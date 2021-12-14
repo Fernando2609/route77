@@ -63,7 +63,7 @@
 
 
 <div align="center">
-<img src="Assets\images\uploads/logo.png" alt="Logo" width="380" height="380">
+<img src="Assets\images\uploads/logo.png" alt="Logo" width="620" height="380">
 </div>
 
 
