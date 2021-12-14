@@ -61,15 +61,9 @@
 <!-- ABOUT THE PROJECT -->
 ##  Imágenes
 
-<<<<<<< HEAD
 
 <div align="center">
 <img src="Assets\images\uploads/logo.png" alt="Logo" width="380" height="380">
-=======
-[![Product Name Screen Shot][product-screenshot]]()
-<div align="center">
-<img src="Assets\images\uploads/logo3.png" alt="Logo" width="380" height="380">
->>>>>>> c46fed571602ba5f603ca6d81c1764c638c556de
 </div>
 
 
