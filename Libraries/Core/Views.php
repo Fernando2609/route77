@@ -10,6 +10,7 @@
                 $view="views/".$controller."/".$view.".php";
             }
             require_once($view);
+            
         }
     }
 
