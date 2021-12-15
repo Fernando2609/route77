@@ -10,8 +10,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Blank Page</li>
+              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div>
         </div>
@@ -24,7 +24,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Title</h3>
+          <h3 class="card-title">Titulo</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -36,13 +36,11 @@
           </div>
         </div>
         <div class="card-body">
-          Start creating your amazing application!
+          Página de inicio
         </div>
         <!-- /.card-body -->
-        <div class="card-footer">
-          Footer
-        </div>
-        <!-- /.card-footer-->
+        
+        
       </div>
       <!-- /.card -->
 
