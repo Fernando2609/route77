@@ -5,8 +5,20 @@
     //Retorla la url de Assets
     function media()
     {
-        return BASE_URL."Assets/";
+        return BASE_URL."/Assets";
     }
+    function headerAdmin($data="")
+    {
+        $view_header = "Views/Template/header_admin.php";
+        require_once ($view_header);
+    }
+    function footerAdmin($data="")
+    {
+        $view_footer = "Views/Template/footer_admin.php";
+         require_once ($view_footer);
+    }
+
+
     //Muestra información formateada
 	function dep($data)
     {
