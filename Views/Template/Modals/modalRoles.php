@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">Registro De Nuevo Rol</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -13,11 +13,11 @@
           <!-- general form elements -->
         <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Quick Example</h3>
+                <h3 class="card-title">Nuevo Rol</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form">
+              <form id="formRol" name="formRol">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputNombre">Nombre</label>
@@ -30,7 +30,7 @@
 
                   <div class="form-group">
                         <label>Estado</label>
-                        <select class="custom-select" id="ListStatus" name="ListStatus" required="">
+                        <select class="custom-select" id="listStatus" name="listStatus" required="">
                           <option value="1">Activo</option>
                           <option value="2">Inactivo</option>
                         
@@ -48,10 +48,10 @@
     
       </div>
       <!-- Cierra Modal Body -->
-      <div class="modal-footer">
+     <!--  <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

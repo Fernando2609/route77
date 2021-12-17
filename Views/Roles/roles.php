@@ -57,13 +57,14 @@ getModal('modalRoles', $data);
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="TableRoles" class="table table-bordered table-striped">
+                <table id="tableRoles" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Descripcion</th>
                     <th>Status</th>
+                    <th>Acciones</th>
                    </tr>
                   </thead>
                   <tbody>

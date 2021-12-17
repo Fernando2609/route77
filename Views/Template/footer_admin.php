@@ -46,6 +46,10 @@
 <script src="<?= media(); ?>/js/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?= media(); ?>/js/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+<!-- Page specific javascripts-->
+<script type="text/javascript" src="<?= media(); ?>/js/plugins/sweetalert.min.js"></script>
+
+
 
 <!-- Funcion de datatables -->
 <script>
