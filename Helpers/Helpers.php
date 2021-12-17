@@ -19,6 +19,7 @@
     }
 
 
+
     //Muestra información formateada
 	function dep($data)
     {
@@ -27,6 +28,14 @@
         $format .= print_r('</pre>');
         return $format;
     }
+    function getModal(string $nameModal, $data)
+    {
+      $view_modal = "Views/Template/Modals/{$nameModal}.php";
+      require_once $view_modal; 
+    
+    }
+
+
     //Elimina exceso de espacios entre palabras
     function strClean($strCadena){
         $string = preg_replace(['/\s+/','/^\s|\s$/'],[' ',''], $strCadena);
