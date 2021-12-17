@@ -8,8 +8,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <!-- abre Modal Body -->
       <div class="modal-body">
-      <!-- general form elements -->
+          <!-- general form elements -->
         <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Quick Example</h3>
@@ -33,9 +34,9 @@
                           <option value="1">Activo</option>
                           <option value="2">Inactivo</option>
                         
-                    </select>
-                      </div>
-                  
+                         </select>
+                  </div>
+                </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
@@ -45,7 +46,8 @@
               </form>
             </div>
     
-            </div>
+      </div>
+      <!-- Cierra Modal Body -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
