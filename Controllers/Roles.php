@@ -11,11 +11,16 @@
             $data['page_id']=3;
             $data['page_tag']="Roles Usuario";
             $data['page_title']="Roles Usuario <small> Estación Route 77</small> ";
-            
+
             $data['page_name']="rol_usuario";
             $this->views->getView($this,"roles",$data);
         }
-        
+        public function getRoles()  {
+
+           $arrData = $this->model->selectRoles();
+           echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+            die();
+        }
     }
    
 

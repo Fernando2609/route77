@@ -1,3 +1,9 @@
+<script>
+  const base_url = "<?= base_url(); ?>";
+</script>  
+   
+
+
 <footer class="main-footer">
     
     <strong>Copyright &copy; 2021 <a href="#">Route 77</a>.</strong> All rights reserved.
