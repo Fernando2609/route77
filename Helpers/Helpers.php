@@ -31,8 +31,7 @@
     function getModal(string $nameModal, $data)
     {
       $view_modal = "Views/Template/Modals/{$nameModal}.php";
-      require_once $view_modal; 
-    
+      require_once $view_modal;
     }
 
 
@@ -67,6 +66,7 @@
         $string = str_ireplace("[","",$string);
         $string = str_ireplace("]","",$string);
         $string = str_ireplace("==","",$string);
+        $string = str_ireplace('22\r\n','\r\n   ',$string);
         return $string;
         
     }

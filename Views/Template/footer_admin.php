@@ -27,7 +27,7 @@
 <script src="<?= media(); ?>/js/adminlte.min.js"></script>
 <script src="<?= media(); ?>/js/fontawesome.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<?= media(); ?>/js/demo.js"></script>
+<!-- <script src="<?= media(); ?>/js/demo.js"></script>-->
 <script src="<?= media(); ?>/js/funtions_admin.js"></script>
 
 <script src="<?= media(); ?>/js/functions_roles.js"></script>
@@ -46,10 +46,12 @@
 <script src="<?= media(); ?>/js/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?= media(); ?>/js/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+<script src="<?= media(); ?>/js/plugins/toastr/toastr.min.js"></script>
+
 <!-- Page specific javascripts-->
-<script type="text/javascript" src="<?= media(); ?>/js/plugins/sweetalert.min.js"></script>
 
-
+<!-- SweetAlert2 -->
+<script src="<?= media(); ?>/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 
 <!-- Funcion de datatables -->
 <script>

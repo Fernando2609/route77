@@ -10,7 +10,7 @@
         {
             $data['page_id']=3;
             $data['page_tag']="Roles Usuario";
-            $data['page_title']="Roles Usuario <small> Estación Route 77</small> ";
+            $data['page_title']="Roles <small> Route 77</small> ";
 
             $data['page_name']="rol_usuario";
             $this->views->getView($this,"roles",$data);
@@ -27,9 +27,9 @@
                }
 
                $arrData[$i]['options'] = '<div class="text-center">
-                <button class="btn btn-secondary btn-sm btnPermisosRol" rl="'.$arrData[$i]['Id_Rol'].'" title="Permisos"><i class="fas fa-key"></i></button>
-				<button class="btn btn-primary btn-sm btnEditRol" rl="'.$arrData[$i]['Id_Rol'].'" title="Editar"><i class="fas fa-pencil-alt"></i></button>
-				<button class="btn btn-danger btn-sm btnDelRol" rl="'.$arrData[$i]['Id_Rol'].'" title="Eliminar"><i class="far fa-trash-alt"></i></button>
+               <button class="btn btn-secondary btn-sm btnPermisosRol" onClick="fntPermisos('.$arrData[$i]['Id_Rol'].')" title="Permisos"><i class="fas fa-key"></i></button>
+				<button class="btn btn-info btn-sm btnEditRol" onClick="fntEditRol('.$arrData[$i]['Id_Rol'].')" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+				<button class="btn btn-danger btn-sm btnDelRol" onClick="fntDelRol('.$arrData[$i]['Id_Rol'].')" title="Eliminar"><i class="far fa-trash-alt"></i></button>
 				</div>';
             } 
            /*  dep($arrData[0]['status']);exit; */
@@ -37,19 +37,51 @@
             die();
         }
 
+        public function getRol(int $idrol)
+        {
+				$intIdrol = intval(strClean($idrol));
+				if($intIdrol > 0)
+				{
+					$arrData = $this->model->selectRol($intIdrol);
+					if(empty($arrData))
+					{
+						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
+					}else{
+						$arrResponse = array('status' => true, 'data' => $arrData);
+					}
+					echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+                    
+				}
+			
+			die();
+        }
+
         public function setRol(){
-         
+            $intIdRol =  intval($_POST['idRol']);
 			$strRol =  strClean($_POST['txtNombre']);
 			$strDescripcion = strClean($_POST['txtDescripcion']);
 			$intStatus = intval($_POST['listStatus']);
-            $request_rol = $this->model->insertRol($strRol, $strDescripcion, $intStatus);
 
-        
+            if ($intIdRol==0) {
+                //Si no hay idRol se crea uno nuevo registro
+                $request_rol = $this->model->insertRol($strRol, $strDescripcion, $intStatus);
+                $option=1;
+            } else{
+                 //Si hay idRol se actualiza elregistro
+                $request_rol = $this->model->updateRol($intIdRol,$strRol, $strDescripcion, $intStatus);
+                $option=2;
+            }
 			if($request_rol > 0 )
 			{
+                if($option == 1)
+					{
+						$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+					}else{
+						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
+					}
                 $arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
 					
-			}else if($request_rol == 'exist'){
+			}else if($request_rol == false){
                 $arrResponse = array('status' => false, 'msg' => '¡Atención! El Rol ya existe.');
 				
 			}else{
@@ -58,6 +90,23 @@
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			die();
         }
+        public function delRol()
+		{
+			if($_POST){
+					$intIdrol = intval($_POST['idrol']);
+					$requestDelete = $this->model->deleteRol($intIdrol);
+					if($requestDelete == true)
+					{
+						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Rol');
+					}else if($requestDelete == false){
+						$arrResponse = array('status' => false, 'msg' => 'No es posible eliminar un Rol asociado a usuarios.');
+					}else{
+						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el Rol.');
+					}
+					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
+			die();
+		}
     }
    
 
