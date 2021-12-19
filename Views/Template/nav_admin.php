@@ -9,7 +9,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
       <div class="image ">
           <img src="<?= media();?>/images/uploads/user_image.png" class="img-circle elevation-2 user " alt="User Image">
         </div>

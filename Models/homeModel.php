@@ -1,6 +1,6 @@
 <?php  
     //Fernadno 23/10/2021
-    class homeModel extends Mysql{
+    class HomeModel extends Mysql{
         public function __construct()
         {
            parent::__construct();
