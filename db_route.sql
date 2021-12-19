@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-12-2021 a las 23:30:16
--- Versión del servidor: 10.4.20-MariaDB
--- Versión de PHP: 8.0.8
+-- Tiempo de generación: 18-12-2021 a las 23:46:06
+-- Versión del servidor: 10.4.19-MariaDB
+-- Versión de PHP: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -113,6 +113,17 @@ CREATE TABLE `modulo` (
   `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
+--
+-- Volcado de datos para la tabla `modulo`
+--
+
+INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
+(1, 'Dashboard', 'Dashboard', 1),
+(2, 'Usuarios', 'Usuarios Administrativos del sistema', 1),
+(3, 'Clientes ', 'Clientes de tienda', 1),
+(4, 'Productos', 'Todos los Producto', 1),
+(5, 'Pedidos', 'Pedidos de compra', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -156,6 +167,32 @@ CREATE TABLE `permisos` (
   `u` int(11) NOT NULL DEFAULT 0,
   `d` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `permisos`
+--
+
+INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VALUES
+(26, 1, 1, 1, 1, 1, 1),
+(27, 1, 2, 1, 1, 1, 1),
+(28, 1, 3, 1, 1, 1, 1),
+(29, 1, 4, 1, 1, 1, 1),
+(30, 1, 5, 1, 1, 1, 1),
+(31, 2, 1, 1, 0, 0, 0),
+(32, 2, 2, 1, 0, 0, 0),
+(33, 2, 3, 1, 0, 0, 0),
+(34, 2, 4, 1, 1, 1, 0),
+(35, 2, 5, 1, 1, 1, 0),
+(36, 3, 1, 1, 0, 0, 0),
+(37, 3, 2, 1, 0, 0, 0),
+(38, 3, 3, 1, 0, 0, 0),
+(39, 3, 4, 1, 1, 0, 0),
+(40, 3, 5, 1, 1, 1, 0),
+(56, 4, 1, 0, 0, 0, 0),
+(57, 4, 2, 0, 0, 0, 0),
+(58, 4, 3, 0, 0, 0, 0),
+(59, 4, 4, 0, 0, 0, 0),
+(60, 4, 5, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -201,6 +238,18 @@ CREATE TABLE `roles` (
   `descripcion` text COLLATE utf8mb4_swedish_ci NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`Id_Rol`, `nombreRol`, `descripcion`, `status`) VALUES
+(1, 'Administrador', 'Administrador General de la Tienda', 1),
+(2, 'Supervisor', 'Supervisor de la tienda y Productos', 1),
+(3, 'Encargado', 'Encargado de la tienda', 1),
+(4, 'Repartidor Moto', 'Repartidor de la tienda', 2),
+(6, 'Asistente', 'Asistente de gerente', 0),
+(7, 'saasdsasd', 'assadasasasaasdsasa', 0);
 
 -- --------------------------------------------------------
 
@@ -432,7 +481,7 @@ ALTER TABLE `genero`
 -- AUTO_INCREMENT de la tabla `modulo`
 --
 ALTER TABLE `modulo`
-  MODIFY `idmodulo` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `idmodulo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `nacionalidad`
@@ -450,7 +499,7 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -468,7 +517,7 @@ ALTER TABLE `redessociales`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `Id_Rol` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_Rol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `sucursal`
