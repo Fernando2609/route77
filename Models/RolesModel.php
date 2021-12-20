@@ -92,9 +92,56 @@
 			}
 			return $request;
 		}
-		
+
+
+
+
+		/* 
+        ESTO DE ACABA ABAJO DEBERA DE CAMBIARSE DE LUGAR EN UN FUTURO
         
+        */
+
+        //Funcion para traer las nacionalidades de usuario
+		
+        public function SelectNacionalidad()
+        {
+        // Extraer Nacionalidad
+        $sql = "SELECT * FROM nacionalidad";
+        $request = $this->select_all($sql); 
+        return $request;
+
+        }
+		 //Funcion para traer el genero de usuario
+		public function SelectGenero()
+		{
+			// Extraer Genero
+			$sql = "SELECT * FROM genero";
+			$request = $this->select_all($sql); 
+			return $request;
+
+		}
+		 //Funcion para traer el Estado Civil
+		 public function selectEstadoC()
+		 {
+			 // Extraer estado Civil
+			 $sql = "SELECT * FROM estadocivil";
+			 $request = $this->select_all($sql); 
+			 return $request;
+ 
+		 }
+		  //Funcion para traer la sucursal
+		  public function selectSucursal()
+		  {
+			  // Extraer estado Civil
+			  $sql = "SELECT * FROM sucursal";
+			  $request = $this->select_all($sql); 
+			  return $request;
+  
+		  }
     }   
+
+	
+   
 
 
 ?>

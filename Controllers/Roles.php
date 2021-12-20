@@ -36,6 +36,21 @@
            echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
             die();
         }
+        //Funcion para traer los roles de usuario
+        public function getSelectRoles()
+		{
+			$htmlOptions = "";
+			$arrData = $this->model->selectRoles();
+			if(count($arrData) > 0 ){
+				for ($i=0; $i < count($arrData); $i++) { 
+					if($arrData[$i]['status'] == 1 ){
+					$htmlOptions .= '<option value="'.$arrData[$i]['Id_Rol'].'">'.$arrData[$i]['nombreRol'].'</option>';
+					}
+				}
+			}
+			echo $htmlOptions;
+			die();		
+		}
 
         public function getRol(int $idrol)
         {
@@ -107,7 +122,80 @@
 			}
 			die();
 		}
+
+
+
+
+
+        /* 
+        ESTO DE ACABA ABAJO DEBERA DE CAMBIARSE DE LUGAR EN UN FUTURO
+        
+        */
+
+        //Funcion para traer la nacionalidades de usuario
+        public function getSelectNacionalidad()
+		{
+			$htmlOptions = "";
+			$arrData = $this->model->selectNacionalidad();
+			if(count($arrData) > 0 ){
+				for ($i=0; $i < count($arrData); $i++) { 
+				
+					$htmlOptions .= '<option value="'.$arrData[$i]['idNacionalidad'].'">'.$arrData[$i]['descripcion'].'</option>';
+					
+				}
+			}
+			echo $htmlOptions;
+			die();		
+		}
+        //Funcion para traer el Genero de usuario
+        public function getSelectGenero()
+        {
+            $htmlOptions = "";
+            $arrData = $this->model->selectGenero();
+            if(count($arrData) > 0 ){
+                for ($i=0; $i < count($arrData); $i++) { 
+                
+                    $htmlOptions .= '<option value="'.$arrData[$i]['idGenero'].'">'.$arrData[$i]['descripcion'].'</option>';
+                    
+                }
+            }
+            echo $htmlOptions;
+            die();		
+        }
+        //Funcion para traer el Estado Civil
+        public function getSelectEstadoC()
+        {
+            $htmlOptions = "";
+            $arrData = $this->model->selectEstadoC();
+            if(count($arrData) > 0 ){
+                for ($i=0; $i < count($arrData); $i++) { 
+                
+                    $htmlOptions .= '<option value="'.$arrData[$i]['idEstado'].'">'.$arrData[$i]['descripcion'].'</option>';
+                    
+                }
+            }
+            echo $htmlOptions;
+            die();		
+        }
+        //Funcion para traer La Sucursal
+        public function getSelectSucursal()
+        {
+            $htmlOptions = "";
+            $arrData = $this->model->selectSucursal();
+            if(count($arrData) > 0 ){
+                for ($i=0; $i < count($arrData); $i++) { 
+                
+                    $htmlOptions .= '<option value="'.$arrData[$i]['idsucursal'].'">'.$arrData[$i]['nombre'].'</option>';
+                    
+                }
+            }
+            echo $htmlOptions;
+            die();		
+        }
     }
+    
+
+    
    
 
 ?>

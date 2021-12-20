@@ -154,4 +154,6 @@ i.fas.fa-home.casa{
     cursor: not-allowed !important;
     color: #ccc;
   }
-  
+  label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: 600;
+}
