@@ -157,3 +157,14 @@ i.fas.fa-home.casa{
   label:not(.form-check-label):not(.custom-file-label) {
     font-weight: 600;
 }
+.preloader{
+  /*background-color: #8da862;*/
+  transition-property: height;
+    transition-duration: .2s;
+    transition-timing-function: linear;
+    transition-delay: 0s;
+}
+.header-primary{
+  background-color: #17a2b8;
+  color: #fff;
+}

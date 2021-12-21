@@ -58,16 +58,7 @@ getModal('modalUsuarios', $data);
                     </thead>
                     <!--Termina Encabezado -->
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Roberto</td>
-                        <td>Gomez</td>
-                        <td>RGomez@gmail.com</td>
-                        <td>97881213</td>
-                        <td>Administrador</td>
-                        <td>Activo</td>
-                        <td></td>
-                    </tr>
+                  
                     </tbody>
                     
                   </table>
