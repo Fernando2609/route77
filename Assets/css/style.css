@@ -1,7 +1,9 @@
 body{
     font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: 0.875rem;
-}
+/*     transition: .3s ease all ;
+ */}
+
 .user{
    width: 45px !important;
     background: gray;
@@ -10,6 +12,9 @@ body{
 .btn-nuevo{
     margin-left: 1rem;
 }
+body.dark-mode i.fas.fa-home.casa {
+  color: white;
+}
 i.fas.fa-home.casa{
     color: black;
 }
@@ -17,6 +22,7 @@ i.fas.fa-home.casa{
     background-color: #1b547e;
     border-color: #1b547e;
 }
+
 .btn{
     font-size:0.875rem;
 }
@@ -157,6 +163,9 @@ i.fas.fa-home.casa{
   label:not(.form-check-label):not(.custom-file-label) {
     font-weight: 600;
 }
+body.dark-mode span.flip-indecator {
+  color: black;
+}
 .preloader{
   /*background-color: #8da862;*/
   transition-property: height;
@@ -167,4 +176,11 @@ i.fas.fa-home.casa{
 .header-primary{
   background-color: #17a2b8;
   color: #fff;
+}
+.boton-dark{
+  margin-bottom: -1.2rem;
+}
+.navbar-nav {
+  display: flex;
+  align-items: center;
 }

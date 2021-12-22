@@ -41,6 +41,8 @@
 
  <!-- Bootstrap Select -->
 <script src="<?= media(); ?>/js/bootstrap-select.min.js"></script>
+ <!-- Bootstrap Switch -->
+ <script src="<?= media(); ?>/js/plugins/bootstrap-switch/js/bootstrap-switch.js"></script>
 
 <!-- Toastr -->
 <script src="<?= media(); ?>/js/plugins/toastr/toastr.min.js"></script>

@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="<?= media(); ?>/js/plugins/sweetalert2/sweetalert2.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!--Boopstrap Sswitch-->
+    <link rel="stylesheet" href="<?= media(); ?>/js/plugins/bootstrap-switch\css\bootstrap3\bootstrap-switch.min.css">
+    
     <!-- Toastr -->
     <link rel="stylesheet" href="<?= media(); ?>/js/plugins/toastr/toastr.min.css">
     <!-- Bootstrap Select -->
@@ -28,6 +31,7 @@
   />
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= media(); ?>/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?= media(); ?>/css/estilo.css">
   <link rel="stylesheet" href="<?= media(); ?>/css/style.css">
 </head>
 
@@ -39,7 +43,7 @@
     <img class="animation__shake" src="<?= media(); ?>/images/uploads/logo3.png" alt="AdminLTELogo" height="60" width="60">
   </div>
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav id="navegacion" class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -50,8 +54,23 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item">
+          <button class="switch" id="switch">
+            <span><i class="fas fa-sun"></i></span>
+            <span><i class="fas fa-moon"></i></span>
+          </button>
+      </li>
 
-
+      <!-- <li class="nav-item">
+        
+        <div class="toggle-flip">
+          <label class="boton-dark">
+            <input id="" type="checkbox" ><span class="flip-indecator" data-toggle-on="Dark" data-toggle-off="White"></span>
+          </label>
+        </div> 
+      </li> -->
+      
     
    
       <li class="nav-item">
@@ -67,6 +86,7 @@
             <li><a class="dropdown-item" href="<?= base_url();?>/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
           </ul>
         </li>
+       
     </ul>
   </nav>
 

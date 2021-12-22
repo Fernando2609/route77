@@ -1,5 +1,5 @@
 var tableUsuarios;
-
+document.all
 
 document.addEventListener('DOMContentLoaded',function () {
     tableUsuarios = $('#tableUsuarios').dataTable(  {
@@ -228,7 +228,7 @@ function fntEditUsuario(idUsuario){
 
             if(objData.status)
             {
-                
+
                 document.querySelector("#idUsuario").value = objData.data.idUsuario;
                 document.querySelector("#txtIdentificacion").value = objData.data.dni;
                 document.querySelector("#txtNombre").value = objData.data.nombres;

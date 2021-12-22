@@ -84,7 +84,7 @@
              <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="txtPassword">Password</label>
-                  <input type="password" class="form-control" id="txtPassword" name="txtPassword" required>
+                  <input type="password" class="form-control" id="txtPassword" name="txtPassword" >
                 </div>
                 <div class="form-group col-md-6">
                     <label for="listStatus">Status</label>
