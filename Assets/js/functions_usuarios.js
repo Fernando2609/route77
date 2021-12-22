@@ -25,7 +25,30 @@ document.addEventListener('DOMContentLoaded',function () {
                     {"data":"options"}
                    
                   ],
-                  
+                    'dom': 'lBfrtip',
+                    'buttons': [
+                        {
+                            "extend": "copyHtml5",
+                            "text": "<i class='far-copy'></i> Copiar",
+                            "titleAttr": "Copiar",
+                            "className": "btn btn-secondary"
+                        }, {
+                             "extend": "excelHtml5",
+                            "text": "<i class='fas fa-file-excel'></i> Excel",
+                            "titleAttr": "Exportar a Excel",
+                            "className": "btn btn-success"
+                        }, {
+                         "extend": "pdfHtml5",
+                            "text": "<i class='fas fa-file-pdf'></i> PDF",
+                            "titleAttr": "Exportar a PDF",
+                            "className": "btn btn-danger"
+                        }, {
+                        "extend": "csvHtml5",
+                            "text": "<i class='fas fa-file-csv'></i> CSV",
+                            "titleAttr": "Exportar a CSV",
+                            "className": "btn btn-info"
+                    }
+                    ],
                   "responsive":true,
                   "bDestroy":true,
                   "iDisplayLength": 10,
@@ -57,7 +80,17 @@ document.addEventListener('DOMContentLoaded',function () {
             {
                 swal.fire("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
+        }
+
+        let elementsValid = document.getElementsByClassName("valid");
+        for (let i = 0; i < elementsValid.length; i++) {
+            if (elementsValid[i].classList.contains('is-invalid')) {
+                swal.fire("Atención", "Por favor verifique los campos en rojo.", "error");
+                return false;
             }
+        }
+        
+            
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         let ajaxUrl = base_url+'/Usuarios/setUsuario'; 
         let formData = new FormData(formUsuario);
@@ -73,7 +106,8 @@ document.addEventListener('DOMContentLoaded',function () {
                     $('#modalFormUsuario').modal("hide");
                         formUsuario.reset();
                         swal.fire("Usuarios", objData.msg ,"success");
-                        tableUsuarios.api().ajax.reload(); 
+                    tableUsuarios.api().ajax.reload(
+                    );
                     }else{
                         swal.fire("Error", objData.msg , "error");
                 }
@@ -88,10 +122,10 @@ document.addEventListener('DOMContentLoaded',function () {
 //Cargar las clases desde el load
 window.addEventListener('load', function() {
     fntRolesUsuario();
-    fntNacionalidadUsuario();
-    fntGeneroUsuario();
-    fnEstadoCUsuario();
-    fnSucursalUsuario();
+     fntNacionalidadUsuario();
+     fntGeneroUsuario();
+     fnEstadoCUsuario();
+     fnSucursalUsuario();
 }, false);
 //Funcion para traer los roles de usuario
 function fntRolesUsuario(){
@@ -258,6 +292,60 @@ function fntEditUsuario(idUsuario){
         $('#modalFormUsuario').modal('show');
     } 
 }
+
+function fntDelUsuario(idUsuario){
+  var idUsuario = idUsuario;
+    swal.fire({
+        title: "Eliminar Usuario",
+        text: "¿Realmente quiere eliminar el Usuario?",
+        icon: "warning",
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        },
+        showCancelButton: true,
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "No, cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            var ajaxUrl = base_url + '/Usuarios/delUsuario/';
+            var strData = "idUsuario=" + idUsuario;
+            request.open("POST", ajaxUrl, true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    var objData = JSON.parse(request.responseText);
+                    if (objData.status) {
+                        swal.fire({
+                            title: "Eliminar!",
+                            text: objData.msg,
+                            icon: "success",
+                            showClass: {
+                                popup: 'animate__animated animate__flipInY'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__flipOutY'
+                            }
+                        });
+                        tableUsuarios.api().ajax.reload();
+                    } else {
+                        swal.fire("Atención!", objData.msg, "error");
+                    }
+    
+                }
+            }
+        }
+    });
+ }
+ 
+
 
 function openModal()
 {

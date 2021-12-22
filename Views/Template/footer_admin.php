@@ -68,7 +68,7 @@
 ?>
 
 
-
+<script type="text/javascript" src="<?= media();?>/js/functions-admin.js"></script>
 
 
 
