@@ -184,3 +184,17 @@ body.dark-mode span.flip-indecator {
   display: flex;
   align-items: center;
 }
+.imagenLogin{
+  width: 20rem;
+}
+.material-half-bg .cover {
+  background-color: #ffe72b;
+  height: 50vh;
+}
+.botonLogin{
+  background-color: #7eae33;
+  border-color: #7eae33;
+}
+.linkLogin{
+  color: #064f85;
+}

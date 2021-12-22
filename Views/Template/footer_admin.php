@@ -51,21 +51,7 @@
 
 <!-- Page specific javascripts-->
 <script src="<?= media(); ?>/js/funtions_admin.js"></script>
-
-<?php
-  if ($data['page_name']=='rol_usuario') {
-?>
-<script src="<?= media(); ?>/js/functions_roles.js"></script>
-<?php
-  }
-?>
-<?php
-  if ($data['page_name']=='usuarios') {
-?>
-<script src="<?= media(); ?>/js/functions_usuarios.js"></script>
-<?php
-  }
-?>
+<script src="<?= media(); ?>/js/<?= $data['page_functions_js'] ?>"></script>
 
 
 <script type="text/javascript" src="<?= media();?>/js/functions-admin.js"></script>

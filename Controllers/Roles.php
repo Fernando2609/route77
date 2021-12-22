@@ -11,7 +11,7 @@
             $data['page_id']=3;
             $data['page_tag']="Roles Usuario";
             $data['page_title']="Roles <small> Route 77</small> ";
-
+            $data['page_functions_js']="functions_roles.js";
             $data['page_name']="rol_usuario";
             $this->views->getView($this,"roles",$data);
         }

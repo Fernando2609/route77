@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
-
+-- Tiempo de generación: 22-12-2021 a las 01:55:23
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -89,6 +89,14 @@ CREATE TABLE `estadocivil` (
   `descripcion` varchar(15) COLLATE utf8mb4_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
+--
+-- Volcado de datos para la tabla `estadocivil`
+--
+
+INSERT INTO `estadocivil` (`idEstado`, `descripcion`) VALUES
+(1, 'Soltero'),
+(2, 'Casado');
+
 -- --------------------------------------------------------
 
 --
@@ -99,6 +107,14 @@ CREATE TABLE `genero` (
   `idGenero` int(11) NOT NULL,
   `descripcion` varchar(10) COLLATE utf8mb4_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `genero`
+--
+
+INSERT INTO `genero` (`idGenero`, `descripcion`) VALUES
+(1, 'Masculino'),
+(2, 'Femenino');
 
 -- --------------------------------------------------------
 
@@ -134,6 +150,14 @@ CREATE TABLE `nacionalidad` (
   `idNacionalidad` int(11) NOT NULL,
   `descripcion` varchar(15) COLLATE utf8mb4_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `nacionalidad`
+--
+
+INSERT INTO `nacionalidad` (`idNacionalidad`, `descripcion`) VALUES
+(1, 'Nacional'),
+(2, 'Extranjera');
 
 -- --------------------------------------------------------
 
@@ -188,11 +212,11 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 (38, 3, 3, 1, 0, 0, 0),
 (39, 3, 4, 1, 1, 0, 0),
 (40, 3, 5, 1, 1, 1, 0),
-(56, 4, 1, 0, 0, 0, 0),
-(57, 4, 2, 0, 0, 0, 0),
-(58, 4, 3, 0, 0, 0, 0),
-(59, 4, 4, 0, 0, 0, 0),
-(60, 4, 5, 1, 1, 1, 0);
+(61, 4, 1, 1, 0, 0, 0),
+(62, 4, 2, 0, 0, 0, 0),
+(63, 4, 3, 0, 0, 0, 0),
+(64, 4, 4, 0, 0, 0, 0),
+(65, 4, 5, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -247,7 +271,7 @@ INSERT INTO `roles` (`Id_Rol`, `nombreRol`, `descripcion`, `status`) VALUES
 (1, 'Administrador', 'Administrador General de la Tienda', 1),
 (2, 'Supervisor', 'Supervisor de la tienda y Productos', 1),
 (3, 'Encargado', 'Encargado de la tienda', 1),
-(4, 'Repartidor Moto', 'Repartidor de la tienda', 2),
+(4, 'Repartidor Moto', 'Repartidor de la tienda', 1),
 (6, 'Asistente', 'Asistente de gerente', 0),
 (7, 'saasdsasd', 'assadasasasaasdsasa', 0);
 
@@ -262,6 +286,15 @@ CREATE TABLE `sucursal` (
   `nombre` varchar(15) COLLATE utf8mb4_swedish_ci NOT NULL,
   `descripcion` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `sucursal`
+--
+
+INSERT INTO `sucursal` (`idsucursal`, `nombre`, `descripcion`) VALUES
+(1, 'Las Hadas', 'Local Ubicado en las Hadas'),
+(2, 'Los Laureles', 'Local ubicado en la colonia los laureles'),
+(3, 'Santa Lucia', 'Local ubicado en Santa Lucia Frente al lago\r\n');
 
 -- --------------------------------------------------------
 
@@ -314,6 +347,16 @@ CREATE TABLE `usuarios` (
   `datelogin` datetime NOT NULL,
   `datemodificado` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`idUsuario`, `dni`, `nombres`, `apellidos`, `email`, `contraseña`, `idNacionalidad`, `idGenero`, `idEstadoCivil`, `idRol`, `idSucursal`, `fechaNacimiento`, `status`, `telefono`, `token`, `datecreated`, `datelogin`, `datemodificado`) VALUES
+(1, '0801200018857', 'José Fernando', 'Ortiz Santos', 'josefortizsantos@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 2, 1, 1, '2000-09-20 00:00:00', 1, 94877564, '', '2021-12-20 02:34:44', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, '0801200018313', 'Hugo Alejandro', 'Paz', 'hugo.paz@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 2, 1, '2000-06-15 00:00:00', 1, 86677646, '', '2021-12-20 13:57:46', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, '0801123989878', 'Leonela', 'Pineda', 'lypineda@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 2, 2, 1, 2, '2021-05-05 00:00:00', 1, 97737659, '', '2021-12-20 14:16:53', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, '0908099', 'Gabriela', 'Maradiaga', 'ggmaradiaga@gmail.com', '0c279387f9ea7ec4a06f945930acc5ea4efeaec97d876054f8d1471c9441f35e', 1, 2, 2, 3, 3, '1999-12-16 00:00:00', 1, 97514274, '', '2021-12-20 19:41:19', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 --
 -- Índices para tablas volcadas
@@ -469,13 +512,13 @@ ALTER TABLE `empresa`
 -- AUTO_INCREMENT de la tabla `estadocivil`
 --
 ALTER TABLE `estadocivil`
-  MODIFY `idEstado` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEstado` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `genero`
 --
 ALTER TABLE `genero`
-  MODIFY `idGenero` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idGenero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `modulo`
@@ -487,7 +530,7 @@ ALTER TABLE `modulo`
 -- AUTO_INCREMENT de la tabla `nacionalidad`
 --
 ALTER TABLE `nacionalidad`
-  MODIFY `idNacionalidad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idNacionalidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
@@ -499,7 +542,7 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -523,7 +566,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `sucursal`
 --
 ALTER TABLE `sucursal`
-  MODIFY `idsucursal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idsucursal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `telefonoempresa`
@@ -541,7 +584,7 @@ ALTER TABLE `tipo_pago`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
