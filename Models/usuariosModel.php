@@ -1,6 +1,7 @@
 <?php  
     //Fernadno 23/10/2021
     class UsuariosModel extends Mysql{
+		
         private $intIdUsuario;
 		private $strIdentificacion;
 		private $strNombre;
@@ -83,8 +84,8 @@
 		public function selectUsuario(int $idUsuario){
 			$this->intIdUsuario = $idUsuario;
 			$sql = "SELECT u.idUsuario,u.dni,u.nombres,u.apellidos,u.telefono,
-			u.email,DATE_FORMAT(u.datecreated,'%d-%m-%Y') as fechaRegistro,
-			DATE_FORMAT(u.fechaNacimiento,'%d-%m-%Y') as fechaNacimiento, DATE_FORMAT(u.fechaNacimiento,'%Y-%m-%d') as fechaNaci,u.status,
+			u.email,DATE_FORMAT(u.datecreated,'%d-%m-%Y %r') as fechaRegistro,
+			DATE_FORMAT(u.fechaNacimiento,'%d-%m-%Y') as fechaNacimiento, DATE_FORMAT(u.fechaNacimiento,'%Y-%m-%d') as fechaNaci,u.status,DATE_FORMAT(u.datelogin,'%d-%m-%Y %r') as datelogin,DATE_FORMAT(u.datemodificado,'%d-%m-%Y %r') as datemodificado ,
 			s.idsucursal,s.nombre as 'sucursal',r.Id_Rol,r.nombreRol, 
 			n.idNacionalidad,n.descripcion as 'nacionalidad',g.idGenero, g.descripcion as 'genero',
 			e.idEstado,e.descripcion as 'estadocivil' 
@@ -100,7 +101,7 @@
 			return $request;
 		}
 		public function updateUsuario(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $telefono, string $email, string $password, int $tipoid, int $status, int $nacionalidad, int $genero, int $estadoC, int $sucursal, string $fechaNacimeinto ){
-
+			
 			$this->intIdUsuario = $idUsuario;
 			$this->strIdentificacion = $identificacion;
 			$this->strNombre = $nombre;
@@ -124,7 +125,7 @@
 			{	//Si la contraseña es diferente a vaacio se actualiza la contraseña
 				if($this->strPassword  != "")
 				{
-					$sql = "UPDATE usuarios SET dni=?,nombres=?,apellidos=?,email=?,contraseña=?,idNacionalidad=?,idGenero=?,idEstadoCivil=?,idRol=?,idSucursal=?,fechaNacimiento=?,status=?,telefono=?
+					$sql = "UPDATE usuarios SET dni=?,nombres=?,apellidos=?,email=?,contraseña=?,idNacionalidad=?,idGenero=?,idEstadoCivil=?,idRol=?,idSucursal=?,fechaNacimiento=?,status=?,telefono=?,datemodificado=?
 							WHERE idUsuario = $this->intIdUsuario ";
 					$arrData = array($this->strIdentificacion,
 									$this->strNombre,
@@ -138,9 +139,9 @@
 									$this->intSucursal,
 									$this->strFechaNacimiento,
 									$this->intStatus,
-									$this->intTelefono);
+									$this->intTelefono, NOW());
 				}else{
-					$sql = "UPDATE usuarios SET dni=?,nombres=?,apellidos=?,email=?,idNacionalidad=?,idGenero=?,idEstadoCivil=?,idRol=?,idSucursal=?,fechaNacimiento=?,status=?,telefono=?
+					$sql = "UPDATE usuarios SET dni=?,nombres=?,apellidos=?,email=?,idNacionalidad=?,idGenero=?,idEstadoCivil=?,idRol=?,idSucursal=?,fechaNacimiento=?,status=?,telefono=?,datemodificado=?
 					WHERE idUsuario = $this->intIdUsuario ";
 					$arrData = array($this->strIdentificacion,
 									$this->strNombre,
@@ -154,7 +155,7 @@
 									$this->intSucursal,
 									$this->strFechaNacimiento,
 									$this->intStatus,
-									$this->intTelefono);
+									$this->intTelefono, NOW());
 				}
 				$request = $this->update($sql,$arrData);
 			}else{

@@ -24,39 +24,25 @@
     <div class="logo d-flex justify-content-center">
         <img src="<?= media(); ?>/images/uploads/Logo.png" class="imagenLogin" alt="" >
     </div>
-      <div class="login-box">
-        <form class="login-form" name="formLogin" id="formLogin" action="">
-          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>INICIAR SESIÓN</h3>
+    <div class="login-box flipped">
+        <div id="divLoading" >
+          <div>
+<!--             <img src="<?= media(); ?>/images/uploads/loading.svg" alt="Loading">
+ -->          </div>
+        </div>
+        <form id="formCambiarPass" name="formCambiarPass" class="forget-form" action="">
+          <input type="hidden" id="idUsuario" name="idUsuario" value="<?= $data['idUsuario']; ?>" required >
+           <input type="hidden" id="txtEmail" name="txtEmail" value="<?= $data['email']; ?>" required >
+          <input type="hidden" id="txtToken" name="txtToken" value="<?= $data['token']; ?>" required > 
+          <h3 class="login-head"><i class="fas fa-key"></i> Cambiar contraseña</h3>
           <div class="form-group">
-            <label class="control-label">USUARIO</label>
-            <input id="txtEmail" name="txtEmail" class="form-control" type="email" placeholder="Email" autofocus>
+            <input id="txtPassword" name="txtPassword" class="form-control" type="password" placeholder="Nueva contraseña" required >
           </div>
           <div class="form-group">
-            <label class="control-label">CONTRASEÑA</label>
-            <input id="txtPassword" name="txtPassword" class="form-control" type="password" placeholder="Contraseña">
-          </div>
-          <div class="form-group">
-            <div class="utility">
-              
-              <p class="semibold-text mb-2 "><a href="#" class="linkLogin" data-toggle="flip">¿Olvidaste tu contraseña ?</a></p>
-            </div>
-          </div>
-          <div id="alertLogin" class="text-center"></div>
-          <div class="form-group btn-container">
-            <button type="submit" class="btn btn-primary btn-block botonLogin"><i class="fa fa-sign-in fa-lg fa-fw"></i>INICIAR SESIÓN</button>
-          </div>
-        </form>
-        <form id="formRecetPass" class="forget-form" action="">
-          <h3 class="login-head "><i class="fa fa-lg fa-fw fa-lock"></i>¿Olvidaste tu contraseña?</h3>
-          <div class="form-group">
-            <label class="control-label">EMAIL</label>
-            <input id="txtEmailReset" name="txtEmailReset" class="form-control" type="text" placeholder="Email">
+            <input id="txtPasswordConfirm" name="txtPasswordConfirm" class="form-control" type="password" placeholder="Confirmar contraseña" required >
           </div>
           <div class="form-group btn-container">
-            <button type="submit" class="btn btn-primary btn-block botonLogin"><i class="fa fa-unlock fa-lg fa-fw"></i>REINICIAR</button>
-          </div>
-          <div class="form-group mt-3">
-            <p class="semibold-text mb-0"><a href="#" class="linkLogin" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Volver al login</a></p>
+            <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>REINICIAR</button>
           </div>
         </form>
       </div>
@@ -73,6 +59,8 @@
     <script src="<?= media(); ?>/js/<?= $data['page_functions_js'] ?>"></script>
     <!-- The javascript plugin to display page loading on top-->
     <script src="<?= media(); ?>/js/pace.min.js"></script>
+    <script src="<?= media(); ?>/js/fontawesome.js"></script>
    
+    ?>
   </body>
 </html>

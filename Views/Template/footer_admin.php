@@ -37,6 +37,8 @@
 <script src="<?= media(); ?>/js/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="<?= media(); ?>/js/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?= media(); ?>/js/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.2.0/js/buttons.html5.styles.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/datatables-buttons-excel-styles@1.2.0/js/buttons.html5.styles.templates.min.js"></script>
 <!-- Termina Datatables  & Plugins -->
 
  <!-- Bootstrap Select -->
@@ -56,7 +58,9 @@
 
 <script type="text/javascript" src="<?= media();?>/js/functions-admin.js"></script>
 
-
+<script>
+  const imgB64="<?=  img64();  ?>"
+</script>
 
 
 <!-- Funcion de datatables -->

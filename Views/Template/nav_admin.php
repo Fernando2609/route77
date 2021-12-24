@@ -14,8 +14,8 @@
           <img src="<?= media();?>/images/uploads/user_image.png" class="img-circle elevation-2 user " alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Zepeda</a>
-          <a href="#" class="d-block">Administrador</a>
+          <a href="#" class="d-block"><?=   $_SESSION['userData']['nombres']  ?></a>
+          <a href="#" class="d-block"><?=   $_SESSION['userData']['nombreRol']  ?></a>
         </div>
       </div>
 
