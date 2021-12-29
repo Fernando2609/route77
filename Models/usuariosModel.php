@@ -72,15 +72,19 @@
 		public function selectUsuarios()
 		{
 			$whereAdmin = "";
+			if($_SESSION['idUser'] != 1){
+				$whereAdmin = " and u.idUsuario !=1";
+			}
 			$sql = "SELECT u.idUsuario,u.dni,u.nombres,u.apellidos,u.telefono,u.email,u.status,r.Id_Rol,r.nombreRol, n.descripcion, g.descripcion 
 					FROM usuarios u 
 					INNER JOIN roles r ON u.idRol = r.Id_Rol
 					INNER JOIN nacionalidad n ON u.idNacionalidad = n.idNacionalidad
 					INNER JOIN genero g on u.idGenero = g.idGenero
-					WHERE u.status != 0";
+					WHERE u.status != 0".$whereAdmin;
 					$request = $this->select_all($sql);
 					return $request;
 		}
+
 		public function selectUsuario(int $idUsuario){
 			$this->intIdUsuario = $idUsuario;
 			$sql = "SELECT u.idUsuario,u.dni,u.nombres,u.apellidos,u.telefono,

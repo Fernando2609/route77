@@ -247,6 +247,7 @@ window.addEventListener('load', function() {
      fnSucursalUsuario();
 }, false);
 //Funcion para traer los roles de usuario
+
 function fntRolesUsuario(){
   
         let ajaxUrl = base_url+'/Roles/getSelectRoles';
@@ -256,7 +257,7 @@ function fntRolesUsuario(){
         request.onreadystatechange = function(){
             if(request.readyState == 4 && request.status == 200){
                 document.querySelector('#listRolid').innerHTML = request.responseText;
-                document.querySelector('#listRolid').value=1;
+                /* document.querySelector('#listRolid').value = 1; */
                 $('#listRolid').selectpicker('render');
             }
         }

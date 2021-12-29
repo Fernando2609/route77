@@ -5,6 +5,7 @@ $('.login-content [data-toggle="flip"]').click(function() {
 
 //Capturar los datos del formulario
 //document.addEventListener: Índica que se van a agregar todos los eventos que irán dentro de la función al moemnto de cargar todo el documento
+var divLoading = document.querySelector("#divLoading");
 document.addEventListener('DOMContentLoaded', function(){
 //valida si existe el formulario del login
     if (document.querySelector("#formLogin")){
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 swal.fire("Por favor", "Escribe usuario y contraseña.", "error");
                 return false;
             }else{
+				divLoading.style.display="flex";
                 var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
                 var ajaxUrl = base_url+'/Login/LoginUser';
                 var formData = new FormData(formLogin);
@@ -41,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					}else{
 						swal.fire("Atención","Error en el proceso", "error");
 					}
-					//divLoading.style.display = "none";
+					divLoading.style.display = "none";
 					return false;
 				}
             }            
@@ -58,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				swal.fire("Por favor", "Escribe tu correo electrónico.", "error");
 				return false;
 			}else{
+				divLoading.style.display="flex";
                 var request = (window.XMLHttpRequest) ? 
 								new XMLHttpRequest() : 
 								new ActiveXObject('Microsoft.XMLHTTP');
@@ -93,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					}else{
 						swal.fire("Atención","Error en el proceso", "error");
 					}
-					//divLoading.style.display = "none";
+					divLoading.style.display = "none";
 					return false;
 				}	
             }
@@ -118,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					swal.fire("Atención", "Las contraseñas no son iguales." , "error");
 					return false;
 				}
+				divLoading.style.display="flex";
 				var request = (window.XMLHttpRequest) ? 
 							new XMLHttpRequest() : 
 							new ActiveXObject('Microsoft.XMLHTTP');
@@ -149,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					}else{
 						swal.fire("Atención","Error en el proceso", "error");
 					}
-					//divLoading.style.display = "none";
+					divLoading.style.display = "none";
 				}
 			}
 		}

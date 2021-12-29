@@ -36,6 +36,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <?php if(!empty($_SESSION['permisos'][1]['r'])){ ?>
+
           <li class="nav-item">
             <a href="<?= base_url();?>/dashboard" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -44,7 +46,9 @@
               </p>
             </a>
           </li>
+          <?php } ?>
           <!-- Usuarios-->
+          <?php if(!empty($_SESSION['permisos'][2]['r'])){ ?>
           <li class="nav-item">
             <a href="../widgets.html" class="nav-link">
              <i class=" nav-icon fas fa-users"></i>
@@ -66,15 +70,12 @@
                   <p>Roles</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="<?= base_url();?>/permisos" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Permisos</p>
-                </a>
-              </li>
             </ul>
           </li>
+          <?php } ?>
+
           <!-- Clientes-->
+          <?php if(!empty($_SESSION['permisos'][3]['r'])){ ?>
           <li class="nav-item">
             <a href="<?= base_url();?>/clientes" class="nav-link">
             <i class=" nav-icon fas fa-user"></i>
@@ -83,16 +84,44 @@
               </p>
             </a>
           </li>
+          <?php } ?>
+
+
           <!-- Productos-->
-          <li class="nav-item">
-            <a href="<?= base_url();?>/productos" class="nav-link">
-            <i class=" nav-icon fas fa-archive"></i>
+          <?php if(!empty($_SESSION['permisos'][4]['r']) || !empty($_SESSION['permisos'][6]['r'])){ ?>
+            <li class="nav-item">
+            <a href="../widgets.html" class="nav-link">
+             <i class=" nav-icon fas fa-store"></i>
               <p>
-                Productos
+                Tienda
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+
+            <ul class="nav nav-treeview">
+
+              <?php if(!empty($_SESSION['permisos'][4]['r'])){ ?>
+              <li class="nav-item">
+                <a href="<?= base_url();?>/productos" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Productos</p>
+                </a>
+              </li>
+              <?php } ?>
+              <?php if(!empty($_SESSION['permisos'][6]['r'])){ ?>
+              <li class="nav-item">
+                <a href="<?= base_url();?>/categorias" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Categorías</p>
+                </a>
+              </li>
+              <?php } ?>
+            </ul>
           </li>
+          <?php } ?>
+
           <!-- Pedidos-->
+          <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
           <li class="nav-item">
             <a href="<?= base_url();?>/pedidos" class="nav-link">
             <i class="nav-icon fas fa-shopping-cart"></i>
@@ -101,6 +130,8 @@
               </p>
             </a>
           </li>
+          <?php } ?>
+
           <!-- Logout-->
           <li class="nav-item">
             <a href="<?= base_url();?>/logout" class="nav-link">

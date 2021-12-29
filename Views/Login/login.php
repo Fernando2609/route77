@@ -25,6 +25,11 @@
         <img src="<?= media(); ?>/images/uploads/Logo.png" class="imagenLogin" alt="" >
     </div>
       <div class="login-box">
+        <div id="divLoading">
+          <div>
+            <img src="<?=media();?>/images/uploads/loading.svg" alt="Loading">
+          </div>
+        </div>
         <form class="login-form" name="formLogin" id="formLogin" action="">
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>INICIAR SESIÓN</h3>
           <div class="form-group">
