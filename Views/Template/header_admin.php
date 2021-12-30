@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!--Boopstrap Sswitch-->
     <link rel="stylesheet" href="<?= media(); ?>/js/plugins/bootstrap-switch\css\bootstrap3\bootstrap-switch.min.css">
-    
+    <!-- Fullcalendar -->
+    <link rel="stylesheet" href="<?= media(); ?>/js/plugins/fullcalendarV5/main.min.css">
+
     <!-- Toastr -->
     <link rel="stylesheet" href="<?= media(); ?>/js/plugins/toastr/toastr.min.css">
     <!-- Bootstrap Select -->
