@@ -198,3 +198,29 @@ body.dark-mode span.flip-indecator {
 .linkLogin{
   color: #064f85;
 }
+body.dark-mode a.fc-col-header-cell-cushion {
+  color: white;
+}
+a.fc-col-header-cell-cushion {
+  color: black;
+}
+body.dark-mode .fc .fc-daygrid-day-number {
+  position: relative;
+  z-index: 4;
+  padding: 4px;
+  color: white;
+}
+.fc .fc-daygrid-day-number {
+  position: relative;
+  z-index: 4;
+  padding: 4px;
+  color: rgb(3, 0, 0);
+}
+body.dark-mode .fc .fc-daygrid-day.fc-day-today {
+  background-color: rgba(255,220,40,.15);
+  background-color: var(--fc-today-bg-color,rgba(238, 255, 0, 0.445));
+}
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: rgba(255,220,40,.15);
+  background-color: var(--fc-today-bg-color,rgba(238, 255, 0, 0.445));
+}

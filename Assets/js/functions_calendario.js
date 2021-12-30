@@ -7,18 +7,26 @@ document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
     editable:true,
+    
     initialView: 'dayGridMonth',
+    //selectable: true,
     locale:"es",
     headerToolbar:{
         left:"prev,next today",
         center:"title",
         right:"dayGridMonth,timeGridWeek,listWeek"
     },
+  
    
     dateClick:function(info,jsEvent,view){
+        $('#tituloEvento').html("Nuevo Evento "+ info.dateStr);
+        $('#btnGuardar').prop("disabled",false);
+        $('#btnModificar').prop("disabled",true);
+        $('#btnEliminar').prop("disabled",true);
         document.querySelector("#formCaledario").reset();
-        document.getElementById('btnGuardar').style.visibility="visible";
+        //document.getElementById('btnGuardar').style.visibility="visible";
         document.querySelector("#inicio").value = info.dateStr;
+        document.querySelector("#end").value = info.dateStr;
         console.log(info);
         console.log(info.dateStr);
         $("#modalFormCalendar").modal("show");
@@ -34,7 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       
  
-       document.getElementById('btnGuardar').style.visibility="hidden";
+       $('#btnGuardar').prop("disabled",true);
+        $('#btnModificar').prop("disabled",false);
+        $('#btnEliminar').prop("disabled",false);
      /*   document.querySelector("#id").value = calEvent.event.id;
        document.querySelector("#title").value = calEvent.event.title;
        document.querySelector("#descripcion").value = calEvent.event.extendedProps.descripcion;
@@ -56,6 +66,19 @@ document.addEventListener('DOMContentLoaded', function() {
        console.log(calEvent.event.textColor);
        console.log(calEvent.event.backgroundColor);
         
+   },
+   eventDrop:function(calEvent){
+        inicio=calEvent.event.startStr;
+        final=calEvent.event.endStr;
+        $('#id').val(calEvent.event.id);
+        $('#title').val(calEvent.event.title);
+       $('#descripcion').val(calEvent.event.extendedProps.descripcion);
+       $('#end').val(final);
+       document.querySelector("#inicio").value = inicio;
+       $('#color').val(calEvent.event.backgroundColor);
+       $('#colorText').val(calEvent.event.textColor);
+       $('#start').val(calEvent.event.start);
+       updateEvento(calEvent.event.id);
    }
    
   });
@@ -116,8 +139,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 function openModal()
 {
+    $('#tituloEvento').html("Nuevo Evento ");
+    $('#btnGuardar').prop("disabled",false);
+    $('#btnModificar').prop("disabled",true);
+    $('#btnEliminar').prop("disabled",true);
     document.querySelector("#formCaledario").reset();
-    document.getElementById('btnGuardar').style.visibility="visible";
+    //document.getElementById('btnGuardar').style.visibility="visible";
     $('#modalFormCalendar').modal('show');
 }
 function agregarEvento(){
@@ -130,7 +157,7 @@ function agregarEvento(){
         let strEnd = document.querySelector('#end').value;
         
 
-        if(strtitle == '' || strDescripcion == '' || strStart == '' || strEnd == '' )
+        if(strtitle == '' || strDescripcion == '' || strStart == '' )
             {
                 swal.fire("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
@@ -153,8 +180,6 @@ function agregarEvento(){
                 { 
                     $('#modalFormCalendar').modal("hide");
                         formUsuario.reset();
-                        
-                        
                         swal.fire({
                             title: "Evento",
                             text: objData.msg,
@@ -169,8 +194,8 @@ function agregarEvento(){
                             confirmButtonText: "Aceptar",
                             //cancelButtonText: "No, cancelar!",
                             closeOnConfirm: false,
-                            closeOnCancel: true
-                          
+                            closeOnCancel: true,
+                            allowOutsideClick: false
                         }).then((result) => {
                           if (result.isConfirmed) {  
                             location.reload();
@@ -199,7 +224,7 @@ function updateEvento(idEvento) {
         let strEnd = document.querySelector('#end').value;
         
 
-        if(strtitle == '' || strDescripcion == '' || strStart == '' || strEnd == '' )
+        if(strtitle == '' || strDescripcion == '' || strStart == '' )
             {
                 swal.fire("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
@@ -213,9 +238,9 @@ function updateEvento(idEvento) {
         request.open("POST",ajaxUrl,true);
         request.send(formData);
         request.onreadystatechange = function(){ 
-            console.log(request);
+           /*  console.log(request); */
             if(request.readyState == 4 && request.status == 200){
-                console.log(request.responseText);
+                /* console.log(request.responseText); */
                 let objData = JSON.parse(request.responseText); 
                 
                 if(objData.status)
@@ -238,8 +263,8 @@ function updateEvento(idEvento) {
                             confirmButtonText: "Aceptar",
                             //cancelButtonText: "No, cancelar!",
                             closeOnConfirm: false,
-                            closeOnCancel: true
-                          
+                            closeOnCancel: true,
+                            allowOutsideClick: false
                         }).then((result) => {
                           if (result.isConfirmed) {  
                             location.reload();
@@ -249,9 +274,9 @@ function updateEvento(idEvento) {
                         swal.fire("Error", objData.msg , "error");
                 }
             
-            }else{
+            }/* else{
                 console.log('Error');
-            }
+            } */
         }  
 }
 function deleteEvento(idEvento) {
@@ -267,7 +292,7 @@ function deleteEvento(idEvento) {
         let strEnd = document.querySelector('#end').value;
         
 
-        if(strtitle == '' || strDescripcion == '' || strStart == '' || strEnd == '' )
+        if(strtitle == '' || strDescripcion == '' || strStart == '' )
             {
                 swal.fire("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
@@ -306,8 +331,8 @@ function deleteEvento(idEvento) {
                             confirmButtonText: "Aceptar",
                             //cancelButtonText: "No, cancelar!",
                             closeOnConfirm: false,
-                            closeOnCancel: true
-                          
+                            closeOnCancel: true,
+                            allowOutsideClick: false
                         }).then((result) => {
                           if (result.isConfirmed) {  
                             location.reload();
