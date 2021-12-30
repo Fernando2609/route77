@@ -179,62 +179,144 @@ document.addEventListener('DOMContentLoaded',function () {
                 
                 
                   });
-    var formUsuario=document.querySelector("#formUsuario");
-    formUsuario.onsubmit=function(e){
-        e.preventDefault();
-        let strIdentificacion = document.querySelector('#txtIdentificacion').value;
-        let strNombre = document.querySelector('#txtNombre').value;
-        let strApellido = document.querySelector('#txtApellido').value;
-        let strEmail = document.querySelector('#txtEmail').value;
-        let intTelefono = document.querySelector('#txtTelefono').value;
-        let intTipousuario = document.querySelector('#listRolid').value;
-        let intNacionalidad = document.querySelector('#listNacionalidad').value;
-        let intGenero = document.querySelector('#listGenero').value;
-        let intEstadoC = document.querySelector('#listEstadoC').value;
-        let strFechaN = document.querySelector('#fechaNacimiento').value;
-        let strPassword = document.querySelector('#txtPassword').value;
-        let intStatus = document.querySelector('#listStatus').value;
-
-        if(strIdentificacion == '' || strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '' || intTipousuario == '' || intNacionalidad == ''|| intGenero == '' )
-            {
-                swal.fire("Atención", "Todos los campos son obligatorios." , "error");
-                return false;
-        }
-
-        let elementsValid = document.getElementsByClassName("valid");
-        for (let i = 0; i < elementsValid.length; i++) {
-            if (elementsValid[i].classList.contains('is-invalid')) {
-                swal.fire("Atención", "Por favor verifique los campos en rojo.", "error");
-                return false;
+    if (document.querySelector("#formUsuario")) {
+        var formUsuario=document.querySelector("#formUsuario");
+        formUsuario.onsubmit=function(e){
+            e.preventDefault();
+            let strIdentificacion = document.querySelector('#txtIdentificacion').value;
+            let strNombre = document.querySelector('#txtNombre').value;
+            let strApellido = document.querySelector('#txtApellido').value;
+            let strEmail = document.querySelector('#txtEmail').value;
+            let intTelefono = document.querySelector('#txtTelefono').value;
+            let intTipousuario = document.querySelector('#listRolid').value;
+            let intNacionalidad = document.querySelector('#listNacionalidad').value;
+            let intGenero = document.querySelector('#listGenero').value;
+            let intEstadoC = document.querySelector('#listEstadoC').value;
+            let strFechaN = document.querySelector('#fechaNacimiento').value;
+            let strPassword = document.querySelector('#txtPassword').value;
+            let intStatus = document.querySelector('#listStatus').value;
+    
+            if(strIdentificacion == '' || strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '' || intTipousuario == '' || intNacionalidad == ''|| intGenero == '' )
+                {
+                    swal.fire("Atención", "Todos los campos son obligatorios." , "error");
+                    return false;
+            }
+    
+            let elementsValid = document.getElementsByClassName("valid");
+            for (let i = 0; i < elementsValid.length; i++) {
+                if (elementsValid[i].classList.contains('is-invalid')) {
+                    swal.fire("Atención", "Por favor verifique los campos en rojo.", "error");
+                    return false;
+                }
+            }
+            
+                
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/Usuarios/setUsuario'; 
+            let formData = new FormData(formUsuario);
+            request.open("POST",ajaxUrl,true);
+            request.send(formData);
+            request.onreadystatechange = function(){ 
+                if(request.readyState == 4 && request.status == 200){
+                    console.log(request.responseText);
+                    let objData = JSON.parse(request.responseText); 
+                    
+                    if(objData.status)
+                    { 
+                        $('#modalFormUsuario').modal("hide");
+                            formUsuario.reset();
+                            swal.fire("Usuarios", objData.msg ,"success");
+                        tableUsuarios.api().ajax.reload(
+                        );
+                        }else{
+                            swal.fire("Error", objData.msg , "error");
+                    }
+                
+                }else{
+                    console.log('Error');
+                }
             }
         }
         
-            
-        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Usuarios/setUsuario'; 
-        let formData = new FormData(formUsuario);
-        request.open("POST",ajaxUrl,true);
-        request.send(formData);
-        request.onreadystatechange = function(){ 
-            if(request.readyState == 4 && request.status == 200){
-                console.log(request.responseText);
-                let objData = JSON.parse(request.responseText); 
-                
-                if(objData.status)
-                { 
-                    $('#modalFormUsuario').modal("hide");
-                        formUsuario.reset();
-                        swal.fire("Usuarios", objData.msg ,"success");
-                    tableUsuarios.api().ajax.reload(
-                    );
-                    }else{
-                        swal.fire("Error", objData.msg , "error");
+    }
+    //Actulizar desde perfil
+    if (document.querySelector("#formPerfil")) {
+        var formPerfil=document.querySelector("#formPerfil");
+        formPerfil.onsubmit=function(e){
+            e.preventDefault();
+            let strIdentificacion = document.querySelector('#txtIdentificacion').value;
+            let strNombre = document.querySelector('#txtNombre').value;
+            let strApellido = document.querySelector('#txtApellido').value;
+  
+            let intTelefono = document.querySelector('#txtTelefono').value;
+           
+            let intNacionalidad = document.querySelector('#listNacionalidad').value;
+            let intGenero = document.querySelector('#listGenero').value;
+            let intEstadoC = document.querySelector('#listEstadoC').value;
+            let strFechaN = document.querySelector('#fechaNacimiento').value;
+            let strPassword = document.querySelector('#txtPassword').value;
+            let strPasswordConfirm = document.querySelector('#txtPasswordConfirm').value;
+           
+    
+            if(strIdentificacion == '' || strApellido == '' || strNombre == '' ||  intTelefono == '')
+                {
+                    swal.fire("Atención", "Todos los campos son obligatorios." , "error");
+                    return false;
+            }
+            if(strPassword != "" || strPasswordConfirm != "")
+            {   
+                if( strPassword != strPasswordConfirm ){
+                    swal.fire("Atención", "Las contraseñas no son iguales." , "info");
+                    return false;
+                }           
+                if(strPassword.length < 5 ){
+                    swal.fire("Atención", "La contraseña debe tener un mínimo de 5 caracteres." , "info");
+                    return false;
                 }
+            }
+            let elementsValid = document.getElementsByClassName("valid");
+            for (let i = 0; i < elementsValid.length; i++) {
+                if (elementsValid[i].classList.contains('is-invalid')) {
+                    swal.fire("Atención", "Por favor verifique los campos en rojo.", "error");
+                    return false;
+                }
+            }
             
-            }else{
-                console.log('Error');
+                
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/Usuarios/putPerfil'; 
+            let formData = new FormData(formPerfil);
+            request.open("POST",ajaxUrl,true);
+            request.send(formData);
+            request.onreadystatechange = function(){ 
+                if(request.readyState != 4) return;
+                if(request.status == 200){
+                    console.log(request.responseText);
+                    let objData = JSON.parse(request.responseText); 
+                    
+                    if(objData.status)
+                    { 
+                        $('#modalFormPerfil').modal("hide");
+                         
+                        swal.fire({
+                            title: "",
+                            text: objData.msg,
+                            icon: "success",
+                            confirmButtonText: "Aceptar",
+                            closeOnConfirm: false,
+                        }).then((result) => {
+                            if (result.isConfirmed) {  
+                                location.reload();
+                            }
+                        })
+                        }else{
+                            swal.fire("Error", objData.msg , "error");
+                    }
+                
+                }
             }
         }
+        
     }
 },false)
 
@@ -249,18 +331,21 @@ window.addEventListener('load', function() {
 //Funcion para traer los roles de usuario
 
 function fntRolesUsuario(){
-  
+    if ( document.querySelector('#listRolid')) {
         let ajaxUrl = base_url+'/Roles/getSelectRoles';
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET",ajaxUrl,true);
         request.send();
         request.onreadystatechange = function(){
             if(request.readyState == 4 && request.status == 200){
+                
                 document.querySelector('#listRolid').innerHTML = request.responseText;
                 /* document.querySelector('#listRolid').value = 1; */
                 $('#listRolid').selectpicker('render');
             }
         }
+                    
+    }
     
 }
 
@@ -479,4 +564,7 @@ function openModal()
     document.querySelector('#titleModal').innerHTML = "Nuevo Usuario";
     document.querySelector("#formUsuario").reset();
     $('#modalFormUsuario').modal('show');
+}
+function openModalPerfil() {
+    $('#modalFormPerfil').modal('show');
 }

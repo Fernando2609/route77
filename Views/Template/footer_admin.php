@@ -56,7 +56,7 @@
 <script src="<?= media(); ?>/js/<?= $data['page_functions_js'] ?>"></script>
 
 
-<script type="text/javascript" src="<?= media();?>/js/functions-admin.js"></script>
+<!-- <script type="text/javascript" src="<?= media();?>/js/functions_admin.js"></script> -->
 
 <script>
   const imgB64="<?=  img64();  ?>"

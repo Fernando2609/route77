@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Nosotros">
   <meta name="theme-color" content="=#009688">
-  <link rel="shortcut icon" href="<?= media();?>/images/uploads/favicon.ico">
+  <link rel="shortcut icon" href="<?= media();?>/images//favicon.ico">
   <title><?= $data['page_tag'] ?></title>
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="<?= media(); ?>/js/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
@@ -40,7 +40,7 @@
 <div class="wrapper">
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="<?= media(); ?>/images/uploads/logo3.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="<?= media(); ?>/images//logo3.png" alt="AdminLTELogo" height="60" width="60">
   </div>
   <!-- Navbar -->
   <nav id="navegacion" class="main-header navbar navbar-expand navbar-white navbar-light">
