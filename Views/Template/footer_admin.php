@@ -51,12 +51,17 @@
 <!-- SweetAlert2 -->
 <script src="<?= media(); ?>/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 
+<!-- Fullcalendar -->
+<script src="<?= media(); ?>/js/plugins/fullcalendarV5/main.min.js"></script>
+<script src="<?= media(); ?>/js/plugins/fullcalendarV5/locales-all.min.js"></script>
+
 <!-- Page specific javascripts-->
 <script src="<?= media(); ?>/js/funtions_admin.js"></script>
 <script src="<?= media(); ?>/js/<?= $data['page_functions_js'] ?>"></script>
 
 
-<!-- <script type="text/javascript" src="<?= media();?>/js/functions_admin.js"></script> -->
+
+<!-- <script type="text/javascript" src="<?= media();?>/js/funtions_admin.js"></script> -->
 
 <script>
   const imgB64="<?=  img64();  ?>"

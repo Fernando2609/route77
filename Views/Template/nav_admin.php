@@ -130,7 +130,19 @@
               </p>
             </a>
           </li>
+
           <?php } ?>
+
+
+          <!-- Calendario-->
+          <li class="nav-item">
+            <a href="<?= base_url();?>/calendario" class="nav-link">
+            <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Calendario
+              </p>
+            </a>
+          </li>
 
           <!-- Logout-->
           <li class="nav-item">
