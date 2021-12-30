@@ -135,6 +135,29 @@
             echo "Error en el envío del mensaje: {$mail->ErrorInfo}";
         }
     }
+
+    function getPermisos(int $idmodulo){
+        require_once ("Models/permisosModel.php");
+        $objPermisos = new PermisosModel();
+        $idrol = $_SESSION['userData']['Id_Rol'];
+        $arrPermisos = $objPermisos->permisosModulo($idrol);
+        $permisos = '';
+        $PermisosMod = '';
+
+        if(count($arrPermisos) > 0){
+            $permisos = $arrPermisos;
+            $PermisosMod = isset($arrPermisos[$idmodulo]) ? $arrPermisos[$idmodulo] : "";
+        }
+        $_SESSION['permisos'] = $permisos;
+        $_SESSION['permisosMod'] = $PermisosMod;
+    }
+    
+    function sessionUser(int $idpersona){
+        require_once ("Models/LoginModel.php");
+        $objLogin = new LoginModel();
+        $request = $objLogin->sessionLogin($idpersona);
+        return $request;
+    }
     //Elimina exceso de espacios entre palabras
     function strClean($strCadena){
         $string = preg_replace(['/\s+/','/^\s|\s$/'],[' ',''], $strCadena);

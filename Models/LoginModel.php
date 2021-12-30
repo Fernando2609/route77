@@ -26,7 +26,7 @@ class LoginModel extends Mysql{
         {
             $this->intIdUsuario=$iduser;
             $sql="SELECT u.idUsuario,u.dni,u.nombres,u.apellidos,u.telefono, u.datemodificado,u.datelogin,
-			u.email,DATE_FORMAT(u.datecreated,'%d-%m-%Y') as fechaRegistro,
+			u.email,u.datecreated, DATE_FORMAT(u.datecreated,'%d-%m-%Y') as fechaRegistro,
 			DATE_FORMAT(u.fechaNacimiento,'%d-%m-%Y') as fechaNacimiento, DATE_FORMAT(u.fechaNacimiento,'%Y-%m-%d') as fechaNaci,u.status,
 			s.idsucursal,s.nombre as 'sucursal',r.Id_Rol,r.nombreRol, 
 			n.idNacionalidad,n.descripcion as 'nacionalidad',g.idGenero, g.descripcion as 'genero',
@@ -39,6 +39,7 @@ class LoginModel extends Mysql{
 			INNER JOIN estadocivil e on u.idEstadoCivil = e.idEstado 
 			WHERE u.idUsuario =  $this->intIdUsuario";
             $request=$this->select($sql);
+            $_SESSION['userData']=$request;
             return $request;
         }
         public function sessionUpdate(int $iduser)

@@ -41,7 +41,8 @@
 							$_SESSION['login'] = true;
                             $this->model->sessionUpdate($_SESSION['idUser']);
 							$arrData = $this->model->sessionLogin($_SESSION['idUser']);
-                            $_SESSION['userData']=$arrData;
+                            sessionUser($_SESSION['idUser']);
+                            
 							$arrResponse = array('status' => true, 'msg' => 'ok'); 
 						}else{
 							$arrResponse = array('status' => false, 'msg' => 'Usuario inactivo.');
@@ -156,6 +157,7 @@
 						}
 					}
 				}
+            
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			die(); 
 		}

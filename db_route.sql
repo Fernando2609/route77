@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-12-2021 a las 01:55:23
+-- Tiempo de generación: 26-12-2021 a las 21:55:12
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -71,12 +71,19 @@ CREATE TABLE `detalle_temp` (
 
 CREATE TABLE `empresa` (
   `idEmpresa` int(11) NOT NULL,
-  `nombreEempresa` varchar(25) NOT NULL,
+  `nombreEmpresa` varchar(25) NOT NULL,
   `direccion` text NOT NULL,
   `razonSocial` text NOT NULL,
   `correo` varchar(50) NOT NULL,
-  `gereneGeneral` varchar(50) NOT NULL
+  `gerenteGeneral` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
+INSERT INTO `empresa` (`idEmpresa`, `nombreEmpresa`, `direccion`, `razonSocial`, `correo`, `gerenteGeneral`) VALUES
+(1, 'Estación Route 77', '', 'Somos un equipo de negocios lideres en los campos de acción que emprendemos , corriente de Bendición , de producción, formadora con el temor a Dios en primer lugar y nuestro socio principal ya que de él recibimos los talentos para multiplicar y generar riqueza en todo emprendimiento , comprometido con la expansión del reino de Dios en la Tierra , generando riqueza para los socios, directivos, empleados, comprometidos con pasión , lealtad y dinamismo , para ver y dejar a nuestras futuras generaciones en una posición de privilegio y sobre todo hijos para el reino de Dios ', 'estacionroute77hn@gmail.com', 'Saúl Armando Zepeda ');
 
 -- --------------------------------------------------------
 
@@ -342,7 +349,7 @@ CREATE TABLE `usuarios` (
   `fechaNacimiento` datetime NOT NULL,
   `status` int(5) NOT NULL DEFAULT 1,
   `telefono` int(11) NOT NULL,
-  `token` varchar(80) COLLATE utf8mb4_swedish_ci NOT NULL,
+  `token` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
   `datecreated` datetime NOT NULL DEFAULT current_timestamp(),
   `datelogin` datetime NOT NULL,
   `datemodificado` datetime NOT NULL
@@ -353,10 +360,10 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `dni`, `nombres`, `apellidos`, `email`, `contraseña`, `idNacionalidad`, `idGenero`, `idEstadoCivil`, `idRol`, `idSucursal`, `fechaNacimiento`, `status`, `telefono`, `token`, `datecreated`, `datelogin`, `datemodificado`) VALUES
-(1, '0801200018857', 'José Fernando', 'Ortiz Santos', 'josefortizsantos@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 2, 1, 1, '2000-09-20 00:00:00', 1, 94877564, '', '2021-12-20 02:34:44', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, '0801200018313', 'Hugo Alejandro', 'Paz', 'hugo.paz@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 2, 1, '2000-06-15 00:00:00', 1, 86677646, '', '2021-12-20 13:57:46', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, '0801123989878', 'Leonela', 'Pineda', 'lypineda@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 2, 2, 1, 2, '2021-05-05 00:00:00', 1, 97737659, '', '2021-12-20 14:16:53', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(5, '0908099', 'Gabriela', 'Maradiaga', 'ggmaradiaga@gmail.com', '0c279387f9ea7ec4a06f945930acc5ea4efeaec97d876054f8d1471c9441f35e', 1, 2, 2, 3, 3, '1999-12-16 00:00:00', 1, 97514274, '', '2021-12-20 19:41:19', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, '0801200018857', 'José Fernando', 'Ortiz Santos', 'josefortizsantos@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 2, 1, 1, '2000-09-20 00:00:00', 1, 94877564, '', '2021-12-20 02:34:44', '2021-12-25 20:08:25', '2021-12-23 18:45:59'),
+(2, '0801200018313', 'Hugo Alejandro', 'Paz', 'hugo.paz@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 2, 1, '2000-06-15 00:00:00', 1, 86677646, '', '2021-12-20 13:57:46', '0000-00-00 00:00:00', '2021-12-24 15:19:58'),
+(3, '0801123989878', 'Leonela', 'Pineda', 'lypineda@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 2, 2, 1, 2, '2021-05-05 00:00:00', 1, 97737659, '', '2021-12-20 14:16:53', '0000-00-00 00:00:00', '2021-12-24 15:20:03'),
+(5, '0908099', 'Gabriela', 'Maradiaga', 'ggmaradiaga@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 2, 2, 2, 4, 3, '1999-12-16 00:00:00', 1, 97514274, '', '2021-12-20 19:41:19', '2021-12-23 17:12:31', '2021-12-24 15:20:09');
 
 --
 -- Índices para tablas volcadas
@@ -506,7 +513,7 @@ ALTER TABLE `detalle_temp`
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `estadocivil`

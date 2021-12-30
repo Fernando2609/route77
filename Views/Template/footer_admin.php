@@ -60,6 +60,7 @@
 <script src="<?= media(); ?>/js/<?= $data['page_functions_js'] ?>"></script>
 
 
+
 <!-- <script type="text/javascript" src="<?= media();?>/js/funtions_admin.js"></script> -->
 
 <script>

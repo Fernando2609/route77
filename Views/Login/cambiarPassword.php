@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Nosotros">
     <meta name="theme-color" content="=#009688">
-    <link rel="shortcut icon" href="<?= media();?>/images/uploads/favicon.ico">
+    <link rel="shortcut icon" href="<?= media();?>/images//favicon.ico">
     <title><?= $data['page_tag'] ?></title>
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/mainLogin.css">
@@ -22,13 +22,13 @@
     </section>
     <section class="login-content">
     <div class="logo d-flex justify-content-center">
-        <img src="<?= media(); ?>/images/uploads/Logo.png" class="imagenLogin" alt="" >
+        <img src="<?= media(); ?>/images//Logo.png" class="imagenLogin" alt="" >
     </div>
     <div class="login-box flipped">
         <div id="divLoading" >
-          <div>
-<!--             <img src="<?= media(); ?>/images/uploads/loading.svg" alt="Loading">
- -->          </div>
+            <div>
+              <img src="<?= media(); ?>/images//loading.svg" alt="Loading">
+            </div>
         </div>
         <form id="formCambiarPass" name="formCambiarPass" class="forget-form" action="">
           <input type="hidden" id="idUsuario" name="idUsuario" value="<?= $data['idUsuario']; ?>" required >
