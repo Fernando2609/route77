@@ -223,7 +223,7 @@ body.dark-mode span.flip-indecator {
   font-size: 13pt;
   font-weight: bold;
 }
-=======
+/*Full Calendario*/
 body.dark-mode a.fc-col-header-cell-cushion {
   color: white;
 }
@@ -249,5 +249,9 @@ body.dark-mode .fc .fc-daygrid-day.fc-day-today {
 .fc .fc-daygrid-day.fc-day-today {
   background-color: rgba(255,220,40,.15);
   background-color: var(--fc-today-bg-color,rgba(238, 255, 0, 0.445));
+}
+.fc-daygrid-block-event .fc-event-time, .fc-daygrid-block-event .fc-event-title {
+  padding: 1px;
+  font-weight: 600;
 }
 
