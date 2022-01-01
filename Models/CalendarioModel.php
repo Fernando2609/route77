@@ -43,8 +43,10 @@
 		}
         public function selectCalendario(int $idUsuario)
 		{
+			//Sumarle un dia a la fecha final
+			//DATE_ADD(c.end, interval 1 day) as end
 			$this->intIdUsuario = $idUsuario;
-			$sql = "SELECT  c.id, c.title,c.descripcion,c.start, DATE_ADD(c.end, interval 1 day) as end, c.color,c.textColor from calendario c WHERE idUsuario=$this->intIdUsuario";
+			$sql = "SELECT  c.id, c.title,c.descripcion,c.start,c.end, c.color,c.textColor from calendario c WHERE idUsuario=$this->intIdUsuario";
 					$request = $this->select_all($sql);
                     
 					return $request;

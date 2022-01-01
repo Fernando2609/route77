@@ -28,11 +28,11 @@
                     </div>
                     <div class="form-group">
                         <label for="">Fecha Inicio</label>
-                        <input type="date"  class="form-control" id="inicio" name="inicio" required>
+                        <input type="datetime-local"  class="form-control" id="inicio" name="inicio" required>
                     </div>
                     <div class="form-group">
                         <label for="end">Fecha Final</label>
-                        <input type="date"  class="form-control" id="end" name="end" required>
+                        <input type="datetime-local" class="form-control" id="end" name="end" required>
                     </div>
                     <div class="form-group">
                         <label for="color">Color</label>
