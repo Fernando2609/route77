@@ -4,14 +4,27 @@ document.addEventListener('DOMContentLoaded', function() {
   let formulario=document.querySelector("form");  
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
+    //Maximo de eventos por dia
+    dayMaxEventRows: true, 
+    views: {
+      dayGridMonth: {
+        dayMaxEventRows: 4 // 4 eventos maximo
+      }
+    },
+    //Configuración Vista semanal
+    slotDuration:'00:30:00',
     selectMirror:true,
+    //Mostrar Hora final del evento
+    displayEventEnd:true,
+    //Zona America, Tegucigalpa
     timeZone: 'America/Tegucigalpa',
     //Eventos Arrastables=true  
     editable:true,
     //VIsta inicial
     initialView: 'dayGridMonth',
+    //Seleccionar dias = true
     selectable: true,
-    themeSystem:'cyborg',
+   
     locale:"es", //Idioma
     //Encabezado
     headerToolbar:{
@@ -91,8 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
    },
    eventDrop:function(calEvent){
-
-        
         //Inicializar Variables con StartStr y EndStr
        inicio=calEvent.event.startStr;
        final=calEvent.event.endStr;
@@ -120,7 +131,9 @@ document.addEventListener('DOMContentLoaded', function() {
      $('#btnGuardar').prop("disabled",false);
      $('#btnModificar').prop("disabled",true);
      $('#btnEliminar').prop("disabled",true);
+     //Prueba de escritorio
     console.log(info.view.type);
+    //Si la vista es mes
        if (info.view.type=='dayGridMonth') {
            
         console.log(info);
@@ -128,7 +141,8 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#tituloEvento').html("Nuevo Evento "+ info.startStr + " Hasta "+ info.endStr);
         document.querySelector("#inicio").value = info.startStr+"T00:00:00";
         document.querySelector("#end").value = info.endStr+"T00:00:00";
-       }else if(info.view.type=='timeGridWeek'){
+
+       }else if(info.view.type=='timeGridWeek'){//Sino, si la vista es semana
         console.log(info);
         inicio=info.startStr;
         final=info.endStr;

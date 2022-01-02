@@ -5,7 +5,7 @@ body{
  */}
 
 .user{
-   width: 45px !important;
+   width: 2.4rem !important;
     background: gray;
     padding: 6px;
 }
@@ -259,4 +259,23 @@ body.dark-mode a.fc-col-header-cell-cushion:hover {
 }
 .dark-mode a:not(.btn):hover {
   color: #ffe72b;
+}
+body.dark-mode tr.fc-list-event.fc-event.fc-event-start.fc-event-end:hover {
+  background-color: #009688;
+  color: black;
+}
+body.dark-mode tbody tr.fc-list-event:hover{
+  color: black;
+}
+body.dark-mode a{
+  color: white;
+}
+.fc-popover-body,.fc-popover-header {
+  background-color: cornflowerblue;
+}
+.fc-popover-body div a {
+  color: black;
+}
+.fc-popover-header span{
+  color: black;
 }
