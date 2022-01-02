@@ -225,23 +225,24 @@ document.addEventListener('DOMContentLoaded',function () {
                     
                     if(objData.status)
                     { 
-                        /* if (rowTable==" "){
+                        if (rowTable ==""){
                             tableUsuarios.api().ajax.reload();
                         }else{
                             htmlStatus = intStatus == 1?
                             '<span class="badge badge-success">Activo</span>':
                             '<span class="badge badge-danger">Inactivo</span>';
-                            //rowTable.cells[1].textContent=strNombre;
+                            rowTable.cells[1].textContent=strNombre;
                             rowTable.cells[2].textContent=strApellido;
                             rowTable.cells[3].textContent=strEmail;
                             rowTable.cells[4].textContent=intTelefono;
                             rowTable.cells[5].textContent=document.querySelector("#listRolid").selectedOptions[0].text
                             rowTable.cells[6].innerHTML=htmlStatus;
-                        }    */
+                            rowTable = ""; 
+                        }   
                         $('#modalFormUsuario').modal("hide");
                             formUsuario.reset();
                             swal.fire("Usuarios", objData.msg ,"success");
-                            tableUsuarios.api().ajax.reload();
+                            //tableUsuarios.api().ajax.reload();
                         
                         }else{
                             swal.fire("Error", objData.msg , "error");
@@ -580,7 +581,7 @@ function openModal()
     rowTable = "";
     document.querySelector('#idUsuario').value ="";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
-    document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
+    document.querySelector('#btnActionForm').classList.replace("btn-warning", "btn-success");
     document.querySelector('#btnText').innerHTML ="Guardar";
     document.querySelector('#titleModal').innerHTML = "Nuevo Usuario";
     document.querySelector("#formUsuario").reset();
