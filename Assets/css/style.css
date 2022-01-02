@@ -254,4 +254,9 @@ body.dark-mode .fc .fc-daygrid-day.fc-day-today {
   padding: 1px;
   font-weight: 600;
 }
-
+body.dark-mode a.fc-col-header-cell-cushion:hover {
+  color: #ffe72b;
+}
+.dark-mode a:not(.btn):hover {
+  color: #ffe72b;
+}

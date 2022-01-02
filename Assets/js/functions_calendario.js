@@ -19,11 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         center:"title",
         right:"dayGridMonth,timeGridWeek,listWeek"
     },
-    events: [
-       // { start: '2018-09-01T12:30:00Z' }, // will be shifted to local
-        { startStr: '2018-09-01T12:30:00' }, // already same offset as local, so won't shift
-        //{ start: '2018-09-01T12:30:00' } // will be parsed as if it were '2018-09-01T12:30:00+XX:XX'
-      ],
+    
     //Click en una fecha especifica
     dateClick:function(info,jsEvent,view){
         // titulo del evento más la fecha Seleccionada
@@ -36,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector("#formCaledario").reset();
         //Inicializacion de fecha seleccionada
         document.querySelector("#inicio").value = info.dateStr+"T00:00:00";
-        document.querySelector("#end").value = info.dateStr+"T00:00:00";
+        document.querySelector("#end").value = info.dateStr+"T23:59:00";
         //Pruebas de consola
          console.log(info);
         console.log(info.dateStr); 
@@ -81,9 +77,22 @@ document.addEventListener('DOMContentLoaded', function() {
        //Prueba de consola, fecha inicial y final String
        console.log(calEvent.event.startStr);
        console.log(calEvent.event.endStr);
+       
+       //Cuanndo se de click al boton modificar 
+       $("#btnModificar").click(function(){
+        //Se envia los parametros a update eventos
+        updateEvento(calEvent.event.id,calEvent.event.title);
+      });
+      //Cuanndo se de click al boton modificar 
+      $("#btnEliminar").click(function(){
+        //Se envia los parametros a update eventos
+        deleteEvento(calEvent.event.id,calEvent.event.title);
+      });
         
    },
    eventDrop:function(calEvent){
+
+        
         //Inicializar Variables con StartStr y EndStr
        inicio=calEvent.event.startStr;
        final=calEvent.event.endStr;
@@ -104,9 +113,13 @@ document.addEventListener('DOMContentLoaded', function() {
        $('#colorText').val(calEvent.event.textColor);
        $('#start').val(calEvent.event.start);
         //Funcion Actualiazr eventos (Parametro ID del evento)
-       updateEvento(calEvent.event.id);
+       updateEvento(calEvent.event.id,calEvent.event.title);
    },
    select:function(info,jsEvent,view) {
+     //Botones, habilitar Guardar,Deshabilitar modificar y eliminar
+     $('#btnGuardar').prop("disabled",false);
+     $('#btnModificar').prop("disabled",true);
+     $('#btnEliminar').prop("disabled",true);
     console.log(info.view.type);
        if (info.view.type=='dayGridMonth') {
            
@@ -134,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
          $('#tituloEvento').html("Nuevo Evento "+ arrayHoraInicio[0]+" a las "+arrayHoraInicio[1] + " Hasta "+ arrayHoraFinal[0]+" a las "+arrayHoraFinal[1]);
          document.querySelector("#inicio").value = inicio;
          document.querySelector("#end").value = final;
-
+         
     }
      //Mostrar Modal de eventos
      $("#modalFormCalendar").modal("show");
@@ -189,12 +202,12 @@ function agregarEvento(){
                             title: "Evento",
                             text: objData.msg,
                             icon: "success",
-                            showClass: {
+                           /*  showClass: {
                               popup: 'animate__animated animate__fadeInDown'
                             },
                             hideClass: {
                               popup: 'animate__animated animate__fadeOutUp'
-                            },
+                            }, */
                             showCancelButton: false,
                             confirmButtonText: "Aceptar",
                             //cancelButtonText: "No, cancelar!",
@@ -217,7 +230,7 @@ function agregarEvento(){
     
 }
 //Actualizar Evento
-function updateEvento(idEvento) {
+function updateEvento(idEvento,nameEvent) {
     var formUsuario=document.querySelector("#formCaledario");
         let strtitle = document.querySelector('#title').value;
         let strDescripcion = document.querySelector('#descripcion').value;
@@ -247,15 +260,15 @@ function updateEvento(idEvento) {
                         
                         
                         swal.fire({
-                            title: "Evento",
+                            title: nameEvent,
                             text: objData.msg,
                             icon: "success",
-                            showClass: {
+                           /*  showClass: {
                               popup: 'animate__animated animate__fadeInDown'
                             },
                             hideClass: {
                               popup: 'animate__animated animate__fadeOutUp'
-                            },
+                            }, */
                             showCancelButton: false,
                             confirmButtonText: "Aceptar",
                             //cancelButtonText: "No, cancelar!",
@@ -277,7 +290,7 @@ function updateEvento(idEvento) {
         }  
 }
 //Función Eliminar Evento
-function deleteEvento(idEvento) {
+function deleteEvento(idEvento,nameEvent) {
     var formUsuario=document.querySelector("#formCaledario");
         let strtitle = document.querySelector('#title').value;
         let strDescripcion = document.querySelector('#descripcion').value;
@@ -307,7 +320,7 @@ function deleteEvento(idEvento) {
                         formUsuario.reset();
 
                         swal.fire({
-                            title: "Evento",
+                            title: nameEvent,
                             text: objData.msg,
                             icon: "success",
                             showClass: {
