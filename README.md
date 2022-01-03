@@ -88,7 +88,7 @@
     <td align="center"><a href="https://github.com/GabyMaradiaga"><img src="https://avatars.githubusercontent.com/u/95946158?v=4" width="100px;" alt=""/><br /><sub><b>Gabriela Maradiaga</b></td>
     <td align="center"><a href="https://github.com/Hup2001"><img src="https://avatars.githubusercontent.com/u/95898021?v=4" width="100px;" alt=""/><br /><sub><b>Hugo Paz</b></td>
     <td align="center"><a href="https://github.com/KevinZuniga97"><img src="https://avatars.githubusercontent.com/u/96089693?v=4" width="100px;" alt=""/><br /><sub><b>Kevin Zúniga</b></td>
-    <td align="center"><a href="https://github.com/ReynaldoG31"><img src="https://avatars.githubusercontent.com/u/95898936?v=4" width="100px;" alt=""/><br /><sub><b>Victor García</b></td>
+    <td align="center"><a href="https://github.com/ReynaldoG31"><img src="https://avatars.githubusercontent.com/u/95898936?v=4" width="100px;" alt=""/><br /><sub><b>Reynaldo Giron</b></td>
     <td align="center"><a href="https://github.com/vico-21"><img src="https://avatars.githubusercontent.com/u/95952380?v=4" width="100px;" alt=""/><br /><sub><b>Victor García</b></td>
     <td align="center"><a href="https://github.com/FerOrtizHN"><img src="https://avatars.githubusercontent.com/u/74040616?v=4" width="100px;" alt=""/><br /><sub><b>Fernando Ortiz</b></td>
   </tr>
