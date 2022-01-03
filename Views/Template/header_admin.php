@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Nosotros">
   <meta name="theme-color" content="=#009688">
-  <link rel="shortcut icon" href="<?= media();?>/images//favicon.ico">
+  <link rel="shortcut icon" href="<?= media();?>/images/uploads/favicon.ico">
   <title><?= $data['page_tag'] ?></title>
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="<?= media(); ?>/js/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
@@ -16,9 +16,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!--Boopstrap Sswitch-->
     <link rel="stylesheet" href="<?= media(); ?>/js/plugins/bootstrap-switch\css\bootstrap3\bootstrap-switch.min.css">
-    <!-- Fullcalendar -->
-    <link rel="stylesheet" href="<?= media(); ?>/js/plugins/fullcalendarV5/main.min.css">
-
+    
     <!-- Toastr -->
     <link rel="stylesheet" href="<?= media(); ?>/js/plugins/toastr/toastr.min.css">
     <!-- Bootstrap Select -->
@@ -38,16 +36,11 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-    <div id="divLoading">
-      <div>
-        <img src="<?=media();?>/images//loading.svg" alt="Loading">
-       </div>
-    </div>
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="<?= media(); ?>/images//logo3.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="<?= media(); ?>/images/uploads/logo3.png" alt="AdminLTELogo" height="60" width="60">
   </div>
   <!-- Navbar -->
   <nav id="navegacion" class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -89,8 +82,8 @@
       <li class="nav-item dropdown show"><a class="nav-link" href="#" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li><a class="dropdown-item" href="<?= base_url();?>/opciones"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
-            <li><a class="dropdown-item" href="<?= base_url();?>/usuarios/perfil"><i class="fa fa-user fa-lg"></i> Profile</a></li>
-            <li><a class="dropdown-item" href="<?= base_url();?>/Logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a class="dropdown-item" href="<?= base_url();?>/perfil"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+            <li><a class="dropdown-item" href="<?= base_url();?>/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
           </ul>
         </li>
        

@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= base_url();?>/dashboard" class="brand-link">
-      <img src="<?= media();?>/images//logo3.png" alt="Route77 Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="<?= media();?>/images/uploads/logo3.png" alt="Route77 Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Estación Route77</span>
     </a>
 
@@ -11,11 +11,11 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
       <div class="image ">
-          <img src="<?= media();?>/images//avatar.png" class="img-circle elevation-2 user " alt="User Image">
+          <img src="<?= media();?>/images/uploads/user_image.png" class="img-circle elevation-2 user " alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?=   $_SESSION['userData']['nombres']  ?></a>
-          <a href="#" class="d-block"><?=   $_SESSION['userData']['nombreRol']  ?></a>
+          <a href="#" class="d-block">Zepeda</a>
+          <a href="#" class="d-block">Administrador</a>
         </div>
       </div>
 
@@ -36,8 +36,6 @@
         <ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <?php if(!empty($_SESSION['permisos'][1]['r'])){ ?>
-
           <li class="nav-item">
             <a href="<?= base_url();?>/dashboard" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -46,9 +44,7 @@
               </p>
             </a>
           </li>
-          <?php } ?>
           <!-- Usuarios-->
-          <?php if(!empty($_SESSION['permisos'][2]['r'])){ ?>
           <li class="nav-item">
             <a href="../widgets.html" class="nav-link">
              <i class=" nav-icon fas fa-users"></i>
@@ -70,12 +66,15 @@
                   <p>Roles</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?= base_url();?>/permisos" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Permisos</p>
+                </a>
+              </li>
             </ul>
           </li>
-          <?php } ?>
-
           <!-- Clientes-->
-          <?php if(!empty($_SESSION['permisos'][3]['r'])){ ?>
           <li class="nav-item">
             <a href="<?= base_url();?>/clientes" class="nav-link">
             <i class=" nav-icon fas fa-user"></i>
@@ -84,44 +83,16 @@
               </p>
             </a>
           </li>
-          <?php } ?>
-
-
           <!-- Productos-->
-          <?php if(!empty($_SESSION['permisos'][4]['r']) || !empty($_SESSION['permisos'][6]['r'])){ ?>
-            <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
-             <i class=" nav-icon fas fa-store"></i>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/productos" class="nav-link">
+            <i class=" nav-icon fas fa-archive"></i>
               <p>
-                Tienda
-                <i class="right fas fa-angle-left"></i>
+                Productos
               </p>
             </a>
-
-            <ul class="nav nav-treeview">
-
-              <?php if(!empty($_SESSION['permisos'][4]['r'])){ ?>
-              <li class="nav-item">
-                <a href="<?= base_url();?>/productos" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Productos</p>
-                </a>
-              </li>
-              <?php } ?>
-              <?php if(!empty($_SESSION['permisos'][6]['r'])){ ?>
-              <li class="nav-item">
-                <a href="<?= base_url();?>/categorias" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Categorías</p>
-                </a>
-              </li>
-              <?php } ?>
-            </ul>
           </li>
-          <?php } ?>
-
           <!-- Pedidos-->
-          <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
           <li class="nav-item">
             <a href="<?= base_url();?>/pedidos" class="nav-link">
             <i class="nav-icon fas fa-shopping-cart"></i>
@@ -130,20 +101,6 @@
               </p>
             </a>
           </li>
-
-          <?php } ?>
-
-          <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
-          <!-- Calendario-->
-          <li class="nav-item">
-            <a href="<?= base_url();?>/calendario" class="nav-link">
-            <i class="nav-icon far fa-calendar-alt"></i>
-              <p>
-                Calendario
-              </p>
-            </a>
-          </li>
-          <?php } ?>
           <!-- Logout-->
           <li class="nav-item">
             <a href="<?= base_url();?>/logout" class="nav-link">

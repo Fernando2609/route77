@@ -1,10 +1,14 @@
 
 <?php 
-    headerAdmin($data); 
-    getModal('modalUsuarios', $data);
+
+headerAdmin($data); 
+
+getModal('modalUsuarios', $data);
+
 ?>
-    <!-- Content Header (Sección de Encabezado) -->
-    <div class="content-wrapper">
+  <!-- Content Wrapper. Contains page content -- Div Principal -->
+  <div class="content-wrapper">
+      <!-- Content Header (Sección de Encabezado) -->
       <section class="content-header">
         <div class="container-fluid"><!-- Div Container-Fluid -->
           <div class="row mb-2"> <!-- Div row y margen abajo de 2-->
@@ -12,9 +16,7 @@
               <!--Titulo-->
               <h1><i class="fas fa-user-tag"></i> <?= $data['page_title'] ?> </h1>
               <!--Boton Nuevo-->
-              <?php if($_SESSION['permisosMod']['w']){ ?>
-              <button type="button" class="btn btn-success btn-nuevo" onclick="openModal();"><i class="fas fa-plus-square"></i>  Nuevo</button>
-              <?php } ?> 
+              <button type="button" class="btn btn-success btn-nuevo" onclick="openModal();"><i class="fas fa-plus-square"></i>  Nuevo</button> 
             </div><!-- / termina Div 6 columnas derecha-->
             <div class="col-sm-6"> <!-- Div 6 columnas Izquierda-->
               <ol class="breadcrumb float-sm-right">
