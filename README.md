@@ -23,7 +23,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Fernando2609/route77.git">
-    <img src="Assets\images\uploads/logo3.png" alt="Logo" width="380" height="380">
+    <img src="Assets\images\logo3.png" alt="Logo" width="380" height="380">
   </a>
 
 <h3 align="center">Estación Route 77</h3>
@@ -63,7 +63,7 @@
 
 
 <div align="center">
-<img src="Assets\images\uploads/logo.png" alt="Logo" width="620" height="380">
+<img src="Assets\images\logo.png" alt="Logo" width="620" height="380">
 </div>
 
 
