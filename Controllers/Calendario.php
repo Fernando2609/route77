@@ -25,18 +25,18 @@
         }
         public function setCalendario()
         {
-            //$idUsuario = intval($_POST['idUsuario']);
+            $idUsuario = $_SESSION['idUser'];
             $strtitle = strClean($_POST['title']);
             $strDescripcion = strClean($_POST['descripcion']);
             $strStart = strClean($_POST['inicio']);
             $strEnd = strClean($_POST['end']);
             $strColor = strClean($_POST['color']);
             $strTextColor = strClean($_POST['colorText']);
-            $request_user = $this->model->insertEvento($strtitle,$strDescripcion,$strStart,$strEnd,$strColor,$strTextColor);
+            $request_user = $this->model->insertEvento($idUsuario,$strtitle,$strDescripcion,$strStart,$strEnd,$strColor,$strTextColor);
             
             if($request_user > 0 ){
               
-                $arrResponse = array("status" => true, "msg" => 'Evento Guardado Correctamente.');
+            $arrResponse = array("status" => true, "msg" => 'Evento Guardado Correctamente.');
                 }
             else{
             $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
@@ -48,8 +48,8 @@
      }
      public function mostrarCalendario()
         {
-            
-            $arrData=$this->model->selectCalendario();
+            $idUsuario = $_SESSION['idUser'];
+            $arrData=$this->model->selectCalendario($idUsuario);
             //dep($arrData);
             
             //dep($arrData[0]['status']);
@@ -98,63 +98,6 @@
          echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
          die();
   }
-         /*public function getUsuarios()
-        {
-            $arrData= $this->model->selectUsuarios();
-            //dep($arrData);
-            for ($i=0; $i < count($arrData) ; $i++) { 
-                if ($arrData[$i]['status']==1) {
-                 $arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';   
-                }else{
-                 $arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
-                }
- 
-                $arrData[$i]['options'] = '<div class="text-center">
-                <button class="btn btn-info btn-sm btnViewUsuario" onClick="fntViewUsuario('.$arrData[$i]['idUsuario'].')" title="Ver usuario"><i class="far fa-eye"></i></button>
-                <button class="btn btn-warning btn-sm btnEditUsuario" onClick="fntEditUsuario('.$arrData[$i]['idUsuario'].')" title="Editar usuario"><i class="fas fa-pencil-alt"></i></button>
-                <button class="btn btn-danger btn-sm btnDelUsuario" onClick="fntDelUsuario('.$arrData[$i]['idUsuario'].')" title="Eliminar usuario"><i class="far fa-trash-alt"></i></button>';
-             }; 
-            //dep($arrData[0]['status']);
-            //exit; 
-            echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
-             die();
-        }
-        public function getUsuario(int $idUsuario){
-            //echo $idUsuario;
-            //die();
-			 
-				$idusuario = intval($idUsuario);
-				if($idusuario > 0)
-				{
-					$arrData = $this->model->selectUsuario($idusuario);
-                    
-					if(empty($arrData))
-					{
-						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
-					}else{
-						$arrResponse = array('status' => true, 'data' => $arrData);
-					}
-					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-				} 
-			die();
-		}
-        
-        public function delUsuario()
-        {
-            if($_POST){
-                $intIdpersona = intval($_POST['idUsuario']);
-               
-                $requestDelete = $this-> model->deleteUsuario($intIdpersona);
-                if ($requestDelete) 
-                {
-                    $arrResponse = array ('status' => true, 'msg' => 'Se ha eliminado el usuario');
-                }else{
-                     $arrResponse = array('status' => false, 'msg' => 'Error al eliminar el usuario.');
-                }
-                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-                }
-            die();  
-        } */
     
     }
 
