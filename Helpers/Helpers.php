@@ -1,10 +1,4 @@
 <?php  
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-    require 'Libraries/phpmailer/Exception.php';
-    require 'Libraries/phpmailer/PHPMailer.php';
-    require 'Libraries/phpmailer/SMTP.php';
-    
     function base_url(){
         return BASE_URL;
     }
@@ -40,124 +34,7 @@
       require_once $view_modal;
     }
 
-    //Envio de correos
-    function sendEmail($data,$template)
-    {
-        if(ENVIRONMENT == 1){
-            $asunto = $data['asunto'];
-            $emailDestino = $data['email'];
-            $empresa = NOMBRE_REMITENTE;
-            $remitente = EMAIL_REMITENTE;
-            $emailCopia = !empty($data['emailCopia']) ? $data['emailCopia'] : "";
-            //ENVIO DE CORREO
-            $de = "MIME-Version: 1.0\r\n";
-            $de .= "Content-type: text/html; charset=UTF-8\r\n";
-            $de .= "From: {$empresa} <{$remitente}>\r\n";
-            $de .= "Bcc: $emailCopia\r\n";
-            ob_start();
-            require_once("Views/Template/Email/".$template.".php");
-            $mensaje = ob_get_clean();
-            $send = mail($emailDestino, $asunto, $mensaje, $de);
-            return $send;
-        }else{
-           //Create an instance; passing `true` enables exceptions
-            $mail = new PHPMailer(true);
-            ob_start();
-            require_once("Views/Template/Email/".$template.".php");
-            $mensaje = ob_get_clean();
 
-            try {
-                //Server settings
-                $mail->SMTPDebug = 0;                      //Enable verbose debug output
-                $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'estacionroute77@gmail.com';          //SMTP username
-                $mail->Password   = 'Estacion.route123';                               //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-                //Recipients
-                $mail->setFrom('estacionroute77@gmail.com', 'Servidor Local');
-                $mail->addAddress($data['email']);     //Add a recipient
-                if(!empty($data['emailCopia'])){
-                    $mail->addBCC($data['emailCopia']);
-                }
-                $mail->CharSet = 'UTF-8';
-                //Content
-                $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = $data['asunto'];
-                $mail->Body    = $mensaje;
-                
-                $mail->send();
-                return true;
-            } catch (Exception $e) {
-                return false;
-            } 
-        }
-    }
-    
-    function sendMailLocal($data,$template){
-        //Create an instance; passing `true` enables exceptions
-        $mail = new PHPMailer(true);
-        ob_start();
-        require_once("Views/Template/Email/".$template.".php");
-        
-        $mensaje = ob_get_clean();
-
-        try {
-            //Server settings
-            $mail->SMTPDebug = 1;                      //Enable verbose debug output
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'estacionroute77@gmail.com';                     //SMTP username
-            $mail->Password   = 'Estacion.route123';                               //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-            //Recipients
-            $mail->setFrom('estacionroute77@gmail.com', 'Servidor Local');
-            $mail->addAddress($data['email']);     //Add a recipient
-            if(!empty($data['emailCopia'])){
-                $mail->addBCC($data['emailCopia']);
-            }
-
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = $data['asunto'];
-            $mail->Body    = $mensaje;
-            
-            $mail->send();
-            return true;
-            echo 'Mensaje enviado';
-        } catch (Exception $e) {
-            echo "Error en el envío del mensaje: {$mail->ErrorInfo}";
-        }
-    }
-
-    function getPermisos(int $idmodulo){
-        require_once ("Models/permisosModel.php");
-        $objPermisos = new PermisosModel();
-        $idrol = $_SESSION['userData']['Id_Rol'];
-        $arrPermisos = $objPermisos->permisosModulo($idrol);
-        $permisos = '';
-        $PermisosMod = '';
-
-        if(count($arrPermisos) > 0){
-            $permisos = $arrPermisos;
-            $PermisosMod = isset($arrPermisos[$idmodulo]) ? $arrPermisos[$idmodulo] : "";
-        }
-        $_SESSION['permisos'] = $permisos;
-        $_SESSION['permisosMod'] = $PermisosMod;
-    }
-    
-    function sessionUser(int $idpersona){
-        require_once ("Models/LoginModel.php");
-        $objLogin = new LoginModel();
-        $request = $objLogin->sessionLogin($idpersona);
-        return $request;
-    }
     //Elimina exceso de espacios entre palabras
     function strClean($strCadena){
         $string = preg_replace(['/\s+/','/^\s|\s$/'],[' ',''], $strCadena);
@@ -223,15 +100,5 @@
         $cantidad = number_format($cantidad,2,SPD,SPM);
         return $cantidad;
     }
-    function img64(){
-        return img64;
-    }
-    //funcion para obtner la fecha y hora actual y enviarla al mysql
-    function NOW(){
-        $date = date('Y-m-d H:i:s');
-        return $date;
-    }
-   
-
     
 ?>
