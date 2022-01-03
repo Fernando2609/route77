@@ -1,4 +1,6 @@
-var tableUsuarios;
+let tableUsuarios;
+let rowTable="";
+let divLoading = document.querySelector("#divLoading");
 document.all
 document.addEventListener('DOMContentLoaded',function () {
     tableUsuarios = $('#tableUsuarios').dataTable(  {
@@ -93,14 +95,14 @@ document.addEventListener('DOMContentLoaded',function () {
                                   h.color='white';
                                   h.fontSize=12;
                                 })
-                                var cols = [];
+                                let cols = [];
                                   cols[0] = { 
                                     image: imgB64                
                                     , alignment: 'left', margin:[20,5,10,20],width:100 };
                                   const fecha = new Date();
                                   cols[1] = {fontSize: 11,text: 'ROUTE 77' , alignment: 'right', margin:[0,20,20,100] };
                                   cols[2] = {fontSize: 11,text: fecha.toLocaleDateString('es-hn',{ weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) , alignment: 'right', margin:[0,20,20,0] }
-                                  var objheader = {};
+                                  let objheader = {};
                                   objheader['columns'] = cols;
                                   doc['header']=function(page) { 
                                   if (page == 1) 
@@ -110,10 +112,10 @@ document.addEventListener('DOMContentLoaded',function () {
                                  };
                                   // Splice the image in after the header, but before the table
                                   
-                                  /* var cols2 = [];
+                                  /* let cols2 = [];
                                   cols2[0] = {fontSize: 13,text:  , alignment: 'center', margin:[0,0,0,0] };
                                   
-                                  var objfooter = {};
+                                  let objfooter = {};
                                   objfooter['columns'] = cols2;*/
                                   doc['footer']= function(currentPage, pageCount) {
                                   return {
@@ -180,7 +182,7 @@ document.addEventListener('DOMContentLoaded',function () {
                 
                   });
     if (document.querySelector("#formUsuario")) {
-        var formUsuario=document.querySelector("#formUsuario");
+        let formUsuario=document.querySelector("#formUsuario");
         formUsuario.onsubmit=function(e){
             e.preventDefault();
             let strIdentificacion = document.querySelector('#txtIdentificacion').value;
@@ -210,7 +212,7 @@ document.addEventListener('DOMContentLoaded',function () {
                 }
             }
             
-                
+            divLoading.style.display="flex";  
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url+'/Usuarios/setUsuario'; 
             let formData = new FormData(formUsuario);
@@ -223,25 +225,42 @@ document.addEventListener('DOMContentLoaded',function () {
                     
                     if(objData.status)
                     { 
+                        if (rowTable ==""){
+                            tableUsuarios.api().ajax.reload();
+                        }else{
+                            htmlStatus = intStatus == 1?
+                            '<span class="badge badge-success">Activo</span>':
+                            '<span class="badge badge-danger">Inactivo</span>';
+                            rowTable.cells[1].textContent=strNombre;
+                            rowTable.cells[2].textContent=strApellido;
+                            rowTable.cells[3].textContent=strEmail;
+                            rowTable.cells[4].textContent=intTelefono;
+                            rowTable.cells[5].textContent=document.querySelector("#listRolid").selectedOptions[0].text
+                            rowTable.cells[6].innerHTML=htmlStatus;
+                            rowTable = ""; 
+                        }   
                         $('#modalFormUsuario').modal("hide");
                             formUsuario.reset();
                             swal.fire("Usuarios", objData.msg ,"success");
-                        tableUsuarios.api().ajax.reload(
-                        );
+                            //tableUsuarios.api().ajax.reload();
+                        
                         }else{
                             swal.fire("Error", objData.msg , "error");
+                            
                     }
                 
                 }else{
                     console.log('Error');
                 }
+                divLoading.style.display = "none";
+				return false;
             }
         }
         
     }
     //Actulizar desde perfil
     if (document.querySelector("#formPerfil")) {
-        var formPerfil=document.querySelector("#formPerfil");
+        let formPerfil=document.querySelector("#formPerfil");
         formPerfil.onsubmit=function(e){
             e.preventDefault();
             let strIdentificacion = document.querySelector('#txtIdentificacion').value;
@@ -282,7 +301,7 @@ document.addEventListener('DOMContentLoaded',function () {
                 }
             }
             
-                
+            divLoading.style.display="flex";        
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url+'/Usuarios/putPerfil'; 
             let formData = new FormData(formPerfil);
@@ -314,6 +333,8 @@ document.addEventListener('DOMContentLoaded',function () {
                     }
                 
                 }
+                divLoading.style.display = "none";
+				return false;
             }
         }
         
@@ -454,7 +475,9 @@ function fntViewUsuario(idpersona){
         }
     } 
 }
-function fntEditUsuario(idUsuario){
+function fntEditUsuario(element,idUsuario){
+    rowTable=element.parentNode.parentNode.parentNode;
+    //console.log(rowTable);
     document.querySelector('#titleModal').innerHTML ="Actualizar Usuario";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-success", "btn-warning");
@@ -501,7 +524,6 @@ function fntEditUsuario(idUsuario){
 }
 
 function fntDelUsuario(idUsuario){
-  var idUsuario = idUsuario;
     swal.fire({
         title: "Eliminar Usuario",
         text: "¿Realmente quiere eliminar el Usuario?",
@@ -520,15 +542,15 @@ function fntDelUsuario(idUsuario){
     
     }).then((result) => {
         if (result.isConfirmed) {
-            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            var ajaxUrl = base_url + '/Usuarios/delUsuario/';
-            var strData = "idUsuario=" + idUsuario;
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url + '/Usuarios/delUsuario/';
+            let strData = "idUsuario=" + idUsuario;
             request.open("POST", ajaxUrl, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
             request.onreadystatechange = function () {
                 if (request.readyState == 4 && request.status == 200) {
-                    var objData = JSON.parse(request.responseText);
+                    let objData = JSON.parse(request.responseText);
                     if (objData.status) {
                         swal.fire({
                             title: "Eliminar!",
@@ -559,7 +581,7 @@ function openModal()
     rowTable = "";
     document.querySelector('#idUsuario').value ="";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
-   document.querySelector('#btnActionForm').classList.replace("btn-warning", "btn-success");
+    document.querySelector('#btnActionForm').classList.replace("btn-warning", "btn-success");
     document.querySelector('#btnText').innerHTML ="Guardar";
     document.querySelector('#titleModal').innerHTML = "Nuevo Usuario";
     document.querySelector("#formUsuario").reset();
