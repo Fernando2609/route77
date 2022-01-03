@@ -11,14 +11,14 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active"><a href="<?=base_url();?>/dashboard">Dashboard</li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol>
-            
-           <!--  <?php  dep($_SESSION['userData']);        
+
+            <?php  dep($_SESSION['userData']);        
                    /* dep($_SESSION['permisos']);
                    dep($_SESSION['permisosMod']); */
             
-            ?> -->
+            ?>
 
           </div>
         </div>
