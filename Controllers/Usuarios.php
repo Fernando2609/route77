@@ -4,7 +4,6 @@
         {
             parent::__construct();
             session_start();
-            session_regenerate_id(true);
             if (empty($_SESSION['login'])) {
                 header('Location: '.base_url().'/login');
                 die();
@@ -27,7 +26,8 @@
         public function setUsuario()
         {
             if ($_POST) {
-               if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listRolid']) || empty($_POST['listStatus']) || empty($_POST['listNacionalidad']) || empty($_POST['listGenero']) )
+                
+                if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listRolid']) || empty($_POST['listStatus']) || empty($_POST['listNacionalidad']) || empty($_POST['listGenero']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{ 
@@ -44,11 +44,9 @@
                     $intEstadoC = intval(strClean($_POST['listEstadoC']));
                     $intSucursal = intval(strClean($_POST['listSucursal']));
                     $strFechaNacimiento = strClean($_POST['fechaNacimiento']);
-                    $request_user="";
                     if ($idUsuario==0) {
                         $option=1;
                         $strPassword =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
-                        if($_SESSION['permisosMod']['w']){
                         $request_user = $this->model->insertUsuario($strIdentificacion,
                                                                                     $strNombre, 
                                                                                     $strApellido, 
@@ -62,11 +60,10 @@
                                                                                     $intEstadoC,
                                                                                     $intSucursal,
                                                                                     $strFechaNacimiento );
-                        }    
+                        
                     }else{
                         $option=2;
                         $strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
-                        if($_SESSION['permisosMod']['u']){
                         $request_user = $this->model->updateUsuario($idUsuario,$strIdentificacion,
                                                                                     $strNombre, 
                                                                                     $strApellido, 
@@ -80,8 +77,6 @@
                                                                                     $intEstadoC,
                                                                                     $intSucursal,
                                                                                     $strFechaNacimiento );
-                    
-                        }
                     }
                     if($request_user > 0 ){
                         if ($option==1) {
@@ -102,7 +97,6 @@
         }
         public function getUsuarios()
         {
-            if($_SESSION['permisosMod']['r']){ 
             $arrData= $this->model->selectUsuarios();
             //dep($arrData);
             for ($i=0; $i < count($arrData) ; $i++) { 
@@ -123,7 +117,7 @@
                 if($_SESSION['permisosMod']['u']){
                     if(($_SESSION['idUser'] == 1 and $_SESSION['userData']['Id_Rol'] == 1) ||
                        ($_SESSION['userData']['Id_Rol'] == 1 and $arrData[$i]['Id_Rol'] != 1)){
-                        $btnEdit = '<button class="btn btn-warning btn-sm btnEditUsuario" onClick="fntEditUsuario(this,'.$arrData[$i]['idUsuario'].')" title="Editar usuario"><i class="fas fa-pencil-alt"></i></button>';
+                        $btnEdit = '<button class="btn btn-warning btn-sm btnEditUsuario" onClick="fntEditUsuario('.$arrData[$i]['idUsuario'].')" title="Editar usuario"><i class="fas fa-pencil-alt"></i></button>';
                        }else{
                         $btnEdit = '<button class="btn btn-warning btn-sm" disabled><i class="fas fa-pencil-alt"></i></button>';  
                        }
@@ -148,13 +142,12 @@
              } 
             /*  dep($arrData[0]['status']);exit; */
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
-        } 
              die();
         }
-        public function getUsuario($idUsuario){
+        public function getUsuario(int $idUsuario){
             //echo $idUsuario;
             //die();
-            if($_SESSION['permisosMod']['r']){
+			 
 				$idusuario = intval($idUsuario);
 				if($idusuario > 0)
 				{
@@ -168,25 +161,22 @@
 					}
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				} 
-            } 
 			die();
 		}
         
         public function delUsuario()
         {
             if($_POST){
-                if($_SESSION['permisosMod']['d']){
-                    $intIdpersona = intval($_POST['idUsuario']);
-                
-                    $requestDelete = $this-> model->deleteUsuario($intIdpersona);
-                    if ($requestDelete) 
-                    {
-                        $arrResponse = array ('status' => true, 'msg' => 'Se ha eliminado el usuario');
-                    }else{
-                        $arrResponse = array('status' => false, 'msg' => 'Error al eliminar el usuario.');
-                    }
-                    echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-                    }  
+                $intIdpersona = intval($_POST['idUsuario']);
+               
+                $requestDelete = $this-> model->deleteUsuario($intIdpersona);
+                if ($requestDelete) 
+                {
+                    $arrResponse = array ('status' => true, 'msg' => 'Se ha eliminado el usuario');
+                }else{
+                     $arrResponse = array('status' => false, 'msg' => 'Error al eliminar el usuario.');
+                }
+                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
             die();  
         }
@@ -239,7 +229,7 @@
 					}
 				
                 }
-                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             }
 
            

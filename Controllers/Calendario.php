@@ -12,14 +12,11 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(7);
         }
         
         public function Calendario()
         {
-            if(empty($_SESSION['permisosMod']['r'])){
-                header('Location: '.base_url().'/dashboard');
-            }
+           
             $data['page_tag']="Calendario";
             $data['page_title']="Calendario <small>Route 77</small>";
             $data['page_name']="calendario";
