@@ -5,7 +5,7 @@ body{
  */}
 
 .user{
-   width: 2.4rem !important;
+   width: 45px !important;
     background: gray;
     padding: 6px;
 }
@@ -202,7 +202,7 @@ body.dark-mode span.flip-indecator {
 
 /*Estilos login*/
 #divLoading{
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
   height: 100%;
@@ -210,7 +210,7 @@ body.dark-mode span.flip-indecator {
   justify-content: center;
   align-items: center;
   background: rgb(254,254,255, .65);
-  z-index: 1;
+  z-index: 9999;
   display: none;
 }
 
@@ -223,7 +223,6 @@ body.dark-mode span.flip-indecator {
   font-size: 13pt;
   font-weight: bold;
 }
-/*Full Calendario*/
 body.dark-mode a.fc-col-header-cell-cushion {
   color: white;
 }
@@ -250,32 +249,4 @@ body.dark-mode .fc .fc-daygrid-day.fc-day-today {
   background-color: rgba(255,220,40,.15);
   background-color: var(--fc-today-bg-color,rgba(238, 255, 0, 0.445));
 }
-.fc-daygrid-block-event .fc-event-time, .fc-daygrid-block-event .fc-event-title {
-  padding: 1px;
-  font-weight: 600;
-}
-body.dark-mode a.fc-col-header-cell-cushion:hover {
-  color: #ffe72b;
-}
-.dark-mode a:not(.btn):hover {
-  color: #ffe72b;
-}
-body.dark-mode tr.fc-list-event.fc-event.fc-event-start.fc-event-end:hover {
-  background-color: #009688;
-  color: black;
-}
-body.dark-mode tbody tr.fc-list-event:hover{
-  color: black;
-}
-body.dark-mode a{
-  color: white;
-}
-.fc-popover-body,.fc-popover-header {
-  background-color: cornflowerblue;
-}
-.fc-popover-body div a {
-  color: black;
-}
-.fc-popover-header span{
-  color: black;
-}
+

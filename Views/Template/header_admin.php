@@ -37,7 +37,12 @@
   <link rel="stylesheet" href="<?= media(); ?>/css/style.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed ">
+<body class="hold-transition sidebar-mini">
+    <div id="divLoading">
+      <div>
+        <img src="<?=media();?>/images//loading.svg" alt="Loading">
+       </div>
+    </div>
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Preloader -->
@@ -49,7 +54,7 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" id="nav-bar" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
      
     </ul>
