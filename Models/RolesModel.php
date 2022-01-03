@@ -14,10 +14,14 @@
 
         public function SelectRoles()
         {
-        // Extraer roles
-        $sql = "SELECT * FROM roles WHERE status != 0";
-        $request = $this->select_all($sql); 
-        return $request;
+			$whereAdmin = "";
+			if($_SESSION['idUser'] != 1){
+				$whereAdmin = " and Id_Rol != 1 ";
+			}
+			// Extraer roles
+			$sql = "SELECT * FROM roles WHERE status != 0".$whereAdmin;
+			$request = $this->select_all($sql); 
+			return $request;
 
         }
         public function selectRol(int $idrol)
