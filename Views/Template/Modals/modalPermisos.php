@@ -55,6 +55,12 @@
                                 </label>
                               </div>
                             </td>
+                            <!-- Codigo para solo mostrar leer en calendario -->
+                             <?php
+                            //if ($idmod==7) {
+                              //break;
+                             //}
+                            ?> 
                             <td>
                               <div class="toggle-flip">
                                 <label>
@@ -78,6 +84,7 @@
                             </td>
                             
                           </tr>
+                         
                           <?php 
                                 $no++;
                             }

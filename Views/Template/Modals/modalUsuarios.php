@@ -184,6 +184,15 @@
               <td>Fecha registro:</td>
               <td id="celFechaRegistro">Larry</td>
             </tr>
+            <tr>
+              <td>Ult. Vez Modificado: </td>
+              <td id="celDateModificado">Larry</td>
+            </tr>
+            <tr>
+              <td>Ult. Vez Login:</td>
+              <td id="celDateLogin">Larry</td>
+            </tr>
+           
           </tbody>
         </table>
 
