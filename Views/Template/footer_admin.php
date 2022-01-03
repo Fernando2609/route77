@@ -61,7 +61,9 @@
 
 
 
+
  <script type="text/javascript" src="<?= media();?>/js/funtions_admin.js"></script>  
+
 
 <script>
   const imgB64="<?=  img64();  ?>"
