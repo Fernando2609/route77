@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-01-2022 a las 21:21:24
+-- Tiempo de generación: 22-12-2021 a las 01:55:23
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -20,38 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `db_route`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `calendario`
---
-
-CREATE TABLE `calendario` (
-  `id` bigint(20) NOT NULL,
-  `idUsuario` bigint(11) NOT NULL,
-  `title` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
-  `descripcion` text COLLATE utf8mb4_swedish_ci NOT NULL,
-  `start` datetime NOT NULL,
-  `end` datetime NOT NULL,
-  `color` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
-  `textColor` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
-  `dateCreated` datetime NOT NULL DEFAULT current_timestamp(),
-  `dateModificado` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
-
---
--- Volcado de datos para la tabla `calendario`
---
-
-INSERT INTO `calendario` (`id`, `idUsuario`, `title`, `descripcion`, `start`, `end`, `color`, `textColor`, `dateCreated`, `dateModificado`) VALUES
-(1, 1, 'Navidad', 'Navidad en el mundo', '2021-12-24 00:00:00', '2021-12-25 23:59:00', '#004cff', '#ffffff', '2021-12-30 20:43:05', '2021-12-31 08:07:47'),
-(2, 5, 'Año Nuevo', 'Año nuevo en todos los paises', '2021-12-31 00:00:00', '0000-00-00 00:00:00', '#ff8686', '#000000', '2021-12-30 20:44:20', '0000-00-00 00:00:00'),
-(4, 3, 'Inicio del Mes', 'Inicia del mes de diciembre', '2021-12-02 01:30:00', '2021-12-06 05:30:00', '#ff9999', '#000000', '2021-12-30 21:06:21', '2021-12-30 22:41:38'),
-(5, 3, 'Partido', 'Partido de Hoy', '2021-12-08 10:00:00', '2021-12-12 12:00:00', '#000000', '#fffafa', '2021-12-30 21:33:22', '2021-12-30 22:43:08'),
-(6, 3, 'Celebración', 'Celebración de año nuevo', '2021-12-31 00:00:00', '2021-12-31 01:00:00', '#0033ff', '#ff1414', '2021-12-30 22:47:47', '2021-12-30 22:50:27'),
-(7, 1, 'Año Nuevo', 'Año Nuevo celebración', '2021-12-31 00:00:00', '2021-12-31 04:03:00', '#14ff67', '#000000', '2021-12-31 03:03:28', '2022-01-01 16:06:18'),
-(8, 1, 'Cumpleaños', 'Cumpleaños de alguien', '2022-01-01 12:00:00', '2022-01-02 23:59:00', '#f92f2f', '#ffffff', '2022-01-01 16:06:09', '2022-01-01 16:51:16');
 
 -- --------------------------------------------------------
 
@@ -103,19 +71,12 @@ CREATE TABLE `detalle_temp` (
 
 CREATE TABLE `empresa` (
   `idEmpresa` int(11) NOT NULL,
-  `nombreEmpresa` varchar(25) NOT NULL,
+  `nombreEempresa` varchar(25) NOT NULL,
   `direccion` text NOT NULL,
   `razonSocial` text NOT NULL,
   `correo` varchar(50) NOT NULL,
-  `gerenteGeneral` varchar(50) NOT NULL
+  `gereneGeneral` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `empresa`
---
-
-INSERT INTO `empresa` (`idEmpresa`, `nombreEmpresa`, `direccion`, `razonSocial`, `correo`, `gerenteGeneral`) VALUES
-(1, 'Estación Route 77', '', 'Somos un equipo de negocios lideres en los campos de acción que emprendemos , corriente de Bendición , de producción, formadora con el temor a Dios en primer lugar y nuestro socio principal ya que de él recibimos los talentos para multiplicar y generar riqueza en todo emprendimiento , comprometido con la expansión del reino de Dios en la Tierra , generando riqueza para los socios, directivos, empleados, comprometidos con pasión , lealtad y dinamismo , para ver y dejar a nuestras futuras generaciones en una posición de privilegio y sobre todo hijos para el reino de Dios ', 'estacionroute77hn@gmail.com', 'Saúl Armando Zepeda ');
 
 -- --------------------------------------------------------
 
@@ -177,9 +138,7 @@ INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 (2, 'Usuarios', 'Usuarios Administrativos del sistema', 1),
 (3, 'Clientes ', 'Clientes de tienda', 1),
 (4, 'Productos', 'Todos los Producto', 1),
-(5, 'Pedidos', 'Pedidos de compra', 1),
-(6, 'Categoría', 'Categorías productos', 1),
-(7, 'Calendario', 'Calendario', 1);
+(5, 'Pedidos', 'Pedidos de compra', 1);
 
 -- --------------------------------------------------------
 
@@ -238,26 +197,26 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VALUES
-(113, 2, 1, 0, 0, 0, 0),
-(114, 2, 2, 0, 0, 0, 0),
-(115, 2, 3, 0, 0, 0, 0),
-(116, 2, 4, 0, 0, 0, 0),
-(117, 2, 5, 0, 0, 0, 0),
-(118, 2, 6, 0, 0, 0, 0),
-(280, 1, 1, 1, 0, 0, 0),
-(281, 1, 2, 1, 1, 1, 1),
-(282, 1, 3, 1, 0, 0, 0),
-(283, 1, 4, 1, 0, 0, 0),
-(284, 1, 5, 1, 0, 0, 0),
-(285, 1, 6, 1, 0, 0, 0),
-(286, 1, 7, 1, 0, 0, 0),
-(294, 4, 1, 1, 0, 0, 0),
-(295, 4, 2, 0, 0, 0, 0),
-(296, 4, 3, 0, 0, 0, 0),
-(297, 4, 4, 0, 0, 0, 0),
-(298, 4, 5, 0, 0, 0, 0),
-(299, 4, 6, 0, 0, 0, 0),
-(300, 4, 7, 1, 0, 0, 0);
+(26, 1, 1, 1, 1, 1, 1),
+(27, 1, 2, 1, 1, 1, 1),
+(28, 1, 3, 1, 1, 1, 1),
+(29, 1, 4, 1, 1, 1, 1),
+(30, 1, 5, 1, 1, 1, 1),
+(31, 2, 1, 1, 0, 0, 0),
+(32, 2, 2, 1, 0, 0, 0),
+(33, 2, 3, 1, 0, 0, 0),
+(34, 2, 4, 1, 1, 1, 0),
+(35, 2, 5, 1, 1, 1, 0),
+(36, 3, 1, 1, 0, 0, 0),
+(37, 3, 2, 1, 0, 0, 0),
+(38, 3, 3, 1, 0, 0, 0),
+(39, 3, 4, 1, 1, 0, 0),
+(40, 3, 5, 1, 1, 1, 0),
+(61, 4, 1, 1, 0, 0, 0),
+(62, 4, 2, 0, 0, 0, 0),
+(63, 4, 3, 0, 0, 0, 0),
+(64, 4, 4, 0, 0, 0, 0),
+(65, 4, 5, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -383,7 +342,7 @@ CREATE TABLE `usuarios` (
   `fechaNacimiento` datetime NOT NULL,
   `status` int(5) NOT NULL DEFAULT 1,
   `telefono` int(11) NOT NULL,
-  `token` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
+  `token` varchar(80) COLLATE utf8mb4_swedish_ci NOT NULL,
   `datecreated` datetime NOT NULL DEFAULT current_timestamp(),
   `datelogin` datetime NOT NULL,
   `datemodificado` datetime NOT NULL
@@ -394,23 +353,14 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `dni`, `nombres`, `apellidos`, `email`, `contraseña`, `idNacionalidad`, `idGenero`, `idEstadoCivil`, `idRol`, `idSucursal`, `fechaNacimiento`, `status`, `telefono`, `token`, `datecreated`, `datelogin`, `datemodificado`) VALUES
-(1, '0801200018857', 'José Fernando', 'Ortiz Santos', 'josefortizsantos@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 1, 1, '2000-09-20 00:00:00', 1, 94877564, '', '2021-12-20 02:34:44', '2021-12-30 18:57:55', '2021-12-30 00:45:59'),
-(2, '0801200018313', 'Hugo Alejandro', 'Paz', 'hugo.paz@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 2, 1, '2000-06-15 00:00:00', 1, 94142814, '', '2021-12-20 13:57:46', '0000-00-00 00:00:00', '2022-01-01 21:20:42'),
-(3, '0801123989878', 'Leonela', 'Pineda', 'lypineda@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 2, 2, 1, 2, '2021-05-05 00:00:00', 1, 97737659, '', '2021-12-20 14:16:53', '2021-12-30 16:51:52', '2021-12-29 20:15:42'),
-(5, '0908099', 'Gabriela', 'Maradiaga', 'ggmaradiaga@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 2, 2, 2, 4, 3, '1999-12-16 00:00:00', 1, 97514274, '', '2021-12-20 19:41:19', '2021-12-30 17:03:05', '2021-12-24 15:20:09'),
-(6, '080119990155', 'Reynaldo Jafet', 'Giron Tercero', 'reynaldo.giron31@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 1, 2, '2000-12-31 00:00:00', 1, 87660249, '', '2021-12-26 22:11:45', '2021-12-28 21:37:24', '2022-01-01 21:19:51'),
-(7, '0801199612345', 'Kevin', 'Zuniga', 'krodriguezz@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 2, 2, 1, '2000-07-06 00:00:00', 1, 32301533, '', '2022-01-01 21:19:17', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, '0801200018857', 'José Fernando', 'Ortiz Santos', 'josefortizsantos@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 2, 1, 1, '2000-09-20 00:00:00', 1, 94877564, '', '2021-12-20 02:34:44', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, '0801200018313', 'Hugo Alejandro', 'Paz', 'hugo.paz@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 2, 1, '2000-06-15 00:00:00', 1, 86677646, '', '2021-12-20 13:57:46', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, '0801123989878', 'Leonela', 'Pineda', 'lypineda@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 2, 2, 1, 2, '2021-05-05 00:00:00', 1, 97737659, '', '2021-12-20 14:16:53', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, '0908099', 'Gabriela', 'Maradiaga', 'ggmaradiaga@gmail.com', '0c279387f9ea7ec4a06f945930acc5ea4efeaec97d876054f8d1471c9441f35e', 1, 2, 2, 3, 3, '1999-12-16 00:00:00', 1, 97514274, '', '2021-12-20 19:41:19', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `calendario`
---
-ALTER TABLE `calendario`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idUsuario` (`idUsuario`);
 
 --
 -- Indices de la tabla `categoria`
@@ -535,12 +485,6 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `calendario`
---
-ALTER TABLE `calendario`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
@@ -562,7 +506,7 @@ ALTER TABLE `detalle_temp`
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `estadocivil`
@@ -580,7 +524,7 @@ ALTER TABLE `genero`
 -- AUTO_INCREMENT de la tabla `modulo`
 --
 ALTER TABLE `modulo`
-  MODIFY `idmodulo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idmodulo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `nacionalidad`
@@ -598,7 +542,7 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
+  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -640,17 +584,11 @@ ALTER TABLE `tipo_pago`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idUsuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `calendario`
---
-ALTER TABLE `calendario`
-  ADD CONSTRAINT `calendario_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `detalle_pedido`
