@@ -37,7 +37,13 @@
   <link rel="stylesheet" href="<?= media(); ?>/css/style.css">
 </head>
 
+
 <body class="hold-transition sidebar-mini layout-fixed ">
+    <div id="divLoading">
+      <div>
+        <img src="<?=media();?>/images//loading.svg" alt="Loading">
+       </div>
+    </div>
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Preloader -->

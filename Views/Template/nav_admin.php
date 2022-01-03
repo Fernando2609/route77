@@ -133,7 +133,7 @@
 
           <?php } ?>
 
-
+          <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
           <!-- Calendario-->
           <li class="nav-item">
             <a href="<?= base_url();?>/calendario" class="nav-link">
@@ -143,7 +143,7 @@
               </p>
             </a>
           </li>
-
+          <?php } ?>
           <!-- Logout-->
           <li class="nav-item">
             <a href="<?= base_url();?>/logout" class="nav-link">
