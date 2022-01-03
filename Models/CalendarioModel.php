@@ -6,8 +6,8 @@
            parent::__construct();
         }
 
-        public function insertEvento(string $title, string $descripcion, string $start,string $end,string $color,string $Textcolor ){
-
+        public function insertEvento(int $idUsuario,string $title, string $descripcion, string $start,string $end,string $color,string $Textcolor ){
+			$this->intIdUsuario = $idUsuario;
 			$this->strtitle = $title;
 			$this->strdescripcion = $descripcion;
 			$this->strstart = $start;
@@ -25,9 +25,10 @@
             
 			if(empty($request))
 			{
-				$query_insert  = "INSERT INTO calendario(title,descripcion,start,end,color,textColor) 
-								  VALUES(?,?,?,?,?,?)";
-	        	$arrData = array($this->strtitle,
+				$query_insert  = "INSERT INTO calendario(idUsuario,title,descripcion,start,end,color,textColor) 
+								  VALUES(?,?,?,?,?,?,?)";
+	        	$arrData = array($this->intIdUsuario,
+								 $this->strtitle,
                                 $this->strdescripcion,
                                 $this->strstart,
                                 $this->strend,
@@ -40,10 +41,12 @@
 			}
 	        return $return;
 		}
-        public function selectCalendario()
+        public function selectCalendario(int $idUsuario)
 		{
-			$whereAdmin = "";
-			$sql = "SELECT  c.id, c.title,c.descripcion,c.start ,c.end, c.color,c.textColor from calendario c";
+			//Sumarle un dia a la fecha final
+			//DATE_ADD(c.end, interval 1 day) as end
+			$this->intIdUsuario = $idUsuario;
+			$sql = "SELECT  c.id, c.title,c.descripcion,c.start,c.end, c.color,c.textColor from calendario c WHERE idUsuario=$this->intIdUsuario";
 					$request = $this->select_all($sql);
                     
 					return $request;
@@ -64,16 +67,17 @@
 			/* $sql = "SELECT * FROM calendario WHERE 
 					email = '{$this->strEmail}' or dni = '{$this->strIdentificacion}' ";
 			$request = $this->select_all($sql); */
+			//date_sub(?, interval 1 day)
             
 			if(empty($request))
 			{
-				$sql = "UPDATE calendario SET title=?,descripcion=?,start=?,end=?,color=?,textColor=? where id=$this->idEvento";
+				$sql = "UPDATE calendario SET title=?,descripcion=?,start=?,end=?,color=?,textColor=?,dateModificado=? where id=$this->idEvento";
 	        	$arrData = array($this->strtitle,
                                 $this->strdescripcion,
                                 $this->strstart,
                                 $this->strend,
 								$this->strcolor,
-								$this->strTextcolor);
+								$this->strTextcolor,NOW());
 				$request = $this->update($sql,$arrData);
 	        	
 			}else{

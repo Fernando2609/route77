@@ -1,3 +1,4 @@
+//Dark mode
 let btnSwitch=document.querySelector('.switch');
 btnSwitch.addEventListener('click',()=>{
     document.body.classList.toggle('dark-mode');
@@ -23,6 +24,28 @@ if (localStorage.getItem('dark')==='true') {
     document.querySelector('#navegacion').classList.add("navbar-white")
 }
 
+//Nav bar collapse, guardar en locale Storage
+let btnNav=document.querySelector('#nav-bar');
+btnNav.addEventListener('click',()=>{
+     document.body.classList.toggle('nav-Activa');
+    
+    if (document.body.classList.contains('nav-Activa')) {
+        localStorage.setItem('barra','true')
+    }else{
+        localStorage.setItem('barra','false')
+    }
+});
+//Saber el modo actual de la barra
+if (localStorage.getItem('barra')==='true') {
+    document.body.classList.add('sidebar-collapse');
+    document.body.classList.add('nav-Activa');
+}else{
+    document.body.classList.remove('sidebar-collapse');
+  
+}
+
+
+
 function controlTag(e) {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla==8) return true;
@@ -33,7 +56,7 @@ function controlTag(e) {
 }
 
 function testText(txtString) {
-    var stringText = new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/);
+    var stringText = new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+.{2,}$/);
     if (stringText.test(txtString)){
         return true;
     } else {
@@ -68,6 +91,8 @@ function fntValidText(){
                 this.classList.add('is-invalid');
             }else{
                 this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+                
             }
         });
     });
@@ -82,6 +107,7 @@ function fntValidNumber(){
                 this.classList.add('is-invalid');
             }else{
                 this.classList.remove('is-invalid');
+            
             }
         });
     });
@@ -96,6 +122,7 @@ function fntValidEmail(){
                 this.classList.add('is-invalid');
             }else {
                 this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
             }
         });
     });
