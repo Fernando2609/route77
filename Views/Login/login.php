@@ -19,7 +19,6 @@
   <body>
     <section class="material-half-bg">
       <div class="cover"></div>
-      <div class="cover2"></div>
     </section>
     <section class="login-content">
     <div class="logo d-flex justify-content-center">
