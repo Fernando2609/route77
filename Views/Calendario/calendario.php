@@ -14,7 +14,7 @@ getModal('modalCalendario', $data);
           <div class="row mb-2"> <!-- Div row y margen abajo de 2-->
             <div class="col-sm-6 d-flex"><!-- Div 6 columnas derecha-->
               <!--Titulo-->
-              <h1><i class="fas fa-user-tag"></i> <?= $data['page_title'] ?> </h1>
+              <h1><i class="fas fa-calendar-alt"></i> <?= $data['page_title'] ?> </h1>
               <!--Boton Nuevo-->
               <button type="button" class="btn btn-success btn-nuevo" onclick="openModal();"><i class="fas fa-plus-square"></i>  Nuevo</button> 
             </div><!-- / termina Div 6 columnas derecha-->
