@@ -1,4 +1,4 @@
-const btnSwitch=document.querySelector('#switch');
+let btnSwitch=document.querySelector('.switch');
 btnSwitch.addEventListener('click',()=>{
     document.body.classList.toggle('dark-mode');
     //document.querySelector('#navegacion').classList.replace("navbar-white", "navbar-dark")
