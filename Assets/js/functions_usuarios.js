@@ -350,7 +350,6 @@ window.addEventListener('load', function() {
      fnSucursalUsuario();
 }, false);
 //Funcion para traer los roles de usuario
-
 function fntRolesUsuario(){
     if ( document.querySelector('#listRolid')) {
         let ajaxUrl = base_url+'/Roles/getSelectRoles';

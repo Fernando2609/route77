@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-01-2022 a las 23:10:56
+-- Tiempo de generación: 04-01-2022 a las 00:59:06
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -51,7 +51,7 @@ INSERT INTO `calendario` (`id`, `idUsuario`, `title`, `descripcion`, `start`, `e
 (5, 5, 'Partido', 'Partido de Hoy', '2021-12-31 10:00:00', '2021-12-31 12:00:00', '#000000', '#fffafa', '2021-12-30 21:33:22', '2022-01-01 23:38:22'),
 (6, 2, 'Celebración', 'Celebración de año nuevo', '2021-12-31 00:00:00', '2021-12-31 01:00:00', '#0033ff', '#ff1414', '2021-12-30 22:47:47', '2021-12-30 22:50:27'),
 (7, 1, 'Año Nuevo', 'Año Nuevo celebración', '2021-12-31 00:30:00', '2021-12-31 04:33:00', '#14ff67', '#ffffff', '2021-12-31 03:03:28', '2022-01-02 17:35:11'),
-(8, 1, 'Cumpleaños', 'Cumpleaños de alguien', '2022-01-08 00:01:00', '2022-01-08 23:59:00', '#f92f2f', '#ffffff', '2022-01-01 16:06:09', '2022-01-02 20:53:13');
+(8, 1, 'Cumpleaños', 'Cumpleaños de alguien', '2022-01-08 00:01:00', '2022-01-08 23:59:00', '#f92f2f', '#ffffff', '2022-01-01 16:06:09', '2022-01-03 07:22:24');
 
 -- --------------------------------------------------------
 
@@ -63,9 +63,22 @@ CREATE TABLE `categoria` (
   `idcategoria` bigint(20) NOT NULL,
   `nombre` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
   `descripcion` text COLLATE utf8mb4_swedish_ci NOT NULL,
+  `portada` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
   `datecreated` datetime NOT NULL DEFAULT current_timestamp(),
   `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`idcategoria`, `nombre`, `descripcion`, `portada`, `datecreated`, `status`) VALUES
+(1, 'Lacteos', 'Lacteos', 'img_5cf5c4410b3681c84552351dc69a7a70.jpg', '2022-01-04 00:23:21', 1),
+(2, 'Frutas', 'Frutas', 'img_3b1217d2569a617e4027f5af757bb016.jpg', '2022-01-04 00:24:02', 1),
+(3, 'Jugos y Bebidas', 'Jugos y Bebidas de todo tipo', 'img_806a627028b9823a349e50b8b1b7e352.jpg', '2022-01-04 00:25:51', 1),
+(4, 'Cerveza y Licores', 'Cerveza y Licores de todo tipo', 'img_99150f0159d99fd0cb574f9f5b89aa17.jpg', '2022-01-04 00:30:20', 1),
+(5, 'Cuidado Personal', 'Cuidado Personal', 'img_28f73615daf125d81ac939d27bd3db10.jpg', '2022-01-04 00:32:13', 1),
+(6, 'Mascotas', 'Mascotas', 'img_be38a8e7cbdd304c2b255f15533a6a3f.jpg', '2022-01-04 00:55:49', 1);
 
 -- --------------------------------------------------------
 
@@ -178,7 +191,7 @@ INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 (3, 'Clientes ', 'Clientes de tienda', 1),
 (4, 'Productos', 'Todos los Producto', 1),
 (5, 'Pedidos', 'Pedidos de compra', 1),
-(6, 'Categoría', 'Categorías productos', 1),
+(6, 'Categorías', 'Categorías productos', 1),
 (7, 'Calendario', 'Calendario', 1);
 
 -- --------------------------------------------------------
@@ -238,26 +251,34 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VALUES
-(113, 2, 1, 0, 0, 0, 0),
-(114, 2, 2, 0, 0, 0, 0),
-(115, 2, 3, 0, 0, 0, 0),
-(116, 2, 4, 0, 0, 0, 0),
-(117, 2, 5, 0, 0, 0, 0),
-(118, 2, 6, 0, 0, 0, 0),
-(280, 1, 1, 1, 0, 0, 0),
-(281, 1, 2, 1, 1, 1, 1),
-(282, 1, 3, 1, 0, 0, 0),
-(283, 1, 4, 1, 0, 0, 0),
-(284, 1, 5, 1, 0, 0, 0),
-(285, 1, 6, 1, 0, 0, 0),
-(286, 1, 7, 1, 0, 0, 0),
 (315, 4, 1, 1, 0, 0, 0),
 (316, 4, 2, 0, 0, 0, 0),
 (317, 4, 3, 0, 0, 0, 0),
 (318, 4, 4, 0, 0, 0, 0),
 (319, 4, 5, 0, 0, 0, 0),
 (320, 4, 6, 0, 0, 0, 0),
-(321, 4, 7, 1, 0, 0, 0);
+(321, 4, 7, 1, 0, 0, 0),
+(322, 3, 1, 0, 0, 0, 0),
+(323, 3, 2, 0, 0, 0, 0),
+(324, 3, 3, 0, 0, 0, 0),
+(325, 3, 4, 0, 0, 0, 0),
+(326, 3, 5, 0, 0, 0, 0),
+(327, 3, 6, 0, 0, 0, 0),
+(328, 3, 7, 1, 0, 0, 0),
+(329, 2, 1, 0, 0, 0, 0),
+(330, 2, 2, 0, 0, 0, 0),
+(331, 2, 3, 0, 0, 0, 0),
+(332, 2, 4, 0, 0, 0, 0),
+(333, 2, 5, 0, 0, 0, 0),
+(334, 2, 6, 0, 0, 0, 0),
+(335, 2, 7, 1, 0, 0, 0),
+(357, 1, 1, 1, 0, 0, 0),
+(358, 1, 2, 1, 1, 1, 1),
+(359, 1, 3, 1, 0, 0, 0),
+(360, 1, 4, 1, 0, 0, 0),
+(361, 1, 5, 1, 0, 0, 0),
+(362, 1, 6, 1, 1, 1, 1),
+(363, 1, 7, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -394,7 +415,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `dni`, `nombres`, `apellidos`, `email`, `contraseña`, `idNacionalidad`, `idGenero`, `idEstadoCivil`, `idRol`, `idSucursal`, `fechaNacimiento`, `status`, `telefono`, `token`, `datecreated`, `datelogin`, `datemodificado`) VALUES
-(1, '0801200018857', 'José Fernando', 'Ortiz Santos', 'josefortizsantos@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 1, 1, '2000-09-20 00:00:00', 1, 94877564, '', '2021-12-20 02:34:44', '2022-01-02 22:05:57', '2021-12-30 00:45:59'),
+(1, '0801200018857', 'José Fernando', 'Ortiz Santos', 'josefortizsantos@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 1, 1, '2000-09-20 00:00:00', 1, 94877564, '', '2021-12-20 02:34:44', '2022-01-03 06:46:18', '2022-01-02 23:15:01'),
 (2, '0801200018313', 'Hugo Alejandro', 'Paz', 'hugo.paz@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 2, 1, '2000-06-15 00:00:00', 1, 94142814, '', '2021-12-20 13:57:46', '0000-00-00 00:00:00', '2022-01-02 23:08:37'),
 (3, '0801123989878', 'Leonela', 'Pineda', 'lypineda@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 2, 2, 1, 2, '2021-05-05 00:00:00', 1, 97737659, '', '2021-12-20 14:16:53', '2021-12-30 16:51:52', '2022-01-02 20:53:38'),
 (5, '0908099', 'Gabriela', 'Maradiaga', 'ggmaradiaga@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 2, 2, 2, 4, 3, '1999-12-16 00:00:00', 1, 97514274, '', '2021-12-20 19:41:19', '2022-01-02 18:06:13', '2021-12-24 15:20:09'),
@@ -544,7 +565,7 @@ ALTER TABLE `calendario`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idcategoria` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcategoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
@@ -598,7 +619,7 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=322;
+  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=364;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
