@@ -53,7 +53,7 @@
 			return $request;
 		}
 
-		public function updateCategoria(string $idcategoria, string $categoria, string $descripcion, string $portada, int $status){
+		public function updateCategoria(int $idcategoria, string $categoria, string $descripcion, string $portada, int $status){
 
 			$this->intIdcategoria = $idcategoria;
 			$this->strCategoria = $categoria;
@@ -66,7 +66,7 @@
 
 			if(empty($request))
 			{
-				$sql = "UPDATE categoria SET nombre = ?, descripcion = ?, portada = ?, status = ? WHERE idcategoria = $this-> intIdcategoria "; 	
+				$sql = "UPDATE categoria SET nombre = ?, descripcion = ?, portada = ?, status = ? WHERE idcategoria = $this->intIdcategoria "; 	
 	        	$arrData = array($this->strCategoria, 
 								 $this->strDescripcion, 
 								 $this->strPortada,
@@ -74,7 +74,7 @@
 	        	$request = $this->update($sql,$arrData);
 	        	
 			}else{
-				$request = "exist";
+				$request = false;
 			}
 			return $request;
 		}

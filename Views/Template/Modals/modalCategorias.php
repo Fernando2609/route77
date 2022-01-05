@@ -37,12 +37,12 @@
                     </div>
                     <!-- Cierra Div Text -->
                     <!-- Div Form-Group -->
-                    <div class="form-group">
-                        <label>Estado (<span class="required">*</span>)</label>
-                        <select class="custom-select selectpicker" id="listStatus" name="listStatus" required="">
+                    <div class="form-group col-md-6">
+                      <label for="listStatus">Estado</label>
+                      <select class="form-control selectpicker" id="listStatus" name="listStatus" required>
                         <option value="1">Activo</option>
                         <option value="2">Inactivo</option>
-                        </select>
+                      </select>
                     </div>
                     <!-- Div Form-Group -->
                  </div>
