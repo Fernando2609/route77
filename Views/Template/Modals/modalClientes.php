@@ -76,8 +76,9 @@
 
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="txtPassword">Password<span class="required"> *</span></label>
-              <input type="password" class="form-control" id="txtPassword" name="txtPassword">
+              <label for="listSucursal">Sucursal</label>
+              <select class="form-control " id="listSucursal" name="listSucursal">
+              </select>
             </div>
             <div class="form-group col-md-6">
               <label for="listStatus">Status<span class="required"> *</span></label>
@@ -87,7 +88,12 @@
               </select>
             </div>
           </div>
-
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="txtPassword">Password<span class="required"> *</span></label>
+              <input type="password" class="form-control" id="txtPassword" name="txtPassword">
+            </div>
+          </div>
           <!-- /.Cierra card-body -->
 
           <div class="card-footer">
@@ -157,10 +163,10 @@
               <td>Estado Civil:</td>
               <td id="celEstadoC">Larry</td>
             </tr>
-            <!-- <tr>
+             <tr>
               <td>Sucursal:</td>
               <td id="celSucursal">Larry</td>
-            </tr> -->
+            </tr>
             <tr>
               <td>Fecha de Nacimiento</td>
               <td id="celNacimiento">Larry</td>

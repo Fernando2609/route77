@@ -15,6 +15,7 @@
         
         public function dashboard()
         {
+            dep($_SESSION['userData']);
             $data['page_id']=2;
             $data['page_tag']="Dashboard Route 77";
             $data['page_title']="DASHBOARD ESTACIÓN ROUTE 77";

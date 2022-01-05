@@ -104,7 +104,7 @@
 			$request = $this->select($sql);
 			return $request;
 		}
-		public function updateUsuario(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $telefono, string $email, string $password, int $tipoid, int $status, int $nacionalidad, int $genero, int $estadoC, int $sucursal, string $fechaNacimeinto ){
+		public function updateUsuario(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $telefono, string $email, string $password, int $tipoid, int $status, int $nacionalidad, int $genero, int $estadoC, int $sucursal, string $fechaNacimiento ){
 			
 			$this->intIdUsuario = $idUsuario;
 			$this->strIdentificacion = $identificacion;
@@ -119,7 +119,7 @@
             $this->intGenero = $genero;
             $this->intEstadoC = $estadoC;
             $this->intSucursal = $sucursal;
-            $this->strFechaNacimiento=$fechaNacimeinto;
+            $this->strFechaNacimiento=$fechaNacimiento;
 
 			$sql = "SELECT * FROM usuarios WHERE (email = '{$this->strEmail}' AND idUsuario != $this->intIdUsuario)
 										  OR (dni = '{$this->strIdentificacion}' AND idUsuario != $this->intIdUsuario) ";

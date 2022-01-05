@@ -27,7 +27,7 @@
         public function setCliente()
         {
             if ($_POST) {
-                if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listStatus']) || empty($_POST['listNacionalidadCliente']) || empty($_POST['listGenero']) )
+                if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listStatus']) || empty($_POST['listNacionalidadCliente']) || empty($_POST['listGenero']) || empty($_POST['listSucursal']))
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{ 
@@ -42,7 +42,7 @@
                     $intNacionalidad = intval(strClean($_POST['listNacionalidadCliente']));
                     $intGenero = intval(strClean($_POST['listGenero']));
                     $intEstadoC = intval(strClean($_POST['listEstadoC']));
-                   /*  $intSucursal = intval(strClean($_POST['listSucursal'])); */
+                    $intSucursal = intval(strClean($_POST['listSucursal'])); 
                     $strFechaNacimiento = strClean($_POST['fechaNacimiento']);
                     $request_user="";
 
@@ -63,7 +63,7 @@
                                                                                     $intNacionalidad,
                                                                                     $intGenero,
                                                                                     $intEstadoC,
-                                                                                    
+                                                                                    $intSucursal,
                                                                                     $strFechaNacimiento );
                                                                                    
                         } 
@@ -77,12 +77,14 @@
                                                                                     $intTelefono, 
                                                                                     $strEmail,
                                                                                     $strPassword,
+                                                                                    $intStatus,
                                                                                     $intNacionalidad,
                                                                                     $intGenero,
+                                                                                    $intSucursal,
                                                                                     $intEstadoC,
                                                                                     $strFechaNacimiento);
                         }
-                    
+                   
                 }
                     if($request_user > 0 ){
                         if ($option==1) {
@@ -236,7 +238,21 @@
         }
         die();
     }
-
+        //Funcion para traer La Sucursal
+        public function getSelectSucursal()
+        {
+            $htmlOptions = "";
+            $arrData = $this->model->selectSucursal();
+            if(count($arrData) > 0 ){
+                for ($i=0; $i < count($arrData); $i++) { 
+                
+                    $htmlOptions .= '<option value="'.$arrData[$i]['idsucursal'].'">'.$arrData[$i]['nombre'].'</option>';
+                    
+                }
+            }
+            echo $htmlOptions;
+            die();		
+        }
 
 
     }

@@ -272,7 +272,7 @@ function fntViewInfo(idpersona){
                 /* document.querySelector("#celTipoUsuario").innerHTML = objData.data.nombreRol; */
                 document.querySelector("#celNacionalidad").innerHTML = objData.data.nacionalidad;
                 document.querySelector("#celGenero").innerHTML = objData.data.genero;
-                /* document.querySelector("#celSucursal").innerHTML = objData.data.sucursal; */
+                 document.querySelector("#celSucursal").innerHTML = objData.data.sucursal; 
                 document.querySelector("#celNacimiento").innerHTML = objData.data.fechaNacimiento;
                 document.querySelector("#celEstadoC").innerHTML = objData.data.estadocivil;
                 document.querySelector("#celEstado").innerHTML = estadoUsuario;
@@ -311,6 +311,7 @@ function fntEditInfo(element,idUsuario){
                 document.querySelector("#txtTelefono").value = objData.data.telefono;
                 document.querySelector("#txtEmail").value = objData.data.email;
                 document.querySelector("#listNacionalidadCliente").value =objData.data.idNacionalidad;
+                document.querySelector("#listSucursal").value =objData.data.idsucursal;
                 document.querySelector("#listGenero").value =objData.data.idGenero;
                 document.querySelector("#listEstadoC").value =objData.data.idEstado;
                 document.querySelector("#fechaNacimiento").value=objData.data.fechaNaci;
@@ -319,7 +320,7 @@ function fntEditInfo(element,idUsuario){
                 $('#listGenero').selectpicker('render');
                 $('#listEstadoC').selectpicker('render');
                 $('#listGenero').selectpicker('render');
-                
+                $('#listSucursal').selectpicker('render');
                  if(objData.data.status == 1){
                    document.querySelector("#listStatus").value = 1;
                 }else{
@@ -403,9 +404,25 @@ window.addEventListener('load', function() {
      fntNacionalidadCliente();
      fntGeneroCliente();
      fnEstadoCCliente();
-     
+     fnSucursalUsuario();
 
 }, false);
+//Funcion para traer Las sucursales
+function fnSucursalUsuario(){
+  
+    let ajaxUrl = base_url+'/Clientes/getSelectSucursal';
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status == 200){
+            document.querySelector('#listSucursal').innerHTML = request.responseText;
+            document.querySelector('#listSucursal').value=1;
+            $('#listSucursal').selectpicker('render');
+        }
+    }
+
+}
 //Funcion para traer la nacionalidad 
 function fntNacionalidadCliente(){
     
