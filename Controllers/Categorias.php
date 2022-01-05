@@ -24,15 +24,13 @@
             $this->views->getView($this,"categorias",$data);
         }
         public function setCategorias(){
-            /* dep($_FILES);
-            dep($_POST);
-            die; */
-            if ($_POST) {
+            if($_POST) {
+                
                 if(empty($_POST['txtNombre']) || empty($_POST['txtDescripcion']) || empty($_POST['listStatus']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else {
-                    $intIdCategoria =  intval($_POST['idCategoria']);
+                    $intIdcategoria =  intval($_POST['idCategoria']);
                     $strCategoria =  strClean($_POST['txtNombre']);
                     $strDescripcion = strClean($_POST['txtDescripcion']);
                     $intStatus = intval($_POST['listStatus']);
@@ -45,18 +43,23 @@
 					$type 		 	= $foto['type'];
 					$url_temp    	= $foto['tmp_name'];
 					$imgPortada 	= 'portada_categoria.png';
-					$request_cateria = "";
+					
                     if($nombre_foto != ''){
-						$imgPortada = 'img_'.md5(date('d-m-Y H:i:s')).'.jpg';
+ 						$imgPortada = 'img_'.md5(date('d-m-Y H:i:s')).'.jpg';
 					}
 
-                if ($intIdCategoria==0) {
-                    //Si no hay idRol se crea uno nuevo registro
+                if ($intIdcategoria==0) {
+                    //Si no hay idCategoria se crea uno nuevo registro
                     $request_Categoria = $this->model->insertCategoria($strCategoria, $strDescripcion,$imgPortada, $intStatus);
                     $option=1;
                 }else{
-                    //Si hay idRol se actualiza elregistro
-                   // $request_Categoria = $this->model->updateCategoria($intIdRol,$intIdCategoria, $strDescripcion, $intStatus);
+                    //Si hay idCategoria se actualiza elregistro
+                    if($nombre_foto == ''){
+                        if($_POST['foto_actual'] != 'portada_categoria.png' &&  $_POST['foto_remove'] == 0){
+                            $imgPortada = $_POST['foto_actual'];
+                        }
+                         }
+                   $request_Categoria = $this->model->updateCategoria($intIdcategoria,$strCategoria, $strDescripcion,$imgPortada,$intStatus);
                     $option=2;
                 }
                 if($request_Categoria > 0 )
@@ -65,9 +68,20 @@
                 {
                     $arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
                     if($nombre_foto != ''){ uploadImage($foto,$imgPortada); }
-                }else{
+                }else   {
                     $arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
+                    if($nombre_foto != ''){ uploadImage($foto,$imgPortada);  }
+                       
+                        if(($nombre_foto == '' && $_POST['foto_remove'] == 1 && $_POST['foto_actual'] != 'portada_categoria.png')
+                              || ($nombre_foto != '' && $_POST['foto_actual'] != 'portada_categoria.png')){ 
+                                  deleteFile($_POST['foto_actual']);
+
+                           }
+
+                     
                     }
+                    
+            
                 $arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
     
                 }else if($request_Categoria == false){
@@ -102,7 +116,7 @@
 					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcategoria'].')" title="Ver Categoría"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-warning  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idcategoria'].')" title="Editar Categoría"><i class="fas fa-pencil-alt"></i></button>';
+					$btnEdit = '<button class="btn btn-warning  btn-sm" onClick="fntEditInfo('.$arrData[$i]['idcategoria'].')" title="Editar Categoría"><i class="fas fa-pencil-alt"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){	
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcategoria'].')" title="Eliminar Categoría"><i class="far fa-trash-alt"></i></button>';

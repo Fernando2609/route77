@@ -216,15 +216,16 @@ document.addEventListener('DOMContentLoaded',function(){
     if(document.querySelector(".delPhoto")){
         var delPhoto = document.querySelector(".delPhoto");
         delPhoto.onclick = function(e) {
+            document.querySelector("#foto_remove").value= 1; 
             removePhoto();
+            
         }
     }
-    //Nueva Caregoria
+    //Nueva Categoria
     var formCategoria = document.querySelector("#formCategoria");
           formCategoria.onsubmit = function(e){
             e.preventDefault();
 
-             var intIdCategoria = document.querySelector('#idCategoria').value;
              var strNombre = document.querySelector('#txtNombre').value;
              var strDescripcion = document.querySelector('#txtDescripcion').value;
              var intStatus = document.querySelector('#listStatus').value;        
@@ -250,6 +251,7 @@ document.addEventListener('DOMContentLoaded',function(){
                     formCategoria.reset();
                     swal.fire("Categoría", objData.msg ,"success");
                     removePhoto();
+                    tableCategorias.api().ajax.reload();
                     //toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
                     tableCategorias.api().ajax.reload(); 
                     }else{
@@ -288,12 +290,91 @@ function fntViewInfo(idcategoria){
             }
         }
     }
-}
+    }
+
+function fntEditInfo(idcategoria){
+    document.querySelector('#titleModal').innerHTML ="Actualizar Categoria";
+    document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
+    document.querySelector('#btnActionForm').classList.replace("btn-success", "btn-warning");
+    document.querySelector('#btnText').innerHTML ="Actualizar";
+    
+        var idcategoria=idcategoria;
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        var ajaxUrl  =base_url+'/Categorias/getCategoria/'+idcategoria;
+        request.open("GET",ajaxUrl,true);
+        request.send();
+        console.log(request);
+        request.onreadystatechange = function(){
+          if(request.readyState == 4 && request.status == 200){
+            
+              var objData = JSON.parse(request.responseText);
+              if(objData.status)
+              {
+                  document.querySelector("#idCategoria").value = objData.data.idcategoria;
+                  document.querySelector("#txtNombre").value = objData.data.nombre;
+                  document.querySelector("#txtDescripcion").value = objData.data.descripcion;
+                  document.querySelector("#foto_actual").value = objData.data.portada;
+                  document.querySelector("#foto_remove").value= 0;
+  
+                  if(objData.data.status == 1){
+                    document.querySelector("#listStatus").value = 1;
+                }else{
+                    document.querySelector("#listStatus").value = 2;
+                }
+                $('#listStatus').selectpicker('render');
+
+                 
+                
+                    if(document.querySelector('#img')){ 
+                      document.querySelector('#img').src = objData.data.url_portada;
+
+                  }else{
+                    document.querySelector('.prevPhoto div ').innerHTML = "<img id='img' src="+objData.data.url_portada+">";
+                
+                }
+                            
+                
+                if(objData.data.portada =='portada_categoria.png'){ 
+                    document.querySelector('.delPhoto').classList.add("notBlock");
+                    
+                }else{
+                    document.querySelector('.delPhoto').classList.remove("notBlock");
+
+            
+                }
+                
+                  
+                
+                  
+                  
+                  
+                $('#modalFormCategorias').modal('show');
+
+
+
+
+
+
+              }else{
+                  swal("Error", objData.msg , "error");
+              }
+          }
+      }
+        $('#ModalFormCategorias').modal('show'); 
+        
+  
+  }
+
+
 
 function removePhoto(){
     document.querySelector('#foto').value ="";
     document.querySelector('.delPhoto').classList.add("notBlock");
-    document.querySelector('#img').remove();
+    if(document.querySelector('#img')){ 
+        document.querySelector('#img').remove();
+ 
+
+ }
 }
 function openModal()
 {
@@ -305,4 +386,7 @@ function openModal()
     document.querySelector('#titleModal').innerHTML = "Nueva Categoría";
     document.querySelector("#formCategoria").reset();
     $('#modalFormCategorias').modal('show');
+    removePhoto();
+
 }
+ 

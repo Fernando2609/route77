@@ -10,12 +10,18 @@
       </div>
       <div class="modal-body">
             <form id="formCategoria" name="formCategoria" class="form-horizontal">
-        
+             <input type="hidden" id="idCategoria" name="idCategoria" value="">
+             <input type="hidden" id="foto_actual" name="foto_actual" value="">
+             <input type="hidden" id="foto_remove" name="foto_remove" value="0">
+
+
+
               <p class="text-primary">Los campos con asterisco (<span class="required">*</span>) son obligatorios.</p>
 
              <div class="row">
                  <div class="col-md-6">
-                    <input type="hidden" id="idCategoria" name="idCategoria" value="">
+                    
+
                   
                     <!-- Div Text -->
                     <div class="form-group">
@@ -33,7 +39,7 @@
                     <!-- Div Form-Group -->
                     <div class="form-group">
                         <label>Estado (<span class="required">*</span>)</label>
-                        <select class="custom-select" id="listStatus" name="listStatus" required="">
+                        <select class="custom-select selectpicker" id="listStatus" name="listStatus" required="">
                         <option value="1">Activo</option>
                         <option value="2">Inactivo</option>
                         </select>
@@ -112,4 +118,5 @@
     </div>
   </div>
 </div>
+
 
