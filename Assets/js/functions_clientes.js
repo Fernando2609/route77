@@ -286,6 +286,105 @@ function fntViewInfo(idpersona){
         }
     }  
 }
+function fntEditInfo(element,idUsuario){
+    rowTable=element.parentNode.parentNode.parentNode;
+    //console.log(rowTable);
+    document.querySelector('#titleModal').innerHTML ="Actualizar Cliente";
+    document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
+    document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
+    document.querySelector('#btnText').innerHTML ="Actualizar";
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+'/Clientes/getCliente/'+idUsuario;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status == 200){
+            let objData = JSON.parse(request.responseText);
+
+            if(objData.status)
+            {
+
+                document.querySelector("#idUsuario").value = objData.data.idUsuario;
+                document.querySelector("#txtIdentificacion").value = objData.data.dni;
+                document.querySelector("#txtNombre").value = objData.data.nombres;
+                document.querySelector("#txtApellido").value = objData.data.apellidos;
+                document.querySelector("#txtTelefono").value = objData.data.telefono;
+                document.querySelector("#txtEmail").value = objData.data.email;
+                document.querySelector("#listNacionalidadCliente").value =objData.data.idNacionalidad;
+                document.querySelector("#listGenero").value =objData.data.idGenero;
+                document.querySelector("#listEstadoC").value =objData.data.idEstado;
+                document.querySelector("#fechaNacimiento").value=objData.data.fechaNaci;
+                console.log(objData.data.fechaNaci);
+                
+                $('#listGenero').selectpicker('render');
+                $('#listEstadoC').selectpicker('render');
+                $('#listGenero').selectpicker('render');
+                
+                 if(objData.data.status == 1){
+                   document.querySelector("#listStatus").value = 1;
+                }else{
+                   document.querySelector("#listStatus").value = 2;
+               }
+                $('#listStatus').selectpicker('render'); 
+            }
+        }
+        $('#modalFormCliente').modal('show');
+    } 
+}
+
+function fntDelInfo(idUsuario){
+
+    swal.fire({
+        title: "Eliminar Cliente",
+        text: "¿Realmente quiere eliminar el Cliente?",
+        icon: "warning",
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        },
+        showCancelButton: true,
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "No, cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url + '/Clientes/delCliente/';
+            let strData = "idUsuario=" + idUsuario;
+            request.open("POST", ajaxUrl, true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    let objData = JSON.parse(request.responseText);
+                    if (objData.status) {
+                        swal.fire({
+                            title: "Eliminar!",
+                            text: objData.msg,
+                            icon: "success",
+                            showClass: {
+                                popup: 'animate__animated animate__flipInY'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__flipOutY'
+                            }
+                        });
+                        tableClientes.api().ajax.reload();
+                    } else {
+                        swal.fire("Atención!", objData.msg, "error");
+                    }
+    
+                }
+            }
+        }
+    });
+ }
+
+
 
 function openModal()
 {

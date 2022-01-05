@@ -48,14 +48,16 @@
 
                     if ($idUsuario==0) {
                         $option=1;
-                        $strPassword =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
+                        $strPassword =  empty($_POST['txtPassword']) ?passGenerator() : $_POST['txtPassword'];
+                        $strPasswordEncrip = hash("SHA256",$strPassword);
                         if($_SESSION['permisosMod']['w']){
                         $request_user = $this->model->insertCliente($strIdentificacion,
                                                                                     $strNombre, 
                                                                                     $strApellido, 
                                                                                     $intTelefono, 
                                                                                     $strEmail,
-                                                                                    $strPassword, 
+                                                                            
+    $strPasswordEncrip, 
                                                                                     $intTipoId, 
                                                                                     $intStatus,
                                                                                     $intNacionalidad,
@@ -66,28 +68,33 @@
                                                                                    
                         } 
                     }else{
-                        /* $option=2;
+                         $option=2;
                         $strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
                         if($_SESSION['permisosMod']['u']){
-                        $request_user = $this->model->updateUsuario($idUsuario,$strIdentificacion,
+                        $request_user = $this->model->updateCliente($idUsuario,$strIdentificacion,
                                                                                     $strNombre, 
                                                                                     $strApellido, 
                                                                                     $intTelefono, 
                                                                                     $strEmail,
-                                                                                    $strPassword, 
-                                                                                    $intTipoId, 
-                                                                                    $intStatus,
+                                                                                    $strPassword,
                                                                                     $intNacionalidad,
                                                                                     $intGenero,
                                                                                     $intEstadoC,
-                                                                                    $intSucursal,
-                                                                                    $strFechaNacimiento );
-
-                    } */
-                    }
+                                                                                    $strFechaNacimiento);
+                        }
+                    
+                }
                     if($request_user > 0 ){
                         if ($option==1) {
                             $arrResponse = array("status" => true, "msg" => 'Cliente Guardado Correctamente.');
+                            $nombreUsuario = $strNombre.' '.$strApellido;
+                        $dataUsuario = array(
+                            'nombreUsuario' => $nombreUsuario,
+                            'email' => $strEmail,
+                            'password' => $strPassword,
+                            'asunto' => 'Bienvenido a tu Tienda en Línea');
+                        sendEmail($dataUsuario, 'email_bienvenida');
+
                         }else{
                             $arrResponse = array("status" => true, "msg" => 'Cliente Actualizado Correctamente.');
                         }
@@ -102,6 +109,7 @@
             
             die();
         }
+    
 
         public function getSelectNacionalidadCliente()
 		{
@@ -209,8 +217,28 @@
              } 
 			die();
 		}
+
+
+    public function delCliente()
+    {
+        if ($_POST) {
+            if ($_SESSION['permisosMod']['d']) {
+                $intIdpersona = intval($_POST['idUsuario']);
+
+                $requestDelete = $this->model->deleteCliente($intIdpersona);
+                if ($requestDelete) {
+                    $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Cliente');
+                } else {
+                    $arrResponse = array('status' => false, 'msg' => 'Error al eliminar al Cliente.');
+                }
+                echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+            }
+        }
+        die();
     }
 
-        
+
+
+    }
 
 ?>

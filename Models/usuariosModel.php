@@ -168,6 +168,7 @@
 			return $request;
 		
 		}
+		
 		public function deleteUsuario(int $intIdUser)
 		{
 			$this->intIdUsuario = $intIdUser;
@@ -177,7 +178,8 @@
 			$request = $this->update($sql,$arrData);
 			return $request;
 		}
-		public function updatePerfil(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $telefono, int $nacionalidad, int $genero, int $estadoC, int $sucursal, string $fechaNacimeinto,string $password, )
+
+		public function updatePerfil(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $telefono, int $nacionalidad, int $genero, int $estadoC, int $sucursal, string $fechaNacimeinto,string $password )
 		{
 			$this->intIdUsuario = $idUsuario;
 			$this->strIdentificacion = $identificacion;

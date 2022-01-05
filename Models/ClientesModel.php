@@ -138,5 +138,76 @@
 			$request = $this->select($sql);
 			return $request;
 		}
+
+	public function updateCliente(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $telefono, string $email, string $password, int $nacionalidad, int $genero, int $estadoC, string $fechaNacimeinto)
+	{
+
+		$this->intIdUsuario = $idUsuario;
+		$this->strIdentificacion = $identificacion;
+		$this->strNombre = $nombre;
+		$this->strApellido = $apellido;
+		$this->intTelefono = $telefono;
+		$this->strEmail = $email;
+		$this->strPassword = $password;
+		$this->intNacionalidad = $nacionalidad;
+		$this->intGenero = $genero;
+		$this->intEstadoC = $estadoC;
+		$this->strFechaNacimiento = $fechaNacimeinto;
+
+		$sql = "SELECT * FROM usuarios WHERE (email = '{$this->strEmail}' AND idUsuario != $this->intIdUsuario)
+										  OR (dni = '{$this->strIdentificacion}' AND idUsuario != $this->intIdUsuario) ";
+		$request = $this->select_all($sql);
+
+		if (empty($request)) {	//Si la contraseña es diferente a vaacio se actualiza la contraseña
+			if ($this->strPassword  != "") {
+				$sql = "UPDATE usuarios SET dni=?,nombres=?,apellidos=?,email=?,contraseña=?,idNacionalidad=?,idGenero=?,idEstadoCivil=?,fechaNacimiento=?,telefono=?,datemodificado=?
+							WHERE idUsuario = $this->intIdUsuario ";
+				$arrData = array(
+					$this->strIdentificacion,
+					$this->strNombre,
+					$this->strApellido,
+					$this->strEmail,
+					$this->strPassword,
+					$this->intNacionalidad,
+					$this->intGenero,
+					$this->intEstadoC,
+					$this->strFechaNacimiento,
+					$this->intTelefono, NOW()
+				);
+			} else {
+				$sql = "UPDATE usuarios SET dni=?,nombres=?,apellidos=?,email=?,idNacionalidad=?,idGenero=?,idEstadoCivil=?,fechaNacimiento=?,telefono=?,datemodificado=?
+					WHERE idUsuario = $this->intIdUsuario ";
+				$arrData = array(
+					$this->strIdentificacion,
+					$this->strNombre,
+					$this->strApellido,
+					$this->strEmail,
+					//$this->strPassword,
+					$this->intNacionalidad,
+					$this->intGenero,
+					$this->intEstadoC,
+					$this->strFechaNacimiento,
+					$this->intTelefono, NOW()
+				);
+			}
+			$request = $this->update($sql, $arrData);
+		} else {
+			$request = false;
+		}
+		return $request;
+	}
+
+	public function deleteCliente(int $intIdUser)
+	{
+		$this->intIdUsuario = $intIdUser;
+		$sql = "UPDATE usuarios SET status = ? WHERE idUsuario = $intIdUser";
+
+		$arrData = array(0);
+		$request = $this->update($sql, $arrData);
+		return $request;
+	}
+
+
+
     }
 ?>
