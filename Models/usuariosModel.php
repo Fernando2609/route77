@@ -80,7 +80,7 @@
 					INNER JOIN roles r ON u.idRol = r.Id_Rol
 					INNER JOIN nacionalidad n ON u.idNacionalidad = n.idNacionalidad
 					INNER JOIN genero g on u.idGenero = g.idGenero
-					WHERE u.status != 0".$whereAdmin;
+					WHERE u.status != 0 and idRol !=7".$whereAdmin;
 					$request = $this->select_all($sql);
 					return $request;
 		}

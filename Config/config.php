@@ -1,9 +1,9 @@
 <?php
 
     //Definición de constantes
-    define('BASEURL', 'http://localhost:8080/route77/');
+    define('BASEURL', 'http://localhost:/route77/');
 	
-    const BASE_URL="http://localhost:8080/route77";
+    const BASE_URL="http://localhost:/route77";
 
 	//const BASE_URL="http://localhost/route77";
 
