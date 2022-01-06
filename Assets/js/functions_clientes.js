@@ -227,11 +227,25 @@ document.addEventListener('DOMContentLoaded',function () {
                     
                     if(objData.status)
                     { 
-                       
+                        if (rowTable == "") {
+                            tableClientes.api().ajax.reload();
+                        } else {
+                            htmlStatus = intStatus == 1?
+                            '<span class="badge badge-success">Activo</span>':
+                            '<span class="badge badge-danger">Inactivo</span>';
+                            rowTable.cells[1].textContent = strIdentificacion;
+                            rowTable.cells[2].textContent = strNombre;
+                            rowTable.cells[3].textContent = strApellido;
+                            rowTable.cells[4].textContent = strEmail;
+                            rowTable.cells[5].textContent = intTelefono;
+                            rowTable.cells[6].innerHTML=htmlStatus;
+                            rowTable = "";
+                        }
+ 
                         $('#modalFormCliente').modal("hide");
                         formCliente.reset();
                             swal.fire("Clientes", objData.msg ,"success");
-                            tableClientes.api().ajax.reload();
+                            //tableClientes.api().ajax.reload();
                         }else{
                             swal.fire("Error", objData.msg , "error");
                     }
@@ -288,7 +302,7 @@ function fntViewInfo(idpersona){
 }
 function fntEditInfo(element,idUsuario){
     rowTable=element.parentNode.parentNode.parentNode;
-    //console.log(rowTable);
+    console.log(rowTable);
     document.querySelector('#titleModal').innerHTML ="Actualizar Cliente";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
@@ -315,7 +329,7 @@ function fntEditInfo(element,idUsuario){
                 document.querySelector("#listGenero").value =objData.data.idGenero;
                 document.querySelector("#listEstadoC").value =objData.data.idEstado;
                 document.querySelector("#fechaNacimiento").value=objData.data.fechaNaci;
-                console.log(objData.data.fechaNaci);
+               // console.log(objData.data.fechaNaci);
                 
                 $('#listGenero').selectpicker('render');
                 $('#listEstadoC').selectpicker('render');
