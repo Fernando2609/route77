@@ -71,6 +71,7 @@
               <label for="listSucursal">Sucursal</label>
               <select class="form-control " id="listSucursal" name="listSucursal">
               </select>
+              <small class="form-text text-muted" >Sucursal en que trabaja (Usuario)</small>
             </div>
           </div>
           <div class="form-row">

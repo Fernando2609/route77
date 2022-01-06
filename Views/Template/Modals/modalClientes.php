@@ -79,6 +79,7 @@
               <label for="listSucursal">Sucursal</label>
               <select class="form-control " id="listSucursal" name="listSucursal">
               </select>
+              <small class="form-text text-muted" >Sucursal de preferencia (Cliente)</small>
             </div>
             <div class="form-group col-md-6">
               <label for="listStatus">Status<span class="required"> *</span></label>

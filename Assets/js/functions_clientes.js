@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded',function () {
                                 //orientacion vertical 
                                 //doc.content[1].table.widths = [ '5%', '25%', '20%', '40%', '20%', '20%', '11%']
                                 //orientacion Horizontal 
-                                doc.content[1].table.widths = [ '5%', '20%', '20%', '30%', '15%', '20%', '11%']
+                                doc.content[1].table.widths = [ '5%', '20%', '20%', '20%', '30%', '15%', '11%']
                                 doc.content[1].table.body[0].forEach(function(h){
                                   //h.alignment='left';  
                                   h.fillColor = '#81ae39';
@@ -305,7 +305,7 @@ function fntEditInfo(element,idUsuario){
     console.log(rowTable);
     document.querySelector('#titleModal').innerHTML ="Actualizar Cliente";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
-    document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
+    document.querySelector('#btnActionForm').classList.replace("btn-success", "btn-warning");
     document.querySelector('#btnText').innerHTML ="Actualizar";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url+'/Clientes/getCliente/'+idUsuario;
