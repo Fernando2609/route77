@@ -4,6 +4,7 @@
         {
             parent::__construct();
             session_start();
+            session_regenerate_id(true);
             //session_regenerate_id(true);
             if (empty($_SESSION['login'])) {
                 header('Location: '.base_url().'/login');
@@ -43,6 +44,8 @@
 					$type 		 	= $foto['type'];
 					$url_temp    	= $foto['tmp_name'];
 					$imgPortada 	= 'portada_categoria.png';
+                    $request_Categoria = "";
+
 					
                     if($nombre_foto != ''){
  						$imgPortada = 'img_'.md5(date('d-m-Y H:i:s')).'.jpg';
@@ -50,10 +53,13 @@
 
                 if ($intIdcategoria==0) {
                     //Si no hay idCategoria se crea uno nuevo registro
+                    if($_SESSION['permisosMod']['w']){
                     $request_Categoria = $this->model->insertCategoria($strCategoria, $strDescripcion,$imgPortada, $intStatus);
                     $option=1;
+                     }
                 }else{
-                    //Si hay idCategoria se actualiza elregistro
+                    //Si hay idCategoria se actualiza el registro
+                    if($_SESSION['permisosMod']['u']){
                     if($nombre_foto == ''){
                         if($_POST['foto_actual'] != 'portada_categoria.png' &&  $_POST['foto_remove'] == 0){
                             $imgPortada = $_POST['foto_actual'];
@@ -61,6 +67,7 @@
                          }
                    $request_Categoria = $this->model->updateCategoria($intIdcategoria,$strCategoria, $strDescripcion,$imgPortada,$intStatus);
                     $option=2;
+                     }
                 }
                 if($request_Categoria > 0 )
                 {
@@ -116,7 +123,7 @@
 					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcategoria'].')" title="Ver Categoría"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-warning  btn-sm" onClick="fntEditInfo('.$arrData[$i]['idcategoria'].')" title="Editar Categoría"><i class="fas fa-pencil-alt"></i></button>';
+					$btnEdit = '<button class="btn btn-warning  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idcategoria'].')" title="Editar Categoría"><i class="fas fa-pencil-alt"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){	
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcategoria'].')" title="Eliminar Categoría"><i class="far fa-trash-alt"></i></button>';
@@ -148,7 +155,32 @@
 			die();
 		}
 
+    
+
+    public function delcategoria()
+    {
+        if($_POST){
+            if($_SESSION['permisosMod']['d']){
+                $intIdcategoria = intval($_POST['idcategoria']);
+                $requestDelete = $this->model->deleteCategoria($intIdcategoria);
+                if($requestDelete == true)
+                {
+                    $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la categoría');
+                }else if($requestDelete == false){
+                    $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una categoría asociada a los usuarios');
+                }else{
+                    $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la cateogoría.');
+                }
+                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+            }
+         }
+        die();
     }
+ }
+ 
+
+
+
 
 ?>
 

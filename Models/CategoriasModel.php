@@ -60,8 +60,8 @@
 			$this->strDescripcion = $descripcion;
 			$this->strPortada = $portada;
 			$this->intStatus = $status;
-
-			$sql = "SELECT * FROM categoria WHERE nombre = '{$this->strCategoria}' AND idcategoria != $this->intIdcategoria";
+			
+			$sql = "SELECT * FROM categoria WHERE nombre = '{$this->strCategoria}´ñkñh8ju8kyl' AND idcategoria != $this->intIdcategoria";
 			$request = $this->select_all($sql);
 
 			if(empty($request))
@@ -78,6 +78,29 @@
 			}
 			return $request;
 		}
+
+		public function deleteCategoria(int $idcategoria)
+		{
+			$this->intIdcategoria = $idcategoria;
+			$sql = "SELECT * FROM producto WHERE categoriaid = $this->intIdcategoria";
+			$request = $this->select_all($sql);
+			if(empty($request))
+			{
+				$sql = "UPDATE categoria SET status = ? WHERE idcategoria = $this->intIdcategoria ";
+				$arrData = array(0);
+				$request = $this->update($sql,$arrData);
+				if($request)
+				{
+					$request = true;	
+				}else{
+					$request = false;
+				}
+			}else{
+				$request = false;
+			}
+			return $request;
+		}
+
 
 
       
