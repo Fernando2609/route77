@@ -3,7 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+
 -- Tiempo de generación: 06-01-2022 a las 22:17:18
+
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -53,6 +55,7 @@ INSERT INTO `calendario` (`id`, `idUsuario`, `title`, `descripcion`, `start`, `e
 (7, 1, 'Año Nuevo', 'Año Nuevo celebración', '2021-12-31 00:30:00', '2021-12-31 04:33:00', '#14ff67', '#ffffff', '2021-12-31 03:03:28', '2022-01-02 17:35:11'),
 (8, 1, 'Cumpleaños', 'Cumpleaños de alguien', '2022-01-08 00:01:00', '2022-01-08 23:59:00', '#f92f2f', '#ffffff', '2022-01-01 16:06:09', '2022-01-06 01:17:46');
 
+
 -- --------------------------------------------------------
 
 --
@@ -80,6 +83,7 @@ INSERT INTO `categoria` (`idcategoria`, `nombre`, `descripcion`, `portada`, `dat
 (5, 'Cuidado Personal', 'Cuidado Personal', 'img_ca3c588b0507214a5a6df6a916b9e9c0.jpg', '2022-01-04 00:32:13', 1),
 (6, 'Mascotas', 'Mascotas', 'img_2d35bd853881291f2bcf8a9303abe423.jpg', '2022-01-04 00:55:49', 1),
 (7, 'Carne', 'Carne de todo tipo', 'img_e552d183f72fe1fc99ad5999f45f50a9.jpg', '2022-01-06 22:13:55', 1);
+
 
 -- --------------------------------------------------------
 
@@ -288,6 +292,7 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 (460, 4, 6, 0, 1, 1, 1),
 (461, 4, 7, 1, 0, 0, 0);
 
+
 -- --------------------------------------------------------
 
 --
@@ -343,7 +348,9 @@ INSERT INTO `roles` (`Id_Rol`, `nombreRol`, `descripcion`, `status`) VALUES
 (3, 'Encargado', 'Encargado de la tienda', 1),
 (4, 'Repartidor Moto', 'Repartidor de la tienda', 1),
 (6, 'Asistente', 'Asistente de gerente', 0),
+
 (7, 'Clientes', 'Clientes de la tienda', 1);
+
 
 -- --------------------------------------------------------
 
@@ -423,6 +430,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `dni`, `nombres`, `apellidos`, `email`, `contraseña`, `idNacionalidad`, `idGenero`, `idEstadoCivil`, `idRol`, `idSucursal`, `fechaNacimiento`, `status`, `telefono`, `token`, `datecreated`, `datelogin`, `datemodificado`) VALUES
+
 (1, '0801200018857', 'José Fernando', 'Ortiz Santos', 'josefortizsantos@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 1, 1, '2000-09-20 00:00:00', 1, 94877564, '6db8ee716df569f48639-e9efa0046d6a4f9e0006-a650ccef7ac48fc451c5-2d6bfdff2ed7db3c2527', '2021-12-20 02:34:44', '2022-01-06 16:45:08', '2022-01-06 16:49:57'),
 (2, '0801200018313', 'Hugo', 'Paz', 'hugo.paz@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 2, 1, '2000-06-15 00:00:00', 1, 94142814, '', '2021-12-20 13:57:46', '0000-00-00 00:00:00', '2022-01-06 18:06:35'),
 (3, '0801123989878', 'Leonela', 'Pineda', 'lypineda@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 2, 2, 1, 2, '2021-05-05 00:00:00', 1, 97737659, '', '2021-12-20 14:16:53', '2021-12-30 16:51:52', '2022-01-02 20:53:38'),
@@ -434,6 +442,7 @@ INSERT INTO `usuarios` (`idUsuario`, `dni`, `nombres`, `apellidos`, `email`, `co
 (11, '12413414', 'Adas', 'Asdad', 'jfortizafas@unah.hn', 'ea5be4aab96c237067718989bb5a77b2a4dd1ae97cd413dbc8d7521b3af869ce', 1, 1, 1, 7, 1, '2022-01-17 00:00:00', 1, 505050574, '', '2022-01-05 16:29:23', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (12, '080124124', 'José Fernando', 'Santos', 'josefortizsantos200@gmail.com', '2028dd742e3ec9a3ab02c434ecabed74ab734d2f275d3ceefdadbba1dd0d5091', 1, 2, 1, 7, 3, '2022-01-14 00:00:00', 1, 94877564, '', '2022-01-05 16:35:29', '2022-01-05 16:36:01', '2022-01-06 18:06:55'),
 (13, '0801123989213', 'José Fernando', 'Santos', 'josefortizsantos2000@gmail.com', '051a77a03046143a7a347eb36ebd9ad0bf87d41979bec7c862166a10e11eccb7', 1, 1, 1, 7, 1, '2022-01-22 00:00:00', 0, 94877564, '', '2022-01-06 01:04:13', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
 
 --
 -- Índices para tablas volcadas
@@ -578,7 +587,9 @@ ALTER TABLE `calendario`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
+
   MODIFY `idcategoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
@@ -634,6 +645,7 @@ ALTER TABLE `pedido`
 ALTER TABLE `permisos`
   MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=462;
 
+
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
@@ -675,6 +687,7 @@ ALTER TABLE `tipo_pago`
 --
 ALTER TABLE `usuarios`
   MODIFY `idUsuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
 
 --
 -- Restricciones para tablas volcadas
