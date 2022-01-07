@@ -80,7 +80,7 @@
 					INNER JOIN roles r ON u.idRol = r.Id_Rol
 					INNER JOIN nacionalidad n ON u.idNacionalidad = n.idNacionalidad
 					INNER JOIN genero g on u.idGenero = g.idGenero
-					WHERE u.status != 0".$whereAdmin;
+					WHERE u.status != 0 and idRol !=7".$whereAdmin;
 					$request = $this->select_all($sql);
 					return $request;
 		}
@@ -104,7 +104,7 @@
 			$request = $this->select($sql);
 			return $request;
 		}
-		public function updateUsuario(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $telefono, string $email, string $password, int $tipoid, int $status, int $nacionalidad, int $genero, int $estadoC, int $sucursal, string $fechaNacimeinto ){
+		public function updateUsuario(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $telefono, string $email, string $password, int $tipoid, int $status, int $nacionalidad, int $genero, int $estadoC, int $sucursal, string $fechaNacimiento ){
 			
 			$this->intIdUsuario = $idUsuario;
 			$this->strIdentificacion = $identificacion;
@@ -119,7 +119,7 @@
             $this->intGenero = $genero;
             $this->intEstadoC = $estadoC;
             $this->intSucursal = $sucursal;
-            $this->strFechaNacimiento=$fechaNacimeinto;
+            $this->strFechaNacimiento=$fechaNacimiento;
 
 			$sql = "SELECT * FROM usuarios WHERE (email = '{$this->strEmail}' AND idUsuario != $this->intIdUsuario)
 										  OR (dni = '{$this->strIdentificacion}' AND idUsuario != $this->intIdUsuario) ";
@@ -168,6 +168,7 @@
 			return $request;
 		
 		}
+		
 		public function deleteUsuario(int $intIdUser)
 		{
 			$this->intIdUsuario = $intIdUser;
@@ -177,7 +178,8 @@
 			$request = $this->update($sql,$arrData);
 			return $request;
 		}
-		public function updatePerfil(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $telefono, int $nacionalidad, int $genero, int $estadoC, int $sucursal, string $fechaNacimeinto,string $password, )
+
+		public function updatePerfil(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $telefono, int $nacionalidad, int $genero, int $estadoC, int $sucursal, string $fechaNacimeinto,string $password )
 		{
 			$this->intIdUsuario = $idUsuario;
 			$this->strIdentificacion = $identificacion;

@@ -40,7 +40,7 @@
 <body class="hold-transition sidebar-mini layout-fixed ">
 <div id="divLoading">
       <div>
-        <img src="<?=media();?>/images//loading.svg" alt="Loading">
+        <img src="<?=media();?>/images//loadingRoute.gif" alt="Loading">
        </div>
     </div>
 <!-- Site wrapper -->
