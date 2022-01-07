@@ -243,7 +243,6 @@ document.addEventListener('DOMContentLoaded',function(){
                 request.onreadystatechange = function(){
                   if(request.readyState == 4 && request.status == 200){
                     //console.log(request.responseText);
-           
                     let objData = JSON.parse(request.responseText);
                     
                     console.log(objData.status);
@@ -340,39 +339,18 @@ function fntEditInfo(element,idcategoria){
                     document.querySelector("#listStatus").value = 2;
                 }
                 $('#listStatus').selectpicker('render');
-
-                 
-                
+            
                     if(document.querySelector('#img')){ 
                       document.querySelector('#img').src = objData.data.url_portada;
-
                   }else{
                     document.querySelector('.prevPhoto div ').innerHTML = "<img id='img' src="+objData.data.url_portada+">";
-                
-                }
-                            
-                
+                }     
                 if(objData.data.portada =='portada_categoria.png'){ 
                     document.querySelector('.delPhoto').classList.add("notBlock");
-                    
                 }else{
                     document.querySelector('.delPhoto').classList.remove("notBlock");
-
-            
-                }
-                
-                  
-                
-                  
-                  
-                  
+                }                  
                 $('#modalFormCategorias').modal('show');
-
-
-
-
-
-
               }else{
                   swal("Error", objData.msg , "error");
               }
