@@ -8,15 +8,19 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
+            getPermisos(4);
         }
         
-        public function productos()
+        public function Productos()
         {
-            $data['page_id']=2;
+            if(empty($_SESSION['permisosMod']['r'])){
+                header('Location: '.base_url().'/dashboard');
+            }
+           
             $data['page_tag']="Productos";
-            $data['page_title']="BIENVENIDOS A LOS PRODUCTOS ESTACIÓN ROUTE 77";
-            $data['page_name']="Productos";
-            
+            $data['page_title']="PRODUCTOS <small> Route 77</small> ";
+            $data['page_name']="productos";
+            $data['page_functions_js']="functions_productos.js";
             $this->views->getView($this,"productos",$data);
         }
     }

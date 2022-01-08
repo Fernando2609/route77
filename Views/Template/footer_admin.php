@@ -48,6 +48,8 @@
 
 <!-- Toastr -->
 <script src="<?= media(); ?>/js/plugins/toastr/toastr.min.js"></script>
+<!-- tinymce -->
+<script src="<?= media(); ?>/js/tinymce/tinymce.min.js"></script>
 <!-- SweetAlert2 -->
 <script src="<?= media(); ?>/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 
