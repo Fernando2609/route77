@@ -45,8 +45,14 @@ i.fas.fa-home.casa{
     background-color: #f3dc34;
     color: black;
 }
-.notBlock{
-    display: none;
+.textcenter{
+	text-align: center;
+}
+.textright{
+	text-align: right;
+}
+.textleft{
+	text-align: left;
 }
 /*Boton de permisos  */
 
@@ -347,4 +353,64 @@ width: 175px;
 #imgCategoria img{
   width: 200px;
   margin: auto;
+}
+.bootstrap-select > .dropdown-toggle{
+	border: 1px solid #CCC;
+ 
+}
+body.dark-mode .bootstrap-select > .dropdown-toggle{
+	border: 1px solid #CCC;
+  background-color: #454d55;
+  color: white;
+}
+/*Imagenes Productos */
+#containerImage{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  
+}
+/*Dispositivos menores a 720px*/
+@media (max-width:720px){
+  #containerImage{justify-content: space-between;}
+}
+#containerImage > div{
+  margin-right: 10px;
+  margin-bottom: 8px;
+}
+.prevImage{
+  border: 1px solid #CCC;
+  width: 120px;
+  height: 148px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.prevImage img{
+  width: 100%;
+}
+.inputUploadfile{
+  display: none;
+}
+.btnDeleteImage, .btnUploadfile{
+  border: 0;
+  background-color: #009688;
+  text-align: center;
+  padding: 2px 3px;
+  color: #FFF;
+  font-size: 9pt;
+  cursor:pointer;
+  width: 100%;
+}
+.btnDeleteImage{
+  background-color: #dc3545;
+}
+.prevImage .loading{
+  width: 80px;
+  height: 80px;
+}
+#celFotos img{
+	width: 150px;
+	margin: 10px;
 }

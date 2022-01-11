@@ -1,6 +1,7 @@
-<script>
-  const base_url = "<?= base_url(); ?>";
-</script>  
+ <script>
+   const base_url = "<?= base_url(); ?>";
+ </script>  
+
    
 
 
@@ -66,8 +67,8 @@
 
 <script>
   const imgB64="<?=  img64();  ?>"
+  const smony = "<?= SMONEY; ?>";
 </script>
-
 
 <!-- Funcion de datatables -->
 <script>

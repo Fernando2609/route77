@@ -2,8 +2,9 @@
 <?php 
 
 headerAdmin($data); 
+  
+  getModal('modalProductos', $data);
 
-getModal('modalProductos', $data);
 
 ?>
   <!-- Content Wrapper. Contains page content -- Div Principal -->
@@ -49,10 +50,10 @@ getModal('modalProductos', $data);
                     <thead>
                       <tr>
                         <th>ID</th>
+                        <th>Código</th>
                         <th>Nombre</th>
                         <th>Stock</th>
                         <th>Precio</th>
-                        <th>Categoría</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                       </tr>
