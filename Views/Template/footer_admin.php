@@ -1,6 +1,7 @@
-<script>
-  const base_url = "<?= base_url(); ?>";
-</script>  
+ <script>
+   const base_url = "<?= base_url(); ?>";
+ </script>  
+
    
 
 
@@ -48,6 +49,8 @@
 
 <!-- Toastr -->
 <script src="<?= media(); ?>/js/plugins/toastr/toastr.min.js"></script>
+<!-- tinymce -->
+<script src="<?= media(); ?>/js/tinymce/tinymce.min.js"></script>
 <!-- SweetAlert2 -->
 <script src="<?= media(); ?>/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 
@@ -64,8 +67,8 @@
 
 <script>
   const imgB64="<?=  img64();  ?>"
+  const smony = "<?= SMONEY; ?>";
 </script>
-
 
 <!-- Funcion de datatables -->
 <script>
