@@ -12,11 +12,10 @@
         
         public function home()
         {
-            $data['page_id']=1;
-            $data['page_tag']="Estación Route 77";
-            $data['page_title']="BIENVENIDOS A ESTACIÓN ROUTE 77";
-            $data['page_name']="home";
-            $data['page_content']="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint labore pariatur voluptates consequuntur debitis et? Facere doloribus rerum distinctio explicabo itaque nihil minima commodi ab laudantium numquam, nam, dolor quisquam.";
+            
+            $data['page_tag']=NOMBRE_EMPESA;
+            $data['page_title']=NOMBRE_EMPESA;
+            $data['page_name']=NOMBRE_EMPESA;
             $this->views->getView($this,"home",$data);
         }
         
