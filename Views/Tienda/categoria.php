@@ -4,8 +4,8 @@
    $arrProductos = $data['productos'];
    /* dep($arrProductos); */
 ?>
-<!-- <br><br><br>
-<hr> -->
+<br><br><br>
+<hr>
 <div class="bg0 m-t-23 p-b-140">
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
