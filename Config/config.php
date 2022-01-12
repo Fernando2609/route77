@@ -34,6 +34,9 @@
 	const NOMBRE_EMPESA = "Route 77";
 	const WEB_EMPRESA = "http://localhost:8080/route77";
 
+	const CAT_SLIDER = "1,2,3";
+	const CAT_BANNER = "4,5,8";
+
 	
 
 

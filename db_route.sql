@@ -3,9 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
-
--- Tiempo de generación: 06-01-2022 a las 22:17:18
-
+-- Tiempo de generación: 12-01-2022 a las 23:50:03
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -55,7 +53,6 @@ INSERT INTO `calendario` (`id`, `idUsuario`, `title`, `descripcion`, `start`, `e
 (7, 1, 'Año Nuevo', 'Año Nuevo celebración', '2021-12-31 00:30:00', '2021-12-31 04:33:00', '#14ff67', '#ffffff', '2021-12-31 03:03:28', '2022-01-02 17:35:11'),
 (8, 1, 'Cumpleaños', 'Cumpleaños de alguien', '2022-01-08 00:01:00', '2022-01-08 23:59:00', '#f92f2f', '#ffffff', '2022-01-01 16:06:09', '2022-01-06 01:17:46');
 
-
 -- --------------------------------------------------------
 
 --
@@ -82,8 +79,8 @@ INSERT INTO `categoria` (`idcategoria`, `nombre`, `descripcion`, `portada`, `dat
 (4, 'Cerveza y Licores', 'Cerveza y Licores de todo tipo', 'img_949a28797e471f6d17ee8ced334856fc.jpg', '2022-01-04 00:30:20', 1),
 (5, 'Cuidado Personal', 'Cuidado Personal', 'img_ca3c588b0507214a5a6df6a916b9e9c0.jpg', '2022-01-04 00:32:13', 1),
 (6, 'Mascotas', 'Mascotas', 'img_2d35bd853881291f2bcf8a9303abe423.jpg', '2022-01-04 00:55:49', 1),
-(7, 'Carne', 'Carne de todo tipo', 'img_e552d183f72fe1fc99ad5999f45f50a9.jpg', '2022-01-06 22:13:55', 1);
-
+(7, 'Carne', 'Carne de todo tipo', 'img_e552d183f72fe1fc99ad5999f45f50a9.jpg', '2022-01-06 22:13:55', 1),
+(8, 'Pasta', 'Pastas', 'img_999a84cc0f585ddd67f39f41e5207dea.jpg', '2022-01-08 20:48:56', 1);
 
 -- --------------------------------------------------------
 
@@ -172,6 +169,41 @@ CREATE TABLE `genero` (
 INSERT INTO `genero` (`idGenero`, `descripcion`) VALUES
 (1, 'Masculino'),
 (2, 'Femenino');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `imagen`
+--
+
+CREATE TABLE `imagen` (
+  `id` bigint(20) NOT NULL,
+  `productoid` bigint(20) NOT NULL,
+  `img` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `imagen`
+--
+
+INSERT INTO `imagen` (`id`, `productoid`, `img`) VALUES
+(1, 1, 'pro_87df145bffc1ecc12cf030637af028ac.jpg'),
+(2, 1, 'pro_93a00dd6b9ebb696c94e1be3cfcf5f48.jpg'),
+(3, 1, 'pro_5b29ebad22ba4f080f6f6ef3bb493d8e.jpg'),
+(4, 1, 'pro_12f7f0db3f48ae83fbf2a51d16b03b24.jpg'),
+(5, 2, 'pro_42528ed19570892ae66c1fd98f9be444.jpg'),
+(8, 2, 'pro_10f8e02a2c2dd1fa525051b810c1cf58.jpg'),
+(9, 3, 'pro_21d608c6905c971c4e3921ab33459435.jpg'),
+(10, 4, 'pro_fac2a254dc53ff5dadbf89843a12c5c7.jpg'),
+(11, 4, 'pro_22ab157bbacedc76f83b38f923473cb9.jpg'),
+(12, 5, 'pro_4da4386b2f1d03c6cc8241974e0eef0c.jpg'),
+(13, 5, 'pro_a9384f9d4b847175623df79086aec0b2.jpg'),
+(14, 6, 'pro_34a2e00016e5d80345248a7cb214637d.jpg'),
+(16, 7, 'pro_6ef52d0cb1fa932320aef47ea2c35110.jpg'),
+(17, 8, 'pro_0be0cbe7f6c7932616191db5acde860d.jpg'),
+(18, 9, 'pro_c0d1f30d7de299e0c85fa21c10dd9a09.jpg'),
+(19, 10, 'pro_d967291202c8491666c05185d5d2d6a4.jpg'),
+(20, 11, 'pro_e8ec46a954cda8e4fc024b5bd5fbeb23.jpg');
 
 -- --------------------------------------------------------
 
@@ -270,13 +302,6 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 (333, 2, 5, 0, 0, 0, 0),
 (334, 2, 6, 0, 0, 0, 0),
 (335, 2, 7, 1, 0, 0, 0),
-(371, 1, 1, 1, 0, 0, 0),
-(372, 1, 2, 1, 1, 1, 1),
-(373, 1, 3, 1, 1, 1, 1),
-(374, 1, 4, 1, 0, 0, 0),
-(375, 1, 5, 1, 0, 0, 0),
-(376, 1, 6, 1, 1, 1, 1),
-(377, 1, 7, 1, 0, 0, 0),
 (385, 7, 1, 0, 0, 0, 0),
 (386, 7, 2, 1, 0, 0, 0),
 (387, 7, 3, 0, 0, 0, 0),
@@ -284,14 +309,20 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 (389, 7, 5, 0, 0, 0, 0),
 (390, 7, 6, 0, 0, 0, 0),
 (391, 7, 7, 1, 0, 0, 0),
-(455, 4, 1, 1, 0, 0, 0),
-(456, 4, 2, 0, 0, 0, 0),
-(457, 4, 3, 0, 0, 0, 0),
-(458, 4, 4, 0, 0, 0, 0),
-(459, 4, 5, 0, 0, 0, 0),
-(460, 4, 6, 0, 1, 1, 1),
-(461, 4, 7, 1, 0, 0, 0);
-
+(462, 1, 1, 1, 0, 0, 0),
+(463, 1, 2, 1, 1, 1, 1),
+(464, 1, 3, 1, 1, 1, 1),
+(465, 1, 4, 1, 1, 1, 1),
+(466, 1, 5, 1, 0, 0, 0),
+(467, 1, 6, 1, 1, 1, 1),
+(468, 1, 7, 1, 0, 0, 0),
+(567, 4, 1, 1, 0, 0, 0),
+(568, 4, 2, 0, 0, 0, 0),
+(569, 4, 3, 0, 0, 0, 0),
+(570, 4, 4, 1, 1, 1, 1),
+(571, 4, 5, 0, 0, 0, 0),
+(572, 4, 6, 1, 0, 0, 0),
+(573, 4, 7, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -302,6 +333,7 @@ INSERT INTO `permisos` (`idpermiso`, `rolid`, `moduloid`, `r`, `w`, `u`, `d`) VA
 CREATE TABLE `producto` (
   `idproducto` bigint(20) NOT NULL,
   `categoriaid` bigint(20) NOT NULL,
+  `codigo` varchar(30) COLLATE utf8mb4_swedish_ci NOT NULL,
   `nombre` varchar(50) COLLATE utf8mb4_swedish_ci NOT NULL,
   `descripcion` text COLLATE utf8mb4_swedish_ci NOT NULL,
   `precio` decimal(11,2) NOT NULL,
@@ -311,6 +343,23 @@ CREATE TABLE `producto` (
   `dateModificado` datetime NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`idproducto`, `categoriaid`, `codigo`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `datecreated`, `dateModificado`, `status`) VALUES
+(1, 2, '1244112', 'Manzana', '<p>Manzana <strong>100%&nbsp;</strong>Natural,.</p><p>Las mejores manzanas en Honduras y toda CentroAm&eacute;rica</p>', '10.00', 250, '', '2022-01-11 00:47:45', '0000-00-00 00:00:00', 1),
+(2, 1, '79589310131', 'Leche Leyde', '<p>Leche Leyde 946ml</p><table style=\"border-collapse: collapse; width: 100%; height: 44.7916px;\" border=\"1\"><tbody><tr style=\"height: 22.3958px;\"><td style=\"width: 50.0717%; height: 22.3958px;\">Marca&nbsp;</td><td style=\"width: 49.9283%; height: 22.3958px;\">Leyde</td></tr><tr style=\"height: 22.3958px;\"><td style=\"width: 50.0717%; height: 22.3958px;\">Categor&iacute;a&nbsp;</td><td style=\"width: 49.9283%; height: 22.3958px;\">Lacteos</td></tr></tbody></table>', '25.00', 150, '', '2022-01-11 01:02:10', '2022-01-11 01:04:14', 1),
+(3, 5, '121231212', 'Colgate', '<h1 class=\"vtex-store-components-3-x-productNameContainer vtex-store-components-3-x-productNameContainerquickview mv0 t-heading-4\"><span class=\"vtex-store-components-3-x-productBrand vtex-store-components-3-x-productBrandquickview \">Crema Dental Colgate Triple Acci&oacute;n 100 Ml</span></h1>', '38.00', 67, '', '2022-01-11 01:12:07', '0000-00-00 00:00:00', 1),
+(4, 4, '7422110101003', 'Six Pack Barena Enlatada', '<p>6 Cerveza Barena en Lata&nbsp; &nbsp;</p><h1>&iexcl;PRIMOOOS!</h1>', '150.00', 50, '', '2022-01-11 01:25:23', '2022-01-11 02:23:36', 1),
+(5, 8, '8917313', 'Spaguetti Delgado Essential', '<p class=\"vtex-store-components-3-x-productNameContainer vtex-store-components-3-x-productNameContainerquickview mv0 t-heading-4\"><span class=\"vtex-store-components-3-x-productBrand vtex-store-components-3-x-productBrandquickview \">Spaguetti Delgado Essential de 70 Onzas, las mejores Pastas&nbsp;</span></p>', '30.00', 60, '', '2022-01-11 01:47:58', '2022-01-11 01:48:16', 1),
+(6, 3, '6525321', 'Jugo de piña', '<p>Jugo sabor a pi&ntilde;a 473ml, SULA</p>', '18.00', 50, '', '2022-01-11 18:23:11', '2022-01-11 18:26:38', 1),
+(7, 5, '65206820', 'Shampoo Pantene', '<p>Shampoo pantene pro-vitaminas</p>', '155.00', 35, '', '2022-01-11 18:36:15', '2022-01-11 18:38:08', 1),
+(8, 1, '864326245443', 'Enjuague bucal Listerine', '<div class=\"eYbsle\">Listerine cool mint enjuague bucal 250 ml</div>', '200.00', 10, '', '2022-01-11 18:40:07', '2022-01-11 18:40:26', 1),
+(9, 8, '634132', 'Pasta codo INA', '<p>Coditos INA 200g</p>', '12.00', 30, '', '2022-01-11 18:42:30', '2022-01-11 18:42:38', 1),
+(10, 1, '674158513', 'Caracoles Pasta Roma', '<p>Pasta enriquecida, Caracoles ROMA</p>', '20.00', 15, '', '2022-01-11 18:46:34', '2022-01-11 18:47:13', 1),
+(11, 5, '368431520000', 'Jabón Protex Antibacterial', '<div class=\"iFxuye\"><div class=\"S4aXnb\">Jab&oacute;n Antibacterial Aloe Vera Protex 125 Gr</div></div>', '23.00', 32, '', '2022-01-11 18:51:31', '2022-01-11 18:51:44', 1);
 
 -- --------------------------------------------------------
 
@@ -348,9 +397,7 @@ INSERT INTO `roles` (`Id_Rol`, `nombreRol`, `descripcion`, `status`) VALUES
 (3, 'Encargado', 'Encargado de la tienda', 1),
 (4, 'Repartidor Moto', 'Repartidor de la tienda', 1),
 (6, 'Asistente', 'Asistente de gerente', 0),
-
 (7, 'Clientes', 'Clientes de la tienda', 1);
-
 
 -- --------------------------------------------------------
 
@@ -430,19 +477,17 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `dni`, `nombres`, `apellidos`, `email`, `contraseña`, `idNacionalidad`, `idGenero`, `idEstadoCivil`, `idRol`, `idSucursal`, `fechaNacimiento`, `status`, `telefono`, `token`, `datecreated`, `datelogin`, `datemodificado`) VALUES
-
-(1, '0801200018857', 'José Fernando', 'Ortiz Santos', 'josefortizsantos@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 1, 1, '2000-09-20 00:00:00', 1, 94877564, '6db8ee716df569f48639-e9efa0046d6a4f9e0006-a650ccef7ac48fc451c5-2d6bfdff2ed7db3c2527', '2021-12-20 02:34:44', '2022-01-06 16:45:08', '2022-01-06 16:49:57'),
+(1, '0801200018857', 'José Fernando', 'Ortiz Santos', 'josefortizsantos@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 1, 1, '2000-09-20 00:00:00', 1, 94877564, '6db8ee716df569f48639-e9efa0046d6a4f9e0006-a650ccef7ac48fc451c5-2d6bfdff2ed7db3c2527', '2021-12-20 02:34:44', '2022-01-12 15:02:12', '2022-01-06 16:49:57'),
 (2, '0801200018313', 'Hugo', 'Paz', 'hugo.paz@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 2, 1, '2000-06-15 00:00:00', 1, 94142814, '', '2021-12-20 13:57:46', '0000-00-00 00:00:00', '2022-01-06 18:06:35'),
 (3, '0801123989878', 'Leonela', 'Pineda', 'lypineda@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 2, 2, 1, 2, '2021-05-05 00:00:00', 1, 97737659, '', '2021-12-20 14:16:53', '2021-12-30 16:51:52', '2022-01-02 20:53:38'),
-(5, '0908099', 'Gabriela', 'Maradiaga', 'ggmaradiaga@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 2, 2, 2, 4, 3, '1999-12-16 00:00:00', 1, 97514274, '', '2021-12-20 19:41:19', '2022-01-06 18:12:20', '2021-12-24 15:20:09'),
+(5, '0908099', 'Gabriela', 'Maradiaga', 'ggmaradiaga@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 2, 2, 2, 4, 3, '1999-12-16 00:00:00', 1, 97514274, '', '2021-12-20 19:41:19', '2022-01-11 00:20:47', '2021-12-24 15:20:09'),
 (6, '080119990155', 'Reynaldo Jafet', 'Giron Tercero', 'reynaldo.giron31@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 1, 2, '2000-12-31 00:00:00', 1, 87660249, '', '2021-12-26 22:11:45', '2021-12-28 21:37:24', '2022-01-01 21:19:51'),
 (7, '0801199612345', 'Kevin', 'Zuniga', 'krodriguezz@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 2, 2, 1, '2000-07-06 00:00:00', 1, 32301533, '', '2022-01-01 21:19:17', '0000-00-00 00:00:00', '2022-01-02 23:02:02'),
 (9, '08011239', 'José', 'Santos', 'josefortizsantos2000222@gmail.com', '09eee68a0fd4daa84d2ed4600b59afb162546f8b2303f256a8386a0c70d0c0b6', 1, 1, 1, 7, 1, '2022-01-03 00:00:00', 0, 94877564, '', '2022-01-05 15:03:26', '2022-01-05 15:15:39', '2022-01-05 18:51:17'),
 (10, '08011239898', 'Pedro', 'Garcia', 'pgarcia@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 2, 1, 2, 7, 3, '2022-01-18 00:00:00', 1, 12412412, '', '2022-01-05 15:43:06', '0000-00-00 00:00:00', '2022-01-06 16:50:29'),
 (11, '12413414', 'Adas', 'Asdad', 'jfortizafas@unah.hn', 'ea5be4aab96c237067718989bb5a77b2a4dd1ae97cd413dbc8d7521b3af869ce', 1, 1, 1, 7, 1, '2022-01-17 00:00:00', 1, 505050574, '', '2022-01-05 16:29:23', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(12, '080124124', 'José Fernando', 'Santos', 'josefortizsantos200@gmail.com', '2028dd742e3ec9a3ab02c434ecabed74ab734d2f275d3ceefdadbba1dd0d5091', 1, 2, 1, 7, 3, '2022-01-14 00:00:00', 1, 94877564, '', '2022-01-05 16:35:29', '2022-01-05 16:36:01', '2022-01-06 18:06:55'),
+(12, '080124124', 'José Fernando', 'Santos', 'josefortizsantos200@gmail.com', '2028dd742e3ec9a3ab02c434ecabed74ab734d2f275d3ceefdadbba1dd0d5091', 1, 2, 1, 7, 3, '2022-01-14 00:00:00', 1, 94877564, '', '2022-01-05 16:35:29', '2022-01-05 16:36:01', '2022-01-06 22:44:09'),
 (13, '0801123989213', 'José Fernando', 'Santos', 'josefortizsantos2000@gmail.com', '051a77a03046143a7a347eb36ebd9ad0bf87d41979bec7c862166a10e11eccb7', 1, 1, 1, 7, 1, '2022-01-22 00:00:00', 0, 94877564, '', '2022-01-06 01:04:13', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
-
 
 --
 -- Índices para tablas volcadas
@@ -493,6 +538,13 @@ ALTER TABLE `estadocivil`
 --
 ALTER TABLE `genero`
   ADD PRIMARY KEY (`idGenero`);
+
+--
+-- Indices de la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `productoid` (`productoid`);
 
 --
 -- Indices de la tabla `modulo`
@@ -587,9 +639,7 @@ ALTER TABLE `calendario`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-
-  MODIFY `idcategoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
+  MODIFY `idcategoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
@@ -622,6 +672,12 @@ ALTER TABLE `genero`
   MODIFY `idGenero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT de la tabla `modulo`
 --
 ALTER TABLE `modulo`
@@ -643,14 +699,13 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=462;
-
+  MODIFY `idpermiso` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=574;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `redessociales`
@@ -688,7 +743,6 @@ ALTER TABLE `tipo_pago`
 ALTER TABLE `usuarios`
   MODIFY `idUsuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -711,6 +765,12 @@ ALTER TABLE `detalle_pedido`
 --
 ALTER TABLE `detalle_temp`
   ADD CONSTRAINT `detalle_temp_ibfk_1` FOREIGN KEY (`productoid`) REFERENCES `producto` (`idproducto`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  ADD CONSTRAINT `imagen_ibfk_1` FOREIGN KEY (`productoid`) REFERENCES `producto` (`idproducto`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `pedido`

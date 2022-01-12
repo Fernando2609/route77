@@ -1,5 +1,8 @@
 <?php  
+    require_once("Models/Tcategoria.php");
+    require_once("Models/Tproducto.php");
     class Home extends Controllers{
+        use Tcategoria, Tproducto;
         public function __construct()
         {
             parent::__construct();
@@ -12,10 +15,17 @@
         
         public function home()
         {
-            
+            /* dep($this->getCategoriasT(CAT_SLIDER));
+            exit; */
+            /* dep($this->selectProductos());
+            exit; */
             $data['page_tag']=NOMBRE_EMPESA;
             $data['page_title']=NOMBRE_EMPESA;
             $data['page_name']=NOMBRE_EMPESA;
+            $data['slider'] = $this->getCategoriasT(CAT_SLIDER);
+            $data['banner'] = $this->getCategoriasT(CAT_BANNER);
+            $data['productos'] = $this->getProductosT();
+            /* dep($data); exit; */
             $this->views->getView($this,"home",$data);
         }
         

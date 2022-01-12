@@ -2,7 +2,6 @@
 <?php 
 
 headerAdmin($data); 
-
 getModal('modalCategorias', $data);
 
 ?>
