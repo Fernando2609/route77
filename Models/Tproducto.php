@@ -4,9 +4,11 @@ trait Tproducto{
     private $con;
     private $strCategoria;
     private $intIdCategoria;
+    private $intIdProducto;
     private $strProducto;
     private $cant;
     private $option;
+    private $strRuta;
    
     public function getProductosT(){
         $this->con = new Mysql();
@@ -17,7 +19,8 @@ trait Tproducto{
                         p.categoriaid,
                         c.nombre as categoria,
                         p.precio,
-                        p.stock 
+                        p.stock,
+                        p.ruta 
                 FROM producto p 
                 INNER JOIN categoria c
                 ON p.categoriaid = c.idcategoria
@@ -41,15 +44,16 @@ trait Tproducto{
         return $request;
     }
 
-    public function getProductosCategoriaT(string $categoria){
-        $this->strCategoria = $categoria;
+    public function getProductosCategoriaT(int $idCategoria, string $ruta){
+        $this->intIdcategoria = $idCategoria;
+        $this->strRuta=$ruta;
         $this->con = new Mysql();
 
-        $sql_cat = "SELECT idcategoria FROM categoria WHERE nombre = '{$this->strCategoria}'";
+        $sql_cat = "SELECT idcategoria, nombre FROM categoria WHERE idcategoria = '{$this->intIdcategoria}'";
         $request = $this->con->select($sql_cat);
 
         if(!empty($request)){
-            $this->intIdcategoria = $request['idcategoria'];
+            $this->strCategoria = $request['nombre'];
             $sql = "SELECT p.idproducto,
             p.codigo,
             p.nombre,
@@ -57,11 +61,12 @@ trait Tproducto{
             p.categoriaid,
             c.nombre as categoria,
             p.precio,
+            p.ruta,
             p.stock 
             FROM producto p 
             INNER JOIN categoria c
             ON p.categoriaid = c.idcategoria
-            WHERE p.status != 0  AND p.categoriaid = $this->intIdcategoria";
+            WHERE p.status != 0  AND p.categoriaid = $this->intIdcategoria AND c.ruta = '{$this->strRuta}'";
             $request = $this->con->select_all($sql);
             if(count($request) > 0){
                 for ($c=0; $c < count($request) ; $c++) { 
@@ -78,14 +83,21 @@ trait Tproducto{
                     $request[$c]['images'] = $arrImg;
                 }
             }
+            $request = array('idcategoria' => $this->intIdcategoria,
+								//'ruta' => $this->strRutaCategoria,
+								'categoria' => $this->strCategoria,
+								'productos' => $request
+							);
         }
      
         return $request;
     }
-    public function getProductoT(string $producto)
+    public function getProductoT(int $idProducto,string $ruta)
     {
         $this->con = new Mysql();
-        $this->strProducto = $producto;
+        $this->intIdProducto=$idProducto;
+        $this->strRuta=$ruta;
+      
         $sql = "SELECT p.idproducto,
                         p.codigo,
                         p.nombre,
@@ -97,7 +109,7 @@ trait Tproducto{
                 FROM producto p 
                 INNER JOIN categoria c
                 ON p.categoriaid = c.idcategoria
-                WHERE p.status != 0 AND p.nombre = '{$this->strProducto}' ";
+                WHERE p.status != 0 AND p.idproducto = '{$this->intIdProducto}'AND p.ruta = '{$this->strRuta}' ";
         $request = $this->con->select($sql);
          if (!empty($request)) {
                  $intIdProducto = $request['idproducto'];
@@ -109,7 +121,9 @@ trait Tproducto{
                      for ($i = 0; $i < count($arrImg); $i++) {
                          $arrImg[$i]['url_image'] = media() . '/images/uploads/' . $arrImg[$i]['img'];
                      }
-                 }
+                 }else{
+                    $arrImg[0]['url_image'] = media().'/images/uploads/product.png';
+                }
                  $request['images'] = $arrImg;
          }
         return $request;
@@ -136,6 +150,7 @@ trait Tproducto{
             p.categoriaid,
             c.nombre as categoria,
             p.precio,
+            p.ruta,
             p.stock 
             FROM producto p 
             INNER JOIN categoria c

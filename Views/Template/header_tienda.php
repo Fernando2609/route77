@@ -33,16 +33,17 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?= media() ?>/tienda/css/util.css">
 	<link rel="stylesheet" type="text/css" href="<?= media() ?>/tienda/css/main.css">
+	<link rel="stylesheet" href="<?= media(); ?>/css/style.css">
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
-	
 	<!-- Header -->
 	<header>
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
 			<div class="top-bar">
+				
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
 						Bienvenido Usuario:
@@ -68,10 +69,10 @@
 				<nav class="limiter-menu-desktop container">
 					
 					<!-- Logo desktop -->		
-					<a href="<?= base_url(); ?>#" class="logo">
+					<a href="<?= base_url(); ?>#" class="logo" >
 						<img src="<?= media() ?>/tienda/images/icons/logo.png" alt="Tienda Virtual">
 					</a>
-
+					
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
@@ -80,7 +81,7 @@
 							</li>
 
 							<li>
-								<a href="<?= base_url(); ?>/tienda">Shop</a>
+								<a href="<?= base_url(); ?>/tienda">Tienda</a>
 							</li>
 
 							
@@ -89,7 +90,7 @@
 							</li>
 
 							<li>
-								<a href="<?= base_url(); ?>/contacto">Contact</a>
+								<a href="<?= base_url(); ?>/contacto">Contacto</a>
 							</li>
 						</ul>
 					</div>	

@@ -233,10 +233,11 @@
                 <?php
                 if(!empty($arrProductos)){
                   for($p=0; $p < count($arrProductos); $p++){
+					  $ruta=$arrProductos[$p]['ruta'];
                     if(count($arrProductos[$p]['images']) > 0){
                         $portada = $arrProductos[$p]['images'][0]['url_image'];
                     }else{
-                      $portada = media().'/images/uploads/portada_producto.png';
+                      $portada = media().'/images/uploads/product.png';
                     }
                   
                 ?>
@@ -246,7 +247,7 @@
 						<div class="block2-pic hov-img0">
 							<img src="<?= $portada ?>" alt="<?= $arrProductos[$p]['nombre'] ?>">
 
-							<a href="<?= base_url().'/tienda/producto/'.$arrProductos[$p]['nombre'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+							<a href="<?= base_url().'/tienda/producto/'.$arrProductos[$p]['idproducto'].'/'.$ruta;?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 								Ver producto
 							</a>
 						</div>

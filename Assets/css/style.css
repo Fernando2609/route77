@@ -207,6 +207,18 @@ body.dark-mode span.flip-indecator {
 
 
 /*Estilos login*/
+#divLoadingTienda{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #81B031;
+  z-index: 9999;
+
+}
 #divLoading{
   position: fixed;
   top: 0;
@@ -414,3 +426,27 @@ body.dark-mode .bootstrap-select > .dropdown-toggle{
 	width: 150px;
 	margin: 10px;
 }
+.block1-txt:hover {
+  background-color: rgb(129 176 49 / 80%);
+}
+.hov-btn1:hover {
+  border-color: #055488;
+  background-color: #055488;
+  color: #fff;
+}
+/* .top-bar {
+
+  background-color: #075289;
+}
+.left-top-bar {
+
+  color: whitesmoke;
+}
+.right-top-bar a {
+ 
+  color: whitesmoke;
+}
+.fix-menu-desktop .wrap-menu-desktop{
+  background-color: #ffe72b;
+ 
+}  */

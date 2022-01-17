@@ -4,8 +4,8 @@
    $arrProductos = $data['productos'];
    /* dep($arrProductos); */
 ?>
-<!-- <br><br><br>
-<hr> -->
+<br><br><br>
+<hr>
 <div class="bg0 m-t-23 p-b-140">
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
@@ -232,10 +232,11 @@
 			<div class="row isotope-grid">
                 <?php
                   for($p=0; $p < count($arrProductos); $p++){
+					  $ruta=$arrProductos[$p]['ruta'];
                     if(count($arrProductos[$p]['images']) > 0){
                         $portada = $arrProductos[$p]['images'][0]['url_image'];
                     }else{
-                      $portada = media().'/images/uploads/portada_producto.png';
+                      $portada = media().'/images/uploads/product.png';
                     }
                   
                 ?>
@@ -245,14 +246,14 @@
 						<div class="block2-pic hov-img0">
 							<img src="<?= $portada ?>" alt="<?= $arrProductos[$p]['nombre'] ?>">
 
-							<a href="<?= base_url().'/tienda/producto/'.$arrProductos[$p]['nombre'];?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+							<a href="<?= base_url().'/tienda/producto/'.$arrProductos[$p]['idproducto'].'/'.$ruta;?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 								Ver producto
 							</a>
 						</div>
 
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a href="<?= base_url().'/tienda/producto/'.$arrProductos[$p]['nombre'];?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<a href="<?= base_url().'/tienda/producto/'.$arrProductos[$p]['idproducto'].'/'.$ruta;?>"class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                   <?= $arrProductos[$p]['nombre'] ?>
 								</a>
 

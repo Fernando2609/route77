@@ -1,11 +1,14 @@
 <?php
+    //require_once("Models/CategoriasModel.php"); 
+    //Fernadno 23/10/2021
 
     //Definición de constantes
-    define('BASEURL', 'http://localhost:/route77/');
+    //define('BASEURL', 'http://localhost:/route77/');
 	
-   //const BASE_URL="http://localhost:8080/route77";
+   const BASE_URL="http://localhost:8080/route77";
+   
 
-	const BASE_URL="http://localhost/route77";
+	//const BASE_URL="http://localhost/route77";
 
 	//Para envío de correo
 	const ENVIRONMENT = 0; // Local: 0, Produccón: 1;
@@ -34,7 +37,7 @@
 	const NOMBRE_EMPESA = "Route 77";
 	const WEB_EMPRESA = "http://localhost:8080/route77";
 
-	const CAT_SLIDER = "1,2,3";
+	const CAT_SLIDER = "1,2,3,7,6";
 	const CAT_BANNER = "4,5,8";
 
 	

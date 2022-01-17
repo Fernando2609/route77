@@ -13,7 +13,7 @@
         loading: true,
         loadingParentElement: 'html',
         loadingClass: 'animsition-loading-1',
-        loadingInner: '<div class="loader05"></div>',
+        loadingInner: '<div id="divLoadingTienda"><div><img src="Assets/images//loadingRoute.gif" alt="Loading"></div></div>',
         timeout: false,
         timeoutCountdown: 5000,
         onLoadEvent: true,
