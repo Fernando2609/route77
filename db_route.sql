@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-01-2022 a las 23:50:03
+-- Tiempo de generación: 17-01-2022 a las 21:47:40
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -61,10 +61,11 @@ INSERT INTO `calendario` (`id`, `idUsuario`, `title`, `descripcion`, `start`, `e
 
 CREATE TABLE `categoria` (
   `idcategoria` bigint(20) NOT NULL,
-  `nombre` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
   `descripcion` text COLLATE utf8mb4_swedish_ci NOT NULL,
   `portada` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
   `datecreated` datetime NOT NULL DEFAULT current_timestamp(),
+  `ruta` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
@@ -72,15 +73,15 @@ CREATE TABLE `categoria` (
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`idcategoria`, `nombre`, `descripcion`, `portada`, `datecreated`, `status`) VALUES
-(1, 'Lacteos', 'Lacteos', 'img_5cf5c4410b3681c84552351dc69a7a70.jpg', '2022-01-04 00:23:21', 1),
-(2, 'Frutas', 'Frutas', 'img_3b1217d2569a617e4027f5af757bb016.jpg', '2022-01-04 00:24:02', 1),
-(3, 'Jugos y Bebidas', 'Jugos y Bebidas de todo tipo', 'img_87a64e13c35d2ef7081fbeed1b52f7e7.jpg', '2022-01-04 00:25:51', 1),
-(4, 'Cerveza y Licores', 'Cerveza y Licores de todo tipo', 'img_949a28797e471f6d17ee8ced334856fc.jpg', '2022-01-04 00:30:20', 1),
-(5, 'Cuidado Personal', 'Cuidado Personal', 'img_ca3c588b0507214a5a6df6a916b9e9c0.jpg', '2022-01-04 00:32:13', 1),
-(6, 'Mascotas', 'Mascotas', 'img_2d35bd853881291f2bcf8a9303abe423.jpg', '2022-01-04 00:55:49', 1),
-(7, 'Carne', 'Carne de todo tipo', 'img_e552d183f72fe1fc99ad5999f45f50a9.jpg', '2022-01-06 22:13:55', 1),
-(8, 'Pasta', 'Pastas', 'img_999a84cc0f585ddd67f39f41e5207dea.jpg', '2022-01-08 20:48:56', 1);
+INSERT INTO `categoria` (`idcategoria`, `nombre`, `descripcion`, `portada`, `datecreated`, `ruta`, `status`) VALUES
+(1, 'Lacteos', 'Lacteos', 'img_6745646d232f3edba5cc31b1608bcf80.jpg', '2022-01-04 00:23:21', 'lacteos', 1),
+(2, 'Frutas', 'Frutas', 'img_4a1425ff813fd0bce838a0ed6daf1f1e.jpg', '2022-01-04 00:24:02', 'frutas', 1),
+(3, 'Jugos y Bebidas', 'Jugos y Bebidas de todo tipo', 'img_0fcb1a0b7438b55240795ea65afe635f.jpg', '2022-01-04 00:25:51', 'jugos-y-bebidas', 1),
+(4, 'Cerveza y Licores', 'Cerveza y Licores de todo tipo', 'img_8723a6104ac42101ed59687bb8e6d6ea.jpg', '2022-01-04 00:30:20', 'cerveza-y-licores', 1),
+(5, 'Cuidado Personal', 'Cuidado Personal', 'img_22a1f851852223d0b55e8899fd78398d.jpg', '2022-01-04 00:32:13', 'cuidado-personal', 1),
+(6, 'Mascotas', 'Mascotas', 'img_1f5490c35871135cd7e87b55013dbeb4.jpg', '2022-01-04 00:55:49', 'mascotas', 1),
+(7, 'Carne', 'Carne de todo tipo', 'img_6c4f504641b05429501b7d79b41d04d8.jpg', '2022-01-06 22:13:55', 'carne', 1),
+(8, 'Pasta', 'Pastas', 'img_264523a4e94898550a1a631ffea743cc.jpg', '2022-01-08 20:48:56', 'pasta', 1);
 
 -- --------------------------------------------------------
 
@@ -198,7 +199,6 @@ INSERT INTO `imagen` (`id`, `productoid`, `img`) VALUES
 (11, 4, 'pro_22ab157bbacedc76f83b38f923473cb9.jpg'),
 (12, 5, 'pro_4da4386b2f1d03c6cc8241974e0eef0c.jpg'),
 (13, 5, 'pro_a9384f9d4b847175623df79086aec0b2.jpg'),
-(14, 6, 'pro_34a2e00016e5d80345248a7cb214637d.jpg'),
 (16, 7, 'pro_6ef52d0cb1fa932320aef47ea2c35110.jpg'),
 (17, 8, 'pro_0be0cbe7f6c7932616191db5acde860d.jpg'),
 (18, 9, 'pro_c0d1f30d7de299e0c85fa21c10dd9a09.jpg'),
@@ -340,6 +340,7 @@ CREATE TABLE `producto` (
   `stock` int(11) NOT NULL,
   `imagen` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
   `datecreated` datetime NOT NULL DEFAULT current_timestamp(),
+  `ruta` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
   `dateModificado` datetime NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
@@ -348,18 +349,18 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`idproducto`, `categoriaid`, `codigo`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `datecreated`, `dateModificado`, `status`) VALUES
-(1, 2, '1244112', 'Manzana', '<p>Manzana <strong>100%&nbsp;</strong>Natural,.</p><p>Las mejores manzanas en Honduras y toda CentroAm&eacute;rica</p>', '10.00', 250, '', '2022-01-11 00:47:45', '0000-00-00 00:00:00', 1),
-(2, 1, '79589310131', 'Leche Leyde', '<p>Leche Leyde 946ml</p><table style=\"border-collapse: collapse; width: 100%; height: 44.7916px;\" border=\"1\"><tbody><tr style=\"height: 22.3958px;\"><td style=\"width: 50.0717%; height: 22.3958px;\">Marca&nbsp;</td><td style=\"width: 49.9283%; height: 22.3958px;\">Leyde</td></tr><tr style=\"height: 22.3958px;\"><td style=\"width: 50.0717%; height: 22.3958px;\">Categor&iacute;a&nbsp;</td><td style=\"width: 49.9283%; height: 22.3958px;\">Lacteos</td></tr></tbody></table>', '25.00', 150, '', '2022-01-11 01:02:10', '2022-01-11 01:04:14', 1),
-(3, 5, '121231212', 'Colgate', '<h1 class=\"vtex-store-components-3-x-productNameContainer vtex-store-components-3-x-productNameContainerquickview mv0 t-heading-4\"><span class=\"vtex-store-components-3-x-productBrand vtex-store-components-3-x-productBrandquickview \">Crema Dental Colgate Triple Acci&oacute;n 100 Ml</span></h1>', '38.00', 67, '', '2022-01-11 01:12:07', '0000-00-00 00:00:00', 1),
-(4, 4, '7422110101003', 'Six Pack Barena Enlatada', '<p>6 Cerveza Barena en Lata&nbsp; &nbsp;</p><h1>&iexcl;PRIMOOOS!</h1>', '150.00', 50, '', '2022-01-11 01:25:23', '2022-01-11 02:23:36', 1),
-(5, 8, '8917313', 'Spaguetti Delgado Essential', '<p class=\"vtex-store-components-3-x-productNameContainer vtex-store-components-3-x-productNameContainerquickview mv0 t-heading-4\"><span class=\"vtex-store-components-3-x-productBrand vtex-store-components-3-x-productBrandquickview \">Spaguetti Delgado Essential de 70 Onzas, las mejores Pastas&nbsp;</span></p>', '30.00', 60, '', '2022-01-11 01:47:58', '2022-01-11 01:48:16', 1),
-(6, 3, '6525321', 'Jugo de piña', '<p>Jugo sabor a pi&ntilde;a 473ml, SULA</p>', '18.00', 50, '', '2022-01-11 18:23:11', '2022-01-11 18:26:38', 1),
-(7, 5, '65206820', 'Shampoo Pantene', '<p>Shampoo pantene pro-vitaminas</p>', '155.00', 35, '', '2022-01-11 18:36:15', '2022-01-11 18:38:08', 1),
-(8, 1, '864326245443', 'Enjuague bucal Listerine', '<div class=\"eYbsle\">Listerine cool mint enjuague bucal 250 ml</div>', '200.00', 10, '', '2022-01-11 18:40:07', '2022-01-11 18:40:26', 1),
-(9, 8, '634132', 'Pasta codo INA', '<p>Coditos INA 200g</p>', '12.00', 30, '', '2022-01-11 18:42:30', '2022-01-11 18:42:38', 1),
-(10, 1, '674158513', 'Caracoles Pasta Roma', '<p>Pasta enriquecida, Caracoles ROMA</p>', '20.00', 15, '', '2022-01-11 18:46:34', '2022-01-11 18:47:13', 1),
-(11, 5, '368431520000', 'Jabón Protex Antibacterial', '<div class=\"iFxuye\"><div class=\"S4aXnb\">Jab&oacute;n Antibacterial Aloe Vera Protex 125 Gr</div></div>', '23.00', 32, '', '2022-01-11 18:51:31', '2022-01-11 18:51:44', 1);
+INSERT INTO `producto` (`idproducto`, `categoriaid`, `codigo`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `datecreated`, `ruta`, `dateModificado`, `status`) VALUES
+(1, 2, '1244112', 'Manzana', '<p>Manzana <strong>100%&nbsp;</strong>Natural,.</p><p>Las mejores manzanas en Honduras y toda CentroAm&eacute;rica</p>', '10.00', 250, '', '2022-01-11 00:47:45', 'manzana', '2022-01-14 21:02:20', 1),
+(2, 1, '79589310131', 'Leche Leyde', '<p>Leche Leyde 946ml</p><table style=\"border-collapse: collapse; width: 100%; height: 44.7916px;\" border=\"1\"><tbody><tr style=\"height: 22.3958px;\"><td style=\"width: 50.0717%; height: 22.3958px;\">Marca&nbsp;</td><td style=\"width: 49.9283%; height: 22.3958px;\">Leyde</td></tr><tr style=\"height: 22.3958px;\"><td style=\"width: 50.0717%; height: 22.3958px;\">Categor&iacute;a&nbsp;</td><td style=\"width: 49.9283%; height: 22.3958px;\">Lacteos</td></tr></tbody></table>', '25.00', 150, '', '2022-01-11 01:02:10', 'leche-leyde', '2022-01-14 21:02:14', 1),
+(3, 5, '121231212', 'Colgate', '<h1 class=\"vtex-store-components-3-x-productNameContainer vtex-store-components-3-x-productNameContainerquickview mv0 t-heading-4\"><span class=\"vtex-store-components-3-x-productBrand vtex-store-components-3-x-productBrandquickview \">Crema Dental Colgate Triple Acci&oacute;n 100 Ml</span></h1>', '38.00', 67, '', '2022-01-11 01:12:07', 'colgate', '2022-01-14 21:02:10', 1),
+(4, 4, '7422110101003', 'Six Pack Barena Enlatada', '<p>6 Cerveza Barena en Lata&nbsp; &nbsp;</p><h1>&iexcl;PRIMOOOS!</h1>', '150.00', 50, '', '2022-01-11 01:25:23', 'six-pack-barena-enlatada', '2022-01-14 21:02:00', 1),
+(5, 8, '8917313', 'Spaguetti Delgado Essential', '<p class=\"vtex-store-components-3-x-productNameContainer vtex-store-components-3-x-productNameContainerquickview mv0 t-heading-4\"><span class=\"vtex-store-components-3-x-productBrand vtex-store-components-3-x-productBrandquickview \">Spaguetti Delgado Essential de 70 Onzas, las mejores Pastas&nbsp;</span></p>', '30.00', 60, '', '2022-01-11 01:47:58', 'spaguetti-delgado-essential', '2022-01-14 21:01:54', 1),
+(6, 3, '6525321', 'Jugo de piña', '<p>Jugo sabor a pi&ntilde;a 473ml, SULA</p>', '18.00', 50, '', '2022-01-11 18:23:11', 'jugo-de-pina', '2022-01-14 21:01:45', 1),
+(7, 5, '65206820', 'Shampoo Pantene', '<p>Shampoo pantene pro-vitaminas</p>', '155.00', 35, '', '2022-01-11 18:36:15', 'shampoo-pantene', '2022-01-14 21:01:41', 1),
+(8, 1, '864326245443', 'Enjuague bucal Listerine', '<div class=\"eYbsle\">Listerine cool mint enjuague bucal 250 ml</div>', '200.00', 10, '', '2022-01-11 18:40:07', 'enjuague-bucal-listerine', '2022-01-14 21:02:51', 1),
+(9, 8, '634132', 'Pasta codo INA', '<p>Coditos INA 200g</p>', '12.00', 30, '', '2022-01-11 18:42:30', 'pasta-codo-ina', '2022-01-14 21:01:27', 1),
+(10, 1, '674158513', 'Caracoles Pasta Roma', '<p>Pasta enriquecida, Caracoles ROMA</p>', '20.00', 15, '', '2022-01-11 18:46:34', 'caracoles-pasta-roma', '2022-01-14 21:01:20', 1),
+(11, 5, '368431520000', 'Jabón Protex Antibacterial', '<div class=\"iFxuye\"><div class=\"S4aXnb\">Jab&oacute;n Antibacterial Aloe Vera Protex 125 Gr</div></div>', '23.00', 32, '', '2022-01-11 18:51:31', 'jabon-protex-antibacterial', '2022-01-14 20:48:47', 1);
 
 -- --------------------------------------------------------
 
@@ -477,7 +478,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idUsuario`, `dni`, `nombres`, `apellidos`, `email`, `contraseña`, `idNacionalidad`, `idGenero`, `idEstadoCivil`, `idRol`, `idSucursal`, `fechaNacimiento`, `status`, `telefono`, `token`, `datecreated`, `datelogin`, `datemodificado`) VALUES
-(1, '0801200018857', 'José Fernando', 'Ortiz Santos', 'josefortizsantos@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 1, 1, '2000-09-20 00:00:00', 1, 94877564, '6db8ee716df569f48639-e9efa0046d6a4f9e0006-a650ccef7ac48fc451c5-2d6bfdff2ed7db3c2527', '2021-12-20 02:34:44', '2022-01-12 15:02:12', '2022-01-06 16:49:57'),
+(1, '0801200018857', 'José Fernando', 'Ortiz Santos', 'josefortizsantos@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 1, 1, '2000-09-20 00:00:00', 1, 94877564, '6db8ee716df569f48639-e9efa0046d6a4f9e0006-a650ccef7ac48fc451c5-2d6bfdff2ed7db3c2527', '2021-12-20 02:34:44', '2022-01-14 20:00:08', '2022-01-06 16:49:57'),
 (2, '0801200018313', 'Hugo', 'Paz', 'hugo.paz@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 1, 1, 2, 1, '2000-06-15 00:00:00', 1, 94142814, '', '2021-12-20 13:57:46', '0000-00-00 00:00:00', '2022-01-06 18:06:35'),
 (3, '0801123989878', 'Leonela', 'Pineda', 'lypineda@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 2, 2, 1, 2, '2021-05-05 00:00:00', 1, 97737659, '', '2021-12-20 14:16:53', '2021-12-30 16:51:52', '2022-01-02 20:53:38'),
 (5, '0908099', 'Gabriela', 'Maradiaga', 'ggmaradiaga@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 2, 2, 2, 4, 3, '1999-12-16 00:00:00', 1, 97514274, '', '2021-12-20 19:41:19', '2022-01-11 00:20:47', '2021-12-24 15:20:09'),
