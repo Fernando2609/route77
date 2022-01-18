@@ -1,7 +1,7 @@
 <?php
     headerTienda($data);
 	getModal('modalCarrito', $data);
-
+	
 	$arrSlider = $data['slider'];
 	/* dep($arrSlider); */
 	$arrBanner = $data['banner'];

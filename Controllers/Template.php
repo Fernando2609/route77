@@ -1,7 +1,7 @@
 <?php  
     require_once("Models/Tcategoria.php");
     require_once("Models/Tproducto.php");
-    class Home extends Controllers{
+    class Template extends Controllers{
         use Tcategoria, Tproducto;
         public function __construct()
         {
@@ -27,7 +27,7 @@
             $data['categorias'] = $this->getCategorias();
             $data['productos'] = $this->getProductosT();
              /* dep($data); exit; */ 
-            $this->views->getView($this,"home",$data);
+            $this->views->getView($this,"header_tienda",$data);
         }
         
         /* public function insertar(){

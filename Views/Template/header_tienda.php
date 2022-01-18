@@ -1,4 +1,12 @@
+<?php
+    
+	//dep($data);
+	$arrCategorias = $data['categorias'];
+	//dep($arrCategorias); 
+	
+?>
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 	<title> <?= $data['page_tag'];?></title>
@@ -10,6 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="<?= media() ?>/tienda/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?= media() ?>/tienda/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?= media() ?>/tienda/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
@@ -80,11 +89,33 @@
 								<a href="<?= base_url(); ?>" >Inicio</a>
 							</li>
 
+							
+							<li >
+								<a class="js-show-categoria" href="javascript:void(0);">Categorias <ion-icon style="font-size: 12px;" name="pricetags"></ion-icon></a>
+								<ul class="sub-menu" >
+									<!-- <div style="display: flex;"> -->
+								
+									<?php
+										for ($i=0; $i < count($arrCategorias); $i++) { 
+									
+									?>
+									
+										<li><a href="index.html"><?= $arrCategorias[$i]['nombre']?></a></li>
+										
+									<?php
+									
+										}
+									?>
+								
+									
+									<!-- 	
+									</div> -->
+								</ul>
+               				 </li>
+
 							<li>
 								<a href="<?= base_url(); ?>/tienda">Tienda</a>
 							</li>
-
-							
 							<li>
 								<a href="<?= base_url(); ?>/nosotros">Nosotros</a>
 							</li>
@@ -122,11 +153,13 @@
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
 					<i class="zmdi zmdi-search"></i>
 				</div>
-
+				
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 js-show-categoria">
+				<ion-icon style="font-size: 25px;" name="pricetags"></ion-icon>
+				</div>
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
-
 			</div>
 
 			<!-- Button show menu -->
@@ -168,7 +201,9 @@
 				<li>
 					<a href="<?= base_url(); ?>">Inicio</a>
 				</li>
-
+				<li>
+					<a class="js-show-categoria" href="#">Categorias</a>
+				</li>
 				<li>
 					<a href="<?= base_url(); ?>/tienda">Tienda</a>
 				</li>
@@ -199,3 +234,4 @@
 			</div>
 		</div>
 	</header>
+

@@ -189,7 +189,15 @@
         }    
     });
 
+/*==================================================================
+    [ Categoria ]*/
+    $('.js-show-categoria').on('click',function(){
+        $('.js-panel-categoria').addClass('show-header-cart');
+    });
 
+    $('.js-hide-cart').on('click',function(){
+        $('.js-panel-categoria').removeClass('show-header-cart');
+    });
 
 
     /*==================================================================

@@ -15,6 +15,7 @@
             $data['page_title']=NOMBRE_EMPESA;
             $data['page_name']="tienda";
             $data['productos'] = $this->getProductosT();
+            $data['categorias'] = $this->getCategorias();
             $this->views->getView($this,"tienda",$data);
         }
 
@@ -30,6 +31,7 @@
                 $data['page_tag'] = NOMBRE_EMPESA." - ".$infoCategoria['categoria'];
                 $data['page_title'] = $infoCategoria['categoria'];
                 $data['page_name'] = "categoria";
+                $data['categorias'] = $this->getCategorias();
                 $data['productos'] = $infoCategoria['productos'];
                 $this->views->getView($this,"categoria",$data);
             }
@@ -51,6 +53,7 @@
             $data['page_tag'] = NOMBRE_EMPESA . " - " . $infoProducto['nombre'];
             $data['page_title'] = $infoProducto['nombre'];
             $data['page_name'] = "producto";
+            $data['categorias'] = $this->getCategorias();
             $data['producto'] = $infoProducto;
             $data['productos'] = $this->getProductosRandom($infoProducto['categoriaid'],8,"r");
             $this->views->getView($this, "producto", $data);
