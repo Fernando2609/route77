@@ -1,6 +1,6 @@
 <?php
     headerTienda($data);
-	getModal('modalCarrito', $data);
+	//getModal('modalCarrito', $data);
 	
 	$arrSlider = $data['slider'];
 	/* dep($arrSlider); */
@@ -150,6 +150,10 @@
 				</a>
 			</div>
 		</div>
+		<!-- <?php
+		 //dep($_SESSION['arrCarrito']);
+		 //exit;
+		?> -->
 	</section>
 	
 <?php

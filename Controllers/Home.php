@@ -5,6 +5,7 @@
         use Tcategoria, Tproducto;
         public function __construct()
         {
+            session_start();
             parent::__construct();
             /* session_start();
             if (empty($_SESSION['login'])) {

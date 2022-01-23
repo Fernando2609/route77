@@ -3,7 +3,12 @@
 	//dep($data);
 	$arrCategorias = $data['categorias'];
 	//dep($arrCategorias); 
-	
+	$cantCarrito = 0;
+	if(isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0){ 
+		foreach($_SESSION['arrCarrito'] as $product) {
+			$cantCarrito += $product['cantidad'];
+		}
+	}
 ?>
 <!DOCTYPE html>
 
@@ -20,6 +25,11 @@
 	<link rel="stylesheet" type="text/css" href="<?= media() ?>/tienda/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!--===============================================================================================-->
+   <!-- SweetAlert2 -->
+   <link rel="stylesheet" href="<?= media(); ?>/js/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="<?= media(); ?>/js/plugins/sweetalert2/sweetalert2.min.css">
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?= media() ?>/tienda/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?= media() ?>/tienda/fonts/linearicons-v1.0.0/icon-font.min.css">
@@ -40,12 +50,19 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?= media() ?>/tienda/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
+ <!-- Bootstrap Select -->
+ <link rel="stylesheet" href="<?= media(); ?>/css/bootstrap-select.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= media() ?>/tienda/css/util.css">
 	<link rel="stylesheet" type="text/css" href="<?= media() ?>/tienda/css/main.css">
 	<link rel="stylesheet" href="<?= media(); ?>/css/style.css">
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
+	<div id="divLoading">
+      <div>
+        <img src="<?=media();?>/images//loadingRoute.gif" alt="Loading">
+       </div>
+    </div>
 	<!-- Header -->
 	<header>
 		<!-- Header desktop -->
@@ -117,6 +134,9 @@
 								<a href="<?= base_url(); ?>/tienda">Tienda</a>
 							</li>
 							<li>
+								<a href="<?= base_url(); ?>/carrito">Carrito</a>
+							</li>
+							<li>
 								<a href="<?= base_url(); ?>/nosotros">Nosotros</a>
 							</li>
 
@@ -131,11 +151,14 @@
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
-
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+						<?php  
+							if ($data['page_name']!='carrito') {
+					
+						?>
+						<div class="cantCarrito icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?=  $cantCarrito;  ?>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
-						
+						<?php } ?>
 					</div>
 				</nav>
 			</div>	
@@ -157,9 +180,14 @@
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 js-show-categoria">
 				<ion-icon style="font-size: 25px;" name="pricetags"></ion-icon>
 				</div>
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+				<?php  
+					if ($data['page_name']!='carrito') {
+					
+				?>
+				<div  class="cantCarrito icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?=  $cantCarrito;  ?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
+				<?php } ?>
 			</div>
 
 			<!-- Button show menu -->
@@ -207,7 +235,9 @@
 				<li>
 					<a href="<?= base_url(); ?>/tienda">Tienda</a>
 				</li>
-
+				<li>
+					<a href="<?= base_url(); ?>/carrito">Carrito</a>
+				</li>
 				<li>
 					<a href="<?= base_url(); ?>/nosotros">Nosotros</a>
 				</li>
@@ -234,4 +264,103 @@
 			</div>
 		</div>
 	</header>
+<!-- Cart -->
+<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
 
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Tu Carrito
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			
+			<div id="productoCarrito" class="header-cart-content flex-w js-pscroll">
+				<?=  getModal("modalCarrito",$data)  ?>
+			</div>
+		</div>
+	</div>
+	<div class="wrap-header-cart js-panel-categoria">
+	
+	<div class="s-full js-hide-cart"></div>
+
+		<div id="header-cate" class="header-categoria flex-col-l p-l-25 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Categorías
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			
+			
+			<div class="header-cart-content flex-w js-pscroll" style="padding-left: 20px;">
+				<ul class="header-cart-wrapitem w-full">
+				<?php
+				for ($j=0; $j < count($arrCategorias); $j++) { 
+					$ruta=$arrCategorias[$j]['ruta'];				
+				?>
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<a href="<?= base_url().'/tienda/categoria/'.$arrCategorias[$j]['idcategoria'].'/'.$ruta; ?>">
+						<div class="header-cart-item-img">
+							  <img src="<?= $arrCategorias[$j]['portada']?>" alt="<?= $arrCategorias[$j]['nombre']?>">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="<?= base_url().'/tienda/categoria/'.$arrCategorias[$j]['idcategoria'].'/'.$ruta; ?>" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								<?= $arrCategorias[$j]['nombre']?>
+							</a>
+
+							<!-- <span class="header-cart-item-info">
+							<?= $arrCategorias[$j]['descripcion']?>
+							</span> -->
+						</div>
+						</a>
+					</li>
+					
+			<?php
+				 }					
+			?>
+
+					
+					<!-- <li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="<?= media() ?>/images/uploads/portada_categoria.png" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
+					</li>  -->
+				</ul>
+				
+				<!-- <div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">
+						Total: $75.00
+					</div>
+
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
+
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>

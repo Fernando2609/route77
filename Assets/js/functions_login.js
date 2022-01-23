@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function(){
 						var objData = JSON.parse(request.responseText);
 						if(objData.status)
 						{
-							window.location = base_url+'/dashboard';
-							//window.location.reload(false);
+							//window.location = base_url+'/dashboard';
+							window.location.reload(false);
 						}else{
 							swal.fire("Atención", objData.msg, "error");
 							document.querySelector('#txtPassword').value = "";

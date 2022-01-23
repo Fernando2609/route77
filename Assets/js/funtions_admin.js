@@ -44,8 +44,6 @@ if (localStorage.getItem('barra')==='true') {
   
 }
 
-
-
 function controlTag(e) {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla==8) return true;
@@ -55,11 +53,11 @@ function controlTag(e) {
     return patron.test(n);
 }
 
-function testText(txtString) {
-    var stringText = new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+.{2,}$/);
-    if (stringText.test(txtString)){
+function testText(txtString){
+    var stringText = new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/);
+    if(stringText.test(txtString)){
         return true;
-    } else {
+    }else{
         return false;
     }
 }
@@ -89,9 +87,10 @@ function fntValidText(){
             let inputValue = this.value;
             if(!testText(inputValue)){
                 this.classList.add('is-invalid');
+               /*  this.classList.remove('is-valid'); */
             }else{
                 this.classList.remove('is-invalid');
-                this.classList.add('is-valid');
+          /*       this.classList.add('is-valid'); */
                 
             }
         });

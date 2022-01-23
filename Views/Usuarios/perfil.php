@@ -84,10 +84,16 @@
                         <td>Fecha de Nacimiento</td>
                         <td><?= $_SESSION['userData']['fechaNacimiento']; ?></td>
                       </tr>
+                      <!-- <?php
+                         if ($_SESSION['userData']['nombreRol']=="Administrador") {
+                           
+                        
+                        ?> -->
                       <tr>
-                        <td>Email (Usuario):</td>
-                        <td><?= $_SESSION['userData']['email']; ?></td>
+                        <td>Sucursal:</td>
+                        <td><?= $_SESSION['userData']['sucursal']; ?></td>
                       </tr>
+                 <!--    <?php } ?> -->
                       <tr>
                         <td>Rol</td>
                         <td><?= $_SESSION['userData']['nombreRol']; ?></td>

@@ -993,7 +993,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .header-cart-item-img::after {
-  /*content: '\e870';*/
+  content: '\e870';
   font-family: Linearicons-Free;
   font-size: 16px;
   display: -webkit-box;
@@ -1019,8 +1019,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 .header-cart-item-img:hover:after {
   opacity: 1;
-  transform: rotate(45deg);
-  padding-right: 20px;
+  
 }
 
 
@@ -1694,6 +1693,58 @@ button.mfp-close {
     margin-top: 0;
 }
 
+.swal2-confirm:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.swal2-confirm.swal2-styled {
+width: 5em;
+background-color: #81B031;
+font-family: Poppins-Regular;
+font-size: 16px;
+color: white;
+text-transform: uppercase;
+font-weight: unset;
+border-radius: 4px;
+-webkit-transition: all 0.3s;
+-o-transition: all 0.3s;
+-moz-transition: all 0.3s;
+transition: all 0.3s;
+}
+.swal2-confirm:hover {
+  background-color: #333;
+}
+
+.swal2-confirm:active {
+  background-color: #333;
+}
+.swal2-container{
+  z-index: 2000;
+}
+.swal2-title {
+font-family: Poppins-Bold;
+color: #333333;
+font-size: 1.35em;
+
+padding: .8em 1em 0;
+}
+.swal2-icon{
+  margin: 1.25em auto 1.175em;
+}
+
+.swal2-content{
+font-family: Poppins-Regular;
+color: #555555;
+font-size: 1.125em;
+line-height: normal;
+text-align: center;
+}
+
+.swal2-footer {
+  margin-top: 0;
+}
+ 
 
 /*//////////////////////////////////////////////////////////////////
 [ Filter ]*/

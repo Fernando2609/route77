@@ -12,10 +12,10 @@
         linkElement: '.animsition-link',
         loading: true,
         loadingParentElement: 'html',
-        loadingClass: 'animsition-loading-1',
-        loadingInner: '<div id="divLoadingTienda"><div><img src="Assets/images//loadingRoute.gif" alt="Loading"></div></div>',
-        timeout: false,
-        timeoutCountdown: 5000,
+        loadingClass: 'divLoadingTienda',
+        loadingInner: `<div id="divLoadingTienda"><div><img src="`+base_url+`/Assets/images/loadingRoute.gif" alt="Loading"></div></div>`,
+        timeout: true,
+        timeoutCountdown: 25000,
         onLoadEvent: true,
         browser: [ 'animation-duration', '-webkit-animation-duration'],
         overlay : false,
@@ -220,17 +220,7 @@
         $('.js-sidebar').removeClass('show-sidebar');
     });
 
-    /*==================================================================
-    [ +/- num product ]*/
-    $('.btn-num-product-down').on('click', function(){
-        var numProduct = Number($(this).next().val());
-        if(numProduct > 0) $(this).next().val(numProduct - 1);
-    });
-
-    $('.btn-num-product-up').on('click', function(){
-        var numProduct = Number($(this).prev().val());
-        $(this).prev().val(numProduct + 1);
-    });
+   
 
     /*==================================================================
     [ Rating ]*/

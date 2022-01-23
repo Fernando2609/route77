@@ -40,8 +40,11 @@
 	const CAT_SLIDER = "1,2,3,7,6";
 	const CAT_BANNER = "4,5,8";
 
-	
+	//Datos para Encriptar / Desencriptar
+	const KEY = 'route77';
+	const METHODENCRIPT = "AES-128-ECB";
 
+	const COSTOENVIO=10;
 
 
 

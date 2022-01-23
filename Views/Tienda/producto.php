@@ -1,9 +1,11 @@
 <?php
 headerTienda($data);
-getModal('modalCarrito', $data);
+//getModal('modalCarrito', $data);
 $arrProducto = $data['producto'];
 $arrProductos = $data['productos'];
 $arrImages = $arrProducto['images'];
+$rutaCategoria=$arrProducto['categoriaid'].'/'.$arrProducto['ruta_categoria'];
+
 ?>
 <br><br><br>
 <hr>
@@ -14,7 +16,7 @@ $arrImages = $arrProducto['images'];
             Inicio
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
-        <a href="<?= base_url() . '/tienda/categoria/' . $arrProducto['categoria']; ?>" class="stext-109 cl8 hov-cl1 trans-04">
+        <a href="<?= base_url() . '/tienda/categoria/' .$rutaCategoria; ?>" class="stext-109 cl8 hov-cl1 trans-04">
             <?= $arrProducto['categoria'] ?>
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
@@ -86,17 +88,17 @@ $arrImages = $arrProducto['images'];
                                         <i class="fs-16 zmdi zmdi-minus"></i>
                                     </div>
 
-                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                    <input id="cant-product" class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1" min="1">
 
                                     <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                         <i class="fs-16 zmdi zmdi-plus"></i>
                                     </div>
                                 </div>
 
-                                <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                <button id="<?=  openssl_encrypt($arrProducto['idproducto'],METHODENCRIPT,KEY);  ?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                     Agregar al carrito
                                 </button>
-                            </div>
+                             </div>
                         </div>
                     </div>
 
