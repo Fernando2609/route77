@@ -74,7 +74,7 @@ $('.js-addcart-detail').each(function(){
                     swal.fire(nameProduct, "Se agrego al carrito", "success");
                     
                 }else{
-                    swal.fire(nameProduct, "No Se agrego al carrito", "error");
+                    swal.fire(nameProduct, objData.msg, "error");
                 }
              }
              return false;
@@ -130,13 +130,13 @@ if(document.querySelector(".num-product")){
 	});
 };
 window.addEventListener('load', function() {
-  
-   if (nombre=='procesarpago' & document.querySelector(".txtEmail")) {
+   if(document.querySelector('#txtEmail')){
+   if (nombre=='procesarpago') {
        fntNacionalidadCliente();
        fntGeneroCliente();
         fnEstadoCCliente();
-       
    }
+}
     /*fnSucursalUsuario(); */
 
 }, false);
@@ -351,6 +351,7 @@ function fntUpdateCant(pro,cant) {
 	    	if(request.status == 200){
 	            let objData = JSON.parse(request.responseText);
 	    		if(objData.status){
+                    
 	    			let colSubtotal = document.getElementsByClassName(pro)[0];
 	    			colSubtotal.cells[4].textContent = objData.totalProducto;
 	    			document.querySelector("#subTotalCompra").innerHTML = objData.subTotal;

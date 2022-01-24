@@ -43,8 +43,10 @@
 									<th class="column-5">Total</th>
 								</tr>
                                 <?php
+								
                                     foreach($_SESSION['arrCarrito'] as $producto)
                                     {
+										$ruta=$producto['ruta'];
                                         $totalProducto=$producto['precio']*$producto['cantidad'];
                                         $subtotal+=$totalProducto;
                                         $idProducto = openssl_encrypt($producto['idproducto'],METHODENCRIPT,KEY);
@@ -56,7 +58,7 @@
 											<img src="<?=  $producto['imagen'];  ?>" alt="<?=  $producto['producto'];  ?>">
 										</div>
 									</td>
-									<td class="column-2"><?=  $producto['producto'];  ?></td>
+									<td class="column-2"><a class="header-cart-item-name m-b-18 hov-cl1 trans-04" href="<?= base_url().'/tienda/producto/'.$producto['idproducto'].'/'.$ruta;?>"><?=  $producto['producto'];  ?></a></td>
 									<td class="column-3"><?=SMONEY.formatMoney($producto['precio']);  ?></td>
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
@@ -65,7 +67,7 @@
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
                                              <!-- Cantidad -->
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="<?=  $producto['cantidad']    ?>" idpr="<?=  $idProducto  ?>" >
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="<?=  $producto['cantidad']    ?>" idpr="<?=  $idProducto  ?>">
                                              <!-- Signo Más -->
 											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"idpr="<?=  $idProducto  ?>">
 												<i class="fs-16 zmdi zmdi-plus"></i>

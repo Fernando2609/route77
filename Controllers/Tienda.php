@@ -66,43 +66,88 @@
         public function addCarrito()
         {
             if ($_POST) {
+               /*  */
                 //dep($_POST);
                 //unset($_SESSION['arrCarrito']);exit;
                 $arrCarrito=array();
                 $cantCarrito=0;
+                $stockCarrito=0;
                 $idproducto=openssl_decrypt($_POST['id'],METHODENCRIPT,KEY);
                 $cantidad=$_POST['cant'];
                 if (is_numeric($idproducto) and is_numeric($cantidad)) {
                     $arrInfoProducto=$this->getProductoIDT($idproducto);
-                  
+                    $stockCarrito=$arrInfoProducto['stock'];
+                   
                     if (!empty($arrInfoProducto)) {
                         $arrProducto = array('idproducto' => $idproducto,
 											'producto' => $arrInfoProducto['nombre'],
 											'cantidad' => $cantidad,
 											'precio' => $arrInfoProducto['precio'],
+                                            'stock' => $arrInfoProducto['stock'],
+                                            'ruta'=>$arrInfoProducto['ruta'],
 											'imagen' => $arrInfoProducto['images'][0]['url_image']
 										);
                         
+                             
                         if (isset($_SESSION['arrCarrito'])) {
                             $on = true;
 							$arrCarrito = $_SESSION['arrCarrito'];
+                            
 							for ($pr=0; $pr < count($arrCarrito); $pr++) {
 								if($arrCarrito[$pr]['idproducto'] == $idproducto){
-									$arrCarrito[$pr]['cantidad'] += $cantidad;
-									$on = false;
-								}
+                                    if ($stockCarrito>=$arrCarrito[$pr]['cantidad'] and $cantidad+$arrCarrito[$pr]['cantidad']<=$stockCarrito) {
+                                        
+                                        
+                                        $arrCarrito[$pr]['cantidad'] += $cantidad;
+                                        $on = false;
+                                      
+                                     }else{
+                                        $arrResponse = array("status" => false, "msg" => 'Stock Sobrepasado');
+                                        echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+                                        die();
+                                    }
+                                    
+                                    
+								}     
 							}
 							if($on){
-								array_push($arrCarrito,$arrProducto);
+                                if ($stockCarrito>= $cantidad) {
+                                   
+                                    array_push($arrCarrito,$arrProducto);
+                                 
+                                 }else{
+                                    $arrResponse = array("status" => false, "msg" => 'Stock Sobrepasado');
+                                    echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+                                    die();
+                                }
+								
 							}
                             $_SESSION['arrCarrito']=$arrCarrito;
                         }else{
-                            array_push($arrCarrito,$arrProducto);
-                            $_SESSION['arrCarrito']=$arrCarrito;
+                            
+                            if ($stockCarrito>=$cantidad ) {
+                                
+                                array_push($arrCarrito,$arrProducto);
+                                $_SESSION['arrCarrito']=$arrCarrito;
+                              
+                             }else{
+                                $arrResponse = array("status" => false, "msg" => 'Stock Sobrepasado');
+                                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+                                die();
+                            }
+                          
                         }
                         foreach ($_SESSION['arrCarrito'] as $pro){
-                            $cantCarrito+=$pro['cantidad'];
+                            if ($stockCarrito>=$cantidad || $stockCarrito>=$pro['cantidad'] ) {
+                                
+                                $cantCarrito+=$pro['cantidad'];
+                            }else{
+                                $arrResponse = array("status" => false, "msg" => 'Stock Sobrepasado');
+                                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+                                die();
+                            }
                         }
+                    
                         $htmlCarrito ="";
 						$htmlCarrito = getFile('Template/Modals/modalCarrito',$_SESSION['arrCarrito']);
 						$arrResponse = array("status" => true, 
@@ -110,8 +155,11 @@
 											"cantCarrito" => $cantCarrito,
 											"htmlCarrito" => $htmlCarrito
 										);
+                        
+                           
+                        
                     }else{
-                        $arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
+                        $arrResponse = array("status" => false, "msg" => 'Producto No existente');
                     }
                
                 }else{
@@ -176,43 +224,57 @@
         public function updCarrito(){
 			if($_POST){
                 //dep($_POST);
-				 $arrCarrito = array();
+				$arrCarrito = array();
 				$totalProducto = 0;
 				$subtotal = 0;
 				$total = 0;
                 $envio=0;
 				$idproducto = openssl_decrypt($_POST['id'], METHODENCRIPT, KEY);
 				$cantidad = intval($_POST['cantidad']);
-               
+                $stockCarrito=0;
+                
 				if(is_numeric($idproducto) and $cantidad > 0){
+                    
+                       
 					$arrCarrito = $_SESSION['arrCarrito'];
 					for ($p=0; $p < count($arrCarrito); $p++) { 
 						if($arrCarrito[$p]['idproducto'] == $idproducto){
 							$arrCarrito[$p]['cantidad'] = $cantidad;
+                            $stockCarrito=$arrCarrito[$p]['stock'];
 							$totalProducto = $arrCarrito[$p]['precio'] * $cantidad;
 							break;
 						}
 					}
+                    if ($stockCarrito>=$cantidad) {
 					$_SESSION['arrCarrito'] = $arrCarrito;
+                  
 					foreach ($_SESSION['arrCarrito'] as $pro) {
 						$subtotal += $pro['cantidad'] * $pro['precio'];
+                        
                         if ($subtotal>=500) {
                             $envio=0;
                         }else if ($subtotal<500) {
                          $envio=COSTOENVIO;   
                         } 
 					}
+                    
 					$arrResponse = array("status" => true, 
-										"msg" => '¡Producto actualizado!',
-										"totalProducto" => SMONEY.formatMoney($totalProducto),
-										"subTotal" => SMONEY.formatMoney($subtotal),
-                                        "envio" => SMONEY.formatMoney($envio),
-										"total" => SMONEY.formatMoney($subtotal + $envio)
-									);
-
+                    "msg" => '¡Producto actualizado!',
+                    "totalProducto" => SMONEY.formatMoney($totalProducto),
+                    "subTotal" => SMONEY.formatMoney($subtotal),
+                    "envio" => SMONEY.formatMoney($envio),
+                    "cantidad"=>$cantidad,
+                    "stock"=>$stockCarrito,
+                    "total" => SMONEY.formatMoney($subtotal + $envio)
+                );
+                
+            }else{
+                $arrResponse = array("status" => false, "msg" => 'Stock Sobrepasado');
+            }
 				}else{
 					$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
 				}
+                
 				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE); 
 			}
 			die();

@@ -60,6 +60,7 @@
 
 <!-- Page specific javascripts-->
 <script src="<?= media(); ?>/js/funtions_admin.js"></script>
+<script src="<?= media(); ?>/js/funtions_storage.js"></script>
 <script src="<?= media(); ?>/js/<?= $data['page_functions_js'] ?>"></script>
 
 

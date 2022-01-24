@@ -14,7 +14,7 @@
               <li class="breadcrumb-item active"><a href="<?=base_url();?>/dashboard">Dashboard </a></li>
             </ol>
 
-             <?php  dep($_SESSION['userData']);        
+             <?php // dep($_SESSION['userData']);        
                    /* dep($_SESSION['permisos']);
                    dep($_SESSION['permisosMod']); */
             

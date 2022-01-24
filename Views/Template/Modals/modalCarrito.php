@@ -1,11 +1,14 @@
 <?php
 	$total=0;
 	if (isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito'])>0) {
+		/* dep($_SESSION['arrCarrito']); */
+		
 ?>
 <ul class="header-cart-wrapitem w-full">
 	<?php
 		foreach($_SESSION['arrCarrito'] as $producto )
 		{
+			$ruta=$producto['ruta'];
 			$total+=$producto['cantidad']*$producto['precio'];
 			$idProducto = openssl_encrypt($producto['idproducto'],METHODENCRIPT,KEY);	
 	?>
@@ -15,7 +18,7 @@
 			</div>
 
 			<div class="header-cart-item-txt p-t-8">
-				<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+				<a href="<?= base_url().'/tienda/producto/'.$producto['idproducto'].'/'.$ruta;?>" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
 				<?= $producto['producto'] ?>
 				</a>
 
