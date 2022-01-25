@@ -18,6 +18,11 @@
      }
      $total=$subtotal+$envio
 ?>
+<script src="https://www.paypal.com/sdk/js?client-id=AUmL2Fpwn11S6DV0_qx35vfZktP1d6S93t99eZOv7BczB6wCEj3k4-ow12kftOf_KaxLiwEI_kY-CoGI">
+</script>
+<script>
+    paypal.Buttons().render('#paypal-btn-container');
+</script>
 <br><br><br>
 <hr>
 <!-- breadcrumb -->
