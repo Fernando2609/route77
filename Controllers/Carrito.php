@@ -38,9 +38,9 @@
                 header("Location: ". base_url());
                 die();
             }
-            if (isset($_SESSION['login'])) {
+           /*  if (isset($_SESSION['login'])) {
                 $this->setDetalleTemp();
-            }
+            } */
       
             $data['page_tag']=NOMBRE_EMPESA.' - Procesar Pago';
             $data['page_title']='Procesar Pago';
@@ -53,14 +53,13 @@
             $this->views->getView($this,"procesarpago",$data);
         }
         
-        public function setDetalleTemp()
-        {
+      /*   public function setDetalleTemp(){
             $sid=session_id();
            $arrPedido=array('idcliente'=>$_SESSION['idUser'],
                             'idtransaccion'=> $sid,
                             'productos'=>$_SESSION['arrCarrito']);
             $this->insertDetalleTemp($arrPedido);
-        }
+        } */
     }
 
 ?>

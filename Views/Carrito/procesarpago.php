@@ -18,11 +18,55 @@
      }
      $total=$subtotal+$envio
 ?>
-<script src="https://www.paypal.com/sdk/js?client-id=AUmL2Fpwn11S6DV0_qx35vfZktP1d6S93t99eZOv7BczB6wCEj3k4-ow12kftOf_KaxLiwEI_kY-CoGI">
+<script src="https://www.paypal.com/sdk/js?client-id=<?=IDCLIENTE?>&currency=<?=CURRENCY?>">
 </script>
+<!--&currency=<?= CURRENCY ?>-->
 <script>
-    paypal.Buttons().render('#paypal-btn-container');
-</script>
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: <?= ($total/25); ?>
+                    },
+                    description:"Compra de articulos en <?= NOMBRE_EMPESA ?> por  <?=SMONEY.$total?>",
+                }]
+            })
+        },
+        onApprove: function(data, actions){
+            return actions.order.capture().then(function(details){
+                /* console.log(details); */
+                let base_url = "<?= base_url();?>";
+                let dir = document.querySelector("#txtDireccion").value;
+                let ciudad = document.querySelector("#txtCiudad").value; 
+                let inttipopago =1; 
+                let request = (window.XMLHttpRequest) ?
+                    new XMLHttpRequest():
+                    new ActiveXObject('Microsoft.XMLHTTP');
+                let ajaxUrl = base_url+'/Tienda/procesarVenta';
+                let formData = new FormData();
+                formData.append('direccion',dir);
+                formData.append('ciudad',ciudad);
+                formData.append('inttipopago',inttipopago);
+                formData.append('datapay',JSON.stringify(details));
+                request.open("POST",ajaxUrl,true);
+                request.send(formData);
+                request.onreadystatechange = function(){
+                    if(request.readyState != 4) return;
+                    if(request.status == 200){
+                        let objData = JSON.parse(request.responseText);
+                        if (objData.status){
+                            window.location = base_url+"/tienda/confirmarpedido/";
+                        }else{
+                            swal.fire("", objData.msg , "error");
+                        }
+                    }
+                } 
+
+                });
+        }
+    }).render('#paypal-btn-container');
+    </script>
 <br><br><br>
 <hr>
 <!-- breadcrumb -->
@@ -197,7 +241,7 @@
                             if (isset($_SESSION['login'])) {
                                 
                         ?>	
-                    <div id="divMetodoPago" class="notblock">
+                    <div id="divMetodoPago" class="notBlock">
 						<!-- <div id="divCondiciones">
 							<input type="checkbox" id="condiciones" >
 							<label for="condiciones"> Aceptar </label>
@@ -240,6 +284,8 @@
 										</select>
 										<div class="dropDownSelect2"></div>
 									</div>
+                                    <button type="submit" id='btnComprar' class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                                    Procesar Pedido</button><!-- <button type="submit" id="btnComprar" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Procesar pedido</button> -->
 									<br>								</div>
 								<div id="divpaypal">
 									<div>
@@ -250,8 +296,6 @@
 								</div>
 							</div>
                             <br>
-                            <button type="submit" id='btnComprar' class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-                                    Procesar Pedido</button><!-- <button type="submit" id="btnComprar" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Procesar pedido</button> -->
                                     	
 						<!-- </div> -->
 					</div> 	

@@ -23,11 +23,14 @@
     //Deliminadores decimal y millar Ej. 24,1989.00
 	const SPD = ".";
 	const SPM = ",";
-    
     //Simbolo de moneda
 	const SMONEY = "L";
-	const CURRENCY = "LPS";
-
+	const CURRENCY = "USD";
+	//API PAYPAL
+	//SANDBOX
+	const IDCLIENTE="AUmL2Fpwn11S6DV0_qx35vfZktP1d6S93t99eZOv7BczB6wCEj3k4-ow12kftOf_KaxLiwEI_kY-CoGI";
+	//LIVE
+	//const IDCLIENTE="ASkjioA1ZOr_UW-kFmU7JEFVoR2T046dXp7oLzqRZGhciXBRZ28VoyZlcbP1jvviBVRdH18HLfEC4nfv";
     //Zona horaria
 	date_default_timezone_set('America/Tegucigalpa');
 	

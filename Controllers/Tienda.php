@@ -390,6 +390,10 @@
             echo $htmlOptions;
             die();		
         }
+        public function procesarVenta(){
+            dep($_POST);
+            die();
+        }
 
     }
 
