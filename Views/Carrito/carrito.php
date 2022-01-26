@@ -2,7 +2,7 @@
     headerTienda($data);
 	//getModal('modalCarrito', $data);
    
-	
+	dep($_SESSION['arrCarrito']);
 ?>
 <br><br><br>
 <hr>

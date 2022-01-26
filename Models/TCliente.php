@@ -94,6 +94,29 @@ require_once("Libraries/Core/Mysql.php");
         return $request;
 
     }
+    public function insertPedido( string $idtransaccionpaypal,
+    string $datospaypal,
+    int $personaid,
+    string $monto,
+    int $tipopagoid,
+    string $direccionenvio,
+    string $status){
+    $this->con = new Mysql();
+    $query_insert = "INSERT INTO pedido (idusuario,monto, idTipoPago,direccion_envio,status,idtransaccionpaypal, datospaypal)
+    VALUES(?, ?, ?, ?, ?, ?, ?)";
+    $arrData = array($personaid,
+                    $monto,
+                    $tipopagoid,
+                    $direccionenvio,
+                    $status,
+                    $idtransaccionpaypal,
+                    $datospaypal);
+    $request_insert=$this->con->insert($query_insert, $arrData);
+    $return=$request_insert;
+    return $return;
+    }
+    
+
     public function insertDetalleTemp(array $pedido)
     {
         $this->con = new Mysql();
