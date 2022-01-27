@@ -94,8 +94,8 @@ require_once("Libraries/Core/Mysql.php");
         return $request;
 
     }
-    public function insertPedido( string $idtransaccionpaypal,
-    string $datospaypal,
+    public function insertPedido( string $idtransaccionpaypal=NULL,
+    string $datospaypal=NULL,
     int $personaid,
     string $monto,
     string $costoenvio,
