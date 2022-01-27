@@ -391,6 +391,7 @@
             die();		
         }
         public function procesarVenta(){
+         
             if ($_POST){
                 $idtransaccionpaypal=NULL;
                 $datospaypal=NULL;
@@ -405,7 +406,13 @@
                     foreach ($_SESSION['arrCarrito'] as $pro) {
                         $subtotal += $pro['cantidad']*$pro['precio'];
                     }
-                    $monto = formatMoney($subtotal + COSTOENVIO);
+                    //Validacion costo de envio
+                    if ($subtotal>=500) {
+                        $envio=0;
+                    }else if ($subtotal<500) {
+                        $envio=COSTOENVIO;
+                    }
+                    $monto = formatMoney($subtotal + $envio);
                     if(empty($_POST['datapay'])){
 
                     }else{
@@ -421,20 +428,14 @@
                                 if($monto==$totalPaypal){
                                     $status="Completo";
                                 }
-                                //
-                                if($monto>=500){
-                                    $costoenvio=0;
-                                }else{
-                                    $costoenvio=10;
-
-                                }
-                                $monto=$monto-$costoenvio;
-                                //
+                                //Sseparmos el envio del monto total
+                                $monto=$monto-$envio;
+                               
                                 $request_pedido=$this->insertPedido($idtransaccionpaypal,
                                 $datospaypal,
                                 $personaid,
                                 $monto,
-                                $costoenvio,
+                                $envio,
                                 $tipopagoid,
                                 $direccionenvio,
                                 $status);
