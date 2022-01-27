@@ -421,15 +421,39 @@
                                 if($monto==$totalPaypal){
                                     $status="Completo";
                                 }
+                                //
+                                if($monto>=500){
+                                    $costoenvio=0;
+                                }else{
+                                    $costoenvio=10;
+
+                                }
+                                $monto=$monto-$costoenvio;
+                                //
                                 $request_pedido=$this->insertPedido($idtransaccionpaypal,
                                 $datospaypal,
                                 $personaid,
                                 $monto,
+                                $costoenvio,
                                 $tipopagoid,
                                 $direccionenvio,
                                 $status);
                                 if ($request_pedido>0){
-                                    
+                                    foreach ($_SESSION['arrCarrito'] as $producto) {
+                                        $productoid = $producto['idproducto'];
+                                        $precio = $producto['precio'];
+                                        $cantidad = $producto['cantidad'];
+                                        $this->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
+                                    }
+                                    $orden=openssl_encrypt($request_pedido, METHODENCRIPT, KEY);
+                                    $transaccion = openssl_encrypt($idtransaccionpaypal, METHODENCRIPT,KEY);  
+                                    $arrResponse= array("status"=> true,
+                                    "orden"=>$orden,
+                                    "transaccion"=>$transaccion,
+                                    "msg"=>'Pedido Realizado');
+                                    $_SESSION['dataorden']=$arrResponse;     
+                                }else{
+                                    $arrResponse=array("status"=>false, "msg" =>'No es posible procesar el pedido.');
                                 }
 
                             }else{
