@@ -396,6 +396,18 @@ if(document.querySelector("#txtCiudad")){
 		fntViewPago();
 	});
 }
+if(document.querySelector("#condiciones")){
+	let opt = document.querySelector("#condiciones");
+	opt.addEventListener('click', function(){
+		let opcion = this.checked;
+		if(opcion){
+            document.querySelector('#optMetodoPago').classList.remove("notBlock");
+        }else{
+            document.querySelector('#optMetodoPago').classList.add("notBlock");
+
+        }
+	});
+}
 function fntViewPago(){
 	let direccion = document.querySelector("#txtDireccion").value;
 	let ciudad = document.querySelector("#txtCiudad").value;

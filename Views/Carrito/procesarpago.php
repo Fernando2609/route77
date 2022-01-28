@@ -67,6 +67,36 @@
         }
     }).render('#paypal-btn-container');
     </script>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalTerminos" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Términos y Condiciones</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p> La gracia de nuestro Señor Jesucristo sea con todos vosotros. Amén.</p>
+        <br>
+        <p> Apocalipsis 22:21</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 <br><br><br>
 <hr>
 <!-- breadcrumb -->
@@ -230,6 +260,7 @@
                                 Total:
                             </span>
                         </div>
+                        <hr>
 
                         <div class="size-209 p-t-1">
                             <span id="totalCompra" class="mtext-110 cl2">
@@ -242,15 +273,14 @@
                                 
                         ?>	
                     <div id="divMetodoPago" class="notBlock">
-						<!-- <div id="divCondiciones">
+						 <div id="divCondiciones">
 							<input type="checkbox" id="condiciones" >
 							<label for="condiciones"> Aceptar </label>
 							<a href="#" data-toggle="modal" data-target="#modalTerminos" > Términos y Condiciones </a>
 						</div>
-						<div id="optMetodoPago" class="notblock"> -->	
+						<div id="optMetodoPago" class="notblock">
 							<hr>
                            	
-                        	
 							<h4 class="mtext-109 cl2 p-b-30">
 								Método de pago
 							</h4>

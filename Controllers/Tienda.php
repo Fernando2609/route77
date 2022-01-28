@@ -409,7 +409,7 @@
                     if($subtotal>500){
                         $costo_envio=0;
                     }else{
-                        $costo_envio=10;
+                        $costo_envio=COSTOENVIO;
                     }
                     $monto = formatMoney($subtotal + $costo_envio);
                     //PAGO CONTRA ENTREGA
@@ -432,7 +432,7 @@
                                     }
                                     $infoOrden=$this->getPedido($request_pedido);
                                     $dataEmailOrden=array('asunto'=>"Se ha creado la orden No.".$request_pedido,
-                                                         'email'=>$_SESSION['userData']['email_user'],
+                                                         'email'=>$_SESSION['userData']['email'],
                                                          'emailCopia'=>EMAIL_PEDIDOS,
                                                             'pedido'=>$infoOrden);
                                     sendEmail($dataEmailOrden,"email_notificacion_orden");
@@ -478,6 +478,13 @@
                                         $cantidad = $producto['cantidad'];
                                         $this->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
                                     }
+                                    $infoOrden=$this->getPedido($request_pedido);
+                                    $dataEmailOrden = array('asunto' => "Se ha creado la orden No.".$request_pedido,
+													'email' => $_SESSION['userData']['email'], 
+													'emailCopia' => EMAIL_PEDIDOS,
+													'pedido' => $infoOrden );
+									sendEmail($dataEmailOrden,"email_notificacion_orden");
+
                                     $orden=openssl_encrypt($request_pedido, METHODENCRIPT, KEY);
                                     $transaccion = openssl_encrypt($idtransaccionpaypal, METHODENCRIPT,KEY);  
                                     $arrResponse= array("status"=> true,
