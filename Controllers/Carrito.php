@@ -30,25 +30,15 @@
         }
         public function procesarpago()
         {
-            /* dep($this->getCategoriasT(CAT_SLIDER));
-            exit; */
-            /* dep($this->selectProductos());
-            exit; */
             if (empty($_SESSION['arrCarrito'])) {
                 header("Location: ". base_url());
                 die();
             }
-           /*  if (isset($_SESSION['login'])) {
-                $this->setDetalleTemp();
-            } */
-      
+
             $data['page_tag']=NOMBRE_EMPESA.' - Procesar Pago';
             $data['page_title']='Procesar Pago';
             $data['page_name']='procesarpago';
-            /* $data['slider'] = $this->getCategoriasT(CAT_SLIDER);
-            $data['banner'] = $this->getCategoriasT(CAT_BANNER); */
             $data['categorias'] = $this->getCategorias();
-            /* $data['productos'] = $this->getProductosT(); */
             $data['tiposPago']= $this->getTiposPagoT();
             $this->views->getView($this,"procesarpago",$data);
         }

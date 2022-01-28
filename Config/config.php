@@ -28,17 +28,22 @@
 	const CURRENCY = "USD";
 	//API PAYPAL
 	//SANDBOX
-	const IDCLIENTE="AUmL2Fpwn11S6DV0_qx35vfZktP1d6S93t99eZOv7BczB6wCEj3k4-ow12kftOf_KaxLiwEI_kY-CoGI";
+	const IDCLIENTE="AW-GazKFas6VozK_zb29ZqBhrkbW6XZQ5_NnOuTQljqniRrlSRM-Q89rMIq2Iq20EEzzvY8WDTL0M79C";
 	//LIVE
-	//const IDCLIENTE="ASkjioA1ZOr_UW-kFmU7JEFVoR2T046dXp7oLzqRZGhciXBRZ28VoyZlcbP1jvviBVRdH18HLfEC4nfv";
+	//const IDCLIENTE="AebH60XEhltFQq9Wz-1MT50V3UQ3my1nQnlZ-VZmlRsY039aehjSAAjo233dtS49bBtWf2ulHfdKkcM9";
     //Zona horaria
 	date_default_timezone_set('America/Tegucigalpa');
 	
 	//Datos envio de correo
 	const NOMBRE_REMITENTE = "Route 77";
-	const EMAIL_REMITENTE = "estacionroute77@gmail.com";
+	const EMAIL_REMITENTE = "Estacionroutehn@gmail.com";
 	const NOMBRE_EMPESA = "Route 77";
 	const WEB_EMPRESA = "http://localhost:8080/route77";
+//DATOS EMPRESA
+	const DIRECCION = "Col. Los Laureles";
+	const TELEMPRESA= "+504 9643-2601";
+	const EMAIL_EMPRESA = "Estacionroutehn@gmail.com";
+	const EMAIL_PEDIDOS = "Estacionroutehn@gmail.com";
 
 	const CAT_SLIDER = "1,2,3,7,6";
 	const CAT_BANNER = "4,5,8";

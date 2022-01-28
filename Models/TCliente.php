@@ -172,5 +172,49 @@ require_once("Libraries/Core/Mysql.php");
 			}
 		}
     }
+    
+
+    public function getPedido(int $idpedido){
+		$this->con = new Mysql();
+		$request = array();
+		$sql = "SELECT p.idpedido,
+							p.referenciacobro,
+							p.idtransaccionpaypal,
+							p.idusuario,
+							p.fecha,
+							p.costoenvio,
+							p.monto,
+							p.idTipoPago,
+							t.tipoPago,
+							p.direccion_envio,
+							p.status
+					FROM pedido as p
+					INNER JOIN tipo_pago t
+					ON p.idTipoPago= t.idTipoPago
+					WHERE p.idpedido =  $idpedido";
+		$requestPedido = $this->con->select($sql);
+		if(count($requestPedido) > 0){
+			$sql_detalle = "SELECT p.idproducto,
+											p.nombre as producto,
+											d.precio,
+											d.cantidad
+									FROM detalle_pedido d
+									INNER JOIN producto p
+									ON d.productoid = p.idproducto 
+									WHERE d.pedidoid = $idpedido
+									";
+			$requestProductos = $this->con->select_all($sql_detalle);
+			$request = array('orden' => $requestPedido,
+							'detalle' => $requestProductos
+							);
+		}
+		return $request;
+	}
+
+
+
+
+
+
    }
 ?>

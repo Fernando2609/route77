@@ -400,25 +400,26 @@
                 $direccionenvio=strClean($_POST['direccion']).', '.strClean($_POST['ciudad']);
                 $status = "Pendiente";
                 $subtotal=0;
+                //$costo_envio=COSTOENVIO;
 
                 if(!empty($_SESSION['arrCarrito'])){
                     foreach ($_SESSION['arrCarrito'] as $pro) {
                         $subtotal += $pro['cantidad']*$pro['precio'];
                     }
-                    //Validacion costo de envio
-                    if ($subtotal>=500) {
-                        $envio=0;
-                    }else if ($subtotal<500) {
-                        $envio=COSTOENVIO;
+                    if($subtotal>500){
+                        $costo_envio=0;
+                    }else{
+                        $costo_envio=10;
                     }
-                    $monto = formatMoney($subtotal + $envio);
+                    $monto = formatMoney($subtotal + $costo_envio);
+                    //PAGO CONTRA ENTREGA
                     if(empty($_POST['datapay'])){
-                       
+                       //CREAR PEDIDO
                         $request_pedido=$this->insertPedido($idtransaccionpaypal,
                                 $datospaypal,
                                 $personaid,
                                 $monto,
-                                $envio,
+                                $costo_envio,                                
                                 $tipopagoid,
                                 $direccionenvio,
                                 $status);
@@ -429,18 +430,26 @@
                                         $cantidad = $producto['cantidad'];
                                         $this->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
                                     }
+                                    $infoOrden=$this->getPedido($request_pedido);
+                                    $dataEmailOrden=array('asunto'=>"Se ha creado la orden No.".$request_pedido,
+                                                         'email'=>$_SESSION['userData']['email_user'],
+                                                         'emailCopia'=>EMAIL_PEDIDOS,
+                                                            'pedido'=>$infoOrden);
+                                    sendEmail($dataEmailOrden,"email_notificacion_orden");
+                                   
                                     $orden=openssl_encrypt($request_pedido, METHODENCRIPT, KEY);
                                     $transaccion = openssl_encrypt($idtransaccionpaypal, METHODENCRIPT,KEY);  
                                     $arrResponse= array("status"=> true,
-                                    "orden"=>$orden,
-                                    "transaccion"=>$transaccion,
-                                    "msg"=>'Pedido Realizado');
+                                                        "orden"=>$orden,
+                                                        "transaccion"=>$transaccion,
+                                                        "msg"=>'Pedido Realizado');
                                     $_SESSION['dataorden']=$arrResponse;    
                                      unset($_SESSION['arrCarrito']);
                                      session_regenerate_id(true);
                                     }
                                 
                     }else{
+                        //PAGO PAYPAL
                         $jsonPaypal=$_POST['datapay'];
                         $objPaypal=json_decode($jsonPaypal);
                         $status="Aprobado";
@@ -453,14 +462,12 @@
                                 if($monto==$totalPaypal){
                                     $status="Completo";
                                 }
-                                //Sseparmos el envio del monto total
-                                $monto=$monto-$envio;
                                
                                 $request_pedido=$this->insertPedido($idtransaccionpaypal,
                                 $datospaypal,
                                 $personaid,
                                 $monto,
-                                $envio,
+                                $costo_envio,
                                 $tipopagoid,
                                 $direccionenvio,
                                 $status);
