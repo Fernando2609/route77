@@ -46,7 +46,12 @@
           Página de inicio
         </div>
         <!-- /.card-body -->
-        
+        <?php
+          $requestApi = CurlConnectionGet(URLPAYPAL."/v2/checkout/orders/2K531646036585830","application/json",getTokenPaypal());
+        dep($requestApi); 
+        $requestPost = CurlConnectionPost(URLPAYPAL."/v2/payments/captures/9EV2586557328140W/refund","application/json",getTokenPaypal());
+        dep($requestPost); 
+        ?>
         
       </div>
       <!-- /.card -->

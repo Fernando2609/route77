@@ -401,11 +401,10 @@ if(document.querySelector("#condiciones")){
 	opt.addEventListener('click', function(){
 		let opcion = this.checked;
 		if(opcion){
-            document.querySelector('#optMetodoPago').classList.remove("notBlock");
-        }else{
-            document.querySelector('#optMetodoPago').classList.add("notBlock");
-
-        }
+			document.querySelector('#optMetodoPago').classList.remove("notBlock");
+		}else{
+			document.querySelector('#optMetodoPago').classList.add("notBlock");
+		}
 	});
 }
 function fntViewPago(){

@@ -28,9 +28,13 @@
 	const CURRENCY = "USD";
 	//API PAYPAL
 	//SANDBOX
+	const URLPAYPAL= "https://api-m.sandbox.paypal.com";
 	const IDCLIENTE="AW-GazKFas6VozK_zb29ZqBhrkbW6XZQ5_NnOuTQljqniRrlSRM-Q89rMIq2Iq20EEzzvY8WDTL0M79C";
+	const SECRET="EF8AzlNNx_MTenCKea4d9NY2H2M8nupC9XoU3NAIxRuTwsZS86-JpgpZN71rM1O_AixNrMY-TmbnahwK";
 	//LIVE
+	//const URLPAYPAL= "https://api-m.paypal.com";
 	//const IDCLIENTE="AebH60XEhltFQq9Wz-1MT50V3UQ3my1nQnlZ-VZmlRsY039aehjSAAjo233dtS49bBtWf2ulHfdKkcM9";
+	//const SECRET="EMcfARjqBsEbmiOyhEd6OfeTNC32jzMNZ3oinVbQcDJcugTC3mRZE6UlmMbTBzt4KwbSKCpyqBM9d8wE";
     //Zona horaria
 	date_default_timezone_set('America/Tegucigalpa');
 	
