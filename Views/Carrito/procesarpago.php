@@ -71,7 +71,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modalTerminos" tabindex="-1" aria-hidden="true">
+<div class="modal modal-tienda fade" id="modalTerminos" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">

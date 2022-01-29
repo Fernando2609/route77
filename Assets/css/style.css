@@ -536,6 +536,6 @@ transform: scale(1.5) translate(-5px, 5px);
 #divCondiciones label{
   margin-bottom: 0;
 }
-.modal{
+.modal.modal-tienda{
   z-index: 9999;
 }
