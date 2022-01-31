@@ -27,7 +27,10 @@
 	const SMONEY = "L";
 	const CURRENCY = "USD";
 	//API PAYPAL
+
 	//SANDBOX
+	//Cuenta Prueba: sb-lrh2t8250598@personal.example.com;
+	//contraseña Prueba:
 	const URLPAYPAL= "https://api-m.sandbox.paypal.com";
 	const IDCLIENTE="AW-GazKFas6VozK_zb29ZqBhrkbW6XZQ5_NnOuTQljqniRrlSRM-Q89rMIq2Iq20EEzzvY8WDTL0M79C";
 	const SECRET="EF8AzlNNx_MTenCKea4d9NY2H2M8nupC9XoU3NAIxRuTwsZS86-JpgpZN71rM1O_AixNrMY-TmbnahwK";

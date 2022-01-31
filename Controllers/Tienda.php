@@ -428,7 +428,11 @@
                                         $productoid = $producto['idproducto'];
                                         $precio = $producto['precio'];
                                         $cantidad = $producto['cantidad'];
+                                        $stock = $producto['stock'];
+                                        $nuevoStock=$stock-$cantidad;
                                         $this->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
+                                        //Disminuir stock
+                                         $this->updateStock($productoid,$nuevoStock); 
                                     }
                                     $infoOrden=$this->getPedido($request_pedido);
                                     $dataEmailOrden=array('asunto'=>"Se ha creado la orden No.".$request_pedido,
@@ -476,7 +480,11 @@
                                         $productoid = $producto['idproducto'];
                                         $precio = $producto['precio'];
                                         $cantidad = $producto['cantidad'];
+                                        $stock = $producto['stock'];
+                                        $nuevoStock=$stock-$cantidad;
                                         $this->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
+                                        //Disminuir stock
+                                        $this->updateStock($productoid,$nuevoStock); 
                                     }
                                     $infoOrden=$this->getPedido($request_pedido);
                                     $dataEmailOrden = array('asunto' => "Se ha creado la orden No.".$request_pedido,

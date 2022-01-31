@@ -110,25 +110,22 @@
 							
 							<li >
 								<a class="js-show-categoria" href="javascript:void(0);">Categorias <ion-icon style="font-size: 12px;" name="pricetags"></ion-icon></a>
-								<ul class="sub-menu" >
-									<!-- <div style="display: flex;"> -->
+								<!--<ul class="sub-menu" >
+									 <div style="display: flex;"> -->
 								
 									<?php
-										for ($i=0; $i < count($arrCategorias); $i++) { 
+										//for ($i=0; $i < count($arrCategorias); $i++) { 
 									
 									?>
 									
-										<li><a href="index.html"><?= $arrCategorias[$i]['nombre']?></a></li>
+										<!-- <li><a href="index.html"><?= $arrCategorias[$i]['nombre']?></a></li> -->
 										
-									<?php
-									
-										}
-									?>
+									<?php //}?>
 								
 									
 									<!-- 	
-									</div> -->
-								</ul>
+									</div> 
+								</ul>-->
                				 </li>
 
 							<li>

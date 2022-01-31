@@ -539,3 +539,8 @@ transform: scale(1.5) translate(-5px, 5px);
 .modal.modal-tienda{
   z-index: 9999;
 }
+.pAgotado:hover{
+  border-color: #ff3f14;
+  background-color: #ff3f14;
+  color: #fff;
+}

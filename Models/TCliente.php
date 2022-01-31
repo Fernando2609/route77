@@ -17,6 +17,10 @@ require_once("Libraries/Core/Mysql.php");
       private $intEstadoC;
       private $intSucursal; 
      /*  private $strFechaNacimiento; */
+
+     //Stock
+     private $productoid;
+      private $stock; 
      
     public function insertCliente(string $nombre, string $apellido, int $telefono, string $email, string $password, int $tipoid, int $nacionalidad, int $genero, int $estadoC, int $sucursal, string $fechaNacimeinto ){
         $this->con = new Mysql();
@@ -130,6 +134,25 @@ require_once("Libraries/Core/Mysql.php");
 	    $return = $request_insert;
 	    return $return;
 	}
+    public function updateStock(int $productoid, int $stock){
+
+        $this->con = new Mysql();
+        $this->productoid=$productoid;
+        $this->stock=$stock;
+        /* $sql = "SELECT * FROM categoria WHERE nombre = '{$this->strCategoria}' AND idcategoria != $this->intIdcategoria";
+        $request = $this->select_all($sql); */
+
+        if(empty($request))
+        {
+            $sql = "UPDATE producto SET stock = ? WHERE idproducto = $this->productoid "; 	
+            $arrData = array($this->stock);
+            $request = $this->con->update($sql,$arrData);
+            
+        }else{
+            $request = false;
+        }
+        return $request;
+    }
 
 
     public function insertDetalleTemp(array $pedido)

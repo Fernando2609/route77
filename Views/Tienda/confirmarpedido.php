@@ -1,7 +1,7 @@
 <?php 
 headerTienda($data);
  ?>
-<br><br><br>
+<br><br><br><hr>
 <div class="jumbotron text-center">
   <h1 class="display-4">¡Gracias por tu compra!</h1>
   <p class="lead">Tu pedido fue procesado con éxito.</p>
