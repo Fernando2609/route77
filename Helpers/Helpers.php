@@ -327,83 +327,54 @@ function deleteFile(string $name){
    }
 
    function CurlConnectionGet(string $ruta, string $contentType = null, string $token){
-    $content_type = $contentType != null ? $contentType : "application/x-www-form-urlencoded";
-     if($token != null){ 
-        $arrHeader = array('Content-Type:'.$content_type,
-                        'Authorization: Bearer '.$token);
-     }else{ 
-        $arrHeader = array('Content-Type:'.$content_type);
-     } 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $ruta);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
-    $result = curl_exec($ch);
-    $err = curl_error($ch);
-    curl_close($ch);
-    if($err){
-        $request = "CURL Error #:" . $err;
-    }else{
-        $request = json_decode($result);
+        $content_type = $contentType != null ? $contentType : "application/x-www-form-urlencoded";
+        if($token != null){ 
+            $arrHeader = array('Content-Type:'.$content_type,
+                            'Authorization: Bearer '.$token);
+        }else{ 
+            $arrHeader = array('Content-Type:'.$content_type);
+        } 
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $ruta);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        if($err){
+            $request = "CURL Error #:" . $err;
+        }else{
+            $request = json_decode($result);
+        }
+        return $request;
     }
-    return $request;
-}
-function CurlConnectionPost(string $ruta, string $contentType = null, string $token){
-    $content_type = $contentType != null ? $contentType : "application/x-www-form-urlencoded";
-     if($token != null){ 
-        $arrHeader = array('Content-Type:'.$content_type,
-                        'Authorization: Bearer '.$token);
-     }else{ 
-        $arrHeader = array('Content-Type:'.$content_type);
-     } 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $ruta);
-    curl_setopt($ch, CURLOPT_POST, TRUE); 
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
-    $result = curl_exec($ch);
-    $err = curl_error($ch);
-    curl_close($ch);
-    if($err){
-        $request = "CURL Error #:" . $err;
-    }else{
-        $request = json_decode($result);
+    function CurlConnectionPost(string $ruta, string $contentType = null, string $token){
+        $content_type = $contentType != null ? $contentType : "application/x-www-form-urlencoded";
+        if($token != null){ 
+            $arrHeader = array('Content-Type:'.$content_type,
+                            'Authorization: Bearer '.$token);
+        }else{ 
+            $arrHeader = array('Content-Type:'.$content_type);
+        } 
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $ruta);
+        curl_setopt($ch, CURLOPT_POST, TRUE); 
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
+        $result = curl_exec($ch);
+        $err = curl_error($ch);
+        curl_close($ch);
+        if($err){
+            $request = "CURL Error #:" . $err;
+        }else{
+            $request = json_decode($result);
+        }
+        return $request;
     }
-    return $request;
-}
 
-function CurlMoney(){
-    //$content_type = $contentType != null ? $contentType : "application/x-www-form-urlencoded";
-    $url = "https://api.m3o.com/v1/currency/Convert";
-        $arrHeader = array("Content-Type: application/json",
-        "Authorization: Bearer YWRlMjNmYTctNzgyYi00MzIxLTk5ZTAtMTI1YjdhMjNjM2I3",);
-     
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
-    $data = <<<DATA
-    {
-      "from": "USD",
-      "to": "HNL",
-      "amount": 1
-    }
-    DATA;
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    $result = curl_exec($ch);
-    $err = curl_error($ch);
-    curl_close($ch);
-    if($err){
-        $request = "CURL Error #:" . $err;
-    }else{
-        $request = json_decode($result);
-    }
-    return $request;
-}
-
+/*  */
 
     
 ?>

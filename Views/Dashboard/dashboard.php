@@ -19,37 +19,7 @@
                    dep($_SESSION['permisosMod']); */
                     //dep(nombreEmpresa()['nombreEmpresa']);
 
-                    /* $url = "https://api.m3o.com/v1/currency/Convert";
-
-                    $curl = curl_init($url);
-                    curl_setopt($curl, CURLOPT_URL, $url);
-                    //curl_setopt($curl, CURLOPT_POST, true);
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                     
-                    $headers = array(
-                       "Content-Type: application/json",
-                       "Authorization: Bearer YWRlMjNmYTctNzgyYi00MzIxLTk5ZTAtMTI1YjdhMjNjM2I3",
-                    );
-                    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-                    
-                    $data = <<<DATA
-                    {
-                      "from": "USD",
-                      "to": "HNL",
-                      "amount": 1
-                    }
-                    DATA;
-                    
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                    
-                    //for debug only!
-                    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-                    
-                    $resp = curl_exec($curl);
-                    curl_close($curl);
-                    
-                    dep($resp);    */   
                    ?>
 
           </div>
@@ -84,10 +54,7 @@
         $requestPost = CurlConnectionPost(URLPAYPAL."/v2/payments/captures/9EV2586557328140W/refund","application/json",getTokenPaypal());
         dep($requestPost); 
 
-        //$money=CurlMoney();
-        //$money2=$money->amount;
-        //dep($money2);
-
+      
         ?>
         
       </div>
