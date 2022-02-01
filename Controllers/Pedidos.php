@@ -76,13 +76,12 @@
         if ($_SESSION['userData']['Id_Rol'] == RCLIENTES) {
             $idpersona = $_SESSION['userData']['idpersona'];
         }
-        
-        $pedido = $this->model->selectPedido($idpedido,$idpersona);
-        //dep($pedido);
+
 
         $data['page_tag'] = "Pedido - Route 77";
         $data['page_title'] = "PEDIDO <small> Route 77</small> ";
         $data['page_name'] = "pedido";
+        $data['arrPedido'] = $this->model->selectPedido($idpedido, $idpersona);
         $this->views->getView($this, "orden", $data);
 
         }

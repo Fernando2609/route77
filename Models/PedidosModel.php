@@ -27,6 +27,10 @@
                     return $request;
         }
          public function selectPedido(int $idpedido,$idpersona = NULL){
+        $busqueda = "";
+        if ($idpersona != NULL) {
+            $busqueda = " AND p.personaid = ".$idpersona;
+        }
         $request = array();
         $sql = "SELECT p.idpedido,
 							p.referenciacobro,
@@ -42,7 +46,7 @@
 					FROM pedido as p
 					INNER JOIN tipo_pago t
 					ON p.idTipoPago= t.idTipoPago
-					WHERE p.idpedido =  $idpedido";
+					WHERE p.idpedido =  $idpedido ".$busqueda;
                     $requestPedido = $this->select($sql);
                     if (!empty($requestPedido)) {
                         $idpersona = $requestPedido['idusuario'];
@@ -53,7 +57,20 @@
                                             telefono
 									FROM usuarios WHERE idUsuario = $idpersona ";
                         $requestcliente = $this->select($sql_cliente);
+                        $sql_detalle = "SELECT p.idproducto,
+											p.nombre as producto,
+											d.precio,
+											d.cantidad
+									FROM detalle_pedido d
+									INNER JOIN producto p
+									ON d.productoid = p.idproducto 
+									WHERE d.pedidoid = $idpedido";
+                        $requestProductos = $this->select_all($sql_detalle);
+                        $request = array('cliente'=> $requestcliente,
+                                        'orden'=> $requestPedido,
+                                        'detalle'=> $requestProductos);
                     }
+                    return $request;
         }
   }
 ?>
