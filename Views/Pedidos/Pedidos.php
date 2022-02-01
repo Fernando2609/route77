@@ -1,9 +1,8 @@
 <?php
 headerAdmin($data);
 //getModal('modalPedidos', $data);
-
-
 ?>
+
 <!-- Content Wrapper. Contains page content -- Div Principal -->
 <div class="content-wrapper">
     <!-- Content Header (Sección de Encabezado) -->

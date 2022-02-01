@@ -8,7 +8,7 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(5);
+            getPermisos(MPEDIDOS);
         }
         
         public function Pedidos()
@@ -26,14 +26,18 @@
 
         public function getPedidos(){
         if ($_SESSION['permisosMod']['r']) {
-            $arrData = $this->model->selectPedidos();
+            $idpersona = "";
+            if( $_SESSION['userData']['Id_Rol'] == RCLIENTES ) {
+                $idpersona = $_SESSION['userData']['idUsuario'];
+            }
+            $arrData = $this->model->selectPedidos($idpersona);
 
             for ($i = 0; $i < count($arrData); $i++) {
                 $btnView = '';
                 $btnEdit = '';
                 $btnDelete = '';
 
-                $arrData[$i]['transaccion'] = $arrData[$i]['refereciacobro'];
+                $arrData[$i]['transaccion'] = $arrData[$i]['referenciacobro'];
                 if ($arrData[$i]['idtransaccionpaypal'] != "") {
                     $arrData[$i]['transaccion'] = $arrData[$i]['idtransaccionpaypal'];
                 }
@@ -42,7 +46,7 @@
 
                 if ($_SESSION['permisosMod']['r']) {
 
-                    $btnView .= ' <a href="'.base_url().'/pedidos/orden/'.$arrData[$i]['idpedido'].'" target="_balnck" class="btn btn-info btn-sm"> <i class="far fa-eye"></i> </a>
+                    $btnView .= ' <a title= "Ver Detalle" href="'.base_url().'/pedidos/orden/'.$arrData[$i]['idpedido'].'" target="_balnck" class="btn btn-info btn-sm"> <i class="far fa-eye"></i> </a>
                     <button class="btn btn-danger btn-sm" onClick="fntViewDPF('.$arrData[$i]['idpedido'].')" title="Generar PDF"><i class="fas fa-file-pdf"></i></button> ';
                     
                     if ($arrData[$i]['idtipopago'] == 1) {
@@ -63,5 +67,25 @@
         }
         die();
         }
+
+        public function orden(int $idpedido){
+        if (empty($_SESSION['permisosMod']['r'])) {
+            header('Location: ' . base_url() . '/dashboard');
+        }
+        $idpersona = "";
+        if ($_SESSION['userData']['Id_Rol'] == RCLIENTES) {
+            $idpersona = $_SESSION['userData']['idpersona'];
+        }
+        
+        $pedido = $this->model->selectPedido($idpedido,$idpersona);
+        dep($pedido);
+
+        $data['page_tag'] = "Pedido - Route 77";
+        $data['page_title'] = "PEDIDO <small> Route 77</small> ";
+        $data['page_name'] = "pedido";
+        $this->views->getView($this, "orden", $data);
+
+        }
+
     }
 ?>

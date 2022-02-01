@@ -9,7 +9,7 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(3);
+            getPermisos(MCLIENTES);
         }
         
         public function Clientes()
