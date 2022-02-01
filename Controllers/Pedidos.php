@@ -78,7 +78,7 @@
         }
         
         $pedido = $this->model->selectPedido($idpedido,$idpersona);
-        dep($pedido);
+        //dep($pedido);
 
         $data['page_tag'] = "Pedido - Route 77";
         $data['page_title'] = "PEDIDO <small> Route 77</small> ";
