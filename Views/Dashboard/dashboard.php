@@ -18,6 +18,11 @@
                    /* dep($_SESSION['permisos']);
                    dep($_SESSION['permisosMod']); */
                     //dep(nombreEmpresa()['nombreEmpresa']);
+                  
+                 
+
+                  //uncomment to test
+            
 
                     
                    ?>

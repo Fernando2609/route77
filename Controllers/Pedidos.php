@@ -79,9 +79,9 @@
 
 
         $data['page_tag'] = "Pedido - Route 77";
-        $data['page_title'] = "PEDIDO <small> Route 77</small> ";
         $data['page_name'] = "pedido";
         $data['arrPedido'] = $this->model->selectPedido($idpedido, $idpersona);
+        $data['page_title'] = "PEDIDO #".$data['arrPedido']['orden']['idpedido'];
         $this->views->getView($this, "orden", $data);
 
         }

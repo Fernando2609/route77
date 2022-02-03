@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1> <?= $data['page_title'] ?></h1>
+                <h1><i class="fa fa-file-text-o"></i> <?= $data['page_title'] ?></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -42,8 +42,8 @@
                                 <div class="col-12">
                                     <h4>
                                         <!-- Acá empieza la orden -->
-                                        <i class="fas fa-globe"></i> Estación Route 77
-                                        <small class="float-right">Fecha: <?= $orden['fecha'] ?></small>
+                                   <img width="42" src="<?= media(); ?>/images//logo3.ico" alt="" srcset="">Estación Route 77
+                                    <small class="float-right">Fecha: <?= $orden['fecha'] ?></small>
                                     </h4>
                                 </div>
                                 <!-- /.col -->

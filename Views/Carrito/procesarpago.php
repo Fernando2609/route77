@@ -16,7 +16,12 @@
         /*  echo SMONEY.formatMoney($envio);   */  
         }
      }
-     $total=$subtotal+$envio
+     $total=$subtotal+$envio;
+     $totalPaypal=convertCurrency($total, 'HNL', 'USD');
+     
+     /* dep($conversion);
+     dep($totalPaypal); */
+
 ?>
 <script src="https://www.paypal.com/sdk/js?client-id=<?=IDCLIENTE?>&currency=<?=CURRENCY?>">
 </script>
@@ -27,7 +32,7 @@
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: <?= ($total/25); ?>
+                        value: <?= ($totalPaypal); ?>
                     },
                     description:"Compra de articulos en <?= NOMBRE_EMPESA ?> por  <?=SMONEY.$total?>",
                 }]

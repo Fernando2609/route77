@@ -406,12 +406,15 @@
                     foreach ($_SESSION['arrCarrito'] as $pro) {
                         $subtotal += $pro['cantidad']*$pro['precio'];
                     }
-                    if($subtotal>500){
+                    if($subtotal>=500){
                         $costo_envio=0;
                     }else{
                         $costo_envio=COSTOENVIO;
                     }
                     $monto = formatMoney($subtotal + $costo_envio);
+                    /* dep($monto);
+                    dep($costo_envio);
+                    die(); */
                     //PAGO CONTRA ENTREGA
                     if(empty($_POST['datapay'])){
                        //CREAR PEDIDO
