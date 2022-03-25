@@ -59,6 +59,7 @@
     //Envio de correos
     function sendEmail($data,$template)
     {
+    
         if(ENVIRONMENT == 1){
             $asunto = $data['asunto'];
             $emailDestino = $data['email'];
@@ -155,7 +156,8 @@
     function getPermisos(int $idmodulo){
         require_once ("Models/permisosModel.php");
         $objPermisos = new PermisosModel();
-        $idrol = $_SESSION['userData']['Id_Rol'];
+        //$idrol = $_SESSION['userData']['Id_Rol'];
+        $idrol = $_SESSION['userData']['COD_ROL'];
         $arrPermisos = $objPermisos->permisosModulo($idrol);
         $permisos = '';
         $PermisosMod = '';

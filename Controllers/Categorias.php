@@ -37,6 +37,7 @@
                     $intStatus = intval($_POST['listStatus']);
                     $ruta = strtolower(clear_cadena($strCategoria));
 					$ruta = str_replace(" ","-",$ruta);
+                    $user=$_SESSION['idUser'];
                     //Imagen
 
 					$foto   	 	= $_FILES['foto'];
@@ -54,8 +55,11 @@
                 if ($intIdcategoria==0) {
                     //Si no hay idCategoria se crea uno nuevo registro
                     if($_SESSION['permisosMod']['w']){
-                    $request_Categoria = $this->model->insertCategoria($strCategoria, $strDescripcion,$imgPortada,$ruta, $intStatus);
+                    
+                   
+                    $request_Categoria = $this->model->insertCategoria($strCategoria, $strDescripcion,$imgPortada,$ruta, $intStatus,$user);
                     $option=1;
+                   
                      }
                 }else{
                     //Si hay idCategoria se actualiza el registro
@@ -65,10 +69,12 @@
                             $imgPortada = $_POST['foto_actual'];
                         }
                          }
-                   $request_Categoria = $this->model->updateCategoria($intIdcategoria,$strCategoria, $strDescripcion,$imgPortada,$ruta,$intStatus);
+                   $request_Categoria = $this->model->updateCategoria($intIdcategoria,$strCategoria, $strDescripcion,$imgPortada,$ruta,$intStatus,$user);
                     $option=2;
+                    
                      }
                 }
+                
                 if($request_Categoria > 0 )
                 {
                 if($option == 1)
@@ -105,31 +111,34 @@
         }
         public function getCategorias()
 	{
+     /* dep($_SESSION['permisosMod']);
+     exit; */
 		if($_SESSION['permisosMod']['r']){
 			$arrData = $this->model->selectCategorias();
-            
+                
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
 				$btnDelete = '';
                 
-                if($arrData[$i]['status'] == 1)
+                if($arrData[$i]['COD_STATUS'] == 1)
                 {
                     $arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';
                 }else{
                     $arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
                 }
 				if($_SESSION['permisosMod']['r']){
-					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcategoria'].')" title="Ver Categoría"><i class="far fa-eye"></i></button>';
+					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['COD_CATEGORIA'].')" title="Ver Categoría"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-warning  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idcategoria'].')" title="Editar Categoría"><i class="fas fa-pencil-alt"></i></button>';
+					$btnEdit = '<button class="btn btn-warning  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['COD_CATEGORIA'].')" title="Editar Categoría"><i class="fas fa-pencil-alt"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){	
-					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcategoria'].')" title="Eliminar Categoría"><i class="far fa-trash-alt"></i></button>';
+					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['COD_CATEGORIA'].')" title="Eliminar Categoría"><i class="far fa-trash-alt"></i></button>';
 				}
 				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 			}
+            
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}
 		die();
@@ -141,14 +150,15 @@
 				if($intIdcategoria > 0)
 				{
 					$arrData = $this->model->selectCategoria($intIdcategoria);
-                   
+                  
 					if(empty($arrData))
 					{
 						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
 					}else{
-						$arrData['url_portada'] = media().'/images/uploads/'.$arrData['portada'];
+						$arrData['url_portada'] = media().'/images/uploads/'.$arrData['PORTADA'];
 						$arrResponse = array('status' => true, 'data' => $arrData);
 					}
+                 
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}
 			}
@@ -160,9 +170,11 @@
     public function delcategoria()
     {
         if($_POST){
+            
             if($_SESSION['permisosMod']['d']){
                 $intIdcategoria = intval($_POST['idcategoria']);
                 $requestDelete = $this->model->deleteCategoria($intIdcategoria);
+                
                 if($requestDelete == true)
                 {
                     $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la categoría');
@@ -171,6 +183,8 @@
                 }else{
                     $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la cateogoría.');
                 }
+              
+               
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             }
          }

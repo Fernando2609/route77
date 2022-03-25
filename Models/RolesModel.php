@@ -16,10 +16,10 @@
         {
 			$whereAdmin = "";
 			if($_SESSION['idUser'] != 1){
-				$whereAdmin = " and Id_Rol != 1 ";
+				$whereAdmin = " and COD_ROL != 1 ";
 			}
 			// Extraer roles
-			$sql = "SELECT * FROM roles WHERE status != 0".$whereAdmin;
+			$sql = "SELECT * FROM tbl_roles WHERE COD_STATUS != 0".$whereAdmin;
 			$request = $this->select_all($sql); 
 			return $request;
 
@@ -119,7 +119,7 @@
 		public function SelectGenero()
 		{
 			// Extraer Genero
-			$sql = "SELECT * FROM genero";
+			$sql = "SELECT * FROM tbl_genero";
 			$request = $this->select_all($sql); 
 			return $request;
 
@@ -137,7 +137,7 @@
 		  public function selectSucursal()
 		  {
 			  // Extraer estado Civil
-			  $sql = "SELECT * FROM sucursal";
+			  $sql = "SELECT * FROM tbl_sucursal";
 			  $request = $this->select_all($sql); 
 			  return $request;
   

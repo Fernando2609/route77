@@ -26,8 +26,9 @@
 
         public function setUsuario()
         {
+        
             if ($_POST) {
-                if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listRolid']) || empty($_POST['listStatus']) || empty($_POST['listNacionalidad']) || empty($_POST['listGenero']) )
+                if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listRolid']) || empty($_POST['listStatus']) ||  empty($_POST['listGenero']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{ 
@@ -39,11 +40,10 @@
 					$strEmail = strtolower(strClean($_POST['txtEmail']));
 					$intTipoId = intval(strClean($_POST['listRolid']));
 					$intStatus = intval(strClean($_POST['listStatus']));
-                    $intNacionalidad = intval(strClean($_POST['listNacionalidad']));
                     $intGenero = intval(strClean($_POST['listGenero']));
-                    $intEstadoC = intval(strClean($_POST['listEstadoC']));
                     $intSucursal = intval(strClean($_POST['listSucursal']));
-                    $strFechaNacimiento = strClean($_POST['fechaNacimiento']);
+                    $user=intval($_SESSION['idUser']);
+                    
                     $request_user="";
                     if ($idUsuario==0) {
                         $option=1;
@@ -57,12 +57,14 @@
                                                                                     $strPassword, 
                                                                                     $intTipoId, 
                                                                                     $intStatus,
-                                                                                    $intNacionalidad,
+                                                                                    
                                                                                     $intGenero,
-                                                                                    $intEstadoC,
+                                                                                   
                                                                                     $intSucursal,
-                                                                                    $strFechaNacimiento );
-                        } 
+                                                                                    $user
+                                                                                   );
+                        
+                        }
                     }else{
                         $option=2;
                         $strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
@@ -75,14 +77,15 @@
                                                                                     $strPassword, 
                                                                                     $intTipoId, 
                                                                                     $intStatus,
-                                                                                    $intNacionalidad,
                                                                                     $intGenero,
-                                                                                    $intEstadoC,
+                                                                               
                                                                                     $intSucursal,
-                                                                                    $strFechaNacimiento );
+                                                                                    $user
+                                                                                    );
 
                     }
                     }
+                    
                     if($request_user > 0 ){
                         if ($option==1) {
                             $arrResponse = array("status" => true, "msg" => 'Usuario Guardado Correctamente.');
@@ -92,7 +95,7 @@
                     }else if($request_user == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
 					}else{
-						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos Verifique el email y el DNI.');
 					}
                  }
                  echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -102,28 +105,30 @@
         }
         public function getUsuarios()
         {
+         
             if($_SESSION['permisosMod']['r']){ 
             $arrData= $this->model->selectUsuarios();
-            //dep($arrData);
+            /* dep($arrData);
+            exit; */
             for ($i=0; $i < count($arrData) ; $i++) { 
                 $btnView ='';
                 $btnEdit = '';
                 $btnDelete = '';
 
-                if ($arrData[$i]['status']==1) {
+                if ($arrData[$i]['COD_STATUS']==1) {
                  $arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';   
                 }else{
                  $arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
                 }
 
                 if($_SESSION['permisosMod']['r']){
-                    $btnView = '<button class="btn btn-info btn-sm btnViewUsuario" onClick="fntViewUsuario('.$arrData[$i]['idUsuario'].')" title="Ver usuario"><i class="far fa-eye"></i></button>';
+                    $btnView = '<button class="btn btn-info btn-sm btnViewUsuario" onClick="fntViewUsuario('.$arrData[$i]['COD_PERSONA'].')" title="Ver usuario"><i class="far fa-eye"></i></button>';
                 }
 
                 if($_SESSION['permisosMod']['u']){
-                    if(($_SESSION['idUser'] == 1 and $_SESSION['userData']['Id_Rol'] == 1) ||
-                       ($_SESSION['userData']['Id_Rol'] == 1 and $arrData[$i]['Id_Rol'] != 1)){
-                        $btnEdit = '<button class="btn btn-warning btn-sm btnEditUsuario" onClick="fntEditUsuario(this,'.$arrData[$i]['idUsuario'].')" title="Editar usuario"><i class="fas fa-pencil-alt"></i></button>';
+                    if(($_SESSION['idUser'] == 1 and $_SESSION['userData']['COD_ROL'] == 1) ||
+                       ($_SESSION['userData']['COD_ROL'] == 1 and $arrData[$i]['COD_ROL'] != 1)){
+                        $btnEdit = '<button class="btn btn-warning btn-sm btnEditUsuario" onClick="fntEditUsuario(this,'.$arrData[$i]['COD_PERSONA'].')" title="Editar usuario"><i class="fas fa-pencil-alt"></i></button>';
                        }else{
                         $btnEdit = '<button class="btn btn-warning btn-sm" disabled><i class="fas fa-pencil-alt"></i></button>';  
                        }
@@ -131,11 +136,11 @@
                 }
 
                 if($_SESSION['permisosMod']['d']){
-                    if(($_SESSION['idUser'] == 1 and $_SESSION['userData']['Id_Rol'] == 1) ||
-                    ($_SESSION['userData']['Id_Rol'] == 1 and $arrData[$i]['Id_Rol'] != 1) and
-                              ($_SESSION['userData']['idUsuario'] != $arrData[$i]['idUsuario'])
+                    if(($_SESSION['idUser'] == 1 and $_SESSION['userData']['COD_ROL'] == 1) ||
+                    ($_SESSION['userData']['COD_ROL'] == 1 and $arrData[$i]['COD_ROL'] != 1) and
+                              ($_SESSION['userData']['COD_PERSONA'] != $arrData[$i]['COD_PERSONA'])
                               ){
-                        $btnDelete = '<button class="btn btn-danger btn-sm btnDelUsuario" onClick="fntDelUsuario('.$arrData[$i]['idUsuario'].')" title="Eliminar usuario"><i class="far fa-trash-alt"></i></button>';
+                        $btnDelete = '<button class="btn btn-danger btn-sm btnDelUsuario" onClick="fntDelUsuario('.$arrData[$i]['COD_PERSONA'].')" title="Eliminar usuario"><i class="far fa-trash-alt"></i></button>';
                     }else{
                         $btnDelete = '<button class="btn btn-danger btn-sm" disabled><i class="far fa-trash-alt"></i></button>';
                     }
@@ -210,11 +215,11 @@
 					$strNombre = ucwords(strClean($_POST['txtNombre']));
 					$strApellido = ucwords(strClean($_POST['txtApellido']));
 					$intTelefono = intval(strClean($_POST['txtTelefono']));
-                    $intNacionalidad = intval(strClean($_POST['listNacionalidad']));
+                    
                     $intGenero = intval(strClean($_POST['listGenero']));
-                    $intEstadoC = intval(strClean($_POST['listEstadoC']));
+                   
                     $intSucursal = intval(strClean($_POST['listSucursal']));
-                    $strFechaNacimiento = strClean($_POST['fechaNacimiento']);
+                    $user=intval($_SESSION['idUser']);
                     $strPassword = "";
                     if(!empty($_POST['txtPassword'])){
 						$strPassword = hash("SHA256",$_POST['txtPassword']);
@@ -224,12 +229,12 @@
 																$strNombre,
 																$strApellido, 
 																$intTelefono,
-                                                                $intNacionalidad,
+                                                               
                                                                 $intGenero,
-                                                                $intEstadoC,
+                                                               
                                                                 $intSucursal,
-                                                                $strFechaNacimiento, 
-																$strPassword);
+                                                                
+																$strPassword,$user);
                     if($request_user)
 					{
 						sessionUser($_SESSION['idUser']);

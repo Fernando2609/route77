@@ -33,9 +33,9 @@
                   
                 </div>
 
-                <h3 class="profile-username text-center"><?=  $_SESSION['userData']['nombres']." ".$_SESSION['userData']['apellidos'];  ?></h3>
+                <h3 class="profile-username text-center"><?=  $_SESSION['userData']['NOMBRES']." ".$_SESSION['userData']['APELLIDOS'];  ?></h3>
 
-                <p class="text-muted text-center"><?=  $_SESSION['userData']['nombreRol'] ?></p>
+                <p class="text-muted text-center"><?=  $_SESSION['userData']['NOM_ROL'] ?></p>
               </div>
               <!-- /.card-body -->
             </div>
@@ -62,46 +62,40 @@
                     <tbody>
                       <tr>
                         <td style="width:200px;">Identificación:</td>
-                        <td><?= $_SESSION['userData']['dni']; ?></td>
+                        <td><?= $_SESSION['userData']['DNI']; ?></td>
                       </tr>
                       <tr>
                         <td>Nombres:</td>
-                        <td><?= $_SESSION['userData']['nombres']; ?></td>
+                        <td><?= $_SESSION['userData']['NOMBRES']; ?></td>
                       </tr>
                       <tr>
                         <td>Apellidos:</td>
-                        <td><?= $_SESSION['userData']['apellidos']; ?></td>
+                        <td><?= $_SESSION['userData']['APELLIDOS']; ?></td>
                       </tr>
                       <tr>
                         <td>Teléfono:</td>
-                        <td><?= $_SESSION['userData']['telefono']; ?></td>
+                        <td><?= $_SESSION['userData']['TELEFONO']; ?></td>
                       </tr>
                       <tr>
                         <td>Email (Usuario):</td>
-                        <td><?= $_SESSION['userData']['email']; ?></td>
+                        <td><?= $_SESSION['userData']['EMAIL']; ?></td>
                       </tr>
-                      <tr>
-                        <td>Fecha de Nacimiento</td>
-                        <td><?= $_SESSION['userData']['fechaNacimiento']; ?></td>
-                      </tr>
+                     
                       <!-- <?php
-                         if ($_SESSION['userData']['nombreRol']=="Administrador") {
+                         if ($_SESSION['userData']['NOM_ROL']=="ADMINISTRADOR") {
                            
                         
                         ?> -->
                       <tr>
                         <td>Sucursal:</td>
-                        <td><?= $_SESSION['userData']['sucursal']; ?></td>
+                        <td><?=ucwords(strtolower($_SESSION['userData']['Sucursal'] ));?></td>
                       </tr>
                  <!--    <?php } ?> -->
                       <tr>
                         <td>Rol</td>
-                        <td><?= $_SESSION['userData']['nombreRol']; ?></td>
+                        <td><?= ucwords(strtolower($_SESSION['userData']['NOM_ROL'])); ?></td>
                       </tr>
-                      <tr>
-                        <td>Estado Civil</td>
-                        <td><?= $_SESSION['userData']['estadocivil']; ?></td>
-                      </tr>
+
                     </tbody>
                   </table>
                   </div>
@@ -112,15 +106,15 @@
                     <tbody>
                       <tr>
                         <td style="width:200px;">Fecha de registro: </td>
-                        <td><?= $_SESSION['userData']['datecreated']; ?></td>
+                        <td><?= $_SESSION['userData']['fechaRegistro']; ?></td>
                       </tr>
                       <tr>
                         <td>Ultimo Inicio de Sesión:</td>
-                        <td><?= $_SESSION['userData']['datelogin']; ?></td>
+                        <td><?= $_SESSION['userData']['DATE_LOGIN']; ?></td>
                       </tr>
                       <tr>
                         <td>Ultima modificación:</td>
-                        <td><?= $_SESSION['userData']['datemodificado']; ?></td>
+                        <td><?= $_SESSION['userData']['FECHA_MODIFICACION']; ?></td>
                       </tr>
                      
                     </tbody>

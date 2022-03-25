@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded',function(){
     },
 
     "columns": [
-      { "data": "Id_Rol" },
-      { "data": "nombreRol" },
-      { "data": "descripcion" },
+      { "data": "COD_ROL" },
+      { "data": "NOM_ROL" },
+      { "data": "DESCRIPCION" },
       { "data": "status" },
       { "data": "options" }
            

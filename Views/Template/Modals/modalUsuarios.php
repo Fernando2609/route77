@@ -27,6 +27,10 @@
               <label for="txtIdentificacion">DNI</label>
               <input type="text" class="form-control valid validNumber" id="txtIdentificacion" name="txtIdentificacion" required="" onkeypress="return controlTag(event);">
             </div>
+            <div class="form-group col-md-6">
+              <label for="txtEmail">Email</label>
+              <input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail" required="">
+            </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -44,29 +48,21 @@
               <input type="text" class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" required="" onkeypress="return controlTag(event);">
             </div>
             <div class="form-group col-md-6">
-              <label for="txtEmail">Email</label>
-              <input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail" required="">
+              <label for="listRolid">Tipo usuario</label>
+              <select class="form-control" data-live-search="true" id="listRolid" name="listRolid" required>
+              </select>
             </div>
           </div>
 
           <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="listNacionalidad">Nacionalidad</label>
-              <select class="form-control" data-live-search="true" id="listNacionalidad" name="listNacionalidad" required>
-              </select>
-            </div>
+      
             <div class="form-group col-md-6">
               <label for="listGenero">Genero</label>
               <select class="form-control " id="listGenero" name="listGenero" required>
               </select>
             </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="listEstadoC">Estado Civil</label>
-              <select class="form-control" data-live-search="true" id="listEstadoC" name="listEstadoC" required>
-              </select>
-            </div>
+        
+            
             <div class="form-group col-md-6">
               <label for="listSucursal">Sucursal</label>
               <select class="form-control " id="listSucursal" name="listSucursal">
@@ -74,18 +70,7 @@
               <small class="form-text text-muted" >Sucursal en que trabaja (Usuario)</small>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="fechaNacimiento">Fecha de Nacimiento</label>
-              <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
-            </div>
-            <div class="form-group col-md-6">
-              <label for="listRolid">Tipo usuario</label>
-              <select class="form-control" data-live-search="true" id="listRolid" name="listRolid" required>
-              </select>
-            </div>
-
-          </div>
+         
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="txtPassword">Password</label>
@@ -157,26 +142,17 @@
               <td>Rol Usuario:</td>
               <td id="celTipoUsuario">Larry</td>
             </tr>
-            <tr>
-              <td>Nacionalidad:</td>
-              <td id="celNacionalidad">Larry</td>
-            </tr>
+           
             <tr>
               <td>Genero:</td>
               <td id="celGenero">Larry</td>
             </tr>
-            <tr>
-              <td>Estado Civil:</td>
-              <td id="celEstadoC">Larry</td>
-            </tr>
+           
             <tr>
               <td>Sucursal:</td>
               <td id="celSucursal">Larry</td>
             </tr>
-            <tr>
-              <td>Fecha de Nacimiento</td>
-              <td id="celNacimiento">Larry</td>
-            </tr>
+           
             <tr>
               <td>Estado:</td>
               <td id="celEstado">Larry</td>

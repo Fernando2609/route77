@@ -36,8 +36,9 @@
                     $arrResponse = array('status' => false, 'msg' => 'El usuario o la contraseña es incorrecto.' ); 
                 }else{
                     $arrData = $requestUser;
-						if($arrData['status'] == 1){
-							$_SESSION['idUser'] = $arrData['idUsuario'];
+                    
+						if($arrData['COD_STATUS'] == 1){
+							$_SESSION['idUser'] = $arrData['COD_PERSONA'];
 							$_SESSION['login'] = true;
                             $this->model->sessionUpdate($_SESSION['idUser']);
 							$arrData = $this->model->sessionLogin($_SESSION['idUser']);
@@ -55,6 +56,7 @@
         }
         public function resetPass()
         {
+            
             if ($_POST) {
                 if(empty($_POST['txtEmailReset'])){
 					$arrResponse = array('status' => false, 'msg' => 'Error de datos' );
@@ -62,22 +64,22 @@
                     $token=token();
                     $strEmail  =  strtolower(strClean($_POST['txtEmailReset']));
 					$arrData = $this->model->getUserEmail($strEmail);
-                    
+                   
 					if(empty($arrData)){
 						$arrResponse = array('status' => false, 'msg' => 'Usuario no existente.' ); 
 					}else{
-                        $idUsuario = $arrData['idUsuario'];
-						$nombreUsuario = $arrData['nombres'].' '.$arrData['apellidos'];
+                        $idUsuario = $arrData['COD_PERSONA'];
+						$nombreUsuario = $arrData['NOMBRES'].' '.$arrData['APELLIDOS'];
                         $url_recovery = base_url().'/login/confirmUser/'.$strEmail.'/'.$token;
 						$requestUpdate = $this->model->setTokenUser($idUsuario,$token);
-                        $datosEmpresa=$this->model->datosEmpresa();
+                        //$datosEmpresa=$this->model->datosEmpresa();
                         $dataUsuario = array('nombreUsuario' => $nombreUsuario,
                         'email' => $strEmail,
                         'asunto' => 'Recuperar cuenta - '.NOMBRE_REMITENTE,
                         'url_recovery' => $url_recovery);
                         
                         if($requestUpdate){
-                            $sendEmail = sendEmail($dataUsuario,'email_cambioPassword');
+                            $sendEmail = sendMailLocal($dataUsuario,'email_cambioPassword');
                             
                             if($sendEmail){
                                 $arrResponse = array('status' => true, 

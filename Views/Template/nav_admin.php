@@ -1,4 +1,8 @@
 <!-- Main Sidebar Container -->
+<?php
+ $nombre=explode(" ",$_SESSION['userData']['NOMBRES']);
+ $apellido=explode(" ",$_SESSION['userData']['APELLIDOS']);
+?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= base_url();?>/dashboard" class="brand-link">
@@ -14,8 +18,8 @@
           <img src="<?= media();?>/images//avatar.png" class="img-circle elevation-2 user " alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?=   $_SESSION['userData']['nombres']  ?></a>
-          <a href="#" class="d-block"><?=   $_SESSION['userData']['nombreRol']  ?></a>
+          <a href="#" class="d-block"><?=$nombre[0]." ".$apellido[0];?></a>
+          <a href="#" class="d-block"><?=ucwords(strtolower($_SESSION['userData']['NOM_ROL']))  ?></a>
         </div>
       </div>
 
