@@ -21,12 +21,7 @@
           <input type="hidden" id="idUsuario" name="idUsuario" value="">
           <p class="text-primary">Los campos con asterisco (<span class="required">*</span>)son obligatorios. </p>
 
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="txtIdentificacion">DNI<span class="required"> *</span></label>
-              <input type="text" class="form-control valid validNumber" id="txtIdentificacion" name="txtIdentificacion" required="" onkeypress="return controlTag(event);">
-            </div>
-          </div>
+          
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="txtNombre">Nombres<span class="required"> *</span></label>
@@ -48,39 +43,6 @@
             </div>
           </div>
 
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="listNacionalidadCliente">Nacionalidad<span class="required"> *</span></label>
-              <select class="form-control" data-live-search="true" id="listNacionalidadCliente" name="listNacionalidadCliente" required>
-              </select>
-            </div>
-            <div class="form-group col-md-6">
-              <label for="listGenero">Género<span class="required"> *</span></label>
-              <select class="form-control " id="listGenero" name="listGenero" required>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="listEstadoC">Estado Civil<span class="required"> *</span></label>
-              <select class="form-control" data-live-search="true" id="listEstadoC" name="listEstadoC" required>
-              </select>
-            </div>
-
-            <div class="form-group col-md-6">
-              <label for="fechaNacimiento">Fecha de Nacimiento<span class="required"> *</span></label>
-              <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="listSucursal">Sucursal</label>
-              <select class="form-control " id="listSucursal" name="listSucursal">
-              </select>
-              <small class="form-text text-muted" >Sucursal de preferencia (Cliente)</small>
-            </div>
             <div class="form-group col-md-6">
               <label for="listStatus">Status<span class="required"> *</span></label>
               <select class="form-control selectpicker" id="listStatus" name="listStatus" required>
@@ -95,7 +57,8 @@
               <input type="password" class="form-control" id="txtPassword" name="txtPassword">
             </div>
           </div>
-          <!-- /.Cierra card-body -->
+
+           <!-- /.Cierra card-body -->
 
           <div class="card-footer">
             <button id="btnActionForm" class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
@@ -128,10 +91,7 @@
         <!-- Card -->
         <table class="table table-bordered">
           <tbody>
-            <tr>
-              <td>DNI:</td>
-              <td id="celIdentificacion">654654654</td>
-            </tr>
+            
             <tr>
               <td>Nombres:</td>
               <td id="celNombre">Jacob</td>
@@ -152,27 +112,7 @@
               <td>Rol Usuario:</td>
               <td id="celTipoUsuario">Larry</td>
             </tr> -->
-            <tr>
-              <td>Nacionalidad:</td>
-              <td id="celNacionalidad">Larry</td>
-            </tr>
-            <tr>
-              <td>Género:</td>
-              <td id="celGenero">Larry</td>
-            </tr>
-            <tr>
-              <td>Estado Civil:</td>
-              <td id="celEstadoC">Larry</td>
-            </tr>
-             <tr>
-              <td>Sucursal:</td>
-              <td id="celSucursal">Larry</td>
-            </tr>
-            <tr>
-              <td>Fecha de Nacimiento</td>
-              <td id="celNacimiento">Larry</td>
-            </tr>
-            <tr>
+            
               <td>Estado:</td>
               <td id="celEstado">Larry</td>
             </tr>

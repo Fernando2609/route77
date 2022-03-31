@@ -17,12 +17,11 @@ document.addEventListener('DOMContentLoaded',function () {
               },
         
                 "columns": [
-                    {"data":"idUsuario"},
-                    {"data":"dni"},
-                    {"data":"nombres"},
-                    {"data":"apellidos"},
-                    {"data":"email"},
-                    {"data":"telefono"},
+                    {"data":"COD_PERSONA"},
+                    {"data":"NOMBRES"},
+                    {"data":"APELLIDOS"},
+                    {"data":"EMAIL"},
+                    {"data":"TELEFONO"},
                     {"data":"status"},
                     {"data":"options"}
                    
@@ -187,20 +186,20 @@ document.addEventListener('DOMContentLoaded',function () {
         let formCliente=document.querySelector("#formCliente");
         formCliente.onsubmit=function(e){
             e.preventDefault();
-            let strIdentificacion = document.querySelector('#txtIdentificacion').value;
+            //let strIdentificacion = document.querySelector('#txtIdentificacion').value;
             let strNombre = document.querySelector('#txtNombre').value;
             let strApellido = document.querySelector('#txtApellido').value;
             let strEmail = document.querySelector('#txtEmail').value;
             let intTelefono = document.querySelector('#txtTelefono').value;
             /* let intTipousuario = document.querySelector('#listRolid').value; */
-            let intNacionalidad = document.querySelector('#listNacionalidadCliente').value;
-            let intGenero = document.querySelector('#listGenero').value;
-            let intEstadoC = document.querySelector('#listEstadoC').value;
-            let strFechaN = document.querySelector('#fechaNacimiento').value;
+           // let intNacionalidad = document.querySelector('#listNacionalidadCliente').value;
+           // let intGenero = document.querySelector('#listGenero').value;
+           // let intEstadoC = document.querySelector('#listEstadoC').value;
+            //let strFechaN = document.querySelector('#fechaNacimiento').value;
             let strPassword = document.querySelector('#txtPassword').value;
             let intStatus = document.querySelector('#listStatus').value;
     
-            if(strIdentificacion == '' || strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == ''|| intNacionalidad == '' || intGenero == ''/* || intEstadoC == '' || strFechaN == ''|| strPassword == '' || intStatus == '' */)
+            if(strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '')
                 {
                     swal.fire("Atención", "Todos los campos son obligatorios." , "error");
                     return false;
@@ -222,7 +221,7 @@ document.addEventListener('DOMContentLoaded',function () {
             request.send(formData);
             request.onreadystatechange = function(){ 
                 if(request.readyState == 4 && request.status == 200){
-                   /*  console.log(request.responseText); */
+                    //console.log(request.responseText); 
                     let objData = JSON.parse(request.responseText); 
                     
                     if(objData.status)
@@ -233,12 +232,12 @@ document.addEventListener('DOMContentLoaded',function () {
                             htmlStatus = intStatus == 1?
                             '<span class="badge badge-success">Activo</span>':
                             '<span class="badge badge-danger">Inactivo</span>';
-                            rowTable.cells[1].textContent = strIdentificacion;
-                            rowTable.cells[2].textContent = strNombre;
-                            rowTable.cells[3].textContent = strApellido;
-                            rowTable.cells[4].textContent = strEmail;
-                            rowTable.cells[5].textContent = intTelefono;
-                            rowTable.cells[6].innerHTML=htmlStatus;
+                           
+                            rowTable.cells[1].textContent = strNombre;
+                            rowTable.cells[2].textContent = strApellido;
+                            rowTable.cells[3].textContent = strEmail;
+                            rowTable.cells[4].textContent = intTelefono;
+                            rowTable.cells[5].innerHTML=htmlStatus;
                             rowTable = "";
                         }
  
@@ -270,29 +269,23 @@ function fntViewInfo(idpersona){
      request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
             let objData = JSON.parse(request.responseText);
-
+            //console.log(objData);
             if(objData.status)
             {
-                /* console.log(objData.data.status); */
-                let estadoUsuario = objData.data.status == 1 ? 
+                /*console.log(objData.data.status); */
+                let estadoUsuario = objData.data.COD_STATUS == 1 ? 
                 '<span class="badge badge-success">Activo</span>' : 
                 '<span class="badge badge-danger">Inactivo</span>'; 
 
-                document.querySelector("#celIdentificacion").innerHTML = objData.data.dni;
-                document.querySelector("#celNombre").innerHTML = objData.data.nombres;
-                document.querySelector("#celApellido").innerHTML = objData.data.apellidos;
-                document.querySelector("#celTelefono").innerHTML = objData.data.telefono;
-                document.querySelector("#celEmail").innerHTML = objData.data.email;
-                /* document.querySelector("#celTipoUsuario").innerHTML = objData.data.nombreRol; */
-                document.querySelector("#celNacionalidad").innerHTML = objData.data.nacionalidad;
-                document.querySelector("#celGenero").innerHTML = objData.data.genero;
-                 document.querySelector("#celSucursal").innerHTML = objData.data.sucursal; 
-                document.querySelector("#celNacimiento").innerHTML = objData.data.fechaNacimiento;
-                document.querySelector("#celEstadoC").innerHTML = objData.data.estadocivil;
+                
+                document.querySelector("#celNombre").innerHTML = objData.data.NOMBRES;
+                document.querySelector("#celApellido").innerHTML = objData.data.APELLIDOS;
+                document.querySelector("#celTelefono").innerHTML = objData.data.TELEFONO;
+                document.querySelector("#celEmail").innerHTML = objData.data.EMAIL;
                 document.querySelector("#celEstado").innerHTML = estadoUsuario;
-                document.querySelector("#celFechaRegistro").innerHTML = objData.data.fechaRegistro;
-                document.querySelector("#celDateModificado").innerHTML = objData.data.datemodificado; 
-                document.querySelector("#celDateLogin").innerHTML = objData.data.datelogin;  
+                document.querySelector("#celFechaRegistro").innerHTML = objData.data.FECHA_CREACION;
+                document.querySelector("#celDateModificado").innerHTML = objData.data.FECHA_MODIFICACION; 
+                document.querySelector("#celDateLogin").innerHTML = objData.data.DATE_LOGIN;  
                 $('#modalViewCliente').modal('show');
             }else{
                 swal.fire("Error", objData.msg , "error");
@@ -318,24 +311,21 @@ function fntEditInfo(element,idUsuario){
             if(objData.status)
             {
 
-                document.querySelector("#idUsuario").value = objData.data.idUsuario;
-                document.querySelector("#txtIdentificacion").value = objData.data.dni;
-                document.querySelector("#txtNombre").value = objData.data.nombres;
-                document.querySelector("#txtApellido").value = objData.data.apellidos;
-                document.querySelector("#txtTelefono").value = objData.data.telefono;
-                document.querySelector("#txtEmail").value = objData.data.email;
-                document.querySelector("#listNacionalidadCliente").value =objData.data.idNacionalidad;
+                document.querySelector("#idUsuario").value = objData.data.COD_PERSONA;
+                //document.querySelector("#txtIdentificacion").value = objData.data.dni;
+                document.querySelector("#txtNombre").value = objData.data.NOMBRES;
+                document.querySelector("#txtApellido").value = objData.data.APELLIDOS;
+                document.querySelector("#txtTelefono").value = objData.data.TELEFONO;
+                document.querySelector("#txtEmail").value = objData.data.EMAIL;
+                /*document.querySelector("#listNacionalidadCliente").value =objData.data.idNacionalidad;
                 document.querySelector("#listSucursal").value =objData.data.idsucursal;
-                document.querySelector("#listGenero").value =objData.data.idGenero;
-                document.querySelector("#listEstadoC").value =objData.data.idEstado;
-                document.querySelector("#fechaNacimiento").value=objData.data.fechaNaci;
+                document.querySelector("#listGenero").value =objData.data.idGenero;*/
+                //document.querySelector("#listEstadoC").value =objData.data.COD_STATUS;
+              //  document.querySelector("#fechaNacimiento").value=objData.data.fechaNaci;
                // console.log(objData.data.fechaNaci);
                 
-                $('#listGenero').selectpicker('render');
-                $('#listEstadoC').selectpicker('render');
-                $('#listGenero').selectpicker('render');
-                $('#listSucursal').selectpicker('render');
-                 if(objData.data.status == 1){
+                
+                 if(objData.data.COD_STATUS == 1){
                    document.querySelector("#listStatus").value = 1;
                 }else{
                    document.querySelector("#listStatus").value = 2;
@@ -413,15 +403,15 @@ function openModal()
     $('#modalFormCliente').modal('show');
 }
 
-window.addEventListener('load', function() {
+//window.addEventListener('load', function() {
    
-     fntNacionalidadCliente();
+    /* fntNacionalidadCliente();
      fntGeneroCliente();
      fnEstadoCCliente();
      fnSucursalUsuario();
 
-}, false);
-//Funcion para traer Las sucursales
+}, false);*/
+/*Funcion para traer Las sucursales
 function fnSucursalUsuario(){
   
     let ajaxUrl = base_url+'/Clientes/getSelectSucursal';
@@ -485,4 +475,4 @@ function fnEstadoCCliente(){
         }
     }
 
-}
+}*/

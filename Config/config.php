@@ -20,10 +20,10 @@
 	const DB_PASSWORD = "routeEstacion76+1";
 	const DB_CHARSET = "utf8";
 */
-	const BASE_URL="http://localhost:8080/route77";
+	//const BASE_URL="http://localhost:8080/route77";
    
 
-	//const BASE_URL="http://localhost/route77";
+	const BASE_URL="http://localhost/route77";
 
 	//Para envío de correo
 	const ENVIRONMENT = 1; // Local: 0, Produccón: 1;
@@ -32,7 +32,7 @@
 	//const DB_NAME = "db_route";
     const DB_NAME = "db_route77";
 	const DB_USER = "root";
-	const DB_PASSWORD = "";
+	const DB_PASSWORD = "newpassword";
 	const DB_CHARSET = "utf8";
 
 
