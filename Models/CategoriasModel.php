@@ -33,16 +33,16 @@
 								 $this->strPortada,
 								 //$this->strRuta, 
 								 $this->intStatus); */
-				$query_insert  = 'CALL CRUD_CATEGORIA(?,?,?,?,?,?,?,?)';
+				$query_insert  = 'CALL CRUD_CATEGORIA(?,?,?,?,?,?,?,?,?)';
 	        	$arrData = array($this->intStatus, 
 								 $this->strDescripcion, 
 								 $this->strCategoria,
 								 $this->strPortada,
 								 $this->intUser,
 								 0,
+								 //$this->strRuta, 
 								 'I',
 								 "null"
-								 //$this->strRuta, 
 								 );
 	        	$request_insert = $this->insert($query_insert,$arrData);
 				$sql = "SELECT last_insert_id()";
@@ -63,7 +63,7 @@
 		{
 			/* $sql = "SELECT * FROM categoria 
 					WHERE status != 0 "; */
-			$sql = 'CALL CRUD_CATEGORIA(null,null,null,null,null,null,"V",null)';
+			$sql = 'CALL CRUD_CATEGORIA(null,null,null,null,null,null,null,"V",null)';
 			$request = $this->select_all($sql);
 			
 			return $request;
@@ -72,7 +72,7 @@
 		public function selectCategoria(int $idcategoria){
 			$this->intIdcategoria = $idcategoria;
 			//$sql = "SELECT * FROM categoria WHERE idcategoria = $this->intIdcategoria";
-			$sql="CALL CRUD_CATEGORIA(null,null,null,null,null,null,'R',{$this->intIdcategoria})";
+			$sql="CALL CRUD_CATEGORIA(null,null,null,null,null,null,null,'R',{$this->intIdcategoria})";
 			$request = $this->select($sql);
 			
 			return $request;
@@ -94,15 +94,15 @@
 			if(empty($request))
 			{
 				
-				$sql = "CALL CRUD_CATEGORIA(?,?,?,?,?,?,?,?)"; 	
+				$sql = "CALL CRUD_CATEGORIA(?,?,?,?,?,?,?,?,?)"; 	
 	        	$arrData = array($this->intStatus,
 								 $this->strDescripcion, 
 								 $this->strCategoria, 
 								 $this->strPortada,
 								 null,
 								 $this->intUser,
+								 $this->strRuta,
 								 "U",
-								 //$this->strRuta,
 								 $this->intIdcategoria
 								 );
 	        	$request = $this->update($sql,$arrData);
@@ -131,7 +131,7 @@
 				$request = $this->update($sql,$arrData);
 				dep($request);
                 exit; */
-				$sql = "CALL CRUD_CATEGORIA(null,null,null,null,null,null,?,'$this->intIdcategoria')";
+				$sql = "CALL CRUD_CATEGORIA(null,null,null,null,null,null,null,?,'$this->intIdcategoria')";
 				$arrData = array("D");
 				$request = $this->update($sql,$arrData);
 				

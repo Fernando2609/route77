@@ -175,6 +175,7 @@
 									$this->strIdentificacion,
 									$this->intUser
 									);
+							
 				}else{
 					/* $sql = "UPDATE usuarios SET dni=?,nombres=?,apellidos=?,email=?,idNacionalidad=?,idGenero=?,idEstadoCivil=?,idRol=?,idSucursal=?,fechaNacimiento=?,status=?,telefono=?,datemodificado=?
 					WHERE idUsuario = $this->intIdUsuario "; */
@@ -198,6 +199,7 @@
 			}else{
 				$request = false;
 			}
+			
 			return $request;
 		
 		}

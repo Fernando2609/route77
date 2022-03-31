@@ -60,7 +60,7 @@
         dep($requestPost);  */
 
         dep($_SESSION['userData']);
-        dep($_SESSION['permisosMod']);
+        dep($_SESSION['permisos']);
         ?>
         
       </div>

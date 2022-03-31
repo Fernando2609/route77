@@ -68,7 +68,7 @@
 	const EMAIL_EMPRESA = "Estacionroutehn@gmail.com";
 	const EMAIL_PEDIDOS = "Estacionroutehn@gmail.com";
 
-	const CAT_SLIDER = "1,2,3,7,6";
+	const CAT_SLIDER = "1,10,5,7,6";
 	const CAT_BANNER = "4,5,8";
 
 	//Datos para Encriptar / Desencriptar
