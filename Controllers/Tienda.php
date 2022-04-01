@@ -42,6 +42,7 @@
         }
         
          public function producto($params){
+             
         if (empty($params)) {
             header("Location:" . base_url());
         } else {
@@ -54,12 +55,12 @@
            }
             $producto = strClean($params);
             //$arrProducto = $this->getProductoT($producto);
-            $data['page_tag'] = NOMBRE_EMPESA . " - " . $infoProducto['nombre'];
-            $data['page_title'] = $infoProducto['nombre'];
+            $data['page_tag'] = NOMBRE_EMPESA . " - " . $infoProducto['NOMBRE'];
+            $data['page_title'] = $infoProducto['NOMBRE'];
             $data['page_name'] = "producto";
             $data['categorias'] = $this->getCategorias();
             $data['producto'] = $infoProducto;
-            $data['productos'] = $this->getProductosRandom($infoProducto['categoriaid'],8,"r");
+            $data['productos'] = $this->getProductosRandom($infoProducto['COD_CATEGORIA'],8,"r");
             $this->views->getView($this, "producto", $data);
          }
         }
@@ -67,7 +68,7 @@
         {
             if ($_POST) {
                /*  */
-                //dep($_POST);
+               
                 //unset($_SESSION['arrCarrito']);exit;
                 $arrCarrito=array();
                 $cantCarrito=0;
@@ -76,15 +77,16 @@
                 $cantidad=$_POST['cant'];
                 if (is_numeric($idproducto) and is_numeric($cantidad)) {
                     $arrInfoProducto=$this->getProductoIDT($idproducto);
-                    $stockCarrito=$arrInfoProducto['stock'];
+                    
+                    $stockCarrito=$arrInfoProducto['STOCK'];
                    
                     if (!empty($arrInfoProducto)) {
                         $arrProducto = array('idproducto' => $idproducto,
-											'producto' => $arrInfoProducto['nombre'],
+											'producto' => $arrInfoProducto['NOMBRE'],
 											'cantidad' => $cantidad,
-											'precio' => $arrInfoProducto['precio'],
-                                            'stock' => $arrInfoProducto['stock'],
-                                            'ruta'=>$arrInfoProducto['ruta'],
+											'precio' => $arrInfoProducto['PRECIO'],
+                                            'stock' => $arrInfoProducto['STOCK'],
+                                            'ruta'=>$arrInfoProducto['RUTA'],
 											'imagen' => $arrInfoProducto['images'][0]['url_image']
 										);
                         

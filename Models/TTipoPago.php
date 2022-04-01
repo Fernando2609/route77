@@ -5,7 +5,7 @@ require_once("Libraries/Core/Mysql.php");
 
       public function getTiposPagoT(){
 		$this->con = new Mysql();
-		$sql = "SELECT * FROM tipo_pago WHERE status != 0";
+		$sql = "SELECT * FROM TBL_TIPO_PAGO WHERE COD_STATUS != 0";
 		$request = $this->con->select_all($sql);
 		return $request;
 	}

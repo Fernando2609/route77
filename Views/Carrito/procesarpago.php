@@ -313,7 +313,7 @@
 												foreach ($data['tiposPago'] as $tipopago) {
 													if($tipopago['idTipoPago'] != 1){
 										 ?>
-										 	<option value="<?= $tipopago['idTipoPago']?>"><?= $tipopago['tipoPago']?></option>
+										 	<option value="<?= $tipopago['COD_TIPO_PAGO']?>"><?= $tipopago['TIPO_PAGO']?></option>
 										<?php
 													}
 												}

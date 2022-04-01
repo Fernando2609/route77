@@ -102,8 +102,8 @@
 			<div class="row isotope-grid">
 				<?php 
 				  for ($p=0; $p < count($arrProductos); $p++){
-					    
 					  $rutaProducto=$arrProductos[$p]['RUTA'];
+	
 					  if(count($arrProductos[$p]['images']) > 0){
 						  $portada = $arrProductos[$p]['images'][0]['url_image'];
 					  }else{
