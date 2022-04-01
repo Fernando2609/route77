@@ -183,9 +183,9 @@ document.addEventListener('DOMContentLoaded',function(){
                     swal.fire("Roles de usuario", objData.msg ,"success");
                     //toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
                     tableRoles.api().ajax.reload(function(){ 
-                      fntEditRol();
+                      /* fntEditRol();
                       fntDelRol();
-                      fntPermisos();
+                      fntPermisos(); */
                     });
                     }else{
                       swal.fire("Error", objData.msg , "error");

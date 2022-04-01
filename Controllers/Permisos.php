@@ -53,14 +53,16 @@
 			{
 				$intIdrol = intval($_POST['idrol']);
 				$modulos = $_POST['modulos'];
+			
 
 				$this->model->deletePermisos($intIdrol);
 				foreach ($modulos as $modulo) {
 					$idModulo = $modulo['COD_MODULO'];
-					$r = empty($modulo['R']) ? 0 : 1;
-					$w = empty($modulo['W']) ? 0 : 1;
-					$u = empty($modulo['U']) ? 0 : 1;
-					$d = empty($modulo['D']) ? 0 : 1;
+					$r = empty($modulo['r']) ? 0 : 1;
+					$w = empty($modulo['w']) ? 0 : 1;
+					$u = empty($modulo['u']) ? 0 : 1;
+					$d = empty($modulo['d']) ? 0 : 1;
+					
 					$requestPermiso = $this->model->insertPermisos($intIdrol, $idModulo, $r, $w, $u, $d);
 				}
 				if($requestPermiso > 0)
