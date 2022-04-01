@@ -28,9 +28,15 @@
         {
             //BUSCAR ROL
 			$this->intIdrol = $idrol;
-			$sql = "SELECT * FROM roles WHERE id_Rol = $this->intIdrol";
+			/* $sql ="CALL CRUD_ROLES(null, null, null,'R', ?);" */
+			/* $sql = "SELECT * FROM tbl_roles WHERE COD_ROL = $this->intIdrol"; */
+			$sql = "CALL CRUD_ROLES(null, null, null,'R',$this->intIdrol)";
+			/* $arrData = array($this->intIdrol); */
 			$request = $this->select($sql);
+			/* dep($request);
+			exit; */
 			return $request;
+			
         }
 
         public function insertRol(string $rol, string $descripcion, int $status){
@@ -41,15 +47,19 @@
             $this->intStatus = $status;
             
 
-            $sql = "SELECT * FROM roles WHERE nombreRol =  '{$this->strRol}'";
+            $sql = "SELECT * FROM tbl_roles WHERE NOM_ROL =  '{$this->strRol}'";
             $request = $this->select_all($sql);
          
             if(empty($request))
 			{
-				$query_insert = "INSERT INTO roles(nombreRol, descripcion, status) VALUES(?,?,?)";
+				/* $query_insert = "INSERT INTO tbl_roles(NOM_ROL, DESCRIPCION, status) VALUES(?,?,?)"; */
+				$query_insert="CALL CRUD_ROLES(?, ?, ?,'I',null)";
 				$arrData = array($this->strRol, $this->strDescripcion, $this->intStatus);
                 $request_insert= $this->insert($query_insert, $arrData);
-				$return = $request_insert;
+				$sql = "SELECT last_insert_id()";
+				$request_ID = $this->select($sql);
+	        	$return = $request_ID['last_insert_id()'];
+				
 			}else{
 				$return = false;
 			}
@@ -61,14 +71,17 @@
 			$this->strDescripcion = $descripcion;
 			$this->intStatus = $status;
 
-			$sql = "SELECT * FROM roles WHERE nombreRol = '$this->strRol' AND id_Rol != $this->intIdrol";
+			$sql = "SELECT * FROM tbl_roles WHERE NOM_ROL = '$this->strRol' AND COD_ROL != $this->intIdrol";
 			$request = $this->select_all($sql);
 
 			if(empty($request))
 			{
-				$sql = "UPDATE roles SET nombreRol = ?, descripcion = ?, status = ? WHERE id_Rol = $this->intIdrol ";
+				/* $sql = "UPDATE tbl_roles SET NOM_ROL = ?, DESCRIPCION = ?, COD_STATUS = ? WHERE COD_ROL = $this->intIdrol "; */
+				$sql = "CALL CRUD_ROLES(?, ?, ?,'U',$this->intIdrol)";
 				$arrData = array($this->strRol, $this->strDescripcion, $this->intStatus);
 				$request = $this->update($sql,$arrData);
+				/* dep($request);
+				exit; */
 			}else{
 				$request = false;
 			}
@@ -78,13 +91,17 @@
         public function deleteRol(int $idrol)
 		{
 			$this->intIdrol = $idrol;
-			$sql = "SELECT * FROM usuarios WHERE idRol = $this->intIdrol";
+			$sql = "SELECT * FROM tbl_personas WHERE COD_ROL = $this->intIdrol";
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{
-				$sql = "UPDATE roles SET status = ? WHERE id_Rol = $this->intIdrol ";
-				$arrData = array(0);
+				/* $sql = "UPDATE tbl_roles SET COD_STATUS = ? WHERE COD_ROL = $this->intIdrol "; */
+				$sql = "CALL CRUD_ROLES(?, ?, ?,'D',$this->intIdrol)";
+				/* $arrData = array(0); */
+				$arrData = array($this->strRol, $this->strDescripcion, $this->intStatus);
 				$request = $this->update($sql,$arrData);
+				/* dep($request);
+				exit; */
 				if($request)
 				{
 					$request = true;	

@@ -14,22 +14,30 @@
         }
         public function selectModulos()
 		{
-			$sql = "SELECT * FROM modulo WHERE status != 0";
+			/* $sql = "SELECT * FROM tbl_modulo WHERE COD_STATUS != 0"; */
+			$sql = "CALL CRUD_MODULOS(null, null, null, null, 'V', null)";
 			$request = $this->select_all($sql);
+			/* dep($request);
+			exit; */
 			return $request;
 		}
         public function selectPermisosRol(int $idrol)
 		{
 			$this->intRolid = $idrol;
-			$sql = "SELECT * FROM permisos WHERE rolid = $this->intRolid";
+			/* $sql = "SELECT * FROM tbl_permisos WHERE COD_ROL = $this->intRolid"; */
+			$sql = "CALL CRUD_PERMISOS($this->intRolid,null,null,null,null,null,'R',null)";
 			$request = $this->select_all($sql);
+			/* dep($request);
+			exit; */
 			return $request;
 		}
 		public function deletePermisos(int $idrol)
 		{
 			$this->intRolid = $idrol;
-			$sql = "DELETE FROM permisos WHERE rolid = $this->intRolid";
+			$sql = "DELETE FROM tbl_permisos WHERE COD_ROL = $this->intRolid";
 			$request = $this->delete($sql);
+			/* dep($request);
+			exit; */
 			return $request;
 		}
 		public function insertPermisos(int $idrol, int $idmodulo, int $r, int $w, int $u, int $d){
@@ -39,9 +47,12 @@
 			$this->w = $w;
 			$this->u = $u;
 			$this->d = $d;
-			$query_insert  = "INSERT INTO permisos(rolid,moduloid,r,w,u,d) VALUES(?,?,?,?,?,?)";
+			$query_insert  = "INSERT INTO tbl_permisos(COD_ROL,COD_MODULO,R,W,U,D) VALUES(?,?,?,?,?,?)";
         	$arrData = array($this->intRolid, $this->intModuloid, $this->r, $this->w, $this->u, $this->d);
-        	$request_insert = $this->insert($query_insert,$arrData);		
+        	$request_insert = $this->insert($query_insert,$arrData);
+			$sql = "SELECT last_insert_id()";
+			$request_ID = $this->select($sql);
+			$request_insert = $request_ID['last_insert_id()'];		
 	        return $request_insert;
 		}
 
