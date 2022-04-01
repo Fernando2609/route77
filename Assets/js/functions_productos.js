@@ -24,11 +24,11 @@ window.addEventListener('load',function(){
               },
         
                 "columns": [
-                    {"data":"idproducto"},
-                    {"data":"codigo"},
-                    {"data":"nombre"},
-                    {"data":"stock"},
-                    {"data":"precio"},
+                    {"data":"COD_PRODUCTO"},
+                    {"data":"COD_BARRA"},
+                    {"data":"NOMBRE"},
+                    {"data":"STOCK"},
+                    {"data":"PRECIO"},
                     {"data":"status"},
                     {"data":"options"}
                         
@@ -392,21 +392,22 @@ function fntViewInfo(idProducto){
     request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
             let objData = JSON.parse(request.responseText);
+            console.table(objData);
             if(objData.status)
             {
                 let htmlImage = "";
                 let objProducto = objData.data;
-                let estadoProducto = objProducto.status == 1 ? 
+                let estadoProducto = objProducto.COD_STATUS == 1 ? 
                 '<span class="badge badge-success">Activo</span>' : 
                 '<span class="badge badge-danger">Inactivo</span>';
 
-                document.querySelector("#celCodigo").innerHTML = objProducto.codigo;
-                document.querySelector("#celNombre").innerHTML = objProducto.nombre;
-                document.querySelector("#celPrecio").innerHTML = objProducto.precio;
-                document.querySelector("#celStock").innerHTML = objProducto.stock;
-                document.querySelector("#celCategoria").innerHTML = objProducto.categoria;
+                document.querySelector("#celCodigo").innerHTML = objProducto.COD_BARRA;
+                document.querySelector("#celNombre").innerHTML = objProducto.NOMBRE;
+                document.querySelector("#celPrecio").innerHTML = objProducto.PRECIO;
+                document.querySelector("#celStock").innerHTML = objProducto.STOCK;
+                document.querySelector("#celCategoria").innerHTML = objProducto.CATEGORÍA;
                 document.querySelector("#celStatus").innerHTML = estadoProducto;
-                document.querySelector("#celDescripcion").innerHTML = objProducto.descripcion;
+                document.querySelector("#celDescripcion").innerHTML = objProducto.DESCRIPCION;
 
                 if(objProducto.images.length > 0){
                     let objProductos = objProducto.images;
@@ -439,22 +440,23 @@ function fntEditInfo(element,idProducto){
     request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
             let objData = JSON.parse(request.responseText);
+            
             if(objData.status)
             {
                 let htmlImage = "";
                 let objProducto = objData.data;
-                document.querySelector("#idProducto").value = objProducto.idproducto;
-                document.querySelector("#txtNombre").value = objProducto.nombre;
-                document.querySelector("#txtDescripcion").value = objProducto.descripcion;
-                document.querySelector("#txtCodigo").value = objProducto.codigo;
-                document.querySelector("#txtPrecio").value = objProducto.precio;
-                document.querySelector("#txtStock").value = objProducto.stock;
-                document.querySelector("#listCategoria").value = objProducto.categoriaid;
-                document.querySelector("#listStatus").value = objProducto.status;
-                tinymce.activeEditor.setContent(objProducto.descripcion); 
+                document.querySelector("#idProducto").value = objProducto.COD_PRODUCTO;
+                document.querySelector("#txtNombre").value = objProducto.NOMBRE;
+                document.querySelector("#txtDescripcion").value = objProducto.DESCRIPCION;
+                document.querySelector("#txtCodigo").value = objProducto.COD_BARRA;
+                document.querySelector("#txtPrecio").value = objProducto.PRECIO;
+                document.querySelector("#txtStock").value = objProducto.STOCK;
+                document.querySelector("#listCategoria").value = objProducto.COD_CATEGORIA;
+                document.querySelector("#listStatus").value = objProducto.COD_STATUS;
+                tinymce.activeEditor.setContent(objProducto.DESCRIPCION); 
                 $('#listCategoria').selectpicker('render');
                 $('#listStatus').selectpicker('render');
-                if (objProducto.codigo!='') {
+                if (objProducto.COD_BARRA!='') {
                     fntBarcode();
                     document.querySelector("#divBarCode").classList.remove("notBlock");
                 }else{
@@ -469,7 +471,7 @@ function fntEditInfo(element,idProducto){
                             <div class="prevImage">
                             <img src="${objProductos[p].url_image}"></img>
                             </div>
-                            <button type="button" class="btnDeleteImage" onclick="fntDelItem('#div${key}')" imgname="${objProductos[p].img}">
+                            <button type="button" class="btnDeleteImage" onclick="fntDelItem('#div${key}')" imgname="${objProductos[p].IMG}">
                             <i class="fas fa-trash-alt"></i></button></div>`;
                     }
                 }
