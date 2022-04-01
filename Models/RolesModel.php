@@ -46,10 +46,11 @@
             $this->strDescripcion = $descripcion;
             $this->intStatus = $status;
             
-
-            $sql = "SELECT * FROM tbl_roles WHERE NOM_ROL =  '{$this->strRol}'";
+            /* CRUD DE INSERT ROL PRIMERA CONDICION DE VERIFICACION */
+           /*  $sql = "SELECT * FROM tbl_roles WHERE NOM_ROL =  '{$this->strRol}'"; */
+		    $sql = "CALL CRUD_ROLES('{$this->strRol}', null, null,'A',null)";
             $request = $this->select_all($sql);
-         
+            
             if(empty($request))
 			{
 				/* $query_insert = "INSERT INTO tbl_roles(NOM_ROL, DESCRIPCION, status) VALUES(?,?,?)"; */
@@ -70,8 +71,10 @@
 			$this->strRol = $rol;
 			$this->strDescripcion = $descripcion;
 			$this->intStatus = $status;
-
-			$sql = "SELECT * FROM tbl_roles WHERE NOM_ROL = '$this->strRol' AND COD_ROL != $this->intIdrol";
+            
+			/* CRUD DE UPDATE ROL PRIMERA CONDICION DE VERIFICACION */
+			/* $sql = "SELECT * FROM tbl_roles WHERE NOM_ROL = '$this->strRol' AND COD_ROL != $this->intIdrol"; */
+			$sql = "CALL CRUD_ROLES('{$this->strRol}', null, null,'B','{$this->intIdrol}')";
 			$request = $this->select_all($sql);
 
 			if(empty($request))
@@ -91,7 +94,9 @@
         public function deleteRol(int $idrol)
 		{
 			$this->intIdrol = $idrol;
-			$sql = "SELECT * FROM tbl_personas WHERE COD_ROL = $this->intIdrol";
+			/* CRUD DE DELETE ROL PRIMERA CONDICION DE VERIFICACION */
+			/* $sql = "SELECT * FROM tbl_personas WHERE COD_ROL = $this->intIdrol"; */
+			$sql = "CALL CRUD_ROLES(null, null, null,'C',$this->intIdrol)";
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{

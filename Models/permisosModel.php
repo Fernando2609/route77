@@ -34,7 +34,8 @@
 		public function deletePermisos(int $idrol)
 		{
 			$this->intRolid = $idrol;
-			$sql = "DELETE FROM tbl_permisos WHERE COD_ROL = $this->intRolid";
+			/* $sql = "DELETE FROM tbl_permisos WHERE COD_ROL = $this->intRolid"; */
+			$sql = "CALL CRUD_PERMISOS($this->intRolid,null,null,null,null,null,'D',null)";
 			$request = $this->delete($sql);
 			/* dep($request);
 			exit; */
@@ -47,8 +48,9 @@
 			$this->w = $w;
 			$this->u = $u;
 			$this->d = $d;
-			$query_insert  = "INSERT INTO tbl_permisos(COD_ROL,COD_MODULO,R,W,U,D) VALUES(?,?,?,?,?,?)";
-        	$arrData = array($this->intRolid, $this->intModuloid, $this->r, $this->w, $this->u, $this->d);
+			/* $query_insert  = "INSERT INTO tbl_permisos(COD_ROL,COD_MODULO,R,W,U,D) VALUES(?,?,?,?,?,?)"; */
+			$query_insert = "CALL CRUD_PERMISOS($this->intRolid,$this->intModuloid,?,?,?,?,'I',null)";
+        	$arrData = array($this->r, $this->w, $this->u, $this->d);
         	$request_insert = $this->insert($query_insert,$arrData);
 			$sql = "SELECT last_insert_id()";
 			$request_ID = $this->select($sql);
