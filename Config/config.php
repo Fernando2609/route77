@@ -20,10 +20,10 @@
 	const DB_PASSWORD = "routeEstacion76+1";
 	const DB_CHARSET = "utf8";
 */
-	//const BASE_URL="http://localhost:8080/route77";
+	const BASE_URL="http://localhost:8080/route77";
    
 
-	const BASE_URL="http://localhost/route77";
+	//const BASE_URL="http://localhost/route77";
 
 	//Para envío de correo
 	const ENVIRONMENT = 1; // Local: 0, Produccón: 1;
@@ -68,8 +68,8 @@
 	const EMAIL_EMPRESA = "Estacionroutehn@gmail.com";
 	const EMAIL_PEDIDOS = "Estacionroutehn@gmail.com";
 
-	const CAT_SLIDER = "1,10,5,7,6";
-	const CAT_BANNER = "4,5,8";
+	const CAT_SLIDER = "10,5,1,6";
+	const CAT_BANNER = "10,5,1";
 
 	//Datos para Encriptar / Desencriptar
 	const KEY = 'route77';

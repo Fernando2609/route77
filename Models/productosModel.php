@@ -30,7 +30,7 @@
 					INNER JOIN categoria c
 					ON p.categoriaid = c.idcategoria
 					WHERE p.status != 0 "; */
-					$sql= 'call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,"V",null)';
+					$sql= 'call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,null,"V",null)';
 					$request = $this->select_all($sql);
 
 
@@ -63,16 +63,16 @@
 														ruta,
 														status) 
 								  VALUES(?,?,?,?,?,?,?,?)"; */
-				$query_insert = "CALL CRUD_PRODUCTOS(?,?,?,?,?,?,?,?,?,?);";		  
+				$query_insert = "CALL CRUD_PRODUCTOS(?,?,?,?,?,?,?,?,?,?,?);";		  
 	        	$arrData = array($this->intCategoriaId,
         						$this->intCodigo,
         						$this->strNombre,
         						$this->strDescripcion,
         						$this->strPrecio,
+								$this->strRuta,
 								$this->intUser,
 								0,
-        						/* $this->intStock,
-        						$this	->strRuta, */
+        						/* $this->intStock, */
         						$this->intStatus,
 								'I',
 								"NULL" );
@@ -120,16 +120,17 @@
 							status=?,dateModificado=? 
 						 WHERE idproducto = $this->intIdProducto "; */
 
-             $sql = "CALL CRUD_PRODUCTOS(?,?,?,?,?,?,?,?,?,?);";
+             $sql = "CALL CRUD_PRODUCTOS(?,?,?,?,?,?,?,?,?,?,?);";
 				$arrData = array($this->intCategoriaId,
 							$this->intCodigo,
 							$this->strNombre,
 							$this->strDescripcion,
 							$this->strPrecio,
+							$this->strRuta,
 							"null",
 							$this->intUser,
 							/* $this->intStock,
-							$this	->strRuta, */
+							 */
 							$this->intStatus,
 							'U',
 							$this->intIdProducto );
@@ -157,7 +158,7 @@
 					INNER JOIN categoria c
 					ON p.categoriaid = c.idcategoria
 					WHERE idproducto = $this->intIdProducto"; */
-					$sql ="call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,'R',{$this->intIdProducto})";
+					$sql ="call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,null,'R',{$this->intIdProducto})";
 			$request = $this->select($sql);
 			
 			return $request;
@@ -204,7 +205,7 @@
 			$this->intIdProducto = $idproducto;
 			/* $sql = "UPDATE TBL_PRODUCTOS SET status = ? WHERE COD_PRODUCTO = $this->intIdProducto ";
 			$arrData = array(0); */
-			$sql ="call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,?,{$this->intIdProducto})";
+			$sql ="call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,null,?,{$this->intIdProducto})";
 			$arrData = array('D');
 			
 			$request = $this->update($sql,$arrData);

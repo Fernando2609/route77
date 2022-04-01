@@ -302,17 +302,18 @@
 				<ul class="header-cart-wrapitem w-full">
 				<?php
 				for ($j=0; $j < count($arrCategorias); $j++) { 
-					$ruta=$arrCategorias[$j]['ruta'];				
+					$ruta=$arrCategorias[$j]['RUTA'];
+									
 				?>
 					<li class="header-cart-item flex-w flex-t m-b-12">
-						<a href="<?= base_url().'/tienda/categoria/'.$arrCategorias[$j]['idcategoria'].'/'.$ruta; ?>">
+						<a href="<?= base_url().'/tienda/categoria/'.$arrCategorias[$j]['COD_CATEGORIA'].'/'.$ruta; ?>">
 						<div class="header-cart-item-img">
-							  <img src="<?= $arrCategorias[$j]['portada']?>" alt="<?= $arrCategorias[$j]['nombre']?>">
+							  <img src="<?= $arrCategorias[$j]['PORTADA']?>" alt="<?= $arrCategorias[$j]['NOMBRE']?>">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
-							<a href="<?= base_url().'/tienda/categoria/'.$arrCategorias[$j]['idcategoria'].'/'.$ruta; ?>" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								<?= $arrCategorias[$j]['nombre']?>
+							<a href="<?= base_url().'/tienda/categoria/'.$arrCategorias[$j]['COD_CATEGORIA'].'/'.$ruta; ?>" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								<?= $arrCategorias[$j]['NOMBRE']?>
 							</a>
 
 							<!-- <span class="header-cart-item-info">

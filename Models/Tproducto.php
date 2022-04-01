@@ -12,7 +12,7 @@ trait Tproducto{
    
     public function getProductosT(){
         $this->con = new Mysql();
-        $sql = "SELECT p.idproducto,
+       /*  $sql = "SELECT p.idproducto,
                         p.codigo,
                         p.nombre,
                         p.descripcion,
@@ -24,23 +24,26 @@ trait Tproducto{
                 FROM producto p 
                 INNER JOIN categoria c
                 ON p.categoriaid = c.idcategoria
-                WHERE p.status != 0 /* and p.stock>0 */ ORDER BY p.idproducto DESC ";
+                WHERE p.status != 0 /* and p.stock>0 ORDER BY p.idproducto DESC  "; */
+                $sql="CALL CRUD_TPRODUCTO(null,null,null,null,'V',null)";
                 $request = $this->con->select_all($sql);
+              
                 if(count($request) > 0){
                     for ($c=0; $c < count($request) ; $c++) { 
-                        $intIdProducto = $request[$c]['idproducto'];
-                        $sqlImg = "SELECT img
-                                FROM imagen
-                                WHERE productoid = $intIdProducto";
+                        $intIdProducto = $request[$c]['COD_PRODUCTO'];
+                        $sqlImg = "SELECT IMG
+                                FROM tbl_img_producto
+                                WHERE COD_PRODUCTO = $intIdProducto";
                         $arrImg = $this->con->select_all($sqlImg);
                         if(count($arrImg) > 0){
                             for($i=0; $i < count($arrImg); $i++){
-                                $arrImg[$i]['url_image'] = media().'/images/uploads/'.$arrImg[$i]['img'];
+                                $arrImg[$i]['url_image'] = media().'/images/uploads/'.$arrImg[$i]['IMG'];
                             }
                         }
                         $request[$c]['images'] = $arrImg;
                     }
                 }
+                
         return $request;
     }
 
@@ -49,47 +52,37 @@ trait Tproducto{
         $this->strRuta=$ruta;
         $this->con = new Mysql();
 
-        $sql_cat = "SELECT idcategoria, nombre FROM categoria WHERE idcategoria = '{$this->intIdcategoria}'";
+        $sql_cat = "SELECT COD_CATEGORIA, NOMBRE FROM tbl_CATEGORIA WHERE COD_CATEGORIA = '{$this->intIdcategoria}'";
         $request = $this->con->select($sql_cat);
 
         if(!empty($request)){
-            $this->strCategoria = $request['nombre'];
-            $sql = "SELECT p.idproducto,
-            p.codigo,
-            p.nombre,
-            p.descripcion,
-            p.categoriaid,
-            c.nombre as categoria,
-            p.precio,
-            p.ruta,
-            p.stock 
-            FROM producto p 
-            INNER JOIN categoria c
-            ON p.categoriaid = c.idcategoria
-            WHERE p.status != 0  AND p.categoriaid = $this->intIdcategoria AND c.ruta = '{$this->strRuta}'";
+            $this->strCategoria = $request['NOMBRE'];
+            $sql="CALL CRUD_TPRODUCTO({$this->intIdcategoria},'{$this->strRuta}',null,null,'C',null)";
             $request = $this->con->select_all($sql);
+          
             if(count($request) > 0){
                 for ($c=0; $c < count($request) ; $c++) { 
-                    $intIdProducto = $request[$c]['idproducto'];
-                    $sqlImg = "SELECT img
-                            FROM imagen
-                            WHERE productoid = $intIdProducto";
+                    $intIdProducto = $request[$c]['COD_PRODUCTO'];
+                    $sqlImg = "SELECT IMG
+                            FROM tbl_img_producto
+                            WHERE COD_PRODUCTO = $intIdProducto";
                     $arrImg = $this->con->select_all($sqlImg);
                     if(count($arrImg) > 0){
                         for($i=0; $i < count($arrImg); $i++){
-                            $arrImg[$i]['url_image'] = media().'/images/uploads/'.$arrImg[$i]['img'];
+                            $arrImg[$i]['url_image'] = media().'/images/uploads/'.$arrImg[$i]['IMG'];
                         }
                     }
                     $request[$c]['images'] = $arrImg;
                 }
             }
+          
             $request = array('idcategoria' => $this->intIdcategoria,
 								//'ruta' => $this->strRutaCategoria,
 								'categoria' => $this->strCategoria,
 								'productos' => $request
 							);
         }
-     
+      
         return $request;
     }
     public function getProductoT(int $idProducto,string $ruta)
