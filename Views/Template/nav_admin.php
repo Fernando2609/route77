@@ -180,6 +180,16 @@
             </a>
           </li>
           <?php } ?>
+          <?php if(!empty($_SESSION['permisos'][16]['r'])){ ?>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/sucursales" class="nav-link">
+            <i class=" nav-icon fas fa-user"></i>
+              <p>
+                Sucursales
+              </p>
+            </a>
+          </li>
+          <?php } ?>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
