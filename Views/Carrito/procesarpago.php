@@ -309,9 +309,10 @@
 									<div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
 										<select id="listtipopago" class="js-select2" name="listtipopago">
 										<?php 
+                                       
 											if(count($data['tiposPago']) > 0){ 
 												foreach ($data['tiposPago'] as $tipopago) {
-													if($tipopago['idTipoPago'] != 1){
+													if($tipopago['COD_TIPO_PAGO'] != 1){
 										 ?>
 										 	<option value="<?= $tipopago['COD_TIPO_PAGO']?>"><?= $tipopago['TIPO_PAGO']?></option>
 										<?php

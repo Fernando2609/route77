@@ -393,6 +393,7 @@
             die();		
         }
         public function procesarVenta(){
+           
             if ($_POST){
                 $idtransaccionpaypal=NULL;
                 $datospaypal=NULL;
@@ -400,7 +401,7 @@
                 $monto=0;
                 $tipopagoid=intval($_POST['inttipopago']);
                 $direccionenvio=strClean($_POST['direccion']).', '.strClean($_POST['ciudad']);
-                $status = "Pendiente";
+                $status = 1;
                 $subtotal=0;
                 //$costo_envio=COSTOENVIO;
 
@@ -428,6 +429,7 @@
                                 $tipopagoid,
                                 $direccionenvio,
                                 $status);
+                        
                                 if ($request_pedido>0){
                                     foreach ($_SESSION['arrCarrito'] as $producto) {
                                         $productoid = $producto['idproducto'];
@@ -436,14 +438,18 @@
                                         $stock = $producto['stock'];
                                         $nuevoStock=$stock-$cantidad;
                                         $this->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
+                                        
                                         //Disminuir stock
                                          $this->updateStock($productoid,$nuevoStock); 
                                     }
+                           
                                     $infoOrden=$this->getPedido($request_pedido);
+                                   
                                     $dataEmailOrden=array('asunto'=>"Se ha creado la orden No.".$request_pedido,
-                                                         'email'=>$_SESSION['userData']['email'],
+                                                         'email'=>$_SESSION['userData']['EMAIL'],
                                                          'emailCopia'=>EMAIL_PEDIDOS,
                                                             'pedido'=>$infoOrden);
+                                    
                                     sendEmail($dataEmailOrden,"email_notificacion_orden");
                                    
                                     $orden=openssl_encrypt($request_pedido, METHODENCRIPT, KEY);
@@ -461,7 +467,7 @@
                         //PAGO PAYPAL
                         $jsonPaypal=$_POST['datapay'];
                         $objPaypal=json_decode($jsonPaypal);
-                        $status="Aprobado";
+                        $status=2;
 
                         if(is_object($objPaypal)){
                             $datospaypal=$jsonPaypal;
@@ -469,7 +475,7 @@
                             if ($objPaypal->status == "COMPLETED"){
                                 $totalPaypal= formatMoney($objPaypal->purchase_units[0]->amount->value);
                                 if($monto==$totalPaypal){
-                                    $status="Completo";
+                                    $status=3;
                                 }
                                
                                 $request_pedido=$this->insertPedido($idtransaccionpaypal,
@@ -493,7 +499,7 @@
                                     }
                                     $infoOrden=$this->getPedido($request_pedido);
                                     $dataEmailOrden = array('asunto' => "Se ha creado la orden No.".$request_pedido,
-													'email' => $_SESSION['userData']['email'], 
+													'email' => $_SESSION['userData']['EMAIL'], 
 													'emailCopia' => EMAIL_PEDIDOS,
 													'pedido' => $infoOrden );
 									sendEmail($dataEmailOrden,"email_notificacion_orden");

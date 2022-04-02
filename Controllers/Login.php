@@ -79,8 +79,9 @@
                         'url_recovery' => $url_recovery);
                         
                         if($requestUpdate){
-                            $sendEmail = sendMailLocal($dataUsuario,'email_cambioPassword');
+                            $sendEmail = sendEmail($dataUsuario,'email_cambioPassword');
                             
+                           
                             if($sendEmail){
                                 $arrResponse = array('status' => true, 
                                                  'msg' => 'Se ha enviado un email a tu cuenta de correo para cambiar tu contraseña.');
@@ -114,7 +115,7 @@
 					$data['page_tag'] = "Cambiar contraseña";
 					$data['page_name'] = "cambiar_contrasenia";
 					$data['page_title'] = "Cambiar Contraseña";
-					$data['idUsuario'] = $arrResponse['idUsuario'];
+					$data['idUsuario'] = $arrResponse['COD_PERSONA'];
                     $data['page_functions_js'] = "functions_login.js";  
 					$data['email'] = $strEmail;
 					$data['token'] = $strToken;
