@@ -183,9 +183,9 @@ document.addEventListener('DOMContentLoaded',function(){
                     swal.fire("Roles de usuario", objData.msg ,"success");
                     //toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
                     tableRoles.api().ajax.reload(function(){ 
-                      fntEditRol();
-                      fntEdelRol();
-                      fntPermisos();
+                      /* fntEditRol();
+                      fntDelRol();
+                      fntPermisos(); */
                     });
                     }else{
                       swal.fire("Error", objData.msg , "error");
@@ -235,11 +235,11 @@ function fntEditRol(idrol){
             var objData = JSON.parse(request.responseText);
             if(objData.status)
             {
-                document.querySelector("#idRol").value = objData.data.Id_Rol;
-                document.querySelector("#txtNombre").value = objData.data.nombreRol;
-                document.querySelector("#txtDescripcion").value = objData.data.descripcion;
+                document.querySelector("#idRol").value = objData.data.COD_ROL;
+                document.querySelector("#txtNombre").value = objData.data.NOM_ROL;
+                document.querySelector("#txtDescripcion").value = objData.data.DESCRIPCION;
 
-                if(objData.data.status == 1)
+                if(objData.data.COD_STATUS == 1)
                 {
                     var optionSelect = '<option value="1" selected class="notBlock">Activo</option>';
                 }else{
