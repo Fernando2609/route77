@@ -32,7 +32,7 @@
 	//const DB_NAME = "db_route";
     const DB_NAME = "db_route77";
 	const DB_USER = "root";
-	const DB_PASSWORD = "";
+	const DB_PASSWORD = "newpassword";
 	const DB_CHARSET = "utf8";
 
 
