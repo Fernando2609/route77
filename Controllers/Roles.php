@@ -209,7 +209,7 @@
             if(count($arrData) > 0 ){
                 for ($i=0; $i < count($arrData); $i++) { 
                 
-                    $htmlOptions .= '<option value="'.$arrData[$i]['COD_SUCURSAL'].'">'.$arrData[$i]['DESCRIPCION'].'</option>';
+                    $htmlOptions .= '<option value="'.$arrData[$i]['COD_SUCURSAL'].'">'.$arrData[$i]['NOMBRE'].'</option>';
                     
                 }
             }
