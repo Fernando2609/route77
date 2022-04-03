@@ -105,14 +105,14 @@ class Empresa extends Controllers{
                         $btnEdit = '<button class="btn btn-warning btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['COD_EMPRESA'] . ')" title="Editar empresa"><i class="fas fa-pencil-alt"></i></button>';
                 }
 
-                if ($_SESSION['permisosMod']['d']) {
+               /*  if ($_SESSION['permisosMod']['d']) {
                     
                         $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo(' . $arrData[$i]['COD_EMPRESA'] . ')" title="Eliminar empresa"><i class="far fa-trash-alt"></i></button>';
                     
-                }
+                } */
 
 
-                $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
+                $arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit /* . ' ' . $btnDelete */ . '</div>';
             }
             /*  dep($arrData[0]['status']);exit; */
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);

@@ -148,6 +148,27 @@
             </a>
           </li>
           <?php } ?>
+          <?php if(!empty($_SESSION['permisos'][14]['r'])){ ?>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/empresa" class="nav-link">
+            <i class="nav-icon fa-solid fa-building"></i>
+              <p>
+                Empresa
+              </p>
+            </a>
+          </li>
+          <?php } ?>
+
+          <?php if(!empty($_SESSION['permisos'][15]['r'])){ ?>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/proveedores" class="nav-link">
+            <i class="nav-icon fa-solid fa-truck-ramp-box"></i>
+              <p>
+                Proveedores
+              </p>
+            </a>
+          </li>
+          <?php } ?>
           <!-- Logout-->
           <li class="nav-item">
             <a href="<?= base_url();?>/logout" class="nav-link">
@@ -159,27 +180,7 @@
           </li>
 
 
-          <?php if(!empty($_SESSION['permisos'][14]['r'])){ ?>
-          <li class="nav-item">
-            <a href="<?= base_url();?>/empresa" class="nav-link">
-            <i class=" nav-icon fas fa-user"></i>
-              <p>
-                Empresa
-              </p>
-            </a>
-          </li>
-          <?php } ?>
-
-          <?php if(!empty($_SESSION['permisos'][15]['r'])){ ?>
-          <li class="nav-item">
-            <a href="<?= base_url();?>/proveedores" class="nav-link">
-            <i class=" nav-icon fas fa-user"></i>
-              <p>
-                Proveedores
-              </p>
-            </a>
-          </li>
-          <?php } ?>
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

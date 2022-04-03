@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
       language: {
         url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
       },
-
+      
       ajax: {
         url: " " + base_url + "/Empresa/getEmpresas",
         dataSrc: "",
