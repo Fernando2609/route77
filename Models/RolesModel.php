@@ -19,7 +19,7 @@
 				$whereAdmin = " and COD_ROL != 1 ";
 			}
 			// Extraer roles
-			$sql = "SELECT * FROM tbl_roles WHERE COD_STATUS != 0".$whereAdmin;
+			$sql = "SELECT * FROM tbl_roles WHERE COD_STATUS != 0 and COD_ROL!=2".$whereAdmin;
 			$request = $this->select_all($sql); 
 			return $request;
 

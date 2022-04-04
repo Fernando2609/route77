@@ -23,7 +23,9 @@
 	const BASE_URL="http://localhost/route77";
    
 
-	//const BASE_URL="http://localhost:8080/route77";
+
+	const BASE_URL="http://localhost:8080/route77";
+
 
 	//Para envío de correo
 	const ENVIRONMENT = 0; // Local: 0, Produccón: 1;
