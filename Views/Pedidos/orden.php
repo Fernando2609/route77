@@ -30,9 +30,11 @@
                         $cliente = $data['arrPedido']['cliente'];
                         $orden = $data['arrPedido']['orden'];
                         $detalle = $data['arrPedido']['detalle'];
-                        $transaccion = $orden['idtransaccionpaypal'] != "" ?
-                            $orden['idtransaccionpaypal'] :
-                            $orden['referenciacobro'];
+                        
+                        $transaccion = $orden['COD_TRANSACCION_PAYPAL'] != "" ?
+                            $orden['COD_TRANSACCION_PAYPAL'] :
+                            $orden['REFERENCIA_COBRO'];
+                           
                     ?>
 
                         <!-- Main content -->
@@ -64,19 +66,19 @@
                                 <div class="col-sm-4 invoice-col">
 
                                     <address>
-                                        <strong><?= $cliente['nombres'] . ' ' . $cliente['apellidos'] ?></strong><br>
-                                        Envío: <?= $orden['direccion_envio']; ?><br>
-                                        Tel: <?= $cliente['telefono'] ?><br>
-                                        Email: <?= $cliente['email'] ?>
+                                        <strong><?= $cliente['NOMBRES'] . ' ' . $cliente['APELLIDOS'] ?></strong><br>
+                                        Envío: <?= $orden['DIRECCION_ENVIO']; ?><br>
+                                        Tel: <?= $cliente['TELEFONO'] ?><br>
+                                        Email: <?= $cliente['EMAIL'] ?>
                                     </address>
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
-                                    <b>Orden #<?= $orden['idpedido'] ?></b>
-                                    <b>Pago: </b><?= $orden['tipoPago'] ?><br>
+                                    <b>Orden #<?= $orden['COD_PEDIDO'] ?></b>
+                                    <b>Pago: </b><?= $orden['TIPO_PAGO'] ?><br>
                                     <b>Transacción:</b> <?= $transaccion ?> <br>
                                     <b>Estado:</b> <?= $orden['status'] ?> <br>
-                                    <b>Monto:</b> <?= SMONEY . ' ' . formatMoney($orden['monto']) ?>
+                                    <b>Monto:</b> <?= SMONEY . ' ' . formatMoney($orden['MONTO']) ?>
                                 </div>
                                 <!-- /.col -->
                             </div>
@@ -99,14 +101,14 @@
                                             $subtotal = 0;
                                             if (count($detalle) > 0) {
                                                 foreach ($detalle as $producto) {
-                                                    $subtotal += $producto['cantidad'] * $producto['precio'];
+                                                    $subtotal += $producto['CANTIDAD'] * $producto['PRECIO'];
 
                                             ?>
                                                     <tr>
                                                         <td><?= $producto['producto'] ?></td>
-                                                        <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['precio']) ?></td>
-                                                        <td class="text-center"><?= $producto['cantidad'] ?></td>
-                                                        <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['cantidad'] * $producto['precio']) ?></td>
+                                                        <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['PRECIO']) ?></td>
+                                                        <td class="text-center"><?= $producto['CANTIDAD'] ?></td>
+                                                        <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['CANTIDAD'] * $producto['PRECIO']) ?></td>
                                                     </tr>
                                             <?php
                                                 }
@@ -120,11 +122,11 @@
                                             </tr>
                                             <tr>
                                                 <th colspan="3" class="text-right">Envío:</th>
-                                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($orden['costoenvio']) ?></td>
+                                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($orden['COSTOENVIO']) ?></td>
                                             </tr>
                                             <tr>
                                                 <th colspan="3" class="text-right">Total:</th>
-                                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($orden['monto']) ?></td>
+                                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($orden['MONTO']) ?></td>
                                             </tr>
                                         </tfoot>
                                     </table>

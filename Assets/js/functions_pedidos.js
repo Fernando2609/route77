@@ -8,22 +8,26 @@ tablePedidos = $('#tablePedidos').dataTable({
         
            "ajax":{
             "url": " "+base_url+"/Pedidos/getPedidos",
-            "dataSrc":""
-              },
+            "dataSrc":"",
+            /* success: function(data, textStatus, jqXHR)
+            {
+                console.log(data); //*** returns correct json data
+            } */
+                      },
         
                 "columns": [
-                    {"data":"idpedido"},
+                    {"data":"COD_PEDIDO"},
                     {"data":"transaccion"},
-                    {"data":"fecha"},
-                    {"data":"monto"},
-                    {"data":"tipopago"},
+                    {"data":"FECHA"},
+                    {"data":"MONTO"},
+                    {"data":"TIPO_PAGO"},
                     {"data":"status"},
                     {"data":"options"}
                         
                   ],
                   "columnDefs": [
                     { 'className': "textcenter", "targets": [ 3 ] },
-                    { 'className': "textright", "targets": [ 4 ] },
+                    { 'className': "textcenter", "targets": [ 4 ] },
                     { 'className': "textcenter", "targets": [ 5 ] }
                   ],       
                     'dom': "<'row d-flex'<'col-sm-12 mb-2 col-md-5'l B><'col-md-7 mb-2 align-self-end'f>>"+ "<'row'<'col-sm-12'tr>>" +"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
