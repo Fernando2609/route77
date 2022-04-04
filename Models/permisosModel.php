@@ -14,14 +14,14 @@
         }
         public function selectModulos()
 		{
-			$sql = "SELECT * FROM modulo WHERE status != 0";
+			$sql = "SELECT * FROM tbl_modulo WHERE COD_STATUS != 0";
 			$request = $this->select_all($sql);
 			return $request;
 		}
         public function selectPermisosRol(int $idrol)
 		{
 			$this->intRolid = $idrol;
-			$sql = "SELECT * FROM permisos WHERE rolid = $this->intRolid";
+			$sql = "SELECT * FROM tbl_roles WHERE COD_ROL = $this->intRolid";
 			$request = $this->select_all($sql);
 			return $request;
 		}
