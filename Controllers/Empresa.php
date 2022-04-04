@@ -40,14 +40,14 @@ class Empresa extends Controllers{
                         $option = 1;
                         
                         if ($_SESSION['permisosMod']['w']) {
-                            $request_user = $this->model->insertEmpresa(
+                          /*   $request_user = $this->model->insertEmpresa(
                                 $strNombreEmpresa,
                                 $strDireccion,
                                 $strRazonSocial,
                                 $strEmail,
                                 $strGerenteGeneral,
 
-                            );
+                            ); */
                         }
                     } else {
                          $option = 2;
@@ -139,7 +139,7 @@ class Empresa extends Controllers{
         die();
     }
 
-    public function delEmpresa()
+   /*  public function delEmpresa()
     {
         if ($_POST) {
             if ($_SESSION['permisosMod']['d']) {
@@ -155,7 +155,7 @@ class Empresa extends Controllers{
             }
         }
         die();
-    }
+    } */
 
 
 
