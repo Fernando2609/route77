@@ -86,8 +86,7 @@ class ProveedoresModel extends Mysql{
 			$this->intIdProveedores = $idProveedores;
 		    $sql= "CALL CRUD_PROVEEDOR(null,null,null,null,null,null,null,null,null,null,null,'R',$this->intIdProveedores)";
 			$request = $this->select($sql);
-			/*dep(($request));
-			exit;*/
+		
 			return $request;
 		}
 

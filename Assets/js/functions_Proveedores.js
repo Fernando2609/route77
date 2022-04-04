@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded',function () {
 
         responsive: true,
         bDestroy: true,
-        iDisplayLength: 3,
+        iDisplayLength: 10,
         order: [[0, "desc"]],
         autoWidth: false,
         lengthMenu: [
@@ -304,9 +304,9 @@ document.addEventListener('DOMContentLoaded',function () {
 
 
  function fntViewInfo(idProveedores){
-    
+  console.log(idProveedores);  
   let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-  let ajaxUrl = base_url+'/Proveedores/getProveedor/'+idProveedores;
+  let ajaxUrl = base_url + "/Proveedores/getProveedor/" + idProveedores;
   request.open("GET",ajaxUrl,true);
   request.send();
    request.onreadystatechange = function(){

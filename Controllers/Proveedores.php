@@ -116,7 +116,7 @@ class Proveedores extends Controllers{
             }
 
             if($_SESSION['permisosMod']['r']){
-                $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(this,'.$arrData[$i]['COD_PERSONA'].')" title="Ver Proveedor"><i class="far fa-eye"></i></button>';
+                $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['COD_PERSONA'].')" title="Ver Proveedor"><i class="far fa-eye"></i></button>';
             }
 
             if($_SESSION['permisosMod']['u']){

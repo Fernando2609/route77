@@ -14,15 +14,21 @@
         }
         public function selectModulos()
 		{
-			$sql = "SELECT * FROM tbl_modulo WHERE COD_STATUS != 0";
+			/* $sql = "SELECT * FROM tbl_modulo WHERE COD_STATUS != 0"; */
+			$sql = "CALL CRUD_MODULOS(null, null, null, null, 'V', null)";
 			$request = $this->select_all($sql);
+			/* dep($request);
+			exit; */
 			return $request;
 		}
         public function selectPermisosRol(int $idrol)
 		{
 			$this->intRolid = $idrol;
-			$sql = "SELECT * FROM tbl_roles WHERE COD_ROL = $this->intRolid";
+			/* $sql = "SELECT * FROM tbl_permisos WHERE COD_ROL = $this->intRolid"; */
+			$sql = "CALL CRUD_PERMISOS($this->intRolid,null,null,null,null,null,'R',null)";
 			$request = $this->select_all($sql);
+			/* dep($request);
+			exit; */
 			return $request;
 		}
 		public function deletePermisos(int $idrol)
