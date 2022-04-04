@@ -80,6 +80,19 @@
                     }
                     return $request;
         }
+        public function selectTransPaypal(string $idtransaccion){
+            $objTransaccion=array();
+            $sql="SELECT DATOS_PAYPAL FROM TBL_PEDIDO WHERE COD_TRANSACCION_PAYPAL = '{$idtransaccion}'";
+            $requestData=$this->select($sql);
+            if(!empty($requestData)){
+                $objData=json_decode($requestData['DATOS_PAYPAL']);
+                $urlOrden=$objData->purchase_units[0]->payments->captures[0]->links[0]->href;
+                $urlOrden=$objData->links[2]->href;
+                $objTransaccion=CurlConnectionGet($urlOrden,"application/json",getTokenPaypal());
+            }
+        return $objTransaccion;
+        }
+    
   }
 ?>
 

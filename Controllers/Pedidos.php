@@ -45,13 +45,19 @@
 
                 if ($_SESSION['permisosMod']['r']) {
 
-                    $btnView .= ' <a title= "Ver Detalle" href="'.base_url().'/pedidos/orden/'.$arrData[$i]['COD_PEDIDO'].'" target="_balnck" class="btn btn-info btn-sm"> <i class="far fa-eye"></i> </a>
-                    <button class="btn btn-danger btn-sm" onClick="fntViewDPF('.$arrData[$i]['COD_PEDIDO'].')" title="Generar PDF"><i class="fas fa-file-pdf"></i></button> ';
+                    $btnView .= ' <a title= "Ver Detalle" href="'.base_url().'/pedidos/orden/'.$arrData[$i]['COD_PEDIDO'].'
+                    " target="_balnck" class="btn btn-info btn-sm"> <i class="far fa-eye"></i> </a>
+                    <button class="btn btn-danger btn-sm" onClick="fntViewDPF('.$arrData[$i]['COD_PEDIDO'].')" 
+                    title="Generar PDF"><i class="fas fa-file-pdf"></i></button> ';
                     
-                    if ($arrData[$i]['COD_TIPO_PAGO'] == 1) {
-                        $btnView .= '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['COD_PEDIDO'].')" title="Ver Transacción"><i class="fa fa-paypal" aria-hidden="true"></i></button> ';
+                    if ($arrData[$i]['COD_TIPO_PAGO'] == 1) {        
+                        $btnView .= '<a title= "Ver Transaccion" href="'.base_url().'/pedidos/transaccion/'.$arrData[$i]['COD_TRANSACCION_PAYPAL'].'
+                        " target="_balnck" class="btn btn-info btn-sm"> <i class="fa fa-paypal" 
+                        aria-hidden="true"></i></a>';
+                   
                     }else{
-                        $btnView .= '<button class="btn btn-secondary btn-sm" disabled=""><i class="fa fa-paypal" aria-hidden="true"></i></button> ';
+                        $btnView .= '<button class="btn btn-secondary btn-sm" disabled=""><i class="fa fa-paypal" 
+                        aria-hidden="true"></i></button> ';
                     }
                 }
                 if ($_SESSION['permisosMod']['u']) {
@@ -68,7 +74,10 @@
         die();
         }
 
-        public function orden(int $idpedido){
+        public function orden($idpedido){
+        if(!is_numeric($idpedido)){
+            header("Location:".base_url().'/pedidos');
+        }
         if (empty($_SESSION['permisosMod']['r'])) {
             header('Location: ' . base_url() . '/dashboard');
         }
@@ -85,6 +94,23 @@
         $this->views->getView($this, "orden", $data);
 
         }
+        public function transaccion($transaccion){
+            if (empty($_SESSION['permisosMod']['r'])) {
+                header('Location: ' . base_url() . '/dashboard');
+            }
+            $idpersona = "";
+            if ($_SESSION['userData']['COD_ROL'] == RCLIENTES) {
+                $idpersona = $_SESSION['userData']['COD_PERSONA'];
+            }
+            $requestTransaccion=$this->model->selectTransPaypal($transaccion);
+            $data['page_tag'] = "Detalle de la Transaccion - Route 77";
+            $data['page_title'] = "Detalles de la Transaccion";
+            $data['page_name'] = "Detalles de la Transaccion";
+            $data['objTransaccion']=$requestTransaccion;
+            $data['arrPedido'] = $this->model->selectPedido(2, $idpersona);
+            $this->views->getView($this, "transaccion", $data);
+    
+            }
 
     }
 ?>
