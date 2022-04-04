@@ -43,10 +43,15 @@
 
 					$ruta = strtolower(clear_cadena($strNombre));
 					$ruta = str_replace(" ","-",$ruta);
+					$user=$_SESSION['idUser'];
+
+
                     if($idProducto == 0)
 					{
 						$option = 1;
 						if($_SESSION['permisosMod']['w']){
+							 
+					
 							$request_producto = $this->model->insertProducto($strNombre, 
 																		$strDescripcion, 
 																		$strCodigo, 
@@ -54,12 +59,13 @@
 																		$strPrecio, 
 																		$intStock, 
 																		$ruta,
-																		$intStatus );
+																		$intStatus,
+																	    $user);
 						}
 					}else{
 						$option = 2;
 						if($_SESSION['permisosMod']['u']){
-							$request_producto = $this->model->updateProducto($idProducto,
+							$request_producto  = $this->model->updateProducto($idProducto,
 																		$strNombre,
 																		$strDescripcion, 
 																		$strCodigo, 
@@ -67,7 +73,9 @@
 																		$strPrecio, 
 																		$intStock, 
 																		$ruta,
-																		$intStatus);
+																		$intStatus,
+																	    $user
+																	);
 						}
 					}
                     if($request_producto > 0 )
@@ -97,22 +105,22 @@
                     $btnEdit = '';
                     $btnDelete = '';
                     
-                    if($arrData[$i]['status'] == 1)
+                    if($arrData[$i]['COD_STATUS'] == 1)
                     {
                         $arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';
                     }else{
                         $arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
                     }
 
-                    $arrData[$i]['precio']=SMONEY.' '.formatMoney($arrData[$i]['precio']);
+                    $arrData[$i]['PRECIO']=SMONEY.' '.formatMoney($arrData[$i]['PRECIO']);
                     if($_SESSION['permisosMod']['r']){
-                        $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idproducto'].')" title="Ver Producto"><i class="far fa-eye"></i></button>';
+                        $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['COD_PRODUCTO'].')" title="Ver Producto"><i class="far fa-eye"></i></button>';
                     }
                     if($_SESSION['permisosMod']['u']){
-                        $btnEdit = '<button class="btn btn-warning  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idproducto'].')" title="Editar Producto"><i class="fas fa-pencil-alt"></i></button>';
+                        $btnEdit = '<button class="btn btn-warning  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['COD_PRODUCTO'].')" title="Editar Producto"><i class="fas fa-pencil-alt"></i></button>';
                     }
                     if($_SESSION['permisosMod']['d']){	
-                        $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idproducto'].')" title="Eliminar Producto"><i class="far fa-trash-alt"></i></button>';
+                        $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['COD_PRODUCTO'].')" title="Eliminar Producto"><i class="far fa-trash-alt"></i></button>';
                     }
                     $arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
                 }
@@ -125,28 +133,29 @@
 				$idproducto = intval($idproducto);
 				if($idproducto > 0){
 					$arrData = $this->model->selectProducto($idproducto);
+					
 					if(empty($arrData)){
 						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
 					}else{
 						$arrImg = $this->model->selectImages($idproducto);
-                        
+                     
 						if(count($arrImg) > 0){
 							for ($i=0; $i < count($arrImg); $i++) { 
-								$arrImg[$i]['url_image'] = media().'/images/uploads/'.$arrImg[$i]['img'];
+								$arrImg[$i]['url_image'] = media().'/images/uploads/'.$arrImg[$i]['IMG'];
 							}
 						}
 						$arrData['images'] = $arrImg;
 						$arrResponse = array('status' => true, 'data' => $arrData);
 					}
-                   
+				
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}
 			}
 			die();
 		}
         public function setImage(){
-            //dep($_POST);
-            //dep($_FILES);
+        /* dep($_POST);
+        dep($_FILES); */
     
 			if($_POST){
 				if(empty($_POST['idproducto'])){
@@ -170,6 +179,7 @@
 		}
 		public function delFile(){
 			if($_POST){
+				
 				if(empty($_POST['idproducto']) || empty($_POST['file'])){
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{

@@ -81,17 +81,20 @@ class LoginModel extends Mysql{
         {
             $this->strUsuario = $email;
 			$this->strToken = $token;
-			$sql = "SELECT idUsuario FROM usuarios WHERE 
+			/* $sql = "SELECT idUsuario FROM usuarios WHERE 
 					email = '$this->strUsuario' and 
 					token = '$this->strToken' and 					
-					status = 1 ";
+					status = 1 "; */
+            $sql="CALL LOGIN('$this->strUsuario',null,'$this->strToken','C',null)";
 			$request = $this->select($sql);
+           
 			return $request;
         }
         public function insertPassword(int $idUsuario, string $password){
 			$this->intIdUsuario = $idUsuario;
 			$this->strPassword = $password;
-			$sql = "UPDATE usuarios SET contraseña = ?, token = ? WHERE idUsuario = $this->intIdUsuario ";
+			//$sql = "UPDATE usuarios SET contraseña = ?, token = ? WHERE idUsuario = $this->intIdUsuario ";
+            $sql="CALL LOGIN(null,?,?,'P',$this->intIdUsuario)";
 			$arrData = array($this->strPassword,"");
 			$request = $this->update($sql,$arrData);
 			return $request;

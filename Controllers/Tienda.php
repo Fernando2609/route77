@@ -42,6 +42,7 @@
         }
         
          public function producto($params){
+             
         if (empty($params)) {
             header("Location:" . base_url());
         } else {
@@ -54,12 +55,12 @@
            }
             $producto = strClean($params);
             //$arrProducto = $this->getProductoT($producto);
-            $data['page_tag'] = NOMBRE_EMPESA . " - " . $infoProducto['nombre'];
-            $data['page_title'] = $infoProducto['nombre'];
+            $data['page_tag'] = NOMBRE_EMPESA . " - " . $infoProducto['NOMBRE'];
+            $data['page_title'] = $infoProducto['NOMBRE'];
             $data['page_name'] = "producto";
             $data['categorias'] = $this->getCategorias();
             $data['producto'] = $infoProducto;
-            $data['productos'] = $this->getProductosRandom($infoProducto['categoriaid'],8,"r");
+            $data['productos'] = $this->getProductosRandom($infoProducto['COD_CATEGORIA'],8,"r");
             $this->views->getView($this, "producto", $data);
          }
         }
@@ -67,7 +68,7 @@
         {
             if ($_POST) {
                /*  */
-                //dep($_POST);
+               
                 //unset($_SESSION['arrCarrito']);exit;
                 $arrCarrito=array();
                 $cantCarrito=0;
@@ -76,15 +77,16 @@
                 $cantidad=$_POST['cant'];
                 if (is_numeric($idproducto) and is_numeric($cantidad)) {
                     $arrInfoProducto=$this->getProductoIDT($idproducto);
-                    $stockCarrito=$arrInfoProducto['stock'];
+                    
+                    $stockCarrito=$arrInfoProducto['STOCK'];
                    
                     if (!empty($arrInfoProducto)) {
                         $arrProducto = array('idproducto' => $idproducto,
-											'producto' => $arrInfoProducto['nombre'],
+											'producto' => $arrInfoProducto['NOMBRE'],
 											'cantidad' => $cantidad,
-											'precio' => $arrInfoProducto['precio'],
-                                            'stock' => $arrInfoProducto['stock'],
-                                            'ruta'=>$arrInfoProducto['ruta'],
+											'precio' => $arrInfoProducto['PRECIO'],
+                                            'stock' => $arrInfoProducto['STOCK'],
+                                            'ruta'=>$arrInfoProducto['RUTA'],
 											'imagen' => $arrInfoProducto['images'][0]['url_image']
 										);
                         
@@ -391,6 +393,7 @@
             die();		
         }
         public function procesarVenta(){
+           
             if ($_POST){
                 $idtransaccionpaypal=NULL;
                 $datospaypal=NULL;
@@ -398,7 +401,7 @@
                 $monto=0;
                 $tipopagoid=intval($_POST['inttipopago']);
                 $direccionenvio=strClean($_POST['direccion']).', '.strClean($_POST['ciudad']);
-                $status = "Pendiente";
+                $status = 1;
                 $subtotal=0;
                 //$costo_envio=COSTOENVIO;
 
@@ -426,6 +429,7 @@
                                 $tipopagoid,
                                 $direccionenvio,
                                 $status);
+                        
                                 if ($request_pedido>0){
                                     foreach ($_SESSION['arrCarrito'] as $producto) {
                                         $productoid = $producto['idproducto'];
@@ -434,14 +438,18 @@
                                         $stock = $producto['stock'];
                                         $nuevoStock=$stock-$cantidad;
                                         $this->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
+                                        
                                         //Disminuir stock
                                          $this->updateStock($productoid,$nuevoStock); 
                                     }
+                           
                                     $infoOrden=$this->getPedido($request_pedido);
+                                   
                                     $dataEmailOrden=array('asunto'=>"Se ha creado la orden No.".$request_pedido,
-                                                         'email'=>$_SESSION['userData']['email'],
+                                                         'email'=>$_SESSION['userData']['EMAIL'],
                                                          'emailCopia'=>EMAIL_PEDIDOS,
                                                             'pedido'=>$infoOrden);
+                                    
                                     sendEmail($dataEmailOrden,"email_notificacion_orden");
                                    
                                     $orden=openssl_encrypt($request_pedido, METHODENCRIPT, KEY);
@@ -459,7 +467,7 @@
                         //PAGO PAYPAL
                         $jsonPaypal=$_POST['datapay'];
                         $objPaypal=json_decode($jsonPaypal);
-                        $status="Aprobado";
+                        $status=2;
 
                         if(is_object($objPaypal)){
                             $datospaypal=$jsonPaypal;
@@ -467,7 +475,7 @@
                             if ($objPaypal->status == "COMPLETED"){
                                 $totalPaypal= formatMoney($objPaypal->purchase_units[0]->amount->value);
                                 if($monto==$totalPaypal){
-                                    $status="Completo";
+                                    $status=3;
                                 }
                                
                                 $request_pedido=$this->insertPedido($idtransaccionpaypal,
@@ -491,7 +499,7 @@
                                     }
                                     $infoOrden=$this->getPedido($request_pedido);
                                     $dataEmailOrden = array('asunto' => "Se ha creado la orden No.".$request_pedido,
-													'email' => $_SESSION['userData']['email'], 
+													'email' => $_SESSION['userData']['EMAIL'], 
 													'emailCopia' => EMAIL_PEDIDOS,
 													'pedido' => $infoOrden );
 									sendEmail($dataEmailOrden,"email_notificacion_orden");

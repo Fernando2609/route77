@@ -59,7 +59,7 @@
     //Envio de correos
     function sendEmail($data,$template)
     {
-    
+        
         if(ENVIRONMENT == 1){
             $asunto = $data['asunto'];
             $emailDestino = $data['email'];
@@ -77,6 +77,7 @@
             $send = mail($emailDestino, $asunto, $mensaje, $de);
             return $send;
         }else{
+           
            //Create an instance; passing `true` enables exceptions
             $mail = new PHPMailer(true);
             ob_start();
@@ -85,17 +86,17 @@
 
             try {
                 //Server settings
-                $mail->SMTPDebug = 0;                      //Enable verbose debug output
+                $mail->SMTPDebug =  0;                      //Enable verbose debug output
                 $mail->isSMTP();                                            //Send using SMTP
                 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'estacionroute77@gmail.com';          //SMTP username
+                $mail->Username   = 'Estacionroutehn@gmail.com';          //SMTP username
                 $mail->Password   = 'Estacion.route123';                               //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                 //Recipients
-                $mail->setFrom('estacionroute77@gmail.com', 'Servidor Local');
+                $mail->setFrom('Estacionroutehn@gmail.com', 'Servidor Local ROUTE 77');
                 $mail->addAddress($data['email']);     //Add a recipient
                 if(!empty($data['emailCopia'])){
                     $mail->addBCC($data['emailCopia']);
@@ -134,7 +135,7 @@
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('estacionroute77@gmail.com', 'Servidor Local');
+            $mail->setFrom('estacionroutehn@gmail.com', 'Servidor Local');
             $mail->addAddress($data['email']);     //Add a recipient
             if(!empty($data['emailCopia'])){
                 $mail->addBCC($data['emailCopia']);

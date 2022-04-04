@@ -107,8 +107,9 @@ require_once("Libraries/Core/Mysql.php");
     string $direccionenvio,
     string $status){
     $this->con = new Mysql();
-    $query_insert = "INSERT INTO pedido (idusuario,monto,costoenvio,idTipoPago,direccion_envio,status,idtransaccionpaypal, datospaypal)
-    VALUES(?, ?, ?, ?, ?, ?, ?,?)";
+    /* $query_insert = "INSERT INTO pedido (idusuario,monto,costoenvio,idTipoPago,direccion_envio,status,idtransaccionpaypal, datospaypal)
+    VALUES(?, ?, ?, ?, ?, ?, ?,?)"; */
+    $query_insert="CALL CRUD_PEDIDO(?,?,?,?,?,?,?,?,null,'I',null)";
     $arrData = array($personaid,
                     $monto,
                     $costoenvio,
@@ -119,12 +120,16 @@ require_once("Libraries/Core/Mysql.php");
                     $datospaypal);
     $request_insert=$this->con->insert($query_insert, $arrData);
     $return=$request_insert;
+    $sql = "SELECT last_insert_id()";
+    $request_ID = $this->con->select($sql);
+    $return = $request_ID['last_insert_id()'];
     return $return;
     }
     public function insertDetalle(int $idpedido, int $productoid, float $precio, int $cantidad){
 		$this->con = new Mysql();
-		$query_insert  = "INSERT INTO detalle_pedido(pedidoid,productoid,precio,cantidad) 
-							  VALUES(?,?,?,?)";
+		/* $query_insert  = "INSERT INTO detalle_pedido(pedidoid,productoid,precio,cantidad) 
+							  VALUES(?,?,?,?)"; */
+        $query_insert="CALL CRUD_DETALLE_PEDIDO(?,?,?,?,'I',null)";
 		$arrData = array($idpedido,
     					$productoid,
 						$precio,
@@ -132,6 +137,9 @@ require_once("Libraries/Core/Mysql.php");
 					);
 		$request_insert = $this->con->insert($query_insert,$arrData);
 	    $return = $request_insert;
+        $sql = "SELECT last_insert_id()";
+        $request_ID = $this->con->select($sql);
+        $return = $request_ID['last_insert_id()'];
 	    return $return;
 	}
     public function updateStock(int $productoid, int $stock){
@@ -144,8 +152,9 @@ require_once("Libraries/Core/Mysql.php");
 
         if(empty($request))
         {
-            $sql = "UPDATE producto SET stock = ? WHERE idproducto = $this->productoid "; 	
-            $arrData = array($this->stock);
+            //$sql = "UPDATE producto SET stock = ? WHERE idproducto = $this->productoid "; 	
+            $sql="CALL INVENTARIO(?,'U',?)";
+            $arrData = array($this->stock,$this->productoid);
             $request = $this->con->update($sql,$arrData);
             
         }else{
@@ -200,7 +209,7 @@ require_once("Libraries/Core/Mysql.php");
     public function getPedido(int $idpedido){
 		$this->con = new Mysql();
 		$request = array();
-		$sql = "SELECT p.idpedido,
+		/* $sql = "SELECT p.idpedido,
 							p.referenciacobro,
 							p.idtransaccionpaypal,
 							p.idusuario,
@@ -214,10 +223,11 @@ require_once("Libraries/Core/Mysql.php");
 					FROM pedido as p
 					INNER JOIN tipo_pago t
 					ON p.idTipoPago= t.idTipoPago
-					WHERE p.idpedido =  $idpedido";
+					WHERE p.idpedido =  $idpedido"; */
+        $sql="CALL CRUD_PEDIDO(null,null,null,null,null,null,null,null,null,'R',$idpedido)";
 		$requestPedido = $this->con->select($sql);
 		if(count($requestPedido) > 0){
-			$sql_detalle = "SELECT p.idproducto,
+			/* $sql_detalle = "SELECT p.idproducto,
 											p.nombre as producto,
 											d.precio,
 											d.cantidad
@@ -225,7 +235,8 @@ require_once("Libraries/Core/Mysql.php");
 									INNER JOIN producto p
 									ON d.productoid = p.idproducto 
 									WHERE d.pedidoid = $idpedido
-									";
+									"; */
+            $sql_detalle="CALL CRUD_DETALLE_PEDIDO($idpedido,null,null,null,'R',null)";
 			$requestProductos = $this->con->select_all($sql_detalle);
 			$request = array('orden' => $requestPedido,
 							'detalle' => $requestProductos

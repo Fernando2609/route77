@@ -169,6 +169,7 @@
             </a>
           </li>
           <?php } ?>
+
           <!-- Logout-->
           <li class="nav-item">
             <a href="<?= base_url();?>/logout" class="nav-link">
@@ -181,6 +182,7 @@
 
 
           
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

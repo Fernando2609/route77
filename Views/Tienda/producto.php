@@ -4,7 +4,7 @@ headerTienda($data);
 $arrProducto = $data['producto'];
 $arrProductos = $data['productos'];
 $arrImages = $arrProducto['images'];
-$rutaCategoria=$arrProducto['categoriaid'].'/'.$arrProducto['ruta_categoria'];
+$rutaCategoria=$arrProducto['COD_CATEGORIA'].'/'.$arrProducto['ruta_categoria'];
 
 ?>
 <br><br><br>
@@ -17,11 +17,11 @@ $rutaCategoria=$arrProducto['categoriaid'].'/'.$arrProducto['ruta_categoria'];
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
         <a href="<?= base_url() . '/tienda/categoria/' .$rutaCategoria; ?>" class="stext-109 cl8 hov-cl1 trans-04">
-            <?= $arrProducto['categoria'] ?>
+            <?= $arrProducto['CATEGORIA'] ?>
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
         <span class="stext-109 cl4">
-            <?= $arrProducto['nombre'] ?>
+            <?= $arrProducto['NOMBRE'] ?>
         </span>
     </div>
 </div>
@@ -45,7 +45,7 @@ $rutaCategoria=$arrProducto['categoriaid'].'/'.$arrProducto['ruta_categoria'];
                             ?>
                                     <div class="item-slick3" data-thumb="<?= $arrImages[$img]['url_image']; ?>">
                                         <div class="wrap-pic-w pos-relative">
-                                            <img src="<?= $arrImages[$img]['url_image']; ?>" alt="<?= $arrProducto['nombre']; ?>">
+                                            <img src="<?= $arrImages[$img]['url_image']; ?>" alt="<?= $arrProducto['NOMBRE']; ?>">
 
                                             <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?= $arrImages[$img]['url_image']; ?>">
                                                 <i class=" fa fa-expand"></i>
@@ -67,15 +67,15 @@ $rutaCategoria=$arrProducto['categoriaid'].'/'.$arrProducto['ruta_categoria'];
             <div class="col-md-6 col-lg-5 p-b-30">
                 <div class="p-r-50 p-t-5 p-lr-0-lg">
                     <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                        <?= $arrProducto['nombre']; ?>
+                        <?= $arrProducto['NOMBRE']; ?>
                     </h4>
 
                     <span class="mtext-106 cl2">
-                        <?= SMONEY . formatMoney($arrProducto['precio']); ?>
+                        <?= SMONEY . formatMoney($arrProducto['PRECIO']); ?>
                     </span>
 
                      <p class="stext-102 cl3 p-t-23">
-                        <?= $arrProducto['descripcion']; ?>
+                        <?= $arrProducto['DESCRIPCION']; ?>
                     </p> 
 
                     
@@ -83,7 +83,7 @@ $rutaCategoria=$arrProducto['categoriaid'].'/'.$arrProducto['ruta_categoria'];
 
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-204 flex-w flex-m respon6-next">
-                                <?php if ($arrProducto['stock']>0) {?>
+                                <?php if ($arrProducto['STOCK']>0) {?>
                                     <div class="wrap-num-product flex-w m-r-20 m-tb-10" style="margin-left: 20px;">
                                         <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                             <i class="fs-16 zmdi zmdi-minus"></i>
@@ -95,12 +95,12 @@ $rutaCategoria=$arrProducto['categoriaid'].'/'.$arrProducto['ruta_categoria'];
                                             <i class="fs-16 zmdi zmdi-plus"></i>
                                         </div>
                                     </div>
-                                <button id="<?=  openssl_encrypt($arrProducto['idproducto'],METHODENCRIPT,KEY);  ?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                <button id="<?=  openssl_encrypt($arrProducto['COD_PRODUCTO'],METHODENCRIPT,KEY);  ?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                                     Agregar al carrito
                                 </button>
                                 <?php }else{?>
                                 
-                                <button id="<?=  openssl_encrypt($arrProducto['idproducto'],METHODENCRIPT,KEY);  ?>" class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn1 p-lr-15 trans-04  pAgotado">
+                            <button id="<?=  openssl_encrypt($arrProducto['COD_PRODUCTO'],METHODENCRIPT,KEY);  ?>" class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn1 p-lr-15 trans-04  pAgotado">
                                   Producto Agotado
                                 </button>
                                 <?php } ?>    
@@ -147,7 +147,7 @@ $rutaCategoria=$arrProducto['categoriaid'].'/'.$arrProducto['ruta_categoria'];
                 <?php
                 if (!empty($arrProductos)) {
                     for ($p = 0; $p < count($arrProductos); $p++) {
-                        $ruta=$arrProductos[$p]['ruta'];
+                        $ruta=$arrProductos[$p]['RUTA'];
                         if (count($arrProductos[$p]['images']) > 0) {
                             $portada = $arrProductos[$p]['images'][0]['url_image'];
                         } else {
@@ -159,9 +159,9 @@ $rutaCategoria=$arrProducto['categoriaid'].'/'.$arrProducto['ruta_categoria'];
                             <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-pic hov-img0">
-                                    <img src="<?= $portada ?>" alt="<?= $arrProductos[$p]['nombre'] ?>">
+                                    <img src="<?= $portada ?>" alt="<?= $arrProductos[$p]['NOMBRE'] ?>">
 
-                                    <a href="<?= base_url().'/tienda/producto/'.$arrProductos[$p]['idproducto'].'/'.$ruta;?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                    <a href="<?= base_url().'/tienda/producto/'.$arrProductos[$p]['COD_PRODUCTO'].'/'.$ruta;?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                         Ver producto
                                     </a>
                                 </div>
@@ -169,10 +169,10 @@ $rutaCategoria=$arrProducto['categoriaid'].'/'.$arrProducto['ruta_categoria'];
                                 <div class="block2-txt flex-w flex-t p-t-14">
                                     <div class="block2-txt-child1 flex-col-l ">
                                         <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                            <?= $arrProductos[$p]['nombre'] ?>
+                                            <?= $arrProductos[$p]['NOMBRE'] ?>
                                         </a>
                                         <span class="stext-105 cl3">
-                                            <?= SMONEY . formatMoney($arrProductos[$p]['precio']); ?>
+                                            <?= SMONEY . formatMoney($arrProductos[$p]['PRECIO']); ?>
                                         </span>
                                     </div>
                                     <div class="block2-txt-child2 flex-r p-t-3">

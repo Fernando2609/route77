@@ -197,8 +197,8 @@
         $arrData=$this->model->selectCategorias();
         if (count($arrData)>0) {
             for ($i=0; $i < count($arrData); $i++) { 
-                if($arrData[$i]['status'] == 1 ){
-					$htmlOptions .= '<option value="'.$arrData[$i]['idcategoria'].'">'.$arrData[$i]['nombre'].'</option>';
+                if($arrData[$i]['COD_STATUS'] == 1 ){
+					$htmlOptions .= '<option value="'.$arrData[$i]['COD_CATEGORIA'].'">'.$arrData[$i]['NOMBRE'].'</option>';
                 }
             }
         }

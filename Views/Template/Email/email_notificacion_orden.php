@@ -56,16 +56,16 @@ $detalle = $data['pedido']['detalle'];
 				<td width="33.33%">
 					<div class="text-right">
 						<p>
-							No. Orden: <strong> <?=$orden['idpedido']?> </strong><br>
-                            Fecha: <?=$orden['fecha']?>  <br>
+							No. Orden: <strong> <?=$orden['COD_PEDIDO']?> </strong><br>
+                            Fecha: <?=$orden['FECHA']?>  <br>
                             <?php
-                            if($orden['idTipoPago']==1){
+                            if($orden['COD_TIPO_PAGO']==1){
                                 ?>
-                            Método Pago: <?=$orden['tipoPago']?>  <br>
-                            Transacción: <?=$orden['idtransaccionpaypal']?>
+                            Método Pago: <?=$orden['TIPO PAGO']?>  <br>
+                            Transacción: <?=$orden['COD_TRANSACCION_PAYPAL']?>
                             <?php }else{ ?>
                                 Método Pago: Contra Entrega  <br>
-                                Tipo Pago: <?=$orden['tipoPago']?>
+                                Tipo Pago: <?=$orden['TIPO PAGO']?>
                             <?php }?> 
 						</p>
 					</div>
@@ -75,15 +75,15 @@ $detalle = $data['pedido']['detalle'];
 		<table>
 			<tr>
 		    	<td width="140">Nombre:</td>
-		    	<td> <?=$_SESSION['userData']['nombres'].' '.$_SESSION['userData']['apellidos'] ?> </td>
+		    	<td> <?=$_SESSION['userData']['NOMBRES'].' '.$_SESSION['userData']['APELLIDOS'] ?> </td>
 		    </tr>
 		    <tr>
 		    	<td>Teléfono</td>
-		    	<td> <?=$_SESSION['userData']['telefono']?> </td>
+		    	<td> <?=$_SESSION['userData']['TELEFONO']?> </td>
 		    </tr>
 		    <tr>
 		    	<td>Dirección de envío:</td>
-		    	<td><?=$orden['direccion_envio']?></td>
+		    	<td><?=$orden['DIRECCION_ENVIO']?></td>
 		    </tr>
 		</table>
 		<table>
@@ -100,15 +100,15 @@ $detalle = $data['pedido']['detalle'];
                 if(count($detalle)>0){
                     $subtotal=0;
                     foreach($detalle as $producto){
-                        $precio=formatMoney($producto['precio']);
-                        $importe=formatMoney($producto['precio'] * $producto['cantidad']);
+                        $precio=formatMoney($producto['PRECIO']);
+                        $importe=formatMoney($producto['PRECIO'] * $producto['CANTIDAD']);
                         $subtotal+=$importe;
                 
               ?>
 		    <tr>
-		      <td><?= $producto['producto'] ?> </td>
+		      <td><?= $producto['NOMBRE'] ?> </td>
 		      <td class="text-right"><?= SMONEY.' '.$precio ?></td>
-		      <td class="text-center"><?= $producto['cantidad'] ?></td>
+		      <td class="text-center"><?= $producto['CANTIDAD'] ?></td>
 		      <td class="text-right"><?= SMONEY.' '.$importe ?></td>
 		    </tr>
             <?php } 
@@ -121,11 +121,11 @@ $detalle = $data['pedido']['detalle'];
 		  		</tr>
 		  		<tr>
 		  			<th colspan="3" class="text-right">Envío:</th>
-		  			<td class="text-right"><?= SMONEY.' '.formatMoney($orden['costoenvio']) ?></td>
+		  			<td class="text-right"><?= SMONEY.' '.formatMoney($orden['COSTOENVIO']) ?></td>
 		  		</tr>
 		  		<tr>
 		  			<th colspan="3" class="text-right">Total:</th>
-		  			<td class="text-right"><?= SMONEY.' '.formatMoney($orden['monto']); ?></td>
+		  			<td class="text-right"><?= SMONEY.' '.formatMoney($orden['MONTO']); ?></td>
 		  		</tr>
 		  </tfoot>
 		</table>
