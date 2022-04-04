@@ -162,9 +162,21 @@
           <?php if(!empty($_SESSION['permisos'][15]['r'])){ ?>
           <li class="nav-item">
             <a href="<?= base_url();?>/proveedores" class="nav-link">
-            <i class="nav-icon fa-solid fa-truck-ramp-box"></i>
+            <i class="nav-icon fa-solid fa-truck-fast"></i>
               <p>
                 Proveedores
+              </p>
+            </a>
+          </li>
+          <?php } ?>
+          
+          <?php if(!empty($_SESSION['permisos'][16]['r'])){ ?>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/sucursales" class="nav-link">
+           
+            <i class="nav-icon fa-solid fa-location-dot"></i>
+              <p>
+                Sucursales
               </p>
             </a>
           </li>

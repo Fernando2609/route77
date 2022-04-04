@@ -9,7 +9,7 @@
           <div class="row mb-2"> <!-- Div row y margen abajo de 2-->
             <div class="col-sm-6 d-flex"><!-- Div 6 columnas derecha-->
               <!--Titulo-->
-              <h1><i class="fas fa-user-tag"></i> <?= $data['page_title'] ?> </h1>
+              <h1><i class="fa-solid fa-truck-fast"></i> <?= $data['page_title'] ?> </h1>
               <!--Boton Nuevo-->
               <?php if($_SESSION['permisosMod']['w']){ ?>
               <button type="button" class="btn btn-success btn-nuevo" onclick="openModal();"><i class="fas fa-plus-square"></i>  Nuevo</button>
