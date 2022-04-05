@@ -149,13 +149,35 @@
           </li>
           <?php } ?>
           <?php if(!empty($_SESSION['permisos'][14]['r'])){ ?>
+          
           <li class="nav-item">
-            <a href="<?= base_url();?>/empresa" class="nav-link">
-            <i class="nav-icon fa-solid fa-building"></i>
+            <a href="../widgets.html" class="nav-link">
+             <i class="nav-icon fa-solid fa-building"></i>
               <p>
                 Empresa
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url();?>/empresa" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Empresa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url();?>/telEmpresa" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Teléfonos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url();?>/telEmpresa" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Redes Sociales</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <?php } ?>
 
