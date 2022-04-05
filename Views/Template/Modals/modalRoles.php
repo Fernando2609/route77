@@ -21,7 +21,7 @@
                   <!-- Div Text -->
                   <div class="form-group">
                     <label for="exampleInputNombre">Nombre</label>
-                    <input type="text" class="form-control" id="txtNombre" name="txtNombre" placeholder="Nombre del rol" required="">
+                    <input type="text" class="form-control valid validText" id="txtNombre" name="txtNombre" placeholder="Nombre del rol" required="">
                   </div>
                   <!-- Cierra Text -->
 
