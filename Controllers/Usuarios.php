@@ -122,7 +122,7 @@
                 }
 
                 if($_SESSION['permisosMod']['r']){
-                    $btnView = '<button class="btn btn-info btn-sm btnViewUsuario" onClick="fntViewUsuario('.$arrData[$i]['COD_PERSONA'].')" title="Ver usuario"><i class="far fa-eye"></i></button>';
+                    $btnView = '<button class="btn  btn-info btn-sm btnViewUsuario" onClick="fntViewUsuario('.$arrData[$i]['COD_PERSONA'].')" title="Ver usuario"><i class="far fa-eye"></i></button>';
                 }
 
                 if($_SESSION['permisosMod']['u']){
