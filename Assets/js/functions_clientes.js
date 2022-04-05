@@ -284,7 +284,9 @@ function fntViewInfo(idpersona){
                 document.querySelector("#celEmail").innerHTML = objData.data.EMAIL;
                 document.querySelector("#celEstado").innerHTML = estadoUsuario;
                 document.querySelector("#celFechaRegistro").innerHTML = objData.data.FECHA_CREACION;
+                document.querySelector("#celCreadoPor").innerHTML = objData.data.CREADO_POR;
                 document.querySelector("#celDateModificado").innerHTML = objData.data.FECHA_MODIFICACION; 
+                document.querySelector("#celModPor").innerHTML = objData.data.MODIFICADO_POR;
                 document.querySelector("#celDateLogin").innerHTML = objData.data.DATE_LOGIN;  
                 $('#modalViewCliente').modal('show');
             }else{

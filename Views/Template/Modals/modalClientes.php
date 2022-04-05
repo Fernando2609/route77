@@ -121,8 +121,16 @@
               <td id="celFechaRegistro">Larry</td>
             </tr>
             <tr>
+              <td>Creado por:</td>
+              <td id="celCreadoPor">Larry</td>
+            </tr>
+            <tr>
               <td>Ult. Vez Modificado: </td>
               <td id="celDateModificado">Larry</td>
+            </tr>
+            <tr>
+              <td>Modificado por:</td>
+              <td id="celModPor">Larry</td>
             </tr>
             <tr>
               <td>Ult. Vez Login:</td>
