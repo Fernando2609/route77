@@ -15,10 +15,8 @@ class telEmpresaModel extends Mysql{
 			$this->intTelefono = $telEmpresa;
 			$return = 0;
 
-			/* $sql = "SELECT * FROM TBL_PERSONAS p 
-			left join tbl_cliente c on p.COD_PERSONA=c.COD_PERSONA
-			WHERE p.email =  '{$this->strEmail}' ";
-			$request = $this->select_all($sql); */
+		     $sql = "SELECT * from tbl_telefono_empresa where TELEFONO =$this->intTelefono";
+			$request = $this->select_all($sql); 
 
 			if(empty($request))
 			{
@@ -62,12 +60,10 @@ class telEmpresaModel extends Mysql{
 		$this->intIdUsuario = $idUsuario;
 		$this->intTelefono = $telEmpresa;
 		
-		/* $sql = "SELECT * FROM TBL_PERSONAS p
-		LEFT JOIN tbl_cliente c on p.COD_PERSONA=c.COD_PERSONA
-		WHERE p.EMAIL = '{$this->strEmail}' AND p.COD_PERSONA !=$this->intIdUsuario";
+		 $sql = "SELECT * from tbl_telefono_empresa where TELEFONO =$this->intTelefono";
 		
 		$request = $this->select_all($sql);
- */
+ 
 		if (empty($request)) {	//Si la contraseña es diferente a vaacio se actualiza la contraseña
 		
 				/*$sql = "UPDATE TBL_CLIENTE SET dni=?,nombres=?,apellidos=?,email=?,contraseña=?,status=?,idNacionalidad=?,idGenero=?,idEstadoCivil=?,fechaNacimiento=?,idSucursal=?,telefono=?,datemodificado=?
