@@ -386,17 +386,41 @@ function deleteFile(string $name){
         $from_Currency = urlencode($from_currency);
         $to_Currency = urlencode($to_currency);
         $query =  "{$from_Currency}_{$to_Currency}";
-
-        // change to the free URL if you're using the free version
-        $json = file_get_contents("https://free.currconv.com/api/v7/convert?q={$query}&compact=ultra&apiKey={$apikey}");
+        if (($json = @file_get_contents("https://free.currconv.com/api/v7/convert?q={$query}&compact=ultra&apiKey={$apikey}")) === false) {
+            $error = error_get_last();
+            return "NULL";
+           
+      } else {
         $obj = json_decode($json, true);
 
         $val = floatval($obj["$query"]);
 
-
+        
         $total = $val * $amount;
         return number_format($total, 2, '.', '');
       }
+        // change to the free URL if you're using the free version
+        //$json = file_get_contents("https://free.currconv.com/api/v7/convert?q={$query}&compact=ultra&apiKey={$apikey}");
+        
+      }
+      
+    function getRates($amount){        
+        $app_id ='f07be6cae81a423fab3dac9717a16aef';
+        $file = "latest.json";  
+        //header("Content-Type: application/json");
+        $json = file_get_contents("http://openexchangerates.org/api/{$file}?app_id={$app_id}&base=USD&symbols=HNL");
+        $obj = json_decode($json);
+        $rate_container = array();
+        
+        if(isset($obj->{"rates"})){
+            foreach($obj->{"rates"} as $key=>$rate){
+                $rate_container[$key]=$rate;
+            }
+        }
+        $valor=$rate_container['HNL'];
+        $total = $amount/$valor ;
+        return number_format($total, 2, '.', '');
+    }   
 
     
 ?>
