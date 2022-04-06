@@ -12,64 +12,80 @@ require_once("Libraries/Core/Mysql.php");
       private $strToken;
       private $intTipoId;
    /*    private $intStatus; */
-      private $intNacionalidad;
+      /* private $intNacionalidad;
       private $intGenero;
       private $intEstadoC;
-      private $intSucursal; 
+      private $intSucursal;  */
      /*  private $strFechaNacimiento; */
 
      //Stock
      private $productoid;
       private $stock; 
      
-    public function insertCliente(string $nombre, string $apellido, int $telefono, string $email, string $password, int $tipoid, int $nacionalidad, int $genero, int $estadoC, int $sucursal, string $fechaNacimeinto ){
+    public function insertCliente(string $nombre, string $apellido,  string $email, string $password, int $tipoid, int $status, int $telefono, ){
         $this->con = new Mysql();
         $this->strNombre = $nombre;
         $this->strApellido = $apellido;
-        $this->intTelefono = $telefono;
         $this->strEmail = $email;
         $this->strPassword = $password;
         $this->intTipoId = $tipoid;
+        $this->intStatus = $status;
+        $this->intTelefono = $telefono;
         
-        $this->intNacionalidad = $nacionalidad;
+       /*  $this->intNacionalidad = $nacionalidad;
         $this->intGenero = $genero;
         $this->intEstadoC = $estadoC;
           $this->intSucursal = $sucursal; 
-        $this->strFechaNacimiento=$fechaNacimeinto;
+        $this->strFechaNacimiento=$fechaNacimeinto; */
 
 
         $return = 0;
 
-        $sql = "SELECT * FROM usuarios WHERE 
+        /* $sql = "SELECT * FROM usuarios WHERE 
                 email = '{$this->strEmail}' ";
-        $request =$this->con->select_all($sql);
+        $request =$this->con->select_all($sql); */
+        $sql = "SELECT * FROM TBL_PERSONAS p 
+			left join tbl_cliente c on p.COD_PERSONA=c.COD_PERSONA
+			WHERE p.email =  '{$this->strEmail}' ";
+			$request = $this-> con->select_all($sql);
 
         if(empty($request))
         {
-            $query_insert  = "INSERT INTO usuarios(nombres,apellidos,email,contraseña,idNacionalidad,idGenero,idEstadoCivil,idRol, idSucursal, fechaNacimiento, telefono) 
-                              VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+            /* $query_insert  = "INSERT INTO usuarios(nombres,apellidos,email,contraseña,idRol,telefono) 
+                              VALUES(?,?,?,?,?,?,?,?,?,?,?)"; */
+            $query_insert="CALL CRUD_CLIENTE(?,?,?,?,?,?,?,null,null,'I',null)";
             $arrData = array(
                             $this->strNombre,
                             $this->strApellido,
                             $this->strEmail,
                             $this->strPassword,
-                            $this->intNacionalidad,
+                            /* $this->intNacionalidad,
                             $this->intGenero,
-                            $this->intEstadoC,
+                            $this->intEstadoC, */
                             $this->intTipoId,
-                            $this->intSucursal,  
-                            $this->strFechaNacimiento,
-                           /*  $this->intStatus, */
+                           /*  $this->intSucursal,  
+                            $this->strFechaNacimiento, */
+                            $this->intStatus, 
                              $this->intTelefono );
-            $request_insert = $this->con->insert($query_insert,$arrData);
+           /*  $request_insert = $this->con->insert($query_insert,$arrData);
             $return = $request_insert;
             
+            */
+           /* dep($arrData);
+           exit; */
+            $request_insert = $this->con->insert($query_insert,$arrData);
+            $sql = "SELECT MAX(COD_PERSONA) FROM tbl_personas";
+            $request_ID = $this-> con ->select($sql);
+            $return =$request_ID ["MAX(COD_PERSONA)"];
+
+
+
         }else{
             $return = false;
         }
         return $return;
     }
-    public function SelectNacionalidadCliente()
+    /* public function SelectNacionalidadCliente()
     {
         $this->con = new Mysql();
     // Extraer Nacionalidad
@@ -97,7 +113,7 @@ require_once("Libraries/Core/Mysql.php");
         $request = $this->con->select_all($sql); 
         return $request;
 
-    }
+    } */
     public function insertPedido( string $idtransaccionpaypal=NULL,
     string $datospaypal=NULL,
     int $personaid,

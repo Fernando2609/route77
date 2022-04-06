@@ -150,13 +150,13 @@ if (document.querySelector("#formRegister")) {
         let strEmail = document.querySelector('#txtEmailCliente').value;
         let intTelefono = document.querySelector('#txtTelefono').value;
         /* let intTipousuario = document.querySelector('#listRolid').value; */
-        let intNacionalidad = document.querySelector('#listNacionalidadCliente').value;
+       /*  let intNacionalidad = document.querySelector('#listNacionalidadCliente').value;
         let intGenero = document.querySelector('#listGenero').value;
         let intEstadoC = document.querySelector('#listEstadoC').value;
         let strFechaN = document.querySelector('#fechaNacimiento').value;
-        
+         */
 
-        if(strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == ''|| intNacionalidad == '' || intGenero == ''/* || intEstadoC == '' || strFechaN == ''|| strPassword == '' || intStatus == '' */)
+        if(strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '')
             {
                 swal.fire("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
@@ -197,7 +197,7 @@ if (document.querySelector("#formRegister")) {
         }
     }
 };
-//Funcion para traer la nacionalidad 
+/* //Funcion para traer la nacionalidad 
 function fntNacionalidadCliente(){
     
     let ajaxUrl = base_url+'/Tienda/getSelectNacionalidadCliente';
@@ -246,7 +246,7 @@ function fnEstadoCCliente(){
         }
     }
 
-};
+}; */
 if(document.querySelector(".methodpago")){
 
 	let optmetodo = document.querySelectorAll(".methodpago");
