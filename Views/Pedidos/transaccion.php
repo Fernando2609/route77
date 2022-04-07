@@ -1,4 +1,5 @@
 <?php headerAdmin($data); ?>
+<div id="divModal"></div>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -11,7 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="<?= base_url(); ?>/dashboard"><i class="fas fa-home casa"></i></a></li>
-                        <li class="breadcrumb-item active"><a href="<?= base_url(); ?>/pedidos"> Pedidos</a></li>
+                        <li class="breadcrumb-item active"><a href="<?= base_url(); ?>/pedidos"> TRANSACCIONES</a></li>
                     </ol>
                 </div>
             </div>
@@ -22,136 +23,179 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <?php
-                    dep($data['objTransaccion']);
-                    if (empty($data['arrPedido'])) {
-                    ?>
-                        <p> Datos no encontrados</p>
-                    <?php } else {
-                        $cliente = $data['arrPedido']['cliente'];
-                        $orden = $data['arrPedido']['orden'];
-                        $detalle = $data['arrPedido']['detalle'];
-                        
-                        $transaccion = $orden['COD_TRANSACCION_PAYPAL'] != "" ?
-                            $orden['COD_TRANSACCION_PAYPAL'] :
-                            $orden['REFERENCIA_COBRO'];
-                           
-                    ?>
+        <?php
+          //dep($data['objTransaccion']);
+          if(empty($data['objTransaccion'])){
+        ?>
+        <p>Datos no encontrados</p>
+        <?php }else{
 
-                        <!-- Main content -->
-                        <div class="invoice p-3 mb-3">
-                            <!-- title row -->
-                            <div class="row">
-                                <div class="col-12">
-                                    <h4>
-                                        <!-- Acá empieza la orden -->
-                                   <img width="42" src="<?= media(); ?>/images//logo3.ico" alt="" srcset="">Estación Route 77
-                                    <small class="float-right">Fecha: <?= $orden['fecha'] ?></small>
-                                    </h4>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- info row -->
-                            <div class="row invoice-info">
-                                <div class="col-sm-4 invoice-col">
+            $trs = $data['objTransaccion']->purchase_units[0];
+            $cl = $data['objTransaccion']->payer;
+            $idTransaccion = $trs->payments->captures[0]->id;
+            $fecha = $trs->payments->captures[0]->create_time;
+            $estado = $trs->payments->captures[0]->status;
+            $monto = $trs->payments->captures[0]->amount->value;
+            $moneda = $trs->payments->captures[0]->amount->currency_code;
+            //Datos del cliente
+            $nombreCliente = $cl->name->given_name.' '.$cl->name->surname;
+            $emailCliente = $cl->email_address;
+            $telCliente = isset($cl->phone) ? $cl->phone->phone_number->national_number : "";
+            $codCiudad =  $cl->address->country_code;
 
-                                    <address>
-                                        <strong>NOMBRE_EMPRESA</strong><br>
-                                        <?= DIRECCION ?><br>
-                                        <?= TELEMPRESA ?><br>
-                                        <?= EMAIL_EMPRESA ?><br>
-                                        <?= WEB_EMPRESA ?>
-                                    </address>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-4 invoice-col">
+            $direccion1 = $trs->shipping->address->address_line_1;
+            $direccion2 = $trs->shipping->address->admin_area_2;
+            $direccion3 = $trs->shipping->address->admin_area_1;
+            $codPostal = $trs->shipping->address->postal_code;
+            //Correo Comercio
+            $emailComercio = $trs->payee->email_address;
+            //Detalle
+            $descripcion = $trs->description;
+            $montoDetalle = $trs->amount->value; 
+            //Detalle montos 
+            $totalCompra =  $trs->payments->captures[0]->seller_receivable_breakdown->gross_amount->value;
+            $comision =  $trs->payments->captures[0]->seller_receivable_breakdown->paypal_fee->value; 
+            $importeNeto =  $trs->payments->captures[0]->seller_receivable_breakdown->net_amount->value;
+            //Reembolso
+            $reembolso = false;
+            if(isset($trs->payments->refunds)){
+                $reembolso = true;
+                $importeBruto = $trs->payments->refunds[0]->seller_payable_breakdown->gross_amount->value;
+                $comisionPaypal = $trs->payments->refunds[0]->seller_payable_breakdown->paypal_fee->value;
+                $importeNeto = $trs->payments->refunds[0]->seller_payable_breakdown->net_amount->value;
+                $fechaReembolso = $trs->payments->refunds[0]->update_time;
+            }
 
-                                    <address>
-                                        <strong><?= $cliente['NOMBRES'] . ' ' . $cliente['APELLIDOS'] ?></strong><br>
-                                        Envío: <?= $orden['DIRECCION_ENVIO']; ?><br>
-                                        Tel: <?= $cliente['TELEFONO'] ?><br>
-                                        Email: <?= $cliente['EMAIL'] ?>
-                                    </address>
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-sm-4 invoice-col">
-                                    <b>Orden #<?= $orden['COD_PEDIDO'] ?></b>
-                                    <b>Pago: </b><?= $orden['TIPO_PAGO'] ?><br>
-                                    <b>Transacción:</b> <?= $transaccion ?> <br>
-                                    <b>Estado:</b> <?= $orden['status'] ?> <br>
-                                    <b>Monto:</b> <?= SMONEY . ' ' . formatMoney($orden['MONTO']) ?>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
 
-                            <!-- Table row -->
-                            <div class="row">
-                                <div class="col-12 table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Descripción</th>
-                                                <th class="text-right">Precio</th>
-                                                <th class="text-center">Cantidad #</th>
-                                                <th class="text-right">Importe</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $subtotal = 0;
-                                            if (count($detalle) > 0) {
-                                                foreach ($detalle as $producto) {
-                                                    $subtotal += $producto['CANTIDAD'] * $producto['PRECIO'];
+         ?>
+        <section id="sPedido" class="invoice">
+          <div class="row mb-4">
+            <div class="col-6">
+              <h2 class="page-header"><img src="<?= media(); ?>/images/img-paypal.jpg" ></h2>
+            </div>
+            <?php if(!$reembolso){
+                    if($_SESSION['permisosMod']['u'] and $_SESSION['userData']['COD_ROL'] != RCLIENTES ){
+             ?>
+            <div class="col-6 text-right">
+              <button class="btn btn-outline-primary" onclick="fntTransaccion('<?= $idTransaccion ?>');"><i class="fa fa-reply-all" aria-hidden="true"></i> Hacer Reembolso </button>
+            </div>
+            <?php   }
+                 } ?>
+          </div>
+          <div class="row invoice-info">
+            <div class="col-4">
+              <address><strong>Transacción: <?= $idTransaccion; ?></strong><br><br>
+                <strong>Fecha: <?= $fecha; ?></strong><br>
+                <strong>Estado: <?= $estado; ?></strong><br>
+                <strong>Importe bruto: <?= $monto; ?></strong><br>
+                <strong>Moneda: <?= $moneda; ?></strong><br>
+              </address>
+            </div>
+            <div class="col-4">
+              <address><strong>Enviado por:</strong><br><br>
+                <strong>Nombre:</strong> <?= $nombreCliente ?> <br>
+                <strong>Teléfono:</strong> <?= $telCliente ?> <br>
+                <strong>Dirección:</strong> <?= $direccion1 ?> <br>
+                <?= $direccion2.', '.$direccion3.' '.$codPostal ?> <br>
+                 <?= $codCiudad ?>
+               </address>
+            </div>
+            <div class="col-4"><strong>Enviado a:</strong> <br><br>
+                <strong>Email: </strong> <?= $emailComercio ?> <br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 table-responsive">
+            <?php if($reembolso){ ?>
+              <table class="table table-sm">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Movimiento</th>
+                    <th class="text-right">Importe bruto</th>
+                    <th class="text-right">Comisión</th>
+                    <th class="text-right">Importe neto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <?php if( $_SESSION['userData']['COD_ROL'] == RCLIENTES ) { ?>
+                  <tr>
+                    <td><?= $fechaReembolso.' Reembolso para '.$nombreCliente ?></td>
+                    <td class="text-right">- <?= $importeBruto.' '.$moneda ?></td>
+                    <td class="text-right">0.00 </td>
+                    <td class="text-right">- <?= $importeBruto.' '.$moneda ?></td>
+                  </tr>
+              <?php }else{ ?>
+                  <tr>
+                    <td><?= $fechaReembolso.' Reembolso para '.$nombreCliente ?></td>
+                    <td class="text-right">- <?= $importeBruto.' '.$moneda ?></td>
+                    <td class="text-right">- <?= $comisionPaypal.' '.$moneda ?> </td>
+                    <td class="text-right">- <?= $importeNeto.' '.$moneda ?></td>
+                  </tr>
+                  <tr>
+                    <td><?= $fechaReembolso ?> Cancelación de la comisión de PayPal</td>
+                    <td class="text-right"><?= $comisionPaypal.' '.$moneda ?></td>
+                    <td class="text-right">0.00 <?= $moneda ?></td>
+                    <td class="text-right"><?= $comisionPaypal.' '.$moneda ?></td>
+                  </tr>
+                <?php } ?>
+                </tbody>
+              </table>
+            <?php } ?>
 
-                                            ?>
-                                                    <tr>
-                                                        <td><?= $producto['producto'] ?></td>
-                                                        <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['PRECIO']) ?></td>
-                                                        <td class="text-center"><?= $producto['CANTIDAD'] ?></td>
-                                                        <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['CANTIDAD'] * $producto['PRECIO']) ?></td>
-                                                    </tr>
-                                            <?php
-                                                }
-                                            }
-                                            ?>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th colspan="3" class="text-right">Sub-Total:</th>
-                                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($subtotal) ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="3" class="text-right">Envío:</th>
-                                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($orden['COSTOENVIO']) ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="3" class="text-right">Total:</th>
-                                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($orden['MONTO']) ?></td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
 
-                            <div class="row">
-                                <!-- accepted payments column -->
+              <table class="table table-sm">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Detalle pedido</th>
+                    <th class="text-right">Cantidad</th>
+                    <th class="text-right">Precio</th>
+                    <th class="text-right">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><?= $descripcion ?></td>
+                    <td class="text-right">1</td>
+                    <td class="text-right"><?= $monto.' '.$moneda ?></td>
+                    <td class="text-right"><?= $monto.' '.$moneda ?></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="3" class="text-right">Total de la compra:</th>
+                        <td class="text-right"><?= $monto.' '.$moneda ?></td>
+                    </tr>
+                </tfoot>
+              </table>
+              <?php if( $_SESSION['userData']['COD_ROL'] != RCLIENTES ){ ?>
+              <table class="table table-sm">
+                  <thead class="thead-light">
+                      <tr>
+                        <th colspan="2">Detalles del pago</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                       <tr>
+                          <td width="250"><strong>Total de la compra</strong></td>
+                          <td><?= $totalCompra.' '.$moneda ?></td>
+                      </tr>
+                      <tr>
+                          <td><strong>Comisión de PayPal</strong></td>
+                          <td>- <?= $comision.' '.$moneda ?></td>
+                      </tr>
+                      <tr>
+                          <td><strong>Importe neto</strong></td>
+                          <td><?= $importeNeto.' '.$moneda ?></td>
+                      </tr>
+                  </tbody>
+              </table>
+                <?php } ?>
 
-                                <!-- /.col -->
-
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
-
-                            <!-- this row will not appear when printing -->
-                            <div class="row no-print">
-                                <div class="col-12">
-                                    <a href="javascript:window.print('#sPedido');" class="btn btn-primary"><i class="fas fa-print"></i> Imprimir</a>
-                                    
-                                    
-                                </div>
+            </div>
+          </div>
+          <div class="row d-print-none mt-2">
+            <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print('#sPedido');" ><i class="fa fa-print"></i> Imprimir</a></div>
+            </div>
                             </div>
                         </div>
                         <!-- /.invoice -->

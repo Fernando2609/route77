@@ -2,6 +2,7 @@
 headerAdmin($data);
 //getModal('modalPedidos', $data);
 ?>
+<div id="divModal"></div>
 
 <!-- Content Wrapper. Contains page content -- Div Principal -->
 <div class="content-wrapper">
