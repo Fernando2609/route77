@@ -476,6 +476,14 @@ function fntViewUsuario(idpersona){
             console.log(objData);
             if(objData.status)
             {
+              let CREADO_POR =
+                objData.data.CREADO_POR == null
+                  ? "Registro en Tienda"
+                  : objData.data.CREADO_POR;
+              let MODIFICADO_POR =
+                objData.data.MODIFICADO_POR == null
+                  ? "Sin Modificar"
+                  : objData.data.MODIFICADO_POR;
                let estadoUsuario = objData.data.COD_STATUS == 1 ? 
                 '<span class="badge badge-success">Activo</span>' : 
                 '<span class="badge badge-danger">Inactivo</span>';

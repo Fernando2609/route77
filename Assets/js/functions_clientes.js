@@ -272,6 +272,15 @@ function fntViewInfo(idpersona){
             //console.log(objData);
             if(objData.status)
             {
+                let CREADO_POR =
+                  objData.data.CREADO_POR == null
+                    ? "Registro en Tienda"
+                    : objData.data.CREADO_POR;
+                 let MODIFICADO_POR =
+                   objData.data.MODIFICADO_POR == null
+                     ? "Sin Modificar"
+                     : objData.data.MODIFICADO_POR;
+                
                 /*console.log(objData.data.status); */
                 let estadoUsuario = objData.data.COD_STATUS == 1 ? 
                 '<span class="badge badge-success">Activo</span>' : 
@@ -284,9 +293,9 @@ function fntViewInfo(idpersona){
                 document.querySelector("#celEmail").innerHTML = objData.data.EMAIL;
                 document.querySelector("#celEstado").innerHTML = estadoUsuario;
                 document.querySelector("#celFechaRegistro").innerHTML = objData.data.FECHA_CREACION;
-                document.querySelector("#celCreadoPor").innerHTML = objData.data.CREADO_POR;
+                document.querySelector("#celCreadoPor").innerHTML = CREADO_POR;
                 document.querySelector("#celDateModificado").innerHTML = objData.data.FECHA_MODIFICACION; 
-                document.querySelector("#celModPor").innerHTML = objData.data.MODIFICADO_POR;
+                document.querySelector("#celModPor").innerHTML = MODIFICADO_POR;
                 document.querySelector("#celDateLogin").innerHTML = objData.data.DATE_LOGIN;  
                 $('#modalViewCliente').modal('show');
             }else{
