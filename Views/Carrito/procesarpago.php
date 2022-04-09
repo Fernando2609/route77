@@ -195,7 +195,7 @@
 										<input type="email" class="form-control valid validEmail" id="txtEmailCliente" name="txtEmailCliente" required="">
 									</div>
 						 		</div>
-                                 <div class="row">
+                                 <!-- <div class="row">
                                     <div class="form-group col col-md-6">
                                         <label for="listNacionalidadCliente">Nacionalidad<span class="required"> *</span></label>
                                         <select class="form-control" data-live-search="true" id="listNacionalidadCliente" name="listNacionalidadCliente" required>
@@ -217,7 +217,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="fechaNacimiento">Fecha de Nacimiento<span class="required"> *</span></label>
                                     <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
-                                </div>
+                                </div> -->
                                 </div>
 								<button type="submit" class="btn btn-primary">Regístrate</button>
 						 	</form>

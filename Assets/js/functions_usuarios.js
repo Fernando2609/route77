@@ -491,7 +491,9 @@ function fntViewUsuario(idpersona){
                 document.querySelector("#celSucursal").innerHTML = objData.data.SUCURSAL;
                 document.querySelector("#celEstado").innerHTML = estadoUsuario;
                 document.querySelector("#celFechaRegistro").innerHTML = objData.data.FECHA_CREACION;
-                document.querySelector("#celDateModificado").innerHTML = objData.data.FECHA_MODIFICACION; 
+                document.querySelector("#celCreadoPor").innerHTML = objData.data.CREADO_POR;
+                document.querySelector("#celDateModificado").innerHTML = objData.data.FECHA_MODIFICACION;
+                document.querySelector("#celModPor").innerHTML = objData.data.MODIFICADO_POR; 
                 document.querySelector("#celDateLogin").innerHTML = objData.data.DATE_LOGIN;  
                 $('#modalViewUser').modal('show');
             }else{

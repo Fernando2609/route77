@@ -287,22 +287,24 @@
         {
             
             if ($_POST) {
-                if(empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmailCliente']) || empty($_POST['listNacionalidadCliente']))
+                if(empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmailCliente']) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{ 
                     
 					$strNombre = ucwords(strClean($_POST['txtNombre']));
 					$strApellido = ucwords(strClean($_POST['txtApellido']));
-					$intTelefono = intval(strClean($_POST['txtTelefono']));
 					$strEmail = strtolower(strClean($_POST['txtEmailCliente']));
-					$intTipoId = 7;
+                    $intTipoId = 2;
+                    $intStatus =1;
+                    $intTelefono = intval(strClean($_POST['txtTelefono']));
+					//$intTipoId = 7;
 				
-                    $intNacionalidad = intval(strClean($_POST['listNacionalidadCliente']));
+                    /* $intNacionalidad = intval(strClean($_POST['listNacionalidadCliente']));
                     $intGenero = intval(strClean($_POST['listGenero']));
                     $intEstadoC = intval(strClean($_POST['listEstadoC']));
                     $intSucursal = 4;
-                     $strFechaNacimiento = strClean($_POST['fechaNacimiento']); 
+                     $strFechaNacimiento = strClean($_POST['fechaNacimiento']); */ 
                     $request_user="";
                     $strPassword =  passGenerator();
                     $strPasswordEncrip = hash("SHA256",$strPassword);
@@ -310,17 +312,13 @@
                     $request_user = $this->insertCliente(
                                             $strNombre, 
                                             $strApellido, 
-                                            $intTelefono, 
                                             $strEmail,
-                                    
-                                            $strPasswordEncrip, 
+                                            $strPasswordEncrip,
                                             $intTipoId, 
-                                            /*  $intStatus, */
-                                            $intNacionalidad,
-                                            $intGenero,
-                                            $intEstadoC,
-                                            $intSucursal,
-                                             $strFechaNacimiento  );
+                                            $intStatus,
+                                            $intTelefono, 
+                                             
+                                             );
                                                                                
                     
 
@@ -348,7 +346,7 @@
             
             die();
         }
-        public function getSelectNacionalidadCliente()
+        /* public function getSelectNacionalidadCliente()
 		{
 			$htmlOptions = "";
 			$arrData = $this->selectNacionalidadCliente();
@@ -391,7 +389,7 @@
             }
             echo $htmlOptions;
             die();		
-        }
+        } */
         public function procesarVenta(){
            
             if ($_POST){
