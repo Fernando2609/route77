@@ -4,8 +4,6 @@ class telEmpresaModel extends Mysql{
 		private $intIdUsuario;
 		private $intTelefono;
 		
-        
-
         public function __construct()
         {
            parent::__construct();
@@ -15,8 +13,8 @@ class telEmpresaModel extends Mysql{
 			$this->intTelefono = $telEmpresa;
 			$return = 0;
 
-		     $sql = "SELECT * from tbl_telefono_empresa where TELEFONO =$this->intTelefono";
-			$request = $this->select_all($sql); 
+		     $sql = "SELECT * from tbl_telefono_empresa where TELEFONO=$this->intTelefono";
+			 $request = $this->select_all($sql); 
 
 			if(empty($request))
 			{
@@ -60,7 +58,7 @@ class telEmpresaModel extends Mysql{
 		$this->intIdUsuario = $idUsuario;
 		$this->intTelefono = $telEmpresa;
 		
-		 $sql = "SELECT * from tbl_telefono_empresa where TELEFONO =$this->intTelefono";
+		 $sql = "SELECT * from tbl_telefono_empresa where TELEFONO =$this->intTelefono and COD_TELEFONO_EMPRESA!=$this->intIdUsuario";
 		
 		$request = $this->select_all($sql);
  
@@ -93,7 +91,6 @@ class telEmpresaModel extends Mysql{
 		$request = $this->update($sql, $arrData);
 		return $request;
 	}
-
 
     }
 ?>

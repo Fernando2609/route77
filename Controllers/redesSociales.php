@@ -18,7 +18,7 @@ class redesSociales extends Controllers{
                 header('Location: '.base_url().'/dashboard');
             }
             $data['page_tag']= "redesSociales";
-            $data['page_title']= "Redes_Sociales <small>Route 77</small>";
+            $data['page_title']= "Redes Sociales <small>Route 77</small>";
             $data['page_name']= "redesSociales";
             $data['page_functions_js']= "functions_redesSociales.js";
             $this->views->getView($this, "redesSociales",$data);

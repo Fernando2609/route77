@@ -40,7 +40,7 @@ getModal('modaltelEmpresa', $data);
                         <!-- div card -->
                         <!-- Encabezado -->
                         <div class="card-header">
-                            <h2 class="card-title">Tabla Tel_Empresa</h2>
+                            <h2 class="card-title">Tabla Teléfonos</h2>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-body">

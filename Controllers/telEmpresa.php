@@ -18,7 +18,7 @@ class telEmpresa extends Controllers{
                 header('Location: '.base_url().'/dashboard');
             }
             $data['page_tag']= "telEmpresa";
-            $data['page_title']="Tel_EMPRESA <small>Route 77</small>";
+            $data['page_title']="Teléfonos <small>Route 77</small>";
             $data['page_name']="telempresa";
             $data['page_functions_js']="functions_telempresa.js";
             $this->views->getView($this,"telempresa",$data);
