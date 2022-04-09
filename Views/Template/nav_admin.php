@@ -204,7 +204,7 @@
           </li>
           <?php } ?>
           
-        <?php if(!empty($_SESSION['permisos'][16]['r'])){ ?>
+        <?php if(!empty($_SESSION['permisos'][9]['r'])){ ?>
           <li class="nav-item">
             <a href="<?= base_url();?>/inventario" class="nav-link"> 
             <i class=" nav-icon fa-solid fa-boxes-stacked"></i>
