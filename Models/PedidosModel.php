@@ -80,19 +80,83 @@
                     }
                     return $request;
         }
-        public function selectTransPaypal(string $idtransaccion){
-            $objTransaccion=array();
-            $sql="SELECT DATOS_PAYPAL FROM TBL_PEDIDO WHERE COD_TRANSACCION_PAYPAL = '{$idtransaccion}'";
-            $requestData=$this->select($sql);
+        public function selectTransPaypal(string $idtransaccion, $idpersona = NULL){
+			$busqueda = "";
+			if($idpersona != NULL){
+				$busqueda = " AND COD_PERSONA =".$idpersona;
+			}
+			$objTransaccion = array();
+			$sql = "SELECT DATOS_PAYPAL FROM TBL_PEDIDO WHERE COD_TRANSACCION_PAYPAL = '{$idtransaccion}' ".$busqueda;
+			$requestData = $this->select($sql);
+			if(!empty($requestData)){
+				$objData = json_decode($requestData['DATOS_PAYPAL']);
+				//$urlTransaccion = $objData->purchase_units[0]->payments->captures[0]->links[0]->href;
+				$urlOrden = $objData->links[0]->href;
+				$objTransaccion = CurlConnectionGet($urlOrden,"application/json",getTokenPaypal());
+			}
+			return $objTransaccion;
+		}
+        public function reembolsoPaypal(string $idtransaccion, string $observacion)
+        {
+            $response = false;
+            $sql= "SELECT COD_PEDIDO, DATOS_PAYPAL FROM TBL_PEDIDO  WHERE COD_TRANSACCION_PAYPAL = '{$idtransaccion}' ";
+            $requestData= $this-> select($sql);
             if(!empty($requestData)){
-                $objData=json_decode($requestData['DATOS_PAYPAL']);
-                $urlOrden=$objData->purchase_units[0]->payments->captures[0]->links[0]->href;
-                $urlOrden=$objData->links[2]->href;
-                $objTransaccion=CurlConnectionGet($urlOrden,"application/json",getTokenPaypal());
+                $objData= json_decode($requestData['DATOS_PAYPAL']);
+                //INGRESAR AL HREF DEL METODO LINKS CON EL METODO GET
+               $urlOrden = $objData->links[0]->href;
+               $objurl=CurlConnectionGet($urlOrden,"application/json",getTokenPaypal());
+                //INGRESAR AL HREF DEL METODO LINKS CON EL METODO POST PARA LA URL DE REEMBOLSO(REFOUND)
+               $urlReembolso=$objurl->purchase_units[0]->payments->captures[0]->links[1]->href;
+               $objTransaccion=CurlConnectionPost($urlReembolso,"application/json",getTokenPaypal());
+                if(isset($objTransaccion->status) and $objTransaccion->status == "COMPLETED") {
+                    $idpedido=$requestData['COD_PEDIDO'];
+                    $idtransaccion= $objTransaccion->id;
+                    $status= $objTransaccion->status;
+                    $jsonData = json_encode($objTransaccion);
+                    $observacion=$observacion;
+                    $query_insert= "INSERT INTO TBL_REEMBOLSO (COD_PEDIDO,
+                                                            COD_TRANSACCION,
+                                                            DATOS_REEMBOLSO,
+                                                            OBSERVACION,
+                                                            STATUS) 
+                                                            VALUES (?,?,?,?,?)";
+                    $arrData = array($idpedido,
+                                    $idtransaccion,
+                                    $jsonData,
+                                    $observacion,
+                                    $status);
+                $request_insert= $this->insert($query_insert, $arrData);
+                if($request_insert>0){
+                    $updatePedido=" UPDATE TBL_PEDIDO SET COD_ESTADO = ? WHERE COD_PEDIDO = $idpedido";
+                    $arrPedido= array(4);
+                    $request=$this->update($updatePedido, $arrPedido);
+                    $response=true;
+                }
             }
-        return $objTransaccion;
-        }
-    
+                return $response;
+            }
+        }  
+        
+        public function updatePedido(int $idpedido, $transaccion = NULL, $idtipopago = NULL,int $estado){
+			if($transaccion == NULL){
+				$query_insert  = "UPDATE TBL_PEDIDO SET COD_ESTADO = ?  WHERE COD_PEDIDO = $idpedido ";
+	        	$arrData = array($estado);
+			}else{
+				$query_insert  = "UPDATE TBL_PEDIDO SET REFERENCIA_COBRO = ?, COD_TIPO_PAGO = ?,COD_ESTADO = ? WHERE COD_PEDIDO = $idpedido";
+	        	$arrData = array($transaccion,
+	        					$idtipopago,
+	    						$estado
+	    					);
+			}
+			$request_insert = $this->update($query_insert,$arrData);
+        	return $request_insert;
+		}
+
+
+
+
+
   }
 ?>
 
