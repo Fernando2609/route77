@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="txtDireccion">Dirección<span class="required"> *</span></label>
-                            <input type="text" class="form-control valid validText" id="txtDireccion" name="txtDireccion" required="">
+                            <input type="text" class="form-control valid" id="txtDireccion" name="txtDireccion" required="">
                         </div>
                     </div>
                     <div class="form-row">

@@ -25,7 +25,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="txtRTN">RTN</label>
-              <input type="text" class="form-control valid validNumber" id="txtRTN" name="txtRTN" required="" onkeypress="return controlTag(event);">
+              <input type="text" class="form-control valid validNumberRtn" id="txtRTN" name="txtRTN" required="" onkeypress="return controlTag(event);">
             </div>
             <div class="form-group col-md-6">
               <label for="txtEmail">Email</label>
@@ -45,18 +45,18 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="txtTelefono">Teléfono</label>
-              <input type="text" class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" required="" onkeypress="return controlTag(event);">
+              <input type="text" class="form-control valid validNumberTel" id="txtTelefono" name="txtTelefono" required="" onkeypress="return controlTag(event);">
             </div>
             <div class="form-group col-md-6">
               <label for="txtTelefono">Empresa</label>
-              <input type="text" class="form-control valid validText" id="txtEmpresa" name="txtEmpresa" required="">
+              <input type="text" class="form-control valid" id="txtEmpresa" name="txtEmpresa" required="">
             </div>
           </div>
 
           <div class="form-row">          
             <div class="form-group col-md-6">
               <label for="txtTelefono">Ubicación</label>
-              <input type="text" class="form-control valid validText" id="txtUbicacion" name="txtUbicacion" required="">
+              <input type="text" class="form-control valid" id="txtUbicacion" name="txtUbicacion" required="">
             </div>
             <div class="form-group col-md-6">
               <label for="listStatus">Status</label>
