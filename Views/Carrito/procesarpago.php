@@ -18,7 +18,10 @@
      }
      $total=$subtotal+$envio;
      $totalPaypal=convertCurrency($total, 'HNL', 'USD');
-     
+     if ($totalPaypal=="NULL") {
+         $totalPaypal=getRates($total);
+         
+     }
      /* dep($conversion);
      dep($totalPaypal); */
 

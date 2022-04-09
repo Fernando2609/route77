@@ -25,6 +25,7 @@ function testText(txtString){
     }
 }
 
+
 function testEnteroDni(intCant) {
     var intCantidad = new RegExp(/^([0-9]{13})$/);
     if (intCantidad.test(intCant)){
@@ -53,6 +54,7 @@ function testEnteroTel(intCant) {
 
 function testPrecio(intCant) {
     var intCantidad = new RegExp(/^([0-9])$/);
+
     if (intCantidad.test(intCant)){
         return true;
     }else{

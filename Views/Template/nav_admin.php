@@ -203,6 +203,17 @@
             </a>
           </li>
           <?php } ?>
+          
+        <?php if(!empty($_SESSION['permisos'][16]['r'])){ ?>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/inventario" class="nav-link"> 
+            <i class=" nav-icon fa-solid fa-boxes-stacked"></i>
+              <p>
+                Inventario
+              </p>
+            </a>
+          </li>
+          <?php } ?>
 
           <!-- Logout-->
           <li class="nav-item">
