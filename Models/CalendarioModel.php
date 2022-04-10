@@ -25,8 +25,8 @@
             
 			if(empty($request))
 			{
-				$query_insert  = "INSERT INTO calendario(idUsuario,title,descripcion,start,end,color,textColor) 
-								  VALUES(?,?,?,?,?,?,?)";
+				//$query_insert  = "INSERT INTO calendario(idUsuario,title,descripcion,start,end,color,textColor) VALUES(?,?,?,?,?,?,?)";
+				$query_insert  = "INSERT INTO tbl_calendario(COD_PERSONA,title,descripcion,start,end,color,textColor) VALUES(?,?,?,?,?,?,?)";
 	        	$arrData = array($this->intIdUsuario,
 								 $this->strtitle,
                                 $this->strdescripcion,
@@ -46,9 +46,10 @@
 			//Sumarle un dia a la fecha final
 			//DATE_ADD(c.end, interval 1 day) as end
 			$this->intIdUsuario = $idUsuario;
-			$sql = "SELECT  c.id, c.title,c.descripcion,c.start,c.end, c.color,c.textColor from calendario c WHERE idUsuario=$this->intIdUsuario";
+			//$sql = "SELECT  c.id, c.title,c.descripcion,c.start,c.end, c.color,c.textColor from calendario c WHERE idUsuario=$this->intIdUsuario";
+			$sql = "SELECT * FROM tbl_calendario where COD_PERSONA=$this->intIdUsuario";
 					$request = $this->select_all($sql);
-                    
+           
 					return $request;
 		}
 		public function updateEvento(int $idEvento, string $title, string $descripcion, string $start,string $end,string $color,string $Textcolor ){
@@ -71,7 +72,7 @@
             
 			if(empty($request))
 			{
-				$sql = "UPDATE calendario SET title=?,descripcion=?,start=?,end=?,color=?,textColor=?,dateModificado=? where id=$this->idEvento";
+				$sql = "UPDATE tbl_calendario SET title=?,descripcion=?,start=?,end=?,color=?,textColor=?,dateModificado=? where COD_CALENDARIO=$this->idEvento";
 	        	$arrData = array($this->strtitle,
                                 $this->strdescripcion,
                                 $this->strstart,
@@ -98,7 +99,7 @@
             
 			if(empty($request))
 			{
-				$sql = "DELETE FROM calendario where id=$this->idEvento";
+				$sql = "DELETE FROM tbl_calendario where COD_CALENDARIO=$this->idEvento";
 	        
 				$request = $this->delete($sql);
 	        	

@@ -60,10 +60,15 @@
                   <div class="tab-pane active" id="activity">
                   <table class="table table-bordered">
                     <tbody>
+                      <?php
+                        
+                        if (!empty($_SESSION['userData']['DNI'])) { 
+                      ?>
                       <tr>
                         <td style="width:200px;">Identificación:</td>
                         <td><?= $_SESSION['userData']['DNI']; ?></td>
                       </tr>
+                      <?php } ?>
                       <tr>
                         <td>Nombres:</td>
                         <td><?= $_SESSION['userData']['NOMBRES']; ?></td>

@@ -228,7 +228,7 @@ tablePedidos = $('#tablePedidos').dataTable({
                 popup: 'animate__animated animate__fadeOutUp'
             },
             showCancelButton: true,
-            confirmButtonText: "Si, eliminar!",
+            confirmButtonText: "Si, Reembolsar!",
             cancelButtonText: "No, cancelar!",
             closeOnConfirm: true,
             closeOnCancel: true

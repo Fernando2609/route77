@@ -68,20 +68,24 @@
 
 
          ?>
-        <section id="sPedido" class="invoice">
+        <section id="sPedido" class="invoice p-3 mb-3">
           <div class="row mb-4">
             <div class="col-6">
               <h2 class="page-header"><img src="<?= media(); ?>/images/img-paypal.jpg" ></h2>
             </div>
-            <?php if(!$reembolso){
+            <div class="col-6 d-flex justify-content-end">
+              <h2 class="page-header"><img width="42" src="<?= media(); ?>/images//logo3.ico" alt="" srcset=""></h2>
+            </div>
+            
+          </div>
+          <?php if(!$reembolso){
                     if($_SESSION['permisosMod']['u'] and $_SESSION['userData']['COD_ROL'] != RCLIENTES ){
              ?>
-            <div class="col-6 text-right">
-              <button class="btn btn-outline-primary" onclick="fntTransaccion('<?= $idTransaccion ?>');"><i class="fa fa-reply-all" aria-hidden="true"></i> Hacer Reembolso </button>
+            <div class="col-12 text-right">
+              <button class="btn btn-primary" onclick="fntTransaccion('<?= $idTransaccion ?>');"><i class="fa fa-reply-all" aria-hidden="true"></i> Hacer Reembolso </button>
             </div>
             <?php   }
                  } ?>
-          </div>
           <div class="row invoice-info">
             <div class="col-4">
               <address><strong>Transacción: <?= $idTransaccion; ?></strong><br><br>
