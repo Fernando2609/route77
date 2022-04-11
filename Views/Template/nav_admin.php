@@ -204,6 +204,17 @@
             </a>
           </li>
           <?php } ?>
+          <?php if(!empty($_SESSION['permisos'][17]['r'])){ ?>
+          <!-- Calendario-->
+          <li class="nav-item">
+            <a href="<?= base_url();?>/ordenCompra" class="nav-link">
+            <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Orden Compra
+              </p>
+            </a>
+          </li>
+          <?php } ?>
           <?php if(!empty($_SESSION['permisos'][14]['r'])){ ?>
           <!-- Calendario-->
           <li class="nav-item">
