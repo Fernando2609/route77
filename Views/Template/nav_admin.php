@@ -90,6 +90,18 @@
           </li>
           <?php } ?>
 
+          <!-- Modulos-->
+          <?php if(!empty($_SESSION['permisos'][17]['r'])){ ?>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/modulos" class="nav-link">
+            <i class="nav-icon fa-solid fa-cubes"></i>
+              <p>
+                Modulos
+              </p>
+            </a>
+          </li>
+          <?php } ?>
+
 
           <!-- Productos-->
           <?php if(!empty($_SESSION['permisos'][4]['r']) || !empty($_SESSION['permisos'][6]['r'])){ ?>
