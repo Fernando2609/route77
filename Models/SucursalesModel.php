@@ -10,13 +10,16 @@
            parent::__construct();
         }
         public function insertSucursales(string $nombre, string $direccion){
-		
+		    $return = 0;
 			$this->strNombre = $nombre;
 			$this->strDireccion = $direccion;
 			
-			$return = 0;
+
 			
-		
+		     $sql="CALL CRUD_SUCURSAL('{$this->strNombre}',null,'A',null)";
+			 /* dep($sql);
+			 exit; */
+			 $request = $this->select_all($sql);
 			if(empty($request))
 			{
 				$query_insert="CALL CRUD_SUCURSAL(?,?,'I',null)";
@@ -51,19 +54,7 @@
 
 		public function selectSucursal(int $idSucursal){
 			$this->intIdSucursal = $idSucursal;
-			/* $sql = "SELECT u.idUsuario,u.dni,u.nombres,u.apellidos,u.telefono,
-			u.email,u.datecreated,DATE_FORMAT(u.datecreated,'%d-%m-%Y %r') as fechaRegistro,
-			DATE_FORMAT(u.fechaNacimiento,'%d-%m-%Y') as fechaNacimiento, DATE_FORMAT(u.fechaNacimiento,'%Y-%m-%d') as fechaNaci,u.status,DATE_FORMAT(u.datelogin,'%d-%m-%Y %r') as datelogin,DATE_FORMAT(u.datemodificado,'%d-%m-%Y %r') as datemodificado ,
-			s.idsucursal,s.nombre as 'sucursal',r.Id_Rol,r.nombreRol, 
-			n.idNacionalidad,n.descripcion as 'nacionalidad',g.idGenero, g.descripcion as 'genero',
-			e.idEstado,e.descripcion as 'estadocivil' 
-			FROM usuarios u 
-			INNER JOIN roles r ON u.idRol = r.Id_Rol 
-			INNER JOIN nacionalidad n ON u.idNacionalidad = n.idNacionalidad 
-			INNER JOIN genero g on u.idGenero = g.idGenero 
-			INNER JOIN sucursal s on u.idSucursal = s.idsucursal 
-			INNER JOIN estadocivil e on u.idEstadoCivil = e.idEstado 
-			WHERE u.idUsuario = $this->intIdUsuario"; */
+			
 
 			$sql="CALL CRUD_SUCURSAL(null,null,'R',$this->intIdSucursal)";
 			
@@ -79,9 +70,14 @@
 		$this->strNombre = $nombre;
 		$this->strDireccion = $direccion;
 		
-		$sql="SELECT * FROM tbl_sucursal
-		WHERE NOMBRE='$this->strNombre'  and COD_SUCURSAL!='$this->intIdSucursal'";
+		//validar
 
+		/* $sql="SELECT * FROM tbl_sucursal
+		WHERE NOMBRE='$this->strNombre'  and COD_SUCURSAL!='$this->intIdSucursal'";
+ */
+        $sql="CALL CRUD_SUCURSAL('$this->strNombre',null,'B',$this->intIdSucursal)";
+		/* dep($sql);
+		exit; */
 		$request = $this->select_all($sql);
         
         if(empty($request))

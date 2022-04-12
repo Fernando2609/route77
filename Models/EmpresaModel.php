@@ -28,11 +28,6 @@ class EmpresaModel extends Mysql{
 			
 			
 
-
-			//$sql = "SELECT * FROM tbl_personas WHERE email = '{$this->strEmail}'";
-			
-			//Leo lo arregla
-			//or dni = '{$this->strIdentificacion}' 
 			
 
 			if(empty($request))
