@@ -41,9 +41,11 @@
     }
     public function lastOrders()
     {
-        $sql = "SELECT p.COD_PEDIDO, CONCAT(pr.nombres,' ',pr.apellidos) as nombre, p.monto, COD_STATUS FROM tbl_pedido p
+        $sql = "SELECT p.COD_PEDIDO, CONCAT(pr.nombres,' ',pr.apellidos) as nombre, p.monto, s.DESCRIPCION as Estado FROM tbl_pedido p
         INNER JOIN tbl_personas pr
         ON p.COD_PERSONA = pr.COD_PERSONA
+        INNER JOIN tbl_tipo_estado s 
+        ON p.COD_ESTADO = s.COD_ESTADO
         ORDER BY p.COD_Pedido DESC LIMIT 10 ";
         $request = $this->select_all($sql);
         return $request;

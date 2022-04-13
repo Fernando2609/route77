@@ -1,67 +1,52 @@
 <?php headerAdmin($data); ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1><?= $data['page_title'] ?></h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-            <li class="breadcrumb-item active"><a href="<?= base_url(); ?>/dashboard">Dashboard </a></li>
-          </ol>
-
-          <?php // dep($_SESSION['userData']);        
-          /* dep($_SESSION['permisos']);
-                   dep($_SESSION['permisosMod']); */
-          //dep(nombreEmpresa()['nombreEmpresa']);
-
-
-
-          //uncomment to test
-
-
-
-          ?>
-
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
-  < <!-- Main content -->
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0"><?= $data['page_title'] ?></h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+              <li class="breadcrumb-item active"><a href="<?= base_url(); ?>/dashboard">Dashboard </a></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+  
+    <!-- Main content -->
     <section class="content">
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <?php if (!empty($_SESSION['permisos'][2]['r'])) { ?>
-              <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <a href="<?= base_url() ?>/usuarios">
-                  <div class="small-box bg-info">
-                    <div class="inner">
-                      <h3><?= $data['usuarios'] ?></h3>
+      <div class="container-fluid">
+        <!-- Small boxes (Usuarios) -->
+        <div class="row">
+        <?php if (!empty($_SESSION['permisos'][2]['r'])) { ?>
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+              <h3><?= $data['usuarios'] ?></h3>
 
-                      <p>Usuarios</p>
-                    </div>
-                    <div class="icon">
-                      <i class=" nav-icon fas fa-users"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                  </div>
-                </a>
+                <p>Usuarios</p>
               </div>
-            <?php
-            }
-            ?>
-            <!-- ./col -->
-            <?php if (!empty($_SESSION['permisos'][3]['r'])) { ?>
+              <div class="icon">
+              <i class=" nav-icon fas fa-users"></i>
+              </div>
+              <a href="<?= base_url() ?>/usuarios" class="small-box-footer">Más Información <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+            
+          </div>
+          <?php } ?>
+          <!-- ./col -->
+          <!-- Clientes -->
+          <?php if (!empty($_SESSION['permisos'][3]['r'])) { ?>
               <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <a href="<?= base_url() ?>/clientes">
+               
                   <div class="small-box bg-success">
                     <div class="inner">
                       <h3><?= $data['clientes'] ?></h3>
@@ -71,39 +56,18 @@
                     <div class="icon">
                       <i class=" nav-icon fas fa-user"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?= base_url() ?>/clientes" class="small-box-footer">Más Información <i class="fas fa-arrow-circle-right"></i></a>
                   </div>
-                </a>
               </div>
             <?php
             }
             ?>
-            <!-- ./col -->
-            <?php if (!empty($_SESSION['permisos'][4]['r'])) { ?>
+          <!-- ./col -->
+           <!-- Pedidos-->
+           <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
               <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <a href="<?= base_url() ?>/productos">
-                  <div class="small-box bg-warning">
-                    <div class="inner">
-                      <h3><?= $data['productos'] ?></h3>
-
-                      <p>Productos</p>
-                    </div>
-                    <div class="icon">
-                      <i class=" nav-icon fas fa-store"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                  </div>
-                </a>
-              </div>
-            <?php
-            }
-            ?>
-            <!-- ./col -->
-            <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
-              <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <a href="<?= base_url() ?>/pedidos">
+           
                   <div class="small-box bg-danger">
                     <div class="inner">
                       <h3><?= $data['pedidos'] ?></h3>
@@ -113,16 +77,39 @@
                     <div class="icon">
                       <i class="nav-icon fas fa-shopping-cart"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?= base_url() ?>/pedidos" class="small-box-footer">Más Información <i class="fas fa-arrow-circle-right"></i></a>
                   </div>
-                </a>
+                
               </div>
             <?php
             }
             ?>
-            <!-- ./col -->
-          </div>
+          <!-- ./col -->
+           <!-- ./col -->
+           <?php if (!empty($_SESSION['permisos'][4]['r'])) { ?>
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                  <div class="small-box bg-warning">
+                    <div class="inner">
+                      <h3><?= $data['productos'] ?></h3>
+
+                      <p>Productos</p>
+                    </div>
+                    <div class="icon">
+                      <i class=" nav-icon fas fa-store"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">Más Información <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
+              
+              </div>
+            <?php
+            }
+            ?>
+          <!-- ./col -->
         </div>
+        <!-- /.row -->
+        <!-- Main row -->
+        <!-- Tabla y Graficaa -->
         <div class="row">
           <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
             <div class="col-md-6">
@@ -146,70 +133,27 @@
                       <?php
                       if (count($data['lastOrders']) > 0) {
                         foreach ($data['lastOrders'] as $pedido) {
-
+                        
 
                       ?>
                           <tr>
                             <td><?= $pedido['COD_PEDIDO'] ?></td>
                             <td><?= $pedido['nombre'] ?></td>
-                            <td><?= $pedido['COD_STATUS'] ?></td>
+                            <td><?= $pedido['Estado'] ?></td>
                             <td class="text-right"><?= SMONEY . " " . formatMoney($pedido['monto']) ?></td>
-                            <td><a href="<?= base_url() ?>/pedidos/orden/<?= $pedido['COD_PEDIDO'] ?>" target="_black"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
-                            <!-- <td>
-                              <div class="progress progress-xs">
-                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                              </div>
-                            </td>
-                            <td><span class="badge bg-danger">55%</span></td>
-                            <td><a href=""><i class="fa fa-eye" aria-hidden="true"></i></a></td> -->
+                            <td><a href="<?= base_url() ?>/pedidos/orden/<?= $pedido['COD_PEDIDO'] ?>" target="_black"><i class="fas fa-eye" aria-hidden="true"></i></a></td>
+                           
                           </tr>
                       <?php
                         }
                       }
                       ?>
-                      <!-- <tr>
-                      <td>2.</td>
-                      <td>Clean database</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar bg-warning" style="width: 70%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-warning">70%</span></td>
-                    </tr>
-                    <tr>
-                      <td>3.</td>
-                      <td>Cron job running</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-primary" style="width: 30%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-primary">30%</span></td>
-                    </tr>
-                    <tr>
-                      <td>4.</td>
-                      <td>Fix and squish bugs</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-success" style="width: 90%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-success">90%</span></td>
-                    </tr> -->
+                     
                     </tbody>
                   </table>
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer clearfix">
-                  <ul class="pagination pagination-sm m-0 float-right">
-                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                  </ul>
-                </div>
+                
               </div>
               <!-- /.card -->
 
@@ -233,9 +177,6 @@
             </div>
           </div>
         </div>
-
-
-
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -261,17 +202,12 @@
           </div>
 
         </div>
-      </div>
-      <!-- /.card-body -->
-</div>
-<!-- /.card -->
-</section>
-<!-- right col -->
-</div>
-</section>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
 
 <?php footerAdmin($data); ?>
 
