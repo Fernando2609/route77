@@ -447,6 +447,21 @@ function deleteFile(string $name){
         return number_format($total, 2, '.', '');
     }   
 
+   function Meses(){
+     $meses = array("Enero",
+                    "Febrero",
+                    "Marzo",
+                    "Abril",
+                    "Mayo",
+                    "Junio",
+                    "Julio",
+                    "Agosto",
+                    "Septiembre",
+                    "Octubre",
+                    "Noviembre",
+                    "Diciembre");
+    return $meses;
+ }
  
     
 ?>
