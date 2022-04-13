@@ -132,7 +132,20 @@ $(document).ready(function(){
              document
                .querySelector("#add_product_Compra")
                .classList.add("notBlock");
-
+             Swal.fire({
+               toast: true,
+               iconColor: "white",
+               customClass: {
+                 popup: "colored-toast",
+               },
+               position: "top-right",
+               icon: "success",
+               title: objData.msg,
+               showConfirmButton: false,
+               timer: 1500,
+               timerProgressBar: true,
+             });
+             viewProcesar();
 
            /*  document.querySelector("#nombre").innerHTML = objData.data.NOMBRE;
             document.querySelector("#txtCategoria").innerHTML =
@@ -183,9 +196,46 @@ function del_product_detalle(id) {
         //document.querySelector("#detalle_venta").innerHTML=objData.data.detalle;
         document.querySelector("#detalle_totales").innerHTML =
           objData.htmlTotales;
+          Swal.fire({
+            toast: true,
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            position: "top-right",
+            icon: "warning",
+            title: objData.msg,
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+          });
       } else {
-        /* console.log("error"); */
+        Swal.fire({
+          toast: true,
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          position: "top-right",
+          icon: "error",
+          title: "Error",
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+        });
       }
+      viewProcesar();
     }
   };
 }
+function viewProcesar() {
+  if ($("#tablaCompra tr" ).length>0) {
+    document.querySelector("#btn_facturar_compra").classList.remove("notBlock");
+  }else{
+    document.querySelector("#btn_facturar_compra").classList.add("notBlock");
+  }
+};
+//Cargar las clases desde el load
+window.addEventListener('load', function() {
+   viewProcesar();
+}, false);

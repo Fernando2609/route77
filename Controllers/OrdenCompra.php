@@ -126,7 +126,7 @@ class OrdenCompra extends Controllers{
                 $htmlCompras = getFile('Template/Modals/tablaCompra',$_SESSION['compraDetalle']); 
                 $htmlTotales = getFile('Template/Modals/tablaTotales',$_SESSION['compraDetalle']);
                     
-                $arrResponse = array("status" => true, "msg" => 'agregado Correctamente',"htmlCompras"=>$htmlCompras,"htmlTotales"=>$htmlTotales);
+                $arrResponse = array("status" => true, "msg" => 'Producto agregado',"htmlCompras"=>$htmlCompras,"htmlTotales"=>$htmlTotales);
                
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
 			}
@@ -152,7 +152,7 @@ class OrdenCompra extends Controllers{
                 $htmlCompras = getFile('Template/Modals/tablaCompra',$_SESSION['compraDetalle']); 
                 $htmlTotales = getFile('Template/Modals/tablaTotales',$_SESSION['compraDetalle']);
                     
-                $arrResponse = array("status" => true, "msg" => 'agregado Correctamente',"htmlCompras"=>$htmlCompras,"htmlTotales"=>$htmlTotales);
+                $arrResponse = array("status" => true, "msg" => 'Producto Eliminado',"htmlCompras"=>$htmlCompras,"htmlTotales"=>$htmlTotales);
                 
             }else{
                 $arrResponse=array("status"=>false,"msg"=>'Datos Incorrectoss');

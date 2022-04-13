@@ -27,7 +27,7 @@
 					INNER JOIN categoria c
 					ON p.categoriaid = c.idcategoria
 					WHERE idproducto = $this->intIdProducto"; */
-					$sql ="call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,null,'R',{$this->intIdProducto})";
+					$sql ="call P_ORDEN_COMPRA(null,null,null,null,null,'A',{$this->intIdProducto})";
 			$request = $this->select($sql);
 			
 			return $request;
