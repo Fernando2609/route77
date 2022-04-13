@@ -40,12 +40,12 @@
 
 			$return = 0;
 			
-			$sql="SELECT * FROM tbl_personas p
+			/* $sql="SELECT * FROM tbl_personas p
 			left join tbl_usuarios u on p.COD_PERSONA=u.COD_PERSONA
-			WHERE p.email =  '{$this->strEmail}' or u.dni = '{$this->strIdentificacion}'";
+			WHERE p.email =  '{$this->strEmail}' or u.dni = '{$this->strIdentificacion}'"; */
+			
 
-
-			//$sql = "SELECT * FROM tbl_personas WHERE email = '{$this->strEmail}'";
+			$sql = "CALL CRUD_USUARIO(null,null,'{$this->strEmail}',null,null,null,null,null,null,'{$this->strIdentificacion}',null,null,'V',null)";
 			
 			//Leo lo arregla
 			//or dni = '{$this->strIdentificacion}' 

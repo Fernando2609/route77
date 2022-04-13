@@ -72,7 +72,7 @@ getModal('modalInventario', $data);
                              
                         </div>
                             <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
+                                <table  class="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
                                             <th style="width: 100px">codigo</th>
@@ -90,34 +90,26 @@ getModal('modalInventario', $data);
                                             <td><input type="text" class="w-100" name="txtCantidad" id="txtCantidad" value="0" min="1" disabled></td>
                                             <td><input type="text" class="w-100" name="txtPrecio" id="txtPrecio" value="0" min="1" disabled></td>
                                             <td id="txtPrecioTotal">0.00</td>
-                                            <td ><a class="notBlock" href="#" id="add_product_Compra" class="link_add"><i class="fa fa-plus"></i>Agregar</a></td>
+                                            <td ><a class="notBlock" id="add_product_Compra" class="link_add"><i class="fa fa-plus"></i>Agregar</a></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="width: 100px">codigo</th>
+                                            <th style="width: 400px">Nombre</th>
+                                            <th>Categoría</th>
+                                            <th style="width: 100px">Cantidad</th>
+                                            <th style="width: 100px">Precio</th>
+                                            <th style="width: 100px">Precio Total</th>
+                                            <th>Acción</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Carne de cerdo libra</td>
-                                            <td>Carne</td>
-                                            <td>1</td>
-                                            <td>50</td>
-                                            <td>50</td>
-                                            <td class=""><a class="link_delete" href="$" # onclick="event.preventDefault();del_product_detalle(1);"><i class="far fa-trash-alt"></i></a></td>
-                                        </tr>
+                                    <tbody id="tablaCompra">
+                                    <?=  getModal("tablaCompra",$data)  ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="6" class="text-right">Subtotal L.</td>
-                                            <td class="text-right">L.88.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="6" class="text-right">IVA (12%)</td>
-                                            <td class="text-right">L.50.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="6" class="text-right">Total </td>
-                                            <td class="text-right">L.150.00</td>
-                                        </tr>
-                                    </tfoot>
+                                <tfoot id="detalle_totales">
+                                <?=  getModal("tablaTotales",$data)  ?>
+                                </tfoot>
+                            
+                                    
                                 </table>
                             </div>
 
