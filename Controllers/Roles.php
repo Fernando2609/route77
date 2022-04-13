@@ -4,7 +4,7 @@
         {
             parent::__construct();
             session_start();
-             //session_regenerate_id(true);
+            //session_regenerate_id(true);
             if (empty($_SESSION['login'])) {
                 header('Location: '.base_url().'/login');
                 die();
@@ -41,7 +41,7 @@
 
                 if($_SESSION['permisosMod']['u']){
                     $btnView = '<button class="btn btn-secondary btn-sm btnPermisosRol" onClick="fntPermisos('.$arrData[$i]['COD_ROL'].')" title="Permisos"><i class="fas fa-key"></i></button>';
-                    $btnEdit = '<button class="btn btn-info btn-sm btnEditRol" onClick="fntEditRol('.$arrData[$i]['COD_ROL'].')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
+                    $btnEdit = '<button class="btn btn-info btn-sm btnEditRol" onClick="fntEditRol(this,'.$arrData[$i]['COD_ROL'].')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
                 }
 
                 if($_SESSION['permisosMod']['d']){

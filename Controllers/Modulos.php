@@ -44,7 +44,7 @@ class Modulos extends Controllers{
 
             if($_SESSION['permisosMod']['u']){
                 //$btnView = '<button class="btn btn-secondary btn-sm btnPermisosRol" onClick="fntPermisos('.$arrData[$i]['COD_MODULO'].')" title="Permisos"><i class="fas fa-key"></i></button>';
-                $btnEdit = '<button class="btn btn-info btn-sm" onClick="fntEditModulo('.$arrData[$i]['COD_MODULO'].')" title="Editar Módulo"><i class="fas fa-pencil-alt"></i></button>';
+                $btnEdit = '<button class="btn btn-info btn-sm" onClick="fntEditModulo(this,'.$arrData[$i]['COD_MODULO'].')" title="Editar Módulo"><i class="fas fa-pencil-alt"></i></button>';
             }
 
             if($_SESSION['permisosMod']['d']){

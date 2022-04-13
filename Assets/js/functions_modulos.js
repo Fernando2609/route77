@@ -1,5 +1,6 @@
-var tableModulos;
-var divLoading = document.querySelector("#divLoading");
+let tableModulos;
+let rowTable = "";
+let divLoading = document.querySelector("#divLoading");
 document.addEventListener('DOMContentLoaded',function(){
 
     tableModulos = $('#tableModulos').dataTable({
@@ -68,13 +69,13 @@ document.addEventListener('DOMContentLoaded',function(){
                           h.color='white';
                           h.fontSize=12;
                         })
-                        var cols = [];
+                        let cols = [];
                           cols[0] = { 
                             image: imgB64                              , alignment: 'left', margin:[20,5,10,20],width:100 };
                           const fecha = new Date();
                           cols[1] = {fontSize: 11,text: 'ROUTE 77' , alignment: 'right', margin:[0,20,20,100] };
                           cols[2] = {fontSize: 11,text: fecha.toLocaleDateString('es-hn',{ weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) , alignment: 'right', margin:[0,20,20,0] }
-                          var objheader = {};
+                          let objheader = {};
                           objheader['columns'] = cols;
                           doc['header']=function(page) { 
                           if (page == 1) 
@@ -84,10 +85,10 @@ document.addEventListener('DOMContentLoaded',function(){
                           };
                           // Splice the image in after the header, but before the table
                           
-                          /* var cols2 = [];
+                          /* let cols2 = [];
                           cols2[0] = {fontSize: 13,text:  , alignment: 'center', margin:[0,0,0,0] };
                           
-                          var objfooter = {};
+                          let objfooter = {};
                           objfooter['columns'] = cols2;*/
                           doc['footer']= function(currentPage, pageCount) {
                           return {
@@ -152,41 +153,55 @@ document.addEventListener('DOMContentLoaded',function(){
           ],
         });
             //Creacion de un nuevo Modulo
-            var formModulo = document.querySelector("#formModulo");
+            let formModulo = document.querySelector("#formModulo");
             formModulo.onsubmit = function(e){
               e.preventDefault();
   
-               var intIdModulo = document.querySelector('#idModulo').value;
-               var strNombre = document.querySelector('#txtNombreModulo').value;
-               var strDescripcion = document.querySelector('#txtDescripcionModulo').value;
-               var intStatus = document.querySelector('#listStatus').value;        
+               let intIdModulo = document.querySelector('#idModulo').value;
+               let strNombre = document.querySelector('#txtNombreModulo').value;
+               let strDescripcion = document.querySelector('#txtDescripcionModulo').value;
+               let intStatus = document.querySelector('#listStatus').value;        
                if(strNombre == '' || strDescripcion == '' || intStatus == ''){
                   swal.fire("Atención", "Todos los campos son obligatorios." , "error");
                   return false;
                }
                   divLoading.style.display="flex";  
-                  var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');;
-                  var ajaxUrl = base_url+'/modulos/setModulo'; 
-                  var formData = new FormData(formModulo);
+                  let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');;
+                  let ajaxUrl = base_url+'/modulos/setModulo'; 
+                  let formData = new FormData(formModulo);
                   request.open("POST",ajaxUrl,true);
                   request.send(formData);
                   request.onreadystatechange = function(){
                     if(request.readyState == 4 && request.status == 200){
                       console.log(request.responseText);
-                      var objData = JSON.parse(request.responseText);
+                      let objData = JSON.parse(request.responseText);
                       
                       console.log(objData.status);
+
                       if(objData.status){
-  
+                        if(rowTable ==""){
+                          tableModulos.api().ajax.reload(function(){
+
+                          });
+                        }else{
+                          htmlStatus = intStatus == 1 ? 
+                            '<span class="badge badge-success">Activo</span>' : 
+                            '<span class="badge badge-danger">Inactivo</span>';
+                          rowTable.cells[1].textContent = strNombre;
+                          rowTable.cells[2].textContent = strDescripcion;
+                          rowTable.cells[3].innerHTML =  htmlStatus;
+                          //rowTable.cells[3].textContent;
+                          rowTable =="";
+                        }
                       $('#modalFormModulo').modal("hide");
                       formModulo.reset();
                       swal.fire("Módulos", objData.msg ,"success");
                       //toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-                      tableModulos.api().ajax.reload(function(){ 
+                      //tableModulos.api().ajax.reload(function(){ 
                         /* fntEditRol();
                         fntDelRol();
                         fntPermisos(); */
-                      });
+                      //});
                       }else{
                         swal.fire("Error", objData.msg , "error");
   
@@ -246,22 +261,24 @@ document.addEventListener('DOMContentLoaded',function(){
 } */
 
 
-  function fntEditModulo(idModulo){
+  function fntEditModulo(element, idModulo){
+    rowTable = element.parentNode.parentNode.parentNode;
+    /* console.log(rowTable); */
     document.querySelector('#titleModal').innerHTML ="Actualizar Módulo";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-success", "btn-warning");
     document.querySelector('#btnText').innerHTML ="Actualizar";
     
-        var idModulo=idModulo;
-        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var ajaxUrl  =base_url+'/modulos/getModulo/'+idModulo;
+        /* let idModulo=idModulo; */
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl  =base_url+'/modulos/getModulo/'+idModulo;
         request.open("GET",ajaxUrl,true);
         request.send();
         console.log(request);
         request.onreadystatechange = function(){
           if(request.readyState == 4 && request.status == 200){
             
-              var objData = JSON.parse(request.responseText);
+              let objData = JSON.parse(request.responseText);
               if(objData.status)
               {
                   document.querySelector("#idModulo").value = objData.data.COD_MODULO;
@@ -291,7 +308,7 @@ document.addEventListener('DOMContentLoaded',function(){
   }
 
   function fntDelModulo(idModulo){
-    var idModulo = idModulo;
+    /* let idModulo = idModulo; */
     swal.fire({
         title: "Eliminar Módulo",
         text: "¿Realmente quiere eliminar el Módulo?",
@@ -310,14 +327,14 @@ document.addEventListener('DOMContentLoaded',function(){
       
         }).then((result) => {
         if (result.isConfirmed) {
-            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-                var ajaxUrl = base_url+'/Modulos/delModulo/';
-                var strData = "idModulo="+idModulo;
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+                let ajaxUrl = base_url+'/Modulos/delModulo/';
+                let strData = "idModulo="+idModulo;
                 request.open("POST",ajaxUrl,true);
                 request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 request.send(strData);
                 request.onreadystatechange = function(){
-                    var objData = JSON.parse(request.responseText);
+                    let objData = JSON.parse(request.responseText);
                         if(objData.status)
                         {
                             swal.fire({ title:"Eliminar!", 
@@ -331,8 +348,7 @@ document.addEventListener('DOMContentLoaded',function(){
                             }});
                             tableModulos.api().ajax.reload(function(){
                                 
-                                fntEdelModulo();
-                                /* fntPermisos() */
+                               
                             });
                 } else{
                     swal.fire("Atención!", objData.msg , "error");
