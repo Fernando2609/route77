@@ -72,7 +72,7 @@
        <tbody>
            <tr>
                <td class="wd33">
-               <img src="<?= media() ?>/tienda/images/icons/logo3.png"width="125"_alt="Logo">
+               <!-- <img src="<?= media() ?>/tienda/images/icons/logo3.png"width="125"_alt="Logo"> -->
                 </td>
             <td class="text-center">
                 <h4>Estación <strong><?= NOMBRE_EMPESA ?></strong></h4>
