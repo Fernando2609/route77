@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="<?= media(); ?>/js/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="<?= media(); ?>/js/plugins/sweetalert2/sweetalert2.min.css">
+   
+    <link rel="stylesheet" type= "text/css" href="<?= media(); ?>/js/datepicker/jquery-ui.min.css">
+   
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!--Boopstrap Sswitch-->

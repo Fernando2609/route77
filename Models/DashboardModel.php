@@ -32,20 +32,37 @@
         $total = $request['total'];
         return $total;
     }
-    public function cantPedidos()
-    {
-        $sql = "SELECT COUNT(*) as total FROM tbl_pedido";
+    public function cantPedidos(){ 
+        $rolid =$_SESSION['userData']['COD_ROL'];
+        $idUser =$_SESSION['userData']['COD_PERSONA'];
+        $where= "";
+        if($rolid == RCLIENTES){
+            $where = " WHERE COD_PERSONA = ".$idUser; 
+         }
+          
+    
+        $sql = "SELECT COUNT(*) as total FROM tbl_pedido".$where;
         $request = $this->select($sql);
         $total = $request['total'];
         return $total;
     }
     public function lastOrders()
     {
+        $rolid =$_SESSION['userData']['COD_ROL'];
+        $idUser =$_SESSION['userData']['COD_PERSONA'];
+        $where= "";
+        if($rolid == RCLIENTES){
+            $where = " WHERE pr.COD_PERSONA = ".$idUser; 
+         }
+          
+
+
         $sql = "SELECT p.COD_PEDIDO, CONCAT(pr.nombres,' ',pr.apellidos) as nombre, p.monto, s.DESCRIPCION as Estado FROM tbl_pedido p
         INNER JOIN tbl_personas pr
         ON p.COD_PERSONA = pr.COD_PERSONA
         INNER JOIN tbl_tipo_estado s 
         ON p.COD_ESTADO = s.COD_ESTADO
+        $where
         ORDER BY p.COD_Pedido DESC LIMIT 10 ";
         $request = $this->select_all($sql);
         return $request;
@@ -64,6 +81,13 @@
     }
 
     public function selectVentasMes(int $anio, int $mes){
+
+        $rolid =$_SESSION['userData']['COD_ROL'];
+        $idUser =$_SESSION['userData']['COD_PERSONA'];
+        $where= "";
+        if($rolid == RCLIENTES){
+            $where = " AND  COD_PERSONA = ".$idUser; 
+         }
         $totalVentasMes = 0;
         $arrVentaDias = array();
         $dias = cal_days_in_month(CAL_GREGORIAN,$mes, $anio);
@@ -73,7 +97,7 @@
             $fechaVenta = date_format($date,"Y-m-d");
             $sql = "SELECT DAY(FECHA) as Dia, COUNT(COD_PEDIDO) as Cantidad, SUM(MONTO) as Total 
             FROM tbl_pedido 
-            WHERE DATE(FECHA) = '$fechaVenta' AND COD_ESTADO = '3'";
+            WHERE DATE(FECHA) = '$fechaVenta' AND COD_ESTADO = 3".$where;
             $ventaDia = $this->select($sql);
             $ventaDia['Dia'] = $n_dia;
             $ventaDia['Total'] = $ventaDia['Total'] == "" ? 0 : $ventaDia['Total'];
@@ -86,5 +110,45 @@
         return $arrData;
         
     }
+    public function selectVentasAnio(int $anio){
+        $arrMVentas = array();
+        $arrMeses = Meses();
+        for ($i=1; $i <= 12; $i++) {
+            $arrData = array ('anio'=>'','No_mes'=>'','venta'=>'');
+            $sql="SELECT $anio as Anio, $i as mes,  SUM(MONTO) AS venta  
+            FROM tbl_pedido
+            WHERE MONTH(FECHA) = $i and YEAR(FECHA)= $anio AND COD_ESTADO = 3
+            GROUP BY MONTH(FECHA)";
+            $ventaMes = $this->select($sql);
+            $arrData['mes'] = $arrMeses[$i-1];
+            if (empty($ventaMes)){
+                $arrData['anio'] = $anio;
+                $arrData['No_mes'] = $i;
+                $arrData['venta'] = 0 ;
 
+            }else{ 
+                $arrData['anio'] = $ventaMes['Anio'];
+                $arrData['No_mes'] =$ventaMes['mes'];
+                $arrData['venta'] = $ventaMes['venta'];
+                
+            }
+            array_push($arrMVentas, $arrData);
+            
+
+           
+        }
+        $arrVentas= array('anio' => $anio,'meses'=>$arrMVentas);
+        return $arrVentas;
+        
+       
     }
+
+public function productosTen(){ 
+    $sql= "SELECT * FROM tbl_productos WHERE COD_STATUS = 1 ORDER BY COD_PRODUCTO DESC LIMIT 0,10";
+    $request = $this->select_all($sql);
+    return $request;    
+}   
+
+ }
+
+ ?>
