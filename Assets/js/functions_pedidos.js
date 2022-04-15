@@ -22,7 +22,7 @@ tablePedidos = $('#tablePedidos').dataTable({
                     {"data":"FECHA"},
                     {"data":"MONTO"},
                     {"data":"TIPO_PAGO"},
-                    {"data":"status"},
+                    {"data":"TIPOESTADO"},
                     {"data":"options"}
                         
                   ],

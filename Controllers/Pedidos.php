@@ -49,8 +49,9 @@ require_once("Models/TTipoPago.php");
 
                     $btnView .= ' <a title= "Ver Detalle" href="'.base_url().'/pedidos/orden/'.$arrData[$i]['COD_PEDIDO'].'
                     " target="_balnck" class="btn btn-info btn-sm"> <i class="far fa-eye"></i> </a>
-                    <button class="btn btn-danger btn-sm" onClick="fntViewDPF('.$arrData[$i]['COD_PEDIDO'].')" 
-                    title="Generar PDF"><i class="fas fa-file-pdf"></i></button> ';
+
+                    <a title= "Generar PDF" href="'.base_url().'/factura/generarFactura/'.$arrData[$i]['COD_PEDIDO'].'
+                    " target="_balnck" class="btn btn-danger btn-sm"> <i class="fas fa-file-pdf"></i> </a> ';
                     
                     if ($arrData[$i]['COD_TIPO_PAGO'] == 1) {        
                         $btnView .= '<a title= "Ver Transaccion" href="'.base_url().'/pedidos/transaccion/'.$arrData[$i]['COD_TRANSACCION_PAYPAL'].'

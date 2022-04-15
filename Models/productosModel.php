@@ -50,7 +50,12 @@
 			$this->intUser = $user;
 			
 			$return = 0;
-			$sql = "SELECT * FROM tbl_productos WHERE COD_BARRA = '{$this->intCodigo}'or NOMBRE = '{$this->strNombre}'";
+			//validación
+			/* $sql = "SELECT * FROM tbl_productos WHERE COD_BARRA = '{$this->intCodigo}'or NOMBRE = '{$this->strNombre}'";
+			 */
+			$sql= "CALL CRUD_PRODUCTOS(null,'{$this->intCodigo}','{$this->strNombre}',null,null,null,null,null,null,'A',null)";
+			/* dep($sql);
+			exit; */
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{
@@ -99,7 +104,12 @@
 			$this->intStatus = $status;
 			$this->intUser = $user;
 			$return = 0;
-			$sql = "SELECT * FROM TBL_PRODUCTOS WHERE COD_BARRA = '{$this->intCodigo}' AND COD_PRODUCTO != $this->intIdProducto or NOMBRE = '{$this->strNombre}' AND COD_PRODUCTO != $this->intIdProducto";
+			//VALIDACIÓN
+			/* $sql = "SELECT * FROM TBL_PRODUCTOS WHERE COD_BARRA = '{$this->intCodigo}' AND COD_PRODUCTO != $this->intIdProducto or NOMBRE = '{$this->strNombre}' AND COD_PRODUCTO != $this->intIdProducto";
+			 */
+			$sql= "CALL CRUD_PRODUCTOS(null,'{$this->intCodigo}','{$this->strNombre}',null,null,null,null,null,null,'B',$this->intIdProducto)";
+		     /* dep($sql);
+			 exit; */
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{

@@ -12,8 +12,9 @@ class telEmpresaModel extends Mysql{
 		public function inserttelEmpresa(int $telEmpresa){
 			$this->intTelefono = $telEmpresa;
 			$return = 0;
-
-		     $sql = "SELECT * from tbl_telefono_empresa where TELEFONO=$this->intTelefono";
+            //VALIDAR
+		    /*  $sql = "SELECT * from tbl_telefono_empresa where TELEFONO=$this->intTelefono"; */
+			$sql= "CALL CRUD_TELEFONO_EMPRESA(null,$this->intTelefono,'A',null)";
 			 $request = $this->select_all($sql); 
 
 			if(empty($request))
@@ -58,8 +59,13 @@ class telEmpresaModel extends Mysql{
 		$this->intIdUsuario = $idUsuario;
 		$this->intTelefono = $telEmpresa;
 		
-		 $sql = "SELECT * from tbl_telefono_empresa where TELEFONO =$this->intTelefono and COD_TELEFONO_EMPRESA!=$this->intIdUsuario";
-		
+		//VALIDAR
+
+		/*  $sql = "SELECT * from tbl_telefono_empresa where TELEFONO =$this->intTelefono and COD_TELEFONO_EMPRESA!=$this->intIdUsuario";
+		 */
+		$sql = "CALL CRUD_TELEFONO_EMPRESA(null,$this->intTelefono,'B',$this->intIdUsuario)";
+		/* dep($sql);
+		exit; */
 		$request = $this->select_all($sql);
  
 		if (empty($request)) {	//Si la contraseña es diferente a vaacio se actualiza la contraseña

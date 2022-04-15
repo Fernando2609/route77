@@ -32,7 +32,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="txtEnlace">Enlace<span class="required"> *</span></label>
-                        <input type="email" class="form-control valid validEmail" id="txtEnlace" name="txtEnlace" required="">
+                        <input type="text" class="form-control valid" id="txtEnlace" name="txtEnlace" required="">
                     </div>
 
 
