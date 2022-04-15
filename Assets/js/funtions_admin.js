@@ -16,6 +16,15 @@ function controlTagPrecio(e) {
     return patron.test(n);
 }
 
+
+function testEntero(intCant) {
+  var intCantidad = new RegExp(/^([0-9])*$/);
+  if (intCantidad.test(intCant)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 function testText(txtString){
     var stringText = new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/);
     if(stringText.test(txtString)){
@@ -162,9 +171,23 @@ function fntValidEmail(){
         });
     });
 }
+function fntValidNumber() {
+  let validNumber = document.querySelectorAll(".validNumber");
+  validNumber.forEach(function (validNumber) {
+    validNumber.addEventListener("keyup", function () {
+      let inputValue = this.value;
+      if (!testEntero(inputValue)) {
+        this.classList.add("is-invalid");
+      } else {
+        this.classList.remove("is-invalid");
+      }
+    });
+  });
+}
 //Llamado de las Funciones
 window.addEventListener('load', function() {
     fntValidText();
+    fntValidNumber();
     fntValidEmail();
     fntValidNumberDni();
     fntValidNumberTel();

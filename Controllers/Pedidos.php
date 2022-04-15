@@ -195,7 +195,7 @@ require_once("Models/TTipoPago.php");
                                     }
                                 }
                             }else{
-                                if($transaccion == "" or $idtipopago =="" or $estado == ""){
+                                if($idtipopago =="" or $estado == ""){
                                     $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
                                 }else{
                                     $requestPedido = $this->model->updatePedido($idpedido,$transaccion,$idtipopago,$estado);

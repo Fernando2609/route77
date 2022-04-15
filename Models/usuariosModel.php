@@ -40,6 +40,7 @@
 
 			$return = 0;
 			
+
 			//Validación
             $sql="CALL CRUD_USUARIO(null,null,'{$this->strEmail}',null,null,null,null,null,null,'{$this->strIdentificacion}',null,null,'A',null)";
 			 

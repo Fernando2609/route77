@@ -5,6 +5,7 @@
 		
 ?>
 <ul class="header-cart-wrapitem w-full">
+<tbody id="detalle_venta">
 	<?php
 		foreach($_SESSION['arrCarrito'] as $producto )
 		{
