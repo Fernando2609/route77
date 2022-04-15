@@ -22,9 +22,14 @@
 			$this->intStatus = $status;
 			$this->intUser = $user;
 
-			$sql = "SELECT * FROM tbl_categoria WHERE nombre = '{$this->strCategoria}' ";
-			$request = $this->select_all($sql);
 
+			//validación 
+
+			/* $sql = "SELECT * FROM tbl_categoria WHERE nombre = '{$this->strCategoria}' "; */
+			$sql="CALL CRUD_CATEGORIA(null,null,'{$this->strCategoria}',null,null,null,null,'A',null)";
+			$request = $this->select_all($sql);
+            /* dep($sql);
+			exit; */
 			if(empty($request))
 			{
 				/* $query_insert  = "INSERT INTO categoria(nombre,descripcion,portada,status) VALUES(?,?,?,?)";
@@ -88,7 +93,12 @@
 			$this->intStatus = $status;
 			$this->intUser = $user;
 			
-			$sql = "SELECT * FROM tbl_categoria WHERE nombre = '{$this->strCategoria}' AND COD_CATEGORIA != $this->intIdcategoria";
+			//Validación update
+			/* $sql = "SELECT * FROM tbl_categoria WHERE nombre = '{$this->strCategoria}' AND COD_CATEGORIA != $this->intIdcategoria";
+			 */
+			$sql="CALL CRUD_CATEGORIA(null,null,'{$this->strCategoria}',null,null,null,null,'B',$this->intIdcategoria)";
+			/* dep($sql);
+			exit; */
 			$request = $this->select_all($sql);
 
 			if(empty($request))

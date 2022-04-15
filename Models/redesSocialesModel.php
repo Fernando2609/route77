@@ -18,10 +18,14 @@ class redesSocialesModel extends Mysql{
 			$this->strEnlace = $enlace;
 
 			$return = 0;
+            //validación
 
-			 $sql = "SELECT * from tbl_redes_sociales where ENLACE ='$this->strEnlace' or DESCRIPCION='$this->strDescripcion'";
-
-			$request = $this->select_all($sql); 
+			/*  $sql = "SELECT * from tbl_redes_sociales where ENLACE ='$this->strEnlace' or DESCRIPCION='$this->strDescripcion'";
+           */
+            $sql="CALL CRUD_REDES_SOCIALES(null,'$this->strDescripcion','$this->strEnlace','A',null)";
+			/* dep($sql);
+            exit; */
+            $request = $this->select_all($sql); 
 
 			if(empty($request))
 			{
