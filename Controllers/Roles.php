@@ -33,19 +33,19 @@
             $arrData = $this->model->selectRoles();
 
                 for ($i=0; $i < count($arrData) ; $i++) { 
-                if ($arrData[$i]['status']==1) {
+                if ($arrData[$i]['COD_STATUS']==1) {
                     $arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';   
                 }else{
                     $arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
                 }
 
                 if($_SESSION['permisosMod']['u']){
-                    $btnView = '<button class="btn btn-secondary btn-sm btnPermisosRol" onClick="fntPermisos('.$arrData[$i]['Id_Rol'].')" title="Permisos"><i class="fas fa-key"></i></button>';
-                    $btnEdit = '<button class="btn btn-info btn-sm btnEditRol" onClick="fntEditRol('.$arrData[$i]['Id_Rol'].')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
+                    $btnView = '<button class="btn btn-secondary btn-sm btnPermisosRol" onClick="fntPermisos('.$arrData[$i]['COD_ROL'].')" title="Permisos"><i class="fas fa-key"></i></button>';
+                    $btnEdit = '<button class="btn btn-info btn-sm btnEditRol" onClick="fntEditRol('.$arrData[$i]['COD_ROL'].')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
                 }
 
                 if($_SESSION['permisosMod']['d']){
-                    $btnDelete = '<button class="btn btn-danger btn-sm btnDelRol" onClick="fntDelRol('.$arrData[$i]['Id_Rol'].')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
+                    $btnDelete = '<button class="btn btn-danger btn-sm btnDelRol" onClick="fntDelRol('.$arrData[$i]['COD_ROL'].')" title="Eliminar"><i class="far fa-trash-alt"></i></button>';
                 }
 
                 $arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
@@ -62,8 +62,8 @@
 			$arrData = $this->model->selectRoles();
 			if(count($arrData) > 0 ){
 				for ($i=0; $i < count($arrData); $i++) { 
-					if($arrData[$i]['status'] == 1 ){
-					$htmlOptions .= '<option value="'.$arrData[$i]['Id_Rol'].'">'.$arrData[$i]['nombreRol'].'</option>';
+					if($arrData[$i]['COD_STATUS'] == 1 ){
+					$htmlOptions .= '<option value="'.$arrData[$i]['COD_ROL'].'">'.$arrData[$i]['NOM_ROL'].'</option>';
 					}
 				}
 			}
@@ -179,7 +179,7 @@
             if(count($arrData) > 0 ){
                 for ($i=0; $i < count($arrData); $i++) { 
                 
-                    $htmlOptions .= '<option value="'.$arrData[$i]['idGenero'].'">'.$arrData[$i]['descripcion'].'</option>';
+                    $htmlOptions .= '<option value="'.$arrData[$i]['COD_GENERO'].'">'.$arrData[$i]['DESCRIPCION'].'</option>';
                     
                 }
             }
@@ -209,7 +209,7 @@
             if(count($arrData) > 0 ){
                 for ($i=0; $i < count($arrData); $i++) { 
                 
-                    $htmlOptions .= '<option value="'.$arrData[$i]['idsucursal'].'">'.$arrData[$i]['nombre'].'</option>';
+                    $htmlOptions .= '<option value="'.$arrData[$i]['COD_SUCURSAL'].'">'.$arrData[$i]['NOMBRE'].'</option>';
                     
                 }
             }

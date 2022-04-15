@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded',function(){
               },
         
                 "columns": [
-                    {"data":"idcategoria"},
-                    {"data":"nombre"},
-                    {"data":"descripcion"},
+                    {"data":"COD_CATEGORIA"},
+                    {"data":"NOMBRE"},
+                    {"data":"DESCRIPCION"},
                     {"data":"status"},
                     {"data":"options"}
                    
@@ -244,8 +244,8 @@ document.addEventListener('DOMContentLoaded',function(){
                   if(request.readyState == 4 && request.status == 200){
                     //console.log(request.responseText);
                     let objData = JSON.parse(request.responseText);
-                    
-                    console.log(objData.status);
+                   
+                    //console.log(objData.status);
                     if(objData.status){
 
                         if(rowTable == ""){
@@ -289,14 +289,15 @@ function fntViewInfo(idcategoria){
     request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
             let objData = JSON.parse(request.responseText);
+            console.table(objData);
             if(objData.status)
             {
-                let estado = objData.data.status == 1 ? 
+                let estado = objData.data.COD_STATUS == 1 ? 
                 '<span class="badge badge-success">Activo</span>' : 
                 '<span class="badge badge-danger">Inactivo</span>';
-                document.querySelector("#celId").innerHTML = objData.data.idcategoria;
-                document.querySelector("#celNombre").innerHTML = objData.data.nombre;
-                document.querySelector("#celDescripcion").innerHTML = objData.data.descripcion;
+                document.querySelector("#celId").innerHTML = objData.data.COD_CATEGORIA;
+                document.querySelector("#celNombre").innerHTML = objData.data.NOMBRE;
+                document.querySelector("#celDescripcion").innerHTML = objData.data.DESCRIPCION;
                 document.querySelector("#celEstado").innerHTML = estado;
                 document.querySelector("#imgCategoria").innerHTML = '<img src="'+objData.data.url_portada+'"></img>';
                 $('#modalViewCategoria').modal('show');
@@ -320,20 +321,21 @@ function fntEditInfo(element,idcategoria){
             let ajaxUrl  =base_url+'/Categorias/getCategoria/'+idcategoria;
         request.open("GET",ajaxUrl,true);
         request.send();
-        console.log(request);
+        //console.log(request);
         request.onreadystatechange = function(){
           if(request.readyState == 4 && request.status == 200){
             
               let objData = JSON.parse(request.responseText);
+              //console.log(request.responseText);
               if(objData.status)
               {
-                  document.querySelector("#idCategoria").value = objData.data.idcategoria;
-                  document.querySelector("#txtNombre").value = objData.data.nombre;
-                  document.querySelector("#txtDescripcion").value = objData.data.descripcion;
-                  document.querySelector("#foto_actual").value = objData.data.portada;
+                  document.querySelector("#idCategoria").value = objData.data.COD_CATEGORIA;
+                  document.querySelector("#txtNombre").value = objData.data.NOMBRE;
+                  document.querySelector("#txtDescripcion").value = objData.data.DESCRIPCION;
+                  document.querySelector("#foto_actual").value = objData.data.PORTADA;
                   document.querySelector("#foto_remove").value= 0;
-  
-                  if(objData.data.status == 1){
+                  
+                  if(objData.data.COD_STATUS == 1){
                     document.querySelector("#listStatus").value = 1;
                 }else{
                     document.querySelector("#listStatus").value = 2;

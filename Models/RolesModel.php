@@ -15,11 +15,13 @@
         public function SelectRoles()
         {
 			$whereAdmin = "";
+			$idUser=$_SESSION['idUser'];
 			if($_SESSION['idUser'] != 1){
-				$whereAdmin = " and Id_Rol != 1 ";
+				$whereAdmin = " and COD_ROL != 1 ";
 			}
 			// Extraer roles
-			$sql = "SELECT * FROM roles WHERE status != 0".$whereAdmin;
+			//$sql = "SELECT * FROM tbl_roles WHERE COD_STATUS != 0".$whereAdmin;
+			$sql="CALL CRUD_ROLES(null, null, null,'V',$idUser)";
 			$request = $this->select_all($sql); 
 			return $request;
 
@@ -28,9 +30,15 @@
         {
             //BUSCAR ROL
 			$this->intIdrol = $idrol;
-			$sql = "SELECT * FROM roles WHERE id_Rol = $this->intIdrol";
+			/* $sql ="CALL CRUD_ROLES(null, null, null,'R', ?);" */
+			/* $sql = "SELECT * FROM tbl_roles WHERE COD_ROL = $this->intIdrol"; */
+			$sql = "CALL CRUD_ROLES(null, null, null,'R',$this->intIdrol)";
+			/* $arrData = array($this->intIdrol); */
 			$request = $this->select($sql);
+			/* dep($request);
+			exit; */
 			return $request;
+			
         }
 
         public function insertRol(string $rol, string $descripcion, int $status){
@@ -40,16 +48,21 @@
             $this->strDescripcion = $descripcion;
             $this->intStatus = $status;
             
-
-            $sql = "SELECT * FROM roles WHERE nombreRol =  '{$this->strRol}'";
+            /* CRUD DE INSERT ROL PRIMERA CONDICION DE VERIFICACION */
+           /*  $sql = "SELECT * FROM tbl_roles WHERE NOM_ROL =  '{$this->strRol}'"; */
+		    $sql = "CALL CRUD_ROLES('{$this->strRol}', null, null,'A',null)";
             $request = $this->select_all($sql);
-         
+            
             if(empty($request))
 			{
-				$query_insert = "INSERT INTO roles(nombreRol, descripcion, status) VALUES(?,?,?)";
+				/* $query_insert = "INSERT INTO tbl_roles(NOM_ROL, DESCRIPCION, status) VALUES(?,?,?)"; */
+				$query_insert="CALL CRUD_ROLES(?, ?, ?,'I',null)";
 				$arrData = array($this->strRol, $this->strDescripcion, $this->intStatus);
                 $request_insert= $this->insert($query_insert, $arrData);
-				$return = $request_insert;
+				$sql = "SELECT last_insert_id()";
+				$request_ID = $this->select($sql);
+	        	$return = $request_ID['last_insert_id()'];
+				
 			}else{
 				$return = false;
 			}
@@ -60,15 +73,20 @@
 			$this->strRol = $rol;
 			$this->strDescripcion = $descripcion;
 			$this->intStatus = $status;
-
-			$sql = "SELECT * FROM roles WHERE nombreRol = '$this->strRol' AND id_Rol != $this->intIdrol";
+            
+			/* CRUD DE UPDATE ROL PRIMERA CONDICION DE VERIFICACION */
+			/* $sql = "SELECT * FROM tbl_roles WHERE NOM_ROL = '$this->strRol' AND COD_ROL != $this->intIdrol"; */
+			$sql = "CALL CRUD_ROLES('{$this->strRol}', null, null,'B','{$this->intIdrol}')";
 			$request = $this->select_all($sql);
 
 			if(empty($request))
 			{
-				$sql = "UPDATE roles SET nombreRol = ?, descripcion = ?, status = ? WHERE id_Rol = $this->intIdrol ";
+				/* $sql = "UPDATE tbl_roles SET NOM_ROL = ?, DESCRIPCION = ?, COD_STATUS = ? WHERE COD_ROL = $this->intIdrol "; */
+				$sql = "CALL CRUD_ROLES(?, ?, ?,'U',$this->intIdrol)";
 				$arrData = array($this->strRol, $this->strDescripcion, $this->intStatus);
 				$request = $this->update($sql,$arrData);
+				/* dep($request);
+				exit; */
 			}else{
 				$request = false;
 			}
@@ -78,13 +96,19 @@
         public function deleteRol(int $idrol)
 		{
 			$this->intIdrol = $idrol;
-			$sql = "SELECT * FROM usuarios WHERE idRol = $this->intIdrol";
+			/* CRUD DE DELETE ROL PRIMERA CONDICION DE VERIFICACION */
+			/* $sql = "SELECT * FROM tbl_personas WHERE COD_ROL = $this->intIdrol"; */
+			$sql = "CALL CRUD_ROLES(null, null, null,'C',$this->intIdrol)";
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{
-				$sql = "UPDATE roles SET status = ? WHERE id_Rol = $this->intIdrol ";
-				$arrData = array(0);
+				/* $sql = "UPDATE tbl_roles SET COD_STATUS = ? WHERE COD_ROL = $this->intIdrol "; */
+				$sql = "CALL CRUD_ROLES(?, ?, ?,'D',$this->intIdrol)";
+				/* $arrData = array(0); */
+				$arrData = array($this->strRol, $this->strDescripcion, $this->intStatus);
 				$request = $this->update($sql,$arrData);
+				/* dep($request);
+				exit; */
 				if($request)
 				{
 					$request = true;	
@@ -119,7 +143,7 @@
 		public function SelectGenero()
 		{
 			// Extraer Genero
-			$sql = "SELECT * FROM genero";
+			$sql = "SELECT * FROM tbl_genero";
 			$request = $this->select_all($sql); 
 			return $request;
 
@@ -137,7 +161,7 @@
 		  public function selectSucursal()
 		  {
 			  // Extraer estado Civil
-			  $sql = "SELECT * FROM sucursal";
+			  $sql = "SELECT * FROM tbl_sucursal";
 			  $request = $this->select_all($sql); 
 			  return $request;
   
@@ -145,9 +169,6 @@
     }   
 
 	
-   
-
-
 ?>
     
    

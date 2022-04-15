@@ -1,4 +1,8 @@
 <!-- Main Sidebar Container -->
+<?php
+ $nombre=explode(" ",$_SESSION['userData']['NOMBRES']);
+ $apellido=explode(" ",$_SESSION['userData']['APELLIDOS']);
+?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= base_url();?>/dashboard" class="brand-link">
@@ -14,8 +18,8 @@
           <img src="<?= media();?>/images//avatar.png" class="img-circle elevation-2 user " alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?=   $_SESSION['userData']['nombres']  ?></a>
-          <a href="#" class="d-block"><?=   $_SESSION['userData']['nombreRol']  ?></a>
+          <a href="#" class="d-block"><?=$nombre[0]." ".$apellido[0];?></a>
+          <a href="#" class="d-block"><?=ucwords(strtolower($_SESSION['userData']['NOM_ROL']))  ?></a>
         </div>
       </div>
 
@@ -133,7 +137,102 @@
 
           <?php } ?>
 
-          <?php if(!empty($_SESSION['permisos'][7]['r'])){ ?>
+          
+          <?php if(!empty($_SESSION['permisos'][14]['r'])){ ?>
+          
+          <li class="nav-item">
+            <a href="../widgets.html" class="nav-link">
+             <i class="nav-icon fa-solid fa-building"></i>
+              <p>
+                Empresa
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url();?>/empresa" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Empresa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url();?>/telEmpresa" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Teléfonos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url();?>/redesSociales" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Redes Sociales</p>
+                </a>
+              </li>
+              <!-- Sucursales -->
+              <?php if(!empty($_SESSION['permisos'][16]['r'])){ ?>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/sucursales" class="nav-link">
+           
+            <i class="far fa-circle nav-icon"></i>
+              <p>
+                Sucursales
+              </p>
+            </a>
+          </li>
+          <?php } ?>
+            </ul>
+          </li>
+          <?php } ?>
+
+          <?php if(!empty($_SESSION['permisos'][15]['r'])){ ?>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/proveedores" class="nav-link">
+            <i class="nav-icon fa-solid fa-truck-fast"></i>
+              <p>
+                Proveedores
+              </p>
+            </a>
+          </li>
+          <?php } ?>
+          
+        
+          
+        <?php if(!empty($_SESSION['permisos'][9]['r'])){ ?>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/inventario" class="nav-link"> 
+            <i class=" nav-icon fa-solid fa-boxes-stacked"></i>
+              <p>
+                Inventario
+              </p>
+            </a>
+          </li>
+          <?php } ?>
+          <?php if(!empty($_SESSION['permisos'][17]['r'])){ ?>
+          <!-- Calendario-->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fa-solid fa-dolly"></i>
+              <p>
+                Compras
+              </p>
+              <i class="right fas fa-angle-left"></i>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url();?>/ordenCompra" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Compra</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url();?>/Compras" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ver Compras</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <?php } ?>
+          <?php if(!empty($_SESSION['permisos'][14]['r'])){ ?>
           <!-- Calendario-->
           <li class="nav-item">
             <a href="<?= base_url();?>/calendario" class="nav-link">
@@ -153,6 +252,10 @@
               </p>
             </a>
           </li>
+
+
+          
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -9,7 +9,7 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(3);
+            getPermisos(MCLIENTES);
         }
         
         public function Clientes()
@@ -27,81 +27,79 @@
         public function setCliente()
         {
             if ($_POST) {
-                if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listStatus']) || empty($_POST['listNacionalidadCliente']) || empty($_POST['listGenero']) || empty($_POST['listSucursal']))
+                
+                if(empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['listStatus']))
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{ 
                     $idUsuario = intval($_POST['idUsuario']);
-					$strIdentificacion = strClean($_POST['txtIdentificacion']);
+					//$strIdentificacion = strClean($_POST['txtIdentificacion']);
 					$strNombre = ucwords(strClean($_POST['txtNombre']));
 					$strApellido = ucwords(strClean($_POST['txtApellido']));
-					$intTelefono = intval(strClean($_POST['txtTelefono']));
+					
 					$strEmail = strtolower(strClean($_POST['txtEmail']));
-					$intTipoId = 7;
+                    $intTipoId = 2;
 					$intStatus = intval(strClean($_POST['listStatus']));
-                    $intNacionalidad = intval(strClean($_POST['listNacionalidadCliente']));
+                    $intTelefono = intval(strClean($_POST['txtTelefono']));
+					
+                   /* $intNacionalidad = intval(strClean($_POST['listNacionalidadCliente']));
                     $intGenero = intval(strClean($_POST['listGenero']));
                     $intEstadoC = intval(strClean($_POST['listEstadoC']));
                     $intSucursal = intval(strClean($_POST['listSucursal'])); 
-                    $strFechaNacimiento = strClean($_POST['fechaNacimiento']);
+                    $strFechaNacimiento = strClean($_POST['fechaNacimiento']);*/
+                    $user=intval($_SESSION['idUser']);
+                    
                     $request_user="";
 
                     if ($idUsuario==0) {
                         $option=1;
-                        $strPassword =  empty($_POST['txtPassword']) ?passGenerator() : $_POST['txtPassword'];
-                        $strPasswordEncrip = hash("SHA256",$strPassword);
+                        $strPassword =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
+                       // $strPassword =  empty($_POST['txtPassword']) ?passGenerator() : $_POST['txtPassword'];
+                      //$strPasswordEncrip = hash("SHA256",$strPassword);
                         if($_SESSION['permisosMod']['w']){
-                        $request_user = $this->model->insertCliente($strIdentificacion,
-                                                                                    $strNombre, 
-                                                                                    $strApellido, 
-                                                                                    $intTelefono, 
-                                                                                    $strEmail,
-                                                                            
-    $strPasswordEncrip, 
+                        $request_user = $this->model->insertCliente($strNombre,     $strApellido, 
+                                                                                   $strEmail,
+                                                                                    $strPassword,
                                                                                     $intTipoId, 
                                                                                     $intStatus,
-                                                                                    $intNacionalidad,
-                                                                                    $intGenero,
-                                                                                    $intEstadoC,
-                                                                                    $intSucursal,
-                                                                                    $strFechaNacimiento );
+                                                                                    $intTelefono, 
+                                                                                    $user    
+                                                                                );
                                                                                    
                         } 
                     }else{
                          $option=2;
-                        $strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
-                        if($_SESSION['permisosMod']['u']){
-                        $request_user = $this->model->updateCliente($idUsuario,$strIdentificacion,
+                         $strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
+                         if($_SESSION['permisosMod']['u']){
+                        $request_user = $this->model->updateCliente($idUsuario,     
                                                                                     $strNombre, 
                                                                                     $strApellido, 
-                                                                                    $intTelefono, 
                                                                                     $strEmail,
                                                                                     $strPassword,
+                                                                                    $intTipoId,
                                                                                     $intStatus,
-                                                                                    $intNacionalidad,
-                                                                                    $intGenero,
-                                                                                    $intSucursal,
-                                                                                    $intEstadoC,
-                                                                                    $strFechaNacimiento);
+                                                                                    $intTelefono,
+                                                                                    $user    
+                                                                                   );
                         }
                    
                 }
                     if($request_user > 0 ){
                         if ($option==1) {
                             $arrResponse = array("status" => true, "msg" => 'Cliente Guardado Correctamente.');
-                            $nombreUsuario = $strNombre.' '.$strApellido;
+                         /*    $nombreUsuario = $strNombre.' '.$strApellido;
                         $dataUsuario = array(
                             'nombreUsuario' => $nombreUsuario,
                             'email' => $strEmail,
                             'password' => $strPassword,
                             'asunto' => 'Bienvenido a tu Tienda en Línea');
-                        sendEmail($dataUsuario, 'email_bienvenida');
+                        sendEmail($dataUsuario, 'email_bienvenida'); */
 
                         }else{
                             $arrResponse = array("status" => true, "msg" => 'Cliente Actualizado Correctamente.');
                         }
                     }else if($request_user == 'exist'){
-						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
+						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email  ya existe, ingrese otro.');		
 					}else{
 						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
 					}
@@ -112,7 +110,7 @@
             die();
         }
     
-
+/*
         public function getSelectNacionalidadCliente()
 		{
 			$htmlOptions = "";
@@ -157,34 +155,34 @@
             echo $htmlOptions;
             die();		
         }
-
+*/
         public function getClientes()
         {
             if($_SESSION['permisosMod']['r']){ 
             $arrData= $this->model->selectClientes();
-           /*  dep($arrData);
-            exit; */
+           /* dep($arrData);
+            exit;*/
             for ($i=0; $i < count($arrData) ; $i++) { 
                 $btnView ='';
                 $btnEdit = '';
                 $btnDelete = '';
 
-                if ($arrData[$i]['status']==1) {
+                if ($arrData[$i]['COD_STATUS']==1) {
                  $arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';   
                 }else{
                  $arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
                 }
 
                 if($_SESSION['permisosMod']['r']){
-                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idUsuario'].')" title="Ver Cliente"><i class="far fa-eye"></i></button>';
+                    $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['COD_PERSONA'].')" title="Ver Cliente"><i class="far fa-eye"></i></button>';
                 }
 
                 if($_SESSION['permisosMod']['u']){
-                    $btnEdit = '<button class="btn btn-warning btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idUsuario'].')" title="Editar Cliente"><i class="fas fa-pencil-alt"></i></button>';                 
+                    $btnEdit = '<button class="btn btn-warning btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['COD_PERSONA'].')" title="Editar Cliente"><i class="fas fa-pencil-alt"></i></button>';                 
                 }
 
                 if($_SESSION['permisosMod']['d']){
-                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idUsuario'].')" title="Eliminar Cliente"><i class="far fa-trash-alt"></i></button>';  
+                    $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['COD_PERSONA'].')" title="Eliminar Cliente"><i class="far fa-trash-alt"></i></button>';  
                 }
                 
  
@@ -195,19 +193,19 @@
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
          }
              die();
-        }
-
+        }   
+      
         public function getCliente($idUsuario){
-            //echo $idUsuario;
-            //die();
+            /*echo $idUsuario;
+            die();*/
             if($_SESSION['permisosMod']['r']){
 				$idusuario = intval($idUsuario);
 
 				if($idusuario > 0)
 				{
 					$arrData = $this->model->selectCliente($idusuario);
-                    /* dep($arrData);
-                    exit; */ 
+                     /*dep($arrData);
+                    exit; */
 					if(empty($arrData))
 					{
 						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
@@ -239,8 +237,8 @@
         die();
     }
         //Funcion para traer La Sucursal
-        public function getSelectSucursal()
-        {
+        /*public function getSelectSucursal()
+        //{
             $htmlOptions = "";
             $arrData = $this->model->selectSucursal();
             if(count($arrData) > 0 ){
@@ -248,11 +246,11 @@
                 
                     $htmlOptions .= '<option value="'.$arrData[$i]['idsucursal'].'">'.$arrData[$i]['nombre'].'</option>';
                     
-                }
-            }
+               // }
+           // }
             echo $htmlOptions;
             die();		
-        }
+        }*/
 
 
     }

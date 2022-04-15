@@ -1,11 +1,8 @@
-
 <?php 
-
 headerAdmin($data); 
+getModal('modalProductos', $data);
+
   
-  getModal('modalProductos', $data);
-
-
 ?>
   <!-- Content Wrapper. Contains page content -- Div Principal -->
   <div class="content-wrapper">

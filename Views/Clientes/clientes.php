@@ -43,8 +43,7 @@
                     <!-- Encabezado de la tabla-->
                     <thead>
                       <tr>
-                        <th>ID</th>
-                        <th>DNI</th>
+                      <th>ID</th>
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>Email</th>
