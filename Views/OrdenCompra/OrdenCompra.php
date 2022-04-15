@@ -46,16 +46,15 @@ getModal('modalInventario', $data);
                                 <div class="col-md-12" style="display: flex;align-items: self-end;">
 
                                     <div class="form-group col-md-6">
-                                        <label for="exampleInputNombre">Nombre  (<span class="required">*</span>)</label>
-                                        <input type="text" class="form-control" id="txtFactura" name="txtFactura" placeholder="Nombre de la Categoría" required="">
+                                        <label for="exampleInputNombre">N° Factura  (<span class="required">*</span>)</label>
+                                        <input type="text" class="form-control  valid validNumber" id="txtFactura" name="txtFactura" placeholder="Número de Factura" required>
                                     </div>
                                     
                                     
                                         <div class="form-group col-md-6">
-                                        <label for="listStatus">Estado</label>
-                                        <select class="form-control selectpicker" id="listStatus" name="listStatus" required>
-                                            <option value="1">Activo</option>
-                                            <option value="2">Inactivo</option>
+                                        <label for="listProveedor">Proveedor</label>
+                                        <select class="form-control" id="listProveedor" name="listProveedor"  data-live-search="true" required>
+                                           
                                         </select>
                                     </div>
                                     <!-- Div Form-Group -->
@@ -64,9 +63,9 @@ getModal('modalInventario', $data);
                             
             
                                 </div>
-                            <div class="tile-footer">
-                                <button id="btn_facturar_compra" class="btn btn-success notBlock" type="submit"><i class="fa fa-fw fa-lg fa-check-circle "></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-danger" type="button" id="btn_facturar_compra"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
+                            <div class="tile-footer d-flex justify-content-end">
+                                <button id="btn_facturar_compra" class="btn btn-success notBlock" type="submit"><i class="fa fa-fw fa-lg fa-check-circle "></i><span id="btnText">Generar Compra</span></button>&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-danger" type="button" id="btn_anular_compra"><i class="fa fa-fw fa-lg fa-times-circle"></i>Anular</button>
                             </div>
                             
                              

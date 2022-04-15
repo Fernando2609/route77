@@ -59,11 +59,13 @@ class OrdenCompra extends Controllers{
                 
                 //$user=intval($_SESSION['idUser']);
                 $arrData = $this->model->selectProducto($idproducto);
-                
+               
                $arrinfoProducto=array('idproducto' => $idproducto,
                'cantidad' => $intCantidad,
                'nombre'=>$arrData['NOMBRE'],
                'categoria'=>$arrData['CATEGORÍA'],
+               'stock'=>$arrData['STOCK'],
+               'cantCompra'=>$arrData['CANT_COMPRA'],
                'precio' => $txtPrecio,
                'txtPrecioTotal'=>$txtPrecioTotal);
                 
@@ -164,6 +166,131 @@ class OrdenCompra extends Controllers{
            die();
        }
 
+       public function anularCompra(){
+            
+        //unset($_SESSION['compraDetalle']);exit;
+       if($_SESSION['permisosMod']['d']){
+         unset($_SESSION['compraDetalle']);
+           if (empty($_SESSION['compraDetalle']) ) {
+           
+            $arrResponse = array("status" => true, "msg" => 'Productos Eliminados');
+            
+        }else{
+            $arrResponse=array("status"=>false,"msg"=>'Datos Incorrectoss');
+        }
+          
+           echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+       }
+       die();
+   }
+
+
+
+
+   public function procesarCompra(){
+           
+    if ($_POST){
+     
+        $personaid=$_SESSION['idUser'];
+        $monto=0;
+        $factura=intval($_POST['txtFactura']);
+        $idProveedor=intval($_POST['idProveedor']);
+        $isv=15;
+        $total=0;
+        $cantCompra=0;
+     
+        //$costo_envio=COSTOENVIO;
+
+        if(!empty($_SESSION['compraDetalle']) and !empty($_POST['txtFactura'])){
+            foreach ($_SESSION['compraDetalle'] as $pro) {
+                $total += $pro['cantidad']*$pro['precio'];
+            }
+            $impuesto=round($total*($isv/100),2);
+            $monto = formatMoney($total);
+            //dep($_SESSION['compraDetalle']);
+            //dep($costo_envio);
+            //die();
+            //PAGO CONTRA ENTREGA
+            if($monto>0){
+               //CREAR PEDIDO
+                $request_pedido=$this->model->insertCompra($idProveedor,
+                        $monto,
+                        $impuesto,
+                        $factura,
+                        $personaid);
+                        
+                        if ($request_pedido>0){
+                            foreach ($_SESSION['compraDetalle'] as $producto) {
+                                $productoid = $producto['idproducto'];
+                                $precio = $producto['precio'];
+                                $cantidad = $producto['cantidad'];
+                                $stock = $producto['stock'];
+                                $cantCompra=$producto['cantCompra']+$cantidad;
+                                $nuevoStock=$stock+$cantidad;
+                                $this->model->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
+                                
+                                //Disminuir stock
+                                $this->model->updateStock($productoid,$nuevoStock); 
+                                //actualizarCant Compra
+                                $this->model->updateCantCompra($productoid,$cantCompra); 
+
+                            }
+                            
+                   
+                           /*  $infoOrden=$this->getPedido($request_pedido); */
+                           
+                           /*  $dataEmailOrden=array('asunto'=>"Se ha realizado una Compraa.".$request_pedido,
+                                                 'email'=>emailGerente,
+                                                 'emailCopia'=>EMAIL_PEDIDOS,
+                                                    'pedido'=>$infoOrden);
+                            
+                            sendEmail($dataEmailOrden,"email_notificacion_orden");
+                           
+                            $orden=openssl_encrypt($request_pedido, METHODENCRIPT, KEY);
+                            $transaccion = openssl_encrypt($idtransaccionpaypal, METHODENCRIPT,KEY);   */
+                            $arrResponse= array("status"=> true,"msg"=>'Compra Realizads');
+                          
+                             unset($_SESSION['compraDetalle']);
+                             session_regenerate_id(true);
+                            }
+                        
+            }
+
+        }else{
+            $arrResponse = array("status" => false, "msg" => 'No es posible procesar la Compra.');
+        }
+
+    }else{
+        $arrResponse= array("status"=> false, "msg" => 'No es posible procesar el pedido.');
+    }
+    echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+    die();
+}
+
+
+
+
+
+
+
+
+
+   //Funcion para traer ell Proveedor
+        public function getSelectProveedores()
+        {
+            $htmlOptions = "";
+            $arrData = $this->model->selectProveedores();
+           
+            if(count($arrData) > 0 ){
+                for ($i=0; $i < count($arrData); $i++) { 
+                
+                    $htmlOptions .= '<option value="'.$arrData[$i]['COD_PROVEEDOR'].'">'.$arrData[$i]['NOMBRE_EMPRESA'].'</option>';
+                    
+                }
+           }
+            echo $htmlOptions;
+            die();		
+        }
 
         
  }

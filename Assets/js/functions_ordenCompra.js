@@ -169,7 +169,91 @@ $(document).ready(function(){
       }; 
     }
 
+    
   });
+
+
+  $("#btn_anular_compra").click(function(e){
+    e.preventDefault();
+    var rows=$('#tablaCompra tr').length;
+    if (rows>0) {
+       let request = window.XMLHttpRequest
+         ? new XMLHttpRequest()
+         : new ActiveXObject("Microsoft.XMLHTTP");
+       let ajaxUrl = base_url + "/OrdenCompra/anularCompra";
+       let formData = new FormData();
+       //formData.append("idProducto", id);
+
+       request.open("POST", ajaxUrl, true);
+       request.send();
+       request.onreadystatechange = function () {
+         if (request.readyState == 4 && request.status == 200) {
+           let objData = JSON.parse(request.responseText);
+           console.log(objData);
+           if (objData.status) {
+             location.reload();
+           }
+           viewProcesar();
+         }
+       };
+    }
+  });
+
+ $("#btn_facturar_compra").click(function (e) {
+   e.preventDefault;
+   var rows = $("#tablaCompra tr").length;
+   if (rows > 0) {
+     let factura = $("#txtFactura").val();
+     let proveedor = $("#listProveedor").val();
+      let elementsValid = document.getElementsByClassName("valid");
+      for (let i = 0; i < elementsValid.length; i++) {
+        if (elementsValid[i].classList.contains("is-invalid")) {
+          swal.fire(
+            "Atención",
+            "Por favor verifique los campos en rojo.",
+            "error"
+          );
+          return false;
+        }
+      }
+     /* let precio = $("#txtPrecio").val();
+    let precioTotal = $("#txtPrecioTotal").html(); */
+
+     let request = window.XMLHttpRequest
+       ? new XMLHttpRequest()
+       : new ActiveXObject("Microsoft.XMLHTTP");
+     let ajaxUrl = base_url + "/OrdenCompra/procesarCompra";
+     let formData = new FormData();
+     formData.append("txtFactura", factura);
+     formData.append("idProveedor", proveedor);
+
+     request.open("POST", ajaxUrl, true);
+     request.send(formData);
+     request.onreadystatechange = function () {
+       if (request.readyState == 4 && request.status == 200) {
+         let objData = JSON.parse(request.responseText);
+
+         if (objData.status) {
+           window.location = base_url + "/dashboard/";
+         } else {
+           swal.fire(
+             "Atención",
+             objData.msg,
+             "error"
+           );
+           /* document.querySelector("#nombre").innerHTML = "-";
+            document.querySelector("#txtCategoria").innerHTML = "-";
+            $("#txtCantidad").attr("disabled", "disabled");
+            $("#txtPrecio").attr("disabled", "disabled");
+            document
+              .querySelector("#add_product_Compra")
+              .classList.add("notBlock"); */
+         }
+       }
+     };
+   }
+ });
+  
 
 });
 
@@ -238,4 +322,23 @@ function viewProcesar() {
 //Cargar las clases desde el load
 window.addEventListener('load', function() {
    viewProcesar();
+   fntProveedores();
 }, false);
+
+
+
+function fntProveedores(){
+  
+      let ajaxUrl = base_url + "/OrdenCompra/getSelectProveedores";
+      let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+      request.open("GET",ajaxUrl,true);
+      request.send();
+      request.onreadystatechange = function(){
+          if(request.readyState == 4 && request.status == 200){
+              document.querySelector("#listProveedor").innerHTML =
+                request.responseText;
+              document.querySelector("#listProveedor").value = 1;
+              $("#listProveedor").selectpicker("render");
+          }
+  }
+ }

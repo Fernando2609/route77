@@ -32,7 +32,7 @@
                                         echo $data['orden']['COD_TRANSACCION_PAYPAL'];
                                     }else{
                                 ?>
-                                <input type="text" name="txtTransaccion" id="txtTransaccion" class="form-control" value="<?= $data['orden']['REFERENCIA_COBRO'] ?>" required="">
+                                <input type="text" name="txtTransaccion" id="txtTransaccion" class="form-control" value="<?= $data['orden']['REFERENCIA_COBRO'] ?>">
                                     <?php } ?>
                             </td>
                         </tr>
