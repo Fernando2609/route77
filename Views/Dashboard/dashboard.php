@@ -171,7 +171,7 @@
               <div class="card-header">
                 <div class="container-tittle">
                   <h3 class="card-title">Tipos de Pagos por Mes</h3>
-                  <div class= "dflex">
+                  <div class= "d-flex justify-content-end">
                     <input class="date-picker pagoMes" name="pagoMes" placeholder="Mes y Año">
                     <button type="button" class="btnTipoVentaMes btn  btn-info btn-sm" onclick="fntSearchPagos()">
                      <i class="fas fa-search" ></i> </button>
