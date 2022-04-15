@@ -40,21 +40,14 @@
 
 			$return = 0;
 			
-			$sql="SELECT * FROM tbl_personas p
-			left join tbl_usuarios u on p.COD_PERSONA=u.COD_PERSONA
-			WHERE p.email =  '{$this->strEmail}' or u.dni = '{$this->strIdentificacion}'";
-
-
-			//$sql = "SELECT * FROM tbl_personas WHERE email = '{$this->strEmail}'";
-			
-			//Leo lo arregla
-			//or dni = '{$this->strIdentificacion}' 
+			//Validación
+            $sql="CALL CRUD_USUARIO(null,null,'{$this->strEmail}',null,null,null,null,null,null,'{$this->strIdentificacion}',null,null,'A',null)";
+			 
 			$request = $this->select_all($sql);
 
 			if(empty($request))
 			{
-				/* $query_insert  = "INSERT INTO usuarios(dni,nombres,apellidos,email,contraseña,idNacionalidad,idGenero,idEstadoCivil,idRol,idSucursal,fechaNacimiento,status,telefono) 
-								  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)"; */
+				
 				$query_insert="CALL CRUD_USUARIO(?,?,?,?,?,?,?,?,?,?,?,null,'I',null)";
 	        	$arrData = array($this->strNombre,
 									$this->strApellido,
@@ -85,12 +78,7 @@
 			if($_SESSION['idUser'] != 1){
 				$whereAdmin = " and P.COD_PERSONA !=1";
 			}
-			/* $sql = "SELECT u.idUsuario,u.dni,u.nombres,u.apellidos,u.telefono,u.email,u.status,r.Id_Rol,r.nombreRol, n.descripcion, g.descripcion 
-					FROM usuarios u 
-					INNER JOIN roles r ON u.idRol = r.Id_Rol
-					INNER JOIN nacionalidad n ON u.idNacionalidad = n.idNacionalidad
-					INNER JOIN genero g on u.idGenero = g.idGenero
-					WHERE u.status != 0 and idRol !=7".$whereAdmin;  and idRol !=7*/
+			
 			$sql="SELECT P.COD_PERSONA,U.COD_USUARIO, P.COD_ROL, R.NOM_ROL AS ROL, U.DNI, P.NOMBRES, P.APELLIDOS, P.EMAIL,ST.DESCRIPCION AS STATUS , P.TELEFONO, S.NOMBRE AS SUCURSAL, G.DESCRIPCION AS GENERO,
 			P.FECHA_CREACION, P.FECHA_MODIFICACION, P.DATE_LOGIN,P.COD_STATUS
 			FROM TBL_USUARIOS U
@@ -106,19 +94,7 @@
 
 		public function selectUsuario(int $idUsuario){
 			$this->intIdUsuario = $idUsuario;
-			/* $sql = "SELECT u.idUsuario,u.dni,u.nombres,u.apellidos,u.telefono,
-			u.email,u.datecreated,DATE_FORMAT(u.datecreated,'%d-%m-%Y %r') as fechaRegistro,
-			DATE_FORMAT(u.fechaNacimiento,'%d-%m-%Y') as fechaNacimiento, DATE_FORMAT(u.fechaNacimiento,'%Y-%m-%d') as fechaNaci,u.status,DATE_FORMAT(u.datelogin,'%d-%m-%Y %r') as datelogin,DATE_FORMAT(u.datemodificado,'%d-%m-%Y %r') as datemodificado ,
-			s.idsucursal,s.nombre as 'sucursal',r.Id_Rol,r.nombreRol, 
-			n.idNacionalidad,n.descripcion as 'nacionalidad',g.idGenero, g.descripcion as 'genero',
-			e.idEstado,e.descripcion as 'estadocivil' 
-			FROM usuarios u 
-			INNER JOIN roles r ON u.idRol = r.Id_Rol 
-			INNER JOIN nacionalidad n ON u.idNacionalidad = n.idNacionalidad 
-			INNER JOIN genero g on u.idGenero = g.idGenero 
-			INNER JOIN sucursal s on u.idSucursal = s.idsucursal 
-			INNER JOIN estadocivil e on u.idEstadoCivil = e.idEstado 
-			WHERE u.idUsuario = $this->intIdUsuario"; */
+			
 
 			$sql="CALL CRUD_USUARIO(null,null,null,null,null,null,null,null,null,null,null,null,'R',$this->intIdUsuario)";
 			
@@ -145,22 +121,23 @@
 			$this->intUser = $user;
            
 
-			//$sql = "SELECT * FROM tbl_personas WHERE (email = '{$this->strEmail}' AND COD_PERSONA != $this->intIdUsuario)";
-			//Areglar despues
-			//OR (DNI = '{$this->strIdentificacion}' AND COD_PERSONA != $this->intIdUsuario)
+			//Validación
 
-			$sql="SELECT * FROM tbl_personas p
+			/* $sql="SELECT * FROM tbl_personas p
 			LEFT JOIN tbl_usuarios u on p.COD_PERSONA=u.COD_PERSONA
 			WHERE p.EMAIL = '{$this->strEmail}' AND p.COD_PERSONA !=$this->intIdUsuario OR u.DNI = '{$this->strIdentificacion}' AND p.COD_PERSONA != $this->intIdUsuario";
-
+ */         
+            //Validación
+            $sql="CALL CRUD_USUARIO(null,null,'{$this->strEmail}',null,null,null,null,null,null,'{$this->strIdentificacion}',null,null,'B',$this->intIdUsuario)";
+			/* dep($sql);
+			exit; */
 			$request = $this->select_all($sql);
 
 			if(empty($request))
 			{	//Si la contraseña es diferente a vaacio se actualiza la contraseña
 				if($this->strPassword  != "")
 				{
-					/* $sql = "UPDATE usuarios SET dni=?,nombres=?,apellidos=?,email=?,contraseña=?,idNacionalidad=?,idGenero=?,idEstadoCivil=?,idRol=?,idSucursal=?,fechaNacimiento=?,status=?,telefono=?,datemodificado=?
-							WHERE idUsuario = $this->intIdUsuario "; */
+					
 					$sql="CALL CRUD_USUARIO(?,?,?,?,?,?,?,?,?,?,null,?,'U',$this->intIdUsuario)";
 					$arrData = array(
 									$this->strNombre,
@@ -177,8 +154,7 @@
 									);
 							
 				}else{
-					/* $sql = "UPDATE usuarios SET dni=?,nombres=?,apellidos=?,email=?,idNacionalidad=?,idGenero=?,idEstadoCivil=?,idRol=?,idSucursal=?,fechaNacimiento=?,status=?,telefono=?,datemodificado=?
-					WHERE idUsuario = $this->intIdUsuario "; */
+					
 					$sql="CALL CRUD_USUARIO(?,?,?,null,?,?,?,?,?,?,null,?,'S',$this->intIdUsuario)";
 					$arrData = array(
 									$this->strNombre,
@@ -207,7 +183,7 @@
 		public function deleteUsuario(int $intIdUser)
 		{
 			$this->intIdUsuario = $intIdUser;
-			/* $sql = "UPDATE usuarios SET status = ? WHERE idUsuario = $intIdUser"; */
+			
 			$sql="CALL CRUD_USUARIO(null,null,null,null,null,null,null,null,null,null,null,null,'D',?)";
 			$arrData = array($this->intIdUsuario);
 			$request = $this->update($sql,$arrData);
@@ -231,18 +207,7 @@
 			$this->intUser = $user;
 			if($this->strPassword != "")
 			{
-				/* $sql = "UPDATE usuarios SET dni=?,nombres=?,apellidos=?,contraseña=?,idNacionalidad=?,idGenero=?,idEstadoCivil=?,idSucursal=?,fechaNacimiento=?,telefono=?,datemodificado=?
-				WHERE idUsuario = $this->intIdUsuario ";
-					$arrData = array($this->strIdentificacion,
-									$this->strNombre,
-									$this->strApellido,
-									$this->strPassword,
-									$this->intNacionalidad,
-									$this->intGenero,
-									$this->intEstadoC,
-									$this->intSucursal,
-									$this->strFechaNacimiento,
-									$this->intTelefono, NOW()); */
+				
 				$sql="CALL CRUD_USUARIO(?,?,?,?,null,null,?,?,?,?,null,?,'P',$this->intIdUsuario)";
 				$arrData = array(
 								$this->strNombre,
@@ -257,8 +222,7 @@
 								$this->intUser
 								);
 			}else{
-				/* $sql = "UPDATE usuarios SET dni=?,nombres=?,apellidos=?,idNacionalidad=?,idGenero=?,idEstadoCivil=?,idSucursal=?,fechaNacimiento=?,telefono=?,datemodificado=?
-				WHERE idUsuario = $this->intIdUsuario "; */
+				
 				$sql="CALL CRUD_USUARIO(?,?,?,null,null,null,?,?,?,?,null,?,'P',$this->intIdUsuario)";
 				$arrData = array(
 								$this->strNombre,
