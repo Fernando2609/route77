@@ -165,7 +165,7 @@ require_once("Libraries/Core/Mysql.php");
         $this->stock=$stock;
         /* $sql = "SELECT * FROM categoria WHERE nombre = '{$this->strCategoria}' AND idcategoria != $this->intIdcategoria";
         $request = $this->select_all($sql); */
-
+        
         if(empty($request))
         {
             //$sql = "UPDATE producto SET stock = ? WHERE idproducto = $this->productoid "; 	
@@ -260,6 +260,26 @@ require_once("Libraries/Core/Mysql.php");
 		}
 		return $request;
 	}
+    public function updateCantVenta(int $productoid, int $stock){
+
+        $this->con = new Mysql();
+        $this->productoid=$productoid;
+        $this->stock=$stock;
+        /* $sql = "SELECT * FROM categoria WHERE nombre = '{$this->strCategoria}' AND idcategoria != $this->intIdcategoria";
+        $request = $this->select_all($sql); */
+        
+        if(empty($request))
+        {
+            //$sql = "UPDATE producto SET stock = ? WHERE idproducto = $this->productoid "; 	
+            $sql="CALL INVENTARIO(?,'A',?)";
+            $arrData = array($this->stock,$this->productoid);
+            $request = $this->con->update($sql,$arrData);
+            
+        }else{
+            $request = false;
+        }
+        return $request;
+    }
 
 
 

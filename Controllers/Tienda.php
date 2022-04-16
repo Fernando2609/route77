@@ -87,6 +87,7 @@
 											'precio' => $arrInfoProducto['PRECIO'],
                                             'stock' => $arrInfoProducto['STOCK'],
                                             'ruta'=>$arrInfoProducto['RUTA'],
+                                            'cantVenta'=>$arrInfoProducto['CANT_VENTA'],
 											'imagen' => $arrInfoProducto['images'][0]['url_image']
 										);
                         
@@ -149,7 +150,7 @@
                                 die();
                             }
                         }
-                    
+                     
                         $htmlCarrito ="";
 						$htmlCarrito = getFile('Template/Modals/modalCarrito',$_SESSION['arrCarrito']);
 						$arrResponse = array("status" => true, 
@@ -402,7 +403,7 @@
                 $status = 1;
                 $subtotal=0;
                 //$costo_envio=COSTOENVIO;
-
+               
                 if(!empty($_SESSION['arrCarrito'])){
                     foreach ($_SESSION['arrCarrito'] as $pro) {
                         $subtotal += $pro['cantidad']*$pro['precio'];
@@ -435,10 +436,14 @@
                                         $cantidad = $producto['cantidad'];
                                         $stock = $producto['stock'];
                                         $nuevoStock=$stock-$cantidad;
+                                        $cantVenta=$producto['cantVenta']+$cantidad;
                                         $this->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
                                         
                                         //Disminuir stock
-                                         $this->updateStock($productoid,$nuevoStock); 
+                                         $this->updateStock($productoid,$nuevoStock);
+                                        //aumentar cantiad vendida
+                                        $this->updateCantVenta($productoid,$cantVenta); 
+
                                     }
                            
                                     $infoOrden=$this->getPedido($request_pedido);

@@ -30,7 +30,7 @@
 					INNER JOIN categoria c
 					ON p.categoriaid = c.idcategoria
 					WHERE p.status != 0 "; */
-					$sql= 'call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,null,"V",null)';
+					$sql= 'call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,null,null,"V",null)';
 					$request = $this->select_all($sql);
 
 
@@ -48,7 +48,7 @@
 			$this->strRuta = $ruta;
 			$this->intStatus = $status;
 			$this->intUser = $user;
-		
+			
 			$return = 0;
 			//validación
 			/* $sql = "SELECT * FROM tbl_productos WHERE COD_BARRA = '{$this->intCodigo}'or NOMBRE = '{$this->strNombre}'";
@@ -68,7 +68,7 @@
 														ruta,
 														status) 
 								  VALUES(?,?,?,?,?,?,?,?)"; */
-				$query_insert = "CALL CRUD_PRODUCTOS(?,?,?,?,?,?,?,?,?,?,?);";		  
+				$query_insert = "CALL CRUD_PRODUCTOS(?,?,?,?,?,?,?,?,?,?,?,?);";		  
 	        	$arrData = array($this->intCategoriaId,
         						$this->intCodigo,
         						$this->strNombre,
@@ -77,8 +77,8 @@
 								$this->strRuta,
 								$this->intUser,
 								0,
-        						/* $this->intStock, */
         						$this->intStatus,
+        						 $this->intStock, 
 								'I',
 								"NULL" );
 	        	$request_insert = $this->insert($query_insert,$arrData);
@@ -86,12 +86,6 @@
 				$request_id = $this-> select($sql);
 				
 	        	$return = $request_id["Last_insert_id()"];
-
-
-
-
-
-
 				
 			}else{ 
 				$return = false;
@@ -130,7 +124,7 @@
 							status=?,dateModificado=? 
 						 WHERE idproducto = $this->intIdProducto "; */
 
-             $sql = "CALL CRUD_PRODUCTOS(?,?,?,?,?,?,?,?,?,?,?);";
+             $sql = "CALL CRUD_PRODUCTOS(?,?,?,?,?,?,?,?,?,?,?,?);";
 				$arrData = array($this->intCategoriaId,
 							$this->intCodigo,
 							$this->strNombre,
@@ -139,9 +133,8 @@
 							$this->strRuta,
 							"null",
 							$this->intUser,
-							/* $this->intStock,
-							 */
 							$this->intStatus,
+							$this->intStock,
 							'U',
 							$this->intIdProducto );
 	        	$request = $this->update($sql,$arrData);
@@ -168,7 +161,7 @@
 					INNER JOIN categoria c
 					ON p.categoriaid = c.idcategoria
 					WHERE idproducto = $this->intIdProducto"; */
-					$sql ="call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,null,'R',{$this->intIdProducto})";
+					$sql ="call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,null,null,'R',{$this->intIdProducto})";
 			$request = $this->select($sql);
 			
 			return $request;

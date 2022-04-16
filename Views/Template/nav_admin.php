@@ -167,6 +167,18 @@
                   <p>Redes Sociales</p>
                 </a>
               </li>
+              <!-- Sucursales -->
+              <?php if(!empty($_SESSION['permisos'][16]['r'])){ ?>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/sucursales" class="nav-link">
+           
+            <i class="far fa-circle nav-icon"></i>
+              <p>
+                Sucursales
+              </p>
+            </a>
+          </li>
+          <?php } ?>
             </ul>
           </li>
           <?php } ?>
@@ -182,17 +194,7 @@
           </li>
           <?php } ?>
           
-          <?php if(!empty($_SESSION['permisos'][16]['r'])){ ?>
-          <li class="nav-item">
-            <a href="<?= base_url();?>/sucursales" class="nav-link">
-           
-            <i class="nav-icon fa-solid fa-location-dot"></i>
-              <p>
-                Sucursales
-              </p>
-            </a>
-          </li>
-          <?php } ?>
+        
           
         <?php if(!empty($_SESSION['permisos'][9]['r'])){ ?>
           <li class="nav-item">
@@ -202,6 +204,32 @@
                 Inventario
               </p>
             </a>
+          </li>
+          <?php } ?>
+          <?php if(!empty($_SESSION['permisos'][17]['r'])){ ?>
+          <!-- Calendario-->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fa-solid fa-dolly"></i>
+              <p>
+                Compras
+              </p>
+              <i class="right fas fa-angle-left"></i>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url();?>/ordenCompra" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Compra</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url();?>/Compras" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ver Compras</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <?php } ?>
           <?php if(!empty($_SESSION['permisos'][14]['r'])){ ?>

@@ -22,7 +22,7 @@ tablePedidos = $('#tablePedidos').dataTable({
                     {"data":"FECHA"},
                     {"data":"MONTO"},
                     {"data":"TIPO_PAGO"},
-                    {"data":"status"},
+                    {"data":"TIPOESTADO"},
                     {"data":"options"}
                         
                   ],
@@ -296,10 +296,7 @@ function fntUpdateInfo(){
         let transaccion;
         if(document.querySelector("#txtTransaccion")){
             transaccion = document.querySelector("#txtTransaccion").value;
-            if(transaccion==""){
-                swal("","Complete los datos para continuar." , "error");
-                return false;
-            }
+            
         }
         let request = (window.XMLHttpRequest) ? 
                          new XMLHttpRequest() : 
