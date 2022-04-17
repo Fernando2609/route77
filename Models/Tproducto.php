@@ -138,22 +138,9 @@ trait Tproducto{
         }
 
         $this->con = new Mysql();
-           /*  $sql = "SELECT p.idproducto,
-            p.codigo,
-            p.nombre,
-            p.descripcion,
-            p.categoriaid,
-            c.nombre as categoria,
-            p.precio,
-            p.ruta,
-            p.stock 
-            FROM producto p 
-            INNER JOIN categoria c
-            ON p.categoriaid = c.idcategoria
-            WHERE p.status != 0  AND p.categoriaid = $this->intIdCategoria
-            ORDER BY $this->option LIMIT $this->cant "; */
+           
 
-            $sql=" SELECT p.COD_PRODUCTO,
+            /* $sql=" SELECT p.COD_PRODUCTO,
                     p.COD_BARRA,
                     p.NOMBRE,
                     p.DESCRIPCION,
@@ -166,8 +153,9 @@ trait Tproducto{
                         INNER JOIN tbl_categoria c ON p.COD_CATEGORIA = c.COD_CATEGORIA
                         INNER JOIN tbl_inventario i ON p.COD_PRODUCTO = i.COD_PRODUCTO
                         WHERE p.COD_STATUS != 0  AND p.COD_CATEGORIA = $this->intIdCategoria
-                        ORDER BY $this->option LIMIT $this->cant";
-
+                        ORDER BY $this->option LIMIT $this->cant"; */
+            $sql="CALL CRUD_PRODUCTOSTIENDA($this->intIdCategoria, $this->cant, '$option', 'V')";
+           
             $request = $this->con->select_all($sql);
             
             if (count($request) > 0) {

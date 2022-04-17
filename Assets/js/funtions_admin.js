@@ -193,4 +193,79 @@ window.addEventListener('load', function() {
     fntValidNumberTel();
     fntValidNumberPrecio;
     fntValidNumberRtn();
+    fntViewInfo();
 }, false);
+
+ $(document).ready(function () {
+    if (document.querySelector("#formProductos")) {
+      let formProductos = document.querySelector("#formProductos");
+      formProductos.onsubmit = function (e) {
+        e.preventDefault();
+        let request = window.XMLHttpRequest
+          ? new XMLHttpRequest()
+          : new ActiveXObject("Microsoft.XMLHTTP");
+        let ajaxUrl = base_url + "/Productos/getProductos";
+        let formData = new FormData();
+        request.open("GET", ajaxUrl, true);
+        request.send();
+        request.onreadystatechange = function () {
+          if (request.readyState == 4 && request.status == 200) {
+            let objData = JSON.parse(request.responseText);
+            console.log(objData);
+            if (objData.status) {
+              swal.fire("", objData.msg, "success");
+
+              document.querySelector("#idProducto").value = objData.idproducto;
+
+              document
+                .querySelector("#containerGallery")
+                .classList.remove("notBlock");
+
+              if (rowTable == "") {
+                tableProductos.api().ajax.reload();
+              } else {
+                htmlStatus =
+                  intStatus == 1
+                    ? '<span class="badge badge-success">Activo</span>'
+                    : '<span class="badge badge-danger">Inactivo</span>';
+                rowTable.cells[1].textContent = intCodigo;
+                rowTable.cells[2].textContent = strNombre;
+                // rowTable.cells[3].textContent = intStock;
+                rowTable.cells[4].textContent = smony + strPrecio;
+                rowTable.cells[5].innerHTML = htmlStatus;
+                rowTable = "";
+              }
+            } else {
+              swal.fire("Error", objData.msg, "error");
+            }
+          }
+          divLoading.style.display = "none";
+          return false;
+        };
+      };
+    }
+ });
+function fntViewInfo() {
+     let prevImg = document.querySelector("#notificacion");
+  let request = window.XMLHttpRequest
+    ? new XMLHttpRequest()
+    : new ActiveXObject("Microsoft.XMLHTTP");
+  let ajaxUrl = base_url + "/Dashboard/getProductos/";
+  request.open("GET", ajaxUrl, true);
+  request.send();
+  request.onreadystatechange = function () {
+    if (request.readyState == 4 && request.status == 200) {
+      let objData = JSON.parse(request.responseText);
+     var cant=0;
+      
+      for (let i = 0; i < objData.length; i++) {
+          const producto = objData[i];
+          if (producto.STOCK<=producto.CANT_MINIMA) {
+              
+              console.log("hola");
+            }
+            console.log(producto.CANT_MINIMA>producto.STOCK);
+      }
+    }
+  };
+}

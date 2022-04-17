@@ -29,6 +29,7 @@
    <!-- DataTables -->
    <link rel="stylesheet" href="<?= media(); ?>/js/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
    <link rel="stylesheet" href="<?= media(); ?>/js/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+   <link rel="stylesheet" href="<?= media(); ?>\css\datatables_datetime.min.css">
    <!-- Animate css CDN -->
    <link
     rel="stylesheet"
@@ -81,6 +82,27 @@
         </div> 
       </li> -->
       
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge"><?php
+            if(!empty($_SESSION['permisos'][9]['r'])){
+            echo count($_SESSION['notificaciones']);
+            }else{
+              echo "0";
+            }
+          ?>
+            
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="notificacion">
+        <?php if(!empty($_SESSION['permisos'][9]['r'])){ ?>
+        <?=  getModal("notificaciones",$data)  ?>
+        <?php } ?>
+          
+         
+        </div>
+      </li>
     
    
       <li class="nav-item">

@@ -60,7 +60,7 @@
             $data['page_name'] = "producto";
             $data['categorias'] = $this->getCategorias();
             $data['producto'] = $infoProducto;
-            $data['productos'] = $this->getProductosRandom($infoProducto['COD_CATEGORIA'],8,"r");
+            $data['productos'] = $this->getProductosRandom($infoProducto['COD_CATEGORIA'],8,"a");
             $this->views->getView($this, "producto", $data);
          }
         }
