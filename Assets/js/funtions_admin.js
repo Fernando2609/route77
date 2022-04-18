@@ -193,4 +193,31 @@ window.addEventListener('load', function() {
     fntValidNumberTel();
     fntValidNumberPrecio;
     fntValidNumberRtn();
+    fntViewProductos();
 }, false);
+
+
+function fntViewProductos() {
+     let prevImg = document.querySelector("#notificacion");
+  let request = window.XMLHttpRequest
+    ? new XMLHttpRequest()
+    : new ActiveXObject("Microsoft.XMLHTTP");
+  let ajaxUrl = base_url + "/Dashboard/getProductos/";
+  request.open("GET", ajaxUrl, true);
+  request.send();
+  request.onreadystatechange = function () {
+    if (request.readyState == 4 && request.status == 200) {
+      let objData = JSON.parse(request.responseText);
+     var cant=0;
+      
+      for (let i = 0; i < objData.length; i++) {
+          const producto = objData[i];
+          if (producto.STOCK<=producto.CANT_MINIMA) {
+              
+              console.log("hola");
+            }
+            //console.log(producto.CANT_MINIMA>producto.STOCK);
+      }
+    }
+  };
+}

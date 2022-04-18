@@ -211,11 +211,11 @@
 			if($this->strPassword != "")
 			{
 				
-				$sql="CALL CRUD_USUARIO(?,?,?,?,null,null,?,?,?,?,null,?,'P',$this->intIdUsuario)";
+				$sql="CALL CRUD_USUARIO(?,?,null,?,null,null,?,?,?,?,null,?,'P',$this->intIdUsuario)";
 				$arrData = array(
 								$this->strNombre,
 								$this->strApellido,
-								$this->strEmail,
+								//$this->strEmail,
 								$this->strPassword,
 								
 								$this->intTelefono,
@@ -226,17 +226,57 @@
 								);
 			}else{
 				
-				$sql="CALL CRUD_USUARIO(?,?,?,null,null,null,?,?,?,?,null,?,'P',$this->intIdUsuario)";
+				$sql="CALL CRUD_USUARIO(?,?,null,null,null,null,?,?,?,?,null,?,'H',$this->intIdUsuario)";
+				
 				$arrData = array(
 								$this->strNombre,
 								$this->strApellido,
-								$this->strEmail,
+								//$this->strEmail,
 								//$this->strPassword,
 								
 								$this->intTelefono,
 								$this->intSucursal,
 								$this->intGenero,
 								$this->strIdentificacion,
+								$this->intUser
+								);
+								
+			}
+			$request = $this->update($sql,$arrData);
+		    return $request;
+		}
+		public function updatePerfilCliente(int $idUsuario, string $nombre, string $apellido, int $telefono,string $password,int $user )
+		{
+			$this->intIdUsuario = $idUsuario;
+
+			$this->strNombre = $nombre;
+			$this->strApellido = $apellido;
+			$this->intTelefono = $telefono;
+			$this->strPassword = $password;
+			$this->intUser = $user;
+			if($this->strPassword != "")
+			{
+				
+				$sql="CALL CRUD_USUARIO(?,?,null,?,null,null,?,null,null,null,null,?,'C',$this->intIdUsuario)";
+				$arrData = array(
+								$this->strNombre,
+								$this->strApellido,
+								//$this->strEmail,
+								$this->strPassword,
+								
+								$this->intTelefono,
+								$this->intUser
+								);
+			}else{
+				
+				$sql="CALL CRUD_USUARIO(?,?,null,null,null,null,?,null,null,null,null,?,'M',$this->intIdUsuario)";
+				$arrData = array(
+								$this->strNombre,
+								$this->strApellido,
+								//$this->strEmail,
+								//$this->strPassword,
+								
+								$this->intTelefono,
 								$this->intUser
 								);
 			}

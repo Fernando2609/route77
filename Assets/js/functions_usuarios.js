@@ -289,20 +289,20 @@ document.addEventListener('DOMContentLoaded',function () {
         let formPerfil=document.querySelector("#formPerfil");
         formPerfil.onsubmit=function(e){
             e.preventDefault();
-            let strIdentificacion = document.querySelector('#txtIdentificacion').value;
+           // let strIdentificacion = document.querySelector('#txtIdentificacion').value;
             let strNombre = document.querySelector('#txtNombre').value;
             let strApellido = document.querySelector('#txtApellido').value;
   
             let intTelefono = document.querySelector('#txtTelefono').value;
            
            
-            let intGenero = document.querySelector('#listGenero').value;
+            //let intGenero = document.querySelector('#listGenero').value;
          
             let strPassword = document.querySelector('#txtPassword').value;
             let strPasswordConfirm = document.querySelector('#txtPasswordConfirm').value;
            
     
-            if(strIdentificacion == '' || strApellido == '' || strNombre == '' ||  intTelefono == '')
+            if(strApellido == '' || strNombre == '' ||  intTelefono == '')
                 {
                     swal.fire("Atención", "Todos los campos son obligatorios." , "error");
                     return false;
@@ -325,9 +325,6 @@ document.addEventListener('DOMContentLoaded',function () {
                     return false;
                 }
             }
-            
-            
-
 
             divLoading.style.display="flex";   
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -413,6 +410,7 @@ function fntNacionalidadUsuario(){
     }
 
 } */
+ if (document.querySelector("#listGenero")) {
 //Funcion para traer el genero
 function fntGeneroUsuario(){
   
@@ -428,7 +426,7 @@ function fntGeneroUsuario(){
         }
     }
 
-}
+}}
 /* //Funcion para traer el Estado Civil
 function fnEstadoCUsuario(){
   

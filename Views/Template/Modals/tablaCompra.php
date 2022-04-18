@@ -18,8 +18,8 @@ if (isset($_SESSION['compraDetalle']) and count($_SESSION['compraDetalle'])>0) {
                     <td><?=  $producto['nombre']  ?></td>
                     <td><?=  $producto['categoria']  ?></td>
                     <td><?=  $producto['cantidad']  ?></td>
-                    <td><?=  $producto['precio']?></td>
-                    <td><?=  $producto['txtPrecioTotal']  ?></td>
+                    <td><?= SMONEY.' '. formatMoney($producto['precio'])?></td>
+                    <td><?= SMONEY.' '. formatMoney($producto['txtPrecioTotal'])  ?></td>
                     <td class=""><a class="link_delete" href="$" # onclick="event.preventDefault();del_product_detalle('<?=  $producto['idproducto']  ?>');"><i class="far fa-trash-alt"></i></a></td>
                     </tr>
       

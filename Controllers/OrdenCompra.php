@@ -198,61 +198,59 @@ class OrdenCompra extends Controllers{
         $isv=15;
         $total=0;
         $cantCompra=0;
-     
+        
         //$costo_envio=COSTOENVIO;
 
         if(!empty($_SESSION['compraDetalle']) and !empty($_POST['txtFactura'])){
             foreach ($_SESSION['compraDetalle'] as $pro) {
                 $total += $pro['cantidad']*$pro['precio'];
+                
             }
-            $impuesto=round($total*($isv/100),2);
-            $monto = formatMoney($total);
+            $impuesto=$total*($isv/100);
+            $monto = $total;
+           
             //dep($_SESSION['compraDetalle']);
-            //dep($costo_envio);
-            //die();
-            //PAGO CONTRA ENTREGA
             if($monto>0){
-               //CREAR PEDIDO
+               //CREAR COMPRA
                 $request_pedido=$this->model->insertCompra($idProveedor,
-                        $monto,
-                        $impuesto,
-                        $factura,
-                        $personaid);
+                                                                $monto,
+                                                                $impuesto,
+                                                                $factura,
+                                                                $personaid);
                         
-                        if ($request_pedido>0){
-                            foreach ($_SESSION['compraDetalle'] as $producto) {
-                                $productoid = $producto['idproducto'];
-                                $precio = $producto['precio'];
-                                $cantidad = $producto['cantidad'];
-                                $stock = $producto['stock'];
-                                $cantCompra=$producto['cantCompra']+$cantidad;
-                                $nuevoStock=$stock+$cantidad;
-                                $this->model->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
-                                
-                                //Disminuir stock
-                                $this->model->updateStock($productoid,$nuevoStock); 
-                                //actualizarCant Compra
-                                $this->model->updateCantCompra($productoid,$cantCompra); 
+                if ($request_pedido>0){
+                    foreach ($_SESSION['compraDetalle'] as $producto) {
+                        $productoid = $producto['idproducto'];
+                        $precio = $producto['precio'];
+                        $cantidad = $producto['cantidad'];
+                        $stock = $producto['stock'];
+                        $cantCompra=$producto['cantCompra']+$cantidad;
+                        $nuevoStock=$stock+$cantidad;
+                        $this->model->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
+                        //Aumentar stock
+                        $this->model->updateStock($productoid,$nuevoStock); 
+                        //actualizarCant Compra
+                        $this->model->updateCantCompra($productoid,$cantCompra); 
 
-                            }
-                            
-                   
-                           /*  $infoOrden=$this->getPedido($request_pedido); */
-                           
-                           /*  $dataEmailOrden=array('asunto'=>"Se ha realizado una Compraa.".$request_pedido,
-                                                 'email'=>emailGerente,
-                                                 'emailCopia'=>EMAIL_PEDIDOS,
-                                                    'pedido'=>$infoOrden);
-                            
-                            sendEmail($dataEmailOrden,"email_notificacion_orden");
-                           
-                            $orden=openssl_encrypt($request_pedido, METHODENCRIPT, KEY);
-                            $transaccion = openssl_encrypt($idtransaccionpaypal, METHODENCRIPT,KEY);   */
-                            $arrResponse= array("status"=> true,"msg"=>'Compra Realizads');
-                          
-                             unset($_SESSION['compraDetalle']);
-                             session_regenerate_id(true);
-                            }
+                    }
+                
+                
+                        /*  $infoOrden=$this->getPedido($request_pedido); */
+                        
+                        /*  $dataEmailOrden=array('asunto'=>"Se ha realizado una Compraa.".$request_pedido,
+                                                'email'=>emailGerente,
+                                                'emailCopia'=>EMAIL_PEDIDOS,
+                                                'pedido'=>$infoOrden);
+                        
+                        sendEmail($dataEmailOrden,"email_notificacion_orden");
+                        
+                        $orden=openssl_encrypt($request_pedido, METHODENCRIPT, KEY);
+                        $transaccion = openssl_encrypt($idtransaccionpaypal, METHODENCRIPT,KEY);   */
+                        $arrResponse= array("status"=> true,"msg"=>'Compra Realizads');
+                        
+                            unset($_SESSION['compraDetalle']);
+                            session_regenerate_id(true);
+                        }
                         
             }
 

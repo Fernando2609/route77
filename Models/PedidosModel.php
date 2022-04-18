@@ -16,7 +16,7 @@
              $sql = "SELECT p.COD_PEDIDO,
                     p.REFERENCIA_COBRO,
                     p.COD_TRANSACCION_PAYPAL,
-                    DATE_FORMAT(p.FECHA, '%d/%m/%Y') as FECHA,
+                    DATE_FORMAT(p.FECHA, '%Y/%m/%d') as FECHA,
                     p.MONTO,
                     tp.TIPO_PAGO,
                     tp.COD_TIPO_PAGO,
@@ -93,9 +93,12 @@
         }
         public function selectTransPaypal(string $idtransaccion, $idpersona = NULL){
 			$busqueda = "";
+            $requestData="";
+            
+           
 			if($idpersona != NULL){
 				$busqueda = " AND COD_PERSONA =".$idpersona;
-			} 
+
 			//$objTransaccion = array(); */
             //FALTA
 			//$sql = "CALL CRUD_PEDIDO(NULL,NULL,NULL,NULL,NULL,NULL, $idtransaccion,NULL,NULL,'F',$idpersona)";

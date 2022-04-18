@@ -177,7 +177,7 @@
         $request = $objLogin->sessionLogin($idpersona);
         return $request;
     }   
-    function nombreEmpresa(){
+    function datosEmpresa(){
         require_once ("Models/LoginModel.php");
         $objLogin = new LoginModel();
         $request = $objLogin->datosEmpresa();
