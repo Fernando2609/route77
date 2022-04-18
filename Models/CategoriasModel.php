@@ -132,7 +132,8 @@
 		public function deleteCategoria(int $idcategoria)
 		{
 			$this->intIdcategoria = $idcategoria;
-			$sql = "SELECT * FROM tbl_productos WHERE COD_CATEGORIA = $this->intIdcategoria";
+			$sql="CALL CRUD_CATEGORIA(null,null,null,null,null,null,null,'F','$this->intIdcategoria')";
+			//$sql = "SELECT * FROM tbl_productos WHERE COD_CATEGORIA = $this->intIdcategoria";
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{
