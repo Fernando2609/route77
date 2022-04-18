@@ -19,9 +19,9 @@
             exit; */
             /* dep($this->selectProductos());
             exit; */
-            $data['page_tag']=NOMBRE_EMPESA;
-            $data['page_title']=NOMBRE_EMPESA;
-            $data['page_name']=NOMBRE_EMPESA;
+            $data['page_tag']=datosEmpresa()['NOMBRE_EMPRESA'];
+            $data['page_title']=datosEmpresa()['NOMBRE_EMPRESA'];
+            $data['page_name']=datosEmpresa()['NOMBRE_EMPRESA'];
             $data['slider'] = $this->getCategoriasT(CAT_SLIDER);
             $data['banner'] = $this->getCategoriasT(CAT_BANNER);
             $data['categorias'] = $this->getCategorias();

@@ -42,7 +42,7 @@ document.addEventListener(
                     },
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3],
+            columns: [0, 1, 2, 3,4],
             modifier: {},
           },
         },
@@ -70,7 +70,7 @@ document.addEventListener(
           
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3],
+            columns: [0, 1, 2, 3,4],
             modifier: {},
           },
         },
@@ -80,11 +80,11 @@ document.addEventListener(
           text: "<i class='fas fa-file-pdf'></i> PDF",
           titleAttr: "Exportar a PDF",
           className: "btn btn-danger mr-1 mb-2",
-          filename: "CATEGORIAS",
+          filename: "Compras",
           download: "open",
           //orientation: 'landscape',
           pageSize: "letter",
-          title: "Reporte de Categorías",
+          title: "Reporte de Compras",
           customize: function (doc) {
             doc.content[1].margin = [0, 40, 120, 20];
             doc.content[0].margin = [0, 20, 0, 0];
@@ -93,7 +93,7 @@ document.addEventListener(
             //orientacion vertical
             //doc.content[1].table.widths = [ '5%', '25%', '20%', '40%', '20%', '20%', '11%']
             //orientacion Horizontal
-            doc.content[1].table.widths = ["5%", "35%", "60%", "30%"];
+            doc.content[1].table.widths = ["10%", "25%", "25%", "30%","40%"];
             doc.content[1].table.body[0].forEach(function (h) {
               h.alignment = "left";
               h.fillColor = "#81ae39";
@@ -173,7 +173,7 @@ document.addEventListener(
           },
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3],
+            columns: [0, 1, 2, 3,4],
             modifier: {},
           },
         },
@@ -184,7 +184,7 @@ document.addEventListener(
           className: "btn btn-info mr-1 mb-2",
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3],
+            columns: [0, 1, 2, 3,4],
             modifier: {},
           },
         },
@@ -195,7 +195,7 @@ document.addEventListener(
           className: "btn btn-warning mr-1 mb-2",
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3],
+            columns: [0, 1, 2, 3,4],
             modifier: {},
           },
         },

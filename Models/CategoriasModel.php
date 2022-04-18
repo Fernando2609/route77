@@ -45,7 +45,7 @@
 								 $this->strPortada,
 								 $this->intUser,
 								 0,
-								 //$this->strRuta, 
+								 $this->strRuta, 
 								 'I',
 								 "null"
 								 );

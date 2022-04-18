@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded',function () {
                             exportOptions: {
 
                                 margin: [0, 20,20,20],
-                                columns: [ 0, 1, 2, 3, 4,5,6],
+                                columns: [ 0, 1, 2, 3, 4,5],
                                   modifier: {
                                   }
                               }
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded',function () {
                             exportOptions: {
                    
                                 margin: [0, 20,20,20],
-                                columns: [ 0, 1, 2, 3, 4,5,6],
+                                columns: [ 0, 1, 2, 3, 4,5],
                                   modifier: {
                                   }
                               },
@@ -82,13 +82,13 @@ document.addEventListener('DOMContentLoaded',function () {
                             pageSize:'letter',
                             title:'Reporte de Clientes',
                             customize: function ( doc ) {
-                                doc.content[1].margin = [ 0, 40, 120, 20 ]
+                                doc.content[1].margin = [ 20, 40, 120, 20 ]
                                 doc.content[0].margin = [ 0, 20, 0, 0 ]
                                 doc.content[0].alignment = 'center'
                                 //orientacion vertical 
                                 //doc.content[1].table.widths = [ '5%', '25%', '20%', '40%', '20%', '20%', '11%']
                                 //orientacion Horizontal 
-                                doc.content[1].table.widths = [ '5%', '20%', '20%', '20%', '30%', '15%', '11%']
+                                doc.content[1].table.widths = [ '5%', '20%', '20%', '40%', '20%', '15%']
                                 doc.content[1].table.body[0].forEach(function(h){
                                   //h.alignment='left';  
                                   h.fillColor = '#81ae39';
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded',function () {
                             }, exportOptions: {
                             
                                 margin: [0, 20,20,20],
-                                columns: [ 0, 1, 2, 3, 4,5,6],
+                                columns: [ 0, 1, 2, 3, 4,5],
                                 modifier: {
                                 }
                             },
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded',function () {
                             exportOptions: {
 
                                 margin: [0, 20,20,20],
-                                columns: [ 0, 1, 2, 3, 4,5,6],
+                                columns: [ 0, 1, 2, 3, 4,5],
                                   modifier: {
                                   }
                               }
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded',function () {
                             exportOptions: {
 
                                 margin: [0, 20,20,20],
-                                columns: [ 0, 1, 2, 3, 4,5,6],
+                                columns: [ 0, 1, 2, 3, 4,5],
                                   modifier: {
 
                                   }
@@ -260,50 +260,7 @@ document.addEventListener('DOMContentLoaded',function () {
 
 }, false);
 
-function fntViewInfo(idpersona){
-    
-    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'/Clientes/getCliente/'+idpersona;
-    request.open("GET",ajaxUrl,true);
-    request.send();
-     request.onreadystatechange = function(){
-        if(request.readyState == 4 && request.status == 200){
-            let objData = JSON.parse(request.responseText);
-            //console.log(objData);
-            if(objData.status)
-            {
-                let CREADO_POR =
-                  objData.data.CREADO_POR == null
-                    ? "Registro en Tienda"
-                    : objData.data.CREADO_POR;
-                 let MODIFICADO_POR =
-                   objData.data.MODIFICADO_POR == null
-                     ? "Sin Modificar"
-                     : objData.data.MODIFICADO_POR;
-                
-                /*console.log(objData.data.status); */
-                let estadoUsuario = objData.data.COD_STATUS == 1 ? 
-                '<span class="badge badge-success">Activo</span>' : 
-                '<span class="badge badge-danger">Inactivo</span>'; 
 
-                
-                document.querySelector("#celNombre").innerHTML = objData.data.NOMBRES;
-                document.querySelector("#celApellido").innerHTML = objData.data.APELLIDOS;
-                document.querySelector("#celTelefono").innerHTML = objData.data.TELEFONO;
-                document.querySelector("#celEmail").innerHTML = objData.data.EMAIL;
-                document.querySelector("#celEstado").innerHTML = estadoUsuario;
-                document.querySelector("#celFechaRegistro").innerHTML = objData.data.FECHA_CREACION;
-                document.querySelector("#celCreadoPor").innerHTML = CREADO_POR;
-                document.querySelector("#celDateModificado").innerHTML = objData.data.FECHA_MODIFICACION; 
-                document.querySelector("#celModPor").innerHTML = MODIFICADO_POR;
-                document.querySelector("#celDateLogin").innerHTML = objData.data.DATE_LOGIN;  
-                $('#modalViewCliente').modal('show');
-            }else{
-                swal.fire("Error", objData.msg , "error");
-            }
-        }
-    }  
-}
 function fntEditInfo(element,idUsuario){
     rowTable=element.parentNode.parentNode.parentNode;
     console.log(rowTable);
@@ -400,7 +357,55 @@ function fntDelInfo(idUsuario){
     });
  }
 
+function fntViewInfo(idpersona) {
+  let request = window.XMLHttpRequest
+    ? new XMLHttpRequest()
+    : new ActiveXObject("Microsoft.XMLHTTP");
+  let ajaxUrl = base_url +"/Clientes/getCliente/" + idpersona;
+  request.open("GET", ajaxUrl, true);
+  request.send();
+  request.onreadystatechange = function () {
+    if (request.readyState == 4 && request.status == 200) {
+      let objData = JSON.parse(request.responseText);
+      //console.log(objData);
+      if (objData.status) {
+        let CREADO_POR =
+          objData.data.CREADO_POR == null
+            ? "Registro en Tienda"
+            : objData.data.CREADO_POR;
+        let MODIFICADO_POR =
+          objData.data.MODIFICADO_POR == null
+            ? "Sin Modificar"
+            : objData.data.MODIFICADO_POR;
 
+        /*console.log(objData.data.status); */
+        let estadoUsuario =
+          objData.data.COD_STATUS == 1
+            ? '<span class="badge badge-success">Activo</span>'
+            : '<span class="badge badge-danger">Inactivo</span>';
+
+        document.querySelector("#celNombre").innerHTML = objData.data.NOMBRES;
+        document.querySelector("#celApellido").innerHTML =
+          objData.data.APELLIDOS;
+        document.querySelector("#celTelefono").innerHTML =
+          objData.data.TELEFONO;
+        document.querySelector("#celEmail").innerHTML = objData.data.EMAIL;
+        document.querySelector("#celEstado").innerHTML = estadoUsuario;
+        document.querySelector("#celFechaRegistro").innerHTML =
+          objData.data.FECHA_CREACION;
+        document.querySelector("#celCreadoPor").innerHTML = CREADO_POR;
+        document.querySelector("#celDateModificado").innerHTML =
+          objData.data.FECHA_MODIFICACION;
+        document.querySelector("#celModPor").innerHTML = MODIFICADO_POR;
+        document.querySelector("#celDateLogin").innerHTML =
+          objData.data.DATE_LOGIN;
+        $("#modalViewCliente").modal("show");
+      } else {
+        swal.fire("Error", objData.msg, "error");
+      }
+    }
+  };
+}
 
 function openModal()
 {

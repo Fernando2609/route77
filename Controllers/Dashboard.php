@@ -46,7 +46,7 @@
            }
         public function getProductos()
         {
-            if($_SESSION['permisosMod']['d']){
+            if($_SESSION['permisosMod']['r']){
             
                 $arrData = $this->model->selectProductos();
                

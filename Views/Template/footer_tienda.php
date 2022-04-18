@@ -50,7 +50,7 @@
 							<i class="fa fa-facebook"></i>
 						</a>
 
-						<a href="https://instagram.com/?" target="_blanck" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+						<a href="https://api.whatsapp.com/send?phone=50494877564?" target="_blanck" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
 							<i class="fa fa-instagram"></i>
 						</a>
 						

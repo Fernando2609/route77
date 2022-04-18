@@ -35,6 +35,7 @@
                     $btnDelete = '';
     
                     $arrData[$i]['MONTO'] = SMONEY.formatMoney($arrData[$i]['MONTO']);
+                    //$arrData[$i]['MONTO'] = SMONEY.formatMoney($arrData[$i]['MONTO']+$arrData[$i]['ISV']);
     
                     if ($_SESSION['permisosMod']['r']) {
     

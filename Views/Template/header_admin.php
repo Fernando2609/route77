@@ -81,17 +81,18 @@
           </label>
         </div> 
       </li> -->
-      
+     
       <!-- Notifications Dropdown Menu -->
+      <?php
+      if(!empty($_SESSION['permisos'][9]['r'])){
+      ?>
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
           <span class="badge badge-warning navbar-badge"><?php
-            if(!empty($_SESSION['permisos'][9]['r'])){
+            
             echo count($_SESSION['notificaciones']);
-            }else{
-              echo "0";
-            }
+            
           ?>
             
         </a>
@@ -103,6 +104,7 @@
          
         </div>
       </li>
+      <?php } ?>
     
    
       <li class="nav-item">
@@ -113,8 +115,8 @@
       <!-- User Menu-->
       <li class="nav-item dropdown show"><a class="nav-link" href="#" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="<?= base_url();?>/opciones"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
-            <li><a class="dropdown-item" href="<?= base_url();?>/usuarios/perfil"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+           
+            <li><a class="dropdown-item" href="<?= base_url();?>/usuarios/perfil"><i class="fa fa-user fa-lg"></i> Perfil</a></li>
             <li><a class="dropdown-item" href="<?= base_url();?>/Logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
           </ul>
         </li>

@@ -98,10 +98,8 @@
 				$busqueda = " AND COD_PERSONA =".$idpersona;
 			}
 			$objTransaccion = array();
-			//$sql = "SELECT DATOS_PAYPAL FROM TBL_PEDIDO WHERE COD_TRANSACCION_PAYPAL = '{$idtransaccion}' ".$busqueda;
-        
-            $sql = "CALL CRUD_PEDIDO(NULL,NULL,NULL,NULL,NULL,NULL,'$idtransaccion',NULL,NULL,'F',$idpersona)";
-                dep($sql);exit;
+			$sql = "SELECT DATOS_PAYPAL FROM TBL_PEDIDO WHERE COD_TRANSACCION_PAYPAL = '{$idtransaccion}' ".$busqueda;
+
                  $requestData = $this->select($sql);
 		
 			if(!empty($requestData)){

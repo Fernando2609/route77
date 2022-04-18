@@ -43,7 +43,7 @@ require_once("Models/TTipoPago.php");
                     $arrData[$i]['transaccion'] = $arrData[$i]['COD_TRANSACCION_PAYPAL'];
                 }
 
-                $arrData[$i]['MONTO'] = SMONEY.formatMoney($arrData[$i]['MONTO']);
+                $arrData[$i]['MONTO'] = SMONEY.' '.formatMoney($arrData[$i]['MONTO']);
 
                 if ($_SESSION['permisosMod']['r']) {
 

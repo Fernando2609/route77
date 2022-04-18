@@ -87,7 +87,7 @@
                       </tr>
                      
                       <!-- <?php
-                         if ($_SESSION['userData']['NOM_ROL']=="ADMINISTRADOR") {
+                         if ($_SESSION['userData']['COD_ROL']==1) {
                            
                         
                         ?> -->
