@@ -114,8 +114,8 @@
 			}
 			return $objTransaccion;
 		}
-        public function reembolsoPaypal(string $idtransaccion, string $observacion)
-        {
+     }
+    public function reembolsoPaypal(string $idtransaccion, string $observacion){
             $response = false;
             $sql="CALL CRUD_PEDIDO(NULL,NULL,NULL,NULL,NULL,NULL,$idtransaccion,NULL,NULL,'C',null)";
             //$sql= "SELECT COD_PEDIDO, DATOS_PAYPAL FROM TBL_PEDIDO  WHERE COD_TRANSACCION_PAYPAL = '{$idtransaccion}' ";
