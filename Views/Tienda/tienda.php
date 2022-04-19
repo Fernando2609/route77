@@ -50,8 +50,8 @@
 
 							<div class="flex-w p-t-4 m-r--5">
 							<?php
-						   if(count($data['categorias']) > 0){
-						   foreach ($data['categorias'] as $categoria){
+						   if(count($data['categorias_search']) > 0){
+						   foreach ($data['categorias_search'] as $categoria){
 
 						
 							?>	

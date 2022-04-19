@@ -84,6 +84,7 @@ trait Tproducto{
 
         $sql_cat="CALL CRUD_TPRODUCTO(null,null,null,null,'G','{$this->intIdcategoria}')";
         //$sql_cat = "SELECT COD_CATEGORIA, NOMBRE FROM tbl_CATEGORIA WHERE COD_CATEGORIA = '{$this->intIdcategoria}'";
+        /* $sql_cat = "SELECT COD_CATEGORIA, NOMBRE, RUTA FROM tbl_CATEGORIA WHERE COD_CATEGORIA = '{$this->intIdcategoria}'"; */
 
         $request = $this->con->select($sql_cat);
            // $sql="CALL CRUD_TPRODUCTO({$this->intIdcategoria},'{$this->strRuta}',null,null,'C',null)";

@@ -26,7 +26,8 @@
             $data['page_name']=datosEmpresa()['NOMBRE_EMPRESA'];
             $data['slider'] = $this->getCategoriasT(datosEmpresa()['CATEGORIAS_SLIDER']);
             $data['banner'] = $this->getCategoriasT(datosEmpresa()['CATEGORIAS_BANNER']);
-            $data['categorias'] = $this->getCategoriasV();
+            $data['categorias'] = $this->getCategorias();
+            
             $data['productos'] = $this->getProductosT();
              /* dep($data); exit; */ 
             $this->views->getView($this,"home",$data);

@@ -9,7 +9,7 @@ require_once("Libraries/Core/Mysql.php");
                    FROM categoria WHERE status != 0 AND idcategoria IN ($categorias)";
           */
           $sql="SELECT COD_CATEGORIA, NOMBRE, DESCRIPCION, PORTADA,RUTA
-          FROM TBL_CATEGORIA WHERE COD_STATUS!=0 AND COD_CATEGORIA IN ($categorias);";
+          FROM TBL_CATEGORIA WHERE COD_STATUS=1 AND COD_CATEGORIA IN ($categorias);";
         
           $request = $this->con->select_all($sql);
           
@@ -25,7 +25,7 @@ require_once("Libraries/Core/Mysql.php");
           $this->con = new Mysql();
           /* $sql = " SELECT idcategoria, nombre, descripcion,portada,ruta
                   FROM categoria WHERE status != 0 "; */
-          $sql = 'CALL CRUD_CATEGORIA(null,null,null,null,null,null,null,"V",null)';
+                  $sql = 'CALL CRUD_TCATEGORIA(null,null,null,null,null,null,null,null,"J",null)';
           $request = $this->con->select_all($sql);
            if(count($request) > 0){
               for ($c=0; $c < count($request); $c++){

@@ -27,7 +27,8 @@
 			//dep($data['productos']);exit;
 			$data['pagina'] = $pagina;
 			$data['total_paginas'] = $total_paginas;
-			$data['categorias'] = $this->getCategoriasV();
+			$data['categorias'] = $this->getCategorias();
+            $data['categorias_search'] = $this->getCategoriasV();
 			$this->views->getView($this,"tienda",$data);
 		}
 
@@ -53,13 +54,15 @@
                 //dep($infoCategoria);exit;
                  $categoria = strClean($params);
                  $data['page_tag'] = NOMBRE_EMPESA." - ".$infoCategoria['categoria'];
+                 
                  $data['page_title'] = $infoCategoria['categoria'];
                  $data['page_name'] = "categoria";
                  $data['productos'] = $infoCategoria['productos'];
                  $data['infoCategoria'] = $infoCategoria;
                  $data['pagina'] = $pagina;
                  $data['total_paginas'] = $total_paginas;
-                 $data['categorias'] = $this->getCategoriasV();
+                 $data['categorias'] = $this->getCategorias();
+                 $data['categorias_search'] = $this->getCategoriasV();
                  
                  $this->views->getView($this,"categoria",$data);
                  
@@ -601,7 +604,8 @@
 			$data['page_name'] = "tienda";
 			$data['pagina'] = $pagina;
 			$data['total_paginas'] = $total_paginas;
-			$data['categorias'] = $this->getCategoriasV();
+			$data['categorias'] = $this->getCategorias();
+            $data['categorias_search'] = $this->getCategoriasV();
 			$this->views->getView($this,"tienda",$data);
 		}
         public function search(){
@@ -627,7 +631,8 @@
 			$data['pagina'] = $pagina;
 			$data['total_paginas'] = $total_paginas;
             $data['busqueda'] = $busqueda;
-			$data['categorias'] = $this->getCategoriasV();
+			$data['categorias'] = $this->getCategorias();
+			$data['categorias_search'] = $this->getCategoriasV();
 			$this->views->getView($this,"search",$data);
 
 		}
