@@ -5,6 +5,7 @@ $arrProducto = $data['producto'];
 $arrProductos = $data['productos'];
 $arrImages = $arrProducto['images'];
 $rutaCategoria=$arrProducto['COD_CATEGORIA'].'/'.$arrProducto['ruta_categoria'];
+$urlShared = base_url()."/tienda/producto/".$arrProducto['COD_PRODUCTO']."/".$arrProducto['RUTA'];
 
 ?>
 <br><br><br>
@@ -108,30 +109,30 @@ $rutaCategoria=$arrProducto['COD_CATEGORIA'].'/'.$arrProducto['ruta_categoria'];
                         </div>
                     </div>
 
-                    <!--  -->
-                    <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                        <div class="flex-m bor9 p-r-10 m-r-11">
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-                                <i class="zmdi zmdi-favorite"></i>
-                            </a>
-                        </div>
+                	<!--  -->
+						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
+							<div class="flex-m bor9 p-r-10 m-r-11">
+								Compartir en:
+							</div>
 
-                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-                            <i class="fa fa-facebook"></i>
-                        </a>
+							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook"
+								onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=<?= $urlShared; ?> &t=<?= $arrProducto['NOMBRE'] ?>','ventanacompartir', 'toolbar=0, status=0, width=650, height=450');"
+								>
+								<i class="fa fa-facebook"></i>
+							</a>
 
-                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-                            <i class="fa fa-twitter"></i>
-                        </a>
+							<a href="https://twitter.com/intent/tweet?text=<?= $arrProducto['NOMBRE'] ?>&url=<?= $urlShared; ?>&hashtags=<?= SHAREDHASH; ?>" target="_blank" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+								<i class="fa fa-twitter"></i>
+							</a>
 
-                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+							<a href="https://api.whatsapp.com/send?text=<?= $arrProducto['NOMBRE'].' '.$urlShared ?>" target="_blank" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="WhatsApp">
+								<i class="fab fa-whatsapp" aria-hidden="true"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>>
 
     <div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
         <h3>Productos Relacionados</h3>
@@ -176,10 +177,14 @@ $rutaCategoria=$arrProducto['COD_CATEGORIA'].'/'.$arrProducto['ruta_categoria'];
                                         </span>
                                     </div>
                                     <div class="block2-txt-child2 flex-r p-t-3">
-                                        <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                            <img class="icon-heart1 dis-block trans-04" src="<?= media() ?>/tienda/images/icons/icon-heart-01.png" alt="ICON">
-                                            <img class="icon-heart2 dis-block trans-04 ab-t-l" src="<?= media() ?>/tienda/images/icons/icon-heart-02.png" alt="ICON">
-                                        </a>
+                                    <a href="#"
+								 id="<?= openssl_encrypt($arrProductos[$p]['COD_PRODUCTO'],METHODENCRIPT,KEY); ?>"
+								     pr = "1"
+									 class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 js-addcart-detail
+									 icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11
+									 ">
+									<i class="zmdi zmdi-shopping-cart"></i>
+								</a>
                                     </div>
                                 </div>
                             </div>

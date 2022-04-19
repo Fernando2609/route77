@@ -18,6 +18,31 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+	<?php 
+		$nombreSitio = NOMBRE_EMPESA;
+		$descripcion = DESCRIPCION;
+		$nombreProducto = NOMBRE_EMPESA;
+		$urlWeb = base_url();
+		$urlImg = media()."/images/logo3.png";
+		if(!empty($data['producto'])){
+			//$descripcion = $data['producto']['descripcion'];
+			$descripcion = DESCRIPCION;
+			$nombreProducto = $data['producto']['NOMBRE'];
+			$urlWeb = base_url()."/tienda/producto/".$data['producto']['COD_PRODUCTO']."/".$data['producto']['RUTA'];
+			$urlImg = $data['producto']['images'][0]['url_image'];
+		}
+		 
+	?>
+	<meta property="og:locale" 		content='es_ES'/>
+	<meta property="og:type"        content="website" />
+	<meta property="og:site_name"	content="<?= $nombreSitio; ?>"/>
+	<meta property="og:description" content="<?= $descripcion; ?>" />
+	<meta property="og:title"       content="<?= $nombreProducto; ?>" />
+	<meta property="og:url"         content="<?= $urlWeb; ?>" />
+	<meta property="og:image"       content="<?= $urlImg; ?>" />
+
+
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="<?= media() ?>/tienda/images/icons/favicon.ico"/>
 <!--===============================================================================================-->
