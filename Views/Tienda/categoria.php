@@ -74,6 +74,7 @@
                 <?php
                 if(!empty($arrProductos)){
                   for($p=0; $p < count($arrProductos); $p++){
+					
 					  
 					  $ruta=$arrProductos[$p]['RUTA'];
                     if(count($arrProductos[$p]['images']) > 0){
@@ -106,9 +107,11 @@
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
-								<a href="<?= base_url().'/tienda/producto/'.$arrProductos[$p]['NOMBRE'];?>" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="<?= media()?>/tienda/images/icons/icon-heart-01.png" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
+							<a href="#"
+								 id="<?= openssl_encrypt($arrProductos[$p]['COD_PRODUCTO'],METHODENCRIPT,KEY); ?>"
+								 class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 js-addcart-detail
+								 icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+									<i class="zmdi zmdi-shopping-cart"></i>
 								</a>
 							</div>
 						</div>
