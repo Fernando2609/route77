@@ -42,12 +42,12 @@
 				<!-- Filter -->
 				<div class="dis-none panel-filter w-full p-t-10">
 					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-						<div class="filter-col4 p-b-27">
+			           	<div class="filter-col4 p-b-27">
 							<div class="mtext-102 cl2 p-b-15">
 								CATEGORÍAS
 							</div>
-							
-						<div class="flex-w p-t-4 m-r--5">
+
+							<div class="flex-w p-t-4 m-r--5">
 							<?php
 						   if(count($data['categorias']) > 0){
 						   foreach ($data['categorias'] as $categoria){
@@ -62,12 +62,11 @@
 						<?php 
 							}
 						}
-						?>			
-						
+						?>
 							</div>
 						</div>
 					</div>
-				</div>			
+				</div>
 			</div>
 
 			<div class="row isotope-grid">
@@ -132,10 +131,10 @@
 			 ?>
 			<div class="flex-c-m flex-w w-full p-t-45">
 			<?php if($data['pagina'] > 1){ ?>
-				<a href="<?= base_url() ?>/tienda/categoria/<?= $data['infoCategoria']['idcategoria'].'/'.$data['infoCategoria']['ruta'].'/'.$prevPagina ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04"> <i class="fas fa-chevron-left"></i> &nbsp; Anterior </a>&nbsp;&nbsp;
+				<a href="<?= base_url() ?>/tienda/search?p=<?= $prevPagina.'&s='.$data['busqueda'] ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04"> <i class="fas fa-chevron-left"></i> &nbsp; Anterior </a>&nbsp;&nbsp;
 			<?php } ?>
 			<?php if($data['pagina'] != $data['total_paginas']){ ?>
-				<a href="<?= base_url() ?>/tienda/categoria/<?= $data['infoCategoria']['idcategoria'].'/'.$data['infoCategoria']['ruta'].'/'.$nextPagina ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04"> Siguiente &nbsp; <i class="fas fa-chevron-right"></i> </a>
+				<a href="<?= base_url() ?>/tienda/search?p=<?= $nextPagina.'&s='.$data['busqueda'] ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04"> Siguiente &nbsp; <i class="fas fa-chevron-right"></i> </a>
 			<?php } ?>
 			</div>
 			<?php 
