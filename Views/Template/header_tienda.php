@@ -59,6 +59,27 @@
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
+<div class="modal modal-tienda fade" id="modalAyuda" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Preguntas Frecuentes </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p> La gracia de nuestro Señor Jesucristo sea con todos vosotros. Amén.</p>
+        <br>
+        <p> Apocalipsis 22:21</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 	<div id="divLoading">
       <div>
         <img src="<?=media();?>/images//loadingRoute.gif" alt="Loading">
@@ -73,24 +94,35 @@
 				
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						Bienvenido Usuario:
+					<?php if(isset($_SESSION['login'])){ ?>
+						Bienvenido: <?= $_SESSION['userData']['NOMBRES'].' '.$_SESSION['userData']['APELLIDOS'] ?>
+						<?php } ?>
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
+						<a href="#" class="flex-c-m trans-04 p-lr-25" data-toggle="modal" data-target="#modalAyuda" >
+						Ayuda y Preguntas frecuentes
+							<?php 
+							if(isset($_SESSION['login'])){
+						?>
+						<a href="<?= base_url() ?>/dashboard" class="flex-c-m trans-04 p-lr-25">
+							Mi cuenta
 						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Mi Cuenta
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<?php } 
+							if(isset($_SESSION['login'])){
+						?>
+						<a href="<?= base_url() ?>/logout" class="flex-c-m trans-04 p-lr-25">
 							Salir
 						</a>
+						<?php }else{ ?>
+						<a href="<?= base_url() ?>/login" class="flex-c-m trans-04 p-lr-25">
+							Iniciar Sesión
+						</a>
+						<?php } ?>
 					</div>
 				</div>
 			</div>
+
 
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
@@ -202,26 +234,38 @@
 			<ul class="topbar-mobile">
 				<li>
 					<div class="left-top-bar">
-						Bienvenido
+						<?php if(isset($_SESSION['login'])){ ?>
+						Bienvenido: <?= $_SESSION['userData']['NOMBRES'].' '.$_SESSION['userData']['APELLIDOS'] ?>
+						<?php } ?>
 					</div>
 				</li>
 
 				<li>
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							Help & FAQs
+						<a href="#" class="flex-c-m trans-04 p-lr-25" data-toggle="modal" data-target="#modalAyuda" >
+							Ayuda y Preguntas frecuentes
 						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							Mi Cuenta
+						<?php 
+							if(isset($_SESSION['login'])){
+						?>
+						<a href="<?= base_url() ?>/dashboard" class="flex-c-m trans-04 p-lr-25">
+							Mi cuenta
 						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
+						<?php } 
+							if(isset($_SESSION['login'])){
+						?>
+						<a href="<?= base_url() ?>/logout" class="flex-c-m trans-04 p-lr-25">
 							Salir
 						</a>
+						<?php }else{ ?>
+						<a href="<?= base_url() ?>/login" class="flex-c-m trans-04 p-lr-25">
+							Iniciar Sesión
+						</a>
+						<?php } ?>
 					</div>
 				</li>
 			</ul>
+
 
 			<ul class="main-menu-m">
 				<li>
@@ -246,42 +290,42 @@
 			</ul>
 		</div>
 
-		<!-- Modal Search -->
-		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+			<!-- Modal Search -->
+			<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
 			<div class="container-search-header">
 				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
 					<img src="<?= media() ?>/tienda/images/icons/icon-close2.png" alt="CLOSE">
 				</button>
 
-				<form class="wrap-search-header flex-w p-l-15">
+				<form class="wrap-search-header flex-w p-l-15" method="get" action="<?= base_url() ?>/tienda/search" >
 					<button class="flex-c-m trans-04">
 						<i class="zmdi zmdi-search"></i>
 					</button>
-					<input class="plh3" type="text" name="search" placeholder="Search...">
+					<input type="hidden" name="p" value="1">
+					<input class="plh3" type="text" name="s" placeholder="Buscar...">
 				</form>
 			</div>
 		</div>
 	</header>
-<!-- Cart -->
-<div class="wrap-header-cart js-panel-cart">
+	<!-- Cart -->
+	<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
-
 		<div class="header-cart flex-col-l p-l-65 p-r-25">
 			<div class="header-cart-title flex-w flex-sb-m p-b-8">
 				<span class="mtext-103 cl2">
-					Tu Carrito
+					Tu carrito
 				</span>
 
 				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
 					<i class="zmdi zmdi-close"></i>
 				</div>
 			</div>
-			
-			<div id="productoCarrito" class="header-cart-content flex-w js-pscroll">
-				<?=  getModal("modalCarrito",$data)  ?>
+			<div id="productosCarrito" class="header-cart-content flex-w js-pscroll">
+				<?php getModal('modalCarrito',$data); ?>
 			</div>
 		</div>
 	</div>
+
 	<div class="wrap-header-cart js-panel-categoria">
 	
 	<div class="s-full js-hide-cart"></div>

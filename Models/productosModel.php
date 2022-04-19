@@ -37,7 +37,7 @@
 					 
 			return $request;
 		}	
-        public function insertProducto(string $nombre, string $descripcion, int $codigo, int $categoriaid, string $precio, int $stock,string $ruta, int $status, int $user){
+		public function insertProducto(string $nombre, string $descripcion, int $codigo, int $categoriaid, string $precio, int $stock,string $ruta, int $status, int $user){
 			
 			$this->strNombre =  $nombre;
 			$this->strDescripcion = $descripcion;
@@ -53,7 +53,7 @@
 			//validación
 			/* $sql = "SELECT * FROM tbl_productos WHERE COD_BARRA = '{$this->intCodigo}'or NOMBRE = '{$this->strNombre}'";
 			 */
-			$sql= "CALL CRUD_PRODUCTOS(null,'{$this->intCodigo}','{$this->strNombre}',null,null,null,null,null,null,'A',null)";
+			$sql= "CALL CRUD_PRODUCTOS(null,'{$this->intCodigo}','{$this->strNombre}',null,null,null,null,null,null,null,'A',null)";
 			/* dep($sql);
 			exit; */
 			$request = $this->select_all($sql);
@@ -107,8 +107,8 @@
 			//VALIDACIÓN
 			/* $sql = "SELECT * FROM TBL_PRODUCTOS WHERE COD_BARRA = '{$this->intCodigo}' AND COD_PRODUCTO != $this->intIdProducto or NOMBRE = '{$this->strNombre}' AND COD_PRODUCTO != $this->intIdProducto";
 			 */
-			$sql= "CALL CRUD_PRODUCTOS(null,'{$this->intCodigo}','{$this->strNombre}',null,null,null,null,null,null,'B',$this->intIdProducto)";
-		     /* dep($sql);
+			$sql= "CALL CRUD_PRODUCTOS(null,'{$this->intCodigo}','{$this->strNombre}',null,null,null,null,null,null,null,'B',$this->intIdProducto)";
+		     /*} dep($sql);
 			 exit; */
 			$request = $this->select_all($sql);
 			if(empty($request))
@@ -208,7 +208,7 @@
 			$this->intIdProducto = $idproducto;
 			/* $sql = "UPDATE TBL_PRODUCTOS SET status = ? WHERE COD_PRODUCTO = $this->intIdProducto ";
 			$arrData = array(0); */
-			$sql ="call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,null,?,{$this->intIdProducto})";
+			$sql ="call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,null,null,?,{$this->intIdProducto})";
 			$arrData = array('D');
 			
 			$request = $this->update($sql,$arrData);

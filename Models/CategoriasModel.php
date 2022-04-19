@@ -45,7 +45,7 @@
 								 $this->strPortada,
 								 $this->intUser,
 								 0,
-								 //$this->strRuta, 
+								 $this->strRuta, 
 								 'I',
 								 "null"
 								 );
@@ -153,6 +153,20 @@
 				}
 			}else{
 				$request = false;
+			}
+			return $request;
+		}
+
+		public function getCategoriasFooter(){
+			$sql = "SELECT COD_CATEGORIA, NOMBRE, DESCRIPCION, PORTADA, RUTA
+					FROM tbl_categoria WHERE  COD_STATUS = 1 AND COD_CATEGORIA IN (".CAT_FOOTER.")";
+			$request = $this->select_all($sql);
+			if(count($request) > 0){
+				for ($c=0; $c < count($request) ; $c++) { 
+					$request[$c]['PORTADA'] = BASE_URL.'/Assets/images/uploads/'.$request[$c]['PORTADA'];		
+
+					 
+				}
 			}
 			return $request;
 		}

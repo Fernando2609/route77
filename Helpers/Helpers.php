@@ -461,6 +461,12 @@ function deleteFile(string $name){
                     "Noviembre",
                     "Diciembre");
     return $meses;
+     }
+    function getCatFooter(){
+        require_once ("Models/CategoriasModel.php");
+        $objCategoria = new CategoriasModel();
+        $request = $objCategoria->getCategoriasFooter();
+        return $request;
  }
  
     
