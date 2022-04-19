@@ -320,7 +320,7 @@
 					<i class="zmdi zmdi-close"></i>
 				</div>
 			</div>
-			<div id="productosCarrito" class="header-cart-content flex-w js-pscroll">
+			<div id="productoCarrito" class="header-cart-content flex-w js-pscroll">
 				<?php getModal('modalCarrito',$data); ?>
 			</div>
 		</div>
