@@ -20,11 +20,11 @@
 	const DB_PASSWORD = "routeEstacion76+1";
 	const DB_CHARSET = "utf8";
 */
-	//const BASE_URL="http://localhost/route77";
+	const BASE_URL="http://localhost/route77";
    
 
 
-	const BASE_URL="http://localhost:8080/route77";
+	//const BASE_URL="http://localhost:8080/route77";
 
 
 	//Para envío de correo
@@ -36,6 +36,7 @@
 	const DB_USER = "root";
 	const DB_PASSWORD = "";
 	const DB_CHARSET = "utf8";
+
 
 
     //Deliminadores decimal y millar Ej. 24,1989.00
@@ -64,6 +65,8 @@
 	const EMAIL_REMITENTE = "estacionroutehn@gmail.com";
 	const NOMBRE_EMPESA = "Route 77";
 	const WEB_EMPRESA = "http://localhost:8080/route77";
+	const DESCRIPCION = "La mejor tienda de conveniencia a tu alcance";
+	const SHAREDHASH = "ROUTE77";
 //DATOS EMPRESA
 	const DIRECCION = "Col. Los Laureles";
 	const TELEMPRESA= "+504 22634806";
