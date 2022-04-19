@@ -180,7 +180,7 @@ $urlShared = base_url()."/tienda/producto/".$arrProducto['COD_PRODUCTO']."/".$ar
                                     <a href="#"
 								 id="<?= openssl_encrypt($arrProductos[$p]['COD_PRODUCTO'],METHODENCRIPT,KEY); ?>"
 								     pr = "1"
-									 class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 js-addcart-detail
+									 class="btn-addwish-b2 dis-block pos-relative js-addcart-detail
 									 icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11
 									 ">
 									<i class="zmdi zmdi-shopping-cart"></i>

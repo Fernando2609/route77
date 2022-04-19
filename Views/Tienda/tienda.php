@@ -114,7 +114,7 @@
 							<div class="block2-txt-child2 flex-r p-t-3">
 							<a href="#"
 								 id="<?= openssl_encrypt($arrProductos[$p]['COD_PRODUCTO'],METHODENCRIPT,KEY); ?>"
-								 class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 js-addcart-detail
+								 class="btn-addwish-b2 dis-block pos-relative js-addcart-detail
 								 icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
 									<i class="zmdi zmdi-shopping-cart"></i>
 								</a>

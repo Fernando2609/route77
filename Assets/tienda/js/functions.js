@@ -16,8 +16,8 @@ $('.gallery-lb').each(function() { // the containers for all your galleries
         mainClass: 'mfp-fade'
     });
 });
-$('.js-addwish-b2').on('click', function(e){
-    e.preventDefault();
+$(".js-addcart-detail").on("click", function (e) {
+  e.preventDefault();
 });
 
 
