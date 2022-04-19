@@ -32,9 +32,10 @@ trait Tproducto{
                 if(count($request) > 0){
                     for ($c=0; $c < count($request) ; $c++) { 
                         $intIdProducto = $request[$c]['COD_PRODUCTO'];
-                        $sqlImg = "SELECT IMG
+                        /* $sqlImg = "SELECT IMG
                                 FROM tbl_img_producto
-                                WHERE COD_PRODUCTO = $intIdProducto";
+                                WHERE COD_PRODUCTO = $intIdProducto"; */
+                        $sqlImg =  "CALL CRUD_TPRODUCTO(null,null,null,null,'H',$intIdProducto)";    
                         $arrImg = $this->con->select_all($sqlImg);
                         if(count($arrImg) > 0){
                             for($i=0; $i < count($arrImg); $i++){
@@ -81,7 +82,9 @@ trait Tproducto{
 		}
         $this->con = new Mysql();
 
-        $sql_cat = "SELECT COD_CATEGORIA, NOMBRE, RUTA FROM tbl_CATEGORIA WHERE COD_CATEGORIA = '{$this->intIdcategoria}'";
+        $sql_cat="CALL CRUD_TPRODUCTO(null,null,null,null,'G','{$this->intIdcategoria}')";
+        //$sql_cat = "SELECT COD_CATEGORIA, NOMBRE FROM tbl_CATEGORIA WHERE COD_CATEGORIA = '{$this->intIdcategoria}'";
+
         $request = $this->con->select($sql_cat);
            // $sql="CALL CRUD_TPRODUCTO({$this->intIdcategoria},'{$this->strRuta}',null,null,'C',null)";
            // $request = $this->con->select_all($sql);
@@ -109,9 +112,10 @@ trait Tproducto{
                 
                 for ($c=0; $c < count($request) ; $c++) { 
                     $intIdProducto = $request[$c]['COD_PRODUCTO'];
-                    $sqlImg = "SELECT IMG
+                    $sqlImg = "CALL CRUD_TPRODUCTO(null,null,null,null,'H',$intIdProducto)"; 
+                    /* $sqlImg = "SELECT IMG
                             FROM tbl_img_producto
-                            WHERE COD_PRODUCTO = $intIdProducto";
+                            WHERE COD_PRODUCTO = $intIdProducto"; */
                     $arrImg = $this->con->select_all($sqlImg);
                     if(count($arrImg) > 0){
                         for($i=0; $i < count($arrImg); $i++){
@@ -164,9 +168,10 @@ trait Tproducto{
         $request = $this->con->select($sql);
          if (!empty($request)) {
                  $intIdProducto = $request['COD_PRODUCTO'];
-                 $sqlImg = "SELECT IMG
+                 $sqlImg =  "CALL CRUD_TPRODUCTO(null,null,null,null,'H',$intIdProducto)"; 
+                 /* $sqlImg = "SELECT IMG
                                  FROM TBL_IMG_PRODUCTO
-                                 WHERE COD_PRODUCTO = $intIdProducto";
+                                 WHERE COD_PRODUCTO = $intIdProducto"; */
                  $arrImg = $this->con->select_all($sqlImg);
                  if (count($arrImg) > 0) {
                      for ($i = 0; $i < count($arrImg); $i++) {
@@ -194,22 +199,10 @@ trait Tproducto{
         }
 
         $this->con = new Mysql();
-           /*  $sql = "SELECT p.idproducto,
-            p.codigo,
-            p.nombre,
-            p.descripcion,
-            p.categoriaid,
-            c.nombre as categoria,
-            p.precio,
-            p.ruta,
-            p.stock 
-            FROM producto p 
-            INNER JOIN categoria c
-            ON p.categoriaid = c.idcategoria
-            WHERE p.status != 0  AND p.categoriaid = $this->intIdCategoria
-            ORDER BY $this->option LIMIT $this->cant "; */
+           
 
-            $sql=" SELECT p.COD_PRODUCTO,
+            $sql="CALL CRUD_PRODUCTOSTIENDA($this->intIdCategoria, $this->cant, '$option', 'V')";
+            /* $sql=" SELECT p.COD_PRODUCTO,
                     p.COD_BARRA,
                     p.NOMBRE,
                     p.DESCRIPCION,
@@ -222,16 +215,20 @@ trait Tproducto{
                         INNER JOIN tbl_categoria c ON p.COD_CATEGORIA = c.COD_CATEGORIA
                         INNER JOIN tbl_inventario i ON p.COD_PRODUCTO = i.COD_PRODUCTO
                         WHERE p.COD_STATUS != 0  AND p.COD_CATEGORIA = $this->intIdCategoria
-                        ORDER BY $this->option LIMIT $this->cant";
+                        ORDER BY $this->option LIMIT $this->cant"; */
+
+            $sql="CALL CRUD_PRODUCTOSTIENDA($this->intIdCategoria, $this->cant, '$option', 'V')";
+           
 
             $request = $this->con->select_all($sql);
             
             if (count($request) > 0) {
                 for ($c = 0; $c < count($request); $c++) {
                     $intIdProducto = $request[$c]['COD_PRODUCTO'];
-                    $sqlImg = "SELECT IMG
+                    $sqlImg =  "CALL CRUD_TPRODUCTO(null,null,null,null,'H',$intIdProducto)"; 
+                    /* $sqlImg = "SELECT IMG
                             FROM TBL_IMG_PRODUCTO
-                            WHERE COD_PRODUCTO = $intIdProducto";
+                            WHERE COD_PRODUCTO = $intIdProducto"; */
                     $arrImg = $this->con->select_all($sqlImg);
                     if (count($arrImg) > 0) {
                         for ($i = 0; $i < count($arrImg); $i++) {
@@ -271,9 +268,10 @@ trait Tproducto{
         $request = $this->con->select($sql);
          if (!empty($request)) {
                  $intIdProducto = $request['COD_PRODUCTO'];
-                 $sqlImg = "SELECT IMG
+                 $sqlImg =  "CALL CRUD_TPRODUCTO(null,null,null,null,'H',$intIdProducto)"; 
+                 /* $sqlImg = "SELECT IMG
                                  FROM TBL_IMG_PRODUCTO
-                                 WHERE COD_PRODUCTO = $intIdProducto";
+                                 WHERE COD_PRODUCTO = $intIdProducto"; */
                  $arrImg = $this->con->select_all($sqlImg);
                  if (count($arrImg) > 0) {
                      for ($i = 0; $i < count($arrImg); $i++) {

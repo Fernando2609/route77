@@ -53,13 +53,15 @@
 
                     if ($idUsuario==0) {
                         $option=1;
-                        $strPassword =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
+                        $strPassword =  empty($_POST['txtPassword']) ? passGenerator() : hash("SHA256",$_POST['txtPassword']);
+                        $strPasswordEncrip = hash("SHA256",$strPassword);
+                       
                        // $strPassword =  empty($_POST['txtPassword']) ?passGenerator() : $_POST['txtPassword'];
                       //$strPasswordEncrip = hash("SHA256",$strPassword);
                         if($_SESSION['permisosMod']['w']){
                         $request_user = $this->model->insertCliente($strNombre,     $strApellido, 
                                                                                    $strEmail,
-                                                                                    $strPassword,
+                                                                                    $strPasswordEncrip,
                                                                                     $intTipoId, 
                                                                                     $intStatus,
                                                                                     $intTelefono, 
@@ -87,21 +89,21 @@
                     if($request_user > 0 ){
                         if ($option==1) {
                             $arrResponse = array("status" => true, "msg" => 'Cliente Guardado Correctamente.');
-                         /*    $nombreUsuario = $strNombre.' '.$strApellido;
+                            $nombreUsuario = $strNombre.' '.$strApellido;
                         $dataUsuario = array(
                             'nombreUsuario' => $nombreUsuario,
                             'email' => $strEmail,
                             'password' => $strPassword,
                             'asunto' => 'Bienvenido a tu Tienda en Línea');
-                        sendEmail($dataUsuario, 'email_bienvenida'); */
-
+                        sendEmail($dataUsuario, 'email_bienvenida');
+                            
                         }else{
                             $arrResponse = array("status" => true, "msg" => 'Cliente Actualizado Correctamente.');
                         }
                     }else if($request_user == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email  ya existe, ingrese otro.');		
 					}else{
-						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.Verifique el Email');
 					}
                  }
                  echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

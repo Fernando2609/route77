@@ -51,8 +51,11 @@
                                             if($data['tipospago'][$i]['COD_TIPO_PAGO']== $data['orden']['COD_TIPO_PAGO']){
                                                 $selected=" selected ";
                                             }
+                                            if($data['tipospago'][$i]['COD_TIPO_PAGO'] != 1){
                                     ?>
+                                    
                                     <option value="<?= $data['tipospago'][$i]['COD_TIPO_PAGO']?>" <?= $selected ?> ><?= $data['tipospago'][$i]['TIPO_PAGO'] ?></option>
+                                    <?php } ?>
                                     <?php }  ?>
                                 </select>
                                     <?php } ?>
