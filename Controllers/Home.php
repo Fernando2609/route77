@@ -25,7 +25,7 @@
             $data['page_name']=NOMBRE_EMPESA;
             $data['slider'] = $this->getCategoriasT(CAT_SLIDER);
             $data['banner'] = $this->getCategoriasT(CAT_BANNER);
-            $data['categorias'] = $this->getCategorias();
+            $data['categorias'] = $this->getCategoriasV();
             $data['productos'] = $this->getProductosT();
              /* dep($data); exit; */ 
             $this->views->getView($this,"home",$data);

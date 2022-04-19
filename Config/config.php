@@ -20,11 +20,11 @@
 	const DB_PASSWORD = "routeEstacion76+1";
 	const DB_CHARSET = "utf8";
 */
-	const BASE_URL="http://localhost/route77";
+	//const BASE_URL="http://localhost/route77";
    
 
 
-	//const BASE_URL="http://localhost:8080/route77";
+	const BASE_URL="http://localhost:8080/route77";
 
 
 	//Para envío de correo
@@ -90,7 +90,7 @@
  
 	const FACEBOOK = "https://www.facebook.com/estacion77/";
 	const INSTAGRAM = "https://www.instagram.com/estacion_77/";
-	const WHATSAPP = "+50498584796";
+	const WHATSAPP = "50494877564";
 	const emailGerente="josefortizsantos@gmail.com";
 
 
@@ -98,7 +98,7 @@
 	
 	const MCLIENTES = 2;
 	const MPEDIDOS = 5;
-	const MSUSCRIPTORES= 20;
+	const MSUSCRIPTORES= 18;
 
 	//Roles
 	const RADMINISTRADOR = 1;

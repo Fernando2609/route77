@@ -44,7 +44,7 @@
 							<i class="fa fa-instagram"></i>
 						</a>
 
-					<a href="https://wa.me/ <?= WHATSAPP ?> " target="_blanck"  class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+					<a href="https://api.whatsapp.com/send?phone=<?=  WHATSAPP  ?>" target="_blanck"  class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
 							<i class="fab fa-whatsapp"></i>
 						</a> 
 					</div>
@@ -100,7 +100,7 @@
 
 				<p class="stext-107 cl6 txt-center">
 
-					Copyright ©<script>document.write(new Date().getFullYear());</script>2022 All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+					Copyright ©<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 
 					</p>
 			</div>
