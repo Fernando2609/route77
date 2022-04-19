@@ -566,10 +566,10 @@ transform: scale(1.5) translate(-5px, 5px);
 
    }
 
-   /* .ui-datepicker-calendar  {
+   .ui-datepicker-calendar  {
      display: none;
         
-   } */
+   }
 
    .inputFecha{
     border: 1px solid #CCC;
@@ -579,4 +579,7 @@ transform: scale(1.5) translate(-5px, 5px);
    }
    .dt-datetime-label{
      color:black
+   }
+   .dropdown-menu-lg {
+     min-width: 370px;
    }
