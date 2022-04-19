@@ -84,7 +84,7 @@
             $data['page_name'] = "producto";
             $data['categorias'] = $this->getCategorias();
             $data['producto'] = $infoProducto;
-            $data['productos'] = $this->getProductosRandom($infoProducto['COD_CATEGORIA'],8,"r");
+            $data['productos'] = $this->getProductosRandom($infoProducto['COD_CATEGORIA'],8,"a");
             $this->views->getView($this, "producto", $data);
          }
         }
@@ -223,7 +223,7 @@
                          if ($subtotal>=500) {
                             $envio=0;
                         }else if ($subtotal<500) {
-                         $envio=COSTOENVIO;   
+                         $envio=datosEmpresa()['COSTO_ENVIO'];   
                         } 
                     }
                     $htmlCarrito ="";
@@ -281,7 +281,7 @@
                         if ($subtotal>=500) {
                             $envio=0;
                         }else if ($subtotal<500) {
-                         $envio=COSTOENVIO;   
+                         $envio=datosEmpresa()['COSTO_ENVIO'];   
                         } 
 					}
                     
@@ -342,7 +342,6 @@
                                             $intTipoId, 
                                             $intStatus,
                                             $intTelefono, 
-                                             
                                              );
                                                                                
                     
@@ -357,9 +356,9 @@
                         'password' => $strPassword,
                         'asunto' => 'Bienvenido a tu Tienda en Línea');
                         $_SESSION['idUser'] = $request_user;
-							$_SESSION['login'] = true;
+                        $_SESSION['login'] = true;
                         $this->login->sessionLogin($request_user);
-                    sendEmail($dataUsuario, 'email_bienvenida');
+                        sendEmail($dataUsuario, 'email_bienvenida');
                     }else if($request_user == false){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
 					}else{
@@ -435,7 +434,7 @@
                     if($subtotal>=500){
                         $costo_envio=0;
                     }else{
-                        $costo_envio=COSTOENVIO;
+                        $costo_envio=datosEmpresa()['COSTO_ENVIO'];
                     }
                     $monto = formatMoney($subtotal + $costo_envio);
                     /* dep($monto);
@@ -474,7 +473,7 @@
                                    
                                     $dataEmailOrden=array('asunto'=>"Se ha creado la orden No.".$request_pedido,
                                                          'email'=>$_SESSION['userData']['EMAIL'],
-                                                         'emailCopia'=>EMAIL_PEDIDOS,
+                                                         'emailCopia'=>datosEmpresa()['EMAIL_PEDIDOS'],
                                                             'pedido'=>$infoOrden);
                                     
                                     sendEmail($dataEmailOrden,"email_notificacion_orden");
@@ -527,7 +526,7 @@
                                     $infoOrden=$this->getPedido($request_pedido);
                                     $dataEmailOrden = array('asunto' => "Se ha creado la orden No.".$request_pedido,
 													'email' => $_SESSION['userData']['EMAIL'], 
-													'emailCopia' => EMAIL_PEDIDOS,
+													'emailCopia' => datosEmpresa()['EMAIL_PEDIDOS'],
 													'pedido' => $infoOrden );
 									sendEmail($dataEmailOrden,"email_notificacion_orden");
 
@@ -563,6 +562,7 @@
             }else{
                 $arrResponse= array("status"=> false, "msg" => 'No es posible procesar el pedido.');
             }
+          
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             die();
         }

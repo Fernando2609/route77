@@ -234,7 +234,7 @@ $(document).ready(function(){
          let objData = JSON.parse(request.responseText);
 
          if (objData.status) {
-           window.location = base_url + "/dashboard/";
+           window.location = base_url + "/Compras/";
          } else {
            swal.fire(
              "Atención",

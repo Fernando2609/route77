@@ -53,6 +53,7 @@
 									$isv,
 									$factura,
 									$personaid);
+					
 					$request_insert=$this->insert($query_insert, $arrData);
 					$return=$request_insert;
 					$sql = "SELECT last_insert_id()";
@@ -60,7 +61,7 @@
 					$return = $request_ID['last_insert_id()'];
 					return $return;
 		}
-		public function insertDetalle(int $idOrden,string $idproducto,int $precio,int $cantidad){
+		public function insertDetalle(int $idOrden,string $idproducto, $precio,int $cantidad){
 			
 			/*$sql = "SELECT idUsuario, dni, nombres, apellidos, telefono, email, status
 					FROM usuarios */
@@ -69,6 +70,8 @@
 									$idproducto,
 									$precio,
 									$cantidad);
+						
+					
 					$request_insert=$this->insert($query_insert, $arrData);
 					$return=$request_insert;
 					$sql = "SELECT last_insert_id()";

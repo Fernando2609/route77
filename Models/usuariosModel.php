@@ -76,18 +76,20 @@
 		public function selectUsuarios()
 		{
 			$whereAdmin = "";
+			$idUser=$_SESSION['idUser'];
 			if($_SESSION['idUser'] != 1){
 				$whereAdmin = " and P.COD_PERSONA !=1";
 			}
+		   $sql="CALL CRUD_USUARIO(null,null,null,null,null,null,null,null,null,null,null,null,'V',$idUser)";
 			
-			$sql="SELECT P.COD_PERSONA,U.COD_USUARIO, P.COD_ROL, R.NOM_ROL AS ROL, U.DNI, P.NOMBRES, P.APELLIDOS, P.EMAIL,ST.DESCRIPCION AS STATUS , P.TELEFONO, S.NOMBRE AS SUCURSAL, G.DESCRIPCION AS GENERO,
+			/*  $sql="SELECT P.COD_PERSONA,U.COD_USUARIO, P.COD_ROL, R.NOM_ROL AS ROL, U.DNI, P.NOMBRES, P.APELLIDOS, P.EMAIL,ST.DESCRIPCION AS STATUS , P.TELEFONO, S.NOMBRE AS SUCURSAL, G.DESCRIPCION AS GENERO,
 			P.FECHA_CREACION, P.FECHA_MODIFICACION, P.DATE_LOGIN,P.COD_STATUS
 			FROM TBL_USUARIOS U
 			INNER JOIN TBL_PERSONAS P ON P.COD_PERSONA=U.COD_PERSONA
 			INNER JOIN TBL_SUCURSAL S ON S.COD_SUCURSAL=U.COD_SUCURSAL
 			INNER JOIN TBL_GENERO G ON G.COD_GENERO=U.COD_GENERO
 			INNER JOIN TBL_STATUS ST ON ST.COD_STATUS=P.COD_STATUS
-			INNER JOIN TBL_ROLES R ON R.COD_ROL=P.COD_ROL WHERE P.COD_STATUS != 0 and P.COD_ROL!=2".$whereAdmin;
+			INNER JOIN TBL_ROLES R ON R.COD_ROL=P.COD_ROL WHERE P.COD_STATUS != 0 and P.COD_ROL!=2".$whereAdmin; */
 			$request = $this->select_all($sql);
 		
 			return $request;
@@ -209,11 +211,11 @@
 			if($this->strPassword != "")
 			{
 				
-				$sql="CALL CRUD_USUARIO(?,?,?,?,null,null,?,?,?,?,null,?,'P',$this->intIdUsuario)";
+				$sql="CALL CRUD_USUARIO(?,?,null,?,null,null,?,?,?,?,null,?,'P',$this->intIdUsuario)";
 				$arrData = array(
 								$this->strNombre,
 								$this->strApellido,
-								$this->strEmail,
+								//$this->strEmail,
 								$this->strPassword,
 								
 								$this->intTelefono,
@@ -224,17 +226,57 @@
 								);
 			}else{
 				
-				$sql="CALL CRUD_USUARIO(?,?,?,null,null,null,?,?,?,?,null,?,'P',$this->intIdUsuario)";
+				$sql="CALL CRUD_USUARIO(?,?,null,null,null,null,?,?,?,?,null,?,'H',$this->intIdUsuario)";
+				
 				$arrData = array(
 								$this->strNombre,
 								$this->strApellido,
-								$this->strEmail,
+								//$this->strEmail,
 								//$this->strPassword,
 								
 								$this->intTelefono,
 								$this->intSucursal,
 								$this->intGenero,
 								$this->strIdentificacion,
+								$this->intUser
+								);
+								
+			}
+			$request = $this->update($sql,$arrData);
+		    return $request;
+		}
+		public function updatePerfilCliente(int $idUsuario, string $nombre, string $apellido, int $telefono,string $password,int $user )
+		{
+			$this->intIdUsuario = $idUsuario;
+
+			$this->strNombre = $nombre;
+			$this->strApellido = $apellido;
+			$this->intTelefono = $telefono;
+			$this->strPassword = $password;
+			$this->intUser = $user;
+			if($this->strPassword != "")
+			{
+				
+				$sql="CALL CRUD_USUARIO(?,?,null,?,null,null,?,null,null,null,null,?,'C',$this->intIdUsuario)";
+				$arrData = array(
+								$this->strNombre,
+								$this->strApellido,
+								//$this->strEmail,
+								$this->strPassword,
+								
+								$this->intTelefono,
+								$this->intUser
+								);
+			}else{
+				
+				$sql="CALL CRUD_USUARIO(?,?,null,null,null,null,?,null,null,null,null,?,'M',$this->intIdUsuario)";
+				$arrData = array(
+								$this->strNombre,
+								$this->strApellido,
+								//$this->strEmail,
+								//$this->strPassword,
+								
+								$this->intTelefono,
 								$this->intUser
 								);
 			}

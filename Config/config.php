@@ -66,7 +66,8 @@
 	const WEB_EMPRESA = "http://localhost:8080/route77";
 //DATOS EMPRESA
 	const DIRECCION = "Col. Los Laureles";
-	const TELEMPRESA= "+504 9643-2601";
+	const TELEMPRESA= "+504 22634806";
+	const CELEMPRESA= "+504 9643-2601";
 	const EMAIL_EMPRESA = "estacionroutehn@gmail.com";
 	const EMAIL_PEDIDOS = "estacionroutehn@gmail.com";
 	const EMAIL_SUSCRIPCION= "estacionroutehn@gmail.com";
@@ -81,6 +82,7 @@
 
 	const COSTOENVIO=10;
 
+
 	//Productos Por Pagina
 	const PROPORPAGINA=4;
 	const PROCATEGORIA=4;
@@ -91,6 +93,8 @@
 	const FACEBOOK = "https://www.facebook.com/estacion77/";
 	const INSTAGRAM = "https://www.instagram.com/estacion_77/";
 	const WHATSAPP = "50494877564";
+	const RTN='03011972007227';
+
 	const emailGerente="josefortizsantos@gmail.com";
 
 
