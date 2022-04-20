@@ -16,6 +16,34 @@ function controlTagPrecio(e) {
     return patron.test(n);
 }
 
+function controlTagLetraNumero(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla==8) return true;
+    else if (tecla==0||tecla==9) return true;
+    patron =/[a-zA-ZÑñÁáÉéÍíÓóÚúÜü0-9\s]/;
+    n = String.fromCharCode(tecla);
+    return patron.test(n);
+}
+
+function controlTagNumeroEmpresa(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla==8) return true;
+    else if (tecla==0||tecla==9) return true;
+    patron =/[0-9+\s]/;
+    n = String.fromCharCode(tecla);
+    return patron.test(n);
+}
+
+function controlTagImagenes(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla==8) return true;
+    else if (tecla==0||tecla==9) return true;
+    patron =/[0-9,\s]/;
+    n = String.fromCharCode(tecla);
+    return patron.test(n);
+}
+
+
 
 function testEntero(intCant) {
   var intCantidad = new RegExp(/^([0-9])*$/);
@@ -61,8 +89,12 @@ function testEnteroTel(intCant) {
     }
 }
 
+
+
 function testPrecio(intCant) {
-    var intCantidad = new RegExp(/^([0-9])$/);
+
+    var intCantidad = new RegExp(/^([0-9]{1,6})\.{0,1}(([0-9]{0,2}))$/);
+
 
     if (intCantidad.test(intCant)){
         return true;
@@ -79,6 +111,8 @@ function fntEmailValidate(email) {
         return true;
     }  
 }
+
+
     
 function fntValidText(){
     let validText = document.querySelectorAll(".validText");
@@ -184,6 +218,9 @@ function fntValidNumber() {
     });
   });
 }
+
+
+
 //Llamado de las Funciones
 window.addEventListener('load', function() {
     fntValidText();
@@ -191,7 +228,7 @@ window.addEventListener('load', function() {
     fntValidEmail();
     fntValidNumberDni();
     fntValidNumberTel();
-    fntValidNumberPrecio;
+    fntValidNumberPrecio();
     fntValidNumberRtn();
     fntViewProductos();
 }, false);

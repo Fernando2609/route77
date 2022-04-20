@@ -16,7 +16,16 @@ document.addEventListener('DOMContentLoaded', function(){
 
             let strEmail = document.querySelector('#txtEmail').value;
             let strPassword = document.querySelector('#txtPassword').value;
-        
+            
+            let elementsValid = document.getElementsByClassName("valid");
+            for (let i = 0; i < elementsValid.length; i++) {
+                if (elementsValid[i].classList.contains('is-invalid')) {
+                    swal.fire("Atención", "Por favor verifique los campos en rojo.", "error");
+                    return false;
+                }
+            }
+
+
             if(strEmail=="" || strPassword=="")
             {
                 swal.fire("Por favor", "Escribe usuario y contraseña.", "error");
@@ -60,6 +69,14 @@ document.addEventListener('DOMContentLoaded', function(){
 			e.preventDefault();
 
             let strEmail = document.querySelector('#txtEmailReset').value;
+			let elementsValid = document.getElementsByClassName("valid");
+            for (let i = 0; i < elementsValid.length; i++) {
+                if (elementsValid[i].classList.contains('is-invalid')) {
+                    swal.fire("Atención", "Por favor verifique los campos en rojo.", "error");
+                    return false;
+                }
+            }
+
 			if(strEmail == "")
 			{
 				swal.fire("Por favor", "Escribe tu correo electrónico.", "error");
