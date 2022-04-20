@@ -75,11 +75,11 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="txtCatSlider">Categorías Slider<span class="required">*</span><i>(Códigos separado por comas)</i></label>
-                            <input type="text" class="form-control valid" placeholder="Separados por Comas" id="txtCatSlider" name="txtCatSlider" required="" onkeypress="return controlTagImagenes(event)";>
+                            <input type="text" class="form-control valid validImg" placeholder="Separados por Comas" id="txtCatSlider" name="txtCatSlider" required="" onkeypress="return controlTagImagenes(event)";>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="txtCatBanner">Categorías Banner<span class="required">* </span><i>(Códigos separado por comas)</i></label>
-                            <input type="text" class="form-control valid " placeholder="Separados por Comas" id="txtCatBanner" name="txtCatBanner" required="" onkeypress="return controlTagImagenes(event)";>
+                            <input type="text" class="form-control valid validImg" placeholder="Separados por Comas" id="txtCatBanner" name="txtCatBanner" required="" onkeypress="return controlTagImagenes(event)";>
                         </div>
                     </div>
 

@@ -162,7 +162,7 @@
 						  	<form id="formLogin">
 							  <div class="form-group">
 							    <label for="txtEmail">Usuario</label>
-							    <input type="email" class="form-control" id="txtEmail" name="txtEmail">
+							    <input type="email" class="form-control validEmail" id="txtEmail" name="txtEmail">
 							  </div>
 							  <div class="form-group">
 							    <label for="txtPassword">Contraseña</label>
@@ -188,11 +188,11 @@
 						 		<div class="row">
 									<div class="col col-md-6 form-group">
 										<label for="txtTelefono">Teléfono</label>
-										<input type="text" class="form-control valid" id="txtTelefono" name="txtTelefono" required="" onkeypress="return controlTag(event);">
+										<input type="text" class="form-control valid validNumberTel" id="txtTelefono" name="txtTelefono" required="" onkeypress="return controlTag(event);">
 									</div>
 									<div class="col col-md-6 form-group">
 										<label for="txtEmailCliente">Email</label>
-										<input type="email" class="form-control valid" id="txtEmailCliente" name="txtEmailCliente" required="">
+										<input type="email" class="form-control valid validEmail" id="txtEmailCliente" name="txtEmailCliente" required="">
 									</div>
 						 		</div>
                                  

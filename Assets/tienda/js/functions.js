@@ -509,4 +509,74 @@ if(document.querySelector("#btnComprar")){
         },false);
     }
 
+//FUncion de entero y longitud Telefono
+function testEnteroTel(intCant) {
+    var intCantidad = new RegExp(/^([0-9]{8})$/);
+    if (intCantidad.test(intCant)){
+        return true;
+    }else{
+        return false;
+    }
+}
 
+function fntEmailValidate(email) {
+    var stringEmail = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})$/);
+    if (stringEmail.test(email) == false){
+        return false;
+    }else{
+        return true;
+    }  
+}
+function testText(txtString) {
+  var stringText = new RegExp(
+    /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü]+(\s[a-zA-ZÑñÁáÉéÍíÓóÚúÜü]+)*$/
+  );
+  if (stringText.test(txtString)) {
+    return true;
+  } else {
+    return false;
+  }
+}function fntValidText() {
+  let validText = document.querySelectorAll(".validText");
+  validText.forEach(function (validText) {
+    validText.addEventListener("keyup", function () {
+      let inputValue = this.value;
+      if (!testText(inputValue)) {
+        this.classList.add("is-invalid");
+        /*  this.classList.remove('is-valid'); */
+      } else {
+        this.classList.remove("is-invalid");
+        /*       this.classList.add('is-valid'); */
+      }
+    });
+  });
+}
+function fntValidEmail() {
+  let validEmail = document.querySelectorAll(".validEmail");
+  validEmail.forEach(function (validEmail) {
+    validEmail.addEventListener("keyup", function () {
+      let inputValue = this.value;
+      if (!fntEmailValidate(inputValue)) {
+        this.classList.add("is-invalid");
+      } else {
+        this.classList.remove("is-invalid");
+        this.classList.add("is-valid");
+      }
+    });
+  });
+}
+//Funcion validacion telefono
+function fntValidNumberTel(){
+    let validNumberTel = document.querySelectorAll(".validNumberTel");
+    validNumberTel.forEach(function(validNumberTel) {
+        validNumberTel.addEventListener('keyup', function (){
+            let inputValue = this.value;
+            if (!testEnteroTel(inputValue)){
+                this.classList.add('is-invalid');
+            }else{
+                this.classList.remove('is-invalid');
+            
+            }
+        });
+    });
+}

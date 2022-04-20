@@ -232,7 +232,12 @@ document.addEventListener('DOMContentLoaded',function () {
                     swal.fire("Atención", "Todos los campos son obligatorios." , "error");
                     return false;
             }
-    
+            let contraseñaValid = document.querySelector("#txtPassword");
+           
+             if (contraseñaValid.classList.contains("is-invalid")) {
+                swal.fire("Atención", "La contraseña debe de contener al menos 8 caracteres, una letra mayúscula, una letra minuscula, un número y un caracter especial", "error");
+               return false;
+             }
             let elementsValid = document.getElementsByClassName("valid");
             for (let i = 0; i < elementsValid.length; i++) {
                 if (elementsValid[i].classList.contains('is-invalid')) {
@@ -326,13 +331,21 @@ document.addEventListener('DOMContentLoaded',function () {
                     return false;
                 }
             }
+            let contraseñaValid = document.querySelector("#txtPassword");
+           
+             if (contraseñaValid.classList.contains("is-invalid")) {
+                swal.fire("Atención", "La contraseña debe de contener al menos 8 caracteres, una letra mayúscula, una letra minuscula, un número y un caracter especial", "error");
+               return false;
+             }
             let elementsValid = document.getElementsByClassName("valid");
             for (let i = 0; i < elementsValid.length; i++) {
                 if (elementsValid[i].classList.contains('is-invalid')) {
+                    
                     swal.fire("Atención", "Por favor verifique los campos en rojo.", "error");
                     return false;
                 }
             }
+           
 
             divLoading.style.display="flex";   
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -523,6 +536,8 @@ function fntEditUsuario(element,idUsuario){
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-success", "btn-warning");
     document.querySelector('#btnText').innerHTML ="Actualizar";
+    document.querySelector("#txtPassword").value = "";
+    document.querySelector("#txtPassword").classList.remove("is-invalid");
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url+'/Usuarios/getUsuario/'+idUsuario;
     request.open("GET",ajaxUrl,true);

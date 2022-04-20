@@ -54,12 +54,31 @@ function testEntero(intCant) {
   }
 }
 function testText(txtString){
-    var stringText = new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/);
+    var stringText = new RegExp(/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü]+(\s[a-zA-ZÑñÁáÉéÍíÓóÚúÜü]+)*$/);
     if(stringText.test(txtString)){
         return true;
     }else{
         return false;
     }
+}
+function testContraseña(txtString) {
+  var stringText = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@#$!%*.?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/);
+  if (stringText.test(txtString)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function testImg(txtString) {
+  var stringText = new RegExp(
+    /^(?=.*\d)(?=.*[$@#$!%*.?&])$/
+  );
+  if (stringText.test(txtString)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 
@@ -112,8 +131,37 @@ function fntEmailValidate(email) {
     }  
 }
 
-
+function fntValidImg() {
+  let ValidImg = document.querySelectorAll(".ValidImg");
+  ValidImg.forEach(function (ValidImg) {
+    ValidImg.addEventListener("keyup", function () {
+      let inputValue = this.value;
+      if (!testImg(inputValue)) {
+        this.classList.add("is-invalid");
+        /*  this.classList.remove('is-valid'); */
+      } else {
+        this.classList.remove("is-invalid");
+        /*       this.classList.add('is-valid'); */
+      }
+    });
+  });
+}
     
+function fntValidContra(){
+    let ValidContra = document.querySelectorAll(".ValidContra");
+    ValidContra.forEach(function(ValidContra) {
+        ValidContra.addEventListener('keyup', function (){
+            let inputValue = this.value;
+            if (!testContraseña(inputValue)) {
+              this.classList.add("is-invalid");
+              /*  this.classList.remove('is-valid'); */
+            } else {
+              this.classList.remove("is-invalid");
+              /*       this.classList.add('is-valid'); */
+            }
+        });
+    });
+}
 function fntValidText(){
     let validText = document.querySelectorAll(".validText");
     validText.forEach(function(validText) {
@@ -231,6 +279,8 @@ window.addEventListener('load', function() {
     fntValidNumberPrecio();
     fntValidNumberRtn();
     fntViewProductos();
+    fntValidContra();
+    fntValidImg();
 }, false);
 
 
