@@ -53,7 +53,7 @@ require_once("Libraries/Core/Mysql.php");
         {
             /* $query_insert  = "INSERT INTO usuarios(nombres,apellidos,email,contraseña,idRol,telefono) 
                               VALUES(?,?,?,?,?,?,?,?,?,?,?)"; */
-            $query_insert="CALL CRUD_CLIENTE(?,?,?,?,?,?,?,null,null,'I',null)";
+            $query_insert="CALL CRUD_CLIENTE(?,?,?,?,?,?,?,null,null,?,'I',null)";
             $arrData = array(
                             $this->strNombre,
                             $this->strApellido,
@@ -66,7 +66,7 @@ require_once("Libraries/Core/Mysql.php");
                            /*  $this->intSucursal,  
                             $this->strFechaNacimiento, */
                             $this->intStatus, 
-                             $this->intTelefono );
+                             $this->intTelefono,NOW());
            /*  $request_insert = $this->con->insert($query_insert,$arrData);
             $return = $request_insert;
             
@@ -294,6 +294,22 @@ require_once("Libraries/Core/Mysql.php");
 			$return = false;
 		}
 		return $return;
+	}
+    public function setContacto(string $nombre, string $email, string $mensaje, string $ip, string $dispositivo, string $useragent){
+		$this->con = new Mysql();
+        $nombre  	 = $nombre != "" ? $nombre : ""; 
+		$email 		 = $email != "" ? $email : ""; 
+		$mensaje	 = $mensaje != "" ? $mensaje : ""; 
+		$ip 		 = $ip != "" ? $ip : ""; 
+		$dispositivo = $dispositivo != "" ? $dispositivo : ""; 
+		$useragent 	 = $useragent != "" ? $useragent : ""; 
+		$query_insert  = "INSERT INTO TBL_CONTACTO(NOMBRE,EMAIL,MENSAJE,IP,DISPOSITIVO,USERAGENT,FECHA_CREACION) 
+						  VALUES(?,?,?,?,?,?,?)";
+		$arrData = array($nombre,$email,$mensaje,$ip,$dispositivo,$useragent,NOW());
+
+		$request_insert = $this->con->insert($query_insert,$arrData);
+       
+		return $request_insert;
 	}
 
 

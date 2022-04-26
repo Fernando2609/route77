@@ -28,7 +28,7 @@
           ?>
             <div class="form-group col-md-6">
               <label for="txtIdentificacion">DNI <span class="required">*</span></label>
-              <input type="text" value="<?=  $_SESSION['userData']['DNI'];  ?>"  class="form-control valid validNumber" id="txtIdentificacion" name="txtIdentificacion" required="" onkeypress="return controlTag(event);">
+              <input type="text" value="<?=  $_SESSION['userData']['DNI'];  ?>"  class="form-control valid validNumberDni" id="txtIdentificacion" name="txtIdentificacion" required="" onkeypress="return controlTag(event);">
             </div>
           <?php } ?>
             <div class="form-group col-md-6">
@@ -49,7 +49,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="txtTelefono">Teléfono <span class="required">*</span></label>
-                <input type="text" class="form-control valid validNumber" id="txtTelefono" name="txtTelefono"  value="<?=  $_SESSION['userData']['TELEFONO'];  ?>" required="" onkeypress="return controlTag(event);">
+                <input type="text" class="form-control valid validNumberTel" id="txtTelefono" name="txtTelefono"  value="<?=  $_SESSION['userData']['TELEFONO'];  ?>" required="" onkeypress="return controlTag(event);">
             </div>
             <?php
              if ($_SESSION['userData']['COD_ROL']!=RCLIENTES) {

@@ -1,6 +1,6 @@
 <?php  
     //Fernadno 23/10/2021
-    class SucursalesModel extends Mysql{
+    class adminSucursalesModel extends Mysql{
 		private $intIdSucursal;
         private $strNombre;
 		private $strDireccion;

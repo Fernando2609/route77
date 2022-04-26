@@ -45,11 +45,11 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="control-label">Precio <span class="required">*</span></label>
-                            <input class="form-control validNumberPrecio" id="txtPrecio" name="txtPrecio" type="text" required="" onkeypress="return controlTagPrecio(event);">
+                            <input class="form-control valid validNumberPrecio" id="txtPrecio" name="txtPrecio" type="text" required="" onkeypress="return controlTagPrecio(event);">
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Stock Mínimo  <span class="required">*</span></label>
-                            <input class="form-control validNumber" id="txtStock" name="txtStock" type="text" required="" onkeypress="return controlTag(event);">
+                            <input class="form-control valid validNumber" id="txtStock" name="txtStock" type="text" required="" onkeypress="return controlTag(event);">
                         </div>
                     </div>
                     <div class="row">

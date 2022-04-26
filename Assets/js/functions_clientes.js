@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded',function () {
      if (contraseñaValid.classList.contains("is-invalid")) {
        swal.fire(
          "Atención",
-         "La contraseña debe de contener al menos 8 caracteres, una letra mayúscula, una letra minuscula, un número y un caracter especial",
+         "La contraseña debe de contener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número, un caracter especial y sin espacios",
          "error"
        );
        return false;
@@ -223,8 +223,8 @@ document.addEventListener('DOMContentLoaded',function () {
             }
              if(strPassword != ""){
                 //longitud de la contraseña   
-                if(strPassword.length < 6 ){
-                    swal.fire("Atención", "La contraseña debe tener un mínimo de 6 caracteres." , "info");
+                if(strPassword.length < 8 ){
+                    swal.fire("Atención", "La contraseña debe tener un mínimo de 8 caracteres." , "info");
                     return false;
                 }
              }

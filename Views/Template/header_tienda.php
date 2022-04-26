@@ -9,6 +9,9 @@
 			$cantCarrito += $product['cantidad'];
 		}
 	}
+	$tituloPreguntas=!empty(getInfoPage(PPREGUNTAS)) ? getInfoPage(PPREGUNTAS)['TITULO'] : "";
+	$infoPreguntas=!empty(getInfoPage(PPREGUNTAS)) ? getInfoPage(PPREGUNTAS)['CONTENIDO'] : "";
+
 ?>
 <!DOCTYPE html>
 
@@ -34,6 +37,7 @@
 		}
 		 
 	?>
+	<meta name="description" content="La mejor tienda de conveniencia a tu alcance"/>
 	<meta property="og:locale" 		content='es_ES'/>
 	<meta property="og:type"        content="website" />
 	<meta property="og:site_name"	content="<?= $nombreSitio; ?>"/>
@@ -83,20 +87,18 @@
 	<link rel="stylesheet" href="<?= media(); ?>/css/style.css">
 <!--===============================================================================================-->
 </head>
-<body class="animsition">
+<body class="animsition page-content">
 <div class="modal modal-tienda fade" id="modalAyuda" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Preguntas Frecuentes </h5>
+        <h5 class="modal-title"><?=  $tituloPreguntas  ?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit minima culpa dolores quaerat aut accusamus placeat libero distinctio veniam saepe nam voluptatem voluptates, nobis rem enim voluptatum animi sit necessitatibus?</p>
-        <br>
-        <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis delectus minus perspiciatis, illo unde voluptas consectetur odio ab mollitia, numquam sed veritatis quis recusandae ex reprehenderit maxime suscipit provident aspernatur.</p>
+       <?=  $infoPreguntas  ?>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -193,6 +195,9 @@
 							</li>
 							<li>
 								<a href="<?= base_url(); ?>/nosotros">Nosotros</a>
+							</li>
+							<li>
+								<a href="<?= base_url(); ?>/sucursales">Sucursales</a>
 							</li>
 
 							<li>
@@ -307,6 +312,9 @@
 				</li>
 				<li>
 					<a href="<?= base_url(); ?>/nosotros">Nosotros</a>
+				</li>
+				<li>
+					<a href="<?= base_url(); ?>/sucursales">Sucursales</a>
 				</li>
 
 				<li>

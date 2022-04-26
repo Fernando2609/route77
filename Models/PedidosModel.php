@@ -67,7 +67,7 @@
                    
                     if (!empty($requestPedido)) {
                         $idpersona = $requestPedido['COD_PERSONA'];
-                        $sql_cliente = "CALL CRUD_CLIENTE(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'C',$idpersona)";
+                        $sql_cliente = "CALL CRUD_CLIENTE(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'C',$idpersona)";
                         /* $sql_cliente = "SELECT tp.COD_PERSONA,
                                                     tp.NOMBRES,
                                                     tp.APELLIDOS,
@@ -116,9 +116,11 @@
 		}
     public function reembolsoPaypal(string $idtransaccion, string $observacion){
             $response = false;
-            $sql="CALL CRUD_PEDIDO(NULL,NULL,NULL,NULL,NULL,NULL,$idtransaccion,NULL,NULL,'C',null)";
+            $sql="CALL CRUD_PEDIDO(NULL,NULL,NULL,NULL,NULL,NULL,'$idtransaccion',NULL,NULL,'C',null)";
+           
             //$sql= "SELECT COD_PEDIDO, DATOS_PAYPAL FROM TBL_PEDIDO  WHERE COD_TRANSACCION_PAYPAL = '{$idtransaccion}' ";
             $requestData= $this-> select($sql);
+            
             if(!empty($requestData)){
                 $objData= json_decode($requestData['DATOS_PAYPAL']);
                 //INGRESAR AL HREF DEL METODO LINKS CON EL METODO GET
