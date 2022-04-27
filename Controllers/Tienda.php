@@ -358,9 +358,9 @@
                         'email' => $strEmail,
                         'password' => $strPassword,
                         'asunto' => 'Bienvenido a tu Tienda en Línea');
-                        $_SESSION['idUser'] = $request_user;
-                        $_SESSION['login'] = true;
-                        $this->login->sessionLogin($request_user);
+                        //$_SESSION['idUser'] = $request_user;
+                        //$_SESSION['login'] = true;
+                        //$this->login->sessionLogin($request_user);
                         sendEmail($dataUsuario, 'email_bienvenida');
                     }else if($request_user == false){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		

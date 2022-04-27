@@ -196,7 +196,26 @@ if (document.querySelector("#formRegister")) {
                 if(objData.status)
                 { 
 
-                    window.location.reload(false);    
+                    //window.location.reload(false);
+                     swal.fire("Revisa tu Correo","Hemos enviado una contraseña a tu correo, verifica e inicia sesión con ella" , "success");
+                    
+                    swal
+                      .fire({
+                        title: "Revisa tu Correo",
+                        text: "Hemos enviado una contraseña a tu correo, verifica e inicia sesión con ella",
+                        icon: "success",
+                        /* showCancelButton: true,
+                                confirmButtonText: "Si, eliminar!",
+                                cancelButtonText: "No, cancelar!", */
+                        //closeOnConfirm: false,
+                        //closeOnCancel: true,
+                      })
+                      .then((result) => {
+                        if (result.isConfirmed) {
+                          location.reload();
+                        }
+                      });
+                      
                 }else{
                     swal.fire("Error", objData.msg , "error");
                 }
