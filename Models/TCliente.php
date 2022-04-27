@@ -125,7 +125,7 @@ require_once("Libraries/Core/Mysql.php");
     $this->con = new Mysql();
     /* $query_insert = "INSERT INTO pedido (idusuario,monto,costoenvio,idTipoPago,direccion_envio,status,idtransaccionpaypal, datospaypal)
     VALUES(?, ?, ?, ?, ?, ?, ?,?)"; */
-    $query_insert="CALL CRUD_PEDIDO(?,?,?,?,?,?,?,?,null,'I',null)";
+    $query_insert="CALL CRUD_PEDIDO(?,?,?,?,?,?,?,?,null,?,'I',null)";
     $arrData = array($personaid,
                     $monto,
                     $costoenvio,
@@ -133,7 +133,8 @@ require_once("Libraries/Core/Mysql.php");
                     $direccionenvio,
                     $status,
                     $idtransaccionpaypal,
-                    $datospaypal);
+                    $datospaypal,
+                    NOW());
     $request_insert=$this->con->insert($query_insert, $arrData);
     $return=$request_insert;
     $sql = "SELECT last_insert_id()";
@@ -240,7 +241,7 @@ require_once("Libraries/Core/Mysql.php");
 					INNER JOIN tipo_pago t
 					ON p.idTipoPago= t.idTipoPago
 					WHERE p.idpedido =  $idpedido"; */
-        $sql="CALL CRUD_PEDIDO(null,null,null,null,null,null,null,null,null,'R',$idpedido)";
+        $sql="CALL CRUD_PEDIDO(null,null,null,null,null,null,null,null,null,NULL,'R',$idpedido)";
 		$requestPedido = $this->con->select($sql);
 		if(count($requestPedido) > 0){
 			/* $sql_detalle = "SELECT p.idproducto,
