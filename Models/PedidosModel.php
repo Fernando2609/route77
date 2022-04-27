@@ -165,17 +165,17 @@
             }
         }  
         
-        public function updatePedido(int $idpedido, $transaccion = NULL, $idtipopago = NULL,int $estado){
+        public function updatePedido(int $idpedido, $transaccion = NULL, $idtipopago = NULL,int $estado,int $user){
 			if($transaccion == NULL){
 				/* $query_insert  = "UPDATE TBL_PEDIDO SET COD_ESTADO = ?  WHERE COD_PEDIDO = $idpedido "; */
-                $query_insert="CALL CRUD_PEDIDO(NULL,NULL,NULL,NULL,NULL,?,NULL,NULL,NULL,NULL,'A',$idpedido)";
-	        	$arrData = array($estado);
+                $query_insert="CALL CRUD_PEDIDO($user,NULL,NULL,NULL,NULL,?,NULL,NULL,NULL,?,'A',$idpedido)";
+	        	$arrData = array($estado,NOW());
 			}else{
 				/* $query_insert  = "UPDATE TBL_PEDIDO SET REFERENCIA_COBRO = ?, COD_TIPO_PAGO = ?,COD_ESTADO = ? WHERE COD_PEDIDO = $idpedido"; */
-                $query_insert="CALL CRUD_PEDIDO(NULL,NULL,NULL,?,NULL,?,?,NULL,NULL,NULL,'B',$idpedido)";
+                $query_insert="CALL CRUD_PEDIDO($user,NULL,NULL,?,NULL,?,?,NULL,NULL,?,'B',$idpedido)";
 	        	$arrData = array($idtipopago,
 	    						$estado,
-                                $transaccion
+                                $transaccion,NOW()
 	    					);
 			}
 			$request_insert = $this->update($query_insert,$arrData);
