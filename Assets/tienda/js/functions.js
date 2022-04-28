@@ -135,23 +135,88 @@ if(document.querySelector(".num-product")){
 		});
 	});
 };
-window.addEventListener('load', function() {
-   if(document.querySelector('#txtEmail')){
-   if (nombre=='procesarpago') {
-       fntNacionalidadCliente();
-       fntGeneroCliente();
-        fnEstadoCCliente();
-   }
 
-}
-    /*fnSucursalUsuario(); */
+/* REGISTRO POR MODAL */
+if (document.querySelector("#formRegisterModal")) {
+    let formRegisterModal = document.querySelector("#formRegisterModal");
+    formRegisterModal.onsubmit=function(e){
+        e.preventDefault();
+      
+        let strNombre = document.querySelector("#txtNombreModal").value;
+        let strApellido = document.querySelector("#txtApellidoModal").value;
+        let strEmail = document.querySelector("#txtEmailClienteModal").value;
+        let intTelefono = document.querySelector("#txtTelefonoModal").value;
+        /* let intTipousuario = document.querySelector('#listRolid').value; */
+       /*  let intNacionalidad = document.querySelector('#listNacionalidadCliente').value;
+        let intGenero = document.querySelector('#listGenero').value;
+        let intEstadoC = document.querySelector('#listEstadoC').value;
+        let strFechaN = document.querySelector('#fechaNacimiento').value;
+         */
 
-    fntEmailValidate();
-    fntValidEmail();
-    fntValidNumberTel();
-    fntValidText();
+        if(strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '')
+            {
+                swal.fire("Atención", "Todos los campos son obligatorios." , "error");
+                return false;
+        }
 
-}, false);
+        let elementsValid = document.getElementsByClassName("valid");
+        for (let i = 0; i < elementsValid.length; i++) {
+            if (elementsValid[i].classList.contains('is-invalid')) {
+                swal.fire("Atención", "Por favor verifique los campos en rojo.", "error");
+                return false;
+            }
+        }
+        
+        divLoading.style.display="flex";
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url + "/Tienda/registroModal"; 
+        let formData = new FormData(formRegisterModal);
+        request.open("POST",ajaxUrl,true);
+        request.send(formData);
+        request.onreadystatechange = function(){ 
+            if(request.readyState == 4 && request.status == 200){
+               /*  console.log(request.responseText); */
+                let objData = JSON.parse(request.responseText); 
+                
+                if(objData.status)
+                { 
+
+                    $("#modalRegistro").modal("hide");
+
+                    /* //window.location.reload(false);
+                     swal.fire("Revisa tu Correo","Hemos enviado una contraseña a tu correo, verifica e inicia sesión con ella" , "success"); */
+                    
+                    swal
+                      .fire({
+                        title: "Revisa tu Correo",
+                        text: "Hemos enviado una contraseña a tu correo, verifica e inicia sesión con ella",
+                        icon: "success",
+                        /* showCancelButton: true,
+                                confirmButtonText: "Si, eliminar!",
+                                cancelButtonText: "No, cancelar!", */
+                        //closeOnConfirm: false,
+                        //closeOnCancel: true,
+                      })
+                      .then((result) => {
+                        if (result.isConfirmed) {
+                          location.reload();
+                        }
+                      });
+                      
+                }else{
+                    swal.fire("Error", objData.msg , "error");
+                }
+            
+            }else{
+                console.log('Error');
+            }
+            divLoading.style.display = "none";
+            return false;
+        }
+    }
+};
+
+
 if (document.querySelector("#formRegister")) {
     let formRegister=document.querySelector("#formRegister");
     formRegister.onsubmit=function(e){
@@ -194,28 +259,30 @@ if (document.querySelector("#formRegister")) {
                 let objData = JSON.parse(request.responseText); 
                 
                 if(objData.status)
-                { 
+                {
+                  //window.location.reload(false);
+                  /* swal.fire(
+                    "Revisa tu Correo",
+                    "Se ha enviado una contraseña a tu correo, verifica e inicia sesión con ella para continuar con el pedido.",
+                    "success"
+                  ); */
 
-                    //window.location.reload(false);
-                     swal.fire("Revisa tu Correo","Hemos enviado una contraseña a tu correo, verifica e inicia sesión con ella" , "success");
-                    
-                    swal
-                      .fire({
-                        title: "Revisa tu Correo",
-                        text: "Hemos enviado una contraseña a tu correo, verifica e inicia sesión con ella",
-                        icon: "success",
-                        /* showCancelButton: true,
+                  swal
+                    .fire({
+                      title: "Revisa tu Correo",
+                      text: "Hemos enviado una contraseña a tu correo, verifica e inicia sesión con ella",
+                      icon: "success",
+                      /* showCancelButton: true,
                                 confirmButtonText: "Si, eliminar!",
                                 cancelButtonText: "No, cancelar!", */
-                        //closeOnConfirm: false,
-                        //closeOnCancel: true,
-                      })
-                      .then((result) => {
-                        if (result.isConfirmed) {
-                          location.reload();
-                        }
-                      });
-                      
+                      //closeOnConfirm: false,
+                      //closeOnCancel: true,
+                    })
+                    .then((result) => {
+                      if (result.isConfirmed) {
+                        location.reload();
+                      }
+                    });
                 }else{
                     swal.fire("Error", objData.msg , "error");
                 }
@@ -658,3 +725,16 @@ function fntValidNumberTel(){
        false
      );
    }
+   
+window.addEventListener(
+  "load",
+  function () {
+    /*fnSucursalUsuario(); */
+
+    fntEmailValidate();
+    fntValidEmail();
+    fntValidNumberTel();
+    fntValidText();
+  },
+  false
+);
