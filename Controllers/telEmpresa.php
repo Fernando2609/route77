@@ -21,6 +21,8 @@ class TelEmpresa extends Controllers{
             $data['page_title']="Teléfonos <small>Route 77</small>";
             $data['page_name']="telempresa";
             $data['page_functions_js']="functions_telEmpresa.js";
+            //BIRACORA
+            Bitacora($_SESSION['idUser'],MEMPRESA,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"telEmpresa",$data);
         }
 
@@ -54,12 +56,21 @@ class TelEmpresa extends Controllers{
                         );
                     } 
                 }
+              
+
                 if ($request_user > 0) {
                     if ($option == 1) {
                         $arrResponse = array("status" => true, "msg" => 'Teléfono Empresa Guardado Correctamente.');
-                    
+                      //Selecciona los datos de el télefono Insertado  
+                      $arrData= $this->model->selecttelEmpresa($request_user);
+                      //BIRACORA
+                      Bitacora($_SESSION['idUser'],MEMPRESA,"Nuevo","Registró el teléfono  ".$arrData['TELEFONO']); 
                     } else {
                         $arrResponse = array("status" => true, "msg" => 'Teléfono Empresa Actualizado Correctamente.');
+                         //Selecciona los datos del usuario Actualizado                                                       
+                         $arrData= $this->model->selecttelEmpresa($idUsuario);
+                         //BIRACORA
+                         Bitacora($_SESSION['idUser'],MEMPRESA,"Update","Actualizó el teléfono  ".$arrData['TELEFONO']); 
                     }
                 } else if ($request_user == 'exist') {
                     $arrResponse = array('status' => false, 'msg' => '¡Atención! el teléfono ya existe, ingrese otro.');
@@ -118,6 +129,8 @@ class TelEmpresa extends Controllers{
                 if (empty($arrData)) {
                     $arrResponse = array('status' => false, 'msg' => 'Dato no encontrado.');
                 } else {
+                    //BIRACORA
+                    Bitacora($_SESSION['idUser'],MEMPRESA,"Consulta","Consultó el teléfono  ".$arrData['TELEFONO']); 
                     $arrResponse = array('status' => true, 'data' => $arrData);
                 }
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
@@ -131,10 +144,15 @@ class TelEmpresa extends Controllers{
         if ($_POST) {
             if ($_SESSION['permisosMod']['d']) {
                 $intIdpersona = intval($_POST['idUsuario']);
+                    //Selecciona los datos del usuario Eliminado  
+                    $arrData= $this->model->selecttelEmpresa($intIdpersona);
+                   
 
                 $requestDelete = $this->model->deletetelEmpresa($intIdpersona);
                 if ($requestDelete) {
                     $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Teléfono Empresa');
+                    //BIRACORA
+                    Bitacora($_SESSION['idUser'],MEMPRESA,"Delete","Eliminó el teléfono ".$arrData['TELEFONO']);
                 } else {
                     $arrResponse = array('status' => false, 'msg' => 'Error al eliminar el Teléfono Empresa.');
                 }

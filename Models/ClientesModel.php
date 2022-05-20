@@ -81,6 +81,14 @@
 			
 			return $request;
 		}
+		public function selectCliente2(int $idUsuario){
+			$this->intIdUsuario = $idUsuario;
+
+			$sql= "CALL CRUD_CLIENTE(null,null,null,null,null,null,null,null,null,null,'J',$this->intIdUsuario)";
+			$request = $this->select($sql);
+			
+			return $request;
+		}
 
 	public function updateCliente(int $idUsuario, string $nombre, string $apellido,  string $email, string $password,  int $intTipoId, int $status, int $telefono, int $user)
 	{

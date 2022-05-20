@@ -9,7 +9,7 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(2);
+            getPermisos(MUSUARIOS);
         }
         
         public function Roles()
@@ -22,6 +22,8 @@
             $data['page_title']="Roles <small> Route 77</small> ";
             $data['page_functions_js']="functions_roles.js";
             $data['page_name']="rol_usuario";
+            //BIRACORA
+            Bitacora($_SESSION['idUser'],MUSUARIOS,"Ingreso","Ingresó al módulo roles en");
             $this->views->getView($this,"roles",$data);
         }
         public function getRoles()  {
@@ -83,6 +85,8 @@
                         $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                     }else{
                         $arrResponse = array('status' => true, 'data' => $arrData);
+                        //BIRACORA
+                       Bitacora($_SESSION['idUser'],MUSUARIOS,"Consulta","Consultó al Rol ".$arrData['NOM_ROL']."");
                     }
                     echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
 
@@ -112,8 +116,16 @@
                     if($option == 1)
                         {
                             $arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+                             //Selecciona los datos del rol Insertado  
+                             $arrData= $this->model->selectRol($request_rol);
+                             //BIRACORA
+                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Nuevo","Registró al rol ".$arrData['NOM_ROL']."");  
                         }else{
                             $arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
+                            //Selecciona los datos del rol Actualizado                                                       
+                            $arrData= $this->model->selectRol($intIdRol);
+                            //BIRACORA
+                            Bitacora($_SESSION['idUser'],MUSUARIOS,"Update","Actualizó al rol ".$arrData['NOM_ROL']."");  
                         }
                     $arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
 
@@ -132,10 +144,14 @@
 			if($_POST){
                 if($_SESSION['permisosMod']['d']){
 					$intIdrol = intval($_POST['idrol']);
+                     //Selecciona los datos del rol eliminar                                                       
+                     $arrData= $this->model->selectRol($intIdrol);
 					$requestDelete = $this->model->deleteRol($intIdrol);
 					if($requestDelete == true)
 					{
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Rol');
+                      //BIRACORA
+                      Bitacora($_SESSION['idUser'],MUSUARIOS,"Delete","Eliminó el rol ".$arrData['NOM_ROL']."");   
 					}else if($requestDelete == false){
 						$arrResponse = array('status' => false, 'msg' => 'No es posible eliminar un Rol asociado a usuarios.');
 					}else{

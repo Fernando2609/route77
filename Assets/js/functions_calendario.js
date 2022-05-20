@@ -54,8 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
     },
 
     //Extraer eventos desde el controlador
-    events: "https://estacionroute77.com/Calendario/mostrarCalendario",
-    //    events: 'http://localhost:8080/route77/Calendario/mostrarCalendario',
+    //events: "https://estacionroute77.com/Calendario/mostrarCalendario",
+        events: 'http://localhost:8080/route77/Calendario/mostrarCalendario',
     //Click en un evento
     eventClick: function (calEvent, jsEvent, view) {
       //Titulo del evento seleccionado

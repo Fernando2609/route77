@@ -51,7 +51,7 @@
                with font-awesome or any other icon font library -->
          
 
-          <?php if(!empty($_SESSION['permisos'][1]['r'])){ ?>
+          <?php if(!empty($_SESSION['permisos'][MDASHBOARD]['r'])){ ?>
 
     <li class="nav-item">
             <a href="<?= base_url();?>/dashboard" class="nav-link">
@@ -63,7 +63,7 @@
           </li>
           <?php } ?>
           <!-- Usuarios-->
-          <?php if(!empty($_SESSION['permisos'][2]['r'])){ ?>
+          <?php if(!empty($_SESSION['permisos'][MUSUARIOS]['r'])){ ?>
           <li class="nav-item">
             <a href="../widgets.html" class="nav-link">
              <i class=" nav-icon fas fa-users"></i>
@@ -90,7 +90,7 @@
           <?php } ?>
 
           <!-- Clientes-->
-          <?php if(!empty($_SESSION['permisos'][3]['r'])){ ?>
+          <?php if(!empty($_SESSION['permisos'][MCLIENTES]['r'])){ ?>
           <li class="nav-item">
             <a href="<?= base_url();?>/clientes" class="nav-link">
             <i class=" nav-icon fas fa-user"></i>
@@ -103,7 +103,7 @@
 
 
           <!-- Productos-->
-          <?php if(!empty($_SESSION['permisos'][4]['r']) || !empty($_SESSION['permisos'][6]['r'])){ ?>
+          <?php if(!empty($_SESSION['permisos'][MPRODUCTOS]['r']) || !empty($_SESSION['permisos'][MCATEGORIAS]['r'])){ ?>
             <li class="nav-item">
             <a href="../widgets.html" class="nav-link">
              <i class=" nav-icon fas fa-store"></i>
@@ -115,7 +115,7 @@
 
             <ul class="nav nav-treeview">
 
-              <?php if(!empty($_SESSION['permisos'][4]['r'])){ ?>
+              <?php if(!empty($_SESSION['permisos'][MPRODUCTOS]['r'])){ ?>
               <li class="nav-item">
                 <a href="<?= base_url();?>/productos" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -123,7 +123,7 @@
                 </a>
               </li>
               <?php } ?>
-              <?php if(!empty($_SESSION['permisos'][6]['r'])){ ?>
+              <?php if(!empty($_SESSION['permisos'][MCATEGORIAS]['r'])){ ?>
               <li class="nav-item">
                 <a href="<?= base_url();?>/categorias" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -136,7 +136,7 @@
           <?php } ?>
 
           <!-- Pedidos-->
-          <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
+          <?php if(!empty($_SESSION['permisos'][MPEDIDOS]['r'])){ ?>
           <li class="nav-item">
             <a href="<?= base_url();?>/pedidos" class="nav-link">
             <i class="nav-icon fas fa-shopping-cart"></i>
@@ -149,7 +149,7 @@
           <?php } ?>
 
           
-          <?php if(!empty($_SESSION['permisos'][14]['r'])){ ?>
+          <?php if(!empty($_SESSION['permisos'][MEMPRESA]['r'])){ ?>
           
           <li class="nav-item">
             <a href="../widgets.html" class="nav-link">
@@ -179,7 +179,7 @@
                 </a>
               </li>
               <!-- Sucursales -->
-              <?php if(!empty($_SESSION['permisos'][16]['r'])){ ?>
+              <?php if(!empty($_SESSION['permisos'][MSUCURSALES]['r'])){ ?>
           <li class="nav-item">
             <a href="<?= base_url();?>/adminsucursales" class="nav-link">
            
@@ -194,7 +194,7 @@
           </li>
           <?php } ?>
 
-          <?php if(!empty($_SESSION['permisos'][15]['r'])){ ?>
+          <?php if(!empty($_SESSION['permisos'][MPROVEEDORES]['r'])){ ?>
           <li class="nav-item">
             <a href="<?= base_url();?>/proveedores" class="nav-link">
             <i class="nav-icon fa-solid fa-truck-fast"></i>
@@ -207,7 +207,7 @@
           
         
           
-        <?php if(!empty($_SESSION['permisos'][9]['r'])){ ?>
+        <?php if(!empty($_SESSION['permisos'][MINVENTARIO]['r'])){ ?>
           <li class="nav-item">
             <a href="<?= base_url();?>/inventario" class="nav-link"> 
             <i class=" nav-icon fa-solid fa-boxes-stacked"></i>
@@ -217,7 +217,7 @@
             </a>
           </li>
           <?php } ?>
-          <?php if(!empty($_SESSION['permisos'][17]['r'])){ ?>
+          <?php if(!empty($_SESSION['permisos'][MCOMPRAS]['r'])){ ?>
           <!-- Calendario-->
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -243,7 +243,7 @@
             </ul>
           </li>
           <?php } ?>
-          <?php if(!empty($_SESSION['permisos'][14]['r'])){ ?>
+          <?php if(!empty($_SESSION['permisos'][MCALENDARIO]['r'])){ ?>
           <!-- Calendario-->
           <li class="nav-item">
             <a href="<?= base_url();?>/calendario" class="nav-link">
@@ -283,6 +283,26 @@
             <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 Páginas
+              </p>
+            </a>
+          </li>
+         <?php } ?>
+         <?php if(!empty($_SESSION['permisos'][MBACKUP]['r'])){ ?>
+            <li class="nav-item">
+            <a href="<?= base_url();?>/backup" class="nav-link">
+            <i class="nav-icon fa-solid fa-database"></i>
+              <p>
+                Respaldo Y Recuperación
+              </p>
+            </a>
+          </li>
+         <?php } ?>
+         <?php if(!empty($_SESSION['permisos'][MBITACORA]['r'])){ ?>
+            <li class="nav-item">
+            <a href="<?= base_url();?>/bitacora" class="nav-link">
+            <i class="nav-icon fa-solid fa-book"></i>
+              <p>
+                Bitacora
               </p>
             </a>
           </li>

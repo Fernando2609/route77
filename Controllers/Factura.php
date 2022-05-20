@@ -1,6 +1,20 @@
 <?php  
     require 'Libraries/html2pdf/vendor/autoload.php';
+    
+    require 'Libraries/Excel/vendor/autoload.php';
     use Spipu\Html2Pdf\Html2Pdf;
+    use PhpOffice\PhpSpreadsheet\Spreadsheet;
+    use PhpOffice\PhpSpreadsheet\IOFactory;
+    use PhpOffice\PhpSpreadsheet\Cell\DataType;
+    use PhpOffice\PhpSpreadsheet\RichText\RichText;
+    use PhpOffice\PhpSpreadsheet\Shared\Date;
+    use  PhpOffice\PhpSpreadsheet\Style\Alignment;
+    use PhpOffice\PhpSpreadsheet\Style\Conditional;
+    use PhpOffice\PhpSpreadsheet\Style\Border;
+    use PhpOffice\PhpSpreadsheet\Style\Fill;
+    use PhpOffice\PhpSpreadsheet\Style\Color;
+    use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+    use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
     class Factura extends Controllers{
         public function __construct()
         {
@@ -32,6 +46,8 @@
             $html2pdf = new Html2Pdf('P','Letter','es','true','UTF-8');
             $html2pdf->writeHTML($html);
             $html2pdf->output('Factura-'.$idpedido.'.pdf');
+             //BIRACORA
+             Bitacora($_SESSION['idUser'],MPEDIDOS,"Consulta","Consultó la factura del pedido #".$idpedido);
             }
 
             }else{
@@ -39,8 +55,12 @@
             }
         }else{
             header('Location: '.base_url().'/login');
-                die();
+            die();
         }
-    }  
+
+
+
+     }
+    
     }
 ?>

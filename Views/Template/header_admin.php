@@ -44,7 +44,7 @@
 <body class="hold-transition sidebar-mini layout-fixed ">
 <div id="divLoading">
       <div>
-        <img src="<?=media();?>/images//loadingRoute.gif" alt="Loading">
+        <img src="<?=media();?>/images//loadingRoute.webp" alt="Loading">
        </div>
     </div>
 <!-- Site wrapper -->
@@ -108,10 +108,11 @@
     
    
       <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+        <a class="nav-link" id="expander" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
+     
       <!-- User Menu-->
       <li class="nav-item dropdown show"><a class="nav-link" href="#" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">

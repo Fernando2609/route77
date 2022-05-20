@@ -42,7 +42,8 @@ class ProveedoresModel extends Mysql{
 			/* dep($sql);
 			exit; */
 			$request = $this->select_all($sql);
-
+			
+			
 			if(empty($request))
 			{
 /* $query_insert  = "INSERT INTO usuarios(nombres,apellidos,email,status,rol,telefono,empresa,rtn,ubicacion,creado_por,modificado_por,modo,cod) 
@@ -89,6 +90,13 @@ class ProveedoresModel extends Mysql{
 			return $request;
 		}
 
+		public function selectProveedor2(int $idProveedores){
+			$this->intIdProveedores = $idProveedores;
+		    $sql= "CALL CRUD_PROVEEDOR(null,null,null,null,null,null,null,null,null,null,null,null,'J',$this->intIdProveedores)";
+			$request = $this->select($sql);
+		
+			return $request;
+		}
 		public function updateProveedores(string $nombre, string $apellido, string $email, int $status, int $tipoid, int $telefono, string $Empresa, string $RTN, string $Ubicacion, int $user, int $idProveedores)
 		{
 	

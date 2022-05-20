@@ -32,7 +32,7 @@
 					WHERE p.status != 0 "; */
 					$sql= 'call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,null,null,null,"V",null)';
 					$request = $this->select_all($sql);
-
+					
 
 					 
 			return $request;

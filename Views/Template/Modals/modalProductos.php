@@ -87,7 +87,7 @@
                   <div id="containerImage">
                     <!-- <div id="div24">
                       <div class="prevImage">
-                        <img class="loading" src="<?= media(); ?>/images/loadingRoute.gif">
+                        <img class="loading" src="<?= media(); ?>/images/loadingRoute.webp">
                       </div>
                       <input type="file" name="foto" id="img1" class="inputUploadfile">
                       <label for="img1" class="btnUploadfile"><i class="fa fa-upload"></i></label>

@@ -15,8 +15,8 @@
             if (empty($pageContent)) {
                 header("Location:".base_url());
             }else{
-            $data['page_tag']=datosEmpresa()['NOMBRE_EMPRESA'];
-            $data['page_title']=datosEmpresa()['NOMBRE_EMPRESA'].' - '.$pageContent['TITULO'];
+            $data['page_tag']=datosEmpresa()['Empresa']['NOMBRE_EMPRESA'];
+            $data['page_title']=datosEmpresa()['Empresa']['NOMBRE_EMPRESA'].' - '.$pageContent['TITULO'];
             $data['page_name']=$pageContent['TITULO'];
             $data['page']=$pageContent;
             $data['categorias'] = $this->getCategorias();

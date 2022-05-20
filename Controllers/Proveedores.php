@@ -9,7 +9,7 @@ class Proveedores extends Controllers{
             header('Location: '.base_url().'/login');
             die();
         }
-        getPermisos(15);
+        getPermisos(MPROVEEDORES);
     }
     
     public function Proveedores()
@@ -21,11 +21,14 @@ class Proveedores extends Controllers{
         $data['page_title']="PROVEEDORES <small>Route 77</small>";
         $data['page_name']="Proveedores";
         $data['page_functions_js']="functions_Proveedores.js";
+        //BIRACORA
+        Bitacora($_SESSION['idUser'],MPROVEEDORES,"Ingreso","Ingresó al módulo");
         $this->views->getView($this,"proveedores",$data);
     }
 
     public function setProveedores()
     {
+       
     
         if ($_POST) {
             if(empty($_POST['txtRTN']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['txtEmpresa']) || empty($_POST['listStatus']) ||  empty($_POST['txtUbicacion']) )
@@ -81,11 +84,21 @@ class Proveedores extends Controllers{
                 }
                 }
                 
+               
                 if($request_user > 0 ){
                     if ($option==1) {
                         $arrResponse = array("status" => true, "msg" => 'Proveedor Guardado Correctamente.');
+                        //Selecciona los datos del proveedor Insertado  
+                        $arrData= $this->model->selectProveedor2($request_user);
+                      
+                        //BIRACORA
+                        Bitacora($_SESSION['idUser'],MPROVEEDORES,"Nuevo","Registró al Proveedor ".$arrData['NOMBRE_EMPRESA']."");  
                     }else{
                         $arrResponse = array("status" => true, "msg" => 'Proveedor Actualizado Correctamente.');
+                        //Selecciona los datos del usuario Actualizado                                                       
+                        $arrData= $this->model->selectProveedor($idProveedores);
+                        //BIRACORA
+                        Bitacora($_SESSION['idUser'],MPROVEEDORES,"Update","Actualizó al Proveedor ".$arrData['NOMBRE_EMPRESA']);
                     }
                 }else if($request_user == 'exist'){
                     $arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
@@ -153,6 +166,8 @@ class Proveedores extends Controllers{
                     $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                 }else{
                     $arrResponse = array('status' => true, 'data' => $arrData);
+                    //BIRACORA
+                    Bitacora($_SESSION['idUser'],MPROVEEDORES,"Consulta","Consultó al Proveedor ".$arrData['NOMBRE_EMPRESA']);
                 }
              
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -167,10 +182,15 @@ public function delProveedor()
     if ($_POST) {
         if ($_SESSION['permisosMod']['d']) {
             $intIdpersona = intval($_POST['idProveedores']);
-
+            $arrData= $this->model->selectProveedor($intIdpersona);
+           
             $requestDelete = $this->model->deleteProveedor($intIdpersona);
             if ($requestDelete) {
                 $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el proveedor');
+                 //Selecciona los datos del usuario Eliminado  
+                
+                 //BIRACORA
+                 Bitacora($_SESSION['idUser'],MPROVEEDORES,"Delete","Eliminó al Proveedor ".$arrData['NOMBRE_EMPRESA']); 
             } else {
                 $arrResponse = array('status' => false, 'msg' => 'Error al eliminar al proveedor.');
             }

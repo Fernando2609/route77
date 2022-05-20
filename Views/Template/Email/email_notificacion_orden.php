@@ -45,12 +45,12 @@ $detalle = $data['pedido']['detalle'];
 				</td>
 				<td width="33.33%">
 					<div class="text-center">
-						<h4><strong><?= datosEmpresa()['NOMBRE_EMPRESA'] ?></strong></h4>
+						<h4><strong><?= datosEmpresa()['Empresa']['NOMBRE_EMPRESA'] ?></strong></h4>
 						<p>
-							<?= datosEmpresa()['RTN'] ?> <br>
-							<?= datosEmpresa()['DIRECCION_FACTURA']?> <br>
-							<?= datosEmpresa()['TEL_EMPRESA'] ?> <br>
-							<?= datosEmpresa()['EMAIL_EMPRESA'] ?>
+							<?= datosEmpresa()['Empresa']['RTN'] ?> <br>
+							<?= datosEmpresa()['Empresa']['DIRECCION_FACTURA']?> <br>
+							<?= datosEmpresa()['Empresa']['TEL_EMPRESA'] ?> <br>
+							<?= datosEmpresa()['Empresa']['EMAIL_EMPRESA'] ?>
 						</p>
 					</div>
 				</td>

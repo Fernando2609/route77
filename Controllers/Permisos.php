@@ -17,7 +17,8 @@
 			{
 				$arrModulos = $this->model->selectModulos();
 				$arrPermisosRol = $this->model->selectPermisosRol($rolid);
-                
+                $rol=$this->model->selectRol($rolid);
+				
 				//$arrRol = $this->model->getRol($rolid);
 				$arrPermisos = array('r' => 0, 'w' => 0, 'u' => 0, 'd' => 0);
 				$arrPermisoRol = array('idrol' => $rolid);
@@ -41,6 +42,8 @@
 						$arrModulos[$i]['permisos']=$arrPermisos;
 					 }
 					}
+					//BIRACORA
+					Bitacora($_SESSION['idUser'],MUSUARIOS,"Consulta","Consultó los permisos del ".$rol['NOM_ROL']."");
                     $arrPermisoRol['modulos']=$arrModulos;
                     $html=getModal('modalPermisos',$arrPermisoRol);
                     //dep($arrPermisoRol);
@@ -49,6 +52,7 @@
 		}
         public function setPermisos()
 		{
+			
 			if($_POST)
 			{
 				$intIdrol = intval($_POST['idrol']);
@@ -64,9 +68,12 @@
 					$d = empty($modulo['d']) ? 0 : 1;
 					
 					$requestPermiso = $this->model->insertPermisos($intIdrol, $idModulo, $r, $w, $u, $d);
+					$rol=$this->model->selectRol($intIdrol);
 				}
 				if($requestPermiso > 0)
 				{
+					//BIRACORA
+					Bitacora($_SESSION['idUser'],MUSUARIOS,"Update","Actualizó los permisos del rol ".$rol['NOM_ROL']."");
 					$arrResponse = array('status' => true, 'msg' => 'Permisos asignados correctamente.');
 				}else{
 					$arrResponse = array("status" => false, "msg" => 'No es posible asignar los permisos.');

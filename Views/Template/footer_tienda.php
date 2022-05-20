@@ -1,8 +1,16 @@
 <?php 
 		$catFotter = getCatFooter();
+		$redesSociales=datosEmpresa()['RedSocial'];
+		$telefonos=datosEmpresa()['TelEmpresa'];
+		$sucursales=datosEmpresa()['Sucursales'];
+		$empresa=datosEmpresa()['Empresa'];
 		
 	 ?>
 <!-- Footer -->
+<!-- 
+<a id="app-whatsapp" target="_blanck" href="https://api.whatsapp.com/send?phone=50494877564&amp;text=Hola!&nbsp;me&nbsp;pueden&nbsp;apoyar?">
+<i class="fa-brands fa-whatsapp-square" aria-hidden="true"></i>
+</a> -->
 <footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
 			<div class="row">
@@ -29,27 +37,47 @@
 					</h4>
 
 					<p class="stext-107 cl7 size-201">
-						<?= DIRECCION ?> <br>
-						Tel: <a class="linkFooter" href="tel:<?= TELEMPRESA ?>"><?= TELEMPRESA ?></a><br>
-						Email: <a class="linkFooter" href="mailto:<?= EMAIL_EMPRESA ?>"><?= EMAIL_EMPRESA ?></a>
+						
+						<?php
+						if (count($telefonos) > 0) {
+							foreach ($telefonos as $tel) {
+						?>
+
+						Tel: <a class="linkFooter" href="tel:+504<?= $tel['TELEFONO'] ?>"><?='+504 '. $tel['TELEFONO'] ?></a><br>
+						<?php  }
+							} ?>
+						Email: <a class="linkFooter" href="mailto:<?= $empresa['EMAIL_EMPRESA'] ?>"><?= $empresa['EMAIL_EMPRESA'] ?></a>
 					</p>
 
 					
-					<div class="p-t-27">
-						<a href="<?= FACEBOOK ?>" target="_blanck" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+					<div >
+						<a href="<?= $redesSociales[0]['ENLACE'] ?>" target="_blanck" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
 							<i class="fa fa-facebook"></i>
 						</a>
 
 
-						<a href="<?= INSTAGRAM ?>" target="_blanck"  class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-
-
+						<a href="<?= $redesSociales[2]['ENLACE'] ?>" target="_blanck"  class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
 							<i class="fa fa-instagram"></i>
 						</a>
 
-					<a href="https://api.whatsapp.com/send?phone=<?=  WHATSAPP  ?>" target="_blanck"  class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+						<a href="https://api.whatsapp.com/send?phone=<?=  $redesSociales[1]['ENLACE']  ?>" target="_blanck"  class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
 							<i class="fab fa-whatsapp"></i>
 						</a> 
+					</div>
+					<div class="p-t-27">
+					<h4 class="stext-301 cl0 p-b-30">
+						Dirección Sucursales
+					</h4>
+					<p class="stext-107 cl7 size-201">
+					<?php
+						if (count($sucursales) > 0) {
+							foreach ($sucursales as $sucursales) {
+					
+						?>
+						<?= $sucursales['DIRECCION'] ?> <br>
+						<?php }
+						 } ?>
+					</p>
 					</div>
 				</div>
 
@@ -166,4 +194,35 @@
 	
 </script>
 </body>
+<!-- Messenger Plugin de chat Code -->
+<!-- <div id="fb-root"></div> -->
+
+<!-- Your Plugin de chat code -->
+<!-- <div id="fb-customer-chat" class="fb-customerchat">
+
+</div> -->
+
+<!-- <script>
+  var chatbox = document.getElementById('fb-customer-chat');
+  chatbox.setAttribute("page_id", "125542366351081");
+  chatbox.setAttribute("attribution", "biz_inbox");
+</script> -->
+
+<!-- Your SDK code -->
+<!-- <script>
+  window.fbAsyncInit = function() {
+	FB.init({
+	  xfbml            : true,
+	  version          : 'v13.0'
+	});
+  };
+
+  (function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = 'https://connect.facebook.net/es_LA/sdk/xfbml.customerchat.js';
+	fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script> -->
 </html>

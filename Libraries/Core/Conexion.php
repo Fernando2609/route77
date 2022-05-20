@@ -10,6 +10,7 @@
             try {
                 $this->conect=new PDO($conectionString,DB_USER,DB_PASSWORD);
                 $this->conect->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+          
             } catch (Exception $e) {
                 $this->conect="Error de conexion";
                 echo "ERROR: ". $e->getMessage();

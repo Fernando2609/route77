@@ -43,12 +43,12 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="txtGerenteGeneral">Gerente General<span class="required"> *</span></label>
-                            <input type="text" class="form-control valid validText" id="txtGerenteGeneral" name="txtGerenteGeneral" required="">
+                            <label for="txtCostoEnvio">Costo de Envío Lps<span class="required"> *</span></label>
+                            <input type="text" class="form-control valid validNumber" id="txtCostoEnvio" name="txtCostoEnvio" required="" onkeypress="return controlTag(event)";>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="txtCostoEnvio">Costo de Envío<span class="required"> *</span></label>
-                            <input type="text" class="form-control valid validNumber" id="txtCostoEnvio" name="txtCostoEnvio" required="" onkeypress="return controlTag(event)";>
+                            <label for="txtPedidoMinimo">Pedido Mínimo Lps<span class="required"> *</span></label>
+                            <input type="text" class="form-control valid validNumber" id="txtPedidoMinimo" name="txtPedidoMinimo" required="" onkeypress="return controlTag(event)";>
                         </div>
                         
                     </div>
@@ -80,6 +80,12 @@
                         <div class="form-group col-md-6">
                             <label for="txtCatBanner">Categorías Banner<span class="required">* </span><i>(Códigos separado por comas)</i></label>
                             <input type="text" class="form-control valid validImg" placeholder="Separados por Comas" id="txtCatBanner" name="txtCatBanner" required="" onkeypress="return controlTagImagenes(event)";>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="txtGerenteGeneral">Gerente General<span class="required"> *</span></label>
+                            <input type="text" class="form-control valid validText" id="txtGerenteGeneral" name="txtGerenteGeneral" required="">
                         </div>
                     </div>
 
@@ -139,8 +145,12 @@
                             <td id="celGerenteGeneral">Nery</td>
                         </tr>
                         <tr>
-                            <td>Costo de Envío</td>
+                            <td>Costo de Envío Lps</td>
                             <td id="celCostoEnvio">Nery</td>
+                        </tr>
+                        <tr>
+                            <td>Pedido Mínimo Lps</td>
+                            <td id="celPedidoMinimo">Nery</td>
                         </tr>
                         <tr>
                             <td>RTN</td>

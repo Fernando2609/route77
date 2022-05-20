@@ -9,7 +9,7 @@ class Inventario extends Controllers{
             header('Location: '.base_url().'/login');
             die();
         }
-        getPermisos(9);
+        getPermisos(MINVENTARIO);
     }
     
     public function Inventario()
@@ -21,12 +21,13 @@ class Inventario extends Controllers{
         $data['page_title']="INVENTARIO <small>Route 77</small>";
         $data['page_name']="inventario";
         $data['page_functions_js']="functions_inventario.js";
+        //BIRACORA
+        Bitacora($_SESSION['idUser'],MINVENTARIO,"Ingreso","Ingresó al módulo");
         $this->views->getView($this,"inventario",$data);
     }
 
   
-public function getInventarios()
-{
+public function getInventarios(){
 
     if ($_SESSION['permisosMod']['r']) {
         $arrData = $this->model->selectInventarios();
@@ -57,18 +58,19 @@ public function getInventarios()
     }
     die();
 }
-public function getInventario($idUsuario)
-{
+public function getInventario($idUsuario){
     //echo $idUsuario;
     //die();
     if ($_SESSION['permisosMod']['r']) {
         $idusuario = intval($idUsuario);
         if ($idusuario > 0) {
             $arrData = $this->model->selectInventario($idusuario);
-
+          
             if (empty($arrData)) {
                 $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
             } else {
+                //BIRACORA
+                Bitacora($_SESSION['idUser'],MINVENTARIO,"Consulta","Consultó el inventario del producto ".$arrData['NOMBRE']);
                 $arrResponse = array('status' => true, 'data' => $arrData);
             }
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);

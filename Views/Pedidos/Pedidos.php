@@ -45,17 +45,26 @@ headerAdmin($data);
                         <div class="card-body">
                         <div class="form-group ">
                             <div class="input-group d-flex justify-content-between">
-                            <div class="form-group">
+                                <div class="form-group mt-2">
 
-                            <label for="" >Fecha Inicio</label>
-                            <input class="fecha inputFecha" id="min" name="min" >
+                                    <label for="" >Fecha Inicio</label>
+                                    <input class="fecha inputFecha Finicio" id="min" name="min" >
+                                </div>
+                                <div>
+                                    <?php
+                                     if($_SESSION['permisosMod']['r'] and $_SESSION['userData']['COD_ROL'] != RCLIENTES){ 
+                                    ?>
+                                    <div class="text-center">
+                                        <button class="btn btn-block btn-success btn-lg" onclick="fntFecha()" id="idUtilidad"><span><i class="fas fa-file-excel" aria-hidden="true"></i></span> Utilidades</button>
+                                    </div>
+                                    <?php } ?>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label for="">Fecha Final</label>
+                                    <input class="fecha inputFecha fFinal" id="max" name="max" >
+                                </div>
                             </div>
-                            <div class="form-group">
-
-                            <label for="">Fecha Final</label>
-                            <input class="fecha inputFecha" id="max" name="max" >
-                            </div>
-                            </div>
+                          
                         </div>
                             <!-- Tabla -->
                             <table id="tablePedidos" class="table table-hover table-bordered table-striped dataTable dtr-inline collapsed" role="grid">
@@ -90,5 +99,14 @@ headerAdmin($data);
     <!-- /. termina content -->
 </div>
 <!-- /.content-wrapper / Div Principal -->
+
+
+
+
+
+
+
+
+
 
 <?php footerAdmin($data); ?>

@@ -103,8 +103,20 @@ class LoginModel extends Mysql{
             public function datosEmpresa(){
                 
              
-                $sql = "call CRUD_EMPRESA(null,null,null,null,null,null,null,null,null,null,null,null,'V',null)";
-                $request = $this->select($sql);
+                $sqlEmpresa = "call CRUD_EMPRESA(null,null,null,null,null,null,null,null,null,null,null,null,null,'V',null)";
+                $requestEmpresa = $this->select($sqlEmpresa);
+
+                $sqlRedSocial = "CALL CRUD_REDES_SOCIALES(1,null,null,'V',null)";
+                $requestRedSocial = $this->select_all($sqlRedSocial);
+
+                $sqlSucursales="CALL CRUD_SUCURSAL(null,null,'V',null)";
+                $requestSucursales = $this->select_all($sqlSucursales);
+
+                $sqlTelEmpresa = "CALL CRUD_TELEFONO_EMPRESA(1,null,'V',null)";
+		        $requestTelEmpresa = $this->select_all($sqlTelEmpresa);
+
+                $request = array('Empresa'=> $requestEmpresa, 'RedSocial'=> $requestRedSocial,'Sucursales'=>$requestSucursales,'TelEmpresa'=>$requestTelEmpresa);
+               
                 return $request;
               
             }  

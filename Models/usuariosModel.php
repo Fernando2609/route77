@@ -78,9 +78,12 @@
 			$whereAdmin = "";
 			$idUser=$_SESSION['idUser'];
 			if($_SESSION['idUser'] != 1){
-				$whereAdmin = " and P.COD_PERSONA !=1";
+				//$whereAdmin = " and P.COD_PERSONA !=1";
+				$sql="CALL CRUD_USUARIO(null,null,null,null,null,null,null,null,null,null,null,null,NULL,'F',$idUser)";
+			}else{
+				
+				$sql="CALL CRUD_USUARIO(null,null,null,null,null,null,null,null,null,null,null,null,NULL,'V',$idUser)";
 			}
-		   $sql="CALL CRUD_USUARIO(null,null,null,null,null,null,null,null,null,null,null,null,NULL,'V',$idUser)";
 			
 			/*  $sql="SELECT P.COD_PERSONA,U.COD_USUARIO, P.COD_ROL, R.NOM_ROL AS ROL, U.DNI, P.NOMBRES, P.APELLIDOS, P.EMAIL,ST.DESCRIPCION AS STATUS , P.TELEFONO, S.NOMBRE AS SUCURSAL, G.DESCRIPCION AS GENERO,
 			P.FECHA_CREACION, P.FECHA_MODIFICACION, P.DATE_LOGIN,P.COD_STATUS
@@ -100,6 +103,16 @@
 			
 
 			$sql="CALL CRUD_USUARIO(null,null,null,null,null,null,null,null,null,null,null,null,NULL,'R',$this->intIdUsuario)";
+			
+			$request = $this->select($sql);
+			
+			return $request;
+		}
+		public function selectUsuario2(int $idUsuario){
+			$this->intIdUsuario = $idUsuario;
+			
+
+			$sql="CALL CRUD_USUARIO(null,null,null,null,null,null,null,null,null,null,null,null,NULL,'J',$this->intIdUsuario)";
 			
 			$request = $this->select($sql);
 			
@@ -257,7 +270,7 @@
 			if($this->strPassword != "")
 			{
 				
-				$sql="CALL CRUD_USUARIO(?,?,null,?,null,null,?,null,null,null,null,?,'C',$this->intIdUsuario)";
+				$sql="CALL CRUD_USUARIO(?,?,null,?,null,null,?,null,null,null,null,null,?,'C',$this->intIdUsuario)";
 				$arrData = array(
 								$this->strNombre,
 								$this->strApellido,

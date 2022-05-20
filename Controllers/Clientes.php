@@ -67,6 +67,7 @@
                                                                                     $intTelefono, 
                                                                                     $user    
                                                                                 );
+                             
                                                                                    
                         } 
                     }else{
@@ -83,6 +84,7 @@
                                                                                     $intTelefono,
                                                                                     $user    
                                                                                    );
+                        
                         }
                    
                 }
@@ -96,8 +98,16 @@
                             'password' => $strPassword,
                             'asunto' => 'Bienvenido a tu Tienda en Línea');
                         sendEmail($dataUsuario, 'email_bienvenida');
+                         //Selecciona los datos del usuario Actualizado                                                       
+                         $arrData= $this->model->selectCliente2($request_user);
+                         //BIRACORA
+                         Bitacora($_SESSION['idUser'],MCLIENTES,"Nuevo","Registró al Cliente ".$arrData['NOMBRES']." ".$arrData['APELLIDOS'].""); 
                             
                         }else{
+                            //Selecciona los datos del usuario Actualizado                                                       
+                            $arrData= $this->model->selectCliente($idUsuario);
+                            //BIRACORA
+                            Bitacora($_SESSION['idUser'],MCLIENTES,"Update","Actualizó al Cliente ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."");
                             $arrResponse = array("status" => true, "msg" => 'Cliente Actualizado Correctamente.');
                         }
                     }else if($request_user == 'exist'){
@@ -111,53 +121,7 @@
             
             die();
         }
-    
-/*
-        public function getSelectNacionalidadCliente()
-		{
-			$htmlOptions = "";
-			$arrData = $this->model->selectNacionalidadCliente();
-			if(count($arrData) > 0 ){
-				for ($i=0; $i < count($arrData); $i++) { 
-				
-					$htmlOptions .= '<option value="'.$arrData[$i]['idNacionalidad'].'">'.$arrData[$i]['descripcion'].'</option>';
-					
-				}
-			}
-			echo $htmlOptions;
-			die();		
-		}
-        //Funcion para traer el Genero de usuario
-        public function getSelectGeneroCliente()
-        {
-            $htmlOptions = "";
-            $arrData = $this->model->selectGeneroCliente();
-            if(count($arrData) > 0 ){
-                for ($i=0; $i < count($arrData); $i++) { 
-                
-                    $htmlOptions .= '<option value="'.$arrData[$i]['idGenero'].'">'.$arrData[$i]['descripcion'].'</option>';
-                    
-                }
-            }
-            echo $htmlOptions;
-            die();		
-        }
-        //Funcion para traer el Estado Civil
-        public function getSelectEstadoCCliente()
-        {
-            $htmlOptions = "";
-            $arrData = $this->model->selectEstadoCCliente();
-            if(count($arrData) > 0 ){
-                for ($i=0; $i < count($arrData); $i++) { 
-                
-                    $htmlOptions .= '<option value="'.$arrData[$i]['idEstado'].'">'.$arrData[$i]['descripcion'].'</option>';
-                    
-                }
-            }
-            echo $htmlOptions;
-            die();		
-        }
-*/
+  
         public function getClientes()
         {
             if($_SESSION['permisosMod']['r']){ 
@@ -191,6 +155,8 @@
                 $arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
                 
              } 
+            //BIRACORA- Usuario entra al módulo
+            Bitacora($_SESSION['idUser'],MCLIENTES,"Ingreso","Ingresó al módulo");
             /*  dep($arrData[0]['status']);exit; */
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
          }
@@ -213,6 +179,8 @@
 						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
 					}else{
 						$arrResponse = array('status' => true, 'data' => $arrData);
+                        //BIRACORA
+                        Bitacora($_SESSION['idUser'],MCLIENTES,"Consulta","Consultó al Cliente ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."");
 					}
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}
@@ -229,6 +197,10 @@
 
                 $requestDelete = $this->model->deleteCliente($intIdpersona);
                 if ($requestDelete) {
+                    //Selecciona los datos del usuario Eliminado  
+                    $arrData= $this->model->selectCliente($intIdpersona);
+                    //BIRACORA
+                    Bitacora($_SESSION['idUser'],MCLIENTES,"Delete","Eliminó al Cliente ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."");  
                     $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Cliente');
                 } else {
                     $arrResponse = array('status' => false, 'msg' => 'Error al eliminar al Cliente.');

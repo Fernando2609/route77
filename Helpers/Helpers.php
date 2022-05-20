@@ -500,4 +500,24 @@ function deleteFile(string $name){
         return false;
     }
  }
+ function Bitacora(int $idPersona,int $idModulo,string $accion,string $descripcion){
+        
+    require_once("Libraries/Core/Mysql.php");
+    $con = new Mysql();
+    $query_insert = "INSERT INTO `TBL_BITACORA` (`FECHA`, `ID_PERSONA`, `ID_MODULO`, `ACCION`, `DESCRIPCION`) VALUES (?,?, ?, ?, ?);";
+    $arrData = array(NOW(),$idPersona,$idModulo,$accion,$descripcion);
+   
+    $request_insert = $con->insert($query_insert,$arrData);
+
+    $return=$request_insert;
+
+   /*  $sql = "SELECT Last_insert_id()";
+    $request_id = $con->select($sql);
+    
+    $return = $request_id["Last_insert_id()"]; */
+    
+
+    return $return;
+ }
+
 ?>

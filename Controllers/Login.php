@@ -59,7 +59,8 @@
                          $_SESSION['notificaciones']=$arrNotificaciones;
 
                          $htmlNotifi = getFile('Template/Modals/notificaciones',$_SESSION['notificaciones']);
-                            
+                              //BIRACORA
+                            Bitacora($_SESSION['idUser'],1,"Login","Inició Sesión");
 							$arrResponse = array('status' => true, 'msg' => 'ok'); 
 						}else{
 							$arrResponse = array('status' => false, 'msg' => 'Usuario inactivo.');
@@ -88,7 +89,7 @@
 						$nombreUsuario = $arrData['NOMBRES'].' '.$arrData['APELLIDOS'];
                         $url_recovery = base_url().'/login/confirmUser/'.$strEmail.'/'.$token;
 						$requestUpdate = $this->model->setTokenUser($idUsuario,$token);
-                        //$datosEmpresa=$this->model->datosEmpresa();
+                        //$datosEmpresa=$this->model->datosEmpresa()['Empresa'];
                         $dataUsuario = array('nombreUsuario' => $nombreUsuario,
                         'email' => $strEmail,
                         'asunto' => 'Recuperar cuenta - '.NOMBRE_REMITENTE,

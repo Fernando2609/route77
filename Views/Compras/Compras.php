@@ -10,10 +10,6 @@
             <div class="col-sm-6 d-flex"><!-- Div 6 columnas derecha-->
               <!--Titulo-->
               <h1><i class="fas fa-user-tag"></i> <?= $data['page_title'] ?> </h1>
-              <!--Boton Nuevo-->
-              <?php if($_SESSION['permisosMod']['w']){ ?>
-              <button type="button" class="btn btn-success btn-nuevo" onclick="openModal();"><i class="fas fa-plus-square"></i>  Nuevo</button>
-              <?php } ?> 
             </div><!-- / termina Div 6 columnas derecha-->
             <div class="col-sm-6"> <!-- Div 6 columnas Izquierda-->
               <ol class="breadcrumb float-sm-right">
@@ -41,16 +37,21 @@
                   <!-- Tabla -->
                   <div class="form-group ">
                     <div class="input-group d-flex justify-content-between">
-                    <div class="form-group">
+                      <div class="form-group">
 
-                      <label for="" >Fecha Inicio</label>
-                      <input class="fecha inputFecha" id="min" name="min" >
-                    </div>
-                    <div class="form-group">
+                        <label for="" >Fecha Inicio</label>
+                        <input class="fecha inputFecha Finicio" id="min" name="min" >
+                      </div>
+                      <div>
+                            <div class="text-center">
+                                <button class="btn btn-block btn-success btn-lg" onclick="fntFecha()" id="idUtilidad"><span><i class="fas fa-file-excel" aria-hidden="true"></i></span> Utilidades</button>
+                            </div>
+                        </div>
+                      <div class="form-group">
 
-                      <label for="">Fecha Final</label>
-                      <input class="fecha inputFecha" id="max" name="max" >
-                    </div>
+                        <label for="">Fecha Final</label>
+                        <input class="fecha inputFecha fFinal" id="max" name="max" >
+                      </div>
                     </div>
                   </div>
                   

@@ -129,7 +129,7 @@
                                             </tr>
                                             <tr>
                                                 <th colspan="5" class="text-right">Total:</th>
-                                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($orden['MONTO']+$impuesto) ?></td>
+                                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($orden['MONTO']) ?></td>
                                             </tr>
                                         </tfoot>
                                     </table>

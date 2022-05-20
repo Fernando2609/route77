@@ -22,6 +22,8 @@
 			$data['page_title'] = "SUSCRIPTORES <small>Route 77</small>";
 			$data['page_name'] = "suscriptores";
 			$data['page_functions_js'] = "functions_suscriptores.js";
+			 //BIRACORA
+			 Bitacora($_SESSION['idUser'],MSUSCRIPTORES,"Ingreso","Ingresó al módulo");
 			$this->views->getView($this,"suscriptores",$data);
 		}
 

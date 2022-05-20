@@ -1,5 +1,5 @@
 <?php  
-    class adminSucursales extends Controllers{
+    class AdminSucursales extends Controllers{
         public function __construct()
         {
             parent::__construct();
@@ -9,10 +9,10 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(16);
+            getPermisos(MSUCURSALES);
         }
         
-        public function adminSucursales ()
+        public function AdminSucursales ()
         {
             if(empty($_SESSION['permisosMod']['r'])){
                 header('Location: '.base_url().'/dashboard');
@@ -21,7 +21,7 @@
             $data['page_title']="SUCURSALES <small>Route 77</small>";
             $data['page_name']="sucursales";
             $data['page_functions_js']="functions_sucursales.js";
-            $this->views->getView($this,"adminsucursales",$data);
+            $this->views->getView($this,"adminSucursales",$data);
         }
         public function setSucursales()
         {
@@ -53,16 +53,23 @@
                        if($_SESSION['permisosMod']['u']){
                         $request_user = $this->model->updateSucursal($idSucursal, $strNombre, 
                                                                                     $strDireccion);
-                                                                                
-                    } 
+                        } 
                    
                     }
                     
                     if($request_user > 0 ){
                         if ($option==1) {
                             $arrResponse = array("status" => true, "msg" => 'Sucursal Guardada Correctamente.');
+                            //Selecciona los datos de la sucursal Insertada
+                            $arrData= $this->model->selectSucursal($request_user);
+                            //BIRACORA
+                            Bitacora($_SESSION['idUser'],MSUCURSALES,"Nuevo","Registró la Sucursal ".$arrData['NOMBRE']."");  
                         }else{
                             $arrResponse = array("status" => true, "msg" => 'Sucursal  Actualizada Correctamente.');
+                            //Selecciona los datos del usuario Actualizado                                                       
+                            $arrData= $this->model->selectSucursal($idSucursal);
+                            //BIRACORA
+                            Bitacora($_SESSION['idUser'],MSUCURSALES,"Update","Actualizó la Sucursal ".$arrData['NOMBRE']."");
                         }
                     }else if($request_user == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! la sucursal ya existe, ingrese otro nombre.');		
@@ -82,7 +89,7 @@
          exit; */
             if($_SESSION['permisosMod']['r']){ 
             $arrData= $this->model->selectSucursales();
-              
+            
             for ($i=0; $i < count($arrData) ; $i++) { 
                 $btnView ='';
                 $btnEdit = '';
@@ -110,9 +117,8 @@
                 $arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
                 
              } 
-            /*  dep($arrData[0]['status']);exit; */
-           /*  dep($arrData);
-            exit;  */
+            //BIRACORA
+            Bitacora($_SESSION['idUser'],MSUCURSALES,"Ingreso","Ingresó al módulo");
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
          }
              die();
@@ -133,6 +139,8 @@
 					}else{
 						$arrResponse = array('status' => true, 'data' => $arrData);
 					}
+                     //BIRACORA
+                     Bitacora($_SESSION['idUser'],MSUCURSALES,"Consulta","Consultó la Sucursal ".$arrData['NOMBRE']."");
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}
              } 
@@ -143,11 +151,15 @@
             if($_POST){
                 if($_SESSION['permisosMod']['d']){
                     $intIdSucursal = intval($_POST['idSucursal']);
-
+                    //Selecciona los datos del usuario Eliminado  
+                    $arrData= $this->model->selectSucursal($intIdSucursal);
                     $requestDelete = $this-> model->deleteSucursal($intIdSucursal);
                     if ($requestDelete) 
                     {
                         $arrResponse = array ('status' => true, 'msg' => 'Se ha eliminado la sucursal');
+                           
+                           //BIRACORA
+                           Bitacora($_SESSION['idUser'],MSUCURSALES,"Delete","Eliminó la Sucursal ".$arrData['NOMBRE'].""); 
                     }else{
                         $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la sucursal.');
                     }

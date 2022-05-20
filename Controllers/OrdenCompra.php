@@ -10,7 +10,7 @@ class OrdenCompra extends Controllers{
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(17);
+            getPermisos(MCOMPRAS);
         }
         
         public function OrdenCompra()
@@ -23,6 +23,9 @@ class OrdenCompra extends Controllers{
             $data['page_title']="Compras <small>Route 77</small>";
             $data['page_name']="ordenCompra";
             $data['page_functions_js']="functions_ordenCompra.js";
+            $data['isv']=true;
+            //BIRACORA
+            Bitacora($_SESSION['idUser'],MCOMPRAS,"Ingreso","Ingresó al módulo para crear una compra");
             $this->views->getView($this,"ordenCompra",$data);
         }
         public function getProducto($idproducto){
@@ -44,12 +47,16 @@ class OrdenCompra extends Controllers{
 			die();
 		}
         public function detalleCompra(){
+          
              //unset($_SESSION['compraDetalle']);exit;
 			if($_SESSION['permisosMod']['w']){
                 $detalleTabla='';
                 $idproducto = intval($_POST['idProducto']);
                 $intCantidad = intval($_POST['txtCantidad']);
-                $txtPrecio = ucwords(strClean($_POST['txtPrecio']));
+                $txtPrecio = $_POST['txtPrecio'];
+                
+                $checkISV=$_POST['checkISV'];
+               
                 $txtPrecioTotal =$intCantidad*$txtPrecio;
                 $arrDetalle=array();
                 $arrTabla=array();
@@ -90,6 +97,12 @@ class OrdenCompra extends Controllers{
                     array_push($arrDetalle, $arrinfoProducto);
                     $_SESSION['compraDetalle'] = $arrDetalle;
                 }
+                
+                $data['producto']=$_SESSION['compraDetalle'];
+                $data['isv']=$checkISV;
+               
+                //$_SESSION['compraDetalle']['ISV']=$checkISV;
+               
             
                 /* for ($i=0; $i < count($_SESSION['compraDetalle']) ; $i++) { 
                     $subtotal=round($subtotal+$_SESSION['compraDetalle'][$i]['txtPrecioTotal'],2);
@@ -105,9 +118,9 @@ class OrdenCompra extends Controllers{
                     </tr>';
                 } */
 
-                $impuesto=round($subtotal*($iva/100),2);
+                //$impuesto=round($subtotal*($iva/100),2);
                 //$tl_sniva=round($subtotal-$impuesto);
-                $total=round($subtotal+$impuesto);
+                //$total=round($subtotal+$impuesto);
                 
                /*  $detalletTotales=' <tr>
                                     <td colspan="6" class="text-right">Subtotal L.</td>
@@ -125,8 +138,8 @@ class OrdenCompra extends Controllers{
               /*   $arrTabla['detalle']=$detalleTabla;            
                 $arrTabla['totales']=$detalletTotales;  */
                 $htmlCarrito='';
-                $htmlCompras = getFile('Template/Modals/tablaCompra',$_SESSION['compraDetalle']); 
-                $htmlTotales = getFile('Template/Modals/tablaTotales',$_SESSION['compraDetalle']);
+                $htmlCompras = getFile('Template/Modals/tablaCompra',$data); 
+                $htmlTotales = getFile('Template/Modals/tablaTotales',$data);
                     
                 $arrResponse = array("status" => true, "msg" => 'Producto agregado',"htmlCompras"=>$htmlCompras,"htmlTotales"=>$htmlTotales);
                
@@ -140,6 +153,8 @@ class OrdenCompra extends Controllers{
            if($_SESSION['permisosMod']['d']){
                $detalleTabla='';
                $idproducto = intval($_POST['idProducto']);
+               $checkISV=$_POST['checkISV'];
+         
                if (is_numeric($idproducto) ) {
                 $arrCompra=$_SESSION['compraDetalle'];
                 for ($pr=0; $pr < count($arrCompra); $pr++) {
@@ -149,10 +164,11 @@ class OrdenCompra extends Controllers{
                 }
                 sort($arrCompra);
                 $_SESSION['compraDetalle']=$arrCompra;
+                $data['isv']=$checkISV;
                
             
-                $htmlCompras = getFile('Template/Modals/tablaCompra',$_SESSION['compraDetalle']); 
-                $htmlTotales = getFile('Template/Modals/tablaTotales',$_SESSION['compraDetalle']);
+                $htmlCompras = getFile('Template/Modals/tablaCompra',$data); 
+                $htmlTotales = getFile('Template/Modals/tablaTotales',$data);
                     
                 $arrResponse = array("status" => true, "msg" => 'Producto Eliminado',"htmlCompras"=>$htmlCompras,"htmlTotales"=>$htmlTotales);
                 
@@ -166,9 +182,8 @@ class OrdenCompra extends Controllers{
            die();
        }
 
-       public function anularCompra(){
-            
-        //unset($_SESSION['compraDetalle']);exit;
+       public function anularCompra(){        
+      //unset($_SESSION['compraDetalle']);exit;
        if($_SESSION['permisosMod']['d']){
          unset($_SESSION['compraDetalle']);
            if (empty($_SESSION['compraDetalle']) ) {
@@ -188,13 +203,14 @@ class OrdenCompra extends Controllers{
 
 
    public function procesarCompra(){
-           
+  
     if ($_POST){
      
         $personaid=$_SESSION['idUser'];
         $monto=0;
         $factura=intval($_POST['txtFactura']);
         $idProveedor=intval($_POST['idProveedor']);
+        $checkISV=$_POST['checkISV'];
         $isv=15;
         $total=0;
         $cantCompra=0;
@@ -206,8 +222,15 @@ class OrdenCompra extends Controllers{
                 $total += $pro['cantidad']*$pro['precio'];
                 
             }
-            $impuesto=$total*($isv/100);
-            $monto = $total;
+            if ($checkISV=='true') {
+     
+                $impuesto=$total*($isv/100);
+            }else{
+                $impuesto=0; 
+            }
+           
+           
+            $monto = $total+$impuesto;
            
             //dep($_SESSION['compraDetalle']);
             if($monto>0){
@@ -234,22 +257,12 @@ class OrdenCompra extends Controllers{
 
                     }
                 
-                
-                        /*  $infoOrden=$this->getPedido($request_pedido); */
-                        
-                        /*  $dataEmailOrden=array('asunto'=>"Se ha realizado una Compraa.".$request_pedido,
-                                                'email'=>emailGerente,
-                                                'emailCopia'=>EMAIL_PEDIDOS,
-                                                'pedido'=>$infoOrden);
-                        
-                        sendEmail($dataEmailOrden,"email_notificacion_orden");
-                        
-                        $orden=openssl_encrypt($request_pedido, METHODENCRIPT, KEY);
-                        $transaccion = openssl_encrypt($idtransaccionpaypal, METHODENCRIPT,KEY);   */
-                        $arrResponse= array("status"=> true,"msg"=>'Compra Realizads');
+                        //BITACORA
+                        Bitacora($_SESSION['idUser'],MCOMPRAS,"Nuevo","Registró la compra #".$request_pedido); 
+                        $arrResponse= array("status"=> true,"msg"=>'Compra Realizada');
                         
                             unset($_SESSION['compraDetalle']);
-                            session_regenerate_id(true);
+                            //session_regenerate_id(true);
                         }
                         
             }
@@ -265,7 +278,15 @@ class OrdenCompra extends Controllers{
     die();
 }
 
-
+      public function Totales()
+      {
+         
+          $checkISV=$_POST['checkISV'];
+          $data['isv']=$checkISV;
+          $htmlTotales = getFile('Template/Modals/tablaTotales',$data);
+          $arrResponse = array("status" => true, "msg" => 'Producto agregado',"htmlTotales"=>$htmlTotales);
+          echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+      }
 
 
 

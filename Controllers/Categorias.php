@@ -10,7 +10,7 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(6);
+            getPermisos(MCATEGORIAS);
         }
         
         public function Categorias()
@@ -22,9 +22,12 @@
             $data['page_title']="CATEGORÍAS <small>Route 77</small>";
             $data['page_name']="categorias";
             $data['page_functions_js']="functions_categorias.js";
+            //BIRACORA
+            Bitacora($_SESSION['idUser'],MCATEGORIAS,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"categorias",$data);
         }
         public function setCategorias(){
+           
             if($_POST) {
                 
                 if(empty($_POST['txtNombre']) || empty($_POST['txtDescripcion']) || empty($_POST['listStatus']) )
@@ -49,8 +52,14 @@
 
 					
                     if($nombre_foto != ''){
- 						$imgPortada = 'img_'.md5(date('d-m-Y H:i:s')).'.jpg';
+                        if ($type=='image/webp') {
+                            $imgPortada = 'img_'.md5(date('d-m-Y H:i:s')).'.webp';
+                        }else{
+
+                            $imgPortada = 'img_'.md5(date('d-m-Y H:i:s')).'.jpg';
+                        }
 					}
+                    
 
                 if ($intIdcategoria==0) {
                     //Si no hay idCategoria se crea uno nuevo registro
@@ -81,9 +90,18 @@
                 {
                     $arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
                     if($nombre_foto != ''){ uploadImage($foto,$imgPortada); }
+                    //Selecciona los datos del usuario Insertado  
+                    $arrData= $this->model->selectCategoria($request_Categoria);
+                    //BIRACORA
+                    Bitacora($_SESSION['idUser'],MCATEGORIAS,"Nuevo","Registró la Categoría ".$arrData['NOMBRE']."");  
                 }else   {
                     $arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
+                     //Selecciona los datos del usuario Actualizado                                                       
+                     $arrData= $this->model->selectCategoria($intIdcategoria);
+                     //BIRACORA
+                     Bitacora($_SESSION['idUser'],MCATEGORIAS,"Update","Actualizó la Categoría ".$arrData['NOMBRE']."");
                     if($nombre_foto != ''){ uploadImage($foto,$imgPortada);  }
+                    
                        
                         if(($nombre_foto == '' && $_POST['foto_remove'] == 1 && $_POST['foto_actual'] != 'portada_categoria.png')
                               || ($nombre_foto != '' && $_POST['foto_actual'] != 'portada_categoria.png')){ 
@@ -115,7 +133,7 @@
      exit; */
 		if($_SESSION['permisosMod']['r']){
 			$arrData = $this->model->selectCategorias();
-                
+         
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
 				$btnEdit = '';
@@ -157,6 +175,8 @@
 					}else{
 						$arrData['url_portada'] = media().'/images/uploads/'.$arrData['PORTADA'];
 						$arrResponse = array('status' => true, 'data' => $arrData);
+                         //BIRACORA
+                       Bitacora($_SESSION['idUser'],MCATEGORIAS,"Consulta","Consultó la Categoría ".$arrData['NOMBRE']."");
 					}
                  
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -178,6 +198,10 @@
                 if($requestDelete == true)
                 {
                     $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la categoría');
+                     //Selecciona los datos del usuario Eliminado  
+                     $arrData= $this->model->selectCategoria($intIdcategoria);
+                     //BIRACORA
+                     Bitacora($_SESSION['idUser'],MCATEGORIAS,"Delete","Eliminó la Categoría ".$arrData['NOMBRE'].""); 
                 }else if($requestDelete == false){
                     $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una categoría asociada a los usuarios');
                 }else{

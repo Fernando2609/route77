@@ -9,7 +9,7 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(2);
+            getPermisos(MUSUARIOS);
         }
         
         public function Usuarios()
@@ -21,6 +21,8 @@
             $data['page_title']="USUARIOS <small>Route 77</small>";
             $data['page_name']="usuarios";
             $data['page_functions_js']="functions_usuarios.js";
+            //BIRACORA
+            Bitacora($_SESSION['idUser'],MUSUARIOS,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"usuarios",$data);
         }
 
@@ -45,6 +47,7 @@
                     $user=intval($_SESSION['idUser']);
                     
                     $request_user="";
+                   
                     if ($idUsuario==0) {
                         $option=1;
                         $strPassword =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
@@ -63,7 +66,7 @@
                                                                                     $intSucursal,
                                                                                     $user
                                                                                    );
-                        
+                                                
                         }
                     }else{
                         $option=2;
@@ -82,15 +85,25 @@
                                                                                     $intSucursal,
                                                                                     $user
                                                                                     );
+                           
 
+                        }
                     }
-                    }
-                    
+                    $arrData= $this->model->selectUsuario($idUsuario);
+               
                     if($request_user > 0 ){
                         if ($option==1) {
                             $arrResponse = array("status" => true, "msg" => 'Usuario Guardado Correctamente.');
+                             //Selecciona los datos del usuario Insertado  
+                             $arrData= $this->model->selectUsuario2($request_user);
+                             //BIRACORA
+                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Nuevo","Registró al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."");  
                         }else{
                             $arrResponse = array("status" => true, "msg" => 'Usuario Actualizado Correctamente.');
+                             //Selecciona los datos del usuario Actualizado                                                       
+                             $arrData= $this->model->selectUsuario($idUsuario);
+                             //BIRACORA
+                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Update","Actualizó al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."");
                         }
                     }else if($request_user == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
@@ -151,7 +164,8 @@
                 $arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
                 
              } 
-            /*  dep($arrData[0]['status']);exit; */
+
+            
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
          }
              die();
@@ -170,6 +184,8 @@
 						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
 					}else{
 						$arrResponse = array('status' => true, 'data' => $arrData);
+                        //BIRACORA
+                       Bitacora($_SESSION['idUser'],MUSUARIOS,"Consulta","Consultó al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."");
 					}
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}
@@ -182,10 +198,14 @@
             if($_POST){
                 if($_SESSION['permisosMod']['d']){
                     $intIdpersona = intval($_POST['idUsuario']);
-
+                   
                     $requestDelete = $this-> model->deleteUsuario($intIdpersona);
                     if ($requestDelete) 
                     {
+                        //Selecciona los datos del usuario Eliminado  
+                        $arrData= $this->model->selectUsuario($intIdpersona);
+                        //BIRACORA
+                        Bitacora($_SESSION['idUser'],MUSUARIOS,"Delete","Eliminó al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."");   
                         $arrResponse = array ('status' => true, 'msg' => 'Se ha eliminado el usuario');
                     }else{
                         $arrResponse = array('status' => false, 'msg' => 'Error al eliminar el usuario.');
@@ -228,7 +248,7 @@
 						$strPassword = hash("SHA256",$_POST['txtPassword']);
 					}
                   
-                   if ($_SESSION['userData']['COD_ROL']==RCLIENTES) {
+                   if ($_SESSION['userData']['COD_ROL']==RCLIENTES){
                      
                     $request_user = $this->model->updatePerfilCliente($idUsuario, 
                     $strNombre,

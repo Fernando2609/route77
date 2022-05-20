@@ -8,7 +8,7 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(4);
+            getPermisos(MPRODUCTOS);
         }
         
         public function Productos()
@@ -21,6 +21,8 @@
             $data['page_title']="PRODUCTOS <small> Route 77</small> ";
             $data['page_name']="productos";
             $data['page_functions_js']="functions_productos.js";
+			 //BIRACORA
+			 Bitacora($_SESSION['idUser'],MPRODUCTOS,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"productos",$data);
         }
         public function setProducto(){
@@ -78,12 +80,22 @@
 																	);
 						}
 					}
+					
                     if($request_producto > 0 )
 					{
 						if($option == 1){
 							$arrResponse = array('status' => true, 'idproducto' => $request_producto, 'msg' => 'Datos guardados correctamente.');
+							//Selecciona los datos del producto Insertado  
+							$arrData= $this->model->selectProducto($request_producto);
+							
+							//BIRACORA
+							Bitacora($_SESSION['idUser'],MPRODUCTOS,"Nuevo","Registró el producto ".$arrData['NOMBRE']);  
 						}else{
 							$arrResponse = array('status' => true, 'idproducto' => $idProducto, 'msg' => 'Datos Actualizados correctamente.');
+							 //Selecciona los datos del producto Actualizado                                                       
+                             $arrData= $this->model->selectProducto($idProducto);
+                             //BIRACORA
+                             Bitacora($_SESSION['idUser'],MPRODUCTOS,"Update","Actualizó el Producto ".$arrData['NOMBRE']);
 						}
 					}else if($request_producto == false){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un producto con el <b> Código </b> o el <b>Nombre</b> Ingresado.');		
@@ -144,6 +156,8 @@
 								$arrImg[$i]['url_image'] = media().'/images/uploads/'.$arrImg[$i]['IMG'];
 							}
 						}
+						//BIRACORA
+						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Consulta","Consultó el producto ".$arrData['NOMBRE']);
 						$arrData['images'] = $arrImg;
 						$arrResponse = array('status' => true, 'data' => $arrData);
 					}
@@ -154,9 +168,7 @@
 			die();
 		}
         public function setImage(){
-        /* dep($_POST);
-        dep($_FILES); */
-    
+			
 			if($_POST){
 				if(empty($_POST['idproducto'])){
 					$arrResponse = array('status' => false, 'msg' => 'Error de datos.');
@@ -164,10 +176,25 @@
 					$idProducto = intval($_POST['idproducto']);
                    
 					$foto      = $_FILES['foto'];
-					$imgNombre = 'pro_'.md5(date('d-m-Y H:i:s')).'.jpg';
+					$type      = $_FILES['foto']['type'];
+					
+					
+                        if ($type=='image/webp') {
+                            $imgNombre = 'pro_'.md5(date('d-m-Y H:i:s')).'.webp';
+                        }else{
+
+                            $imgNombre = 'pro_'.md5(date('d-m-Y H:i:s')).'.jpg';
+                        }
+					
+					
 					$request_image = $this->model->insertImage($idProducto,$imgNombre);
 					if($request_image){
 						$uploadImage = uploadImage($foto,$imgNombre);
+						//Selecciona los datos del producto que se inserto la imagen  
+						$arrData= $this->model->selectProducto($idProducto);
+						
+						//BIRACORA
+						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Nuevo","Agregó una imagen al producto ".$arrData['NOMBRE']); 
 						$arrResponse = array('status' => true, 'imgname' => $imgNombre, 'msg' => 'Archivo cargado.');
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error de carga.');
@@ -178,6 +205,7 @@
 			die(); 
 		}
 		public function delFile(){
+		
 			if($_POST){
 				
 				if(empty($_POST['idproducto']) || empty($_POST['file'])){
@@ -190,6 +218,11 @@
 
 					if($request_image){
 						$deleteFile =  deleteFile($imgNombre);
+						//Selecciona los datos del prodcuto que se elimino la imagem  
+						$arrData= $this->model->selectProducto($idProducto);
+						
+						//BIRACORA
+						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Delete","Eliminó una imagen al producto ".$arrData['NOMBRE']); 
 						$arrResponse = array('status' => true, 'msg' => 'Archivo eliminado');
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar');
@@ -206,6 +239,11 @@
 					$requestDelete = $this->model->deleteProducto($intIdproducto);
 					if($requestDelete)
 					{
+						//Selecciona los datos del producto eliminado  
+						$arrData= $this->model->selectProducto($intIdproducto);
+						
+						//BIRACORA
+						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Delete","Eliminó el producto ".$arrData['NOMBRE']); 
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el producto');
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el producto.');

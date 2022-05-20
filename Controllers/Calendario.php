@@ -12,7 +12,7 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(13);
+            getPermisos(MCALENDARIO);
         }
         
         public function Calendario()
@@ -24,6 +24,8 @@
             $data['page_title']="Calendario <small>Route 77</small>";
             $data['page_name']="calendario";
             $data['page_functions_js']="functions_calendario.js";
+            //BIRACORA
+            Bitacora($_SESSION['idUser'],MCALENDARIO,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"calendario",$data);
         }
         public function setCalendario()
@@ -41,6 +43,9 @@
             if($request_user > 0 ){
               
             $arrResponse = array("status" => true, "msg" => 'Evento Guardado Correctamente.');
+            
+             /* //BIRACORA
+             Bitacora($_SESSION['idUser'],MUSUARIOS,"Nuevo","Registró el evento ".$strtitle.""); */
                 }
             else{
             $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
@@ -79,7 +84,9 @@
          if($request_user > 0 ){
            
              $arrResponse = array("status" => true, "msg" => 'Evento Actualizado Correctamente.');
-             }
+              /* //BIRACORA
+              Bitacora($_SESSION['idUser'],MUSUARIOS,"Nuevo","Actualizó el evento ".$strtitle."");*/
+             } 
          else{
          $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
      

@@ -57,7 +57,20 @@
 			$request_insert = $request_ID['last_insert_id()'];		
 	        return $request_insert;
 		}
-
+		public function selectRol(int $idrol)
+        {
+            //BUSCAR ROL
+			$this->intIdrol = $idrol;
+			/* $sql ="CALL CRUD_ROLES(null, null, null,'R', ?);" */
+			/* $sql = "SELECT * FROM TBL_ROLES WHERE COD_ROL = $this->intIdrol"; */
+			$sql = "CALL CRUD_ROLES(null, null, null,'R',$this->intIdrol)";
+			/* $arrData = array($this->intIdrol); */
+			$request = $this->select($sql);
+			/* dep($request);
+			exit; */
+			return $request;
+			
+        }
 		public function permisosModulo(int $idrol){
 			$this->intRolid = $idrol;
 			/* $sql = "SELECT p.rolid,

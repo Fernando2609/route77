@@ -7,12 +7,12 @@
     {
         $subtotal+=$producto['precio']*$producto['cantidad'];
        
-        if ($subtotal>=500) {
+        if ($subtotal>=datosEmpresa()['Empresa']['PEDIDO_MINIMO']) {
             $envio=0;
            /*  echo SMONEY.formatMoney($envio); */
-        }else if ($subtotal<500) {
+        }else if ($subtotal<datosEmpresa()['Empresa']['PEDIDO_MINIMO']) {
           
-         $envio=datosEmpresa()['COSTO_ENVIO'];
+         $envio=datosEmpresa()['Empresa']['COSTO_ENVIO'];
         /*  echo SMONEY.formatMoney($envio);   */  
         }
      }

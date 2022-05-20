@@ -9,7 +9,8 @@ class Empresa extends Controllers{
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(14);
+            
+            getPermisos(MEMPRESA);
         }
         
         public function Empresa()
@@ -21,13 +22,15 @@ class Empresa extends Controllers{
             $data['page_title']="EMPRESA <small>Route 77</small>";
             $data['page_name']="empresa";
             $data['page_functions_js']="functions_empresa.js";
+            //BIRACORA
+            Bitacora($_SESSION['idUser'],MEMPRESA,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"empresa",$data);
         }
 
     public function setEmpresa(){ {
-       
+        
             if ($_POST) {
-                if (empty($_POST['txtNombreEmpresa']) || empty($_POST['txtDireccion']) || empty($_POST['txtRazonSocial']) || empty($_POST['txtEmail']) || empty($_POST['txtGerenteGeneral'])|| empty($_POST['txtCostoEnvio'])|| empty($_POST['txtRTN']) || empty($_POST['txtEmailPedidos'])|| empty($_POST['txtTelEmpresa'])|| empty($_POST['txtCelEmpresa'])|| empty($_POST['txtCatSlider'])|| empty($_POST['txtCatBanner'])) {
+                if (empty($_POST['txtNombreEmpresa']) || empty($_POST['txtDireccion']) || empty($_POST['txtRazonSocial']) || empty($_POST['txtEmail']) || empty($_POST['txtGerenteGeneral'])|| empty($_POST['txtCostoEnvio'])|| empty($_POST['txtRTN']) || empty($_POST['txtEmailPedidos'])|| empty($_POST['txtTelEmpresa'])|| empty($_POST['txtCelEmpresa'])|| empty($_POST['txtCatSlider'])|| empty($_POST['txtCatBanner']) || empty($_POST['txtPedidoMinimo'])) {
                     $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
                 } else {
                     $idUsuario = intval($_POST['idUsuario']);
@@ -38,13 +41,13 @@ class Empresa extends Controllers{
                     $strGerenteGeneral = ucwords(strClean($_POST['txtGerenteGeneral']));
 
                     $intCostoEnvio = ucwords(strClean($_POST['txtCostoEnvio']));
+                    $intPedidoMinimo = ucwords(strClean($_POST['txtPedidoMinimo']));
                     $strRTN = ucwords(strClean($_POST['txtRTN']));
                     $strEmailPedidos = strtolower(strClean($_POST['txtEmailPedidos']));
                     $strTelEmpresa = ucwords(strClean($_POST['txtTelEmpresa']));
                     $strCelEmpresa = ucwords(strClean($_POST['txtCelEmpresa']));
                     $strCatSlider = ucwords(strClean($_POST['txtCatSlider']));
                     $strCatBanner = strtolower(strClean($_POST['txtCatBanner']));
-        
                     
                     if ($idUsuario == 0) {
                         $option = 1;
@@ -71,6 +74,7 @@ class Empresa extends Controllers{
                                 $strEmail,
                                 $strGerenteGeneral,
                                 $intCostoEnvio,
+                                $intPedidoMinimo,
                                 $strRTN,
                                 $strEmailPedidos,
                                 $strTelEmpresa,
@@ -86,6 +90,8 @@ class Empresa extends Controllers{
                             $arrResponse = array("status" => true, "msg" => 'Empresa Guardada Correctamente.');
                         } else {
                             $arrResponse = array("status" => true, "msg" => 'Empresa Actualizada Correctamente.');
+                            //BIRACORA
+                            Bitacora($_SESSION['idUser'],MEMPRESA,"Update","Actualizó los datos de la empresa ");
                         }
                     } else if ($request_user == 'exist') {
                         $arrResponse = array('status' => false, 'msg' => '¡Atención! el email ya existe, ingrese otro.');
@@ -143,7 +149,8 @@ class Empresa extends Controllers{
             $idusuario = intval($idUsuario);
             if ($idusuario > 0) {
                 $arrData = $this->model->selectEmpresa($idusuario);
-
+                /* dep($arrData);
+                exit; */
                 if (empty($arrData)) {
                     $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
                 } else {

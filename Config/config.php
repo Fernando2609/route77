@@ -1,28 +1,25 @@
 <?php
-    //require_once("Models/CategoriasModel.php"); 
-    //Fernadno 23/10/2021
 
-    //Definición de constantes
-    //define('BASEURL', 'http://localhost:/route77/');
+    
+// ! PRODUCCION
 /*
-   const BASE_URL="https://estacionroute77.com";
-   
-
-	//const BASE_URL="http://localhost/route77";
-
-	//Para envío de correo
-	const ENVIRONMENT = 0; // Local: 0, Produccón: 1;
+const BASE_URL="https://estacionroute77.com";
+//Para envío de correo
+	const ENVIRONMENT = 1; // Local: 0, Produccón: 1;
     //Datos de conexión a Base de Datos
 	const DB_HOST = "localhost";
-	//const DB_NAME = "db_route";
-    const DB_NAME = "u251006101_db_route";
-	const DB_USER = "u251006101_Fernando";
-	const DB_PASSWORD = "routeEstacion76+1";
-	const DB_CHARSET = "utf8";
+    const DB_NAME = "u251006101_db_route77";
+	const DB_USER = "u251006101_Estacion";
+	const DB_PASSWORD = "RouteEstacion76+1";
+	const DB_CHARSET = "utf-8";
+	
+
+	
+	funtions_backup: linea 77 modificar el 5 por el numero 8 en el array
 */
+	const USER="u251006101_";
 	//const BASE_URL="http://localhost/route77";
    
-
 
 	const BASE_URL="http://localhost:8080/route77";
 
@@ -77,7 +74,8 @@
 
 	const CAT_SLIDER = "10,5,1,6";
 	const CAT_BANNER = "10,5,1";
-	const CAT_FOOTER="1,2,3,4,5,6,7,8,9,10,11,12,13,14";
+	//const CAT_FOOTER="1,2,3,4,5,6,7,8,9,10,11,12,13,14";
+	const CAT_FOOTER="1,2,3,4,5,6,7";
 
 	//Datos para Encriptar / Desencriptar
 	const KEY = 'route77';
@@ -85,6 +83,7 @@
 
 	const COSTOENVIO=10;
 
+	const PEDIDOMINIMO=500;
 
 	//Productos Por Pagina
 	const PROPORPAGINA=4;
@@ -102,12 +101,23 @@
 
 
 	//Módulos
-	
-	const MCLIENTES = 2;
+	const MDASHBOARD = 1;
+	const MUSUARIOS = 2;
+	const MCLIENTES = 3;
+	const MPRODUCTOS = 4;
 	const MPEDIDOS = 5;
-	const MSUSCRIPTORES= 18;
-	const MCONTACTO= 19;
-	const MPÁGINAS= 20;
+	const MCATEGORIAS = 6;
+	const MINVENTARIO = 7;
+	const MCALENDARIO = 8;
+	const MEMPRESA = 9;
+	const MPROVEEDORES = 10;
+	const MSUCURSALES = 11;
+	const MCOMPRAS = 12;
+	const MSUSCRIPTORES= 13;
+	const MCONTACTO= 14;
+	const MPÁGINAS= 15;
+	const MBACKUP= 16;
+	const MBITACORA= 17;
 
 	//Roles
 	const RADMINISTRADOR = 1;

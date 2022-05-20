@@ -183,7 +183,17 @@
 		}
 
 
+        public function selectUtilidad(string $inicio,string $final ){
+            $sqlPEDIDO="SELECT date_format(FECHA,'%d-%m-%Y') as FECHA, MONTO from TBL_PEDIDO where FECHA between '{$inicio} 00:00:00' and '{$final} 23:59:59'";
+            $requestPedido = $this->select_all($sqlPEDIDO);
 
+            $sqlCompra="SELECT  date_format(FECHA_COMPRA,'%d-%m-%Y') as FECHA_COMPRA, MONTO from TBL_ORDEN_COMPRA where FECHA_COMPRA between  '{$inicio} 00:00:00' and '{$final} 23:59:59'";
+           
+            $requestCompraa = $this->select_all($sqlCompra);
+            $request = array('pedido'=> $requestPedido, 'compra'=> $requestCompraa);
+         
+            return $request;
+        }
 
 
   }

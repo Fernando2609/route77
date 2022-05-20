@@ -28,7 +28,7 @@
     <div class="login-box flipped">
         <div id="divLoading" >
             <div>
-              <img src="<?= media(); ?>/images//loadingRoute.gif" alt="Loading">
+              <img src="<?= media(); ?>/images//loadingRoute.webp" alt="Loading">
             </div>
         </div>
         <form id="formCambiarPass" name="formCambiarPass" class="forget-form" action="">

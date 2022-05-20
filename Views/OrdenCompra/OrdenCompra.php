@@ -64,6 +64,12 @@ getModal('modalInventario', $data);
             
                                 </div>
                             <div class="tile-footer d-flex justify-content-end">
+                            <div class="form-group mr-4">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="checkISV">
+                                    <label class="custom-control-label" for="checkISV">15%</label>
+                                </div>
+                            </div>
                                 <button id="btn_facturar_compra" class="btn btn-success notBlock" type="submit"><i class="fa fa-fw fa-lg fa-check-circle "></i><span id="btnText">Generar Compra</span></button>&nbsp;&nbsp;&nbsp;
                                 <button class="btn btn-danger" type="button" id="btn_anular_compra"><i class="fa fa-fw fa-lg fa-times-circle"></i>Anular</button>
                             </div>

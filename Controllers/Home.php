@@ -22,11 +22,11 @@
             exit; */
             $pageContent=getPageRout('inicio');
             
-            $data['page_tag']=datosEmpresa()['NOMBRE_EMPRESA'];
-            $data['page_title']=datosEmpresa()['NOMBRE_EMPRESA'];
-            $data['page_name']=datosEmpresa()['NOMBRE_EMPRESA'];
-            $data['slider'] = $this->getCategoriasT(datosEmpresa()['CATEGORIAS_SLIDER']);
-            $data['banner'] = $this->getCategoriasT(datosEmpresa()['CATEGORIAS_BANNER']);
+            $data['page_tag']=datosEmpresa()['Empresa']['NOMBRE_EMPRESA'];
+            $data['page_title']=datosEmpresa()['Empresa']['NOMBRE_EMPRESA'];
+            $data['page_name']=datosEmpresa()['Empresa']['NOMBRE_EMPRESA'];
+            $data['slider'] = $this->getCategoriasT(datosEmpresa()['Empresa']['CATEGORIAS_SLIDER']);
+            $data['banner'] = $this->getCategoriasT(datosEmpresa()['Empresa']['CATEGORIAS_BANNER']);
             $data['categorias'] = $this->getCategorias();
             $data['page']=$pageContent;
             $data['productos'] = $this->getProductosT();

@@ -43,7 +43,7 @@
 				<!-- Filter -->
 				<div class="dis-none panel-filter w-full p-t-10">
 					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-						<div class="filter-col4 p-b-27">
+						<div class="p-b-27">
 							<div class="mtext-102 cl2 p-b-15">
 								CATEGORÍAS
 							</div>
@@ -55,7 +55,7 @@
 
 						
 							?>	
-						<a href="<?= base_url() ?>/tienda/categoria/<?=$categoria['COD_CATEGORIA'].'/'.$categoria['RUTA'] ?>" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+						<a href="<?= base_url() ?>/tienda/categoria/<?=$categoria['COD_CATEGORIA'].'/'.$categoria['RUTA'] ?>" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-10">
 						<?= $categoria ['NOMBRE'] ?> <span> &nbsp; (<?= $categoria ['cantidad'] ?>)
 					</a>
 					
@@ -88,7 +88,7 @@
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<img src="<?= $portada ?>" alt="<?= $arrProductos[$p]['NOMBRE'] ?>">
+							<img src="<?= $portada ?>"   alt="<?= $arrProductos[$p]['NOMBRE'] ?>">
 							<?php  
 							if ($arrProductos[$p]['STOCK']>0) {?>
 							<a href="<?= base_url().'/tienda/producto/'.$arrProductos[$p]['COD_PRODUCTO'].'/'.$ruta;?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">

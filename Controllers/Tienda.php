@@ -223,10 +223,10 @@
                     {
                          $cantCarrito+=$pro['cantidad'];
                          $subtotal+=$pro['cantidad']*$pro['precio'];
-                         if ($subtotal>=500) {
+                         if ($subtotal>=datosEmpresa()['Empresa']['Empresa']['Empresa']['PEDIDO_MINIMO']) {
                             $envio=0;
-                        }else if ($subtotal<500) {
-                         $envio=datosEmpresa()['COSTO_ENVIO'];   
+                        }else if ($subtotal<datosEmpresa()['Empresa']['PEDIDO_MINIMO']) {
+                         $envio=datosEmpresa()['Empresa']['COSTO_ENVIO'];   
                         } 
                     }
                     $htmlCarrito ="";
@@ -281,10 +281,10 @@
 					foreach ($_SESSION['arrCarrito'] as $pro) {
 						$subtotal += $pro['cantidad'] * $pro['precio'];
                         
-                        if ($subtotal>=500) {
+                        if ($subtotal>=datosEmpresa()['Empresa']['PEDIDO_MINIMO']) {
                             $envio=0;
-                        }else if ($subtotal<500) {
-                         $envio=datosEmpresa()['COSTO_ENVIO'];   
+                        }else if ($subtotal<datosEmpresa()['Empresa']['PEDIDO_MINIMO']) {
+                         $envio=datosEmpresa()['Empresa']['COSTO_ENVIO'];   
                         } 
 					}
                     
@@ -496,10 +496,10 @@
                     foreach ($_SESSION['arrCarrito'] as $pro) {
                         $subtotal += $pro['cantidad']*$pro['precio'];
                     }
-                    if($subtotal>=500){
+                    if($subtotal>=datosEmpresa()['Empresa']['PEDIDO_MINIMO']){
                         $costo_envio=0;
                     }else{
-                        $costo_envio=datosEmpresa()['COSTO_ENVIO'];
+                        $costo_envio=datosEmpresa()['Empresa']['COSTO_ENVIO'];
                     }
                     $monto = formatMoney($subtotal + $costo_envio);
                     /* dep($monto);
@@ -538,7 +538,7 @@
                                    
                                     $dataEmailOrden=array('asunto'=>"Se ha creado la orden No.".$request_pedido,
                                                          'email'=>$_SESSION['userData']['EMAIL'],
-                                                         'emailCopia'=>datosEmpresa()['EMAIL_PEDIDOS'],
+                                                         'emailCopia'=>datosEmpresa()['Empresa']['EMAIL_PEDIDOS'],
                                                             'pedido'=>$infoOrden);
                                     
                                     sendEmail($dataEmailOrden,"email_notificacion_orden");
@@ -591,7 +591,7 @@
                                     $infoOrden=$this->getPedido($request_pedido);
                                     $dataEmailOrden = array('asunto' => "Se ha creado la orden No.".$request_pedido,
 													'email' => $_SESSION['userData']['EMAIL'], 
-													'emailCopia' => datosEmpresa()['EMAIL_PEDIDOS'],
+													'emailCopia' => datosEmpresa()['Empresa']['EMAIL_PEDIDOS'],
 													'pedido' => $infoOrden );
 									sendEmail($dataEmailOrden,"email_notificacion_orden");
 

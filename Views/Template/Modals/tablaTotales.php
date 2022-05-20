@@ -2,6 +2,7 @@
 $subtotal=0;
 $total=0;
 $iva=15;
+
 if (isset($_SESSION['compraDetalle']) and count($_SESSION['compraDetalle'])>0) {
 ?>
         
@@ -14,7 +15,13 @@ if (isset($_SESSION['compraDetalle']) and count($_SESSION['compraDetalle'])>0) {
     ?>
     <?php } ?>
     <?php
+    if ($data['isv']=='true') {
+     
         $impuesto=$subtotal*($iva/100);
+    }else{
+        $impuesto=0; 
+    }
+       
         //$tl_sniva=round($subtotal-$impuesto);
         $total=$subtotal+$impuesto;
     ?>

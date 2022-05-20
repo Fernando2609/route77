@@ -155,7 +155,7 @@
 
 	<div id="divLoading">
       <div>
-        <img src="<?=media();?>/images//loadingRoute.gif" alt="Loading">
+        <img src="<?=media();?>/images//loadingRoute.webp" alt="Loading">
        </div>
     </div>
 	<!-- Header -->
@@ -183,7 +183,7 @@
 						</a>
 						<?php } 
 							if(isset($_SESSION['login'])){
-						?>
+						?> 
 						<a href="<?= base_url() ?>/logout" class="flex-c-m trans-04 p-lr-25">
 							Salir
 						</a>
@@ -205,7 +205,7 @@
 					
 					<!-- Logo desktop -->		
 					<a href="<?= base_url(); ?>#" class="logo" >
-						<img src="<?= media() ?>/tienda/images/icons/logo.png" alt="Tienda Virtual">
+						<img src="<?= media() ?>/tienda/images/icons/logoTienda.png" alt="Tienda Virtual">
 					</a>
 					
 					<!-- Menu desktop -->
@@ -218,22 +218,6 @@
 							
 							<li >
 								<a class="js-show-categoria" href="javascript:void(0);">Categorias <ion-icon style="font-size: 12px;" name="pricetags"></ion-icon></a>
-								<!--<ul class="sub-menu" >
-									 <div style="display: flex;"> -->
-								
-									<?php
-										//for ($i=0; $i < count($arrCategorias); $i++) { 
-									
-									?>
-									
-										<!-- <li><a href="index.html"><?= $arrCategorias[$i]['nombre']?></a></li> -->
-										
-									<?php //}?>
-								
-									
-									<!-- 	
-									</div> 
-								</ul>-->
                				 </li>
 
 							<li>
@@ -277,7 +261,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="<?= base_url(); ?>"><img src="<?= media() ?>/tienda/images/logo.png" alt="Tienda Virtual"></a>
+				<a href="<?= base_url(); ?>"><img src="<?= media() ?>/tienda/images/icons/logoTienda.png" alt="Tienda Virtual"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -445,9 +429,7 @@
 								<?= $arrCategorias[$j]['NOMBRE']?>
 							</a>
 
-							<!-- <span class="header-cart-item-info">
-							<?= $arrCategorias[$j]['descripcion']?>
-							</span> -->
+							
 						</div>
 						</a>
 					</li>
@@ -455,40 +437,9 @@
 			<?php
 				 }					
 			?>
-
-					
-					<!-- <li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="<?= media() ?>/images/uploads/portada_categoria.png" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-						</div>
-					</li>  -->
 				</ul>
 				
-				<!-- <div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
-					</div>
-
-					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart
-						</a>
-
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
-						</a>
-					</div>
-				</div> -->
+			
 			</div>
 		</div>
 	</div>

@@ -225,7 +225,8 @@ $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
   var max = maxDate.val();
   var date = new Date(data[2]);
   minimo = moment(min, "MM-DD-YYYY");
-  console.log(min);
+     
+ //console.log(min);
   if (
     (min === null && max === null) ||
     (min === null && date <= max) ||
@@ -248,6 +249,7 @@ $(document).ready(function () {
   // Refilter the table
   $("#min, #max").on("change", function () {
     tablePedidos.api().ajax.reload();
+    //document.querySelector("#idUtilidad").classList.remove("notBlock");
   });
 
   /*  minDate = new DateTime($("#min"), {
@@ -256,8 +258,9 @@ $(document).ready(function () {
        maxDate = new DateTime($("#max"), {
          format: "MMMM Do YYYY",
        }); */
-});
+}
 
+);
 
 
 
@@ -452,4 +455,39 @@ function fntUpdateInfo(){
         }
     }
     }
+}
+
+function fntFecha() {
+    let Finicio = document.querySelector(".Finicio").value;
+    let Ffinal = document.querySelector(".fFinal").value;
+   
+     if (Finicio == "" || Ffinal=="") {
+       swal.fire("", "Seleccione Fecha inicial y Fecha final para las utilidades", "error");
+       return false;
+     } else {
+       
+       let request = window.XMLHttpRequest
+         ? new XMLHttpRequest()
+         : new ActiveXObject("Microsoft.XMLHTTP");
+       let ajaxUrl = base_url + "/Pedidos/Utilidad/" + Finicio + "/" + Ffinal;    
+       divLoading.style.display = "flex";
+       let formData = new FormData();
+       formData.append("fechaInicio", Finicio);
+      formData.append("fechaFinal", Ffinal);
+       request.open("POST", ajaxUrl, true);
+       request.send(formData);
+      
+       request.onreadystatechange = function () {
+         if (request.readyState != 4) return;
+         if (request.status == 200) {
+           
+              window.open(base_url + "/Pedidos/Utilidad/"+ Finicio + "/" + Ffinal, "_blank");
+              
+              divLoading.style.display = "none";
+              return false; 
+             
+               //$("#pagosMesAnio").html(request.responseText);
+         }
+       };
+     }
 }

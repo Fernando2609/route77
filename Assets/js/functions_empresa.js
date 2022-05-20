@@ -333,6 +333,8 @@ function fntEditInfo(element,idUsuario){
                    objData.data.GERENTE_GENERAL;
                  document.querySelector("#txtCostoEnvio").value =
                    objData.data.COSTO_ENVIO;
+                    document.querySelector("#txtPedidoMinimo").value =
+                      objData.data.PEDIDO_MINIMO;
                  document.querySelector("#txtRTN").value = objData.data.RTN;
                  document.querySelector("#txtEmailPedidos").value =
                    objData.data.EMAIL_PEDIDOS;
@@ -378,6 +380,8 @@ function fntViewInfo(idpersona) {
           objData.data.GERENTE_GENERAL;
           document.querySelector("#celCostoEnvio").innerHTML =
             objData.data.COSTO_ENVIO;
+             document.querySelector("#celPedidoMinimo").innerHTML =
+               objData.data.PEDIDO_MINIMO;
              document.querySelector("#celRTN").innerHTML =
                objData.data.RTN;
              document.querySelector("#celEmailPedidos").innerHTML =

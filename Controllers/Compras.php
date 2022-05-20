@@ -9,7 +9,7 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(17);
+            getPermisos(MCOMPRAS);
         }
         
         public function Compras()
@@ -21,6 +21,8 @@
             $data['page_title']="Compras <small>Route 77</small>";
             $data['page_name']="compras";
             $data['page_functions_js']="functions_compras.js";
+            //BIRACORA
+            Bitacora($_SESSION['idUser'],MCOMPRAS,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"compras",$data);
         }
 
@@ -76,6 +78,8 @@
             $data['arrCompras'] = $this->model->selectCompra($idCompra);
             
             $data['page_title'] = "COMPRA# ".$data['arrCompras']['orden']['COD_ORDEN'];
+            //BIRACORA
+            Bitacora($_SESSION['idUser'],MCOMPRAS,"Consulta","Consultó la Orden Compra #".$idCompra);
             $this->views->getView($this, "orden", $data);
     
             }

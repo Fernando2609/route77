@@ -9,7 +9,7 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            getPermisos(1);
+            getPermisos(MDASHBOARD);
             
         }
         
@@ -34,8 +34,10 @@
         // dep($data['ventasMDia']);
         // exit;
             $data['ventasAnio'] = $this->model->selectVentasAnio($anio);
-            /* dep($data['ventasAnio']);
-             exit;  */
+         
+            //BIRACORA
+             Bitacora($_SESSION['idUser'],1,"Ingreso","Ingresó al módulo");
+            
             if ($_SESSION['userData']['COD_ROL'] == RCLIENTES ) {
                 $this->views->getView($this,"dashboardCliente",$data);
 
@@ -46,7 +48,8 @@
            }
         public function getProductos()
         {
-            if($_SESSION['permisosMod']['r']){
+            
+            if($_SESSION['permisosMod']['r'] and $_SESSION['userData']['COD_ROL']!=RCLIENTES){
             
                 $arrData = $this->model->selectProductos();
                
@@ -73,13 +76,15 @@
         }
         public function tipoPagoMes(){
             if($_POST){
+               
                 $grafica = "tipoPagoMes";
                 $nFecha = str_replace(" ","",$_POST['fecha']);
                 $arrFecha = explode('-',$nFecha);
                 $mes = $arrFecha[0];
                 $anio = $arrFecha[1];
                 $pagos = $this->model->selectPagosMes($anio,$mes);
-
+                //BIRACORA
+                Bitacora($_SESSION['idUser'],MDASHBOARD,"Consulta","Consultó las ventas por tipo de pago del mes ".$mes." y el año ".$anio."");
                 $script = getFile("Template/Modals/graficas",$pagos);
                 echo $script;
                /*  dep($pagos);
@@ -92,12 +97,16 @@
         public function ventasMes(){
             if($_POST){
                 $grafica = "ventasMes";
+              
                 $nFecha = str_replace(" ","",$_POST['fecha']);
+                
                 $arrFecha = explode('-',$nFecha);
+                
                 $mes = $arrFecha[0];
                 $anio = $arrFecha[1];
                 $pagos = $this->model->selectVentasMes($anio, $mes);
-               
+               //BIRACORA
+               Bitacora($_SESSION['idUser'],MDASHBOARD,"Consulta","Consultó las ventas del mes ".$mes." y el año ".$anio."");
 
                 $script = getFile("Template/Modals/graficas",$pagos);
                 echo $script;
@@ -108,6 +117,8 @@
         $grafica = "ventasAnio";
         $anio = intval($_POST['anio']);
          $pagos = $this->model->selectVentasAnio($anio);
+         //BIRACORA
+         Bitacora($_SESSION['idUser'],MDASHBOARD,"Consulta","Consultó las ventas del año ".$anio."");
          $script = getFile("Template/Modals/graficas",$pagos);
         echo $script;
  }

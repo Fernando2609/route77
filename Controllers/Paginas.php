@@ -22,7 +22,8 @@
 			$data['page_title'] = "Páginas <small>Route 77</small>";
 			$data['page_name'] = "paginas";
 			$data['page_functions_js'] = "functions_Paginas.js";
-            
+            //BIRACORA
+            Bitacora($_SESSION['idUser'],MPÁGINAS,"Ingreso","Ingresó al módulo");
 			$this->views->getView($this,"paginas",$data);
 		}
         public function editar($idPost)
@@ -39,6 +40,8 @@
                         header("Location:".base_url().'/paginas');
                     }else{
                         $data['infoPage']=$infopage;
+                          //BIRACORA
+                       Bitacora($_SESSION['idUser'],MPÁGINAS,"Consulta","Consultó la página ".$infopage['TITULO']);
                     }
                     $this->views->getView($this,"editarPagina",$data);
                 }else{
@@ -154,8 +157,14 @@
                 if($option == 1)
                 {
                     $arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+                    $infopage=getInfoPage($request);
+                    //BIRACORA
+                    Bitacora($_SESSION['idUser'],MPÁGINAS,"Nuevo","Registró la página ".$infopage['TITULO']."");  
                     if($nombre_foto != ''){ uploadImage($foto,$imgPortada); }
                 }else   {
+                    $infopage=getInfoPage($intIdPost);
+                    //BIRACORA
+                    Bitacora($_SESSION['idUser'],MPÁGINAS,"Update","Actualizó la página ".$infopage['TITULO'].""); 
                     $arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
                     if($nombre_foto != ''){ uploadImage($foto,$imgPortada); }
                     if(($nombre_foto == '' AND $_POST['foto_remove'] == 1 AND $_POST['foto_actual'] != '')
@@ -183,6 +192,10 @@
 					$requestDelete = $this->model->deletePagina($intIdPagina);
 					if($requestDelete)
 					{
+                        //Selecciona los datos del usuario Eliminado  
+                        $infopage=getInfoPage($intIdPagina);
+                        //BIRACORA
+                        Bitacora($_SESSION['idUser'],MPÁGINAS,"Delete","Eliminó la página ".$infopage['TITULO'].""); 
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la Página');
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar la Página.');

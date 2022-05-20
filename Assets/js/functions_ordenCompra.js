@@ -95,7 +95,7 @@ $(document).ready(function(){
        let cantidad = $("#txtCantidad").val();
         let precio = $("#txtPrecio").val();
          let precioTotal = $("#txtPrecioTotal").html();
-
+          let checkISV = document.querySelector("#checkISV").checked;
 
       let request = window.XMLHttpRequest
         ? new XMLHttpRequest()
@@ -106,6 +106,7 @@ $(document).ready(function(){
        formData.append("txtCantidad", cantidad);
        formData.append("txtPrecio", precio);
        formData.append("txtPrecioTotal", precioTotal);
+       formData.append("checkISV", checkISV);
 
       request.open("POST", ajaxUrl, true);
       request.send(formData);
@@ -171,7 +172,7 @@ $(document).ready(function(){
 
     
   });
-
+  
 
   $("#btn_anular_compra").click(function(e){
     e.preventDefault();
@@ -205,6 +206,7 @@ $(document).ready(function(){
    if (rows > 0) {
      let factura = $("#txtFactura").val();
      let proveedor = $("#listProveedor").val();
+     checkISV = document.querySelector("#checkISV").checked;
       let elementsValid = document.getElementsByClassName("valid");
       for (let i = 0; i < elementsValid.length; i++) {
         if (elementsValid[i].classList.contains("is-invalid")) {
@@ -226,7 +228,7 @@ $(document).ready(function(){
      let formData = new FormData();
      formData.append("txtFactura", factura);
      formData.append("idProveedor", proveedor);
-
+      formData.append("checkISV", checkISV);
      request.open("POST", ajaxUrl, true);
      request.send(formData);
      request.onreadystatechange = function () {
@@ -256,17 +258,41 @@ $(document).ready(function(){
   
 
 });
+  $("#checkISV").on("change", function () {
+      let checkISV = document.querySelector("#checkISV").checked;
+     let request = window.XMLHttpRequest
+       ? new XMLHttpRequest()
+       : new ActiveXObject("Microsoft.XMLHTTP");
+     let ajaxUrl = base_url + "/OrdenCompra/Totales";
+     let formData = new FormData();
+     formData.append("checkISV", checkISV);
+     request.open("POST", ajaxUrl, true);
+     request.send(formData);
+      request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+          let objData = JSON.parse(request.responseText);
+          console.log(objData);
+          if (objData.status) {
+             document.querySelector("#detalle_totales").innerHTML =
+               objData.htmlTotales;
+
+          }else{
+            swal.fire('error','error','error');
+          }
+
+        }
+      };
+  });
 
 function del_product_detalle(id) {
-
- 
-
+  checkISV = document.querySelector("#checkISV").checked;
   let request = window.XMLHttpRequest
     ? new XMLHttpRequest()
     : new ActiveXObject("Microsoft.XMLHTTP");
   let ajaxUrl = base_url + "/OrdenCompra/delCompra";
    let formData = new FormData();
    formData.append("idProducto", id);
+     formData.append("checkISV", checkISV);
    
 
   request.open("POST", ajaxUrl, true);
@@ -323,6 +349,7 @@ function viewProcesar() {
 window.addEventListener('load', function() {
    viewProcesar();
    fntProveedores();
+    document.querySelector("#checkISV").checked=true;
 }, false);
 
 
