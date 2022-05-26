@@ -324,7 +324,7 @@
 					$strApellido = ucwords(strClean($_POST['txtApellido']));
 					$strEmail = strtolower(strClean($_POST['txtEmailCliente']));
                     $intTipoId = 2;
-                    $intStatus =1;
+                    $intStatus =3;
                     $intTelefono = intval(strClean($_POST['txtTelefono']));
 					//$intTipoId = 7;
 				
@@ -386,7 +386,7 @@
 					$strApellido = ucwords(strClean($_POST['txtApellidoModal']));
 					$strEmail = strtolower(strClean($_POST['txtEmailClienteModal']));
                     $intTipoId = 2;
-                    $intStatus =1;
+                    $intStatus =3;
                     $intTelefono = intval(strClean($_POST['txtTelefonoModal']));
 					//$intTipoId = 7;
 				

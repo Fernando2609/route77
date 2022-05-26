@@ -125,5 +125,33 @@
 
 }
 
-  }
+public function preguntasSeguridad(){
+   
+        if ($_POST) {
+            if(empty($_POST['txtPregunta1']) || empty($_POST['txtRespuesta1'])  || empty($_POST['txtPassword'])  || empty($_POST['txtPasswordConfirm']))
+            {
+                $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+            }else{
+                
+                $passwordConfirm= strClean($_POST['txtPasswordConfirm']);
+                $pregunta1= intval($_POST['txtPregunta1']);
+                $respuesta1=strClean($_POST['txtRespuesta1']);
+                $user=intval($_SESSION['idUser']);
+
+                $strPassword = hash("SHA256",$_POST['txtPassword']);
+                $this->model->deletePregunta($user);
+                $request_user = $this->model->insertPregunta($pregunta1,$user,$respuesta1,$strPassword);
+                
+                if($request_user > 0 ){
+                    $arrResponse = array("status" => true, "msg" => 'Datos Guardados Correctamente.');
+                    $_SESSION['userData']['COD_STATUS']=1;
+                }else{
+                    $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos Comuniquesé con el administrador');
+                }
+            }
+            echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }   
+  } 
 ?>

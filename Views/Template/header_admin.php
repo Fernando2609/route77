@@ -87,7 +87,7 @@
       if(!empty($_SESSION['permisos'][9]['r'])){
       ?>
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+        <a class="nav-link" id="listProductos" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
           <span class="badge badge-warning navbar-badge"><?php
             
@@ -124,8 +124,94 @@
        
     </ul>
   </nav>
+  <?php
+    if ($_SESSION['userData']['COD_STATUS']==3 ) {
+      $preguntas=[];
+      $preguntas=preguntasSeguridad();
+     
+  ?>
+  <!-- Modal -->
+<div class="modal fade" id="modalUserNew" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Div Centrar Modal -->
+<div class="modal-dialog modal-lg bounceInDown animated" role="document">
+  <div class="modal-content">
+    <!-- Div Contenido Modal -->
+    <div class="modal-header2">
+          <!-- Encabezado Modal -->
+        <h5 class="modal-title" >Cambiar Contraseña</h5>
+      </div><!-- Termina Encabezado Modal -->
+    
+    <!-- abre Modal Body -->
+    <div class="modal-body">
+        <!-- Card -->
+      <!-- formulario Modal -->
+      <form id="formPreguntasSeguridad" name="formPreguntasSeguridad" class="form-horizontal">
+        <!-- <input type="hidden" id="idUsuario" name="idUsuario" value=""> -->
+        <!-- <p class="text-success">Todos los campos son obligatorios</p> -->
+        <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="txtPassword">Contraseña</label>
+                <input type="password" class="form-control valid ValidContra" id="txtPassword" name="txtPassword" required="">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="txtPasswordConfirm">Confirmar Contraseña</label>
+                <input type="password" class="form-control valid ValidContra" id="txtPasswordConfirm" name="txtPasswordConfirm" required="">
+              </div>
+            </div>
+        
+            <div class="modal-header2">
+              <!-- Encabezado Modal -->
+              <h5 class="modal-title" >Configuración de Preguntas de Seguridad</h5>
+            </div><!-- Termina Encabezado Modal --> 
+        
+        
+            <!-- abre Modal Body -->
+          <div class="modal-body">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="txtPregunta1">Selecciona una pregunta</label>
+                <select class="form-control"  id="txtPregunta1" name="txtPregunta1" required>
+                  <?php
+                    for ($i=0; $i < count($preguntas); $i++) {
 
-  <?php require_once("nav_admin.php"); ?>
+                      $idPregunta=$preguntas[$i]['COD_PREGUNTA'];
+                      $pregunta=$preguntas[$i]['PREGUNTA'];
+
+                      echo "<option value='$idPregunta'>$pregunta</option>";
+                    }
+                  ?>
+                
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="txtRespuesta1">Respuesta</label>
+                <input type="text" class="form-control " id="txtRespuesta1" name="txtRespuesta1" required="">
+              </div>
+            </div>
+                
+          </div>
+        <!-- /.Cierra card-body -->
+
+        <div class="card-footer">
+          <button id="btnAction" class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
+
+          <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
+        </div>
+      </form>
+
+    </div><!-- /. Cierra  Div body Modal -->
+  </div><!-- /. Cierra  Div Centrar Modal -->
+</div><!-- /. Cierre Div Centrar Modal -->
+</div>
+<!-- Cierra Modal -->
+
+
+
+
+  <?php 
+    }
+  require_once("nav_admin.php"); 
+  ?>
   <!-- /.navbar -->
 
   

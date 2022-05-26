@@ -17,7 +17,67 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
+      <!-- Modal -->
+  <div class="modal fade" id="modalResetPreg" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Div Centrar Modal -->
+    <div class="modal-dialog modal-lg bounceInDown animated" role="document">
+      <div class="modal-content">
+        <!-- Div Contenido Modal -->
+        <div class="modal-header2">
+              <!-- Encabezado Modal -->
+            <h5 class="modal-title" >Recuperación por Pregunta de Seguridad</h5>
+          </div><!-- Termina Encabezado Modal -->
+        
+        <!-- abre Modal Body -->
+        <div class="modal-body">
+            <!-- Card -->
+          <!-- formulario Modal -->
+          <form id="formPregSeguridad" name="formPregSeguridad" class="form-horizontal">
+            <!-- <input type="hidden" id="idUsuario" name="idUsuario" value=""> -->
+            <p class="text-success">Todos los campos son obligatorios</p>
+                <!-- abre Modal Body -->
+              <div class="modal-body">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="txtPregunta1">Selecciona una pregunta</label>
+                    <select class="form-control"  id="txtPregunta1" name="txtPregunta1" required>
+                      <?php
+                         $preguntas=[];
+                         $preguntas=preguntasSeguridad();
+
+                         for ($i=0; $i < count($preguntas); $i++) {
+
+                          $idPregunta=$preguntas[$i]['COD_PREGUNTA'];
+                          $pregunta=$preguntas[$i]['PREGUNTA'];
     
+                          echo "<option value='$idPregunta'>$pregunta</option>";
+                        }
+
+                      ?>
+                    
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="txtRespuesta1">Respuesta</label>
+                    <input type="text" class="form-control " id="txtRespuesta1" name="txtRespuesta1" required="">
+                  </div>
+                </div>
+                    
+              </div>
+            <!-- /.Cierra card-body -->
+
+            <div class="card-footer">
+              <button id="btnAction" class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Verificar</span></button>&nbsp;&nbsp;&nbsp;
+
+              <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
+            </div>
+          </form>
+
+        </div><!-- /. Cierra  Div body Modal -->
+      </div><!-- /. Cierra  Div Centrar Modal -->
+    </div><!-- /. Cierre Div Centrar Modal -->
+  </div>
+  <!-- Cierra Modal -->
     <section class="material-half-bg">
       <div class="cover"></div>
       <div class="cover2"></div>
@@ -29,6 +89,7 @@
         <img src="<?= media(); ?>/images/Logo.png" class="imagenLogin" alt="" >
     </div>
     </a>
+
       <div class="login-box">
         <div id="divLoading">
           <div>
@@ -56,19 +117,25 @@
             <button type="submit" class="btn btn-primary btn-block botonLogin"><i class="fa fa-sign-in fa-lg fa-fw"></i>INICIAR SESIÓN</button>
           </div>
         </form>
+     
         <form id="formRecetPass" class="forget-form" action="">
           <h3 class="login-head "><i class="fa fa-lg fa-fw fa-lock"></i>¿Olvidaste tu contraseña?</h3>
           <div class="form-group">
             <label class="control-label">EMAIL</label>
             <input id="txtEmailReset" name="txtEmailReset" class="form-control valid validEmail" type="text" placeholder="Email">
           </div>
-          <div class="form-group btn-container">
-            <button type="submit" class="btn btn-primary btn-block botonLogin"><i class="fa fa-unlock fa-lg fa-fw"></i>REINICIAR</button>
+         
+          <div class="form-group btn-container mb-3">
+            <button type="submit" class="btn btn-primary btn-block botonLogin"><i class="fa fa-unlock fa-lg fa-fw"></i>ENVIAR EMAIL</button>
           </div>
-          <div class="form-group mt-3">
+          <div class="form-group btn-container">
+            <a style="color:white" onclick="fntOpenModal()" class="btn btn-primary btn-block botonLogin"><i class="fa fa-unlock fa-lg fa-fw"></i>PREGUNTA DE SEGURIDAD</a>
+          </div>
+          <div class="form-group mt-3 mb-3">
             <p class="semibold-text mb-0"><a href="#" class="linkLogin" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Volver al login</a></p>
           </div>
         </form>
+       
       </div>
       </section>
       <script>

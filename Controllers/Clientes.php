@@ -40,6 +40,8 @@
 					$strEmail = strtolower(strClean($_POST['txtEmail']));
                     $intTipoId = 2;
 					$intStatus = intval(strClean($_POST['listStatus']));
+                    
+                    
                     $intTelefono = intval(strClean($_POST['txtTelefono']));
 					
                    /* $intNacionalidad = intval(strClean($_POST['listNacionalidadCliente']));
@@ -53,8 +55,12 @@
 
                     if ($idUsuario==0) {
                         $option=1;
-                        $strPassword =  empty($_POST['txtPassword']) ? passGenerator() : hash("SHA256",$_POST['txtPassword']);
+                        $strPassword =  empty($_POST['txtPassword']) ? passGenerator() : $_POST['txtPassword'];
+                        
                         $strPasswordEncrip = hash("SHA256",$strPassword);
+                        if ($intStatus==ACTIVO) {
+                            $intStatus=NUEVO;
+                        }
                        
                        // $strPassword =  empty($_POST['txtPassword']) ?passGenerator() : $_POST['txtPassword'];
                       //$strPasswordEncrip = hash("SHA256",$strPassword);
@@ -135,8 +141,10 @@
 
                 if ($arrData[$i]['COD_STATUS']==1) {
                  $arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';   
-                }else{
+                }else if($arrData[$i]['COD_STATUS']==2){
                  $arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
+                }else{
+                    $arrData[$i]['status'] = '<span class="badge badge-info">Nuevo</span>';
                 }
 
                 if($_SESSION['permisosMod']['r']){

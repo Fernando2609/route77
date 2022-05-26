@@ -136,6 +136,9 @@ const BASE_URL="https://estacionroute77.com";
 	const PSUCURSALES=8;
 	const PERROR=9;
 
+	const ACTIVO=1;
+	const INACTIVO=2;
+	const NUEVO=3;
 
 
 

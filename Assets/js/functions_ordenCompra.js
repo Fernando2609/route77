@@ -92,10 +92,10 @@ $(document).ready(function(){
     if ($("#txtCantidad").val()>0) {
 
       let COD_PRODUCTO = $("#idProducto").val();
-       let cantidad = $("#txtCantidad").val();
-        let precio = $("#txtPrecio").val();
-         let precioTotal = $("#txtPrecioTotal").html();
-          let checkISV = document.querySelector("#checkISV").checked;
+      let cantidad = $("#txtCantidad").val();
+      let precio = $("#txtPrecio").val();
+      let precioTotal = $("#txtPrecioTotal").html();
+      let checkISV = document.querySelector("#checkISV").checked;
 
       let request = window.XMLHttpRequest
         ? new XMLHttpRequest()

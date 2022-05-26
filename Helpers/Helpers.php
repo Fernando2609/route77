@@ -498,7 +498,7 @@ function deleteFile(string $name){
         return true;        
     }else{
         return false;
-    }
+}
  }
  function Bitacora(int $idPersona,int $idModulo,string $accion,string $descripcion){
         
@@ -519,5 +519,14 @@ function deleteFile(string $name){
 
     return $return;
  }
+
+function preguntasSeguridad(){
+    require_once("Libraries/Core/Mysql.php");
+    $con = new Mysql();
+    $sql = "SELECT * FROM TBL_PREGUNTAS";
+    $request = $con->select_all($sql);
+   
+    return $request;
+}
 
 ?>

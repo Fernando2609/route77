@@ -311,7 +311,7 @@ function fntEditInfo(element,idUsuario){
                // console.log(objData.data.fechaNaci);
                 
                 
-                 if(objData.data.COD_STATUS == 1){
+                 if(objData.data.COD_STATUS == 1 || objData.data.COD_STATUS == 3){
                    document.querySelector("#listStatus").value = 1;
                 }else{
                    document.querySelector("#listStatus").value = 2;
@@ -397,10 +397,17 @@ function fntViewInfo(idpersona) {
             : objData.data.MODIFICADO_POR;
 
         /*console.log(objData.data.status); */
-        let estadoUsuario =
+        if (objData.data.COD_STATUS == 1) {
+            estadoUsuario='<span class="badge badge-success">Activo</span>';
+        }else if (objData.data.COD_STATUS == 2) {
+            estadoUsuario='<span class="badge badge-danger">Inactivo</span>';
+        }else{
+            estadoUsuario='<span class="badge badge-info">Nuevo</span>';;
+        }
+        /* let estadoUsuario =
           objData.data.COD_STATUS == 1
             ? '<span class="badge badge-success">Activo</span>'
-            : '<span class="badge badge-danger">Inactivo</span>';
+            : '<span class="badge badge-danger">Inactivo</span>'; */
 
         document.querySelector("#celNombre").innerHTML = objData.data.NOMBRES;
         document.querySelector("#celApellido").innerHTML =

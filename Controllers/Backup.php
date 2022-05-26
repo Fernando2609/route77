@@ -49,6 +49,7 @@
                 
                     while(($archivo = readdir($aux)) !== false){
                         
+                      
                        
                         
                        
@@ -60,10 +61,10 @@
                             //$nombrearchivo=str_replace("-", "/", $nombrearchivo);
                             $nombrearchivo=explode("_",$nombrearchivo);
                             
+                            
                             $dia=date_create_from_format("Y-m-d",$nombrearchivo[2] )->format("d-m-Y");
                             $hora=date_create_from_format("His",$nombrearchivo[3] )->format("H:i:s A");
-                           
-                           
+                          
                             
                             $ruta_completa=$ruta.$archivo;
                             if(is_dir($ruta_completa)){
@@ -84,6 +85,7 @@
             }
             asort($data['restore']);
             $data['restore']=array_reverse($data['restore']);
+         
            
            
             

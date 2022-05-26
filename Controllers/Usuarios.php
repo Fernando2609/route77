@@ -50,6 +50,9 @@
                    
                     if ($idUsuario==0) {
                         $option=1;
+                        if ($intStatus==ACTIVO) {
+                            $intStatus=NUEVO;
+                        }
                         $strPassword =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
                         if($_SESSION['permisosMod']['w']){
                         $request_user = $this->model->insertUsuario($strIdentificacion,
@@ -129,10 +132,13 @@
                 $btnDelete = '';
 
                 if ($arrData[$i]['COD_STATUS']==1) {
-                 $arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';   
-                }else{
-                 $arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
-                }
+                    $arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';   
+                   }else if($arrData[$i]['COD_STATUS']==2){
+                    $arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
+                   }else{
+                       $arrData[$i]['status'] = '<span class="badge badge-info">Nuevo</span>';
+                   }
+   
 
                 if($_SESSION['permisosMod']['r']){
                     $btnView = '<button class="btn  btn-info btn-sm btnViewUsuario" onClick="fntViewUsuario('.$arrData[$i]['COD_PERSONA'].')" title="Ver usuario"><i class="far fa-eye"></i></button>';
