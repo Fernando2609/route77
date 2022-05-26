@@ -271,40 +271,141 @@ function fntValidNumber() {
 
 //Llamado de las Funciones
 window.addEventListener('load', function() {
-    fntValidText();
-    fntValidNumber();
-    fntValidEmail();
-    fntValidNumberDni();
-    fntValidNumberTel();
-    fntValidNumberPrecio();
-    fntValidNumberRtn();
+  fntValidText();
+  fntValidNumber();
+  fntValidEmail();
+  fntValidNumberDni();
+  fntValidNumberTel();
+  fntValidNumberPrecio();
+  fntValidNumberRtn();
+  if (document.querySelector("#notificacion")) {
     fntViewProductos();
-    fntValidContra();
-    fntValidImg();
-}, false);
+  }
+  fntValidContra();
+  fntValidImg();
+  //modaal Preguntas
+  if (document.querySelector("#modalUserNew")) {
+    $("#modalUserNew").modal({ backdrop: "static", keyboard: false });
+  }
 
+  //preguntas
+  //Actulizar desde perfil
+  if (document.querySelector("#formPreguntasSeguridad")) {
+    let formPreguntas = document.querySelector("#formPreguntasSeguridad");
+    formPreguntas.onsubmit = function (e) {
+      e.preventDefault();
+     
+      // let strIdentificacion = document.querySelector('#txtIdentificacion').value;
+      let respuesta1 = document.querySelector("#txtPregunta1").value;
+      let strPassword = document.querySelector('#txtPassword').value;
+      let strPasswordConfirm = document.querySelector('#txtPasswordConfirm').value;
+      //let respuesta2 = document.querySelector("#txtPregunta2").value;
 
-function fntViewProductos() {
-     let prevImg = document.querySelector("#notificacion");
-  let request = window.XMLHttpRequest
-    ? new XMLHttpRequest()
-    : new ActiveXObject("Microsoft.XMLHTTP");
-  let ajaxUrl = base_url + "/Dashboard/getProductos/";
-  request.open("GET", ajaxUrl, true);
-  request.send();
-  request.onreadystatechange = function () {
-    if (request.readyState == 4 && request.status == 200) {
-      let objData = JSON.parse(request.responseText);
-     var cant=0;
-      
-      for (let i = 0; i < objData.length; i++) {
-          const producto = objData[i];
-          if (producto.STOCK<=producto.CANT_MINIMA) {
-              
-              console.log("hola");
-            }
-            //console.log(producto.CANT_MINIMA>producto.STOCK);
+      if (respuesta1 == "" || strPassword=="" || strPasswordConfirm=="") {
+        swal.fire("Atención", "Todos los campos son obligatorios.", "error");
+        return false;
       }
-    }
-  };
+
+      if( strPassword != strPasswordConfirm ){
+          swal.fire("Atención", "Las contraseñas no son iguales." , "info");
+          return false;
+        }        
+      //longitud de la contraseña   
+      if(strPassword.length < 8 ){
+          swal.fire("Atención", "La contraseña debe tener un mínimo de 8 caracteres." , "info");
+          return false;
+      }
+
+      let contraseñaValid = document.querySelector("#txtPassword");
+           
+        if (contraseñaValid.classList.contains("is-invalid")) {
+          swal.fire(
+            "Atención",
+            "La contraseña debe de contener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número, un caracter especial y sin espacios",
+            "error"
+          );
+          return false;
+        }
+      let elementsValid = document.getElementsByClassName("valid");
+      for (let i = 0; i < elementsValid.length; i++) {
+          if (elementsValid[i].classList.contains('is-invalid')) {
+              swal.fire("Atención", "Por favor verifique los campos en rojo.", "error");
+              return false;
+          }
+      }
+      divLoading.style.display = "flex";
+      let request = window.XMLHttpRequest
+        ? new XMLHttpRequest()
+        : new ActiveXObject("Microsoft.XMLHTTP");
+      let ajaxUrl = base_url + "/Dashboard/preguntasSeguridad";
+      let formData = new FormData(formPreguntas);
+      request.open("POST", ajaxUrl, true);
+      request.send(formData);
+      request.onreadystatechange = function () {
+        if (request.readyState != 4) return;
+        if (request.status == 200) {
+          console.log(request.responseText);
+          let objData = JSON.parse(request.responseText);
+          if (objData.status) {
+            //$("#modalformPreguntas").modal("hide");
+            swal.fire({
+              title: "Datos Guardados",
+              text: objData.msg,
+              icon: "success",
+              confirmButtonText: "Aceptar",
+              closeOnConfirm: false,
+              timer: 3000,
+              willClose: () => {
+                location.reload();
+              },
+            });
+                
+          } else {
+            swal.fire("Error", objData.msg, "error");
+          }
+        }
+        divLoading.style.display = "none";
+        return false;
+      };
+    };
+  }
+}, false);
+function openModal()
+{
+    rowTable = "";
+    document.querySelector('#idUsuario').value ="";
+    document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
+    document.querySelector('#btnActionForm').classList.replace("btn-warning", "btn-success");
+    document.querySelector('#btnText').innerHTML ="Guardar";
+    
+}
+//preguntas de seguridada
+
+
+
+
+if (document.querySelector("#notificacion")) {
+  function fntViewProductos() {
+    let prevImg = document.querySelector("#notificacion");
+    let request = window.XMLHttpRequest
+      ? new XMLHttpRequest()
+      : new ActiveXObject("Microsoft.XMLHTTP");
+    let ajaxUrl = base_url + "/Dashboard/getProductos/";
+    request.open("GET", ajaxUrl, true);
+    request.send();
+    request.onreadystatechange = function () {
+      if (request.readyState == 4 && request.status == 200) {
+        let objData = JSON.parse(request.responseText);
+        var cant = 0;
+
+        for (let i = 0; i < objData.length; i++) {
+          const producto = objData[i];
+          if (producto.STOCK <= producto.CANT_MINIMA) {
+            console.log("hola");
+          }
+          //console.log(producto.CANT_MINIMA>producto.STOCK);
+        }
+      }
+    };
+  }
 }

@@ -123,11 +123,18 @@ class LoginModel extends Mysql{
             public function selectProductos(){
 			
                 $sql= 'call CRUD_PRODUCTOS(null,null,null,null,null,null,null,null,null,null,null,"H",null)';
-                $request = $this->select_all($sql);
+                $request = $this->select_all($sql); 
+                return $request;    
+            }
+            public function confirmRequest(string $email, int $pregunta, string $respuesta){
+			
+                $sql= "SELECT * from tbl_personas p 
+                INNER JOIN tbl_preguntas_x_usuario pu on pu.COD_USUARIO= p.COD_PERSONA
+                WHERE p.EMAIL='$email' and pu.COD_PREGUNTA=$pregunta and pu.RESPUESTA='$respuesta'";
+                $request = $this->select($sql); 
+              
+                return $request;    
+            }
 
-
-                 
-        return $request;
-    }	
         }
 ?>

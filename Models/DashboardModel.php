@@ -151,12 +151,36 @@
        
     }
 
-public function productosTen(){ 
+    public function productosTen(){ 
     $sql= "SELECT * FROM TBL_PRODUCTOS WHERE COD_STATUS = 1 ORDER BY COD_PRODUCTO DESC LIMIT 0,10";
     $request = $this->select_all($sql);
     return $request;    
-}   
+    }   
+    public function insertPregunta(int $pregunta,int $user,string $respuesta,string $password)
+    {
+        
+        $query_insert="INSERT INTO `TBL_PREGUNTAS_X_USUARIO` (`COD_PREGUNTA`, `COD_USUARIO`, `RESPUESTA`) VALUES (?, ?, ?)";
+        $arrData = array($pregunta,$user,$respuesta);
+        $request_insert = $this->insert($query_insert,$arrData);
+        $sql = "SELECT last_insert_id()";
+        $request_ID = $this->select($sql);
+        $return = $request_ID['last_insert_id()'];
 
+        $sql="UPDATE `TBL_PERSONAS` SET `COD_STATUS` = ?, `CONTRASEÑA`=?  WHERE `TBL_PERSONAS`.`COD_PERSONA` = $user;
+        ";
+        $arrData = array(1,$password);
+        $request = $this->update($sql,$arrData);
+        
+        return $return;
+    }
+    public function deletePregunta(int $usuario)
+    {
+       
+         $sql = "DELETE FROM TBL_PREGUNTAS_X_USUARIO WHERE COD_USUARIO = $usuario"; 
+     
+        $request = $this->select_all($sql);
+        return $request;
+    }
  }
 
  ?>

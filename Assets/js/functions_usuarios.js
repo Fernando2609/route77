@@ -507,9 +507,16 @@ function fntViewUsuario(idpersona){
                 objData.data.MODIFICADO_POR == null
                   ? "Sin Modificar"
                   : objData.data.MODIFICADO_POR;
-               let estadoUsuario = objData.data.COD_STATUS == 1 ? 
-                '<span class="badge badge-success">Activo</span>' : 
-                '<span class="badge badge-danger">Inactivo</span>';
+                 if (objData.data.COD_STATUS == 1) {
+                   estadoUsuario =
+                     '<span class="badge badge-success">Activo</span>';
+                 } else if (objData.data.COD_STATUS == 2) {
+                   estadoUsuario =
+                     '<span class="badge badge-danger">Inactivo</span>';
+                 } else {
+                   estadoUsuario =
+                     '<span class="badge badge-info">Nuevo</span>';
+                 }
 
                 document.querySelector("#celIdentificacion").innerHTML = objData.data.DNI;
                 document.querySelector("#celNombre").innerHTML = objData.data.NOMBRES;
@@ -568,11 +575,11 @@ function fntEditUsuario(element,idUsuario){
                 $('#listGenero').selectpicker('render');
                 $('#listGenero').selectpicker('render');
                 $('#listSucursal').selectpicker('render');
-                if(objData.data.COD_STATUS == 1){
-                    document.querySelector("#listStatus").value = 1;
-                }else{
-                    document.querySelector("#listStatus").value = 2;
-                }
+         if (objData.data.COD_STATUS == 1 || objData.data.COD_STATUS == 3) {
+           document.querySelector("#listStatus").value = 1;
+         } else {
+           document.querySelector("#listStatus").value = 2;
+         }
                 $('#listStatus').selectpicker('render');
             }
         }

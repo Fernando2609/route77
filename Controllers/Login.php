@@ -23,7 +23,7 @@
             $this->views->getView($this,"login",$data);
         }
         public function LoginUser(){
-           // dep($_POST);
+           
            if($_POST){
                if(empty($_POST['txtEmail']) || empty($_POST['txtPassword'])){
                    $arrResponse = array('status' => false, 'msg' => 'Error de datos');
@@ -31,13 +31,14 @@
                    
                    $strUsuario = strtolower(strClean($_POST['txtEmail']));
                    $strPassword = hash("SHA256", $_POST['txtPassword']);
+                   
                    $requestUser = $this->model->loginUser($strUsuario, $strPassword);
                    if(empty($requestUser)){
                     $arrResponse = array('status' => false, 'msg' => 'Datos incorrectos.' ); 
                 }else{
                     $arrData = $requestUser;
                     
-						if($arrData['COD_STATUS'] == 1){
+						if($arrData['COD_STATUS'] == 1 OR $arrData['COD_STATUS'] == 3){
 							$_SESSION['idUser'] = $arrData['COD_PERSONA'];
 							$_SESSION['login'] = true;
                             $this->model->sessionUpdate($_SESSION['idUser']);
@@ -89,6 +90,7 @@
 						$nombreUsuario = $arrData['NOMBRES'].' '.$arrData['APELLIDOS'];
                         $url_recovery = base_url().'/login/confirmUser/'.$strEmail.'/'.$token;
 						$requestUpdate = $this->model->setTokenUser($idUsuario,$token);
+                       
                         //$datosEmpresa=$this->model->datosEmpresa()['Empresa'];
                         $dataUsuario = array('nombreUsuario' => $nombreUsuario,
                         'email' => $strEmail,
@@ -117,7 +119,7 @@
             die();
         }
         public function confirmUser(string $params){
-
+           
 			if(empty($params)){
 				header('Location: '.base_url());
 			}else{
@@ -181,6 +183,57 @@
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			die(); 
 		}
+
+        public function verificar()
+        {
+            
+            if ($_POST) {
+                if(empty($_POST['txtPregunta1']) || empty($_POST['txtRespuesta1']) || empty($_POST['email'])){
+                    $arrResponse = array('status' => false, 'msg' => 'Error de datos');
+                 }else{
+                    $token=token();
+                   $intPregunta = intval($_POST['txtPregunta1']);
+                   $respuesta = ($_POST['txtRespuesta1']);
+                   $strEmail  =  strtolower(strClean($_POST['email']));
+                 
+                   $arrData = $this->model->getUserEmail($strEmail);
+                  
+					if(empty($arrData)){
+						$arrResponse = array('status' => false, 'msg' => 'Usuario no existente.' ); 
+                    }else{
+                        $requestUser = $this->model->confirmRequest($strEmail,$intPregunta, $respuesta);
+                       
+                        if($requestUser!=""){
+                            $idUsuario=$requestUser['COD_PERSONA'];
+                            $url_recovery = base_url().'/login/confirmUser/'.$strEmail.'/'.$token;
+                            $requestUpdate = $this->model->setTokenUser($idUsuario,$token);
+                           
+                            if($requestUpdate){
+                              
+                                
+                               
+                        
+                                $arrResponse = array('status' => true, 
+                                                    'msg' => 'Respuesta Correcta','url'=>$url_recovery);
+                              
+                              
+                            }else{
+                                $arrResponse = array('status' => false, 
+                                                 'msg' => 'No es posible realizar el proceso, intenta más tarde.');
+                            }
+                        }else{
+                            $arrResponse = array('status' => false, 
+                                                 'msg' => 'Incorrecto, Verifique los Datos');
+                            
+                        }
+                       
+                    }
+
+                 }
+            }
+            echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+            die();
+        }
     }
 
 ?>
