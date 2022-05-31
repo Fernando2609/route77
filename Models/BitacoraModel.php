@@ -17,8 +17,8 @@
 		{
 		
             $sql = "SELECT b.*,m.NOMBRE  as 'MODULO',CONCAT(p.NOMBRES, ' ', p.APELLIDOS) AS 'USUARIO' FROM `TBL_BITACORA` b 
-            INNER JOIN tbl_modulo m on ID_MODULO=COD_MODULO
-            INNER JOIN tbl_personas p on ID_PERSONA=COD_PERSONA";
+            INNER JOIN TBL_MODULO m on ID_MODULO=COD_MODULO
+            INNER JOIN TBL_PERSONAS p on ID_PERSONA=COD_PERSONA";
 			//WHERE idRol = 7 and status != 0";
 			    $request = $this->select_all($sql);
                
@@ -33,9 +33,10 @@
 
 			
 			$sql= "SELECT b.*,m.NOMBRE as 'MODULO',CONCAT(p.NOMBRES, ' ', p.APELLIDOS) AS 'USUARIO' FROM `TBL_BITACORA` b 
-			INNER JOIN tbl_modulo m on ID_MODULO=COD_MODULO
-			INNER JOIN tbl_personas p on ID_PERSONA=COD_PERSONA WHERE ID_BITACORA=$this->intCod_Producto";
+			INNER JOIN TBL_MODULO m on ID_MODULO=COD_MODULO
+			INNER JOIN TBL_PERSONAS p on ID_PERSONA=COD_PERSONA WHERE ID_BITACORA=$this->intCod_Producto";
 			$request = $this->select($sql);
+			
 			/* dep(($request));
 			exit; */
 			return $request;

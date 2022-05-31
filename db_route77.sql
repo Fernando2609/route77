@@ -1,4 +1,9 @@
-Re a las 20:45:42
+-- phpMyAdmin SQL Dump
+-- version 5.1.0
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 27-05-2022 a las 20:52:39
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -20,7 +25,7 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_CATEGORIA` (IN `PI_COD_STATUS` INT(11), IN `PV_DESCRIPCION` VARCHAR(100), IN `PV_NOMBRE` VARCHAR(50), IN `PV_PORTADA` VARCHAR(200), IN `PI_CREADO_POR` BIGINT(20), IN `PI_MODIFICADO_POR` BIGINT(20), IN `PV_RUTA` VARCHAR(255), IN `PV_FECHA` VARCHAR(100), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_CATEGORIA` (IN `PI_COD_STATUS` INT(11), IN `PV_DESCRIPCION` VARCHAR(100), IN `PV_NOMBRE` VARCHAR(50), IN `PV_PORTADA` VARCHAR(200), IN `PI_CREADO_POR` BIGINT(20), IN `PI_MODIFICADO_POR` BIGINT(20), IN `PV_RUTA` VARCHAR(255), IN `PV_FECHA` VARCHAR(100), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	-- INSERT EN LA TABLA CATEGORIA
     IF MODO='I' THEN
@@ -61,7 +66,7 @@ START TRANSACTION;
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_CLIENTE` (IN `PV_NOMBRES` VARCHAR(25), IN `PV_APELLIDOS` VARCHAR(25), IN `PV_EMAIL` VARCHAR(35), IN `PV_CONTRASEÑA` VARCHAR(150), IN `PI_ROL` BIGINT(20), IN `PI_STATUS` INT(11), IN `PI_TELEFONO` INT(11), IN `PI_CREADO_POR` BIGINT(20), IN `PI_MODIFICADO_POR` BIGINT(20), IN `PV_FECHA` VARCHAR(100), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_CLIENTE` (IN `PV_NOMBRES` VARCHAR(25), IN `PV_APELLIDOS` VARCHAR(25), IN `PV_EMAIL` VARCHAR(35), IN `PV_CONTRASEÑA` VARCHAR(150), IN `PI_ROL` BIGINT(20), IN `PI_STATUS` INT(11), IN `PI_TELEFONO` INT(11), IN `PI_CREADO_POR` BIGINT(20), IN `PI_MODIFICADO_POR` BIGINT(20), IN `PV_FECHA` VARCHAR(100), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
    START TRANSACTION;
 
      -- INSERT TABLAS PERSONAS Y CLIENTE
@@ -128,7 +133,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_CLIENTE` (IN `PV_NOMBRES` VARC
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_DETALLE_COMPRA` (IN `PI_COD_ORDEN` BIGINT(20), IN `PI_COD_PRODUCTO` BIGINT(20), IN `PD_PRECIO` DECIMAL(11,2), IN `PI_CANTIDAD` INT(11), `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_DETALLE_COMPRA` (IN `PI_COD_ORDEN` BIGINT(20), IN `PI_COD_PRODUCTO` BIGINT(20), IN `PD_PRECIO` DECIMAL(11,2), IN `PI_CANTIDAD` INT(11), `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
 START TRANSACTION;
     -- INSERT DE LA TABLA DETALLE_COMPRA
     IF PC_MODO='I' THEN
@@ -168,7 +173,7 @@ START TRANSACTION;
     COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_DETALLE_PEDIDO` (IN `PI_COD_PEDIDO` BIGINT(20), IN `PI_COD_PRODUCTO` BIGINT(20), IN `PD_PRECIO` DECIMAL(11,2), IN `PI_CANTIDAD` INT(11), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_DETALLE_PEDIDO` (IN `PI_COD_PEDIDO` BIGINT(20), IN `PI_COD_PRODUCTO` BIGINT(20), IN `PD_PRECIO` DECIMAL(11,2), IN `PI_CANTIDAD` INT(11), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
 START TRANSACTION;
     -- INSERT DE LA TABLA DETALLE_PEDIDO
     IF MODO='I' THEN
@@ -208,7 +213,7 @@ INNER JOIN TBL_PEDIDO PE ON DP.COD_PEDIDO= PE.COD_PEDIDO
     COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_EMPRESA` (IN `PV_NOMBRE_EMPRESA` VARCHAR(20), IN `PV_DIRECCION` VARCHAR(50), IN `PV_RAZON_SOCIAL` VARCHAR(255), IN `PV_EMAIL` VARCHAR(100), IN `PV_GERENTE_GENERAL` VARCHAR(30), IN `PI_COSTO_ENVIO` INT, IN `PI_PEDIDO_MINIMO` INT, IN `PV_RTN` VARCHAR(100), IN `PV_EMAIL_PEDIDOS` VARCHAR(100), IN `PV_TEL_EMPRESA` VARCHAR(50), IN `PV_CEL_EMPRESA` VARCHAR(50), IN `PV_CAT_SLIDER` VARCHAR(100), IN `PV_CAT_BANNER` VARCHAR(100), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_EMPRESA` (IN `PV_NOMBRE_EMPRESA` VARCHAR(20), IN `PV_DIRECCION` VARCHAR(50), IN `PV_RAZON_SOCIAL` VARCHAR(255), IN `PV_EMAIL` VARCHAR(100), IN `PV_GERENTE_GENERAL` VARCHAR(30), IN `PI_COSTO_ENVIO` INT, IN `PI_PEDIDO_MINIMO` INT, IN `PV_RTN` VARCHAR(100), IN `PV_EMAIL_PEDIDOS` VARCHAR(100), IN `PV_TEL_EMPRESA` VARCHAR(50), IN `PV_CEL_EMPRESA` VARCHAR(50), IN `PV_CAT_SLIDER` VARCHAR(100), IN `PV_CAT_BANNER` VARCHAR(100), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	-- INSERT
     IF PC_MODO='I' THEN
@@ -239,7 +244,7 @@ START TRANSACTION;
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_GENERO` (IN `PV_DESCRIPCION` VARCHAR(10), IN `PI_MODO` CHAR(1), IN `PI_COD` BIGINT(11))  BEGIN
+CREATE PROCEDURE `CRUD_GENERO` (IN `PV_DESCRIPCION` VARCHAR(10), IN `PI_MODO` CHAR(1), IN `PI_COD` BIGINT(11))  BEGIN
 	-- INSERT TABLA PARA GÉNERO
     IF PI_MODO='I' THEN
      INSERT INTO TBL_GENERO(DESCRIPCION) 
@@ -261,7 +266,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_GENERO` (IN `PV_DESCRIPCION` V
 	END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_IMG_PRODUCTO` (IN `PV_NOMBRE` VARCHAR(255), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_IMG_PRODUCTO` (IN `PV_NOMBRE` VARCHAR(255), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	-- INSERT EN LA TABLA IMG
     IF MODO='I' THEN
@@ -279,7 +284,7 @@ START TRANSACTION;
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_MODULOS` (IN `PV_NOMBRE` VARCHAR(50), IN `PT_DESCRIPCION` TEXT, IN `PI_COD_STATUS` INT(11), IN `PI_COD_ROL` BIGINT(20), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_MODULOS` (IN `PV_NOMBRE` VARCHAR(50), IN `PT_DESCRIPCION` TEXT, IN `PI_COD_STATUS` INT(11), IN `PI_COD_ROL` BIGINT(20), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
 START TRANSACTION;
    #READ
    IF PC_MODO="R" THEN
@@ -317,7 +322,7 @@ START TRANSACTION;
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_ORDEN_COMPRA` (IN `PI_COD_PROVEEDOR` BIGINT(20), IN `PD_MONTO` DECIMAL(11,2), IN `PD_ISV` DECIMAL(11,2), IN `PI_FACTURA` INT(11), IN `PC_MODO` CHAR(1), IN `PI_CREADO_POR` BIGINT(20), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_ORDEN_COMPRA` (IN `PI_COD_PROVEEDOR` BIGINT(20), IN `PD_MONTO` DECIMAL(11,2), IN `PD_ISV` DECIMAL(11,2), IN `PI_FACTURA` INT(11), IN `PC_MODO` CHAR(1), IN `PI_CREADO_POR` BIGINT(20), IN `PI_COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 
 	-- ABRE EL IF
@@ -390,7 +395,7 @@ START TRANSACTION;
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_PEDIDO` (IN `PI_COD_PERSONA` BIGINT(20), IN `PD_MONTO` DECIMAL(11,2), IN `PD_COSTOENVIO` DECIMAL(11,2), IN `PI_COD_TIPO_PAGO` BIGINT(20), IN `PT_DIRECCON_ENVIO` TEXT, IN `PI_COD_ESTADO` INT(11), IN `PV_COD_TR_PAYPAL` VARCHAR(255), IN `PT_DATOS_PAYPAL` TEXT, IN `PI_MODIFICADO_POR` BIGINT(20), IN `PV_FECHA` VARCHAR(100), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_PEDIDO` (IN `PI_COD_PERSONA` BIGINT(20), IN `PD_MONTO` DECIMAL(11,2), IN `PD_COSTOENVIO` DECIMAL(11,2), IN `PI_COD_TIPO_PAGO` BIGINT(20), IN `PT_DIRECCON_ENVIO` TEXT, IN `PI_COD_ESTADO` INT(11), IN `PV_COD_TR_PAYPAL` VARCHAR(255), IN `PT_DATOS_PAYPAL` TEXT, IN `PI_MODIFICADO_POR` BIGINT(20), IN `PV_FECHA` VARCHAR(100), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
 START TRANSACTION;
    
 	-- INSERT EN LA TABLA TBL_PEDIDO
@@ -450,7 +455,7 @@ START TRANSACTION;
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_PERMISOS` (IN `PI_COD_ROL` BIGINT(20), IN `PI_COD_MODULO` BIGINT(20), IN `PI_R` INT(11), IN `PI_U` INT(11), IN `PI_W` INT(11), IN `PI_D` INT(11), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_PERMISOS` (IN `PI_COD_ROL` BIGINT(20), IN `PI_COD_MODULO` BIGINT(20), IN `PI_R` INT(11), IN `PI_U` INT(11), IN `PI_W` INT(11), IN `PI_D` INT(11), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
 START TRANSACTION;
    #INSERT
    IF PC_MODO="I" THEN
@@ -477,7 +482,7 @@ START TRANSACTION;
    COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_PRODUCTOS` (IN `PI_COD_CATEGORIA` BIGINT(20), IN `PV_COD_BARRA` VARCHAR(30), IN `PV_NOMBRE` VARCHAR(100), IN `PT_DESCRIPCION` TEXT, IN `PD_PRECIO` DECIMAL(11,2), IN `PV_RUTA` VARCHAR(255), IN `PI_CREADO_POR` BIGINT(20), IN `PI_MODIFICADO_POR` BIGINT(20), IN `PI_COD_STATUS` INT(11), IN `PI_CANT_MINIMA` INT(11), IN `PV_FECHA` VARCHAR(100), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_PRODUCTOS` (IN `PI_COD_CATEGORIA` BIGINT(20), IN `PV_COD_BARRA` VARCHAR(30), IN `PV_NOMBRE` VARCHAR(100), IN `PT_DESCRIPCION` TEXT, IN `PD_PRECIO` DECIMAL(11,2), IN `PV_RUTA` VARCHAR(255), IN `PI_CREADO_POR` BIGINT(20), IN `PI_MODIFICADO_POR` BIGINT(20), IN `PI_COD_STATUS` INT(11), IN `PI_CANT_MINIMA` INT(11), IN `PV_FECHA` VARCHAR(100), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	-- INSERT DE LA TABLA TBL_PRODUCTOS
      IF MODO='I' THEN
@@ -538,7 +543,7 @@ START TRANSACTION;
     COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_PRODUCTOSTIENDA` (IN `PI_COD_CATEGORIA` BIGINT(20), IN `PI_CANT` BIGINT(20), IN `PV_OPTIONS` VARCHAR(100), IN `PC_MODO` CHAR(1))  BEGIN
+CREATE PROCEDURE `CRUD_PRODUCTOSTIENDA` (IN `PI_COD_CATEGORIA` BIGINT(20), IN `PI_CANT` BIGINT(20), IN `PV_OPTIONS` VARCHAR(100), IN `PC_MODO` CHAR(1))  BEGIN
 START TRANSACTION;
    #READ
    IF PC_MODO="V" THEN
@@ -592,7 +597,7 @@ START TRANSACTION;
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_PROVEEDOR` (IN `PV_NOMBRES` VARCHAR(25), IN `PV_APELLIDOS` VARCHAR(25), IN `PV_EMAIL` VARCHAR(35), IN `PI_STATUS` INT(11), IN `PI_ROL` BIGINT(11), IN `PI_TELEFONO` INT(11), IN `PV_NOM_EMPRESA` VARCHAR(50), IN `PI_RTN` VARCHAR(20), IN `PV_UBICACION` VARCHAR(50), IN `PI_CREADO_POR` BIGINT(20), IN `PI_MODIFICADO_POR` BIGINT(20), IN `PV_FECHA` VARCHAR(100), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_PROVEEDOR` (IN `PV_NOMBRES` VARCHAR(25), IN `PV_APELLIDOS` VARCHAR(25), IN `PV_EMAIL` VARCHAR(35), IN `PI_STATUS` INT(11), IN `PI_ROL` BIGINT(11), IN `PI_TELEFONO` INT(11), IN `PV_NOM_EMPRESA` VARCHAR(50), IN `PI_RTN` VARCHAR(20), IN `PV_UBICACION` VARCHAR(50), IN `PI_CREADO_POR` BIGINT(20), IN `PI_MODIFICADO_POR` BIGINT(20), IN `PV_FECHA` VARCHAR(100), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
 START TRANSACTION;
      -- INSERT
     IF PC_MODO='I' THEN
@@ -652,7 +657,7 @@ SELECT PV.COD_PERSONA, PV.COD_PROVEEDOR, PV.NOMBRE_EMPRESA,PV.RTN,PV.UBICACION, 
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_REDES_SOCIALES` (IN `PI_COD_EMPRESA` BIGINT(20), IN `PC_DESCRIPCION` VARCHAR(15), IN `PC_ENLACE` VARCHAR(100), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_REDES_SOCIALES` (IN `PI_COD_EMPRESA` BIGINT(20), IN `PC_DESCRIPCION` VARCHAR(15), IN `PC_ENLACE` VARCHAR(100), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	-- INSERT
     IF PC_MODO='I' THEN
@@ -688,7 +693,7 @@ START TRANSACTION;
     COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_REEMBOLSO` (IN `PI_COD_PEDIDO` BIGINT(20), IN `PT_OBSERVACION` TEXT, IN `PV_STATUS` VARCHAR(255), IN `PI_COD_TRANSACCION` VARCHAR(255), IN `PT_DATOS_REEMBOLSO` TEXT, IN `PC_MODO` CHAR(1))  BEGIN
+CREATE PROCEDURE `CRUD_REEMBOLSO` (IN `PI_COD_PEDIDO` BIGINT(20), IN `PT_OBSERVACION` TEXT, IN `PV_STATUS` VARCHAR(255), IN `PI_COD_TRANSACCION` VARCHAR(255), IN `PT_DATOS_REEMBOLSO` TEXT, IN `PC_MODO` CHAR(1))  BEGIN
 START TRANSACTION;
 	-- INSERT EN LA TABLA TBL_PEDIDO
     IF PC_MODO='I' THEN
@@ -698,7 +703,7 @@ START TRANSACTION;
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_ROLES` (IN `PV_NOM_ROL` VARCHAR(20), IN `PT_DESCRIPCION` TEXT, IN `PI_COD_STATUS` INT(11), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_ROLES` (IN `PV_NOM_ROL` VARCHAR(20), IN `PT_DESCRIPCION` TEXT, IN `PI_COD_STATUS` INT(11), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
 declare whereAdmin varchar(20);
 
 START TRANSACTION;
@@ -750,7 +755,7 @@ set whereAdmin="";
    COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_STATUS` (IN `PV_DESCRIPCION` VARCHAR(20), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_STATUS` (IN `PV_DESCRIPCION` VARCHAR(20), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	-- INSERT
     IF MODO='I' THEN
@@ -778,7 +783,7 @@ START TRANSACTION;
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_SUCURSAL` (IN `PV_NOMBRE` VARCHAR(15), IN `PV_DIRECCION` VARCHAR(50), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(11))  BEGIN
+CREATE PROCEDURE `CRUD_SUCURSAL` (IN `PV_NOMBRE` VARCHAR(15), IN `PV_DIRECCION` VARCHAR(50), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(11))  BEGIN
 	-- INSERT EN TABLA SUCURSAL
     IF PC_MODO='I' THEN
      INSERT INTO TBL_SUCURSAL(NOMBRE, DIRECCION) 
@@ -807,7 +812,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_SUCURSAL` (IN `PV_NOMBRE` VARC
     END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_TCATEGORIA` (IN `PI_COD_STATUS` INT(11), IN `PV_DESCRIPCION` VARCHAR(100), IN `PV_NOMBRE` VARCHAR(50), IN `PV_PORTADA` VARCHAR(200), IN `PI_CREADO_POR` BIGINT(20), IN `PI_MODIFICADO_POR` BIGINT(20), IN `PV_RUTA` VARCHAR(255), IN `M_CATEGORIAS` INT(10), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_TCATEGORIA` (IN `PI_COD_STATUS` INT(11), IN `PV_DESCRIPCION` VARCHAR(100), IN `PV_NOMBRE` VARCHAR(50), IN `PV_PORTADA` VARCHAR(200), IN `PI_CREADO_POR` BIGINT(20), IN `PI_MODIFICADO_POR` BIGINT(20), IN `PV_RUTA` VARCHAR(255), IN `M_CATEGORIAS` INT(10), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	-- INSERT EN LA TABLA CATEGORIA
     IF MODO='I' THEN
@@ -848,7 +853,7 @@ ELSEIF MODO='J' THEN
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_TELEFONO_EMPRESA` (IN `PI_COD_EMPRESA` BIGINT(20), IN `PV_TELEFONO` VARCHAR(15), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_TELEFONO_EMPRESA` (IN `PI_COD_EMPRESA` BIGINT(20), IN `PV_TELEFONO` VARCHAR(15), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	-- INSERT
     IF PC_MODO='I' THEN
@@ -888,7 +893,7 @@ START TRANSACTION;
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_TIPOESTADO` (IN `PV_DESCRIPCION` VARCHAR(50), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_TIPOESTADO` (IN `PV_DESCRIPCION` VARCHAR(50), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	-- INSERT EN LA TABLA TBL_TIPO_ESTADO
     IF PC_MODO='I' THEN
@@ -919,7 +924,7 @@ START TRANSACTION;
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_TIPOPAGO` (IN `PV_DESCRIPCION` VARCHAR(15), IN `PV_TIPO_PAGO` VARCHAR(100), IN `PI_COD_STATUS` INT(11), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_TIPOPAGO` (IN `PV_DESCRIPCION` VARCHAR(15), IN `PV_TIPO_PAGO` VARCHAR(100), IN `PI_COD_STATUS` INT(11), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	-- INSERT EN LA TABLA TBL_TIPO_PAGO
     IF PC_MODO='I' THEN
@@ -957,7 +962,7 @@ S.DESCRIPCION AS COD_STATUS
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_TPRODUCTO` (IN `PI_COD_CATEGORIA` INT(11), IN `PV_RUTA` VARCHAR(255), IN `CANT` INT(11), IN `PV_OPTION` VARCHAR(200), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_TPRODUCTO` (IN `PI_COD_CATEGORIA` INT(11), IN `PV_RUTA` VARCHAR(255), IN `CANT` INT(11), IN `PV_OPTION` VARCHAR(200), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	-- INSERT EN LA TABLA CATEGORIA
     IF MODO='V' THEN
@@ -1059,7 +1064,7 @@ WHERE p.COD_STATUS = 1 /* and p.stock>0 */ ORDER BY p.COD_PRODUCTO DESC LIMIT 12
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_USUARIO` (IN `PV_NOMBRES` VARCHAR(25), IN `PV_APELLIDOS` VARCHAR(25), IN `PV_EMAIL` VARCHAR(35), IN `PV_CONTRASEÑA` VARCHAR(150), IN `PI_ROL` BIGINT(20), IN `PI_STATUS` INT(11), IN `PI_TELEFONO` INT(11), IN `PI_COD_SUCURSAL` INT(11), IN `PI_COD_GENERO` INT(11), IN `PV_DNI` VARCHAR(15), IN `PI_CREADO_POR` BIGINT(20), IN `PI_MODIFICADO_POR` BIGINT(20), IN `PV_FECHA` VARCHAR(100), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `CRUD_USUARIO` (IN `PV_NOMBRES` VARCHAR(25), IN `PV_APELLIDOS` VARCHAR(25), IN `PV_EMAIL` VARCHAR(35), IN `PV_CONTRASEÑA` VARCHAR(150), IN `PI_ROL` BIGINT(20), IN `PI_STATUS` INT(11), IN `PI_TELEFONO` INT(11), IN `PI_COD_SUCURSAL` INT(11), IN `PI_COD_GENERO` INT(11), IN `PV_DNI` VARCHAR(15), IN `PI_CREADO_POR` BIGINT(20), IN `PI_MODIFICADO_POR` BIGINT(20), IN `PV_FECHA` VARCHAR(100), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
     START TRANSACTION;
      -- INSERT TABLAS USUARIOS Y PERSONAS
     IF PC_MODO='I' THEN
@@ -1186,7 +1191,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CRUD_USUARIO` (IN `PV_NOMBRES` VARC
 COMMIT;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `INVENTARIO` (IN `PI_STOCK` INT(20), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `INVENTARIO` (IN `PI_STOCK` INT(20), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	IF MODO='V' THEN
        SELECT I.*, P.NOMBRE,P.* FROM TBL_INVENTARIO I 
@@ -1214,7 +1219,7 @@ START TRANSACTION;
    COMMIT;
    END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `LOGIN` (IN `PV_USUARIO` VARCHAR(35), IN `PV_CONTRASEÑA` VARCHAR(135), IN `PV_TOKEN` VARCHAR(100), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN    
+CREATE PROCEDURE `LOGIN` (IN `PV_USUARIO` VARCHAR(35), IN `PV_CONTRASEÑA` VARCHAR(135), IN `PV_TOKEN` VARCHAR(100), IN `MODO` CHAR(1), IN `COD` BIGINT(20))  BEGIN    
  
 	IF MODO='V' THEN
 	SELECT COD_PERSONA, COD_STATUS FROM TBL_PERSONAS 
@@ -1222,7 +1227,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `LOGIN` (IN `PV_USUARIO` VARCHAR(35)
 	ELSEIF MODO='L' THEN
     UPDATE TBL_PERSONAS SET DATE_LOGIN = now() WHERE COD_PERSONA = COD;
     ELSEIF MODO="S" THEN
-SELECT p.COD_PERSONA,u.DNI,p.NOMBRES,p.APELLIDOS,p.TELEFONO,date_format(p.FECHA_MODIFICACION,'%d-%m-%Y') as "FECHA_MODIFICACION" ,date_format(p.DATE_LOGIN,'%d-%m-%Y') as "DATE_LOGIN" ,
+SELECT p.COD_PERSONA,u.DNI,p.NOMBRES,p.COD_STATUS,p.APELLIDOS,p.TELEFONO,date_format(p.FECHA_MODIFICACION,'%d-%m-%Y') as "FECHA_MODIFICACION" ,date_format(p.DATE_LOGIN,'%d-%m-%Y') as "DATE_LOGIN" ,
 			p.EMAIL,date_format(p.FECHA_CREACION,'%d-%m-%Y') as "FECHA_CREACION" , DATE_FORMAT(p.FECHA_CREACION,'%d-%m-%Y') as fechaRegistro,
 			r.COD_ROL,r.NOM_ROL,u.COD_SUCURSAL,u.COD_GENERO,s.NOMBRE as "Sucursal",s.DIRECCION as "Sucursal Desc"
 			FROM TBL_PERSONAS p
@@ -1233,20 +1238,22 @@ SELECT p.COD_PERSONA,u.DNI,p.NOMBRES,p.APELLIDOS,p.TELEFONO,date_format(p.FECHA_
 	ELSEIF MODO="R" THEN
     SELECT COD_PERSONA,NOMBRES,APELLIDOS,COD_STATUS FROM TBL_PERSONAS WHERE 
 					EMAIL = PV_USUARIO and  
-					COD_STATUS = 1;
+					(COD_STATUS = 1 or 
+					COD_STATUS = 3);
 	elseif MODO="T" THEN
     UPDATE TBL_PERSONAS SET token = PV_TOKEN WHERE COD_PERSONA = COD;
     elseif MODO="C" THEN
     SELECT COD_PERSONA FROM TBL_PERSONAS WHERE 
 					EMAIL = PV_USUARIO and 
 					TOKEN = PV_TOKEN and 					
-					COD_STATUS = 1;
+					(COD_STATUS = 1  or 
+					COD_STATUS = 3);
     ELSEIF MODO="P" THEN
    UPDATE TBL_PERSONAS SET CONTRASEÑA = PV_CONTRASEÑA, TOKEN = PV_TOKEN WHERE COD_PERSONA =COD;
    END IF; 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `P_ORDEN_COMPRA` (IN `PI_COD_PROVEEDOR` BIGINT(20), IN `PI_COD_PRODUCTO` BIGINT(20), IN `PD_PRECIO` DECIMAL(11,2), IN `PI_CANT_COMPRA` INT(11), IN `PD_ISV` DECIMAL(11,2), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
+CREATE PROCEDURE `P_ORDEN_COMPRA` (IN `PI_COD_PROVEEDOR` BIGINT(20), IN `PI_COD_PRODUCTO` BIGINT(20), IN `PD_PRECIO` DECIMAL(11,2), IN `PI_CANT_COMPRA` INT(11), IN `PD_ISV` DECIMAL(11,2), IN `PC_MODO` CHAR(1), IN `PI_COD` BIGINT(20))  BEGIN
 START TRANSACTION;
 	-- TOTAL PRECIO * CANTIDAD
 	SET @TOTAL:=PD_PRECIO*PI_CANT_COMPRA;
@@ -1334,10 +1341,10 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_bitacora`
+-- Estructura de tabla para la tabla `TBL_BITACORA`
 --
 
-CREATE TABLE `tbl_bitacora` (
+CREATE TABLE `TBL_BITACORA` (
   `ID_BITACORA` bigint(20) NOT NULL,
   `FECHA` datetime NOT NULL,
   `ID_PERSONA` bigint(20) NOT NULL,
@@ -1347,145 +1354,14 @@ CREATE TABLE `tbl_bitacora` (
   `COD_REGISTRO` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_bitacora`
---
-
-INSERT INTO `tbl_bitacora` (`ID_BITACORA`, `FECHA`, `ID_PERSONA`, `ID_MODULO`, `ACCION`, `DESCRIPCION`, `COD_REGISTRO`) VALUES
-(2, '2022-05-10 22:13:53', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(3, '2022-05-10 22:41:21', 1, 1, 'Login', 'Inicio Sesión', 0),
-(4, '2022-05-10 22:41:21', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(5, '2022-05-10 22:42:19', 1, 1, 'Login', 'Inicio Sesión', 0),
-(6, '2022-05-10 22:42:19', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(7, '2022-05-10 22:43:38', 1, 1, 'Login', 'Inicio Sesión', 0),
-(8, '2022-05-10 22:43:38', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(9, '2022-05-10 23:19:30', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(10, '2022-05-10 23:21:08', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(11, '2022-05-10 23:21:08', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(12, '2022-05-10 23:21:57', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(13, '2022-05-10 23:22:16', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(14, '2022-05-11 00:02:50', 13, 1, 'Login', 'Inicio Sesión', 0),
-(15, '2022-05-11 00:02:50', 13, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(16, '2022-05-11 00:03:36', 13, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(17, '2022-05-11 15:35:02', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(18, '2022-05-11 16:42:39', 1, 1, 'Consulta', 'Consulto al Usuario', 0),
-(19, '2022-05-11 16:42:55', 1, 1, 'Consulta', 'Consulto al Usuario', 0),
-(20, '2022-05-11 16:43:05', 1, 1, 'Consulta', 'Consulto al Usuario', 0),
-(21, '2022-05-11 16:43:12', 1, 1, 'Consulta', 'Consulto al Usuario', 0),
-(22, '2022-05-11 16:44:43', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(23, '2022-05-11 16:51:44', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(24, '2022-05-11 16:51:46', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(25, '2022-05-11 17:07:14', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(26, '2022-05-11 17:07:16', 1, 2, 'Consulta', 'Consulto al UsuarioLeonela', 0),
-(27, '2022-05-11 17:07:19', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(28, '2022-05-11 17:08:43', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(29, '2022-05-11 17:08:46', 1, 2, 'Consulta', 'Consulto al UsuarioLeonela', 0),
-(30, '2022-05-11 17:10:57', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(31, '2022-05-11 17:10:59', 1, 2, 'Consulta', 'Consultó al Usuario Leonelaen el módulo', 0),
-(32, '2022-05-11 17:31:31', 1, 2, 'Consulta', 'Consultó al Usuario Reynaldo en el módulo', 0),
-(33, '2022-05-11 17:34:49', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(34, '2022-05-11 17:35:44', 1, 2, 'Consulta', 'Consultó al Usuario Leonela en el módulo', 0),
-(35, '2022-05-11 17:50:23', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(36, '2022-05-11 17:51:15', 1, 2, 'Nuevo', 'Agrego al Usuario  ', 0),
-(37, '2022-05-11 17:51:20', 1, 2, 'Nuevo', 'Agrego al Usuario  ', 0),
-(38, '2022-05-11 18:14:54', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(39, '2022-05-11 18:15:21', 1, 2, 'Consulta', 'Consultó al Usuario Leonela Pineda', 0),
-(40, '2022-05-11 18:15:47', 1, 2, 'Consulta', 'Consultó al Usuario Leonela Pineda', 0),
-(41, '2022-05-11 18:15:48', 1, 2, 'Update', 'Actualizo al Usuario Leonela Pineda', 0),
-(42, '2022-05-11 18:17:19', 1, 2, 'Consulta', 'Consultó al Usuario José Fernando Ortiz', 0),
-(43, '2022-05-11 18:17:48', 1, 2, 'Consulta', 'Consultó al Usuario Hugo Paz', 0),
-(44, '2022-05-11 18:24:30', 1, 2, 'Nuevo', 'Agrego al Usuario José Fernando Santos', 0),
-(45, '2022-05-11 18:24:30', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(46, '2022-05-11 18:25:03', 1, 2, 'Consulta', 'Consultó al Usuario José Fernando Santos', 0),
-(47, '2022-05-11 18:25:11', 1, 2, 'Update', 'Actualizo al Usuario Pedro Martinez Santos', 0),
-(48, '2022-05-11 18:25:24', 1, 2, 'Nuevo', 'Elimino al Usuario José Fernando Ortiz', 0),
-(49, '2022-05-11 18:25:24', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(50, '2022-05-11 18:26:35', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(51, '2022-05-11 18:27:03', 1, 2, 'Nuevo', 'Elimino al Usuario Pedro Martinez Santos', 0),
-(52, '2022-05-11 18:27:03', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(53, '2022-05-11 18:46:25', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(54, '2022-05-11 18:46:27', 1, 2, 'Delete', 'Eliminó al Usuario Pedro Martinez Santos', 0),
-(55, '2022-05-11 18:46:27', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(56, '2022-05-11 20:57:41', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(57, '2022-05-11 21:01:21', 1, 3, 'Ingreso', 'Ingresó al módulo', 0),
-(58, '2022-05-11 21:01:36', 1, 3, 'Consulta', 'Consultó al Cliente Juan Orlando Hernandez Alvarado', 0),
-(59, '2022-05-11 21:01:49', 1, 3, 'Consulta', 'Consultó al Cliente Juan Orlando Hernandez Alvarado', 0),
-(60, '2022-05-11 21:01:51', 1, 3, 'Update', 'Actualizo al Cliente Juan Orlando Hernandez Alvarado', 0),
-(61, '2022-05-11 21:02:15', 1, 3, 'Ingreso', 'Ingresó al módulo', 0),
-(62, '2022-05-11 21:03:03', 1, 3, 'Ingreso', 'Ingresó al módulo', 0),
-(63, '2022-05-11 21:03:08', 1, 3, 'Delete', 'Eliminó al Cliente Juan Orlando Hernandez Alvarado', 0),
-(64, '2022-05-11 21:03:08', 1, 3, 'Ingreso', 'Ingresó al módulo', 0),
-(65, '2022-05-12 01:30:58', 1, 11, 'Ingreso', 'Ingresó al módulo', 0),
-(66, '2022-05-12 01:31:16', 1, 11, 'Nuevo', 'Registró la Sucursal La Isla', 0),
-(67, '2022-05-12 01:31:16', 1, 11, 'Ingreso', 'Ingresó al módulo', 0),
-(68, '2022-05-12 01:31:16', 1, 11, 'Ingreso', 'Ingresó al módulo', 0),
-(69, '2022-05-12 01:31:35', 1, 11, 'Consulta', 'Consultó la Sucursal La Isla', 0),
-(70, '2022-05-12 01:31:37', 1, 11, 'Update', 'Actualizo la Sucursal La Isla', 0),
-(71, '2022-05-12 01:31:37', 1, 11, 'Ingreso', 'Ingresó al módulo', 0),
-(72, '2022-05-12 01:32:33', 1, 11, 'Delete', 'Eliminó la Sucursal ', 0),
-(73, '2022-05-12 01:32:47', 1, 11, 'Delete', 'Eliminó la Sucursal ', 0),
-(74, '2022-05-12 01:33:05', 1, 11, 'Ingreso', 'Ingresó al módulo', 0),
-(75, '2022-05-12 01:34:33', 1, 11, 'Nuevo', 'Registró la Sucursal La Isla', 0),
-(76, '2022-05-12 01:34:33', 1, 11, 'Ingreso', 'Ingresó al módulo', 0),
-(77, '2022-05-12 01:34:33', 1, 11, 'Ingreso', 'Ingresó al módulo', 0),
-(78, '2022-05-12 01:34:36', 1, 11, 'Delete', 'Eliminó la Sucursal La Isla', 0),
-(79, '2022-05-12 01:34:36', 1, 11, 'Ingreso', 'Ingresó al módulo', 0),
-(80, '2022-05-12 02:22:08', 1, 11, 'Ingreso', 'Ingresó al módulo', 0),
-(81, '2022-05-12 02:23:28', 1, 11, 'Ingreso', 'Ingresó al módulo', 0),
-(82, '2022-05-12 02:23:49', 1, 11, 'Ingreso', 'Ingresó al módulo', 0),
-(83, '2022-05-12 02:24:12', 1, 16, 'Ingreso', 'Ingresó al módulo', 0),
-(84, '2022-05-16 19:38:28', 1, 16, 'Update', 'Restauró la Base de datos db_route77_2022-05-12_022428.sql', 0),
-(85, '2022-05-16 20:42:50', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(86, '2022-05-16 20:43:08', 1, 3, 'Ingreso', 'Ingresó al módulo', 0),
-(87, '2022-05-16 21:06:08', 1, 5, 'Ingreso', 'Ingresó al módulo', 0),
-(88, '2022-05-16 21:06:27', 1, 5, 'Consulta', 'Consultó la factura del pedido #88', 0),
-(89, '2022-05-16 21:06:39', 1, 5, 'Consulta', 'Consultó la factura del pedido #85', 0),
-(90, '2022-05-16 21:07:01', 1, 5, 'Consulta', 'Consultó la factura del pedido #83', 0),
-(91, '2022-05-16 21:27:15', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(92, '2022-05-16 21:36:57', 1, 5, 'Ingreso', 'Ingresó al módulo', 0),
-(93, '2022-05-16 21:54:38', 1, 2, 'Ingreso', 'Ingresó al módulo', 0),
-(94, '2022-05-16 21:54:43', 1, 2, 'Consulta', 'Consultó al Usuario Reynaldo Giron Flores', 0),
-(95, '2022-05-16 21:55:04', 1, 2, 'Consulta', 'Consultó al Usuario Reynaldo Giron Flores', 0),
-(96, '2022-05-16 21:55:10', 1, 2, 'Consulta', 'Consultó al Usuario Reynaldo Giron Flores', 0),
-(97, '2022-05-17 00:15:54', 1, 16, 'Ingreso', 'Ingresó al módulo', 0),
-(98, '2022-05-17 00:16:18', 1, 16, 'Update', 'Restauró la Base de datos db_route77_2022-05-17_001607.sql', 0),
-(99, '2022-05-17 00:17:58', 1, 3, 'Ingreso', 'Ingresó al módulo', 0),
-(100, '2022-05-17 00:18:04', 1, 3, 'Consulta', 'Consultó al Cliente José Fernando Santos', 0),
-(101, '2022-05-17 00:18:05', 1, 3, 'Consulta', 'Consultó al Cliente José Fernando Santos', 0),
-(102, '2022-05-17 00:26:45', 1, 14, 'Ingreso', 'Ingresó al módulo', 0),
-(103, '2022-05-18 01:25:36', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(104, '2022-05-18 01:25:40', 1, 16, 'Ingreso', 'Ingresó al módulo', 0),
-(105, '2022-05-18 01:25:48', 1, 16, 'Ingreso', 'Ingresó al módulo', 0),
-(106, '2022-05-18 01:25:52', 1, 16, 'Ingreso', 'Ingresó al módulo', 0),
-(107, '2022-05-18 01:28:14', 1, 16, 'Ingreso', 'Ingresó al módulo', 0),
-(108, '2022-05-18 01:28:27', 1, 16, 'Ingreso', 'Ingresó al módulo', 0),
-(109, '2022-05-18 01:28:29', 1, 16, 'Ingreso', 'Ingresó al módulo', 0),
-(110, '2022-05-18 01:29:32', 1, 16, 'Update', 'Restauró la Base de datos db_route77_2022-05-18_012830.sql', 0),
-(111, '2022-05-19 02:05:47', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(112, '2022-05-19 02:05:55', 1, 5, 'Ingreso', 'Ingresó al módulo', 0),
-(113, '2022-05-19 02:06:15', 1, 5, 'Consulta', 'Consultó la factura del pedido #91', 0),
-(114, '2022-05-19 02:13:01', 1, 5, 'Consulta', 'Consultó la factura del pedido #91', 0),
-(115, '2022-05-19 19:28:35', 1, 1, 'Login', 'Inició Sesión', 0),
-(116, '2022-05-19 19:28:36', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(117, '2022-05-19 19:34:18', 1, 1, 'Consulta', 'Consultó las ventas por tipo de pago del mes 5 y el año 2022', 0),
-(118, '2022-05-19 19:34:27', 1, 1, 'Consulta', 'Consultó las ventas por tipo de pago del mes 4 y el año 2022', 0),
-(119, '2022-05-19 19:46:31', 1, 2, 'Ingreso', 'Ingresó al módulo roles en', 0),
-(120, '2022-05-19 19:48:19', 1, 2, 'Consulta', 'Consultó al Rol Supervisor', 0),
-(121, '2022-05-19 19:48:21', 1, 1, 'Ingreso', 'Ingresó al módulo', 0),
-(122, '2022-05-19 19:48:27', 1, 2, 'Update', 'Actualizó al rol Administrador', 0),
-(123, '2022-05-19 19:49:22', 1, 2, 'Ingreso', 'Ingresó al módulo roles en', 0),
-(124, '2022-05-19 19:49:23', 1, 2, 'Consulta', 'Consultó al Rol Supervisor', 0),
-(125, '2022-05-19 19:49:24', 1, 2, 'Update', 'Actualizó al rol Supervisor', 0),
-(126, '2022-05-19 20:02:59', 1, 16, 'Ingreso', 'Ingresó al módulo', 0),
-(127, '2022-05-19 20:03:13', 1, 16, 'Update', 'Restauró la Base de datos db_route77_2022-05-19_200301.sql', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_calendario`
+-- Estructura de tabla para la tabla `TBL_CALENDARIO`
 --
 
-CREATE TABLE `tbl_calendario` (
+CREATE TABLE `TBL_CALENDARIO` (
   `COD_CALENDARIO` bigint(20) NOT NULL,
   `COD_PERSONA` bigint(20) NOT NULL,
   `title` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL,
@@ -1498,25 +1374,14 @@ CREATE TABLE `tbl_calendario` (
   `dateModificado` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_calendario`
---
-
-INSERT INTO `tbl_calendario` (`COD_CALENDARIO`, `COD_PERSONA`, `title`, `descripcion`, `start`, `end`, `color`, `textColor`, `dateCreated`, `dateModificado`) VALUES
-(4, 1, 'Subir Proyecto', 'Subir proyecto al campus virtual esta fecha', '2022-04-25 00:00:00', '2022-04-25 23:59:00', '#0033ff', '#ffffff', '2022-04-09 16:19:30', '2022-04-18 01:54:30'),
-(5, 1, 'Realizar Contabilidad', 'Realizar Contabilidad de ingresos y egresos', '2022-04-30 00:00:00', '2022-04-30 23:59:00', '#ff24ed', '#000000', '2022-04-09 16:22:08', '2022-04-09 16:22:49'),
-(7, 1, 'Fin del Periodo', 'Celebrar', '2022-05-07 00:00:00', '2022-05-07 23:59:00', '#1468f0', '#000000', '2022-04-18 17:33:02', '0000-00-00 00:00:00'),
-(8, 1, 'Realizar Contabilidad en Santa Lucia', 'Realizar Contabilidad', '2022-04-16 00:45:00', '2022-04-18 15:56:00', '#0040ff', '#ffffff', '2022-04-24 21:52:40', '2022-04-24 15:57:46'),
-(9, 1, 'Inversiones', 'Inversiones', '2022-04-20 00:00:00', '2022-04-20 23:59:00', '#2bff00', '#000000', '2022-04-24 21:53:55', '0000-00-00 00:00:00'),
-(10, 1, 'Cerrado', 'Cerrado', '2022-04-06 00:00:00', '2022-04-10 00:00:00', '#ff4000', '#ffffff', '2022-04-24 21:55:20', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_categoria`
+-- Estructura de tabla para la tabla `TBL_CATEGORIA`
 --
 
-CREATE TABLE `tbl_categoria` (
+CREATE TABLE `TBL_CATEGORIA` (
   `COD_CATEGORIA` bigint(20) NOT NULL COMMENT 'CÓDIGO DE CATEGORÍA',
   `COD_STATUS` int(11) DEFAULT NULL COMMENT 'CÓDIGO DEL STATUS',
   `DESCRIPCION` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'DESCRIPCIÓN SOBRE LA CATEGORÍA',
@@ -1530,14 +1395,14 @@ CREATE TABLE `tbl_categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_categoria`
+-- Volcado de datos para la tabla `TBL_CATEGORIA`
 --
 
-INSERT INTO `tbl_categoria` (`COD_CATEGORIA`, `COD_STATUS`, `DESCRIPCION`, `NOMBRE`, `PORTADA`, `RUTA`, `CREADO_POR`, `FECHA_CREACION`, `MODIFICADO_POR`, `FECHA_MODIFICACION`) VALUES
+INSERT INTO `TBL_CATEGORIA` (`COD_CATEGORIA`, `COD_STATUS`, `DESCRIPCION`, `NOMBRE`, `PORTADA`, `RUTA`, `CREADO_POR`, `FECHA_CREACION`, `MODIFICADO_POR`, `FECHA_MODIFICACION`) VALUES
 (1, 1, 'Derivados de la leche', 'Lacteos', 'img_bee4fea75cfa2a6e542b0575ad2516f2.jpg', 'lacteos', 1, '2022-03-20 00:11:48', 32, '2022-04-21 00:36:17'),
 (2, 1, 'Extenso Catálogo de Licores', 'Cervezas y Licores', 'img_50ab0b4623f1fb35934750cf73ab51ba.jpg', 'cervezas-y-licores', 1, '2022-02-19 03:19:41', 1, '2022-04-19 00:03:15'),
 (3, 1, 'Maquillaje y Cosmeticos', 'Maquillaje', 'img_ff226895a9e920ccb4f395019684731f.jpg', 'maquillaje', 1, '2022-02-12 02:21:20', 1, '2022-04-18 22:32:24'),
-(4, 1, 'Artículos del Hogar', 'Artículos del Hogar', 'img_5b59bd9c8985f1165a14152df943a677.jpg', 'articulos-del-hogar', 1, '2022-04-18 00:34:38', 1, '2022-04-19 09:48:21'),
+(4, 1, 'Artículos del Hogar', 'Artículos del Hogar', 'img_ce3ce337c0535ed605149ae4b1b9e123.webp', 'articulos-del-hogar', 1, '2022-04-18 00:34:38', 1, '2022-05-21 18:04:43'),
 (5, 1, 'Frescas Y Deliciosas', 'Frutas Y Vegetales', 'img_67bcce3e9c78193a009e25370785791f.jpg', 'frutas-y-vegetales', 1, '2022-04-18 23:47:11', 0, '0000-00-00 00:00:00'),
 (6, 1, 'Pastas de Buena Calidad', 'Pastas', 'img_eec94374e5ecd6f1f4da86682cfbedba.jpg', 'pastas', 1, '2022-04-18 23:57:01', 0, '0000-00-00 00:00:00'),
 (7, 1, 'Productos para Mascotas', 'Mascotas', 'img_bec798b8d653225977def8bfd99557df.jpg', 'mascotas', 1, '2022-04-19 00:02:50', 0, '0000-00-00 00:00:00'),
@@ -1550,45 +1415,21 @@ INSERT INTO `tbl_categoria` (`COD_CATEGORIA`, `COD_STATUS`, `DESCRIPCION`, `NOMB
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_cliente`
+-- Estructura de tabla para la tabla `TBL_CLIENTE`
 --
 
-CREATE TABLE `tbl_cliente` (
+CREATE TABLE `TBL_CLIENTE` (
   `COD_CLIENTE` bigint(20) NOT NULL COMMENT 'CÓDIGO DE CLIENTE',
   `COD_PERSONA` bigint(20) NOT NULL COMMENT 'CÓDIGO DE LA PERSONA'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_cliente`
---
-
-INSERT INTO `tbl_cliente` (`COD_CLIENTE`, `COD_PERSONA`) VALUES
-(1, 2),
-(2, 14),
-(3, 19),
-(12, 62),
-(13, 63),
-(14, 64),
-(15, 65),
-(16, 66),
-(17, 67),
-(18, 68),
-(19, 69),
-(20, 70),
-(21, 71),
-(22, 72),
-(23, 74),
-(24, 76),
-(25, 77),
-(36, 92);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_contacto`
+-- Estructura de tabla para la tabla `TBL_CONTACTO`
 --
 
-CREATE TABLE `tbl_contacto` (
+CREATE TABLE `TBL_CONTACTO` (
   `COD_CONTACTO` bigint(20) NOT NULL,
   `NOMBRE` varchar(200) COLLATE utf8mb4_swedish_ci NOT NULL,
   `EMAIL` varchar(200) COLLATE utf8mb4_swedish_ci NOT NULL,
@@ -1599,26 +1440,14 @@ CREATE TABLE `tbl_contacto` (
   `FECHA_CREACION` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_contacto`
---
-
-INSERT INTO `tbl_contacto` (`COD_CONTACTO`, `NOMBRE`, `EMAIL`, `MENSAJE`, `IP`, `DISPOSITIVO`, `USERAGENT`, `FECHA_CREACION`) VALUES
-(1, 'Fernando', 'josefortizsantos@gmail.com', 'HOLAAAA', '::1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36 Edg/100.0.1185.44', '2022-04-23 02:42:38'),
-(2, 'Fernando', 'josefortizsantos@gmail.com', 'HOLAAAA', '::1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36 Edg/100.0.1185.44', '2022-04-23 02:44:09'),
-(3, 'Fernando', 'josefortizsantos@gmail.com', 'HOLAAAAAAAAAAAA', '::1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36 Edg/100.0.1185.44', '2022-04-23 02:50:21'),
-(4, 'Fernando', 'josefortizsantos@gmail.com', 'HOLA', '::1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36 Edg/100.0.1185.44', '2022-04-23 02:51:01'),
-(5, 'Fernando', 'josefortizsantos@gmail.com', 'Fernadno', '::1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36 Edg/100.0.1185.44', '2022-04-23 02:52:25'),
-(6, 'Fernando', 'josefortizsantos@gmail.comh', 'HOLAAAAAAAA', '::1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36 Edg/100.0.1185.44', '2022-04-23 02:57:34'),
-(7, 'José Fernando Ortiz Santos', 'josefortizsantos@gmail.com', 'Hola como estas', '138.94.121.240', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36 Edg/100.0.1185.50', '2022-04-26 08:49:20');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_detalle_compra`
+-- Estructura de tabla para la tabla `TBL_DETALLE_COMPRA`
 --
 
-CREATE TABLE `tbl_detalle_compra` (
+CREATE TABLE `TBL_DETALLE_COMPRA` (
   `COD_DETALLE` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL DETALLE DE COMPRA',
   `COD_ORDEN` bigint(20) NOT NULL COMMENT 'CÓDIGO DE LA ORDEN DE COMPRA',
   `COD_PRODUCTO` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL PRODUCTO QUE SE ESTÁ COMPRANDO',
@@ -1627,67 +1456,13 @@ CREATE TABLE `tbl_detalle_compra` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_detalle_compra`
+-- Volcado de datos para la tabla `TBL_DETALLE_COMPRA`
+--
+--
+-- Estructura de tabla para la tabla `TBL_DETALLE_PEDIDO`
 --
 
-INSERT INTO `tbl_detalle_compra` (`COD_DETALLE`, `COD_ORDEN`, `COD_PRODUCTO`, `PRECIO`, `CANT_COMPRA`) VALUES
-(7, 5, 12, '18.00', 48),
-(8, 5, 2, '10.00', 10),
-(9, 6, 1, '10.00', 10),
-(10, 7, 1, '10.00', 10),
-(11, 8, 1, '20.00', 100),
-(12, 9, 15, '20.00', 100),
-(13, 10, 15, '10.00', 10),
-(14, 11, 15, '10.00', 10),
-(15, 12, 15, '10.00', 10),
-(16, 13, 15, '15.00', 15),
-(17, 14, 1, '10.00', 10),
-(18, 15, 1, '50.00', 100),
-(19, 15, 2, '20.00', 150),
-(20, 15, 15, '25.00', 500),
-(21, 15, 14, '10.00', 200),
-(22, 16, 1, '10.00', 100),
-(23, 18, 1, '10.00', 100),
-(24, 18, 15, '25.00', 200),
-(25, 19, 2, '25.00', 48),
-(26, 19, 13, '12.00', 20),
-(27, 19, 15, '23.00', 20),
-(28, 20, 1, '25.00', 100),
-(29, 20, 2, '20.00', 24),
-(30, 21, 1, '25.00', 100),
-(31, 21, 2, '20.00', 24),
-(32, 25, 1, '25.60', 100),
-(33, 25, 2, '20.12', 24),
-(34, 26, 1, '25.60', 100),
-(35, 26, 2, '20.12', 24),
-(36, 27, 1, '20.00', 10),
-(37, 27, 2, '50.00', 100),
-(38, 28, 15, '50.00', 10),
-(39, 29, 17, '20.00', 20),
-(40, 30, 1, '20.00', 10),
-(41, 31, 21, '50.00', 10),
-(42, 32, 2, '20.00', 48),
-(43, 32, 9, '60.00', 10),
-(44, 33, 19, '30.00', 50),
-(45, 34, 20, '20.00', 10),
-(46, 35, 20, '20.00', 10),
-(47, 36, 1, '20.00', 20),
-(48, 36, 20, '20.00', 10),
-(49, 37, 21, '15.00', 20),
-(50, 37, 3, '16.00', 48),
-(51, 38, 2, '30.00', 10),
-(52, 38, 21, '30.00', 200),
-(53, 39, 10, '2000.00', 10),
-(54, 40, 10, '2000.00', 1),
-(55, 41, 13, '15.00', 30);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbl_detalle_pedido`
---
-
-CREATE TABLE `tbl_detalle_pedido` (
+CREATE TABLE `TBL_DETALLE_PEDIDO` (
   `COD_DETALLE` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL DETALLE PEDIDO',
   `COD_PEDIDO` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL PEDIDO AL CUAL SE ASIGNA EL PRODUCTO',
   `COD_PRODUCTO` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL PRODUCTO AGREGADO AL PEDIDO',
@@ -1695,102 +1470,13 @@ CREATE TABLE `tbl_detalle_pedido` (
   `CANTIDAD` int(11) NOT NULL COMMENT 'CANTIDAD DEL PRODUCTO A VENDER'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_detalle_pedido`
---
-
-INSERT INTO `tbl_detalle_pedido` (`COD_DETALLE`, `COD_PEDIDO`, `COD_PRODUCTO`, `PRECIO`, `CANTIDAD`) VALUES
-(10, 15, 1, '25.00', 4),
-(11, 16, 1, '25.00', 10),
-(12, 17, 1, '25.00', 4),
-(13, 20, 1, '25.00', 3),
-(14, 20, 12, '25.00', 1),
-(15, 20, 2, '19.00', 1),
-(16, 21, 13, '65.00', 10),
-(17, 22, 13, '65.00', 10),
-(18, 22, 12, '25.00', 3),
-(19, 23, 13, '65.00', 10),
-(20, 23, 12, '25.00', 3),
-(21, 24, 13, '65.00', 10),
-(22, 24, 12, '25.00', 5),
-(23, 25, 13, '65.00', 5),
-(24, 25, 12, '25.00', 10),
-(25, 26, 1, '25.00', 2),
-(26, 27, 1, '25.00', 2),
-(27, 28, 13, '65.00', 10),
-(28, 29, 2, '19.00', 3),
-(29, 29, 13, '65.00', 4),
-(30, 30, 2, '19.00', 3),
-(31, 30, 13, '65.00', 4),
-(32, 31, 2, '19.00', 3),
-(33, 31, 13, '65.00', 4),
-(34, 32, 2, '19.00', 3),
-(35, 32, 13, '65.00', 4),
-(36, 33, 1, '25.00', 4),
-(37, 33, 2, '19.00', 5),
-(38, 34, 12, '25.00', 1),
-(39, 35, 12, '25.00', 1),
-(40, 36, 1, '25.00', 1),
-(41, 37, 1, '25.00', 1),
-(42, 38, 1, '25.00', 1),
-(50, 46, 1, '25.00', 3),
-(51, 46, 2, '19.00', 6),
-(52, 46, 13, '65.00', 1),
-(53, 47, 12, '25.00', 3),
-(54, 47, 2, '19.00', 3),
-(55, 48, 12, '25.00', 6),
-(56, 49, 13, '65.00', 10),
-(57, 50, 12, '25.00', 1),
-(58, 51, 1, '25.00', 5),
-(59, 52, 13, '65.00', 3),
-(63, 56, 13, '65.00', 3),
-(64, 57, 1, '25.00', 5),
-(65, 58, 12, '25.00', 2),
-(66, 59, 13, '65.00', 2),
-(67, 60, 12, '25.00', 2),
-(68, 61, 12, '25.00', 2),
-(69, 62, 12, '25.00', 10),
-(70, 67, 14, '15.00', 5),
-(72, 69, 14, '15.00', 13),
-(73, 70, 14, '15.00', 5),
-(74, 71, 14, '15.99', 5),
-(75, 72, 15, '23.00', 10),
-(76, 73, 15, '23.00', 10),
-(77, 74, 15, '23.00', 10),
-(78, 75, 17, '20.00', 1),
-(79, 76, 12, '22.00', 10),
-(80, 77, 17, '20.00', 1),
-(81, 78, 2, '19.00', 1),
-(82, 79, 12, '22.00', 1),
-(83, 80, 17, '20.00', 1),
-(84, 81, 15, '23.00', 1),
-(85, 82, 17, '20.00', 1),
-(86, 83, 12, '22.00', 1),
-(87, 83, 15, '23.00', 3),
-(88, 83, 13, '65.00', 3),
-(89, 84, 15, '23.00', 4),
-(90, 84, 13, '65.00', 3),
-(91, 85, 15, '23.00', 2),
-(92, 85, 14, '15.99', 4),
-(93, 85, 13, '65.00', 2),
-(94, 86, 12, '22.00', 1),
-(95, 86, 17, '20.00', 1),
-(96, 87, 17, '20.00', 5),
-(97, 87, 14, '15.99', 3),
-(98, 88, 17, '20.00', 1),
-(99, 88, 14, '15.99', 2),
-(100, 88, 13, '65.00', 2),
-(101, 89, 2, '19.00', 10),
-(102, 90, 19, '45.00', 11),
-(103, 91, 19, '45.00', 3);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_empresa`
+-- Estructura de tabla para la tabla `TBL_EMPRESA`
 --
 
-CREATE TABLE `tbl_empresa` (
+CREATE TABLE `TBL_EMPRESA` (
   `COD_EMPRESA` bigint(20) NOT NULL COMMENT 'CÓDIGO DE EMPRESA',
   `NOMBRE_EMPRESA` varchar(20) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'NOMBRE DE LA EMPRESA',
   `RAZON_SOCIAL` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'RAZÓN SOCIAL DE LA EMPRESA',
@@ -1808,84 +1494,51 @@ CREATE TABLE `tbl_empresa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_empresa`
+-- Volcado de datos para la tabla `TBL_EMPRESA`
 --
 
-INSERT INTO `tbl_empresa` (`COD_EMPRESA`, `NOMBRE_EMPRESA`, `RAZON_SOCIAL`, `GERENTE_GENERAL`, `COSTO_ENVIO`, `RTN`, `EMAIL_PEDIDOS`, `EMAIL_EMPRESA`, `TEL_EMPRESA`, `CEL_EMPRESA`, `DIRECCION_FACTURA`, `CATEGORIAS_SLIDER`, `CATEGORIAS_BANNER`, `PEDIDO_MINIMO`) VALUES
+INSERT INTO `TBL_EMPRESA` (`COD_EMPRESA`, `NOMBRE_EMPRESA`, `RAZON_SOCIAL`, `GERENTE_GENERAL`, `COSTO_ENVIO`, `RTN`, `EMAIL_PEDIDOS`, `EMAIL_EMPRESA`, `TEL_EMPRESA`, `CEL_EMPRESA`, `DIRECCION_FACTURA`, `CATEGORIAS_SLIDER`, `CATEGORIAS_BANNER`, `PEDIDO_MINIMO`) VALUES
 (1, 'Estación Route 77', 'Ser Los Mejores De Honduras', 'Saúl Zepeda', 100, '03011972007276', 'estacionroutehn@gmail.com', 'estacionroutehn@gmail.com', '+504 22634896', '+504 9643-2601', 'Col. Los Laureles Calle Principal', '3,5,4,7', '2,6,8', 500);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_genero`
+-- Estructura de tabla para la tabla `TBL_GENERO`
 --
 
-CREATE TABLE `tbl_genero` (
+CREATE TABLE `TBL_GENERO` (
   `COD_GENERO` int(11) NOT NULL COMMENT 'CÓDIGO DE GÉNERO',
   `DESCRIPCION` varchar(10) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'DESCRIPCIÓN DEL GÉNERO DEL USUARIO A REGISTRAR'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_genero`
+-- Volcado de datos para la tabla `TBL_GENERO`
 --
 
-INSERT INTO `tbl_genero` (`COD_GENERO`, `DESCRIPCION`) VALUES
+INSERT INTO `TBL_GENERO` (`COD_GENERO`, `DESCRIPCION`) VALUES
 (1, 'MASCULINO'),
 (2, 'FEMENINO'),
-(12, 'OTRO');
+(3, 'OTRO');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_img_producto`
+-- Estructura de tabla para la tabla `TBL_IMG_PRODUCTO`
 --
 
-CREATE TABLE `tbl_img_producto` (
+CREATE TABLE `TBL_IMG_PRODUCTO` (
   `COD_IMAGEN` bigint(20) NOT NULL COMMENT 'CÓDIGO DE IMAGEN',
   `COD_PRODUCTO` bigint(20) NOT NULL COMMENT 'CÓDIGO DE LOS PRODUCTOS ALMACENADOS',
   `IMG` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'UBICACIÓN DE LA IMAGEN GUARDADA'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_img_producto`
---
-
-INSERT INTO `tbl_img_producto` (`COD_IMAGEN`, `COD_PRODUCTO`, `IMG`) VALUES
-(27, 14, 'pro_75b1b8a1a4a640ff3273d97413664dfa.jpg'),
-(28, 14, 'pro_1f0e9d3cd16b6c5767a2dd29eee682c7.jpg'),
-(29, 13, 'pro_270072dcdabbc969d1587f1f1ccf9ebc.jpg'),
-(30, 13, 'pro_d4d6a065aa30ec9207767f7833e5f538.jpg'),
-(31, 12, 'pro_666c58bc5899035ff737b14c70a25f47.jpg'),
-(45, 1, 'pro_5e383c4706812480701b9ec344731756.jpg'),
-(46, 2, 'pro_fa7e60289ee36a76673148cd33d04594.jpg'),
-(47, 3, 'pro_937a5ffaf6dd64899736a69affafebf7.jpg'),
-(48, 12, 'pro_6b8bb843d7f8fa06fb2451a3c8750d70.jpg'),
-(49, 4, 'pro_6243190ce1066357434a0c25455f877a.jpg'),
-(52, 6, 'pro_2599de94254a7e9918d7322de75ba120.jpg'),
-(53, 10, 'pro_2d29fe34277340b97df4678251c77fb7.jpg'),
-(54, 11, 'pro_ee49a9463e15fddc76d4817b1f397661.jpg'),
-(56, 9, 'pro_fe8f78ec194e2fc6570e30d5fdcf43d5.jpg'),
-(57, 5, 'pro_65f90863c18fa94d85a062c817ef21f4.jpg'),
-(58, 17, 'pro_8e10dce9d3cc9db30533b7b53b41a6ac.jpg'),
-(59, 18, 'pro_642d6d80e5577885cad6df5a9af581dc.jpg'),
-(60, 15, 'pro_f6c719244eaa1d77582eeef765c42c78.jpg'),
-(65, 16, 'pro_e3a2932e0db24fdcf0498eb0113ee4dd.jpg'),
-(68, 16, 'pro_b43459e239b12144a8616d3d53cfb251.jpg'),
-(71, 19, 'pro_c2e6db961c5771668382d91424a44f14.jpg'),
-(72, 20, 'pro_6820ccc2e463543ee820bef2a0ffe81e.jpg'),
-(73, 22, 'pro_e8b61d20c399fb2e324b38548bab5813.jpg'),
-(77, 24, 'pro_5c530a853f538634714c203b7824dec1.jpg'),
-(78, 24, 'pro_bff3c2de752e7df7e195094e79a79555.jpg'),
-(85, 27, 'pro_5e895e41d521b59193888b93b14ad2c6.jpg'),
-(86, 28, 'pro_4480e5157c28b016a5034458755ab008.jpg');
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_inventario`
+-- Estructura de tabla para la tabla `TBL_INVENTARIO`
 --
 
-CREATE TABLE `tbl_inventario` (
+CREATE TABLE `TBL_INVENTARIO` (
   `COD_INVENTARIO` bigint(20) NOT NULL COMMENT 'CÓDIGO DE INVENTARIO',
   `COD_PRODUCTO` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL PRODUCTO ALMACENADO',
   `STOCK` int(11) NOT NULL COMMENT 'CANTIDAD DE PRODUCTO EN INVENTARIO',
@@ -1894,45 +1547,14 @@ CREATE TABLE `tbl_inventario` (
   `CANT_MINIMA` int(11) NOT NULL COMMENT 'CANTIDAD MÍNIMA PARA ENVIAR ADVERTENCIA'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_inventario`
---
-
-INSERT INTO `tbl_inventario` (`COD_INVENTARIO`, `COD_PRODUCTO`, `STOCK`, `CANT_VENTA`, `CANT_COMPRA`, `CANT_MINIMA`) VALUES
-(1, 2, 1071, 16, 1105, 24),
-(2, 1, 755, 90, 764, 30),
-(3, 3, 68, 0, 68, 24),
-(4, 4, 0, 0, 0, 20),
-(5, 5, 0, 0, 0, 0),
-(6, 6, 0, 0, 0, 10),
-(9, 9, 10, 0, 10, 10),
-(10, 10, 11, 0, 11, 10),
-(11, 11, 0, 0, 0, 5),
-(12, 12, 0, 20, 2, 20),
-(13, 13, 112, 2, 52, 100),
-(14, 14, 163, 25, 200, 50),
-(15, 15, 735, 11, 745, 10),
-(16, 16, 0, 0, 0, 50),
-(17, 17, 9, 6, 20, 20),
-(18, 18, 0, 0, 0, 10),
-(19, 19, 36, 14, 50, 20),
-(20, 20, 10, 0, 10, 20),
-(21, 21, 230, 0, 230, 20),
-(22, 22, 0, 0, 0, 100),
-(23, 23, 0, 0, 0, 10),
-(24, 24, 0, 0, 0, 10),
-(25, 25, 0, 0, 0, 10),
-(26, 26, 0, 0, 0, 10),
-(27, 27, 0, 0, 0, 15),
-(28, 28, 0, 0, 0, 15);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_modulo`
+-- Estructura de tabla para la tabla `TBL_MODULO`
 --
 
-CREATE TABLE `tbl_modulo` (
+CREATE TABLE `TBL_MODULO` (
   `COD_MODULO` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL MÓDULO',
   `NOMBRE` varchar(50) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'NOMBRE DEL MÓDULO',
   `DESCRIPCION` text COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'DESCRIPCIÓN DE LA FUNCIÓN QUE TIENE EL MÓDULO',
@@ -1940,10 +1562,10 @@ CREATE TABLE `tbl_modulo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_modulo`
+-- Volcado de datos para la tabla `TBL_MODULO`
 --
 
-INSERT INTO `tbl_modulo` (`COD_MODULO`, `NOMBRE`, `DESCRIPCION`, `COD_STATUS`) VALUES
+INSERT INTO `TBL_MODULO` (`COD_MODULO`, `NOMBRE`, `DESCRIPCION`, `COD_STATUS`) VALUES
 (1, 'DASHBOARD', 'DASHBOARD', 1),
 (2, 'USUARIOS', 'USUARIOS ADMINISTRATIVOS DEL SISTEMA', 1),
 (3, 'CLIENTES ', 'CLIENTES DE TIENDA', 1),
@@ -1951,24 +1573,24 @@ INSERT INTO `tbl_modulo` (`COD_MODULO`, `NOMBRE`, `DESCRIPCION`, `COD_STATUS`) V
 (5, 'PEDIDOS', 'PEDIDOS DE COMPRA', 1),
 (6, 'CATEGORÍAS', 'CATEGORÍAS TBL_PRODUCTOS', 1),
 (7, 'INVENTARIO', 'INVENTARIO PRODUCTOS ROUTE', 1),
-(8, 'Calendario', 'Calendario en la empresa route77', 1),
-(9, 'Empresa', 'asdasdasd', 1),
-(10, 'Proveedores', '12131223', 1),
-(11, 'Sucursales', 'Sucursales', 1),
-(12, 'Compras', 'Orden Compra', 1),
-(13, 'Suscripciones', 'Registro de suscripciones de la empresa', 1),
-(14, 'Contactos', 'Mensajes de el formulario contacto', 1),
-(15, 'Páginas', 'Páginas del sitio Web', 1),
-(16, 'Backup', 'Copia de seguridad y restauración de la base de datos', 1),
-(17, 'Bitácora', 'Bitácora del sistema', 1);
+(8, 'CALENDARIO', 'Calendario en la empresa route77', 1),
+(9, 'EMPRESA', 'asdasdasd', 1),
+(10, 'PROVEEDORES', '12131223', 1),
+(11, 'SUCURSALES', 'Sucursales', 1),
+(12, 'COMPRAS', 'Orden Compra', 1),
+(13, 'SUSCRIPCIONES', 'Registro de suscripciones de la empresa', 1),
+(14, 'CONTACTOS', 'Mensajes de el formulario contacto', 1),
+(15, 'PÁGINAS', 'Páginas del sitio Web', 1),
+(16, 'BACKUP', 'Copia de seguridad y restauración de la base de datos', 1),
+(17, 'BITÁCORA', 'Bitácora del sistema', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_orden_compra`
+-- Estructura de tabla para la tabla `TBL_ORDEN_COMPRA`
 --
 
-CREATE TABLE `tbl_orden_compra` (
+CREATE TABLE `TBL_ORDEN_COMPRA` (
   `COD_ORDEN` bigint(20) NOT NULL COMMENT 'CÓDIGO DE LA ORDEN DE COMPRA',
   `COD_PROVEEDOR` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL PROOVEDOR DE LOS PRODUCTOS',
   `FECHA_COMPRA` datetime NOT NULL COMMENT 'FECHA EN LA CUAL SE HACE LA ORDEN',
@@ -1978,56 +1600,14 @@ CREATE TABLE `tbl_orden_compra` (
   `NO_FACTURA` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_orden_compra`
---
-
-INSERT INTO `tbl_orden_compra` (`COD_ORDEN`, `COD_PROVEEDOR`, `FECHA_COMPRA`, `MONTO`, `ISV`, `CREADO_POR`, `NO_FACTURA`) VALUES
-(5, 4, '2022-03-01 16:45:03', '964.00', '15.00', 1, 312213),
-(6, 1, '2022-03-14 17:11:34', '100.00', '15.00', 1, 0),
-(7, 1, '2022-04-14 17:13:51', '100.00', '15.00', 1, 123),
-(8, 1, '2022-04-14 17:15:10', '2.00', '15.00', 1, 123),
-(9, 1, '2022-04-14 17:43:30', '2.00', '15.00', 1, 122131),
-(10, 1, '2022-04-14 18:46:54', '100.00', '15.00', 1, 1234),
-(11, 1, '2022-04-14 18:48:01', '100.00', '15.00', 1, 123),
-(12, 1, '2022-04-14 18:48:51', '100.00', '15.00', 1, 10),
-(13, 1, '2022-04-14 18:50:40', '225.00', '15.00', 1, 123),
-(14, 1, '2022-04-14 18:53:30', '100.00', '15.00', 1, 2313),
-(15, 1, '2022-04-15 02:19:07', '22.00', '3375.00', 1, 41341314),
-(16, 1, '2022-04-15 02:28:50', '1.00', '150.00', 1, 41412414),
-(17, 1, '2022-04-15 02:32:55', '6.00', '900.00', 1, 414124145),
-(18, 1, '2022-04-15 02:38:57', '6000.00', '900.00', 1, 123412213),
-(19, 1, '2022-04-15 03:03:57', '1921.20', '288.00', 1, 123123123),
-(20, 1, '2022-04-15 03:07:37', '3042.88', '456.00', 1, 3131313),
-(21, 1, '2022-04-15 03:15:23', '3042.88', '456.00', 1, 3131313),
-(22, 1, '2022-04-15 03:19:38', '3042.88', '456.00', 1, 3131313),
-(23, 1, '2022-04-15 03:20:05', '3042.88', '456.00', 1, 3131313),
-(24, 1, '2022-04-15 03:20:22', '3042.88', '456.00', 1, 3131313),
-(25, 1, '2022-04-15 03:20:32', '3042.88', '456.00', 1, 3131313),
-(26, 1, '2022-04-30 00:00:00', '3042.88', '456.00', 1, 2147483647),
-(27, 1, '2022-04-17 01:21:01', '5200.00', '780.00', 1, 12231131),
-(28, 1, '2022-04-17 23:36:55', '500.00', '75.00', 1, 1231231231),
-(29, 1, '2022-04-18 13:51:52', '400.00', '60.00', 1, 12123123),
-(30, 1, '2022-04-18 17:32:10', '200.00', '30.00', 1, 3121231),
-(31, 1, '2022-04-23 07:56:42', '500.00', '75.00', 1, 5496),
-(32, 1, '2022-04-24 21:35:58', '1560.00', '234.00', 1, 76754678),
-(33, 1, '2022-04-25 00:00:01', '1500.00', '225.00', 1, 345654),
-(34, 1, '2022-05-09 01:48:43', '450.00', '0.00', 1, 121221313),
-(35, 1, '2022-05-09 01:48:48', '450.00', '0.00', 1, 121221313),
-(36, 1, '2022-05-09 01:49:54', '600.00', '0.00', 1, 121221313),
-(37, 1, '2022-05-09 01:51:19', '1228.20', '160.00', 1, 41232123),
-(38, 1, '2022-05-09 16:21:31', '6300.00', '0.00', 1, 3123132),
-(39, 1, '2022-05-09 17:57:06', '23000.00', '3000.00', 1, 51341),
-(40, 1, '2022-05-09 17:58:04', '2300.00', '300.00', 1, 312313254),
-(41, 1, '2022-05-09 17:59:07', '450.00', '0.00', 1, 62424212);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_pedido`
+-- Estructura de tabla para la tabla `TBL_PEDIDO`
 --
 
-CREATE TABLE `tbl_pedido` (
+CREATE TABLE `TBL_PEDIDO` (
   `COD_PEDIDO` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL PEDIDO',
   `COD_PERSONA` bigint(20) NOT NULL COMMENT 'CÓDIGO DE LA PERSONA QUE REGISTRÓ EL PEDIDO',
   `FECHA` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'FECHA EN LA QUE SE REGISTRÓ EL PEDIDO',
@@ -2045,87 +1625,14 @@ CREATE TABLE `tbl_pedido` (
   `FECHA_MODIFICACION` datetime NOT NULL COMMENT 'FECHA DE LA ÚLTIMA MODIFICACIÓN'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_pedido`
---
-
-INSERT INTO `tbl_pedido` (`COD_PEDIDO`, `COD_PERSONA`, `FECHA`, `MONTO`, `COSTOENVIO`, `COD_TIPO_PAGO`, `DIRECCION_ENVIO`, `COD_ESTADO`, `REFERENCIA_COBRO`, `COD_TRANSACCION_PAYPAL`, `DATOS_PAYPAL`, `CREADO_POR`, `FECHA_CREACION`, `MODIFICADO_POR`, `FECHA_MODIFICACION`) VALUES
-(15, 1, '2022-03-20 22:50:23', '100.00', '10.00', 2, 'Tangamandapio', 3, '', '', '', 0, '2022-03-20 22:50:23', 0, '2022-03-20 22:53:31'),
-(16, 1, '2022-03-20 23:16:07', '250.00', '199.00', 1, 'La Vecindad del Chavo', 1, '', '', '', 0, '2022-03-20 23:16:07', 0, '0000-00-00 00:00:00'),
-(17, 1, '2022-03-22 18:39:32', '100.00', '10.00', 2, 'Florencia Norte', 3, '', '', '', 0, '2022-03-22 18:39:32', 0, '2022-03-22 18:40:25'),
-(18, 1, '2022-04-01 22:21:31', '35.00', '10.00', 1, 'Flor del campo Zona 2, Mi casa', 1, NULL, NULL, NULL, 0, '2022-04-01 22:21:31', 0, '0000-00-00 00:00:00'),
-(19, 1, '2022-04-01 22:27:12', '35.00', '10.00', 1, 'Flor del campo Zona 3, Otra casa mia', 1, NULL, NULL, NULL, 0, '2022-04-01 22:27:12', 0, '0000-00-00 00:00:00'),
-(20, 1, '2022-04-01 22:33:15', '129.00', '10.00', 1, 'Col. el hato de enmedio, casa 3', 1, NULL, NULL, NULL, 0, '2022-04-01 22:33:15', 0, '0000-00-00 00:00:00'),
-(21, 1, '2022-04-01 22:36:39', '650.00', '0.00', 2, 'Col. Las torres, El matadero', 1, NULL, NULL, NULL, 0, '2022-04-01 22:36:39', 0, '0000-00-00 00:00:00'),
-(22, 1, '2022-04-01 22:46:31', '725.00', '0.00', 2, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 22:46:31', 0, '0000-00-00 00:00:00'),
-(23, 1, '2022-04-01 22:47:03', '725.00', '0.00', 1, 'Col. Flor del Campo, 504', 1, NULL, NULL, NULL, 0, '2022-04-01 22:47:03', 0, '0000-00-00 00:00:00'),
-(24, 1, '2022-04-01 22:48:27', '775.00', '0.00', 1, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 22:48:27', 0, '0000-00-00 00:00:00'),
-(25, 1, '2022-04-01 22:51:18', '575.00', '0.00', 1, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 22:51:18', 0, '0000-00-00 00:00:00'),
-(26, 1, '2022-04-01 22:53:57', '60.00', '10.00', 1, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 22:53:57', 0, '0000-00-00 00:00:00'),
-(27, 1, '2022-04-01 22:54:11', '60.00', '10.00', 1, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 22:54:11', 0, '0000-00-00 00:00:00'),
-(28, 1, '2022-04-01 23:03:01', '650.00', '0.00', 1, 'Col. Flor del Campo, 11101', 2, NULL, '8YM43723DX3011454', '{\"id\":\"7A7450099E898960Y\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"26.67\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L650\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"8YM43723DX3011454\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"26.67\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-02T05:03:01Z\",\"update_time\":\"2022-04-02T05:03:01Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-02T05:00:55Z\",\"update_time\":\"2022-04-02T05:03:01Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/7A7450099E898960Y\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-01 23:03:01', 0, '0000-00-00 00:00:00'),
-(29, 1, '2022-04-01 23:27:52', '327.00', '10.00', 2, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 23:27:52', 0, '0000-00-00 00:00:00'),
-(30, 1, '2022-04-01 23:28:08', '327.00', '10.00', 2, 'Col. Flor del Campo, 504', 1, NULL, NULL, NULL, 0, '2022-04-01 23:28:08', 0, '0000-00-00 00:00:00'),
-(31, 1, '2022-04-01 23:29:02', '327.00', '10.00', 2, 'Col. Flor del Campo, 504', 1, NULL, NULL, NULL, 0, '2022-04-01 23:29:02', 0, '0000-00-00 00:00:00'),
-(32, 1, '2022-04-01 23:33:58', '327.00', '10.00', 2, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 23:33:58', 0, '0000-00-00 00:00:00'),
-(33, 1, '2022-04-01 23:35:07', '205.00', '10.00', 2, 'Flor del campo Zona 2, Mi casa', 1, NULL, NULL, NULL, 0, '2022-04-01 23:35:07', 0, '0000-00-00 00:00:00'),
-(34, 1, '2022-04-01 23:39:57', '35.00', '10.00', 2, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 23:39:57', 0, '0000-00-00 00:00:00'),
-(35, 1, '2022-04-01 23:41:40', '35.00', '10.00', 2, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 23:41:40', 0, '0000-00-00 00:00:00'),
-(36, 1, '2022-04-01 23:44:17', '35.00', '10.00', 2, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 23:44:17', 0, '0000-00-00 00:00:00'),
-(37, 1, '2022-04-01 23:46:27', '35.00', '10.00', 2, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 23:46:27', 0, '0000-00-00 00:00:00'),
-(38, 1, '2022-04-01 23:47:38', '35.00', '10.00', 2, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 23:47:38', 0, '0000-00-00 00:00:00'),
-(39, 1, '2022-04-01 23:51:47', '35.00', '10.00', 2, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 23:51:47', 0, '0000-00-00 00:00:00'),
-(40, 1, '2022-04-01 23:52:27', '35.00', '10.00', 2, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 23:52:27', 0, '0000-00-00 00:00:00'),
-(41, 1, '2022-04-01 23:56:44', '205.00', '10.00', 2, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-01 23:56:44', 0, '0000-00-00 00:00:00'),
-(42, 1, '2022-04-02 00:00:49', '85.00', '10.00', 1, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-02 00:00:49', 0, '0000-00-00 00:00:00'),
-(43, 1, '2022-04-02 00:01:25', '85.00', '10.00', 2, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-02 00:01:25', 0, '0000-00-00 00:00:00'),
-(45, 1, '2022-04-02 01:10:48', '86.00', '10.00', 1, 'Flor del campo Zona 2, 11101', 2, NULL, '641590789F655810D', '{\"id\":\"0GG102024S275645U\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"3.53\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L86\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"641590789F655810D\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"3.53\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-02T07:10:48Z\",\"update_time\":\"2022-04-02T07:10:48Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-02T07:10:29Z\",\"update_time\":\"2022-04-02T07:10:48Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/0GG102024S275645U\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-02 01:10:48', 0, '0000-00-00 00:00:00'),
-(46, 1, '2022-04-05 15:13:48', '264.00', '10.00', 1, 'USA, Miami', 4, NULL, '1KD91627VM8744945', '{\"id\":\"709582511C7326134\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"10.82\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L264\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"1KD91627VM8744945\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"10.82\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-05T21:13:48Z\",\"update_time\":\"2022-04-05T21:13:48Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-05T21:13:23Z\",\"update_time\":\"2022-04-05T21:13:48Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/709582511C7326134\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-05 15:13:48', 0, '0000-00-00 00:00:00'),
-(47, 1, '2022-04-06 01:16:24', '142.00', '10.00', 1, 'QQ, WW', 4, NULL, '4C372163YS110874S', '{\"create_time\":\"2022-04-06T07:15:37Z\",\"update_time\":\"2022-04-06T07:16:23Z\",\"id\":\"7F538361R17420226\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"payer\":{\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"},\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"}},\"purchase_units\":[{\"description\":\"Compra de articulos en Route 77 por  L142\",\"reference_id\":\"default\",\"amount\":{\"value\":\"5.75\",\"currency_code\":\"USD\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"status\":\"COMPLETED\",\"id\":\"4C372163YS110874S\",\"final_capture\":true,\"create_time\":\"2022-04-06T07:16:23Z\",\"update_time\":\"2022-04-06T07:16:23Z\",\"amount\":{\"value\":\"5.75\",\"currency_code\":\"USD\"},\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/payments/captures/4C372163YS110874S\",\"rel\":\"self\",\"method\":\"GET\",\"title\":\"GET\"},{\"href\":\"https://api.sandbox.paypal.com/v2/payments/captures/4C372163YS110874S/refund\",\"rel\":\"refund\",\"method\":\"POST\",\"title\":\"POST\"},{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/7F538361R17420226\",\"rel\":\"up\",\"method\":\"GET\",\"title\":\"GET\"}]}]}}],\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/7F538361R17420226\",\"rel\":\"self\",\"method\":\"GET\",\"title\":\"GET\"}]}', 0, '2022-04-06 01:16:24', 0, '0000-00-00 00:00:00'),
-(48, 19, '2022-04-06 01:47:51', '160.00', '10.00', 1, 'LAS HADAS, VALLE', 4, NULL, '4GE28682PD2061717', '{\"id\":\"24250260CH2702632\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"6.47\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L160\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"4GE28682PD2061717\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"6.47\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-06T07:47:51Z\",\"update_time\":\"2022-04-06T07:47:51Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-06T07:47:28Z\",\"update_time\":\"2022-04-06T07:47:51Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/24250260CH2702632\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-06 01:47:51', 0, '0000-00-00 00:00:00'),
-(49, 19, '2022-04-06 01:51:48', '650.00', '0.00', 1, 'Col. Los Laureles, BARRIO #2', 2, NULL, '5AH52430S5824271V', '{\"id\":\"2YK86895VJ883910P\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"26.30\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L650\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"5AH52430S5824271V\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"26.30\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-06T07:51:47Z\",\"update_time\":\"2022-04-06T07:51:47Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-06T07:51:40Z\",\"update_time\":\"2022-04-06T07:51:47Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/2YK86895VJ883910P\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-06 01:51:48', 0, '0000-00-00 00:00:00'),
-(50, 19, '2022-04-06 01:55:32', '35.00', '10.00', 1, 'FLOR DEL CAMPO, LA CANTERA', 2, NULL, '0NE94464Y1916112C', '{\"id\":\"40J16266M5069691J\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"1.42\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L35\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"0NE94464Y1916112C\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"1.42\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-06T07:55:31Z\",\"update_time\":\"2022-04-06T07:55:31Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-06T07:55:24Z\",\"update_time\":\"2022-04-06T07:55:31Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/40J16266M5069691J\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-06 01:55:32', 0, '0000-00-00 00:00:00'),
-(51, 19, '2022-04-06 02:20:13', '135.00', '10.00', 1, 'VALLE DE SULA, EL CC', 4, NULL, '4VD94482T8502422N', '{\"id\":\"7TK423171U7143208\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"5.46\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L135\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"4VD94482T8502422N\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"5.46\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-06T08:20:12Z\",\"update_time\":\"2022-04-06T08:20:12Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-06T08:19:58Z\",\"update_time\":\"2022-04-06T08:20:12Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/7TK423171U7143208\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-06 02:20:13', 0, '0000-00-00 00:00:00'),
-(52, 1, '2022-04-06 23:04:27', '205.00', '10.00', 3, 'PPP, OOO', 3, '333', NULL, NULL, 0, '2022-04-06 23:04:27', 0, '0000-00-00 00:00:00'),
-(56, 1, '2022-04-09 17:29:30', '205.00', '10.00', 2, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-09 17:29:30', 0, '0000-00-00 00:00:00'),
-(57, 1, '2022-04-14 17:18:22', '135.00', '10.00', 2, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-14 17:18:22', 0, '0000-00-00 00:00:00'),
-(58, 1, '2022-04-14 19:01:29', '60.00', '10.00', 2, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-14 19:01:29', 0, '0000-00-00 00:00:00'),
-(59, 1, '2022-04-14 19:03:02', '140.00', '10.00', 2, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-14 19:03:02', 0, '0000-00-00 00:00:00'),
-(60, 1, '2022-04-14 19:03:52', '60.00', '10.00', 2, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-14 19:03:52', 0, '0000-00-00 00:00:00'),
-(61, 1, '2022-04-14 19:04:42', '60.00', '10.00', 1, 'Flor del campo Zona 2, 11101', 3, '123', NULL, NULL, 0, '2022-04-14 19:04:42', 0, '0000-00-00 00:00:00'),
-(62, 1, '2022-04-17 17:23:43', '260.00', '10.00', 2, 'Col. Flor del Campo, 11101', 1, NULL, NULL, NULL, 0, '2022-04-17 17:23:43', 0, '0000-00-00 00:00:00'),
-(67, 1, '2022-04-17 23:15:39', '85.00', '10.00', 2, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-17 23:15:39', 0, '0000-00-00 00:00:00'),
-(69, 1, '2022-04-18 02:40:51', '225.00', '30.00', 2, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-18 02:40:51', 0, '0000-00-00 00:00:00'),
-(70, 1, '2022-04-18 21:50:44', '85.00', '10.00', 1, 'Flor del campo Zona 2, 11101', 3, NULL, '13Y94839UA610281D', '{\"id\":\"13X72570A96577145\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"3.42\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L85\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"13Y94839UA610281D\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"3.42\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-19T03:50:43Z\",\"update_time\":\"2022-04-19T03:50:43Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-tpf3v1494486@personal.example.com\",\"payer_id\":\"66G328FZP4H4N\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-19T03:50:32Z\",\"update_time\":\"2022-04-19T03:50:43Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/13X72570A96577145\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-18 21:50:44', 0, '0000-00-00 00:00:00'),
-(71, 1, '2022-04-19 03:19:43', '179.95', '100.00', 3, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-19 03:19:43', 0, '0000-00-00 00:00:00'),
-(72, 1, '2022-04-19 23:34:37', '1.00', '1000.00', 2, 'Col. Los Laureles Calle Principal, 11101', 1, NULL, NULL, NULL, 0, '2022-04-19 23:34:37', 0, '0000-00-00 00:00:00'),
-(73, 1, '2022-04-19 23:35:00', '1.00', '1000.00', 2, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-19 23:35:00', 0, '0000-00-00 00:00:00'),
-(74, 1, '2022-04-19 23:39:38', '1.00', '1000.00', 2, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-19 23:39:38', 0, '0000-00-00 00:00:00'),
-(75, 1, '2022-04-19 23:45:21', '120.00', '100.00', 2, 'Flor del campo Zona 2, 11101', 1, NULL, NULL, NULL, 0, '2022-04-19 23:45:21', 0, '0000-00-00 00:00:00'),
-(76, 63, '2022-04-20 03:38:10', '320.00', '100.00', 1, 'Col 19 de Septiembre, Tegucigalpa', 4, NULL, '34U490118K543832X', '{\"id\":\"0M865575U6697282K\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"13.04\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L320\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"34U490118K543832X\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"13.04\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-20T03:38:09Z\",\"update_time\":\"2022-04-20T03:38:09Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-20T03:37:01Z\",\"update_time\":\"2022-04-20T03:38:09Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/0M865575U6697282K\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-20 03:38:10', 0, '0000-00-00 00:00:00'),
-(77, 64, '2022-04-20 03:38:39', '120.00', '100.00', 2, 'Col. Mall Premier, Tegucigalpa', 1, NULL, NULL, NULL, 0, '2022-04-20 03:38:39', 0, '0000-00-00 00:00:00'),
-(78, 66, '2022-04-20 03:39:53', '119.00', '100.00', 3, 'Villas la concepción, Tegucigalpa', 1, NULL, NULL, NULL, 0, '2022-04-20 03:39:53', 0, '0000-00-00 00:00:00'),
-(79, 66, '2022-04-20 03:47:07', '122.00', '100.00', 1, 'La satélite, Jan Pedro jula', 5, NULL, '0D332664RV1063326', '{\"id\":\"1E943782K14653801\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"4.97\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L122\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"0D332664RV1063326\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"4.97\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-20T03:47:06Z\",\"update_time\":\"2022-04-20T03:47:06Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-tpf3v1494486@personal.example.com\",\"payer_id\":\"66G328FZP4H4N\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-20T03:46:49Z\",\"update_time\":\"2022-04-20T03:47:06Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/1E943782K14653801\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-20 03:47:07', 0, '0000-00-00 00:00:00'),
-(80, 69, '2022-04-22 00:43:04', '120.00', '100.00', 2, 'home, tegucigalpa', 1, NULL, NULL, NULL, 0, '2022-04-22 00:43:04', 0, '0000-00-00 00:00:00'),
-(81, 71, '2022-04-24 03:46:25', '123.00', '100.00', 2, 'Residencial San Ignacio, Nueva York / America', 1, NULL, NULL, NULL, 0, '2022-04-24 03:46:25', 0, '0000-00-00 00:00:00'),
-(82, 1, '2022-04-24 05:31:40', '120.00', '100.00', 3, 'Col San Miguel, Tegucigalpa', 3, '12345678', NULL, NULL, 0, '2022-04-24 05:31:40', 0, '0000-00-00 00:00:00'),
-(83, 63, '2022-04-24 19:50:02', '386.00', '100.00', 1, 'Col. La Kennedy, Tegicigalpa', 2, NULL, '09U40028D6447060C', '{\"id\":\"67178896R2395700U\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"15.68\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L386\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"09U40028D6447060C\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"15.68\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-24T19:50:01Z\",\"update_time\":\"2022-04-24T19:50:01Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-24T19:49:27Z\",\"update_time\":\"2022-04-24T19:50:01Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/67178896R2395700U\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-24 19:50:02', 0, '0000-00-00 00:00:00'),
-(84, 63, '2022-04-24 19:53:16', '387.00', '100.00', 1, 'Col. La Kennedy, Tegucigalpa', 2, NULL, '8S9517388L3477825', '{\"id\":\"2GL084299F705022P\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"15.73\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L387\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"8S9517388L3477825\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"15.73\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-24T19:53:16Z\",\"update_time\":\"2022-04-24T19:53:16Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-24T19:52:46Z\",\"update_time\":\"2022-04-24T19:53:16Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/2GL084299F705022P\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-24 19:53:16', 0, '0000-00-00 00:00:00'),
-(85, 63, '2022-04-24 19:57:10', '339.96', '100.00', 1, 'La Kennedy, Tegicigalpa', 2, NULL, '04014399W7337304P', '{\"id\":\"1DF71558E0174863A\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"13.81\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L339.96\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"04014399W7337304P\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"13.81\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-24T19:57:09Z\",\"update_time\":\"2022-04-24T19:57:09Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-24T19:56:38Z\",\"update_time\":\"2022-04-24T19:57:09Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/1DF71558E0174863A\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-24 19:57:10', 0, '0000-00-00 00:00:00'),
-(86, 63, '2022-04-24 20:00:29', '142.00', '100.00', 2, 'Col. Los Laureles, Tegucigalpa', 3, NULL, NULL, NULL, 0, '2022-04-24 20:00:29', 0, '0000-00-00 00:00:00'),
-(87, 63, '2022-04-24 21:54:48', '247.97', '100.00', 1, 'Col. San Francisco, Tegucigalpa', 3, NULL, '5V368156BR676805M', '{\"id\":\"3W963593Y4183443C\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"10.09\"},\"payee\":{\"email_address\":\"sb-wredv8287762@business.example.com\",\"merchant_id\":\"5E2T43PBCLZWQ\"},\"description\":\"Compra de articulos en Route 77 por  L247.97\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Tegucigalpa\",\"admin_area_1\":\"Tegucigalpa\",\"postal_code\":\"12345\",\"country_code\":\"HN\"}},\"payments\":{\"captures\":[{\"id\":\"5V368156BR676805M\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"10.09\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2022-04-24T21:54:47Z\",\"update_time\":\"2022-04-24T21:54:47Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-lrh2t8250598@personal.example.com\",\"payer_id\":\"3KDQTSC5T4SJJ\",\"address\":{\"country_code\":\"HN\"}},\"create_time\":\"2022-04-24T21:54:18Z\",\"update_time\":\"2022-04-24T21:54:47Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/3W963593Y4183443C\",\"rel\":\"self\",\"method\":\"GET\"}]}', 0, '2022-04-24 21:54:48', 0, '0000-00-00 00:00:00'),
-(88, 76, '2022-04-25 00:44:49', '281.98', '100.00', 2, 'Tegucigalpa Lomas del Guijarro, Tegucigalpa', 3, NULL, NULL, NULL, 0, '2022-04-25 00:44:49', 0, '0000-00-00 00:00:00'),
-(89, 76, '2022-04-25 00:45:41', '290.00', '100.00', 2, 'Lomas del Guijarro, Tegucigalpa', 2, NULL, NULL, NULL, 0, '2022-04-25 00:45:41', 0, '0000-00-00 00:00:00'),
-(90, 1, '2022-04-25 00:55:27', '595.00', '100.00', 2, 'Residencial El trapiche, Tegucigalpa', 1, NULL, NULL, NULL, 0, '2022-04-25 00:55:27', 0, '0000-00-00 00:00:00'),
-(91, 49, '2022-04-25 19:33:40', '235.00', '100.00', 2, 'Lomas, Tegucigalpa', 3, NULL, NULL, NULL, 0, '2022-04-25 19:33:40', 1, '2022-04-26 23:33:58');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_permisos`
+-- Estructura de tabla para la tabla `TBL_PERMISOS`
 --
 
-CREATE TABLE `tbl_permisos` (
+CREATE TABLE `TBL_PERMISOS` (
   `COD_PERMISO` bigint(20) NOT NULL COMMENT 'CÓDIGO DE PERMISO',
   `COD_ROL` bigint(20) NOT NULL COMMENT 'CÓDIGO DE ROL DEL USUARIO ',
   `COD_MODULO` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL MÓDULO AL CUAL SE OTORGA O QUITA EL PERMISO',
@@ -2136,85 +1643,35 @@ CREATE TABLE `tbl_permisos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_permisos`
+-- Volcado de datos para la tabla `TBL_PERMISOS`
 --
 
-INSERT INTO `tbl_permisos` (`COD_PERMISO`, `COD_ROL`, `COD_MODULO`, `R`, `W`, `U`, `D`) VALUES
-(322, 3, 1, 0, 0, 0, 0),
-(323, 3, 2, 0, 0, 0, 0),
-(324, 3, 3, 0, 0, 0, 0),
-(325, 3, 4, 0, 0, 0, 0),
-(326, 3, 5, 0, 0, 0, 0),
-(327, 3, 6, 0, 0, 0, 0),
-(1353, 4, 1, 1, 0, 0, 0),
-(1354, 4, 2, 0, 0, 0, 0),
-(1355, 4, 3, 0, 0, 0, 0),
-(1356, 4, 4, 1, 1, 1, 0),
-(1357, 4, 5, 1, 1, 1, 0),
-(1358, 4, 6, 1, 1, 1, 0),
-(1359, 4, 7, 1, 0, 0, 0),
-(1360, 4, 8, 1, 0, 0, 0),
-(1361, 4, 9, 0, 0, 0, 0),
-(1362, 4, 10, 0, 1, 1, 0),
-(1363, 4, 11, 0, 0, 0, 0),
-(1364, 4, 12, 1, 1, 0, 0),
-(1365, 4, 13, 0, 0, 0, 0),
-(1501, 8, 1, 1, 1, 1, 1),
-(1502, 8, 2, 1, 1, 1, 1),
-(1503, 8, 3, 1, 0, 0, 0),
-(1504, 8, 4, 1, 0, 0, 0),
-(1505, 8, 5, 1, 0, 0, 0),
-(1506, 8, 6, 1, 0, 0, 0),
-(1507, 8, 7, 1, 0, 0, 0),
-(1508, 8, 8, 1, 0, 0, 0),
-(1509, 8, 9, 1, 0, 0, 0),
-(1510, 8, 10, 1, 0, 0, 0),
-(1511, 8, 11, 1, 0, 0, 0),
-(1512, 8, 12, 1, 0, 0, 0),
-(1513, 8, 13, 1, 0, 0, 0),
-(1514, 8, 14, 0, 0, 0, 0),
-(1515, 8, 15, 0, 0, 0, 0),
-(1532, 2, 1, 1, 0, 0, 0),
-(1533, 2, 2, 0, 0, 0, 0),
-(1534, 2, 3, 0, 0, 0, 0),
-(1535, 2, 4, 0, 0, 0, 0),
-(1536, 2, 5, 1, 0, 0, 0),
-(1537, 2, 6, 0, 0, 0, 0),
-(1538, 2, 7, 0, 0, 0, 0),
-(1539, 2, 8, 0, 0, 0, 0),
-(1540, 2, 9, 0, 0, 0, 0),
-(1541, 2, 10, 0, 0, 0, 0),
-(1542, 2, 11, 0, 0, 0, 0),
-(1543, 2, 12, 0, 0, 0, 0),
-(1544, 2, 13, 0, 0, 0, 0),
-(1545, 2, 14, 0, 0, 0, 0),
-(1546, 2, 15, 0, 0, 0, 0),
-(1547, 2, 16, 0, 0, 0, 0),
-(1548, 1, 1, 1, 1, 1, 1),
-(1549, 1, 2, 1, 1, 1, 1),
-(1550, 1, 3, 1, 1, 1, 1),
-(1551, 1, 4, 1, 1, 1, 1),
-(1552, 1, 5, 1, 1, 1, 1),
-(1553, 1, 6, 1, 1, 1, 1),
-(1554, 1, 7, 1, 1, 1, 1),
-(1555, 1, 8, 1, 1, 1, 1),
-(1556, 1, 9, 1, 1, 1, 1),
-(1557, 1, 10, 1, 1, 1, 1),
-(1558, 1, 11, 1, 1, 1, 1),
-(1559, 1, 12, 1, 1, 1, 1),
-(1560, 1, 13, 1, 1, 1, 1),
-(1561, 1, 14, 1, 1, 1, 1),
-(1562, 1, 15, 1, 1, 1, 1),
-(1563, 1, 16, 1, 1, 1, 1),
-(1564, 1, 17, 1, 1, 1, 1);
+INSERT INTO `TBL_PERMISOS` (`COD_PERMISO`, `COD_ROL`, `COD_MODULO`, `R`, `W`, `U`, `D`) VALUES
+(1, 1, 1, 1, 1, 1, 1),
+(2, 1, 2, 1, 1, 1, 1),
+(3, 1, 3, 1, 1, 1, 1),
+(4, 1, 4, 1, 1, 1, 1),
+(5, 1, 5, 1, 1, 1, 1),
+(6, 1, 6, 1, 1, 1, 1),
+(7, 1, 7, 1, 1, 1, 1),
+(8, 1, 8, 1, 1, 1, 1),
+(9, 1, 9, 1, 1, 1, 1),
+(10, 1, 10, 1, 1, 1, 1),
+(11, 1, 11, 1, 1, 1, 1),
+(12, 1, 12, 1, 1, 1, 1),
+(13, 1, 13, 1, 1, 1, 1),
+(14, 1, 14, 1, 1, 1, 1),
+(15, 1, 15, 1, 1, 1, 1),
+(16, 1, 16, 1, 1, 1, 1),
+(17, 1, 17, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_personas`
+-- Estructura de tabla para la tabla `TBL_PERSONAS`
 --
 
-CREATE TABLE `tbl_personas` (
+CREATE TABLE `TBL_PERSONAS` (
   `COD_PERSONA` bigint(20) NOT NULL COMMENT 'CÓDIGO DE PERSONA',
   `NOMBRES` varchar(25) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'NOMBRE DE LA PERSONA',
   `APELLIDOS` varchar(25) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'APELLIDO DE LA PERSONA',
@@ -2232,55 +1689,20 @@ CREATE TABLE `tbl_personas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_personas`
+-- Volcado de datos para la tabla `TBL_PERSONAS`
 --
 
-INSERT INTO `tbl_personas` (`COD_PERSONA`, `NOMBRES`, `APELLIDOS`, `EMAIL`, `CONTRASEÑA`, `COD_ROL`, `COD_STATUS`, `TELEFONO`, `TOKEN`, `CREADO_POR`, `FECHA_CREACION`, `MODIFICADO_POR`, `FECHA_MODIFICACION`, `DATE_LOGIN`) VALUES
-(1, 'José Fernando', 'Ortiz', 'josefortizsantos@gmail.com', '65d452d53579e16d2fdf9228577b6eac314b59163f1c6ad43b61032109d3f608', 1, 1, 98912135, '', 51, '2022-02-12 02:22:51', 1, '2022-05-08 21:44:40', '2022-05-19 19:28:35'),
-(2, 'PEDRO', 'LOPEZ', 'plopez@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 2, 1, 98912132, '', 51, '2022-02-12 02:23:15', 1, '2022-04-16 22:43:51', '2022-03-25 01:42:11'),
-(5, 'FRANCISCA', 'LAGOS', 'flagoss@gmail.com', '123', 3, 1, 98912132, '', 1, '2022-02-12 02:25:44', 1, '2022-04-09 02:53:28', '2022-02-12 02:23:22'),
-(6, 'MARIO', 'PEREZ', 'MPEREZ@GMAIL.COM', '', 1, 0, 9898131, '', 0, '2022-02-15 21:25:36', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(13, 'Leonela', 'Pineda', 'lypineda@unah.hn', 'dd75ba64297196aa490cf83772f5373aa4e6ee78544374604d95ac5117d3beda', 8, 1, 97737659, '', 1, '2022-02-17 19:53:21', 1, '2022-05-11 18:15:48', '2022-05-11 00:02:50'),
-(14, 'LD', 'LJHBS', 'G@GMAIL.COM', '100', 2, 1, 98795600, '', 1, '2022-02-17 21:24:30', 1, '2022-02-17 21:25:06', '0000-00-00 00:00:00'),
-(18, 'CRISTIANO', 'IZAGUIRRE', 'czaguire@gmail.com', '', 3, 1, 9898989, '', 1, '2022-02-18 23:33:55', 1, '2022-04-04 02:18:25', '0000-00-00 00:00:00'),
-(19, 'CARLOS', 'ALMENDAREZ', 'ALMENDAREZC@GMAIL.COM', '100', 2, 1, 98103650, '', 1, '2022-02-19 00:30:39', 1, '2022-02-19 00:32:11', '0000-00-00 00:00:00'),
-(20, 'CAROLINA FRANCISCA', 'GONZALES', 'cgonz@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 2, 91006354, '', 1, '2022-02-19 00:34:29', 1, '2022-03-24 01:12:55', '0000-00-00 00:00:00'),
-(32, 'Hugo', 'Paz', 'hugo.paz@unah.hn', 'dd75ba64297196aa490cf83772f5373aa4e6ee78544374604d95ac5117d3beda', 4, 1, 98142814, '', 1, '2022-03-22 18:24:11', 1, '2022-04-20 23:33:33', '2022-04-22 00:10:30'),
-(49, 'Kevin', 'Rodriguez', 'krodriguezz@unah.hn', 'dd75ba64297196aa490cf83772f5373aa4e6ee78544374604d95ac5117d3beda', 1, 1, 32301533, '', 1, '2022-03-24 17:37:43', 1, '2022-04-24 05:05:51', '2022-04-25 19:33:06'),
-(50, 'Fernando', 'Ortiz', 'josefortizsan121os@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 0, 505050574, '', 1, '2022-03-24 17:48:10', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(51, 'DARLIN YOHANA', 'MARTEL', 'darlin.matamoros123@unah.hn', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 0, 505050574, '', 1, '2022-03-24 22:39:44', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(52, 'Pedro', 'Gomez', 'pgomez@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1, 0, 9898998, '', 1, '2022-03-24 22:41:53', 1, '2022-03-25 00:56:56', '0000-00-00 00:00:00'),
-(53, 'HUIG', 'PIZA', 'ffernandada@gmail.com', '', 3, 1, 123123123, '', 1, '2022-04-04 02:10:56', 1, '2022-04-18 17:31:38', '0000-00-00 00:00:00'),
-(62, 'Pedro Enrique', 'Bustillo', 'josefortizsantos20000@gmail.com', '95e56aa6c537557c35ed141fc054822fdd050187fa161e7da186abda2871bed3', 2, 1, 94877564, '', NULL, '2022-04-18 14:06:02', 0, '0000-00-00 00:00:00', '2022-04-18 14:07:22'),
-(63, 'Victor', 'García', 'victorbustillo2000@gmail.com', 'dd75ba64297196aa490cf83772f5373aa4e6ee78544374604d95ac5117d3beda', 2, 1, 97484752, '', NULL, '2022-04-20 03:35:02', 1, '2022-04-25 02:19:13', '2022-04-25 02:20:27'),
-(64, 'Gaby', 'Maradiaga', 'ggmaradiaga@unah.hn', 'dd75ba64297196aa490cf83772f5373aa4e6ee78544374604d95ac5117d3beda', 2, 1, 97514276, '', NULL, '2022-04-20 03:36:23', 1, '2022-04-20 23:34:05', '2022-05-04 02:00:26'),
-(65, 'Jafet', 'Giron', 'reynaldo.giron31@gmail.com', '05e0b1ff69d7eb776fde986b622558b424c9744e6cce2eec9a52acceb8f24903', 2, 1, 22222222, '', NULL, '2022-04-20 03:37:51', 65, '2022-04-25 01:25:16', '2022-04-25 02:22:18'),
-(66, 'Alejandro', 'Izaguirre', 'alej@gmail.com', 'dd75ba64297196aa490cf83772f5373aa4e6ee78544374604d95ac5117d3beda', 2, 1, 98142814, '', NULL, '2022-04-20 03:39:30', 1, '2022-04-20 23:33:55', '0000-00-00 00:00:00'),
-(67, 'Laura', 'Bozzo', 'lauaritabozzo@gmaail.com', 'a1908d81dd32d6e768cd02ed8e3ac704f8086164852fe44d8e01c4f45fc2888b', 2, 0, 97987889, '', 1, '2022-04-20 04:10:24', 1, '2022-04-20 04:12:36', '0000-00-00 00:00:00'),
-(68, 'Luis', 'Garcia', 'enriquegarsan@hotmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 2, 1, 94956573, '', NULL, '2022-04-20 17:35:50', 68, '2022-04-20 17:39:52', '2022-04-20 17:37:00'),
-(69, 'Test', 'Test', 'test@test.com', '1ee1fbff077d45b975c0a0b08d4b155670fc3503be1179ff750d7c79587e7e7b', 2, 1, 56789845, '', NULL, '2022-04-22 00:41:59', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(70, 'Eileen Arabelle', 'Rivera', 'eileenaa.bracamonteaa@unah.hn', '613ba10fb44ebe2c8c121c748d59083ac92aafdd9891d0073d0a8d12c84abe63', 2, 1, 50505058, '', NULL, '2022-04-22 08:42:05', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(71, 'Juan Orlando', 'Hernandez Alvarado', 'juancito.jodido@gmail.com', 'd258729cdd62c74b34d7953995313f205f7fe9100c42aad210e088d794a3302c', 2, 0, 22668844, '', NULL, '2022-04-24 03:45:20', 1, '2022-05-11 21:01:51', '0000-00-00 00:00:00'),
-(72, 'Fragoso', 'Diaz', 'josjdosd@gmail.com', '1fb54a53280c22005e97da446ba16dcea2ca58a7835176db7ee94ecfa68f1830', 2, 1, 94877564, '', NULL, '2022-04-24 04:27:01', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(73, 'Jafet', 'Giron Flores', 'reynaldo.giron@unah.hn', 'ae528a6d8308a30428d133358cb0c053646ac189f6a2e326aeeaa7c7486fb31e', 3, 0, 98989800, '', 1, '2022-04-24 05:05:21', 1, '2022-04-25 02:10:08', '2022-04-24 08:50:13'),
-(74, 'Hikn', 'Hjvn', 'ji@gmail.com', '7876460a2729a1b1feadeb9618755fb216ec36ff91f186659119290e5339c192', 2, 1, 65125111, '', NULL, '2022-04-24 08:01:16', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(75, 'David Alejandro', 'Romero', 'davidromero@gmail.com', '', 3, 0, 94904305, '', 1, '2022-04-24 22:44:06', 1, '2022-04-24 22:48:28', '0000-00-00 00:00:00'),
-(76, 'Carmen', 'Flores', 'kazrodriguez97@gmail.com', 'f0cb9b281e1480e3092281cec04ed610b18fe3f70bc7fee085b29142e932329d', 2, 0, 39874563, '', 49, '2022-04-24 23:35:45', 1, '2022-04-25 01:36:44', '2022-04-25 00:43:01'),
-(77, 'Rosa', 'Flores', 'raquel@gmail.com', '2e314f2228feae8494cdc888293f11b4ff2035f97e822e9da5d7693d4c343dcb', 2, 0, 98787455, '', 1, '2022-04-25 01:18:51', 1, '2022-04-25 01:30:47', '0000-00-00 00:00:00'),
-(78, 'Reynaldo', 'Giron Flores', 'reynaldo@gmail.com', 'ae528a6d8308a30428d133358cb0c053646ac189f6a2e326aeeaa7c7486fb31e', 4, 1, 87456325, '', 1, '2022-04-25 02:24:05', 1, '2022-05-11 17:32:53', '2022-04-25 02:49:30'),
-(79, 'Carolina', 'Mendoza', 'carolina@gmail.com', 'e81f05b54b3bf054c30e411a7d10d9d5edf5db10cea586d95869fb4e91325cf3', 2, 0, 87965456, '', 1, '2022-04-25 02:34:39', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(80, 'Cristian', 'Garcia', 'caolina@gmail.com', '37f807c3bd67a3dbd1c3919d10c616dfc206b0cb3f0148b3e61c35ec9ebfa448', 3, 0, 88153145, '', 1, '2022-04-25 03:00:57', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(81, 'Carlita', 'Pineda', 'carla@gmail.com', '5951dbb16d5514fc139eeecfad2fcba86b868767a0d82f09a02f1b838e0ccdd9', 4, 0, 95687456, '', 1, '2022-04-25 03:09:05', 1, '2022-04-25 03:19:09', '0000-00-00 00:00:00'),
-(92, 'José Fernando', 'Santos', 'josefortizsantos2000@gmail.com', '65d452d53579e16d2fdf9228577b6eac314b59163f1c6ad43b61032109d3f608', 2, 1, 2147483647, '', NULL, '2022-04-27 03:24:16', 0, '0000-00-00 00:00:00', '2022-05-09 18:00:45'),
-(98, 'Pedro Martinez', 'Santos', 'jfortizsas@unah.hn', '65d452d53579e16d2fdf9228577b6eac314b59163f1c6ad43b61032109d3f608', 1, 0, 50505057, '', 1, '2022-05-11 18:24:30', 1, '2022-05-11 18:25:11', '0000-00-00 00:00:00');
+INSERT INTO `TBL_PERSONAS` (`COD_PERSONA`, `NOMBRES`, `APELLIDOS`, `EMAIL`, `CONTRASEÑA`, `COD_ROL`, `COD_STATUS`, `TELEFONO`, `TOKEN`, `CREADO_POR`, `FECHA_CREACION`, `MODIFICADO_POR`, `FECHA_MODIFICACION`, `DATE_LOGIN`) VALUES
+(1, 'José Fernando', 'Ortiz', 'josefortizsantos@gmail.com', '65d452d53579e16d2fdf9228577b6eac314b59163f1c6ad43b61032109d3f608', 1, 3, 98912135, '', 51, '2022-02-12 02:22:51', 1, '2022-05-08 21:44:40', '2022-05-27 20:44:18'),
+(2, 'Leonela', 'Pineda', 'lypineda@unah.hn', 'dd75ba64297196aa490cf83772f5373aa4e6ee78544374604d95ac5117d3beda', 1, 3, 97737659, '', 1, '2022-02-17 19:53:21', 1, '2022-05-11 18:15:48', '2022-05-11 00:02:50');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_post`
+-- Estructura de tabla para la tabla `TBL_POST`
 --
 
-CREATE TABLE `tbl_post` (
+CREATE TABLE `TBL_POST` (
   `COD_POST` bigint(20) NOT NULL,
   `TITULO` varchar(255) COLLATE utf8mb4_swedish_ci NOT NULL,
   `CONTENIDO` text COLLATE utf8mb4_swedish_ci NOT NULL,
@@ -2291,10 +1713,10 @@ CREATE TABLE `tbl_post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_post`
+-- Volcado de datos para la tabla `TBL_POST`
 --
 
-INSERT INTO `tbl_post` (`COD_POST`, `TITULO`, `CONTENIDO`, `PORTADA`, `RUTA`, `COD_STATUS`, `FECHA_CREACION`) VALUES
+INSERT INTO `TBL_POST` (`COD_POST`, `TITULO`, `CONTENIDO`, `PORTADA`, `RUTA`, `COD_STATUS`, `FECHA_CREACION`) VALUES
 (1, 'Inicio', '<div class=\"container text-center p-t-80\"><hr /><div class=\"p-t-80\"><h1 class=\"ltext-103 cl5\">Nuestras Marcas</h1></div><div class=\"row\"><div class=\"col-md-3\"><img src=\"https://estacionroute77.com/Assets/tienda/images/m1.png\" alt=\"Marca1\" width=\"110\" height=\"110\" /></div><div class=\"col-md-3\"><img src=\"https://estacionroute77.com/Assets/tienda/images/m2.png\" alt=\"Marca2\" width=\"128\" height=\"128\" /></div><div class=\"col-md-3\"><img src=\"https://estacionroute77.com/Assets/tienda/images/m3.png\" alt=\"Marca3\" width=\"128\" height=\"128\" /></div><div class=\"col-md-3\"><img src=\"https://estacionroute77.com/Assets/tienda/images/m4.png\" alt=\"Marca4\" width=\"128\" height=\"128\" /></div></div></div>', '', 'inicio', 1, '2022-04-25 23:33:19'),
 (2, 'Tienda', '<p>Tienda Donde se muestran los Productos</p>', '', 'tienda', 1, '2022-04-25 18:35:15'),
 (3, 'Carrito', '<p>Carrito</p>', '', 'carrito', 1, '2022-04-25 23:33:58'),
@@ -2308,10 +1730,49 @@ INSERT INTO `tbl_post` (`COD_POST`, `TITULO`, `CONTENIDO`, `PORTADA`, `RUTA`, `C
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_productos`
+-- Estructura de tabla para la tabla `TBL_PREGUNTAS`
 --
 
-CREATE TABLE `tbl_productos` (
+CREATE TABLE `TBL_PREGUNTAS` (
+  `COD_PREGUNTA` bigint(20) NOT NULL,
+  `PREGUNTA` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `TBL_PREGUNTAS`
+--
+
+INSERT INTO `TBL_PREGUNTAS` (`COD_PREGUNTA`, `PREGUNTA`) VALUES
+(1, '¿Nombre de tu primera mascota?'),
+(2, '¿Cuál es tu comida favorita?'),
+(3, '¿Cuál es el nombre de su primer maestro?'),
+(4, '¿Lugar dónde fuiste al colegio?');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `TBL_PREGUNTAS_X_USUARIO`
+--
+
+CREATE TABLE `TBL_PREGUNTAS_X_USUARIO` (
+  `COD_PREGUNTAS_X_USUARIO` bigint(20) NOT NULL,
+  `COD_PREGUNTA` bigint(20) NOT NULL,
+  `COD_USUARIO` bigint(20) NOT NULL,
+  `RESPUESTA` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `TBL_PREGUNTAS_X_USUARIO`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `TBL_PRODUCTOS`
+--
+
+CREATE TABLE `TBL_PRODUCTOS` (
   `COD_PRODUCTO` bigint(20) NOT NULL COMMENT 'CÓDIGO DE LOS PRODUCTOS',
   `COD_CATEGORIA` bigint(20) NOT NULL COMMENT 'CÓDIGO DE LAS CATEGORÍAS ALMACENADAS',
   `COD_BARRA` varchar(30) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'CÓDIGO DE BARRA DEL PRODUCTO',
@@ -2327,44 +1788,14 @@ CREATE TABLE `tbl_productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_productos`
---
-
-INSERT INTO `tbl_productos` (`COD_PRODUCTO`, `COD_CATEGORIA`, `COD_BARRA`, `NOMBRE`, `DESCRIPCION`, `PRECIO`, `RUTA`, `CREADO_POR`, `FECHA_CREACION`, `MODIFICADO_POR`, `FECHA_MODIFICACION`, `COD_STATUS`) VALUES
-(1, 4, '123123123123', 'Pasta Colgate', '<p>ARTICULOS PARA EL HOGAR</p>', '25.00', 'pasta-colgate', 1, '2022-02-12 02:39:56', 1, '2022-04-19 10:01:12', 1),
-(2, 2, '32141545322', 'Salvavida', '<h1>PRIMOS!!</h1>', '19.00', 'salvavida', 1, '2022-02-12 02:39:56', 1, '2022-04-19 02:14:18', 1),
-(3, 2, '12345643234', 'Cerveza Imperial', '<p>Cerveza Imperial 100% Hecha en Casa&nbsp;<span style=\"text-decoration: underline;\">HONDURAS</span></p>', '20.00', 'cerveza-imperial', 1, '2022-02-20 01:33:57', 1, '2022-04-19 02:16:59', 1),
-(4, 1, '123456786', 'Leche Leyde', '<p>Leche Leyde</p><ul><li>Deliciosa</li><li>Nutritiva</li><li>Barata</li></ul>', '25.00', 'leche-leyde', 1, '2022-02-27 22:57:46', 1, '2022-04-19 03:15:16', 1),
-(5, 3, '12345612378', 'Sombras Victoria Sec', '<p>Paleta de sombras rosa marca Victoria Secret</p><p>20 colores&nbsp;</p>', '25.00', 'sombras-victoria-secret', 0, '2022-03-18 00:01:59', 1, '2022-04-19 10:19:16', 1),
-(6, 4, '123456787', 'Cubiertos', '<p>Cubiertos de acero inoxidable de buena calidad</p>', '55.00', 'cubiertos', 0, '2022-03-18 00:11:11', 1, '2022-04-19 21:26:45', 1),
-(9, 7, '12345678', 'Dog Chow', '<p>5 Libras de Dog Chow para esos <strong>perros </strong>que andan detr&aacute;s de ti mi amor.</p><p>&nbsp;</p>', '95.00', 'dog-chow', 0, '2022-03-22 18:34:21', 1, '2022-04-19 09:31:16', 1),
-(10, 4, '1234567898765000', 'Microondas', '<p>muebles de todo tipo</p>', '1500.00', 'microondas', 1, '2022-03-31 14:25:55', 1, '2022-04-19 03:11:12', 1),
-(11, 4, '2345654545', 'Regleta', '<p>&iquest;Estas sin lugar para conectar tus aparatos?</p><h3>No te preocupes m&aacute;s! ROUTE 77 tiene la soluci&oacute;n</h3><p>Regleta a solo 80 lempiras</p>', '80.00', 'regleta', 1, '2022-03-31 14:37:23', 1, '2022-04-19 03:12:48', 1),
-(12, 2, '2345665676', 'Cerveza Barena', '<p>Cerveza Barena, Refrescante</p>', '22.00', 'cerveza-barena', 1, '2022-03-31 17:50:25', 1, '2022-04-19 02:18:05', 1),
-(13, 6, '43141341', 'Espaguetti', '<p>Espaguetti para comer en familia&nbsp;</p>', '65.00', 'espaguetti', 1, '2022-03-31 21:27:57', 1, '2022-04-19 03:14:49', 1),
-(14, 5, '12231223131', 'Manzana', '<p>Porque a Newton le cayo una en la cabeza, no desaproveches la oprtunidad y comete una deliciosa manzana recien cortada del &aacute;rbol.</p><h2>&nbsp;</h2>', '15.99', 'manzana', 1, '2022-04-06 17:41:05', 1, '2022-04-19 03:20:05', 1),
-(15, 1, '1234512123', 'Leche Sula 1 litro', '<p>Leche Sula:&nbsp;</p><p>No busques m&aacute;s la leche que m&aacute;s le gusta a los Hondure&ntilde;os es Leche Sula</p>', '23.00', 'leche-sula-1-litro', 1, '2022-04-14 17:41:12', 1, '2022-04-20 01:33:24', 1),
-(16, 1, '21312312', 'Malteada sabor fresa Sula', '<p>Malteada de sabor fresa Marca sula</p>', '17.00', 'malteada-sabor-fresa-sula', 1, '2022-04-18 00:32:52', 1, '2022-04-20 01:48:23', 1),
-(17, 3, '321321321', 'Estuche para maquillaje', '<p>Estuche para maquillaje tipo maletin con espejo y luces</p>', '20.00', 'estuche-para-maquillaje', 1, '2022-04-18 00:35:04', 1, '2022-04-20 01:59:00', 1),
-(18, 3, '234235235', 'Labial', '<p>Labial rojo&nbsp;</p>', '80.00', 'labial', 1, '2022-04-19 10:27:13', 0, '0000-00-00 00:00:00', 1),
-(19, 9, '1313131212', 'Coca Cola 1.5 litros', '<p>Compra una Coca Cola 1.5 litros</p>', '45.00', 'coca-cola-15-litros', 1, '2022-04-20 04:16:52', 32, '2022-04-21 00:24:32', 1),
-(20, 1, '132654654', 'Jugo Del Valle mediano', '<p>Jugo de naranja del valle</p>', '11.00', 'jugo-del-valle-mediano', 32, '2022-04-21 00:33:31', 32, '2022-04-21 00:34:02', 1),
-(21, 1, '123123123', 'Jugo Natura Melocoton', '<p>Sabor melocot&oacute;n de lata</p>', '12.00', 'jugo-natura-melocoton', 1, '2022-04-22 00:50:42', 49, '2022-04-24 21:30:49', 1),
-(22, 9, '111012', 'Sprite', '<p>Refresco 125 ml.</p>', '30.00', 'sprite', 1, '2022-04-22 00:50:52', 1, '2022-04-22 00:51:50', 0),
-(23, 9, '510532120', 'Canada dry portátil', '<p>Refresco</p>', '18.00', 'canada-dry-portatil', 1, '2022-04-23 02:50:25', 1, '2022-04-23 03:02:46', 0),
-(24, 9, '123456789', 'Hershey', '<p>Chocolate</p>', '25.00', 'hershey', 49, '2022-04-24 21:21:59', 49, '2022-04-24 21:23:10', 0),
-(25, 10, '23545455', 'Zambos', '<p>Zambos con chile&nbsp;</p>', '25.00', 'zambos', 49, '2022-04-24 21:42:08', 0, '0000-00-00 00:00:00', 0),
-(26, 10, '2323333', 'Zambo', '<p>Zambo con chile</p>', '25.00', 'zambo', 49, '2022-04-24 21:45:29', 0, '0000-00-00 00:00:00', 0),
-(27, 10, '21234564454', 'Zambos con chile', '<p>Picositos con limon y sal</p>', '28.00', 'zambos-con-chile', 49, '2022-04-24 21:52:47', 49, '2022-04-24 22:36:17', 0),
-(28, 10, '23456656761344', 'Zambo con chile', '<p>Picositos con limon y sal</p>', '28.00', 'zambo-con-chile', 49, '2022-04-24 22:38:01', 49, '2022-04-24 22:40:05', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_proveedores`
+-- Estructura de tabla para la tabla `TBL_PROVEEDORES`
 --
 
-CREATE TABLE `tbl_proveedores` (
+CREATE TABLE `TBL_PROVEEDORES` (
   `COD_PROVEEDOR` bigint(20) NOT NULL COMMENT 'CÓDIGO DE PROVEEDOR',
   `COD_PERSONA` bigint(20) NOT NULL COMMENT 'CÓDIGO PERSONA DEL PROOVEDOR',
   `NOMBRE_EMPRESA` varchar(50) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'NOMBRE DE LA EMPRESA',
@@ -2372,24 +1803,15 @@ CREATE TABLE `tbl_proveedores` (
   `UBICACION` varchar(50) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'UBICACIÓN DEL PROVEEDOR'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_proveedores`
---
 
-INSERT INTO `tbl_proveedores` (`COD_PROVEEDOR`, `COD_PERSONA`, `NOMBRE_EMPRESA`, `RTN`, `UBICACION`) VALUES
-(1, 5, 'PRICEMART', 98908908, 'LAS UVAS'),
-(2, 6, 'LA COLONIA2', 98909809, 'LA FLOR'),
-(4, 18, 'CERVECERIA HONDUREÑA SA', 9989123, 'LA GRANJA'),
-(5, 53, 'No Se', 123123, 'Por Ahi En La Calle'),
-(6, 75, 'Inversiones Romero', 2147483647, 'Colonia Centroamerica Oeste');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_redes_sociales`
+-- Estructura de tabla para la tabla `TBL_REDES_SOCIALES`
 --
 
-CREATE TABLE `tbl_redes_sociales` (
+CREATE TABLE `TBL_REDES_SOCIALES` (
   `COD_RED_SOCIAL` bigint(20) NOT NULL COMMENT 'CÓDIGO DE RED SOCIAL',
   `COD_EMPRESA` bigint(20) NOT NULL COMMENT 'CÓDIGO DE LA EMPRESA',
   `DESCRIPCION` varchar(15) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'DESCRIPCIÓN DE LA RED SOCIAL',
@@ -2397,10 +1819,10 @@ CREATE TABLE `tbl_redes_sociales` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_redes_sociales`
+-- Volcado de datos para la tabla `TBL_REDES_SOCIALES`
 --
 
-INSERT INTO `tbl_redes_sociales` (`COD_RED_SOCIAL`, `COD_EMPRESA`, `DESCRIPCION`, `ENLACE`) VALUES
+INSERT INTO `TBL_REDES_SOCIALES` (`COD_RED_SOCIAL`, `COD_EMPRESA`, `DESCRIPCION`, `ENLACE`) VALUES
 (1, 1, 'FACEBOOK', 'https://www.facebook.com/estacion77/'),
 (2, 1, 'whatsapp', '94877564'),
 (3, 1, 'Instagram', 'https://www.instagram.com/estacion_77/');
@@ -2408,10 +1830,10 @@ INSERT INTO `tbl_redes_sociales` (`COD_RED_SOCIAL`, `COD_EMPRESA`, `DESCRIPCION`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_reembolso`
+-- Estructura de tabla para la tabla `TBL_REEMBOLSO`
 --
 
-CREATE TABLE `tbl_reembolso` (
+CREATE TABLE `TBL_REEMBOLSO` (
   `COD_REEMBOLSO` bigint(20) NOT NULL,
   `COD_PEDIDO` bigint(20) NOT NULL,
   `COD_TRANSACCION` varchar(255) COLLATE utf8_swedish_ci NOT NULL,
@@ -2420,24 +1842,12 @@ CREATE TABLE `tbl_reembolso` (
   `STATUS` varchar(150) COLLATE utf8_swedish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_reembolso`
---
-
-INSERT INTO `tbl_reembolso` (`COD_REEMBOLSO`, `COD_PEDIDO`, `COD_TRANSACCION`, `DATOS_REEMBOLSO`, `OBSERVACION`, `STATUS`) VALUES
-(1, 47, '36X95954BP875211P', '{\"id\":\"36X95954BP875211P\",\"status\":\"COMPLETED\",\"links\":[{\"href\":\"https:\\/\\/api.sandbox.paypal.com\\/v2\\/payments\\/refunds\\/36X95954BP875211P\",\"rel\":\"self\",\"method\":\"GET\"},{\"href\":\"https:\\/\\/api.sandbox.paypal.com\\/v2\\/payments\\/captures\\/4C372163YS110874S\",\"rel\":\"up\",\"method\":\"GET\"}]}', 'AAA', 'COMPLETED'),
-(2, 48, '9DA84135UY4368923', '{\"id\":\"9DA84135UY4368923\",\"status\":\"COMPLETED\",\"links\":[{\"href\":\"https:\\/\\/api.sandbox.paypal.com\\/v2\\/payments\\/refunds\\/9DA84135UY4368923\",\"rel\":\"self\",\"method\":\"GET\"},{\"href\":\"https:\\/\\/api.sandbox.paypal.com\\/v2\\/payments\\/captures\\/4GE28682PD2061717\",\"rel\":\"up\",\"method\":\"GET\"}]}', 'PRODUCTO VENCIDO', 'COMPLETED'),
-(3, 51, '8VA964105R132590V', '{\"id\":\"8VA964105R132590V\",\"status\":\"COMPLETED\",\"links\":[{\"href\":\"https:\\/\\/api.sandbox.paypal.com\\/v2\\/payments\\/refunds\\/8VA964105R132590V\",\"rel\":\"self\",\"method\":\"GET\"},{\"href\":\"https:\\/\\/api.sandbox.paypal.com\\/v2\\/payments\\/captures\\/4VD94482T8502422N\",\"rel\":\"up\",\"method\":\"GET\"}]}', 'BARRIO PELIGROSO', 'COMPLETED'),
-(10, 79, '2T153544JR667693X', '{\"id\":\"2T153544JR667693X\",\"status\":\"COMPLETED\",\"links\":[{\"href\":\"https:\\/\\/api.sandbox.paypal.com\\/v2\\/payments\\/refunds\\/2T153544JR667693X\",\"rel\":\"self\",\"method\":\"GET\"},{\"href\":\"https:\\/\\/api.sandbox.paypal.com\\/v2\\/payments\\/captures\\/0D332664RV1063326\",\"rel\":\"up\",\"method\":\"GET\"}]}', 'Ya no lo necesita', 'COMPLETED'),
-(11, 76, '9VD65814GR387780N', '{\"id\":\"9VD65814GR387780N\",\"status\":\"COMPLETED\",\"links\":[{\"href\":\"https:\\/\\/api.sandbox.paypal.com\\/v2\\/payments\\/refunds\\/9VD65814GR387780N\",\"rel\":\"self\",\"method\":\"GET\"},{\"href\":\"https:\\/\\/api.sandbox.paypal.com\\/v2\\/payments\\/captures\\/34U490118K543832X\",\"rel\":\"up\",\"method\":\"GET\"}]}', 'Productos Vencido', 'COMPLETED');
-
--- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_roles`
+-- Estructura de tabla para la tabla `TBL_ROLES`
 --
 
-CREATE TABLE `tbl_roles` (
+CREATE TABLE `TBL_ROLES` (
   `COD_ROL` bigint(20) NOT NULL COMMENT 'CÓDIGO DE ROL',
   `NOM_ROL` varchar(20) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'NOMBRE DEL ROL DEL USUARIO',
   `DESCRIPCION` text COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'DESCRIPCIÓN DEL TIPO DE ROL AL CUAL PERTENECE EL USUARIO',
@@ -2445,63 +1855,50 @@ CREATE TABLE `tbl_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_roles`
+-- Volcado de datos para la tabla `TBL_ROLES`
 --
-
-INSERT INTO `tbl_roles` (`COD_ROL`, `NOM_ROL`, `DESCRIPCION`, `COD_STATUS`) VALUES
+INSERT INTO `TBL_ROLES` (`COD_ROL`, `NOM_ROL`, `DESCRIPCION`, `COD_STATUS`) VALUES
 (1, 'Administrador', 'Administrador', 1),
 (2, 'Cliente', 'Cliente', 1),
 (3, 'Proveedor', 'Proveedor', 1),
 (4, 'Encargado', 'Encargado de Tienda', 1),
-(5, 'FINANZAS', 'TESORA FINANZAS EMPRESA', 0),
-(7, 'REPARTIDOR', 'REPARTE PRODUCTO', 0),
-(8, 'Supervisor', 'Supervisor de la tienda', 1),
-(10, 'Motorista', 'Motorista de la tienda', 0),
-(11, 'Control de calidad', 'Controla imágenes y nombres de productos.', 0),
-(12, 'wewe55', 'werw', 0),
-(13, 'Editor', 'Editor de route 77', 0),
-(14, 'Contador route 77', 'Contador tienda Route 77', 0),
-(15, 'Contador Route', 'Contador tienda Route 77', 0),
-(16, 'Contador negocio', 'Contador tienda Route 77', 0),
-(17, 'Contador del negocio', 'Contador tienda Route 77', 0);
-
--- --------------------------------------------------------
-
+(5, 'FINANZAS', 'TESORA FINANZAS EMPRESA', 1),
+(7, 'REPARTIDOR', 'REPARTE PRODUCTO', 1),
+(8, 'Supervisor', 'Supervisor de la tienda', 1);
 --
--- Estructura de tabla para la tabla `tbl_status`
+-- Estructura de tabla para la tabla `TBL_STATUS`
 --
 
-CREATE TABLE `tbl_status` (
+CREATE TABLE `TBL_STATUS` (
   `COD_STATUS` int(11) NOT NULL COMMENT 'CÓDIGO DEL STATUS',
   `DESCRIPCION` varchar(20) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'DESCRIPCIÓN DEL STATUS'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_status`
---
 
-INSERT INTO `tbl_status` (`COD_STATUS`, `DESCRIPCION`) VALUES
+
+INSERT INTO `TBL_STATUS` (`COD_STATUS`, `DESCRIPCION`) VALUES
 (0, 'ELIMINADO'),
 (1, 'ACTIVO'),
-(2, 'INACTIVO');
+(2, 'INACTIVO'),
+(3, 'NUEVO');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_sucursal`
+-- Estructura de tabla para la tabla `TBL_SUCURSAL`
 --
 
-CREATE TABLE `tbl_sucursal` (
+CREATE TABLE `TBL_SUCURSAL` (
   `COD_SUCURSAL` int(11) NOT NULL COMMENT 'CÓDIGO DE LA SUCURSAL',
   `NOMBRE` varchar(25) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'NOMBRE DE LA SUCURSAL',
   `DIRECCION` varchar(50) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'DESCRIPCIÓN DE LA SUCURSAL'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_sucursal`
+-- Volcado de datos para la tabla `TBL_SUCURSAL`
 --
 
-INSERT INTO `tbl_sucursal` (`COD_SUCURSAL`, `NOMBRE`, `DIRECCION`) VALUES
+INSERT INTO `TBL_SUCURSAL` (`COD_SUCURSAL`, `NOMBRE`, `DIRECCION`) VALUES
 (1, 'Los Laureles', 'Calle Principal. Col. Los Laureles'),
 (2, 'Las Hadas', 'Centro Comercial Las Hadas'),
 (3, 'Santa Lucia', 'Santa Lucia, Frente A La Laguna');
@@ -2509,55 +1906,34 @@ INSERT INTO `tbl_sucursal` (`COD_SUCURSAL`, `NOMBRE`, `DIRECCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_suscripciones`
+-- Estructura de tabla para la tabla `TBL_SUSCRIPCIONES`
 --
 
-CREATE TABLE `tbl_suscripciones` (
+CREATE TABLE `TBL_SUSCRIPCIONES` (
   `COD_SUSCRIPCION` bigint(20) NOT NULL,
   `NOMBRE` varchar(200) COLLATE utf8mb4_swedish_ci NOT NULL,
   `EMAIL` varchar(200) COLLATE utf8mb4_swedish_ci NOT NULL,
   `FECHA_CREACION` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'FECHA EN LA QUE SE REGISTRO EL PRODUCTO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_suscripciones`
---
-
-INSERT INTO `tbl_suscripciones` (`COD_SUSCRIPCION`, `NOMBRE`, `EMAIL`, `FECHA_CREACION`) VALUES
-(1, 'Kevin Zuniga', 'kazro@gmail.com', '2022-04-18 15:24:53'),
-(3, 'Hola', 'prueba@gmail.com', '2022-04-18 15:35:20'),
-(4, 'Kevin', 'prueba@gmail.coom', '2022-04-18 15:36:41'),
-(5, 'Fer', 'fer@gmail.com', '2022-04-18 15:38:18'),
-(6, 'Reynaldo De Funes', 'ryn@gmail.com', '2022-04-18 15:43:48'),
-(9, 'Jafet De Montoya', 'reyluz@gmail.com', '2022-04-18 15:47:36'),
-(10, 'Leonela', 'chinos@gmail.com', '2022-04-18 15:52:00'),
-(11, 'Alejandra', 'ale@gmail.com', '2022-04-18 17:33:28'),
-(12, 'Jairo', 'jairo@gmail.com', '2022-04-18 21:27:52'),
-(15, 'Fernando Ortiz', 'josefortizsantos@gmail.com', '2022-04-20 03:10:01'),
-(16, 'Alejandra La Novia De Kevin', 'alejandraveca95@gmail.com', '2022-04-20 03:20:03'),
-(17, 'José', 'jfortizs@unah.hn', '2022-04-20 03:26:31'),
-(18, 'José', 'josefortizsantos@hotmail.com', '2022-04-20 03:28:17'),
-(19, 'Allyson G', 'allysongarcia993@gmail.com', '2022-04-24 16:59:01'),
-(20, 'Kevin R Zuniga', 'karro@gmail.com', '2022-04-25 03:22:30'),
-(21, 'Kevin R', 'gjgjf@gmail.com', '2022-04-25 04:55:35');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_telefono_empresa`
+-- Estructura de tabla para la tabla `TBL_TELEFONO_EMPRESA`
 --
 
-CREATE TABLE `tbl_telefono_empresa` (
+CREATE TABLE `TBL_TELEFONO_EMPRESA` (
   `COD_TELEFONO_EMPRESA` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL TELÉFONO EMPRESARIAL',
   `COD_EMPRESA` bigint(20) NOT NULL COMMENT 'CÓDIGO DE LA EMPRESA',
   `TELEFONO` varchar(15) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'TELÉFONO DE LA EMPRESA'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_telefono_empresa`
+-- Volcado de datos para la tabla `TBL_TELEFONO_EMPRESA`
 --
 
-INSERT INTO `tbl_telefono_empresa` (`COD_TELEFONO_EMPRESA`, `COD_EMPRESA`, `TELEFONO`) VALUES
+INSERT INTO `TBL_TELEFONO_EMPRESA` (`COD_TELEFONO_EMPRESA`, `COD_EMPRESA`, `TELEFONO`) VALUES
 (1, 1, '98990087'),
 (2, 1, '96432601'),
 (3, 1, '22634806');
@@ -2565,19 +1941,19 @@ INSERT INTO `tbl_telefono_empresa` (`COD_TELEFONO_EMPRESA`, `COD_EMPRESA`, `TELE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_tipo_estado`
+-- Estructura de tabla para la tabla `TBL_TIPO_ESTADO`
 --
 
-CREATE TABLE `tbl_tipo_estado` (
+CREATE TABLE `TBL_TIPO_ESTADO` (
   `COD_ESTADO` int(11) NOT NULL COMMENT 'CÓDIGO DE ESTADO',
   `DESCRIPCION` varchar(50) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'DESCRIPCIÓN DEL ESTADO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_tipo_estado`
+-- Volcado de datos para la tabla `TBL_TIPO_ESTADO`
 --
 
-INSERT INTO `tbl_tipo_estado` (`COD_ESTADO`, `DESCRIPCION`) VALUES
+INSERT INTO `TBL_TIPO_ESTADO` (`COD_ESTADO`, `DESCRIPCION`) VALUES
 (1, 'PENDIENTE'),
 (2, 'APROBADO'),
 (3, 'COMPLETO'),
@@ -2588,10 +1964,10 @@ INSERT INTO `tbl_tipo_estado` (`COD_ESTADO`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_tipo_pago`
+-- Estructura de tabla para la tabla `TBL_TIPO_PAGO`
 --
 
-CREATE TABLE `tbl_tipo_pago` (
+CREATE TABLE `TBL_TIPO_PAGO` (
   `COD_TIPO_PAGO` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL TIPO DE PAGO',
   `DESCRIPCION` varchar(100) COLLATE utf8mb4_swedish_ci NOT NULL COMMENT 'DESCRIPCIÓN DEL TIPO DE PAGO',
   `TIPO_PAGO` varchar(25) COLLATE utf8mb4_swedish_ci DEFAULT NULL COMMENT 'NOMBRE DEL TIPO DE PAGO',
@@ -2599,10 +1975,10 @@ CREATE TABLE `tbl_tipo_pago` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `tbl_tipo_pago`
+-- Volcado de datos para la tabla `TBL_TIPO_PAGO`
 --
 
-INSERT INTO `tbl_tipo_pago` (`COD_TIPO_PAGO`, `DESCRIPCION`, `TIPO_PAGO`, `COD_STATUS`) VALUES
+INSERT INTO `TBL_TIPO_PAGO` (`COD_TIPO_PAGO`, `DESCRIPCION`, `TIPO_PAGO`, `COD_STATUS`) VALUES
 (1, 'PAYPAL', 'PAYPAL', 1),
 (2, 'EFECTIVO', 'EFECTIVO', 1),
 (3, 'CHEQUE', 'BANCO', 1);
@@ -2610,10 +1986,10 @@ INSERT INTO `tbl_tipo_pago` (`COD_TIPO_PAGO`, `DESCRIPCION`, `TIPO_PAGO`, `COD_S
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_usuarios`
+-- Estructura de tabla para la tabla `TBL_USUARIOS`
 --
 
-CREATE TABLE `tbl_usuarios` (
+CREATE TABLE `TBL_USUARIOS` (
   `COD_USUARIO` bigint(20) NOT NULL COMMENT 'CÓDIGO DEL USUARIO',
   `COD_PERSONA` bigint(20) NOT NULL COMMENT 'CODIGO DE PERSONA',
   `COD_SUCURSAL` int(11) NOT NULL COMMENT 'CÓDIGO DE LA SUCURSAL DONDE PERTENECE EL USUARIO',
@@ -2621,141 +1997,127 @@ CREATE TABLE `tbl_usuarios` (
   `COD_GENERO` int(11) NOT NULL COMMENT 'CÓDIGO DEL GÉNERO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
---
--- Volcado de datos para la tabla `tbl_usuarios`
---
-
-INSERT INTO `tbl_usuarios` (`COD_USUARIO`, `COD_PERSONA`, `COD_SUCURSAL`, `DNI`, `COD_GENERO`) VALUES
-(1, 1, 1, '9098082123321', 1),
-(4, 13, 1, '21652652', 2),
-(17, 32, 1, '33895426', 1),
-(33, 49, 1, '0801123989878', 1),
-(34, 50, 1, '909808905', 1),
-(35, 51, 1, '08011239894124', 1),
-(36, 52, 1, '1234455667', 1),
-(37, 73, 1, '0981289653108', 1),
-(38, 78, 1, '9874563215235', 1),
-(39, 79, 1, '0536555584205', 2),
-(40, 80, 1, '5478962222222', 1),
-(41, 81, 1, '0801195465488', 2),
-(47, 98, 1, '0801123989872', 1);
 
 --
 -- Índices para tablas volcadas
 --
+INSERT INTO `TBL_USUARIOS` (`COD_USUARIO`, `COD_PERSONA`, `COD_SUCURSAL`, `DNI`, `COD_GENERO`) VALUES
+(1, 1, 1, '9098082123321', 1),
+(2, 2, 1, '909452828362', 2);
 
 --
--- Indices de la tabla `tbl_bitacora`
 --
-ALTER TABLE `tbl_bitacora`
+-- Indices de la tabla `TBL_BITACORA`
+--
+ALTER TABLE `TBL_BITACORA`
   ADD PRIMARY KEY (`ID_BITACORA`),
   ADD KEY `ID_USUARIO` (`ID_PERSONA`),
   ADD KEY `ID_MODULO` (`ID_MODULO`);
 
 --
--- Indices de la tabla `tbl_calendario`
+-- Indices de la tabla `TBL_CALENDARIO`
 --
-ALTER TABLE `tbl_calendario`
+ALTER TABLE `TBL_CALENDARIO`
   ADD PRIMARY KEY (`COD_CALENDARIO`),
   ADD KEY `COD_PERSONA` (`COD_PERSONA`);
 
 --
--- Indices de la tabla `tbl_categoria`
+-- Indices de la tabla `TBL_CATEGORIA`
 --
-ALTER TABLE `tbl_categoria`
+ALTER TABLE `TBL_CATEGORIA`
   ADD PRIMARY KEY (`COD_CATEGORIA`),
   ADD KEY `COD_STATUS` (`COD_STATUS`);
 
 --
--- Indices de la tabla `tbl_cliente`
+-- Indices de la tabla `TBL_CLIENTE`
 --
-ALTER TABLE `tbl_cliente`
+ALTER TABLE `TBL_CLIENTE`
   ADD PRIMARY KEY (`COD_CLIENTE`),
   ADD KEY `COD_PERSONA` (`COD_PERSONA`);
 
 --
--- Indices de la tabla `tbl_contacto`
+-- Indices de la tabla `TBL_CONTACTO`
 --
-ALTER TABLE `tbl_contacto`
+ALTER TABLE `TBL_CONTACTO`
   ADD PRIMARY KEY (`COD_CONTACTO`);
 
 --
--- Indices de la tabla `tbl_detalle_compra`
+-- Indices de la tabla `TBL_DETALLE_COMPRA`
 --
-ALTER TABLE `tbl_detalle_compra`
+ALTER TABLE `TBL_DETALLE_COMPRA`
   ADD PRIMARY KEY (`COD_DETALLE`),
   ADD KEY `COD_ORDEN` (`COD_ORDEN`),
   ADD KEY `COD_PRODUCTO` (`COD_PRODUCTO`);
 
 --
--- Indices de la tabla `tbl_detalle_pedido`
+-- Indices de la tabla `TBL_DETALLE_PEDIDO`
 --
-ALTER TABLE `tbl_detalle_pedido`
+ALTER TABLE `TBL_DETALLE_PEDIDO`
   ADD PRIMARY KEY (`COD_DETALLE`),
   ADD KEY `COD_PEDIDO` (`COD_PEDIDO`),
   ADD KEY `COD_PRODUCTO` (`COD_PRODUCTO`);
 
 --
--- Indices de la tabla `tbl_empresa`
+-- Indices de la tabla `TBL_EMPRESA`
 --
-ALTER TABLE `tbl_empresa`
+ALTER TABLE `TBL_EMPRESA`
   ADD PRIMARY KEY (`COD_EMPRESA`);
 
 --
--- Indices de la tabla `tbl_genero`
+-- Indices de la tabla `TBL_GENERO`
 --
-ALTER TABLE `tbl_genero`
+ALTER TABLE `TBL_GENERO`
   ADD PRIMARY KEY (`COD_GENERO`);
 
 --
--- Indices de la tabla `tbl_img_producto`
+-- Indices de la tabla `TBL_IMG_PRODUCTO`
 --
-ALTER TABLE `tbl_img_producto`
+ALTER TABLE `TBL_IMG_PRODUCTO`
   ADD PRIMARY KEY (`COD_IMAGEN`),
   ADD KEY `COD_PRODUCTO` (`COD_PRODUCTO`);
 
 --
--- Indices de la tabla `tbl_inventario`
+-- Indices de la tabla `TBL_INVENTARIO`
 --
-ALTER TABLE `tbl_inventario`
+ALTER TABLE `TBL_INVENTARIO`
   ADD PRIMARY KEY (`COD_INVENTARIO`),
   ADD KEY `COD_PRODUCTO` (`COD_PRODUCTO`);
 
 --
--- Indices de la tabla `tbl_modulo`
+-- Indices de la tabla `TBL_MODULO`
 --
-ALTER TABLE `tbl_modulo`
+ALTER TABLE `TBL_MODULO`
   ADD PRIMARY KEY (`COD_MODULO`),
   ADD KEY `COD_STATUS` (`COD_STATUS`);
 
 --
--- Indices de la tabla `tbl_orden_compra`
+-- Indices de la tabla `TBL_ORDEN_COMPRA`
 --
-ALTER TABLE `tbl_orden_compra`
+ALTER TABLE `TBL_ORDEN_COMPRA`
   ADD PRIMARY KEY (`COD_ORDEN`),
   ADD KEY `COD_PROVEEDOR` (`COD_PROVEEDOR`);
 
 --
--- Indices de la tabla `tbl_pedido`
+-- Indices de la tabla `TBL_PEDIDO`
 --
-ALTER TABLE `tbl_pedido`
+ALTER TABLE `TBL_PEDIDO`
   ADD PRIMARY KEY (`COD_PEDIDO`),
   ADD KEY `COD_USUARIO` (`COD_PERSONA`),
   ADD KEY `COD_TIPO_PAGO` (`COD_TIPO_PAGO`),
   ADD KEY `COD_ESTADO` (`COD_ESTADO`);
 
 --
--- Indices de la tabla `tbl_permisos`
+-- Indices de la tabla `TBL_PERMISOS`
 --
-ALTER TABLE `tbl_permisos`
+ALTER TABLE `TBL_PERMISOS`
   ADD PRIMARY KEY (`COD_PERMISO`),
   ADD KEY `COD_ROL` (`COD_ROL`),
   ADD KEY `COD_MODULO` (`COD_MODULO`);
 
 --
--- Indices de la tabla `tbl_personas`
+-- Indices de la tabla `TBL_PERSONAS`
 --
-ALTER TABLE `tbl_personas`
+ALTER TABLE `TBL_PERSONAS`
   ADD PRIMARY KEY (`COD_PERSONA`),
   ADD UNIQUE KEY `EMAIL` (`EMAIL`),
   ADD KEY `COD_ROL` (`COD_ROL`),
@@ -2763,90 +2125,104 @@ ALTER TABLE `tbl_personas`
   ADD KEY `COD_STATUS` (`COD_STATUS`);
 
 --
--- Indices de la tabla `tbl_post`
+-- Indices de la tabla `TBL_POST`
 --
-ALTER TABLE `tbl_post`
+ALTER TABLE `TBL_POST`
   ADD PRIMARY KEY (`COD_POST`);
 
 --
--- Indices de la tabla `tbl_productos`
+-- Indices de la tabla `TBL_PREGUNTAS`
 --
-ALTER TABLE `tbl_productos`
+ALTER TABLE `TBL_PREGUNTAS`
+  ADD PRIMARY KEY (`COD_PREGUNTA`);
+
+--
+-- Indices de la tabla `TBL_PREGUNTAS_X_USUARIO`
+--
+ALTER TABLE `TBL_PREGUNTAS_X_USUARIO`
+  ADD PRIMARY KEY (`COD_PREGUNTAS_X_USUARIO`),
+  ADD KEY `COD_PREGUNTA` (`COD_PREGUNTA`),
+  ADD KEY `COD_USUARIO` (`COD_USUARIO`);
+
+--
+-- Indices de la tabla `TBL_PRODUCTOS`
+--
+ALTER TABLE `TBL_PRODUCTOS`
   ADD PRIMARY KEY (`COD_PRODUCTO`),
   ADD KEY `COD_CATEGORIA` (`COD_CATEGORIA`),
   ADD KEY `COD_STATUS` (`COD_STATUS`);
 
 --
--- Indices de la tabla `tbl_proveedores`
+-- Indices de la tabla `TBL_PROVEEDORES`
 --
-ALTER TABLE `tbl_proveedores`
+ALTER TABLE `TBL_PROVEEDORES`
   ADD PRIMARY KEY (`COD_PROVEEDOR`),
   ADD KEY `COD_PERSONA` (`COD_PERSONA`);
 
 --
--- Indices de la tabla `tbl_redes_sociales`
+-- Indices de la tabla `TBL_REDES_SOCIALES`
 --
-ALTER TABLE `tbl_redes_sociales`
+ALTER TABLE `TBL_REDES_SOCIALES`
   ADD PRIMARY KEY (`COD_RED_SOCIAL`),
   ADD KEY `COD_EMPRESA` (`COD_EMPRESA`);
 
 --
--- Indices de la tabla `tbl_reembolso`
+-- Indices de la tabla `TBL_REEMBOLSO`
 --
-ALTER TABLE `tbl_reembolso`
+ALTER TABLE `TBL_REEMBOLSO`
   ADD PRIMARY KEY (`COD_REEMBOLSO`),
   ADD KEY `COD_PEDIDO` (`COD_PEDIDO`);
 
 --
--- Indices de la tabla `tbl_roles`
+-- Indices de la tabla `TBL_ROLES`
 --
-ALTER TABLE `tbl_roles`
+ALTER TABLE `TBL_ROLES`
   ADD PRIMARY KEY (`COD_ROL`),
   ADD KEY `COD_STATUS` (`COD_STATUS`),
   ADD KEY `COD_STATUS_2` (`COD_STATUS`);
 
 --
--- Indices de la tabla `tbl_status`
+-- Indices de la tabla `TBL_STATUS`
 --
-ALTER TABLE `tbl_status`
+ALTER TABLE `TBL_STATUS`
   ADD PRIMARY KEY (`COD_STATUS`);
 
 --
--- Indices de la tabla `tbl_sucursal`
+-- Indices de la tabla `TBL_SUCURSAL`
 --
-ALTER TABLE `tbl_sucursal`
+ALTER TABLE `TBL_SUCURSAL`
   ADD PRIMARY KEY (`COD_SUCURSAL`);
 
 --
--- Indices de la tabla `tbl_suscripciones`
+-- Indices de la tabla `TBL_SUSCRIPCIONES`
 --
-ALTER TABLE `tbl_suscripciones`
+ALTER TABLE `TBL_SUSCRIPCIONES`
   ADD PRIMARY KEY (`COD_SUSCRIPCION`);
 
 --
--- Indices de la tabla `tbl_telefono_empresa`
+-- Indices de la tabla `TBL_TELEFONO_EMPRESA`
 --
-ALTER TABLE `tbl_telefono_empresa`
+ALTER TABLE `TBL_TELEFONO_EMPRESA`
   ADD PRIMARY KEY (`COD_TELEFONO_EMPRESA`),
   ADD KEY `COD_EMPRESA` (`COD_EMPRESA`);
 
 --
--- Indices de la tabla `tbl_tipo_estado`
+-- Indices de la tabla `TBL_TIPO_ESTADO`
 --
-ALTER TABLE `tbl_tipo_estado`
+ALTER TABLE `TBL_TIPO_ESTADO`
   ADD PRIMARY KEY (`COD_ESTADO`);
 
 --
--- Indices de la tabla `tbl_tipo_pago`
+-- Indices de la tabla `TBL_TIPO_PAGO`
 --
-ALTER TABLE `tbl_tipo_pago`
+ALTER TABLE `TBL_TIPO_PAGO`
   ADD PRIMARY KEY (`COD_TIPO_PAGO`),
   ADD KEY `COD_STATUS` (`COD_STATUS`);
 
 --
--- Indices de la tabla `tbl_usuarios`
+-- Indices de la tabla `TBL_USUARIOS`
 --
-ALTER TABLE `tbl_usuarios`
+ALTER TABLE `TBL_USUARIOS`
   ADD PRIMARY KEY (`COD_USUARIO`),
   ADD UNIQUE KEY `DNI` (`DNI`),
   ADD KEY `COD_PERSONA` (`COD_PERSONA`),
@@ -2858,318 +2234,337 @@ ALTER TABLE `tbl_usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `tbl_bitacora`
+-- AUTO_INCREMENT de la tabla `TBL_BITACORA`
 --
-ALTER TABLE `tbl_bitacora`
-  MODIFY `ID_BITACORA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+ALTER TABLE `TBL_BITACORA`
+  MODIFY `ID_BITACORA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=635;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_calendario`
+-- AUTO_INCREMENT de la tabla `TBL_CALENDARIO`
 --
-ALTER TABLE `tbl_calendario`
+ALTER TABLE `TBL_CALENDARIO`
   MODIFY `COD_CALENDARIO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_categoria`
+-- AUTO_INCREMENT de la tabla `TBL_CATEGORIA`
 --
-ALTER TABLE `tbl_categoria`
+ALTER TABLE `TBL_CATEGORIA`
   MODIFY `COD_CATEGORIA` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE CATEGORÍA', AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_cliente`
+-- AUTO_INCREMENT de la tabla `TBL_CLIENTE`
 --
-ALTER TABLE `tbl_cliente`
-  MODIFY `COD_CLIENTE` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE CLIENTE', AUTO_INCREMENT=37;
+ALTER TABLE `TBL_CLIENTE`
+  MODIFY `COD_CLIENTE` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE CLIENTE', AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_contacto`
+-- AUTO_INCREMENT de la tabla `TBL_CONTACTO`
 --
-ALTER TABLE `tbl_contacto`
+ALTER TABLE `TBL_CONTACTO`
   MODIFY `COD_CONTACTO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_detalle_compra`
+-- AUTO_INCREMENT de la tabla `TBL_DETALLE_COMPRA`
 --
-ALTER TABLE `tbl_detalle_compra`
+ALTER TABLE `TBL_DETALLE_COMPRA`
   MODIFY `COD_DETALLE` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL DETALLE DE COMPRA', AUTO_INCREMENT=56;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_detalle_pedido`
+-- AUTO_INCREMENT de la tabla `TBL_DETALLE_PEDIDO`
 --
-ALTER TABLE `tbl_detalle_pedido`
-  MODIFY `COD_DETALLE` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL DETALLE PEDIDO', AUTO_INCREMENT=104;
+ALTER TABLE `TBL_DETALLE_PEDIDO`
+  MODIFY `COD_DETALLE` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL DETALLE PEDIDO', AUTO_INCREMENT=106;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_empresa`
+-- AUTO_INCREMENT de la tabla `TBL_EMPRESA`
 --
-ALTER TABLE `tbl_empresa`
+ALTER TABLE `TBL_EMPRESA`
   MODIFY `COD_EMPRESA` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE EMPRESA', AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_genero`
+-- AUTO_INCREMENT de la tabla `TBL_GENERO`
 --
-ALTER TABLE `tbl_genero`
+ALTER TABLE `TBL_GENERO`
   MODIFY `COD_GENERO` int(11) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE GÉNERO', AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_img_producto`
+-- AUTO_INCREMENT de la tabla `TBL_IMG_PRODUCTO`
 --
-ALTER TABLE `tbl_img_producto`
+ALTER TABLE `TBL_IMG_PRODUCTO`
   MODIFY `COD_IMAGEN` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE IMAGEN', AUTO_INCREMENT=87;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_inventario`
+-- AUTO_INCREMENT de la tabla `TBL_INVENTARIO`
 --
-ALTER TABLE `tbl_inventario`
+ALTER TABLE `TBL_INVENTARIO`
   MODIFY `COD_INVENTARIO` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE INVENTARIO', AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_modulo`
+-- AUTO_INCREMENT de la tabla `TBL_MODULO`
 --
-ALTER TABLE `tbl_modulo`
+ALTER TABLE `TBL_MODULO`
   MODIFY `COD_MODULO` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL MÓDULO', AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_orden_compra`
+-- AUTO_INCREMENT de la tabla `TBL_ORDEN_COMPRA`
 --
-ALTER TABLE `tbl_orden_compra`
+ALTER TABLE `TBL_ORDEN_COMPRA`
   MODIFY `COD_ORDEN` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE LA ORDEN DE COMPRA', AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_pedido`
+-- AUTO_INCREMENT de la tabla `TBL_PEDIDO`
 --
-ALTER TABLE `tbl_pedido`
-  MODIFY `COD_PEDIDO` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL PEDIDO', AUTO_INCREMENT=92;
+ALTER TABLE `TBL_PEDIDO`
+  MODIFY `COD_PEDIDO` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL PEDIDO', AUTO_INCREMENT=94;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_permisos`
+-- AUTO_INCREMENT de la tabla `TBL_PERMISOS`
 --
-ALTER TABLE `tbl_permisos`
+ALTER TABLE `TBL_PERMISOS`
   MODIFY `COD_PERMISO` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE PERMISO', AUTO_INCREMENT=1565;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_personas`
+-- AUTO_INCREMENT de la tabla `TBL_PERSONAS`
 --
-ALTER TABLE `tbl_personas`
-  MODIFY `COD_PERSONA` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE PERSONA', AUTO_INCREMENT=99;
+ALTER TABLE `TBL_PERSONAS`
+  MODIFY `COD_PERSONA` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE PERSONA', AUTO_INCREMENT=112;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_post`
+-- AUTO_INCREMENT de la tabla `TBL_POST`
 --
-ALTER TABLE `tbl_post`
+ALTER TABLE `TBL_POST`
   MODIFY `COD_POST` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_productos`
+-- AUTO_INCREMENT de la tabla `TBL_PREGUNTAS`
 --
-ALTER TABLE `tbl_productos`
+ALTER TABLE `TBL_PREGUNTAS`
+  MODIFY `COD_PREGUNTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `TBL_PREGUNTAS_X_USUARIO`
+--
+ALTER TABLE `TBL_PREGUNTAS_X_USUARIO`
+  MODIFY `COD_PREGUNTAS_X_USUARIO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT de la tabla `TBL_PRODUCTOS`
+--
+ALTER TABLE `TBL_PRODUCTOS`
   MODIFY `COD_PRODUCTO` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE LOS PRODUCTOS', AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_proveedores`
+-- AUTO_INCREMENT de la tabla `TBL_PROVEEDORES`
 --
-ALTER TABLE `tbl_proveedores`
+ALTER TABLE `TBL_PROVEEDORES`
   MODIFY `COD_PROVEEDOR` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE PROVEEDOR', AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_redes_sociales`
+-- AUTO_INCREMENT de la tabla `TBL_REDES_SOCIALES`
 --
-ALTER TABLE `tbl_redes_sociales`
+ALTER TABLE `TBL_REDES_SOCIALES`
   MODIFY `COD_RED_SOCIAL` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE RED SOCIAL', AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_reembolso`
+-- AUTO_INCREMENT de la tabla `TBL_REEMBOLSO`
 --
-ALTER TABLE `tbl_reembolso`
-  MODIFY `COD_REEMBOLSO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `TBL_REEMBOLSO`
+  MODIFY `COD_REEMBOLSO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_roles`
+-- AUTO_INCREMENT de la tabla `TBL_ROLES`
 --
-ALTER TABLE `tbl_roles`
+ALTER TABLE `TBL_ROLES`
   MODIFY `COD_ROL` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE ROL', AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_status`
+-- AUTO_INCREMENT de la tabla `TBL_STATUS`
 --
-ALTER TABLE `tbl_status`
-  MODIFY `COD_STATUS` int(11) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL STATUS', AUTO_INCREMENT=7;
+ALTER TABLE `TBL_STATUS`
+  MODIFY `COD_STATUS` int(11) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL STATUS', AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_sucursal`
+-- AUTO_INCREMENT de la tabla `TBL_SUCURSAL`
 --
-ALTER TABLE `tbl_sucursal`
+ALTER TABLE `TBL_SUCURSAL`
   MODIFY `COD_SUCURSAL` int(11) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE LA SUCURSAL', AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_suscripciones`
+-- AUTO_INCREMENT de la tabla `TBL_SUSCRIPCIONES`
 --
-ALTER TABLE `tbl_suscripciones`
+ALTER TABLE `TBL_SUSCRIPCIONES`
   MODIFY `COD_SUSCRIPCION` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_telefono_empresa`
+-- AUTO_INCREMENT de la tabla `TBL_TELEFONO_EMPRESA`
 --
-ALTER TABLE `tbl_telefono_empresa`
-  MODIFY `COD_TELEFONO_EMPRESA` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL TELÉFONO EMPRESARIAL', AUTO_INCREMENT=4;
+ALTER TABLE `TBL_TELEFONO_EMPRESA`
+  MODIFY `COD_TELEFONO_EMPRESA` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL TELÉFONO EMPRESARIAL', AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_tipo_estado`
+-- AUTO_INCREMENT de la tabla `TBL_TIPO_ESTADO`
 --
-ALTER TABLE `tbl_tipo_estado`
+ALTER TABLE `TBL_TIPO_ESTADO`
   MODIFY `COD_ESTADO` int(11) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DE ESTADO', AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_tipo_pago`
+-- AUTO_INCREMENT de la tabla `TBL_TIPO_PAGO`
 --
-ALTER TABLE `tbl_tipo_pago`
+ALTER TABLE `TBL_TIPO_PAGO`
   MODIFY `COD_TIPO_PAGO` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL TIPO DE PAGO', AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_usuarios`
+-- AUTO_INCREMENT de la tabla `TBL_USUARIOS`
 --
-ALTER TABLE `tbl_usuarios`
-  MODIFY `COD_USUARIO` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL USUARIO', AUTO_INCREMENT=48;
+ALTER TABLE `TBL_USUARIOS`
+  MODIFY `COD_USUARIO` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'CÓDIGO DEL USUARIO', AUTO_INCREMENT=49;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `tbl_bitacora`
+-- Filtros para la tabla `TBL_BITACORA`
 --
-ALTER TABLE `tbl_bitacora`
-  ADD CONSTRAINT `tbl_bitacora_ibfk_1` FOREIGN KEY (`ID_PERSONA`) REFERENCES `tbl_personas` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_bitacora_ibfk_2` FOREIGN KEY (`ID_MODULO`) REFERENCES `tbl_modulo` (`COD_MODULO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_BITACORA`
+  ADD CONSTRAINT `TBL_BITACORA_ibfk_1` FOREIGN KEY (`ID_PERSONA`) REFERENCES `TBL_PERSONAS` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TBL_BITACORA_ibfk_2` FOREIGN KEY (`ID_MODULO`) REFERENCES `TBL_MODULO` (`COD_MODULO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_calendario`
+-- Filtros para la tabla `TBL_CALENDARIO`
 --
-ALTER TABLE `tbl_calendario`
-  ADD CONSTRAINT `TBL_CALENDARIO_ibfk_1` FOREIGN KEY (`COD_PERSONA`) REFERENCES `tbl_personas` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_CALENDARIO`
+  ADD CONSTRAINT `TBL_CALENDARIO_ibfk_1` FOREIGN KEY (`COD_PERSONA`) REFERENCES `TBL_PERSONAS` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_categoria`
+-- Filtros para la tabla `TBL_CATEGORIA`
 --
-ALTER TABLE `tbl_categoria`
-  ADD CONSTRAINT `TBL_CATEGORIA_IBFK_1` FOREIGN KEY (`COD_STATUS`) REFERENCES `tbl_status` (`COD_STATUS`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_CATEGORIA`
+  ADD CONSTRAINT `TBL_CATEGORIA_IBFK_1` FOREIGN KEY (`COD_STATUS`) REFERENCES `TBL_STATUS` (`COD_STATUS`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_cliente`
+-- Filtros para la tabla `TBL_CLIENTE`
 --
-ALTER TABLE `tbl_cliente`
-  ADD CONSTRAINT `CLIENTE_IBFK_1` FOREIGN KEY (`COD_PERSONA`) REFERENCES `tbl_personas` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_CLIENTE`
+  ADD CONSTRAINT `CLIENTE_IBFK_1` FOREIGN KEY (`COD_PERSONA`) REFERENCES `TBL_PERSONAS` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_detalle_compra`
+-- Filtros para la tabla `TBL_DETALLE_COMPRA`
 --
-ALTER TABLE `tbl_detalle_compra`
-  ADD CONSTRAINT `TBL_DETALLE_COMPRA_IBFK_1` FOREIGN KEY (`COD_ORDEN`) REFERENCES `tbl_orden_compra` (`COD_ORDEN`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `TBL_DETALLE_COMPRA_IBFK_2` FOREIGN KEY (`COD_PRODUCTO`) REFERENCES `tbl_productos` (`COD_PRODUCTO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_DETALLE_COMPRA`
+  ADD CONSTRAINT `TBL_DETALLE_COMPRA_IBFK_1` FOREIGN KEY (`COD_ORDEN`) REFERENCES `TBL_ORDEN_COMPRA` (`COD_ORDEN`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TBL_DETALLE_COMPRA_IBFK_2` FOREIGN KEY (`COD_PRODUCTO`) REFERENCES `TBL_PRODUCTOS` (`COD_PRODUCTO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_detalle_pedido`
+-- Filtros para la tabla `TBL_DETALLE_PEDIDO`
 --
-ALTER TABLE `tbl_detalle_pedido`
-  ADD CONSTRAINT `TBL_DETALLE_PEDIDO_IBFK_1` FOREIGN KEY (`COD_PRODUCTO`) REFERENCES `tbl_productos` (`COD_PRODUCTO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `TBL_DETALLE_PEDIDO_IBFK_2` FOREIGN KEY (`COD_PEDIDO`) REFERENCES `tbl_pedido` (`COD_PEDIDO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_DETALLE_PEDIDO`
+  ADD CONSTRAINT `TBL_DETALLE_PEDIDO_IBFK_1` FOREIGN KEY (`COD_PRODUCTO`) REFERENCES `TBL_PRODUCTOS` (`COD_PRODUCTO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TBL_DETALLE_PEDIDO_IBFK_2` FOREIGN KEY (`COD_PEDIDO`) REFERENCES `TBL_PEDIDO` (`COD_PEDIDO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_img_producto`
+-- Filtros para la tabla `TBL_IMG_PRODUCTO`
 --
-ALTER TABLE `tbl_img_producto`
-  ADD CONSTRAINT `TBL_IMG_PRODUCTO_IBFK_1` FOREIGN KEY (`COD_PRODUCTO`) REFERENCES `tbl_productos` (`COD_PRODUCTO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_IMG_PRODUCTO`
+  ADD CONSTRAINT `TBL_IMG_PRODUCTO_IBFK_1` FOREIGN KEY (`COD_PRODUCTO`) REFERENCES `TBL_PRODUCTOS` (`COD_PRODUCTO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_inventario`
+-- Filtros para la tabla `TBL_INVENTARIO`
 --
-ALTER TABLE `tbl_inventario`
-  ADD CONSTRAINT `TBL_INVENTARIO_IBFK_1` FOREIGN KEY (`COD_PRODUCTO`) REFERENCES `tbl_productos` (`COD_PRODUCTO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_INVENTARIO`
+  ADD CONSTRAINT `TBL_INVENTARIO_IBFK_1` FOREIGN KEY (`COD_PRODUCTO`) REFERENCES `TBL_PRODUCTOS` (`COD_PRODUCTO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_modulo`
+-- Filtros para la tabla `TBL_MODULO`
 --
-ALTER TABLE `tbl_modulo`
-  ADD CONSTRAINT `TBL_MODULO_IBFK_1` FOREIGN KEY (`COD_STATUS`) REFERENCES `tbl_status` (`COD_STATUS`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_MODULO`
+  ADD CONSTRAINT `TBL_MODULO_IBFK_1` FOREIGN KEY (`COD_STATUS`) REFERENCES `TBL_STATUS` (`COD_STATUS`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_orden_compra`
+-- Filtros para la tabla `TBL_ORDEN_COMPRA`
 --
-ALTER TABLE `tbl_orden_compra`
-  ADD CONSTRAINT `TBL_ORDEN_COMPRA_IBFK_1` FOREIGN KEY (`COD_PROVEEDOR`) REFERENCES `tbl_proveedores` (`COD_PROVEEDOR`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_ORDEN_COMPRA`
+  ADD CONSTRAINT `TBL_ORDEN_COMPRA_IBFK_1` FOREIGN KEY (`COD_PROVEEDOR`) REFERENCES `TBL_PROVEEDORES` (`COD_PROVEEDOR`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_pedido`
+-- Filtros para la tabla `TBL_PEDIDO`
 --
-ALTER TABLE `tbl_pedido`
-  ADD CONSTRAINT `TBL_PEDIDO_IBFK_1` FOREIGN KEY (`COD_PERSONA`) REFERENCES `tbl_personas` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `TBL_PEDIDO_IBFK_3` FOREIGN KEY (`COD_TIPO_PAGO`) REFERENCES `tbl_tipo_pago` (`COD_TIPO_PAGO`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `TBL_PEDIDO_IBFK_4` FOREIGN KEY (`COD_ESTADO`) REFERENCES `tbl_tipo_estado` (`COD_ESTADO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_PEDIDO`
+  ADD CONSTRAINT `TBL_PEDIDO_IBFK_1` FOREIGN KEY (`COD_PERSONA`) REFERENCES `TBL_PERSONAS` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TBL_PEDIDO_IBFK_3` FOREIGN KEY (`COD_TIPO_PAGO`) REFERENCES `TBL_TIPO_PAGO` (`COD_TIPO_PAGO`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TBL_PEDIDO_IBFK_4` FOREIGN KEY (`COD_ESTADO`) REFERENCES `TBL_TIPO_ESTADO` (`COD_ESTADO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_permisos`
+-- Filtros para la tabla `TBL_PERMISOS`
 --
-ALTER TABLE `tbl_permisos`
-  ADD CONSTRAINT `TBL_PERMISOS_IBFK_1` FOREIGN KEY (`COD_ROL`) REFERENCES `tbl_roles` (`COD_ROL`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `TBL_PERMISOS_IBFK_2` FOREIGN KEY (`COD_MODULO`) REFERENCES `tbl_modulo` (`COD_MODULO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_PERMISOS`
+  ADD CONSTRAINT `TBL_PERMISOS_IBFK_1` FOREIGN KEY (`COD_ROL`) REFERENCES `TBL_ROLES` (`COD_ROL`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TBL_PERMISOS_IBFK_2` FOREIGN KEY (`COD_MODULO`) REFERENCES `TBL_MODULO` (`COD_MODULO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_personas`
+-- Filtros para la tabla `TBL_PERSONAS`
 --
-ALTER TABLE `tbl_personas`
-  ADD CONSTRAINT `TBL_PERSONAS_IBFK_4` FOREIGN KEY (`COD_ROL`) REFERENCES `tbl_roles` (`COD_ROL`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `TBL_PERSONAS_IBFK_6` FOREIGN KEY (`COD_STATUS`) REFERENCES `tbl_status` (`COD_STATUS`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_PERSONAS`
+  ADD CONSTRAINT `TBL_PERSONAS_IBFK_4` FOREIGN KEY (`COD_ROL`) REFERENCES `TBL_ROLES` (`COD_ROL`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TBL_PERSONAS_IBFK_6` FOREIGN KEY (`COD_STATUS`) REFERENCES `TBL_STATUS` (`COD_STATUS`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_productos`
+-- Filtros para la tabla `TBL_PREGUNTAS_X_USUARIO`
 --
-ALTER TABLE `tbl_productos`
-  ADD CONSTRAINT `TBL_PRODUCTOS_IBFK_1` FOREIGN KEY (`COD_CATEGORIA`) REFERENCES `tbl_categoria` (`COD_CATEGORIA`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `TBL_PRODUCTOS_IBFK_2` FOREIGN KEY (`COD_STATUS`) REFERENCES `tbl_status` (`COD_STATUS`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_PREGUNTAS_X_USUARIO`
+  ADD CONSTRAINT `TBL_PREGUNTAS_X_USUARIO_ibfk_1` FOREIGN KEY (`COD_USUARIO`) REFERENCES `TBL_PERSONAS` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TBL_PREGUNTAS_X_USUARIO_ibfk_2` FOREIGN KEY (`COD_PREGUNTA`) REFERENCES `TBL_PREGUNTAS` (`COD_PREGUNTA`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_proveedores`
+-- Filtros para la tabla `TBL_PRODUCTOS`
 --
-ALTER TABLE `tbl_proveedores`
-  ADD CONSTRAINT `TBL_PROVEEDORES_IBFK_1` FOREIGN KEY (`COD_PERSONA`) REFERENCES `tbl_personas` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_PRODUCTOS`
+  ADD CONSTRAINT `TBL_PRODUCTOS_IBFK_1` FOREIGN KEY (`COD_CATEGORIA`) REFERENCES `TBL_CATEGORIA` (`COD_CATEGORIA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TBL_PRODUCTOS_IBFK_2` FOREIGN KEY (`COD_STATUS`) REFERENCES `TBL_STATUS` (`COD_STATUS`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_redes_sociales`
+-- Filtros para la tabla `TBL_PROVEEDORES`
 --
-ALTER TABLE `tbl_redes_sociales`
-  ADD CONSTRAINT `TBL_REDES_SOCIALES_IBFK_1` FOREIGN KEY (`COD_EMPRESA`) REFERENCES `tbl_empresa` (`COD_EMPRESA`) ON UPDATE CASCADE;
+ALTER TABLE `TBL_PROVEEDORES`
+  ADD CONSTRAINT `TBL_PROVEEDORES_IBFK_1` FOREIGN KEY (`COD_PERSONA`) REFERENCES `TBL_PERSONAS` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_reembolso`
+-- Filtros para la tabla `TBL_REDES_SOCIALES`
 --
-ALTER TABLE `tbl_reembolso`
-  ADD CONSTRAINT `TBL_REEMBOLSO_ibfk_1` FOREIGN KEY (`COD_PEDIDO`) REFERENCES `tbl_pedido` (`COD_PEDIDO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_REDES_SOCIALES`
+  ADD CONSTRAINT `TBL_REDES_SOCIALES_IBFK_1` FOREIGN KEY (`COD_EMPRESA`) REFERENCES `TBL_EMPRESA` (`COD_EMPRESA`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_roles`
+-- Filtros para la tabla `TBL_REEMBOLSO`
 --
-ALTER TABLE `tbl_roles`
-  ADD CONSTRAINT `TBL_ROLES_IBFK_1` FOREIGN KEY (`COD_STATUS`) REFERENCES `tbl_status` (`COD_STATUS`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_REEMBOLSO`
+  ADD CONSTRAINT `TBL_REEMBOLSO_ibfk_1` FOREIGN KEY (`COD_PEDIDO`) REFERENCES `TBL_PEDIDO` (`COD_PEDIDO`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_telefono_empresa`
+-- Filtros para la tabla `TBL_ROLES`
 --
-ALTER TABLE `tbl_telefono_empresa`
-  ADD CONSTRAINT `TBL_TELEFONO_EMPRESA_IBFK_1` FOREIGN KEY (`COD_EMPRESA`) REFERENCES `tbl_empresa` (`COD_EMPRESA`) ON UPDATE CASCADE;
+ALTER TABLE `TBL_ROLES`
+  ADD CONSTRAINT `TBL_ROLES_IBFK_1` FOREIGN KEY (`COD_STATUS`) REFERENCES `TBL_STATUS` (`COD_STATUS`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_tipo_pago`
+-- Filtros para la tabla `TBL_TELEFONO_EMPRESA`
 --
-ALTER TABLE `tbl_tipo_pago`
-  ADD CONSTRAINT `TBL_TIPO_PAGO_IBFK_1` FOREIGN KEY (`COD_STATUS`) REFERENCES `tbl_status` (`COD_STATUS`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_TELEFONO_EMPRESA`
+  ADD CONSTRAINT `TBL_TELEFONO_EMPRESA_IBFK_1` FOREIGN KEY (`COD_EMPRESA`) REFERENCES `TBL_EMPRESA` (`COD_EMPRESA`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_usuarios`
+-- Filtros para la tabla `TBL_TIPO_PAGO`
 --
-ALTER TABLE `tbl_usuarios`
-  ADD CONSTRAINT `TBL_USUARIOS_IBFK_1` FOREIGN KEY (`COD_PERSONA`) REFERENCES `tbl_personas` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `TBL_USUARIOS_IBFK_2` FOREIGN KEY (`COD_SUCURSAL`) REFERENCES `tbl_sucursal` (`COD_SUCURSAL`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `TBL_USUARIOS_IBFK_3` FOREIGN KEY (`COD_GENERO`) REFERENCES `tbl_genero` (`COD_GENERO`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `TBL_TIPO_PAGO`
+  ADD CONSTRAINT `TBL_TIPO_PAGO_IBFK_1` FOREIGN KEY (`COD_STATUS`) REFERENCES `TBL_STATUS` (`COD_STATUS`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `TBL_USUARIOS`
+--
+ALTER TABLE `TBL_USUARIOS`
+  ADD CONSTRAINT `TBL_USUARIOS_IBFK_1` FOREIGN KEY (`COD_PERSONA`) REFERENCES `TBL_PERSONAS` (`COD_PERSONA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TBL_USUARIOS_IBFK_2` FOREIGN KEY (`COD_SUCURSAL`) REFERENCES `TBL_SUCURSAL` (`COD_SUCURSAL`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `TBL_USUARIOS_IBFK_3` FOREIGN KEY (`COD_GENERO`) REFERENCES `TBL_GENERO` (`COD_GENERO`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

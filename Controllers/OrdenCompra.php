@@ -243,17 +243,22 @@ class OrdenCompra extends Controllers{
                         
                 if ($request_pedido>0){
                     foreach ($_SESSION['compraDetalle'] as $producto) {
+                        
                         $productoid = $producto['idproducto'];
+                      
                         $precio = $producto['precio'];
                         $cantidad = $producto['cantidad'];
                         $stock = $producto['stock'];
                         $cantCompra=$producto['cantCompra']+$cantidad;
                         $nuevoStock=$stock+$cantidad;
                         $this->model->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
+                         //Aumentar stock
+                         $id=$this->model->selectID($productoid); 
+                      
                         //Aumentar stock
-                        $this->model->updateStock($productoid,$nuevoStock); 
+                        $this->model->updateStock($id['COD_PRODUCTO'],$nuevoStock); 
                         //actualizarCant Compra
-                        $this->model->updateCantCompra($productoid,$cantCompra); 
+                        $this->model->updateCantCompra($id['COD_PRODUCTO'],$cantCompra); 
 
                     }
                 

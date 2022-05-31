@@ -118,6 +118,17 @@
 				$request = false;
 			}
 			return $request;
+		
+		}
+		public function selectID(int $COD_BARRA)
+		{
+			/* $sql = "SELECT * FROM categoria 
+					WHERE status != 0 "; */
+			$sql = "SELECT COD_PRODUCTO FROM TBL_PRODUCTOS WHERE COD_BARRA = {$COD_BARRA}";
+			$request = $this->select($sql);
+			
+			return $request;
+
 		}
     }
 

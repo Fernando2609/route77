@@ -74,6 +74,7 @@
 			return $request;
 
 		}
+		
 		public function selectCompra(int $idCompra){
 			$this->intidCompra = $idCompra;
 		
@@ -105,7 +106,7 @@
                              p.COD_BARRA
                             FROM TBL_DETALLE_COMPRA d
                             INNER JOIN TBL_PRODUCTOS p
-                            ON d.COD_PRODUCTO = p.COD_PRODUCTO
+                            ON d.COD_PRODUCTO = p.COD_BARRA
                             INNER JOIN TBL_CATEGORIA c
                             ON c.COD_CATEGORIA = p.COD_CATEGORIA
                             WHERE d.COD_ORDEN = $idCompra";

@@ -469,7 +469,7 @@ function fntViewInfo(idProducto) {
         document.querySelector("#celCodigo").innerHTML = objProducto.COD_BARRA;
         document.querySelector("#celNombre").innerHTML = objProducto.NOMBRE;
         document.querySelector("#celPrecio").innerHTML = objProducto.PRECIO;
-        document.querySelector("#celStock").innerHTML = objProducto.CANT_MINIMA;
+        document.querySelector("#celStock").innerHTML = objProducto.STOCK;
         document.querySelector("#celCategoria").innerHTML =
           objProducto.CATEGORÍA;
         document.querySelector("#celStatus").innerHTML = estadoProducto;
@@ -631,7 +631,6 @@ function fntPrintBarcode(area) {
 
 function openModal() {
   rowTable = "";
-
   document.querySelector("#idProducto").value = "";
   document
     .querySelector(".modal-header")

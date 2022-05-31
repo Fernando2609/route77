@@ -59,7 +59,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="txtRespuesta1">Respuesta</label>
-                    <input type="text" class="form-control " id="txtRespuesta1" name="txtRespuesta1" required="">
+                    <input type="text" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" id="txtRespuesta1" name="txtRespuesta1" required="">
                   </div>
                 </div>
                     
