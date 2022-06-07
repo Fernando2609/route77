@@ -51,11 +51,20 @@
             $emailComercio = $trs->payee->email_address;
             //Detalle
             $descripcion = $trs->description;
-            $montoDetalle = $trs->amount->value; 
-            //Detalle montos 
+            $montoDetalle = $trs->amount->value;
+        
+            if (isset($trs->payments->captures[0]->seller_receivable_breakdown)) {
+                //Detalle montos 
             $totalCompra =  $trs->payments->captures[0]->seller_receivable_breakdown->gross_amount->value;
             $comision =  $trs->payments->captures[0]->seller_receivable_breakdown->paypal_fee->value; 
             $importeNeto =  $trs->payments->captures[0]->seller_receivable_breakdown->net_amount->value;
+            }else{
+              $totalCompra =0;
+              $comision=0;
+              $importeNeto=0;
+            }
+        
+
             //Reembolso
             $reembolso = false;
             if(isset($trs->payments->refunds)){
@@ -80,10 +89,13 @@
           </div>
           <?php if(!$reembolso){
                     if($_SESSION['permisosMod']['u'] and $_SESSION['userData']['COD_ROL'] != RCLIENTES ){
+                      if (isset($trs->payments->captures[0]->seller_receivable_breakdown)) {
              ?>
+             
             <div class="col-12 text-right">
               <button class="btn btn-primary" onclick="fntTransaccion('<?= $idTransaccion ?>');"><i class="fa fa-reply-all" aria-hidden="true"></i> Hacer Reembolso </button>
             </div>
+            <?php } ?>
             <?php   }
                  } ?>
           <div class="row invoice-info">
@@ -178,6 +190,9 @@
                         <th colspan="2">Detalles del pago</th>
                       </tr>
                   </thead>
+                  <?php
+                      if (isset($trs->payments->captures[0]->seller_receivable_breakdown)) {  
+                  ?>
                   <tbody>
                        <tr>
                           <td width="250"><strong>Total de la compra</strong></td>
@@ -192,6 +207,7 @@
                           <td><?= $importeNeto.' '.$moneda ?></td>
                       </tr>
                   </tbody>
+                  <?php } ?>
               </table>
                 <?php } ?>
 

@@ -101,7 +101,7 @@
                 <td>
                     <div class="x_sgwrap x_title_blue">
                   <!--       <h1><?= NOMBRE_EMPESA ?></h1> -->
-                        <img class="img" src="<?=  base_url()  ?>/images/logoAmarillo.png" alt="">
+                        <img class="img" src="<?=  media()  ?>/images/LogoAmarillo.png" alt="">
                     </div>
                 </td>
             </tr>
