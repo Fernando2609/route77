@@ -206,43 +206,40 @@
 			return $request;
 		}
 
-		public function updatePerfil(int $idUsuario, string $identificacion, string $nombre, string $apellido, int $telefono, int $genero, int $sucursal,string $password,int $user )
+		public function updatePerfil(int $idUsuario, /*string $identificacion, string $nombre, string $apellido, int $telefono, int $genero, int $sucursal,*/string $password,int $user )
 		{
 			$this->intIdUsuario = $idUsuario;
-			$this->strIdentificacion = $identificacion;
+			/* $this->strIdentificacion = $identificacion;
 			$this->strNombre = $nombre;
 			$this->strApellido = $apellido;
 			$this->intTelefono = $telefono;
+			 $this->intGenero = $genero;
+			 $this->intSucursal = $sucursal; */
 			
 			$this->strPassword = $password;
 		
-           
-            $this->intGenero = $genero;
-      
-            $this->intSucursal = $sucursal;
 			$this->intUser = $user;
 			if($this->strPassword != "")
 			{
 				
-				$sql="CALL CRUD_USUARIO(?,?,null,?,null,null,?,?,?,?,null,?,?,'P',$this->intIdUsuario)";
+				$sql="CALL CRUD_USUARIO(null,null,null,?,null,null,null,null,null,null,null,?,?,'W',$this->intIdUsuario)";
 				$arrData = array(
-								$this->strNombre,
+								/* $this->strNombre,
 								$this->strApellido,
-								//$this->strEmail,
-								$this->strPassword,
-								
+								//$this->strEmail,	
 								$this->intTelefono,
 								$this->intSucursal,
 								$this->intGenero,
-								$this->strIdentificacion,
+								$this->strIdentificacion, */
+								$this->strPassword,
 								$this->intUser,NOW()
 								);
 			}else{
 				
-				$sql="CALL CRUD_USUARIO(?,?,null,null,null,null,?,?,?,?,null,?,?,'H',$this->intIdUsuario)";
+				$sql="CALL CRUD_USUARIO(null,null,null,null,null,null,null,null,null,null,null,?,?,'L',$this->intIdUsuario)";
 				
 				$arrData = array(
-								$this->strNombre,
+								/* $this->strNombre,
 								$this->strApellido,
 								//$this->strEmail,
 								//$this->strPassword,
@@ -250,7 +247,7 @@
 								$this->intTelefono,
 								$this->intSucursal,
 								$this->intGenero,
-								$this->strIdentificacion,
+								$this->strIdentificacion, */
 								$this->intUser, NOW()
 								);
 								

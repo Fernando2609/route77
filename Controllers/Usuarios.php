@@ -231,18 +231,25 @@
         }
         public function putPerfil()
         {
+          
             if ($_POST) {
-                if(empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) )
+                $idUsuario = $_SESSION['idUser'];
+                $codRol=$_SESSION['userData']['COD_ROL'];
+                
+                
+                if(($codRol==RCLIENTES and empty($_POST['txtNombre'])) || ($codRol==RCLIENTES and empty($_POST['txtApellido'])) || ( $codRol==RCLIENTES and empty($_POST['txtTelefono'])) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{
                     $idUsuario = $_SESSION['idUser'];
                     $strIdentificacion =  empty($_POST['txtIdentificacion']) ? "":  strClean($_POST['txtIdentificacion']);
-                   
-					/* $strIdentificacion = strClean($_POST['txtIdentificacion']); */
-					$strNombre = ucwords(strClean($_POST['txtNombre']));
-					$strApellido = ucwords(strClean($_POST['txtApellido']));
-					$intTelefono = intval(strClean($_POST['txtTelefono']));
+                    if ($codRol==RCLIENTES) {
+                        	/* $strIdentificacion = strClean($_POST['txtIdentificacion']); */
+                        $strNombre = ucwords(strClean($_POST['txtNombre']));
+                        $strApellido = ucwords(strClean($_POST['txtApellido']));
+                        $intTelefono = intval(strClean($_POST['txtTelefono']));
+                    }
+				
              
                     $intGenero =  empty($_POST['listGenero']) ? "":   intval(strClean($_POST['listGenero']));
                    /*  $intGenero = intval(strClean($_POST['listGenero'])); */
@@ -250,6 +257,7 @@
                     /* $intSucursal = intval(strClean($_POST['listSucursal'])); */
                     $user=intval($_SESSION['idUser']);
                     $strPassword = "";
+                  
                     if(!empty($_POST['txtPassword'])){
 						$strPassword = hash("SHA256",$_POST['txtPassword']);
 					}
@@ -263,12 +271,12 @@
                     $strPassword,$user);
                    }else{
                         $request_user = $this->model->updatePerfil($idUsuario,
-                        $strIdentificacion, 
-                        $strNombre,
-                        $strApellido, 
-                        $intTelefono,
-                        $intGenero,
-                        $intSucursal,
+                        //$strIdentificacion, 
+                        //$strNombre,
+                        //$strApellido, 
+                        //$intTelefono,
+                        //$intGenero,
+                        //$intSucursal,
                         $strPassword,$user);
                    }
                    
