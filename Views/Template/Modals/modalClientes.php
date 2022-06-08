@@ -25,21 +25,21 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="txtNombre">Nombres<span class="required"> *</span></label>
-              <input type="text" class="form-control valid validText" id="txtNombre" name="txtNombre" required="">
+              <input type="text" class="form-control valid validText" id="txtNombre" name="txtNombre" required="" maxlength="25">
             </div>
             <div class="form-group col-md-6">
               <label for="txtApellido">Apellidos<span class="required"> *</span></label>
-              <input type="text" class="form-control valid validText" maxlength="10" id="txtApellido" name="txtApellido" required="">
+              <input type="text" class="form-control valid validText" maxlength="10" id="txtApellido" name="txtApellido" required="" maxlength="25">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="txtTelefono">Teléfono<span class="required"> *</span></label>
-              <input type="text" class="form-control valid validNumberTel" id="txtTelefono" name="txtTelefono" required="" onkeypress="return controlTag(event);">
+              <input type="text" class="form-control valid validNumberTel" id="txtTelefono" name="txtTelefono" required="" maxlength="8" onkeypress="return controlTag(event);">
             </div>
             <div class="form-group col-md-6">
               <label for="txtEmail">Email<span class="required"> *</span></label>
-              <input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail" required="">
+              <input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail" required="" maxlength="35">
             </div>
           </div>
 
@@ -53,7 +53,7 @@
             <div class="form-row">
             <div class="form-group col-md-6">
               <label for="txtPassword">Password<span class="required"> *</span></label>
-              <input type="password" class="form-control valid ValidContra" id="txtPassword" name="txtPassword">
+              <input type="password" class="form-control valid ValidContra" id="txtPassword" name="txtPassword" >
             </div>
           </div>
           </div>
@@ -118,7 +118,7 @@
               <td id="celEstado">Larry</td>
             </tr>
             <tr>
-              <td>Fecha registro:</td>
+              <td>Fecha de Creación:</td>
               <td id="celFechaRegistro">Larry</td>
             </tr>
             <tr>

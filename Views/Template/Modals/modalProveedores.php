@@ -137,7 +137,7 @@
             </tr>
 
             <tr>
-              <td>Fecha de creación:</td>
+              <td>Fecha de Creación:</td>
               <td id="celFechaCreacion">Larry</td>
             </tr>
             <tr>
