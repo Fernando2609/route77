@@ -33,9 +33,11 @@
                 $btnDelete = '';
 
             $arrData = $this->model->selectRoles();
+            
 
                 for ($i=0; $i < count($arrData) ; $i++) { 
                 if ($arrData[$i]['COD_STATUS']==1) {
+        
                     $arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';   
                 }else{
                     $arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
@@ -51,7 +53,10 @@
                 }
 
                 $arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
-                } 
+                $arrData[$i]['NOM_ROL'] = strtoupper($arrData[$i]['NOM_ROL']);
+                $arrData[$i]['DESCRIPCION'] = strtoupper($arrData[$i]['DESCRIPCION']);
+
+            } 
             /*  dep($arrData[0]['status']);exit; */
                 echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
            }
