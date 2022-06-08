@@ -37,7 +37,7 @@ document.addEventListener(
 
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3, 4, 5, 6],
+            columns: [0, 1, 2, 3, 4],
             modifier: {},
           },
         },
@@ -64,7 +64,7 @@ document.addEventListener(
           ],
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3, 4, 5, 6],
+            columns: [0, 1, 2, 3, 4],
             modifier: {},
           },
         },
@@ -79,7 +79,7 @@ document.addEventListener(
           pageSize: "letter",
           title: "Reporte de Bitacora",
           customize: function (doc) {
-            doc.content[1].margin = [0, 40, 120, 20];
+            doc.content[1].margin = [60, 40, 120, 20];
             doc.content[0].margin = [0, 20, 0, 0];
             doc.content[0].alignment = "center";
             //orientacion vertical
@@ -87,12 +87,11 @@ document.addEventListener(
             //orientacion Horizontal
             doc.content[1].table.widths = [
               "5%",
-              "20%",
               "30%",
-              "15%",
-              "15%",
-              "15%",
+              "35%",
               "20%",
+              "15%",
+             
             ];
             doc.content[1].table.body[0].forEach(function (h) {
               //h.alignment='left';
@@ -173,7 +172,7 @@ document.addEventListener(
           },
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3, 4, 5, 6],
+            columns: [0, 1, 2, 3, 4],
             modifier: {},
           },
         },
@@ -184,7 +183,7 @@ document.addEventListener(
           className: "btn btn-info mr-1 mb-2",
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3, 4, 5, 6],
+            columns: [0, 1, 2, 3, 4],
             modifier: {},
           },
         },
@@ -195,7 +194,7 @@ document.addEventListener(
           className: "btn btn-warning mr-1 mb-2",
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3, 4, 5, 6],
+            columns: [0, 1, 2, 3, 4],
             modifier: {},
           },
         },

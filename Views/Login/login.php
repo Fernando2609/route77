@@ -104,7 +104,12 @@
           </div>
           <div class="form-group">
             <label class="control-label">CONTRASEÑA</label>
-            <input id="txtPassword" name="txtPassword" class="form-control" type="password" placeholder="Contraseña">
+            <div class="input-group">
+              <input id="txtPassword" name="txtPassword" class="form-control" type="password" placeholder="Contraseña">
+              <div class="input-group-prepend" onclick="mostrarContrasenas()">
+              <span class="input-group-text" ><i id="icon" data-original="fa fa-eye" class="fa fa-eye" ></i></span></div>
+            </div>
+            
           </div>
           <div class="form-group">
             <div class="utility">
