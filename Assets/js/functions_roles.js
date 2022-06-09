@@ -214,7 +214,15 @@ window.addEventListener('load', function() {
   /*fntEditRol()
   fntDelRol();*/
   //fntPermisos();
+  //checkBoxes();
 }, false);
+
+
+//Funcion para checkbox
+  function checkBoxes(nameInput){ 
+  const deschecar = document.querySelector(`input[name='${nameInput}']`);
+  deschecar.checked=true; 
+}
 
 
 function fntEditRol(idrol){

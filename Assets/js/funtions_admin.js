@@ -381,6 +381,44 @@ function openModal()
 }
 //preguntas de seguridada
 
+//Funcion de checkbox
+//let validNumber = document.querySelectorAll(".validNumber");
+/* function checharVer(){
+//$('#checkedTrue').click(function() {
+  let validCheck = document.querySelector("#checkedTrue");
+  if ($(this).prop('checked')) {
+     
+      $('.checar').prop('checked', true);
+  } else {
+      
+      $('.checar').prop('checked', false);
+  }
+}); */
+
+/* $("#selectAll").on("click", function() {  
+  $(".checar").prop("checked", this.checked);  
+  });  
+ 
+  $(".checar").on("click", function() {  
+    if ($(".checar").length == $(".checar:checked").length) {  
+      $("#selectAll").prop("checked", true);  
+    } else {  
+      $("#selectAll").prop("checked", false);  
+    }  
+}); */
+
+/* function checkAll() {
+  document.querySelectorAll('#selectAll input[type=checkbox]').forEach(function(checkElement){
+      checkElement.checked("#unchecked") = true;
+  });
+}
+
+function uncheckAll() {
+  document.querySelectorAll('#selectAll input[type=checkbox]').forEach(function(checkElement) {
+      checkElement.checked("#unchecked") = false;
+  });
+} */
+
 
 
 
