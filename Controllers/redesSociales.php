@@ -22,7 +22,7 @@ class RedesSociales extends Controllers{
             $data['page_name']= "redesSociales";
             $data['page_functions_js']= "functions_redesSociales.js";
             //BIRACORA
-            Bitacora($_SESSION['idUser'],MEMPRESA,"Ingreso","Ingresó al módulo");
+            ////Bitacora($_SESSION['idUser'],MEMPRESA,"Ingreso","Ingresó al módulo");
             $this->views->getView($this, "redesSociales",$data);
         }
 
@@ -65,13 +65,13 @@ class RedesSociales extends Controllers{
                             //Selecciona los datos de la red social Insertado  
                             $arrData= $this->model->selectredSocial($request_user);
                             //BIRACORA
-                            Bitacora($_SESSION['idUser'],MEMPRESA,"Nuevo","Registró la red social ".$arrData['DESCRIPCION']);  
+                            //Bitacora($_SESSION['idUser'],MEMPRESA,"Nuevo","Registró la red social ".$arrData['DESCRIPCION']);  
                         } else {
                             $arrResponse = array("status" => true, "msg" => 'Red Social Actualizada Correctamente.');
                              //Selecciona los datos del usuario Actualizado                                                       
                              $arrData= $this->model->selectredSocial($idUsuario);
                              //BIRACORA
-                             Bitacora($_SESSION['idUser'],MEMPRESA,"Update","Actualizó la red social ".$arrData['DESCRIPCION']);  
+                             //Bitacora($_SESSION['idUser'],MEMPRESA,"Update","Actualizó la red social ".$arrData['DESCRIPCION']);  
                         }
                     } else if ($request_user == 'exist') {
                         $arrResponse = array('status' => false, 'msg' => '¡Atención! el email ya existe, ingrese otro.');
@@ -135,7 +135,7 @@ class RedesSociales extends Controllers{
                 } else {
                     $arrResponse = array('status' => true, 'data' => $arrData);
                     //BIRACORA
-                    Bitacora($_SESSION['idUser'],MEMPRESA,"Consulta","Consultó la red social ".$arrData['DESCRIPCION']);  
+                    //Bitacora($_SESSION['idUser'],MEMPRESA,"Consulta","Consultó la red social ".$arrData['DESCRIPCION']);  
                 }
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
             }
@@ -156,7 +156,7 @@ class RedesSociales extends Controllers{
                     $arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la Red Social');
                    
                     //BIRACORA
-                    Bitacora($_SESSION['idUser'],MEMPRESA,"Delete","Eliminó la red social ".$arrData['DESCRIPCION']);
+                    //Bitacora($_SESSION['idUser'],MEMPRESA,"Delete","Eliminó la red social ".$arrData['DESCRIPCION']);
                 } else {
                     $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la Red Social.');
                 }

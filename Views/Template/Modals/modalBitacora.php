@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="modal fade" id="modalViewInventario" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <!-- Div Centrar Modal -->
-  <div class="modal-dialog bounceInDown animated" role="document">
+  <div class="modal-dialog bounceInDown animated" id="modalBitacora" role="document">
     <div class="modal-content">
       <!-- Div Contenido Modal -->
       <div class="modal-header header-primary">
@@ -15,31 +15,31 @@
       <div class="modal-body">
         <!-- Card -->
         
-        <table class="table table-bordered">
-          <tbody>
+        <table id="prueba" class="table table-bordered">
+          <tbody id="">
             
             <tr>
               <td>Fecha</td>
-              <td id="celFecha"></td>
+              <td colspan="2" id="celFecha"></td>
             </tr>
             <tr>
               <td>Usuario</td>
-              <td id="celUsuario"></td>
+              <td colspan="2" id="celUsuario"></td>
             </tr>
             <tr>
               <td>Módulo</td>
-              <td id="celModulo"></td>
+              <td colspan="2" id="celModulo"></td>
             </tr>
             <tr>
               <td>Acción</td>
-              <td id="celAccion"></td>
+              <td colspan="2" id="celAccion"></td>
             </tr>
+           
            
             <tr>
               <td>Descripción</td>
-              <td rowspan="2" id="celDescripcion">Larry</td>
+              <td colspan="2" id="celDescripcion">Larry</td>
             </tr>
-           
           </tbody>
         </table>
 

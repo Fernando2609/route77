@@ -37,7 +37,7 @@ require 'Libraries/Excel/vendor/autoload.php';
             $data['page_name']="pedidos";
             $data['page_functions_js']="functions_pedidos.js";
             //BIRACORA
-            Bitacora($_SESSION['idUser'],MPEDIDOS,"Ingreso","Ingresó al módulo");
+            //Bitacora($_SESSION['idUser'],MPEDIDOS,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"pedidos",$data);
         }
 
@@ -112,7 +112,7 @@ require 'Libraries/Excel/vendor/autoload.php';
         $data['arrPedido'] = $this->model->selectPedido($idpedido, $idpersona);
         $data['page_title'] = "PEDIDO #".$data['arrPedido']['orden']['COD_PEDIDO'];
         //BIRACORA
-        Bitacora($_SESSION['idUser'],MPEDIDOS,"Consulta","Consultó el Pedido #".$idpedido);
+        Bitacora($_SESSION['idUser'],MPEDIDOS,"Consulta","Consultó el Pedido #".$idpedido,'');
         $this->views->getView($this, "orden", $data);
 
         }
@@ -132,7 +132,7 @@ require 'Libraries/Excel/vendor/autoload.php';
             $data['page_functions_js']="functions_pedidos.js";
             $data['objTransaccion']=$requestTransaccion;
              //BIRACORA
-             Bitacora($_SESSION['idUser'],MPEDIDOS,"Consulta","Consultó el Pedido con la transacción paypal #".$transaccion);
+             Bitacora($_SESSION['idUser'],MPEDIDOS,"Consulta","Consultó el Pedido con la transacción paypal #".$transaccion,'');
             $this->views->getView($this, "transaccion", $data);   
             }
             public function getTransaccion(string $transaccion){
@@ -162,7 +162,7 @@ require 'Libraries/Excel/vendor/autoload.php';
                         $requestTransaccion = $this->model->reembolsoPaypal($transaccion,$observacion);
                         if($requestTransaccion){
                              //BIRACORA
-                             Bitacora($_SESSION['idUser'],MPEDIDOS,"Update","Realizó el reembolso a la transacción ".$transaccion." con la observación ".$observacion."");
+                             Bitacora($_SESSION['idUser'],MPEDIDOS,"Update","Realizó el reembolso a la transacción ".$transaccion." con la observación ".$observacion."",'');
                             $arrResponse = array("status" => true, "msg" => "El reembolso se ha procesado.");
                         }else{
                             $arrResponse = array("status" => false, "msg" => "No es posible procesar el reembolso.");
@@ -214,8 +214,8 @@ require 'Libraries/Excel/vendor/autoload.php';
                                     $requestPedido = $this->model->updatePedido($idpedido,"","",$estado,$user);
                                     if($requestPedido){
                                         $arrResponse = array("status" => true, "msg" => "Datos actualizados correctamente");
-                                         //BIRACORA
-                                        Bitacora($_SESSION['idUser'],MPEDIDOS,"Update","Actualizó el pedido #".$idpedido);
+                                        //BIRACORA
+                                        //Bitacora($_SESSION['idUser'],MPEDIDOS,"Update","Actualizó el pedido #".$idpedido,'');
                                     }else{
                                         $arrResponse = array("status" => false, "msg" => "No es posible actualizar la información.");
                                     }
@@ -228,7 +228,7 @@ require 'Libraries/Excel/vendor/autoload.php';
                                     
                                     if($requestPedido){
                                         //BIRACORA
-                                        Bitacora($_SESSION['idUser'],MPEDIDOS,"Update","Actualizó el pedido #".$idpedido);
+                                        //Bitacora($_SESSION['idUser'],MPEDIDOS,"Update","Actualizó el pedido #".$idpedido,'');
                                         $arrResponse = array("status" => true, "msg" => "Datos actualizados correctamente");
                                     }else{
                                         $arrResponse = array("status" => false, "msg" => "No es posible actualizar la información.");
@@ -525,7 +525,7 @@ require 'Libraries/Excel/vendor/autoload.php';
        
                    $hojaActiva->getStyle('I8')->setConditionalStyles($conditionalStyles);
                     //BIRACORA
-                    Bitacora($_SESSION['idUser'],MPEDIDOS,"Consulta","Consultó y descargó las utilidades de la fecha del ".$fechaInicio." al ".$fechaFin);
+                    Bitacora($_SESSION['idUser'],MPEDIDOS,"Consulta","Consultó y descargó las utilidades de la fecha del ".$fechaInicio." al ".$fechaFin,'');
                    //dep($excel);
                    //exit;
                    ob_end_clean();

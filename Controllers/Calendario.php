@@ -25,7 +25,7 @@
             $data['page_name']="calendario";
             $data['page_functions_js']="functions_calendario.js";
             //BIRACORA
-            Bitacora($_SESSION['idUser'],MCALENDARIO,"Ingreso","Ingresó al módulo");
+            //Bitacora($_SESSION['idUser'],MCALENDARIO,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"calendario",$data);
         }
         public function setCalendario()

@@ -281,6 +281,7 @@ document.addEventListener('DOMContentLoaded',function () {
                             rowTable = ""; 
                         }   
                         $('#modalFormUsuario').modal("hide");
+                        
                             formUsuario.reset();
                             swal.fire("Usuarios", objData.msg ,"success");
                             //tableUsuarios.api().ajax.reload();

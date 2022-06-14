@@ -23,7 +23,7 @@
 			$data['page_name'] = "Contactos";
 			$data['page_functions_js'] = "functions_Contactos.js";
 			//BIRACORA
-            Bitacora($_SESSION['idUser'],MCONTACTO,"Ingreso","Ingresó al módulo");
+            //Bitacora($_SESSION['idUser'],MCONTACTO,"Ingreso","Ingresó al módulo");
 			$this->views->getView($this,"contactos",$data);
 		}
 
@@ -52,7 +52,7 @@
 						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
 					}else{
            			 //BIRACORA
-            		Bitacora($_SESSION['idUser'],MCONTACTO,"Consulta","Consultó el mensaje #".$idMensaje." Enviado por el usuario ".$arrData['NOMBRE']." con el Correo ".$arrData['EMAIL']);
+            		//Bitacora($_SESSION['idUser'],MCONTACTO,"Consulta","Consultó el mensaje #".$idMensaje." Enviado por el usuario ".$arrData['NOMBRE']." con el Correo ".$arrData['EMAIL']);
 						$arrResponse = array('status' => true, 'data' => $arrData);
 					}
 				

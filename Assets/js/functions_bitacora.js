@@ -214,6 +214,8 @@ document.addEventListener(
 );
 
 function fntViewInfo(ID_BITACORA) {
+ 
+       
   let request = window.XMLHttpRequest
     ? new XMLHttpRequest()
     : new ActiveXObject("Microsoft.XMLHTTP");
@@ -224,7 +226,7 @@ function fntViewInfo(ID_BITACORA) {
   request.onreadystatechange = function () {
     if (request.readyState == 4 && request.status == 200) {
       let objData = JSON.parse(request.responseText);
-      console.log(objData);
+    
       if (objData.status) {
         document.querySelector("#celFecha").innerHTML = objData.data.FECHA;
         document.querySelector("#celUsuario").innerHTML = objData.data.USUARIO;
@@ -233,7 +235,32 @@ function fntViewInfo(ID_BITACORA) {
         document.querySelector("#celAccion").innerHTML = objData.data.ACCION;
         document.querySelector("#celDescripcion").innerHTML =
           objData.data.DESCRIP;
-        $("#modalViewInventario").modal("show");
+          
+
+          
+         var tableHeaderRowCount = 5;
+         var table = document.getElementById("prueba");
+         var rowCount = table.rows.length;
+         for (var i = tableHeaderRowCount; i < rowCount; i++) {
+           table.deleteRow(tableHeaderRowCount);
+         }
+
+          if (objData.data.ACCION == "Update") {
+              $("#prueba>tbody").append(
+                `<tr class="text-center bg-blue">
+             <td colspan="3" >Cambios</td>
+           </tr>
+           <tr>
+            <td >Campo</td>
+            <td >Valor anterior</td>
+            <td >Valor actual</td>
+           </tr>` +objData.data.TEXT_CAMBIO);
+              $("#modalViewInventario").modal("show");
+              document.querySelector("#modalBitacora").classList.add("modal-lg");
+          }else{
+            document.querySelector("#modalBitacora").classList.remove("modal-lg");
+             $("#modalViewInventario").modal("show"); 
+          }
       } else {
         swal.fire("Error", objData.msg, "error");
       }

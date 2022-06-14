@@ -22,7 +22,7 @@
             $data['page_name']="productos";
             $data['page_functions_js']="functions_productos.js";
 			 //BIRACORA
-			 Bitacora($_SESSION['idUser'],MPRODUCTOS,"Ingreso","Ingresó al módulo");
+			 //Bitacora($_SESSION['idUser'],MPRODUCTOS,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"productos",$data);
         }
         public function setProducto(){
@@ -67,6 +67,8 @@
 					}else{
 						$option = 2;
 						if($_SESSION['permisosMod']['u']){
+							// ! Seleccionar Datos antes de la actualización
+							$arrDataOld= $this->model->selectProducto($idProducto);
 							$request_producto  = $this->model->updateProducto($idProducto,
 																		$strNombre,
 																		$strDescripcion, 
@@ -78,6 +80,90 @@
 																		$intStatus,
 																	    $user
 																	);
+
+							 //! datos despues de la actualización
+							 $arrDataNew= $this->model->selectProducto($idProducto);
+
+							 //dep($arrDataNew);
+							 // ? array_keys = extrae las llaves del array
+							 $arrayKey=array_keys($arrDataNew);
+							 // ? array_chunk= dividir array en fragmentos(Valores)
+							 $arrDataNew=array_chunk($arrDataNew,1);
+							 $arrDataOld=array_chunk($arrDataOld,1);
+							 //Inicializar array
+							 $arrChange=[];
+							 //vaciar Array
+							 unset($arrChange);
+							 
+							 // TODO: for para recorrer los valores de los array
+							 for ($i=0; $i < count($arrDataNew); $i++) { 
+								 // TODO: if datos nuevos diferente a datos viejos 
+								 if ($arrDataNew[$i][0]!=$arrDataOld[$i][0]) {
+									 //TODO: valores en el arrayCambios dentro de las llaves nuevo y antiguo
+									 $arrChange['nuevo'][$i]=$arrDataNew[$i][0];
+									 $arrChange['antiguo'][$i]=$arrDataOld[$i][0];
+								 
+								 }else{
+									 // TODO: sino array en esa posición vacio
+									 $arrChange['nuevo'][$i]='No se realizó Cambio';
+									 $arrChange['antiguo'][$i]='No se realizó Cambio';
+								 }
+							 }
+	 
+							 // ?array_combine = combina las llavas con los valores
+							 $arrChangeNew=array_combine($arrayKey,$arrChange['nuevo']);
+							 $arrChangeOld=array_combine($arrayKey,$arrChange['antiguo']);
+	 
+							 /* dep($arrChangeNew);
+							 dep($arrChangeOld);
+							 exit; */
+							 
+							
+							
+							 
+							 $changeTable="<tr>
+							 <td>Codigo:</td>
+							 <td id='celCodigo'>{$arrChangeOld['COD_BARRA']}</td>
+							 <td id='celCodigo'>{$arrChangeNew['COD_BARRA']}</td>
+						   </tr>
+						   <tr>
+							 <td>Nombres:</td>
+							 <td id='celNombre'>{$arrChangeOld['NOMBRE']}</td>
+							 <td >{$arrChangeNew['NOMBRE']}</td>
+						   </tr>
+						   <tr>
+							 <td>Precio:</td>
+							 <td id='celPrecio'>{$arrChangeOld['PRECIO']}</td>
+							 <td >{$arrChangeNew['PRECIO']}</td>
+						   </tr>
+						   <tr>
+							 <td>Stock:</td>
+							 <td id='celStock'>{$arrChangeOld['CANT_MINIMA']}</td>
+							 <td>{$arrChangeNew['CANT_MINIMA']}</td>
+						   </tr>
+						   <tr>
+							 <td>Categoría:</td>
+							 <td id='celCategoria'>{$arrChangeOld['CATEGORÍA']}</td>
+							 <td >{$arrChangeNew['CATEGORÍA']}</td>
+						   </tr>
+						   <tr>
+							 <td>Status:</td>
+							 <td id='celStatus'>{$arrChangeOld['STATUS']}</td>
+							 <td>{$arrChangeNew['STATUS']}</td>
+						   </tr>
+						   <tr>
+							 <td>Descripción:</td>
+							 <td id='celDescripcion'>{$arrChangeOld['DESCRIPCION']}</td>
+							 <td >{$arrChangeNew['DESCRIPCION']}</td>
+						   </tr>";
+						  
+						   //$changeTable="{$arrChangeOld['DNI']}";
+						   //dep($changeTable);
+						   //exit;
+	 
+							 
+
+							
 						}
 					}
 					
@@ -89,13 +175,13 @@
 							$arrData= $this->model->selectProducto($request_producto);
 							
 							//BIRACORA
-							Bitacora($_SESSION['idUser'],MPRODUCTOS,"Nuevo","Registró el producto ".$arrData['NOMBRE']);  
+							Bitacora($_SESSION['idUser'],MPRODUCTOS,"Nuevo","Registró el producto ".$arrData['NOMBRE'],'');  
 						}else{
 							$arrResponse = array('status' => true, 'idproducto' => $idProducto, 'msg' => 'Datos Actualizados correctamente.');
 							 //Selecciona los datos del producto Actualizado                                                       
                              $arrData= $this->model->selectProducto($idProducto);
                              //BIRACORA
-                             Bitacora($_SESSION['idUser'],MPRODUCTOS,"Update","Actualizó el Producto ".$arrData['NOMBRE']);
+                             Bitacora($_SESSION['idUser'],MPRODUCTOS,"Update","Actualizó el Producto ".$arrData['NOMBRE'],$changeTable);
 						}
 					}else if($request_producto == false){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un producto con el <b> Código </b> o el <b>Nombre</b> Ingresado.');		
@@ -157,7 +243,7 @@
 							}
 						}
 						//BIRACORA
-						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Consulta","Consultó el producto ".$arrData['NOMBRE']);
+						//Bitacora($_SESSION['idUser'],MPRODUCTOS,"Consulta","Consultó el producto ".$arrData['NOMBRE']);
 						$arrData['images'] = $arrImg;
 						$arrResponse = array('status' => true, 'data' => $arrData);
 					}
@@ -194,7 +280,7 @@
 						$arrData= $this->model->selectProducto($idProducto);
 						
 						//BIRACORA
-						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Nuevo","Agregó una imagen al producto ".$arrData['NOMBRE']); 
+						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Nuevo","Agregó una imagen al producto ".$arrData['NOMBRE'],''); 
 						$arrResponse = array('status' => true, 'imgname' => $imgNombre, 'msg' => 'Archivo cargado.');
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error de carga.');
@@ -222,7 +308,7 @@
 						$arrData= $this->model->selectProducto($idProducto);
 						
 						//BIRACORA
-						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Delete","Eliminó una imagen al producto ".$arrData['NOMBRE']); 
+						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Delete","Eliminó una imagen al producto ".$arrData['NOMBRE'],''); 
 						$arrResponse = array('status' => true, 'msg' => 'Archivo eliminado');
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar');
@@ -243,7 +329,7 @@
 						$arrData= $this->model->selectProducto($intIdproducto);
 						
 						//BIRACORA
-						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Delete","Eliminó el producto ".$arrData['NOMBRE']); 
+						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Delete","Eliminó el producto ".$arrData['NOMBRE'],''); 
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el producto');
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el producto.');

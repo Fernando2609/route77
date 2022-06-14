@@ -56,7 +56,10 @@
             $data=$this->model->delUser($id);
             print_r($data);
         } */
+      
     }
+
+    
 
 ?>
 

@@ -23,7 +23,7 @@ class Empresa extends Controllers{
             $data['page_name']="empresa";
             $data['page_functions_js']="functions_empresa.js";
             //BIRACORA
-            Bitacora($_SESSION['idUser'],MEMPRESA,"Ingreso","Ingresó al módulo");
+            //Bitacora($_SESSION['idUser'],MEMPRESA,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"empresa",$data);
         }
 
@@ -66,6 +66,8 @@ class Empresa extends Controllers{
                          $option = 2;
                         
                         if ($_SESSION['permisosMod']['u']) {
+                             // ! Seleccionar Datos antes de la actualización
+                            $arrDataOld= $this->model->selectEmpresa($idUsuario);
                             $request_user = $this->model->updateEmpresa(
                                 $idUsuario,
                                 $strNombreEmpresa,
@@ -82,6 +84,110 @@ class Empresa extends Controllers{
                                 $strCatSlider,
                                 $strCatBanner
                             );
+                             // ! datos despues de la actualización
+                        $arrDataNew= $this->model->selectEmpresa($idUsuario);
+
+                        //dep($arrDataNew);
+                        // ? array_keys = extrae las llaves del array
+                        $arrayKey=array_keys($arrDataNew);
+                        // ? array_chunk= dividir array en fragmentos(Valores)
+                        $arrDataNew=array_chunk($arrDataNew,1);
+                        $arrDataOld=array_chunk($arrDataOld,1);
+                        //Inicializar array
+                        $arrChange=[];
+                        //vaciar Array
+                        unset($arrChange);
+                        
+                        // TODO: for para recorrer los valores de los array
+                        for ($i=0; $i < count($arrDataNew); $i++) { 
+                            // TODO: if datos nuevos diferente a datos viejos 
+                            if ($arrDataNew[$i][0]!=$arrDataOld[$i][0]) {
+                                //TODO: valores en el arrayCambios dentro de las llaves nuevo y antiguo
+                                $arrChange['nuevo'][$i]=$arrDataNew[$i][0];
+                                $arrChange['antiguo'][$i]=$arrDataOld[$i][0];
+                            
+                            }else{
+                                // TODO: sino array en esa posición vacio
+                                $arrChange['nuevo'][$i]='No se realizó Cambio';
+                                $arrChange['antiguo'][$i]='No se realizó Cambio';
+                            }
+                        }
+
+                        // ?array_combine = combina las llavas con los valores
+                        $arrChangeNew=array_combine($arrayKey,$arrChange['nuevo']);
+                        $arrChangeOld=array_combine($arrayKey,$arrChange['antiguo']);
+
+                        
+
+                            $changeTable="<tr>
+                            <td>Nombre Empresa:</td>
+                            <td id='celNombreEmpresa'>{$arrChangeOld['NOMBRE_EMPRESA']}</td>
+                            <td >{$arrChangeNew['NOMBRE_EMPRESA']}</td>
+                        </tr>
+                        <tr>
+                            <td>Direccion Factura (Factura)</td>
+                            <td id='celDireccion'>{$arrChangeOld['DIRECCION_FACTURA']}</td>
+                            <td>{$arrChangeNew['DIRECCION_FACTURA']}</td>
+                        </tr>
+                        <tr>
+                            <td>Razón Social:</td>
+                            <td id='celRazonSocial'>{$arrChangeOld['RAZON_SOCIAL']}</td>
+                            <td >{$arrChangeNew['RAZON_SOCIAL']}</td>
+                        </tr>
+                        <tr>
+                            <td>Email (Empresa):</td>
+                            <td id='celEmail'>{$arrChangeOld['EMAIL_EMPRESA']}</td>
+                            <td>{$arrChangeNew['EMAIL_EMPRESA']}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Gerente General</td>
+                            <td id='celGerenteGeneral'>{$arrChangeOld['GERENTE_GENERAL']}</td>
+                            <td >{$arrChangeNew['GERENTE_GENERAL']}</td>
+                        </tr>
+                        <tr>
+                            <td>Costo de Envío Lps</td>
+                            <td id='celCostoEnvio'>{$arrChangeOld['COSTO_ENVIO']}</td>
+                            <td>{$arrChangeNew['COSTO_ENVIO']}</td>
+                        </tr>
+                        <tr>
+                            <td>Pedido Mínimo Lps</td>
+                            <td id='celPedidoMinimo'>{$arrChangeOld['PEDIDO_MINIMO']}</td>
+                            <td >{$arrChangeNew['PEDIDO_MINIMO']}</td>
+                        </tr>
+                        <tr>
+                            <td>RTN</td>
+                            <td id='celRTN'>{$arrChangeOld['RTN']}</td>
+                            <td >{$arrChangeNew['RTN']}</td>
+                        </tr>
+                        <tr>
+                            <td>Email Pedidos</td>
+                            <td id='celEmailPedidos'>{$arrChangeOld['EMAIL_PEDIDOS']}</td>
+                            <td>{$arrChangeNew['EMAIL_PEDIDOS']}</td>
+                        </tr>
+                        <tr>
+                            <td>Teléfono Empresa (Factura)</td>
+                            <td id='celTelefonoEmpresa'>{$arrChangeOld['TEL_EMPRESA']}</td>
+                            <td >{$arrChangeNew['TEL_EMPRESA']}</td>
+                        </tr>
+                        <tr>
+                            <td>Celular Empresa(Factura)</td>
+                            <td id='celCelularEmpresa'>{$arrChangeOld['CEL_EMPRESA']}</td>
+                            <td >{$arrChangeNew['CEL_EMPRESA']}</td>
+                        </tr>
+                       
+                        <tr>
+                            <td>Categorías Slider</td>
+                            <td id='celCatSlider'>{$arrChangeOld['CATEGORIAS_SLIDER']}</td>
+                            <td>{$arrChangeNew['CATEGORIAS_SLIDER']}</td>
+                        </tr>
+                        <tr>
+                            <td>Categorías Banner</td>
+                            <td id='celCatBanner'>{$arrChangeOld['CATEGORIAS_BANNER']}</td>
+                            <td >{$arrChangeNew['CATEGORIAS_BANNER']}</td>
+                        </tr>";
+
+
                         } 
                     }
 
@@ -91,7 +197,7 @@ class Empresa extends Controllers{
                         } else {
                             $arrResponse = array("status" => true, "msg" => 'Empresa Actualizada Correctamente.');
                             //BIRACORA
-                            Bitacora($_SESSION['idUser'],MEMPRESA,"Update","Actualizó los datos de la empresa ");
+                            Bitacora($_SESSION['idUser'],MEMPRESA,"Update","Actualizó los datos de la empresa ",$changeTable);
                         }
                     } else if ($request_user == 'exist') {
                         $arrResponse = array('status' => false, 'msg' => '¡Atención! el email ya existe, ingrese otro.');

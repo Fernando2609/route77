@@ -43,7 +43,7 @@
 					 }
 					}
 					//BIRACORA
-					Bitacora($_SESSION['idUser'],MUSUARIOS,"Consulta","Consultó los permisos del ".$rol['NOM_ROL']."");
+					//Bitacora($_SESSION['idUser'],MUSUARIOS,"Consulta","Consultó los permisos del ".$rol['NOM_ROL']."");
                     $arrPermisoRol['modulos']=$arrModulos;
                     $html=getModal('modalPermisos',$arrPermisoRol);
                     //dep($arrPermisoRol);
@@ -73,7 +73,7 @@
 				if($requestPermiso > 0)
 				{
 					//BIRACORA
-					Bitacora($_SESSION['idUser'],MUSUARIOS,"Update","Actualizó los permisos del rol ".$rol['NOM_ROL']."");
+					Bitacora($_SESSION['idUser'],MUSUARIOS,"Update","Actualizó los permisos del rol ".$rol['NOM_ROL']."",'');
 					$arrResponse = array('status' => true, 'msg' => 'Permisos asignados correctamente.');
 				}else{
 					$arrResponse = array("status" => false, "msg" => 'No es posible asignar los permisos.');
