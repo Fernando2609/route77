@@ -147,6 +147,30 @@
           </li>
 
           <?php } ?>
+          
+          <!--Inventario -->
+          <?php if(!empty($_SESSION['permisos'][MINVENTARIO]['r'])){ ?>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/inventario" class="nav-link"> 
+            <i class=" nav-icon fa-solid fa-boxes-stacked"></i>
+              <p>
+                Inventario
+              </p>
+            </a>
+          </li>
+          <?php } ?>
+
+          <!-- Calendario-->
+          <?php if(!empty($_SESSION['permisos'][MCALENDARIO]['r'])){ ?>
+          <li class="nav-item">
+            <a href="<?= base_url();?>/calendario" class="nav-link">
+            <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Calendario
+              </p>
+            </a>
+          </li>
+          <?php } ?>
 
           
           <?php if(!empty($_SESSION['permisos'][MEMPRESA]['r'])){ ?>
@@ -205,18 +229,7 @@
           </li>
           <?php } ?>
           
-        
-          
-        <?php if(!empty($_SESSION['permisos'][MINVENTARIO]['r'])){ ?>
-          <li class="nav-item">
-            <a href="<?= base_url();?>/inventario" class="nav-link"> 
-            <i class=" nav-icon fa-solid fa-boxes-stacked"></i>
-              <p>
-                Inventario
-              </p>
-            </a>
-          </li>
-          <?php } ?>
+
           <?php if(!empty($_SESSION['permisos'][MCOMPRAS]['r'])){ ?>
           <!-- Calendario-->
           <li class="nav-item">
@@ -243,20 +256,8 @@
             </ul>
           </li>
           <?php } ?>
-          <?php if(!empty($_SESSION['permisos'][MCALENDARIO]['r'])){ ?>
-          <!-- Calendario-->
-          <li class="nav-item">
-            <a href="<?= base_url();?>/calendario" class="nav-link">
-            <i class="nav-icon far fa-calendar-alt"></i>
-              <p>
-                Calendario
-              </p>
-            </a>
-          </li>
-          <?php } ?>
 
           <!-- Suscriptores-->
-
           <?php if(!empty($_SESSION['permisos'][MSUSCRIPTORES]['r'])){ ?>
             <li class="nav-item">
             <a href="<?= base_url();?>/suscriptores" class="nav-link">
