@@ -100,7 +100,7 @@
             <tr>
                 <td>
                     <div class="x_sgwrap x_title_blue">
-                  <!--       <h1><?= NOMBRE_EMPESA ?></h1> -->
+                  <!--       <h1><?= datosEmpresa()['Empresa']['NOMBRE_EMPRESA'] ?></h1> -->
                         <img class="img" src="<?=  media()  ?>/images/LogoAmarillo.png" alt="">
                     </div>
                 </td>

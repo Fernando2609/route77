@@ -15,8 +15,8 @@
         
         public function tienda()
         {
-            $data['page_tag']=NOMBRE_EMPESA;
-            $data['page_title']=NOMBRE_EMPESA;
+            $data['page_tag']=datosEmpresa()['Empresa']['NOMBRE_EMPRESA'];
+            $data['page_title']=datosEmpresa()['Empresa']['NOMBRE_EMPRESA'];
             $data['page_name']="tienda";
             $pagina = 1;
 			$cantProductos = $this->cantProductos();
@@ -53,7 +53,7 @@
                  $infoCategoria = $this->getProductosCategoriaT($idcategoria,$ruta,$desde,PROCATEGORIA);
                 //dep($infoCategoria);exit;
                  $categoria = strClean($params);
-                 $data['page_tag'] = NOMBRE_EMPESA." - ".$infoCategoria['categoria'];
+                 $data['page_tag'] = datosEmpresa()['Empresa']['NOMBRE_EMPRESA']." - ".$infoCategoria['categoria'];
                  
                  $data['page_title'] = $infoCategoria['categoria'];
                  $data['page_name'] = "categoria";
@@ -82,7 +82,7 @@
            }
             $producto = strClean($params);
             //$arrProducto = $this->getProductoT($producto);
-            $data['page_tag'] = NOMBRE_EMPESA . " - " . $infoProducto['NOMBRE'];
+            $data['page_tag'] = datosEmpresa()['Empresa']['NOMBRE_EMPRESA'] . " - " . $infoProducto['NOMBRE'];
             $data['page_title'] = $infoProducto['NOMBRE'];
             $data['page_name'] = "producto";
             $data['categorias'] = $this->getCategorias();
@@ -661,8 +661,8 @@
 			$total_paginas = ceil($total_registro / PROPORPAGINA);
 			$data['productos'] = $this->getProductosPage($desde,PROPORPAGINA);
 			//dep($data['productos']);exit;
-			$data['page_tag'] = NOMBRE_EMPESA;
-			$data['page_title'] = NOMBRE_EMPESA;
+			$data['page_tag'] = datosEmpresa()['Empresa']['NOMBRE_EMPRESA'];
+			$data['page_title'] = datosEmpresa()['Empresa']['NOMBRE_EMPRESA'];
 			$data['page_name'] = "tienda";
 			$data['pagina'] = $pagina;
 			$data['total_paginas'] = $total_paginas;
@@ -687,7 +687,7 @@
 
 //dep($data['productos']); exit;
 
-			$data['page_tag'] = NOMBRE_EMPESA;
+			$data['page_tag'] = datosEmpresa()['Empresa']['NOMBRE_EMPRESA'];
 			$data['page_title'] = "Resultado de: ".$busqueda;
 			$data['page_name'] = "tienda";
 			$data['pagina'] = $pagina;

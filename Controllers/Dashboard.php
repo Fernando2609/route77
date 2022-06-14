@@ -36,7 +36,7 @@
             $data['ventasAnio'] = $this->model->selectVentasAnio($anio);
          
             //BIRACORA
-             Bitacora($_SESSION['idUser'],1,"Ingreso","Ingresó al módulo");
+            //Bitacora($_SESSION['idUser'],1,"Ingreso","Ingresó al módulo");
             
             if ($_SESSION['userData']['COD_ROL'] == RCLIENTES ) {
                 $this->views->getView($this,"dashboardCliente",$data);
@@ -84,7 +84,7 @@
                 $anio = $arrFecha[1];
                 $pagos = $this->model->selectPagosMes($anio,$mes);
                 //BIRACORA
-                Bitacora($_SESSION['idUser'],MDASHBOARD,"Consulta","Consultó las ventas por tipo de pago del mes ".$mes." y el año ".$anio."");
+                Bitacora($_SESSION['idUser'],MDASHBOARD,"Consulta","Consultó las ventas por tipo de pago del mes ".$mes." y el año ".$anio."",'');
                 $script = getFile("Template/Modals/graficas",$pagos);
                 echo $script;
                /*  dep($pagos);
@@ -106,7 +106,7 @@
                 $anio = $arrFecha[1];
                 $pagos = $this->model->selectVentasMes($anio, $mes);
                //BIRACORA
-               Bitacora($_SESSION['idUser'],MDASHBOARD,"Consulta","Consultó las ventas del mes ".$mes." y el año ".$anio."");
+               Bitacora($_SESSION['idUser'],MDASHBOARD,"Consulta","Consultó las ventas del mes ".$mes." y el año ".$anio."",'');
 
                 $script = getFile("Template/Modals/graficas",$pagos);
                 echo $script;
@@ -118,7 +118,7 @@
         $anio = intval($_POST['anio']);
          $pagos = $this->model->selectVentasAnio($anio);
          //BIRACORA
-         Bitacora($_SESSION['idUser'],MDASHBOARD,"Consulta","Consultó las ventas del año ".$anio."");
+         Bitacora($_SESSION['idUser'],MDASHBOARD,"Consulta","Consultó las ventas del año ".$anio."",'');
          $script = getFile("Template/Modals/graficas",$pagos);
         echo $script;
  }

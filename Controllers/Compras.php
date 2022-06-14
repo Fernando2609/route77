@@ -22,7 +22,7 @@
             $data['page_name']="compras";
             $data['page_functions_js']="functions_compras.js";
             //BIRACORA
-            Bitacora($_SESSION['idUser'],MCOMPRAS,"Ingreso","Ingresó al módulo");
+            //Bitacora($_SESSION['idUser'],MCOMPRAS,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"compras",$data);
         }
 
@@ -79,7 +79,7 @@
             
             $data['page_title'] = "COMPRA# ".$data['arrCompras']['orden']['COD_ORDEN'];
             //BIRACORA
-            Bitacora($_SESSION['idUser'],MCOMPRAS,"Consulta","Consultó la Orden Compra #".$idCompra);
+            //Bitacora($_SESSION['idUser'],MCOMPRAS,"Consulta","Consultó la Orden Compra #".$idCompra);
             $this->views->getView($this, "orden", $data);
     
             }

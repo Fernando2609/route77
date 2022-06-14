@@ -47,7 +47,7 @@
             $html2pdf->writeHTML($html);
             $html2pdf->output('Factura-'.$idpedido.'.pdf');
              //BIRACORA
-             Bitacora($_SESSION['idUser'],MPEDIDOS,"Consulta","Consultó la factura del pedido #".$idpedido);
+             Bitacora($_SESSION['idUser'],MPEDIDOS,"Consulta","Consultó la factura del pedido #".$idpedido,'');
             }
 
             }else{
