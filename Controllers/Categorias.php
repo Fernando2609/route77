@@ -157,13 +157,13 @@
                     //Selecciona los datos del usuario Insertado  
                     $arrData= $this->model->selectCategoria($request_Categoria);
                     //BIRACORA
-                    Bitacora($_SESSION['idUser'],MCATEGORIAS,"Nuevo","Registró la Categoría ".$arrData['NOMBRE']."",'');  
+                    Bitacora($_SESSION['idUser'],MCATEGORIAS,"Nuevo","Registró la Categoría con el código: ".$arrData['COD_CATEGORIA']."",'');  
                 }else   {
                     $arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
                      //Selecciona los datos del usuario Actualizado                                                       
                      $arrData= $this->model->selectCategoria($intIdcategoria);
                      //BIRACORA
-                     Bitacora($_SESSION['idUser'],MCATEGORIAS,"Update","Actualizó la Categoría ".$arrData['NOMBRE']."",$changeTable);
+                     Bitacora($_SESSION['idUser'],MCATEGORIAS,"Actualizar","Actualizó la Categoría con el código: ".$arrData['COD_CATEGORIA']."",$changeTable);
                     if($nombre_foto != ''){ uploadImage($foto,$imgPortada);  }
                     
                        
@@ -265,7 +265,7 @@
                      //Selecciona los datos del usuario Eliminado  
                      $arrData= $this->model->selectCategoria($intIdcategoria);
                      //BIRACORA
-                     Bitacora($_SESSION['idUser'],MCATEGORIAS,"Delete","Eliminó la Categoría ".$arrData['NOMBRE']."",''); 
+                     Bitacora($_SESSION['idUser'],MCATEGORIAS,"Eliminar","Eliminó la Categoría con el código: ".$arrData['COD_CATEGORIA']."",''); 
                 }else if($requestDelete == false){
                     $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una categoría asociada a los usuarios');
                 }else{

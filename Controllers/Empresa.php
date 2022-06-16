@@ -197,7 +197,7 @@ class Empresa extends Controllers{
                         } else {
                             $arrResponse = array("status" => true, "msg" => 'Empresa Actualizada Correctamente.');
                             //BIRACORA
-                            Bitacora($_SESSION['idUser'],MEMPRESA,"Update","Actualizó los datos de la empresa ",$changeTable);
+                            Bitacora($_SESSION['idUser'],MEMPRESA,"Actualizar","Actualizó los datos de la empresa ",$changeTable);
                         }
                     } else if ($request_user == 'exist') {
                         $arrResponse = array('status' => false, 'msg' => '¡Atención! el email ya existe, ingrese otro.');
