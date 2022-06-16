@@ -23,9 +23,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
         
 	<?php 
-		$nombreSitio = NOMBRE_EMPESA;
+		$nombreSitio = datosEmpresa()['Empresa']['NOMBRE_EMPRESA'];
 		$descripcion = DESCRIPCION;
-		$nombreProducto = NOMBRE_EMPESA;
+		$nombreProducto = datosEmpresa()['Empresa']['NOMBRE_EMPRESA'];
 		$urlWeb = base_url();
 		$urlImg = media()."/images/logo3.png";
 		if(!empty($data['producto'])){

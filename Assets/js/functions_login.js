@@ -269,3 +269,30 @@ document.addEventListener('DOMContentLoaded', function(){
 function fntOpenModal() {
   $("#modalResetPreg").modal("show");
 }
+function mostrarContrasenas() {
+  var tipo = document.getElementById("txtPassword");
+  var icono = document.getElementById("icon");
+
+  if (tipo.type == "password") {
+    tipo.type = "text";
+     document.getElementById("icon").classList.remove("fa-eye");
+    document.getElementById("icon").classList.add("fa-eye-slash");
+  } else {
+    document.getElementById("icon").classList.remove("fa-eye-slash");
+    document.getElementById("icon").classList.add("fa-eye");
+    tipo.type = "password";
+  }
+}
+function mostrarContrasenasConfirm() {
+  var tipo = document.getElementById("txtPasswordConfirm");
+  var icono = document.getElementById("icon2");
+  if (tipo.type == "password") {
+    tipo.type = "text";
+    document.getElementById("icon2").classList.remove("fa-eye");
+    document.getElementById("icon2").classList.add("fa-eye-slash");
+  } else {
+    tipo.type = "password";
+     document.getElementById("icon2").classList.remove("fa-eye-slash");
+     document.getElementById("icon2").classList.add("fa-eye");
+  }
+}

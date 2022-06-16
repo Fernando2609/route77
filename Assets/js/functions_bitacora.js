@@ -37,7 +37,7 @@ document.addEventListener(
 
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3, 4, 5, 6],
+            columns: [0, 1, 2, 3, 4],
             modifier: {},
           },
         },
@@ -64,7 +64,7 @@ document.addEventListener(
           ],
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3, 4, 5, 6],
+            columns: [0, 1, 2, 3, 4],
             modifier: {},
           },
         },
@@ -79,7 +79,7 @@ document.addEventListener(
           pageSize: "letter",
           title: "Reporte de Bitacora",
           customize: function (doc) {
-            doc.content[1].margin = [0, 40, 120, 20];
+            doc.content[1].margin = [60, 40, 120, 20];
             doc.content[0].margin = [0, 20, 0, 0];
             doc.content[0].alignment = "center";
             //orientacion vertical
@@ -87,12 +87,11 @@ document.addEventListener(
             //orientacion Horizontal
             doc.content[1].table.widths = [
               "5%",
-              "20%",
               "30%",
-              "15%",
-              "15%",
-              "15%",
+              "35%",
               "20%",
+              "15%",
+             
             ];
             doc.content[1].table.body[0].forEach(function (h) {
               //h.alignment='left';
@@ -173,7 +172,7 @@ document.addEventListener(
           },
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3, 4, 5, 6],
+            columns: [0, 1, 2, 3, 4],
             modifier: {},
           },
         },
@@ -184,7 +183,7 @@ document.addEventListener(
           className: "btn btn-info mr-1 mb-2",
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3, 4, 5, 6],
+            columns: [0, 1, 2, 3, 4],
             modifier: {},
           },
         },
@@ -195,7 +194,7 @@ document.addEventListener(
           className: "btn btn-warning mr-1 mb-2",
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2, 3, 4, 5, 6],
+            columns: [0, 1, 2, 3, 4],
             modifier: {},
           },
         },
@@ -215,6 +214,8 @@ document.addEventListener(
 );
 
 function fntViewInfo(ID_BITACORA) {
+ 
+       
   let request = window.XMLHttpRequest
     ? new XMLHttpRequest()
     : new ActiveXObject("Microsoft.XMLHTTP");
@@ -225,7 +226,7 @@ function fntViewInfo(ID_BITACORA) {
   request.onreadystatechange = function () {
     if (request.readyState == 4 && request.status == 200) {
       let objData = JSON.parse(request.responseText);
-      console.log(objData);
+    
       if (objData.status) {
         document.querySelector("#celFecha").innerHTML = objData.data.FECHA;
         document.querySelector("#celUsuario").innerHTML = objData.data.USUARIO;
@@ -234,7 +235,32 @@ function fntViewInfo(ID_BITACORA) {
         document.querySelector("#celAccion").innerHTML = objData.data.ACCION;
         document.querySelector("#celDescripcion").innerHTML =
           objData.data.DESCRIP;
-        $("#modalViewInventario").modal("show");
+          
+
+          
+         var tableHeaderRowCount = 5;
+         var table = document.getElementById("prueba");
+         var rowCount = table.rows.length;
+         for (var i = tableHeaderRowCount; i < rowCount; i++) {
+           table.deleteRow(tableHeaderRowCount);
+         }
+
+          if (objData.data.ACCION == "Update") {
+              $("#prueba>tbody").append(
+                `<tr class="text-center bg-blue">
+             <td colspan="3" >Cambios</td>
+           </tr>
+           <tr>
+            <td >Campo</td>
+            <td >Valor anterior</td>
+            <td >Valor actual</td>
+           </tr>` +objData.data.TEXT_CAMBIO);
+              $("#modalViewInventario").modal("show");
+              document.querySelector("#modalBitacora").classList.add("modal-lg");
+          }else{
+            document.querySelector("#modalBitacora").classList.remove("modal-lg");
+             $("#modalViewInventario").modal("show"); 
+          }
       } else {
         swal.fire("Error", objData.msg, "error");
       }

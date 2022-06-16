@@ -18,7 +18,7 @@
             exit; */
             /* dep($this->selectProductos());
             exit; */
-            $data['page_tag']=NOMBRE_EMPESA.' - Carrito';
+            $data['page_tag']=datosEmpresa()['Empresa']['NOMBRE_EMPRESA'].' - Carrito';
             $data['page_title']='Carrito de Compras';
             $data['page_name']='carrito';
             /* $data['slider'] = $this->getCategoriasT(CAT_SLIDER);
@@ -35,7 +35,7 @@
                 die();
             }
 
-            $data['page_tag']=NOMBRE_EMPESA.' - Procesar Pago';
+            $data['page_tag']=datosEmpresa()['Empresa']['NOMBRE_EMPRESA'].' - Procesar Pago';
             $data['page_title']='Procesar Pago';
             $data['page_name']='procesarpago';
             $data['categorias'] = $this->getCategorias();

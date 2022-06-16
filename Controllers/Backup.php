@@ -93,7 +93,7 @@
 
 
             //BIRACORA
-            Bitacora($_SESSION['idUser'],MBACKUP,"Ingreso","Ingresó al módulo");
+            //Bitacora($_SESSION['idUser'],MBACKUP,"Ingreso","Ingresó al módulo");
 
 
             $this->views->getView($this,"backup",$data);
@@ -144,7 +144,7 @@
             
             $arrResponse = array('status' => true, 'msg' => 'Base De Datos Descargada Correctamente','data'=>$salida_sql);
             //BIRACORA
-            Bitacora($_SESSION['idUser'],MBACKUP,"Nuevo","Realizó un respaldo de la base de datos ");  
+            Bitacora($_SESSION['idUser'],MBACKUP,"Nuevo","Realizó un respaldo de la base de datos ",'');  
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
         }
         die();
@@ -205,10 +205,10 @@
                     if (ENVIRONMENT===0) {
 
                          //BIRACORA
-                        Bitacora($_SESSION['idUser'],MBACKUP,"Update","Restauró la Base de datos ".$archivo[5]);
+                        Bitacora($_SESSION['idUser'],MBACKUP,"Update","Restauró la Base de datos ".$archivo[5],'');
                     }else{
                         //BIRACORA
-                        Bitacora($_SESSION['idUser'],MBACKUP,"Update","Restauró la Base de datos ".$archivo[8]);
+                        Bitacora($_SESSION['idUser'],MBACKUP,"Update","Restauró la Base de datos ".$archivo[8],'');
                     }
                    
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

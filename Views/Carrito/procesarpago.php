@@ -39,7 +39,7 @@
                     amount: {
                         value: <?= ($totalPaypal); ?>
                     },
-                    description:"Compra de articulos en <?= NOMBRE_EMPESA ?> por  <?=SMONEY.$total?>",
+                    description:"Compra de articulos en <?= datosEmpresa()['Empresa']['NOMBRE_EMPRESA'] ?> por  <?=SMONEY.$total?>",
                 }]
             })
         },

@@ -28,7 +28,7 @@
           ?>
             <div class="form-group col-md-6">
               <label for="txtIdentificacion">DNI <span class="required">*</span></label>
-              <input type="text" value="<?=  $_SESSION['userData']['DNI'];  ?>"  class="form-control valid validNumberDni" id="txtIdentificacion" name="txtIdentificacion" required="" onkeypress="return controlTag(event);">
+              <input type="text" value="<?=  $_SESSION['userData']['DNI'];  ?>"  class="form-control valid validNumberDni" id="txtIdentificacion" readonly disabled name="txtIdentificacion" required="" onkeypress="return controlTag(event);">
             </div>
           <?php } ?>
             <div class="form-group col-md-6">
@@ -36,6 +36,21 @@
               <input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail"  value="<?=  $_SESSION['userData']['EMAIL'];  ?>"  readonly disabled required="">
             </div>
           </div>
+
+          <?php  
+              if ($_SESSION['userData']['COD_ROL']!=RCLIENTES) {
+          ?>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="txtNombre">Nombres <span class="required">*</span></label>
+              <input type="text" class="form-control valid validText" id="txtNombre" name="txtNombre"  value="<?=  $_SESSION['userData']['NOMBRES'];  ?>" readonly disabled required="">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="txtApellido">Apellidos <span class="required">*</span></label>
+              <input type="text" class="form-control valid validText" id="txtApellido" name="txtApellido"  value="<?=  $_SESSION['userData']['APELLIDOS'];  ?>" readonly disabled required="">
+            </div>
+        </div>
+        <?php }else{ ?>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="txtNombre">Nombres <span class="required">*</span></label>
@@ -46,17 +61,28 @@
               <input type="text" class="form-control valid validText" id="txtApellido" name="txtApellido"  value="<?=  $_SESSION['userData']['APELLIDOS'];  ?>" required="">
             </div>
         </div>
+        <?php } ?>
+       
         <div class="form-row">
+        <?php  
+          if ($_SESSION['userData']['COD_ROL']!=RCLIENTES) {
+        ?>  
+            <div class="form-group col-md-6">
+                <label for="txtTelefono">Teléfono <span class="required">*</span></label>
+                <input type="text" class="form-control valid validNumberTel" id="txtTelefono" name="txtTelefono"  value="<?=  $_SESSION['userData']['TELEFONO'];  ?>" readonly disabled required="" onkeypress="return controlTag(event);">
+            </div>
+        <?php }else{?>
             <div class="form-group col-md-6">
                 <label for="txtTelefono">Teléfono <span class="required">*</span></label>
                 <input type="text" class="form-control valid validNumberTel" id="txtTelefono" name="txtTelefono"  value="<?=  $_SESSION['userData']['TELEFONO'];  ?>" required="" onkeypress="return controlTag(event);">
             </div>
+          <?php } ?>
             <?php
              if ($_SESSION['userData']['COD_ROL']!=RCLIENTES) {
             ?>
             <div class="form-group col-md-6">
               <label for="listGenero">Genero</label>
-              <select class="form-control " id="listGenero"  value="<?=  $_SESSION['userData']['COD_GENERO'];  ?>" name="listGenero">
+              <select class="form-control " id="listGenero" readonly disabled value="<?=  $_SESSION['userData']['COD_GENERO'];  ?>" name="listGenero">
               </select>
             </div>
             <?php } ?>
@@ -68,7 +94,7 @@
            
             <div class="form-group col-md-6">
               <label for="listSucursal">Sucursal</label>
-              <select class="form-control"  value="<?=  $_SESSION['userData']['COD_SUCURSAL'];  ?>" id="listSucursal" name="listSucursal">
+              <select class="form-control" readonly disabled   value="<?=  $_SESSION['userData']['COD_SUCURSAL'];  ?>" id="listSucursal" name="listSucursal">
               </select>
             </div>
           </div>

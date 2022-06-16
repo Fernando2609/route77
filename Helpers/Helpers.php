@@ -91,7 +91,7 @@
                 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
                 $mail->Username   = 'Estacionroutehn@gmail.com';          //SMTP username
-                $mail->Password   = 'LaurelesRoute77';                               //SMTP password
+                $mail->Password   = 'gnggdmmcrnjpafsy';                               //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -500,12 +500,12 @@ function deleteFile(string $name){
         return false;
 }
  }
- function Bitacora(int $idPersona,int $idModulo,string $accion,string $descripcion){
-        
+ function Bitacora(int $idPersona,int $idModulo,string $accion,string $descripcion,string $cambio){
+    
     require_once("Libraries/Core/Mysql.php");
     $con = new Mysql();
-    $query_insert = "INSERT INTO `TBL_BITACORA` (`FECHA`, `ID_PERSONA`, `ID_MODULO`, `ACCION`, `DESCRIPCION`) VALUES (?,?, ?, ?, ?);";
-    $arrData = array(NOW(),$idPersona,$idModulo,$accion,$descripcion);
+    $query_insert = "INSERT INTO `TBL_BITACORA` (`FECHA`, `ID_PERSONA`, `ID_MODULO`, `ACCION`, `DESCRIPCION`,`TEXT_CAMBIO`) VALUES (?,?, ?, ?, ?,?);";
+    $arrData = array(NOW(),$idPersona,$idModulo,$accion,$descripcion,$cambio);
    
     $request_insert = $con->insert($query_insert,$arrData);
 
@@ -525,7 +525,7 @@ function preguntasSeguridad(){
     $con = new Mysql();
     $sql = "SELECT * FROM TBL_PREGUNTAS";
     $request = $con->select_all($sql);
-   
+    
     return $request;
 }
 

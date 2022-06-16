@@ -23,7 +23,7 @@
             $data['page_name']="categorias";
             $data['page_functions_js']="functions_categorias.js";
             //BIRACORA
-            Bitacora($_SESSION['idUser'],MCATEGORIAS,"Ingreso","Ingresó al módulo");
+            //Bitacora($_SESSION['idUser'],MCATEGORIAS,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"categorias",$data);
         }
         public function setCategorias(){
@@ -73,14 +73,78 @@
                 }else{
                     //Si hay idCategoria se actualiza el registro
                     if($_SESSION['permisosMod']['u']){
+                    $cambio=0;
+                 
+                  
                     if($nombre_foto == ''){
                         if($_POST['foto_actual'] != 'portada_categoria.png' &&  $_POST['foto_remove'] == 0){
                             $imgPortada = $_POST['foto_actual'];
+                            
                         }
                          }
-                   $request_Categoria = $this->model->updateCategoria($intIdcategoria,$strCategoria, $strDescripcion,$imgPortada,$ruta,$intStatus,$user);
-                    $option=2;
-                    
+                    // ! Datos de la categoria antes de actualizar                               
+                        $arrDataOld= $this->model->selectCategoria($intIdcategoria);
+                        $request_Categoria = $this->model->updateCategoria($intIdcategoria,$strCategoria, $strDescripcion,$imgPortada,$ruta,$intStatus,$user);
+                        $option=2;
+
+                        // ! Datos despues de actualizar
+                        $arrDataNew= $this->model->selectCategoria($intIdcategoria);
+
+                        //dep($arrDataNew);
+                        // ? array_keys = extrae las llaves del array
+                        $arrayKey=array_keys($arrDataNew);
+                        // ? array_chunk= dividir array en fragmentos(Valores)
+                        $arrDataNew=array_chunk($arrDataNew,1);
+                        $arrDataOld=array_chunk($arrDataOld,1);
+                        //Inicializar array
+                        $arrChange=[];
+                        //vaciar Array
+                        unset($arrChange);
+
+                        // TODO: for para recorrer los valores de los array
+                        for ($i=0; $i < count($arrDataNew); $i++) { 
+                            // TODO: if datos nuevos diferente a datos viejos 
+                            if ($arrDataNew[$i][0]!=$arrDataOld[$i][0]) {
+                                //TODO: valores en el arrayCambios dentro de las llaves nuevo y antiguo
+                                $arrChange['nuevo'][$i]=$arrDataNew[$i][0];
+                                $arrChange['antiguo'][$i]=$arrDataOld[$i][0];
+                            
+                            }else{
+                                // TODO: sino array en esa posición vacio
+                                $arrChange['nuevo'][$i]='No se realizó Cambio';
+                                $arrChange['antiguo'][$i]='No se realizó Cambio';
+                            }
+                        }
+
+                        // ?array_combine = combina las llavas con los valores
+                        $arrChangeNew=array_combine($arrayKey,$arrChange['nuevo']);
+                        $arrChangeOld=array_combine($arrayKey,$arrChange['antiguo']);
+
+                        /* dep($arrChangeNew);
+                        dep($arrChangeOld);
+                        exit;*/
+                       /*  if ($cambio==1) {
+                          
+                            $foto="<tr class='text-center bg-orange'>
+                            <td colspan=3>Se modificó la fotografia</td></tr>";
+                        }; */
+                        $changeTable="
+                      <tr>
+                        <td>Nombre:</td>
+                        <td id='celNombre'>{$arrChangeOld['NOMBRE']}</td>
+                        <td >{$arrChangeNew['NOMBRE']}</td>
+                      </tr>
+                      <tr>
+                        <td>Descripción:</td>
+                        <td id='celDescripcion'>{$arrChangeOld['DESCRIPCION']}</td>
+                        <td>{$arrChangeNew['DESCRIPCION']}</td>
+                      </tr>
+                      <tr>
+                        <td>Estado:</td>
+                        <td id='celEstado'>{$arrChangeOld['STATUS']}</td>
+                        <td id='celEstado'>{$arrChangeNew['STATUS']}</td>
+                      </tr>";
+
                      }
                 }
                 
@@ -93,13 +157,13 @@
                     //Selecciona los datos del usuario Insertado  
                     $arrData= $this->model->selectCategoria($request_Categoria);
                     //BIRACORA
-                    Bitacora($_SESSION['idUser'],MCATEGORIAS,"Nuevo","Registró la Categoría ".$arrData['NOMBRE']."");  
+                    Bitacora($_SESSION['idUser'],MCATEGORIAS,"Nuevo","Registró la Categoría ".$arrData['NOMBRE']."",'');  
                 }else   {
                     $arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
                      //Selecciona los datos del usuario Actualizado                                                       
                      $arrData= $this->model->selectCategoria($intIdcategoria);
                      //BIRACORA
-                     Bitacora($_SESSION['idUser'],MCATEGORIAS,"Update","Actualizó la Categoría ".$arrData['NOMBRE']."");
+                     Bitacora($_SESSION['idUser'],MCATEGORIAS,"Update","Actualizó la Categoría ".$arrData['NOMBRE']."",$changeTable);
                     if($nombre_foto != ''){ uploadImage($foto,$imgPortada);  }
                     
                        
@@ -176,7 +240,7 @@
 						$arrData['url_portada'] = media().'/images/uploads/'.$arrData['PORTADA'];
 						$arrResponse = array('status' => true, 'data' => $arrData);
                          //BIRACORA
-                       Bitacora($_SESSION['idUser'],MCATEGORIAS,"Consulta","Consultó la Categoría ".$arrData['NOMBRE']."");
+                       //Bitacora($_SESSION['idUser'],MCATEGORIAS,"Consulta","Consultó la Categoría ".$arrData['NOMBRE']."");
 					}
                  
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -201,7 +265,7 @@
                      //Selecciona los datos del usuario Eliminado  
                      $arrData= $this->model->selectCategoria($intIdcategoria);
                      //BIRACORA
-                     Bitacora($_SESSION['idUser'],MCATEGORIAS,"Delete","Eliminó la Categoría ".$arrData['NOMBRE'].""); 
+                     Bitacora($_SESSION['idUser'],MCATEGORIAS,"Delete","Eliminó la Categoría ".$arrData['NOMBRE']."",''); 
                 }else if($requestDelete == false){
                     $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una categoría asociada a los usuarios');
                 }else{

@@ -24,7 +24,7 @@
       <div class="container-fluid">
         <!-- Small boxes (Usuarios) -->
         <div class="row">
-        <?php if (!empty($_SESSION['permisos'][2]['r'])) { ?>
+        <?php if (!empty($_SESSION['permisos'][MUSUARIOS]['r'])) { ?>
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
@@ -43,7 +43,7 @@
           <?php } ?>
           <!-- ./col -->
           <!-- Clientes -->
-          <?php if (!empty($_SESSION['permisos'][3]['r'])) { ?>
+          <?php if (!empty($_SESSION['permisos'][MCLIENTES]['r'])) { ?>
               <div class="col-lg-3 col-6">
                 <!-- small box -->
                
@@ -64,7 +64,7 @@
             ?>
           <!-- ./col -->
            <!-- Pedidos-->
-           <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
+           <?php if (!empty($_SESSION['permisos'][MPEDIDOS]['r'])) { ?>
               <div class="col-lg-3 col-6">
                 <!-- small box -->
            
@@ -86,7 +86,7 @@
             ?>
           <!-- ./col -->
            <!-- ./col -->
-           <?php if (!empty($_SESSION['permisos'][4]['r'])) { ?>
+           <?php if (!empty($_SESSION['permisos'][MPRODUCTOS]['r'])) { ?>
               <div class="col-lg-3 col-6">
                 <!-- small box -->
                   <div class="small-box bg-warning">
@@ -110,8 +110,8 @@
         <!-- /.row -->
         <!-- Main row -->
         <!-- Tabla y Graficaa -->
-        <div class="row">
-          <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
+         <div class="row">
+          <?php if (!empty($_SESSION['permisos'][MPEDIDOS]['r'])) { ?>
             <div class="col-md-6">
               <div class="card">
                 <div class="card-header">

@@ -37,10 +37,18 @@
           <input type="hidden" id="txtToken" name="txtToken" value="<?= $data['token']; ?>" required > 
           <h3 class="login-head"><i class="fas fa-key"></i> Cambiar contraseña</h3>
           <div class="form-group">
-            <input id="txtPassword" name="txtPassword" class="form-control valid ValidContra" type="password" placeholder="Nueva contraseña" required >
+            <div class="input-group">
+               <input id="txtPassword" name="txtPassword" class="form-control valid ValidContra" type="password" placeholder="Nueva contraseña" required >
+              <div class="input-group-prepend" onclick="mostrarContrasenas()"><span class="input-group-text"><i id="icon" class="fa fa-eye" ></i></span></div>
+            </div>
+           
           </div>
           <div class="form-group">
+          <div class="input-group">
             <input id="txtPasswordConfirm" name="txtPasswordConfirm" class="form-control valid ValidContra" type="password" placeholder="Confirmar contraseña" required >
+            <div class="input-group-prepend" onclick="mostrarContrasenasConfirm()"><span class="input-group-text"><i  id="icon2" class="fa  fa-eye" ></i></span></div>
+
+          </div>
           </div>
           <div class="form-group btn-container">
             <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>REINICIAR</button>

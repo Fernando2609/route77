@@ -44,6 +44,17 @@
                                  
                             ?>
                           <tr>
+                          <?php
+                            if ($modulos[$i]['COD_MODULO'] == (MUSUARIOS+1) ) {
+                              $modulos[$i]['NOMBRE']='USUARIOS / ROLES';
+                            }
+                            if ($modulos[$i]['COD_MODULO'] == (MPRODUCTOS)) {
+                              $modulos[$i]['NOMBRE']='TIENDA / PRODUCTOS';
+                            }
+                            if ($modulos[$i]['COD_MODULO'] == (MCATEGORIAS)) {
+                              $modulos[$i]['NOMBRE']='TIENDA / CATEGORIAS';
+                            }
+                            ?>
                           <td> <?= $no; ?>
                                 <input type="hidden" name="modulos[<?= $i; ?>][COD_MODULO]" value="<?= $idmod ?>" required ></td>
                             <td><?=  $modulos[$i]['NOMBRE'];  ?></td>

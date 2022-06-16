@@ -63,13 +63,13 @@
                             //Selecciona los datos de la sucursal Insertada
                             $arrData= $this->model->selectSucursal($request_user);
                             //BIRACORA
-                            Bitacora($_SESSION['idUser'],MSUCURSALES,"Nuevo","Registró la Sucursal ".$arrData['NOMBRE']."");  
+                            //Bitacora($_SESSION['idUser'],MSUCURSALES,"Nuevo","Registró la Sucursal ".$arrData['NOMBRE']."");  
                         }else{
                             $arrResponse = array("status" => true, "msg" => 'Sucursal  Actualizada Correctamente.');
                             //Selecciona los datos del usuario Actualizado                                                       
                             $arrData= $this->model->selectSucursal($idSucursal);
                             //BIRACORA
-                            Bitacora($_SESSION['idUser'],MSUCURSALES,"Update","Actualizó la Sucursal ".$arrData['NOMBRE']."");
+                            //Bitacora($_SESSION['idUser'],MSUCURSALES,"Update","Actualizó la Sucursal ".$arrData['NOMBRE']."");
                         }
                     }else if($request_user == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! la sucursal ya existe, ingrese otro nombre.');		
@@ -118,7 +118,7 @@
                 
              } 
             //BIRACORA
-            Bitacora($_SESSION['idUser'],MSUCURSALES,"Ingreso","Ingresó al módulo");
+            //Bitacora($_SESSION['idUser'],MSUCURSALES,"Ingreso","Ingresó al módulo");
             echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
          }
              die();
@@ -140,7 +140,7 @@
 						$arrResponse = array('status' => true, 'data' => $arrData);
 					}
                      //BIRACORA
-                     Bitacora($_SESSION['idUser'],MSUCURSALES,"Consulta","Consultó la Sucursal ".$arrData['NOMBRE']."");
+                     //Bitacora($_SESSION['idUser'],MSUCURSALES,"Consulta","Consultó la Sucursal ".$arrData['NOMBRE']."");
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}
              } 
@@ -159,7 +159,7 @@
                         $arrResponse = array ('status' => true, 'msg' => 'Se ha eliminado la sucursal');
                            
                            //BIRACORA
-                           Bitacora($_SESSION['idUser'],MSUCURSALES,"Delete","Eliminó la Sucursal ".$arrData['NOMBRE'].""); 
+                           //Bitacora($_SESSION['idUser'],MSUCURSALES,"Delete","Eliminó la Sucursal ".$arrData['NOMBRE'].""); 
                     }else{
                         $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la sucursal.');
                     }

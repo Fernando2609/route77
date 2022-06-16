@@ -61,7 +61,7 @@
 
                          $htmlNotifi = getFile('Template/Modals/notificaciones',$_SESSION['notificaciones']);
                               //BIRACORA
-                            Bitacora($_SESSION['idUser'],1,"Login","Inició Sesión");
+                            Bitacora($_SESSION['idUser'],1,"Login","Inició Sesión",'');
 							$arrResponse = array('status' => true, 'msg' => 'ok'); 
 						}else{
 							$arrResponse = array('status' => false, 'msg' => 'Usuario inactivo.');
@@ -100,7 +100,6 @@
                         if($requestUpdate){
                             $sendEmail = sendEmail($dataUsuario,'email_cambioPassword');
                             
-                           
                             if($sendEmail){
                                 $arrResponse = array('status' => true, 
                                                  'msg' => 'Se ha enviado un email a tu cuenta de correo para cambiar tu contraseña.');

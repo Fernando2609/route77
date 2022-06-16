@@ -22,7 +22,7 @@ class Proveedores extends Controllers{
         $data['page_name']="Proveedores";
         $data['page_functions_js']="functions_Proveedores.js";
         //BIRACORA
-        Bitacora($_SESSION['idUser'],MPROVEEDORES,"Ingreso","Ingresó al módulo");
+        //Bitacora($_SESSION['idUser'],MPROVEEDORES,"Ingreso","Ingresó al módulo");
         $this->views->getView($this,"proveedores",$data);
     }
 
@@ -92,13 +92,13 @@ class Proveedores extends Controllers{
                         $arrData= $this->model->selectProveedor2($request_user);
                       
                         //BIRACORA
-                        Bitacora($_SESSION['idUser'],MPROVEEDORES,"Nuevo","Registró al Proveedor ".$arrData['NOMBRE_EMPRESA']."");  
+                        //Bitacora($_SESSION['idUser'],MPROVEEDORES,"Nuevo","Registró al Proveedor ".$arrData['NOMBRE_EMPRESA']."");  
                     }else{
                         $arrResponse = array("status" => true, "msg" => 'Proveedor Actualizado Correctamente.');
                         //Selecciona los datos del usuario Actualizado                                                       
                         $arrData= $this->model->selectProveedor($idProveedores);
                         //BIRACORA
-                        Bitacora($_SESSION['idUser'],MPROVEEDORES,"Update","Actualizó al Proveedor ".$arrData['NOMBRE_EMPRESA']);
+                        //Bitacora($_SESSION['idUser'],MPROVEEDORES,"Update","Actualizó al Proveedor ".$arrData['NOMBRE_EMPRESA']);
                     }
                 }else if($request_user == 'exist'){
                     $arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
@@ -167,7 +167,7 @@ class Proveedores extends Controllers{
                 }else{
                     $arrResponse = array('status' => true, 'data' => $arrData);
                     //BIRACORA
-                    Bitacora($_SESSION['idUser'],MPROVEEDORES,"Consulta","Consultó al Proveedor ".$arrData['NOMBRE_EMPRESA']);
+                    //Bitacora($_SESSION['idUser'],MPROVEEDORES,"Consulta","Consultó al Proveedor ".$arrData['NOMBRE_EMPRESA']);
                 }
              
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -190,7 +190,7 @@ public function delProveedor()
                  //Selecciona los datos del usuario Eliminado  
                 
                  //BIRACORA
-                 Bitacora($_SESSION['idUser'],MPROVEEDORES,"Delete","Eliminó al Proveedor ".$arrData['NOMBRE_EMPRESA']); 
+                 //Bitacora($_SESSION['idUser'],MPROVEEDORES,"Delete","Eliminó al Proveedor ".$arrData['NOMBRE_EMPRESA']); 
             } else {
                 $arrResponse = array('status' => false, 'msg' => 'Error al eliminar al proveedor.');
             }

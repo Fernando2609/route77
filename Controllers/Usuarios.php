@@ -22,7 +22,7 @@
             $data['page_name']="usuarios";
             $data['page_functions_js']="functions_usuarios.js";
             //BIRACORA
-            Bitacora($_SESSION['idUser'],MUSUARIOS,"Ingreso","Ingresó al módulo");
+            //Bitacora($_SESSION['idUser'],MUSUARIOS,"Ingreso","Ingresó al módulo");
             $this->views->getView($this,"usuarios",$data);
         }
 
@@ -75,6 +75,10 @@
                         $option=2;
                         $strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
                         if($_SESSION['permisosMod']['u']){
+                        // ! Seleccionar Datos antes de la actualización
+                        $arrDataOld= $this->model->selectUsuario($idUsuario);
+                        
+                       
                         $request_user = $this->model->updateUsuario($idUsuario,$strIdentificacion,
                                                                                     $strNombre, 
                                                                                     $strApellido, 
@@ -88,11 +92,105 @@
                                                                                     $intSucursal,
                                                                                     $user
                                                                                     );
-                           
+                        //! datos despues de la actualización
+                        $arrDataNew= $this->model->selectUsuario($idUsuario);
+
+                        //dep($arrDataNew);
+                        // ? array_keys = extrae las llaves del array
+                        $arrayKey=array_keys($arrDataNew);
+                        // ? array_chunk= dividir array en fragmentos(Valores)
+                        $arrDataNew=array_chunk($arrDataNew,1);
+                        $arrDataOld=array_chunk($arrDataOld,1);
+                        //Inicializar array
+                        $arrChange=[];
+                        //vaciar Array
+                        unset($arrChange);
+                        
+                        // TODO: for para recorrer los valores de los array
+                        for ($i=0; $i < count($arrDataNew); $i++) { 
+                            // TODO: if datos nuevos diferente a datos viejos 
+                            if ($arrDataNew[$i][0]!=$arrDataOld[$i][0]) {
+                                //TODO: valores en el arrayCambios dentro de las llaves nuevo y antiguo
+                                $arrChange['nuevo'][$i]=$arrDataNew[$i][0];
+                                $arrChange['antiguo'][$i]=$arrDataOld[$i][0];
+                            
+                            }else{
+                                // TODO: sino array en esa posición vacio
+                                $arrChange['nuevo'][$i]='No se realizó Cambio';
+                                $arrChange['antiguo'][$i]='No se realizó Cambio';
+                            }
+                        }
+
+                        // ?array_combine = combina las llavas con los valores
+                        $arrChangeNew=array_combine($arrayKey,$arrChange['nuevo']);
+                        $arrChangeOld=array_combine($arrayKey,$arrChange['antiguo']);
+
+                       /*  dep($arrChangeNew);
+                        dep($arrChangeOld); */
+                        $contraseña='';
+                       
+                        if ($strPassword!="") {
+                          
+                            $contraseña="<tr class='text-center bg-orange'>
+                            <td colspan=3>Se modificó la contraseña</td></tr>";
+                        };
+                        
+                        $changeTable="<tr id='prueba2'>
+                        <td>DNI:</td>
+                        <td id='celIdentificacion'>{$arrChangeOld['DNI']}</td>
+                        <td id='celIdentificacion'>{$arrChangeNew['DNI']}</td>
+                      </tr>
+                      <tr>
+                        <td>Nombres:</td>
+                        <td id='celNombre'>{$arrChangeOld['NOMBRES']}</td>
+                        <td id='celNombre'>{$arrChangeNew['NOMBRES']}</td>
+                      </tr>
+                      <tr>
+                        <td>Apellidos:</td>
+                        <td id='celApellido'>{$arrChangeOld['APELLIDOS']}</td>
+                        <td id='celNombre'>{$arrChangeNew['APELLIDOS']}</td>
+                      </tr>
+                      <tr>
+                        <td>Teléfono:</td>
+                        <td id='celTelefono'>{$arrChangeOld['TELEFONO']}</td>
+                        <td id='celNombre'>{$arrChangeNew['TELEFONO']}</td>
+                      </tr>
+                      <tr>
+                        <td>Email (Usuario):</td>
+                        <td id='celEmail'>{$arrChangeOld['EMAIL']}</td>
+                        <td id='celNombre'>{$arrChangeNew['EMAIL']}</td>
+                      </tr>
+                      <tr>
+                        <td>Rol Usuario:</td>
+                        <td id='celTipoUsuario'>{$arrChangeOld['ROL']}</td>
+                        <td id='celNombre'>{$arrChangeNew['ROL']}</td>
+                      </tr>
+                     
+                      <tr>
+                        <td>Genero:</td>
+                        <td id='celGenero'>{$arrChangeOld['GENERO']}</td>
+                        <td id='celNombre'>{$arrChangeNew['GENERO']}</td>
+                      </tr>
+                     
+                      <tr>
+                        <td>Sucursal:</td>
+                        <td id='celSucursal'>{$arrChangeOld['SUCURSAL']}</td>
+                        <td id='celNombre'>{$arrChangeNew['SUCURSAL']}</td>
+                      </tr>
+                     
+                      <tr>
+                        <td>Estado:</td>
+                        <td id='celEstado'>{$arrChangeOld['STATUS']}</td>
+                        <td id='celNombre'>{$arrChangeNew['STATUS']}</td>
+                      </tr>".$contraseña;
+                     
+                      //$changeTable="{$arrChangeOld['DNI']}";
+                      //dep($changeTable);
+                      //exit;
 
                         }
                     }
-                    $arrData= $this->model->selectUsuario($idUsuario);
+                  
                
                     if($request_user > 0 ){
                         if ($option==1) {
@@ -100,13 +198,13 @@
                              //Selecciona los datos del usuario Insertado  
                              $arrData= $this->model->selectUsuario2($request_user);
                              //BIRACORA
-                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Nuevo","Registró al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."");  
+                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Nuevo","Registró al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."",'');  
                         }else{
                             $arrResponse = array("status" => true, "msg" => 'Usuario Actualizado Correctamente.');
                              //Selecciona los datos del usuario Actualizado                                                       
                              $arrData= $this->model->selectUsuario($idUsuario);
                              //BIRACORA
-                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Update","Actualizó al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."");
+                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Update","Actualizó al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."",$changeTable);
                         }
                     }else if($request_user == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
@@ -191,7 +289,7 @@
 					}else{
 						$arrResponse = array('status' => true, 'data' => $arrData);
                         //BIRACORA
-                       Bitacora($_SESSION['idUser'],MUSUARIOS,"Consulta","Consultó al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."");
+                       //Bitacora($_SESSION['idUser'],MUSUARIOS,"Consulta","Consultó al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."",'');
 					}
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}
@@ -211,7 +309,7 @@
                         //Selecciona los datos del usuario Eliminado  
                         $arrData= $this->model->selectUsuario($intIdpersona);
                         //BIRACORA
-                        Bitacora($_SESSION['idUser'],MUSUARIOS,"Delete","Eliminó al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."");   
+                        Bitacora($_SESSION['idUser'],MUSUARIOS,"Delete","Eliminó al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."",'');   
                         $arrResponse = array ('status' => true, 'msg' => 'Se ha eliminado el usuario');
                     }else{
                         $arrResponse = array('status' => false, 'msg' => 'Error al eliminar el usuario.');
@@ -231,18 +329,25 @@
         }
         public function putPerfil()
         {
+          
             if ($_POST) {
-                if(empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) )
+                $idUsuario = $_SESSION['idUser'];
+                $codRol=$_SESSION['userData']['COD_ROL'];
+                
+                
+                if(($codRol==RCLIENTES and empty($_POST['txtNombre'])) || ($codRol==RCLIENTES and empty($_POST['txtApellido'])) || ( $codRol==RCLIENTES and empty($_POST['txtTelefono'])) )
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{
                     $idUsuario = $_SESSION['idUser'];
                     $strIdentificacion =  empty($_POST['txtIdentificacion']) ? "":  strClean($_POST['txtIdentificacion']);
-                   
-					/* $strIdentificacion = strClean($_POST['txtIdentificacion']); */
-					$strNombre = ucwords(strClean($_POST['txtNombre']));
-					$strApellido = ucwords(strClean($_POST['txtApellido']));
-					$intTelefono = intval(strClean($_POST['txtTelefono']));
+                    if ($codRol==RCLIENTES) {
+                        	/* $strIdentificacion = strClean($_POST['txtIdentificacion']); */
+                        $strNombre = ucwords(strClean($_POST['txtNombre']));
+                        $strApellido = ucwords(strClean($_POST['txtApellido']));
+                        $intTelefono = intval(strClean($_POST['txtTelefono']));
+                    }
+				
              
                     $intGenero =  empty($_POST['listGenero']) ? "":   intval(strClean($_POST['listGenero']));
                    /*  $intGenero = intval(strClean($_POST['listGenero'])); */
@@ -250,6 +355,7 @@
                     /* $intSucursal = intval(strClean($_POST['listSucursal'])); */
                     $user=intval($_SESSION['idUser']);
                     $strPassword = "";
+                  
                     if(!empty($_POST['txtPassword'])){
 						$strPassword = hash("SHA256",$_POST['txtPassword']);
 					}
@@ -263,12 +369,12 @@
                     $strPassword,$user);
                    }else{
                         $request_user = $this->model->updatePerfil($idUsuario,
-                        $strIdentificacion, 
-                        $strNombre,
-                        $strApellido, 
-                        $intTelefono,
-                        $intGenero,
-                        $intSucursal,
+                        //$strIdentificacion, 
+                        //$strNombre,
+                        //$strApellido, 
+                        //$intTelefono,
+                        //$intGenero,
+                        //$intSucursal,
                         $strPassword,$user);
                    }
                    

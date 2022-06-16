@@ -25,7 +25,7 @@ class OrdenCompra extends Controllers{
             $data['page_functions_js']="functions_ordenCompra.js";
             $data['isv']=true;
             //BIRACORA
-            Bitacora($_SESSION['idUser'],MCOMPRAS,"Ingreso","Ingresó al módulo para crear una compra");
+            //Bitacora($_SESSION['idUser'],MCOMPRAS,"Ingreso","Ingresó al módulo para crear una compra");
             $this->views->getView($this,"ordenCompra",$data);
         }
         public function getProducto($idproducto){
@@ -263,7 +263,7 @@ class OrdenCompra extends Controllers{
                     }
                 
                         //BITACORA
-                        Bitacora($_SESSION['idUser'],MCOMPRAS,"Nuevo","Registró la compra #".$request_pedido); 
+                        Bitacora($_SESSION['idUser'],MCOMPRAS,"Nuevo","Registró la compra #".$request_pedido,''); 
                         $arrResponse= array("status"=> true,"msg"=>'Compra Realizada');
                         
                             unset($_SESSION['compraDetalle']);
