@@ -1,8 +1,8 @@
-let tableEmpresa;
+let tableInventario;
 let rowTable="";
 let divLoading = document.querySelector("#divLoading");
 document.addEventListener('DOMContentLoaded', function () {
-      tableEmpresa = $("#tableInventarios").dataTable({
+      tableInventario = $("#tableInventarios").dataTable({
         aProcessing: true,
         aServerSide: true,
         language: {
@@ -209,7 +209,48 @@ document.addEventListener('DOMContentLoaded', function () {
           [10, 25, 50, -1],
           ["10 ", "25 ", "50 ", "Todo"],
         ],
-      });
+      }); 
+      if (document.querySelector("#formInventario")) {
+      
+        let formInventario = document.querySelector("#formInventario");
+        formInventario.onsubmit = function (e) {
+         e.preventDefault();
+         console.log(formInventario);
+          let intstock = document.querySelector("#stockupdate").value;
+          if (intstock == "") {
+            swal.fire("Atención", "Todos los campos son obligatorios.", "error");
+            return false;
+           }
+           
+           divLoading.style.display = "flex";
+           
+          let request = window.XMLHttpRequest
+            ? new XMLHttpRequest()
+            : new ActiveXObject("Microsoft.XMLHTTP");
+          let ajaxUrl = base_url + "/Inventario/setInventario";
+          let formData = new FormData(formInventario);
+          request.open("POST", ajaxUrl, true);
+          request.send(formData);
+          request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+              
+              let objData = JSON.parse(request.responseText);
+              if (objData.status) {              
+                tableInventario.api().ajax.reload()
+                $('#modalEditInventario').modal("hide");
+                            formInventario.reset();
+                            swal.fire("Inventario", objData.msg ,"success");
+              } else {
+                swal.fire("Error", objData.msg, "error");
+              } 
+              
+            }
+            divLoading.style.display = "none";
+            return false;
+          };
+        };
+      }
+      
 
 }, false)
 
@@ -239,6 +280,73 @@ function fntViewInfo(COD_PRODUCTO){
         }
     } 
 } 
+/* function fntEditInfo(element,COD_PRODUCTO){
+  rowTable=element.parentNode.parentNode.parentNode;
+  let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+  let ajaxUrl = base_url+'/Inventario/getInventario/'+COD_PRODUCTO;
+  request.open("GET",ajaxUrl,true);
+  request.send();
+  $('#modalViewUser').modal('show');
+   request.onreadystatechange = function(){
+      if(request.readyState == 4 && request.status == 200){
+          let objData = JSON.parse(request.responseText);
+          console.log(objData);
+          if(objData.status)
+          {
+            
+              document.querySelector("#celproducto").innerHTML = objData.data.NOMBRE;
+              document.querySelector("#celstock").innerHTML = objData.data.STOCK;
+              document.querySelector("#celCant_Vent").innerHTML = objData.data.CANT_VENTA;
+              document.querySelector("#celCant_Comp").innerHTML = objData.data.CANT_COMPRA;
+              document.querySelector("#celCant_Min").innerHTML = objData.data.CANT_MINIMA; 
+              $('#modalEditInventario').modal('show');
+          }else{
+              swal.fire("Error", objData.msg , "error");
+          }
+      }
+  } 
+}
+ */
+
+function fntEditInfo(element,COD_PRODUCTO){
+  rowTable=element.parentNode.parentNode.parentNode;
+  console.log(rowTable);
+
+  document.querySelector('#titleModal').innerHTML ="Actualizar Stock";
+    document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
+    document.querySelector('#btnActionForm').classList.replace("btn-success", "btn-warning");
+    document.querySelector('#btnText').innerHTML ="Actualizar";
+
+    stock=document.querySelector("#stockupdate");
+  let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+  let ajaxUrl = base_url+'/Inventario/getInventario/'+COD_PRODUCTO;
+  request.open("GET",ajaxUrl,true);
+  request.send();
+  $('#modalViewUser').modal('show');
+   request.onreadystatechange = function(){
+      if(request.readyState == 4 && request.status == 200){
+          let objData = JSON.parse(request.responseText);
+          console.log(objData);
+          if(objData.status)
+          {
+            document.querySelector('#stockupdate').max =objData.data.STOCK;
+            document.querySelector("#idInventario").value = objData.data.COD_PRODUCTO; 
+              $('#modalEditInventario').modal('show');
+          }else{
+              swal.fire("Error", objData.msg , "error");
+          }
+      }
+  } 
+}
+
+
+
+
+
+
+
+
+
 
 
 

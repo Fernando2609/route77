@@ -202,6 +202,7 @@
 				$btnView = '';
 				$btnEdit = '';
 				$btnDelete = '';
+               
                 
                 if($arrData[$i]['COD_STATUS'] == 1)
                 {
@@ -219,7 +220,9 @@
 					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['COD_CATEGORIA'].')" title="Eliminar Categoría"><i class="far fa-trash-alt"></i></button>';
 				}
 				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
-			}
+                $arrData[$i]['NOMBRE'] = strtoupper($arrData[$i]['NOMBRE']);
+                $arrData[$i]['DESCRIPCION'] = strtoupper($arrData[$i]['DESCRIPCION']);
+            }
             
 			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
 		}

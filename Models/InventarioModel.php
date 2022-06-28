@@ -35,6 +35,17 @@
 			return $request;
 		}
 
+		public function updateInventario(int $idInventario, int $stock)
+    {
+        $this->intIdInventario = $idInventario;
+		$this->intStock = $stock;
+		$sql = "UPDATE TBL_INVENTARIO SET STOCK = ? WHERE COD_PRODUCTO = $this->intIdInventario";
+		$arrData = array($this->intStock);
+		$request = $this->update($sql,$arrData);
+	    return $request;
+    }
+
+
 	
 
 

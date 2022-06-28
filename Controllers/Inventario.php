@@ -42,6 +42,9 @@ public function getInventarios(){
             if ($_SESSION['permisosMod']['r']) {
                 $btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo(' . $arrData[$i]['COD_PRODUCTO'] . ')" title="Ver empresa"><i class="far fa-eye"></i></button>';
             }
+            if($_SESSION['permisosMod']['u']){
+                $btnEdit = '<button class="btn btn-warning btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['COD_PRODUCTO'].')" title="Editar Producto"><i class="fas fa-pencil-alt"></i></button>';                 
+            }
 
 
            /*  if ($_SESSION['permisosMod']['d']) {
@@ -51,8 +54,9 @@ public function getInventarios(){
             } */
 
 
-            $arrData[$i]['options'] = '<div class="text-center">' . $btnView  /* . ' ' . $btnDelete */ . '</div>';
-        }
+            $arrData[$i]['options'] = '<div class="text-center">' . $btnView   . ' ' . $btnEdit . '</div>';
+            
+    }
         /*  dep($arrData[0]['status']);exit; */
         echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
     }
@@ -65,7 +69,6 @@ public function getInventario($idUsuario){
         $idusuario = intval($idUsuario);
         if ($idusuario > 0) {
             $arrData = $this->model->selectInventario($idusuario);
-          
             if (empty($arrData)) {
                 $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
             } else {
@@ -79,7 +82,55 @@ public function getInventario($idUsuario){
     die();
 }   
 
+public function setInventario()
+{   
+    if ($_POST) {
+        if(empty($_POST['idInventario']) || empty($_POST['stockupdate']))
+        {
+            $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+        }else{ 
+            $idInventario = intval($_POST['idInventario']);
+            $stockupdate = intval($_POST['stockupdate']);
+                            
+            $request_user="";
+            $arrData = $this->model->selectInventario($idInventario);
+            if(empty($arrData)){
+                $arrResponse = array("status" => false, "msg" => 'Producto No Existente');
+            }else{
+                $stock=$arrData["STOCK"];
+                if($stockupdate>=$stock){
+                    $arrResponse = array("status" => false, "msg" => 'Stock a eliminar es mayor que el actual.');
+                }else{
+                    $newstock=$stock-$stockupdate;
+                    $request_user=$this->model->updateInventario($idInventario, $newstock);
+                
+            if($request_user > 0 ){
+                    $arrResponse = array("status" => true, "msg" => 'Inventario  Actualizado Correctamente.');
+                    //Selecciona los datos del usuario Actualizado                                                       
+                     //$arrData= $this->model->selectSucursal();
+                    //BIRACORA
+                    //Bitacora($_SESSION['idUser'],MSUCURSALES,"Update","Actualizó la Sucursal ".$arrData['NOMBRE']."");
+                
+            }else if($request_user == 'exist'){
+                $arrResponse = array('status' => false, 'msg' => '¡Atención! la sucursal ya existe, ingrese otro nombre.');		
+                    }else{
+                $arrResponse = array("status" => false, "msg" => 'No es posible actualizar el inventario.');
+            }
+        }
+    }
+         }
+         echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+    }
+    
+    die();
+}
+
+
+
+
 }
    
+
+
 
     ?>
