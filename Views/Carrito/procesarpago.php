@@ -24,14 +24,19 @@
      }
      /* dep($conversion);
      dep($totalPaypal); */
-     $tituloTerminos=!empty(getInfoPage(PTERMINOS)) ? getInfoPage(PPREGUNTAS)['TITULO'] : "";
-     $infoTerminos=!empty(getInfoPage(PTERMINOS)) ? getInfoPage(PPREGUNTAS)['CONTENIDO'] : "";
+
+     $tituloTerminos=!empty(getInfoPage(PTERMINOS)) ? getInfoPage(PTERMINOS)['TITULO'] : "";
+     $infoTerminos=!empty(getInfoPage(PTERMINOS)) ? getInfoPage(PTERMINOS)['CONTENIDO'] : "";
+     
 
 ?>
+<script src="<?= media(); ?>/leaflet/leaflet.js"></script>
+<link rel="stylesheet" href="<?= media(); ?>/leaflet/leaflet.css" />
 <script src="https://www.paypal.com/sdk/js?client-id=<?=IDCLIENTE?>&currency=<?=CURRENCY?>">
-</script>
+</script>   
 <!--&currency=<?= CURRENCY ?>-->
 <script>
+    
     paypal.Buttons({
         createOrder: function(data, actions) {
             return actions.order.create({
@@ -47,16 +52,33 @@
             return actions.order.capture().then(function(details){
                 /* console.log(details); */
                 let base_url = "<?= base_url();?>";
-                let dir = document.querySelector("#txtDireccion").value;
-                let ciudad = document.querySelector("#txtCiudad").value; 
+               
+                if (checkDireccion) {
+                    var dir = document.querySelector("#txtDireccion").value;
+                    var ciudad = document.querySelector("#txtCiudad").value;
+                }else if (ubicacion) {
+                    var ref = document.querySelector("#txtReferencia").value;
+                    var mapUbicacion = latitude+","+longitude;
+                    console.log(mapUbicacion);
+                }
+               /*  let dir = document.querySelector("#txtDireccion").value;
+                let ciudad = document.querySelector("#txtCiudad").value; */
+                
+                
+
                 let inttipopago =1; 
                 let request = (window.XMLHttpRequest) ?
                     new XMLHttpRequest():
                     new ActiveXObject('Microsoft.XMLHTTP');
                 let ajaxUrl = base_url+'/Tienda/procesarVenta';
                 let formData = new FormData();
-                formData.append('direccion',dir);
-                formData.append('ciudad',ciudad);
+                if (checkDireccion) {
+          formData.append("direccion", dir);
+          formData.append("ciudad", ciudad);
+        }else if (ubicacion) {
+          formData.append("referencia", ref);
+          formData.append("mapUbicacion", mapUbicacion);
+        }
                 formData.append('inttipopago',inttipopago);
                 formData.append('datapay',JSON.stringify(details));
                 request.open("POST",ajaxUrl,true);
@@ -128,7 +150,7 @@
 	
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+            <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50" >
                 <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-l-25 m-r--38 m-lr-0-xl">
                     <div >
                         <?php
@@ -136,7 +158,11 @@
                             if (isset($_SESSION['login'])) {
                         
                         ?>
-                        <div>
+                         <div class="form-check">
+                            <input class="form-check-input" type="radio" checked name="ubicacion" id="direccion">
+                            <label class="form-check-label" for="direccion">Escribir dirección</label>
+                            </div>
+                        <div id="blockDireccion">
 							<label for="tipopago">Dirección de envío</label>
 							<div class="bor8 bg0 m-b-12">
 								<input id="txtDireccion" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="Dirección de envío">
@@ -145,6 +171,17 @@
 								<input id="txtCiudad" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Ciudad / Estado">
 							</div>
 						</div>
+                        <div class="form-check">
+                        <input class="form-check-input" data-toggle="tooltip" data-placement="top" title="Dar permiso de ubicación"  type="radio" name="ubicacion" id="ubicacionMap">
+                        <label class="form-check-label" data-toggle="tooltip" data-placement="top" title="Dar permiso de ubicación" for="ubicacionMap">Ubicación Exacta</label>
+                        </div>
+                        <div id="blockUbicacion" class="notBlock">
+                            <div class="bor8 bg0 m-b-12">
+                                <input id="txtReferencia" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="Referencia para la entrega (ej: # casa, Cerca de la pulperia)">
+                            </div>
+                            <div id = 'map'>
+                            </div>
+                        </div>
                         <?php }else{ 
                            
                             ?>
@@ -325,7 +362,7 @@
             </div>
         </div>
     </div>
-	
+        <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 <?php
      
     footerTienda($data);

@@ -62,7 +62,7 @@ function testText(txtString){
     }
 }
 function testContraseña(txtString) {
-  var stringText = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@#$!%*.?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/);
+  var stringText = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@#$!%*,.?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/);
   if (stringText.test(txtString)) {
     return true;
   } else {

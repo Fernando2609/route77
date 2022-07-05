@@ -361,7 +361,7 @@
                         //$_SESSION['idUser'] = $request_user;
                         //$_SESSION['login'] = true;
                         //$this->login->sessionLogin($request_user);
-                        sendEmail($dataUsuario, 'email_bienvenida');
+                        sendEmail($dataUsuario, 'email_bienvenida2');
                     }else if($request_user == false){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
 					}else{
@@ -423,7 +423,7 @@
                         //$_SESSION['idUser'] = $request_user;
                         //$_SESSION['login'] = true;
                         //$this->login->sessionLogin($request_user);
-                        sendEmail($dataUsuario, 'email_bienvenida');
+                        sendEmail($dataUsuario, 'email_bienvenida2');
                     }else if($request_user == false){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
 					}else{
@@ -480,14 +480,21 @@
             die();		
         } */
         public function procesarVenta(){
-           
+            
             if ($_POST){
                 $idtransaccionpaypal=NULL;
                 $datospaypal=NULL;
                 $personaid=$_SESSION['idUser'];
                 $monto=0;
                 $tipopagoid=intval($_POST['inttipopago']);
-                $direccionenvio=strClean($_POST['direccion']).', '.strClean($_POST['ciudad']);
+                if (isset($_POST['direccion'])) {
+                    $direccionenvio=strClean($_POST['direccion']).', '.strClean($_POST['ciudad']);
+                    
+                }else{
+                    $direccionenvio=strClean($_POST['mapUbicacion']).' /Ref: '.strClean($_POST['referencia']);
+                   
+                }
+                
                 $status = 1;
                 $subtotal=0;
                 //$costo_envio=COSTOENVIO;
@@ -538,10 +545,10 @@
                                    
                                     $dataEmailOrden=array('asunto'=>"Se ha creado la orden No.".$request_pedido,
                                                          'email'=>$_SESSION['userData']['EMAIL'],
-                                                         'emailCopia'=>datosEmpresa()['Empresa']['EMAIL_PEDIDOS'],
+                                                         //'emailCopia'=>datosEmpresa()['Empresa']['EMAIL_PEDIDOS'],
                                                             'pedido'=>$infoOrden);
                                     
-                                    sendEmail($dataEmailOrden,"email_notificacion_orden");
+                                    sendEmail($dataEmailOrden,"email_orden");
                                    
                                     $orden=openssl_encrypt($request_pedido, METHODENCRIPT, KEY);
                                     $transaccion = openssl_encrypt($idtransaccionpaypal, METHODENCRIPT,KEY);  

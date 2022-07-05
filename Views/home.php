@@ -1,4 +1,5 @@
 <?php
+	
     headerTienda($data);
 	//getModal('modalCarrito', $data);
 	
@@ -62,7 +63,7 @@
 					$ruta=$arrBanner[$j]['RUTA'];
 					
 				?>
-				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto" style="width: 100%;">
 					<!-- Block1 -->
 					<div class="block1 wrap-pic-w">
 						<img src="<?= $arrBanner[$j]['PORTADA']?>" alt="<?= $arrBanner[$j]['NOMBRE']?>">
@@ -115,7 +116,7 @@
 					  }
 					  
 				?>
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 pro isotope-item women">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">

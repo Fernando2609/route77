@@ -68,6 +68,16 @@
                                     <address>
                                         <strong><?= $cliente['NOMBRES'] . ' ' . $cliente['APELLIDOS'] ?></strong><br>
                                         Envío: <?= $orden['DIRECCION_ENVIO']; ?><br>
+                                        <?php
+                                            $pos=strpos($orden['DIRECCION_ENVIO'],'/Ref');
+                                            if ($pos!==false) {
+                                                # code...
+                                            $ubicacion=explode("/",$orden['DIRECCION_ENVIO']);
+                                            
+                                            
+                                        ?>
+                                        <a href="https://maps.google.com/?q=<?=  $ubicacion[0]  ?>" target="_blank">Ver ubicacion <i class="fa-solid fa-map-location-dot"></i> </a><br>
+                                        <?php } ?>
                                         Tel: <?= $cliente['TELEFONO'] ?><br>
                                         Email: <?= $cliente['EMAIL'] ?>
                                     </address>
@@ -148,6 +158,12 @@
                             <div class="row no-print">
                                 <div class="col-12">
                                     <a href="javascript:window.print('#sPedido');" class="btn btn-primary"><i class="fas fa-print"></i> Imprimir</a>
+
+                                    <?php
+                                        if ($pos!==false) {              
+                                    ?>  
+                                    <a href="https://maps.google.com/?q=<?=  $ubicacion[0]  ?>" class="btn btn-success" target="_blank"><i class="fa-solid fa-map-location-dot"></i> Ver Ubicación</a>
+                                    <?php } ?>
                                     
                                     
                                 </div>

@@ -12,11 +12,14 @@
             getPermisos(MSUCURSALES);
         }
         
+       
+        
         public function AdminSucursales ()
         {
             if(empty($_SESSION['permisosMod']['r'])){
                 header('Location: '.base_url().'/dashboard');
             }
+            
             $data['page_tag']="Sucursales";
             $data['page_title']="SUCURSALES <small>Route 77</small>";
             $data['page_name']="sucursales";
@@ -25,7 +28,7 @@
         }
         public function setSucursales()
         {
-           
+         
         /* dep($_POST);
         exit;   */ 
             if ($_POST) {

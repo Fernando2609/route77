@@ -35,7 +35,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="txtTelefono">Teléfono<span class="required"> *</span></label>
-              <input type="text" class="form-control valid validNumberTel" id="txtTelefono" name="txtTelefono" required="" maxlength="8" onkeypress="return controlTag(event);">
+              <input type="number" class="form-control valid validNumberTel" id="txtTelefono" name="txtTelefono" required="" maxlength="8" onkeypress="return controlTag(event);">
             </div>
             <div class="form-group col-md-6">
               <label for="txtEmail">Email<span class="required"> *</span></label>
