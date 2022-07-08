@@ -188,13 +188,13 @@
                             'email' => $strEmail,
                             'password' => $strPassword,
                             'asunto' => 'Bienvenido a tu Tienda en Línea');
-                        sendEmail($dataUsuario, 'email_bienvenida');
+                        sendEmail($dataUsuario, 'email_bienvenida2');
                          //Selecciona los datos del usuario Actualizado                                                       
                          $arrData= $this->model->selectCliente2($request_user);
                          //BIRACORA
                          Bitacora($_SESSION['idUser'],MCLIENTES,"Nuevo","Registró al Cliente ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."",''); 
                             
-                        }else{
+                        }else{  
                             //Selecciona los datos del usuario Actualizado                                                       
                             $arrData= $this->model->selectCliente($idUsuario);
                             //BIRACORA
@@ -204,7 +204,7 @@
                     }else if($request_user == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email  ya existe, ingrese otro.');		
 					}else{
-						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.Verifique el Email');
+						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos. Verifique el Email');
 					}
                  }
                  echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

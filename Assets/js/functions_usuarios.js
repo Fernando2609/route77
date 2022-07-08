@@ -543,7 +543,11 @@ function fntViewUsuario(idpersona){
 }
 function fntEditUsuario(element,idUsuario){
     rowTable=element.parentNode.parentNode.parentNode;
-    //console.log(rowTable);
+     if (rowTable.classList.value!='odd'){
+      rowTable='';
+    }
+   
+   
     document.querySelector('#titleModal').innerHTML ="Actualizar Usuario";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-success", "btn-warning");
