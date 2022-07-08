@@ -124,7 +124,7 @@
                              //Selecciona los datos del rol Insertado  
                              $arrData= $this->model->selectRol($request_rol);
                              //BIRACORA
-                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Nuevo","Registró al rol ".$arrData['NOM_ROL']."",'');  
+                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Nuevo","Registró al rol ".$arrData['NOM_ROL']."con el código ".$arrData['COD_ROL'],'');    
                         }else{
                             $arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
                             //Selecciona los datos del rol Actualizado                                                       
@@ -156,7 +156,7 @@
 					{
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Rol');
                       //BIRACORA
-                      Bitacora($_SESSION['idUser'],MUSUARIOS,"Delete","Eliminó el rol ".$arrData['NOM_ROL']."",'');   
+                      Bitacora($_SESSION['idUser'],MUSUARIOS,"Eliminar","Eliminó el rol ".$arrData['NOM_ROL']."con el código ".$arrData['COD_ROL'],'');   
 					}else if($requestDelete == false){
 						$arrResponse = array('status' => false, 'msg' => 'No es posible eliminar un Rol asociado a usuarios.');
 					}else{

@@ -205,10 +205,10 @@
                     if (ENVIRONMENT===0) {
 
                          //BIRACORA
-                        Bitacora($_SESSION['idUser'],MBACKUP,"Update","Restauró la Base de datos ".$archivo[5],'');
+                        Bitacora($_SESSION['idUser'],MBACKUP,"Actualizar","Restauró la Base de datos ".$archivo[5],'');
                     }else{
                         //BIRACORA
-                        Bitacora($_SESSION['idUser'],MBACKUP,"Update","Restauró la Base de datos ".$archivo[8],'');
+                        Bitacora($_SESSION['idUser'],MBACKUP,"Actualizar","Restauró la Base de datos ".$archivo[8],'');
                     }
                    
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
