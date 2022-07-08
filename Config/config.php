@@ -18,13 +18,15 @@ const BASE_URL="https://estacionroute77.com";
 	funtions_backup: linea 77 modificar el 5 por el numero 8 en el array
 */
 	const USER="u251006101_";
+
 	//const BASE_URL="https://estacionroute77.com";
 
 
 	//const BASE_URL="http://localhost/route77";
+
    
 
-	const BASE_URL="http://localhost:8080/route77";
+	//const BASE_URL="http://localhost:8080/route77";
 
 
 	//Para envío de correo

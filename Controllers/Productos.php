@@ -175,13 +175,13 @@
 							$arrData= $this->model->selectProducto($request_producto);
 							
 							//BIRACORA
-							Bitacora($_SESSION['idUser'],MPRODUCTOS,"Nuevo","Registró el producto ".$arrData['NOMBRE'],'');  
+							Bitacora($_SESSION['idUser'],MPRODUCTOS,"Nuevo","Registró el producto ".$arrData['NOMBRE']." con el código ".$arrData['COD_PRODUCTO']."",'');
 						}else{
 							$arrResponse = array('status' => true, 'idproducto' => $idProducto, 'msg' => 'Datos Actualizados correctamente.');
 							 //Selecciona los datos del producto Actualizado                                                       
                              $arrData= $this->model->selectProducto($idProducto);
                              //BIRACORA
-                             Bitacora($_SESSION['idUser'],MPRODUCTOS,"Update","Actualizó el Producto ".$arrData['NOMBRE'],$changeTable);
+                             Bitacora($_SESSION['idUser'],MPRODUCTOS,"Actualizar","Actualizó el Producto ".$arrData['NOMBRE']."con el código ".$arrData['COD_PRODUCTO'],$changeTable);
 						}
 					}else if($request_producto == false){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! ya existe un producto con el <b> Código </b> o el <b>Nombre</b> Ingresado.');		
@@ -280,7 +280,7 @@
 						$arrData= $this->model->selectProducto($idProducto);
 						
 						//BIRACORA
-						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Nuevo","Agregó una imagen al producto ".$arrData['NOMBRE'],''); 
+						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Nuevo","Agregó una imagen al producto ".$arrData['NOMBRE'],"con el código ".$arrData['COD_PRODUCTO'],''); 
 						$arrResponse = array('status' => true, 'imgname' => $imgNombre, 'msg' => 'Archivo cargado.');
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error de carga.');
@@ -308,7 +308,7 @@
 						$arrData= $this->model->selectProducto($idProducto);
 						
 						//BIRACORA
-						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Delete","Eliminó una imagen al producto ".$arrData['NOMBRE'],''); 
+						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Eliminar","Eliminó una imagen al producto ".$arrData['NOMBRE']."con el código ".$arrData['COD_PRODUCTO'],''); 
 						$arrResponse = array('status' => true, 'msg' => 'Archivo eliminado');
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar');
@@ -329,7 +329,7 @@
 						$arrData= $this->model->selectProducto($intIdproducto);
 						
 						//BIRACORA
-						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Delete","Eliminó el producto ".$arrData['NOMBRE'],''); 
+						Bitacora($_SESSION['idUser'],MPRODUCTOS,"Eliminar","Eliminó el producto ".$arrData['NOMBRE']."con el código ".$arrData['COD_PRODUCTO'],''); 
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el producto');
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el producto.');

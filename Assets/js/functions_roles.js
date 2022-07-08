@@ -164,6 +164,17 @@ document.addEventListener('DOMContentLoaded',function(){
                 swal.fire("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
              }
+              let elementsValid = document.getElementsByClassName("valid");
+               for (let i = 0; i < elementsValid.length; i++) {
+                 if (elementsValid[i].classList.contains("is-invalid")) {
+                   swal.fire(
+                     "Atención",
+                     "Por favor verifique los campos en rojo.",
+                     "error"
+                   );
+                   return false;
+                 }
+               }
                 divLoading.style.display="flex";  
                 var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');;
                 var ajaxUrl = base_url+'/Roles/setRol'; 
@@ -214,7 +225,15 @@ window.addEventListener('load', function() {
   /*fntEditRol()
   fntDelRol();*/
   //fntPermisos();
+  //checkBoxes();
 }, false);
+
+
+//Funcion para checkbox
+  function checkBoxes(nameInput){ 
+  const deschecar = document.querySelector(`input[name='${nameInput}']`);
+  deschecar.checked=true; 
+}
 
 
 function fntEditRol(idrol){

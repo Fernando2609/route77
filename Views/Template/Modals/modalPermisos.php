@@ -44,6 +44,17 @@
                                  
                             ?>
                           <tr>
+                          <?php
+                            if ($modulos[$i]['COD_MODULO'] == (MUSUARIOS+1) ) {
+                              $modulos[$i]['NOMBRE']='USUARIOS / ROLES';
+                            }
+                            if ($modulos[$i]['COD_MODULO'] == (MPRODUCTOS)) {
+                              $modulos[$i]['NOMBRE']='TIENDA / PRODUCTOS';
+                            }
+                            if ($modulos[$i]['COD_MODULO'] == (MCATEGORIAS)) {
+                              $modulos[$i]['NOMBRE']='TIENDA / CATEGORIAS';
+                            }
+                            ?>
                           <td> <?= $no; ?>
                                 <input type="hidden" name="modulos[<?= $i; ?>][COD_MODULO]" value="<?= $idmod ?>" required ></td>
                             <td><?=  $modulos[$i]['NOMBRE'];  ?></td>
@@ -51,7 +62,7 @@
                             <td>
                               <div class="toggle-flip">
                                 <label>
-                                  <input type="checkbox" name="modulos[<?= $i; ?>][r]" <?= $rCheck ?>><span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
+                                  <input type="checkbox" id="unchecked" class="deschecar" name="modulos[<?= $i; ?>][r]" <?= $rCheck ?>><span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
                                 </label>
                               </div>
                             </td>
@@ -64,21 +75,21 @@
                             <td>
                               <div class="toggle-flip">
                                 <label>
-                                  <input type="checkbox" name="modulos[<?= $i; ?>][w]" <?= $wCheck ?>><span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
+                                  <input type="checkbox" class="selectAll" onclick="checkBoxes('modulos[<?= $i; ?>][r]')" name="modulos[<?= $i; ?>][w]" <?= $wCheck ?>><span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
                                 </label>
                               </div>
                             </td>
                             <td>
                               <div class="toggle-flip">
                                 <label>
-                                  <input type="checkbox" name="modulos[<?= $i; ?>][u]" <?= $uCheck ?>><span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
+                                  <input type="checkbox" class="selectAll" onClick="checkBoxes('modulos[<?= $i; ?>][r]')" name="modulos[<?= $i; ?>][u]" <?= $uCheck ?>><span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
                                 </label>
                               </div>
                             </td>
                             <td>
                               <div class="toggle-flip">
                                 <label>
-                                  <input type="checkbox" name="modulos[<?= $i; ?>][d]" <?= $dCheck ?>><span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
+                                  <input type="checkbox" class="selectAll" onClick="checkBoxes('modulos[<?= $i; ?>][r]')" name="modulos[<?= $i; ?>][d]" <?= $dCheck ?>><span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
                                 </label>
                               </div>
                             </td>

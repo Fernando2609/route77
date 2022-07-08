@@ -198,13 +198,13 @@
                              //Selecciona los datos del usuario Insertado  
                              $arrData= $this->model->selectUsuario2($request_user);
                              //BIRACORA
-                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Nuevo","Registró al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."",'');  
+                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Nuevo","Registró al Usuario con el ID ".$arrData['COD_USUARIO'],'');   
                         }else{
                             $arrResponse = array("status" => true, "msg" => 'Usuario Actualizado Correctamente.');
                              //Selecciona los datos del usuario Actualizado                                                       
                              $arrData= $this->model->selectUsuario($idUsuario);
                              //BIRACORA
-                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Update","Actualizó al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."",$changeTable);
+                             Bitacora($_SESSION['idUser'],MUSUARIOS,"Actualizar","Actualizó al Usuario con el ID ".$arrData['COD_USUARIO'],$changeTable);
                         }
                     }else if($request_user == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
@@ -308,8 +308,8 @@
                     {
                         //Selecciona los datos del usuario Eliminado  
                         $arrData= $this->model->selectUsuario($intIdpersona);
-                        //BIRACORA
-                        Bitacora($_SESSION['idUser'],MUSUARIOS,"Delete","Eliminó al Usuario ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."",'');   
+                        //BIRACORA  
+                        Bitacora($_SESSION['idUser'],MUSUARIOS,"Eliminar","Eliminó al Usuario con el ID ".$arrData['COD_USUARIO'],'');  
                         $arrResponse = array ('status' => true, 'msg' => 'Se ha eliminado el usuario');
                     }else{
                         $arrResponse = array('status' => false, 'msg' => 'Error al eliminar el usuario.');

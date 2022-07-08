@@ -73,7 +73,9 @@
 				if($requestPermiso > 0)
 				{
 					//BIRACORA
-					Bitacora($_SESSION['idUser'],MUSUARIOS,"Update","Actualizó los permisos del rol ".$rol['NOM_ROL']."",'');
+					
+					Bitacora($_SESSION['idUser'],MUSUARIOS,"Actualizar","Actualizó los permisos del rol ".$rol['NOM_ROL']." con el código ".$rol['COD_ROL']."",'');
+					
 					$arrResponse = array('status' => true, 'msg' => 'Permisos asignados correctamente.');
 				}else{
 					$arrResponse = array("status" => false, "msg" => 'No es posible asignar los permisos.');
