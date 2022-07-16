@@ -49,7 +49,7 @@ getModal('modalCategorias', $data);
                       <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Descripcion</th>
+                        <th>Descripción</th>
                         <th>Status</th>
                         <th>Acciones</th>
                       </tr>

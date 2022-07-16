@@ -128,7 +128,7 @@
         <table class="table table-bordered">
           <tbody>
             <tr>
-              <td>Codigo:</td>
+              <td>Código:</td>
               <td id="celCodigo"></td>
             </tr>
             <tr>

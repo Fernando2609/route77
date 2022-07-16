@@ -77,11 +77,11 @@ document.addEventListener("DOMContentLoaded", function () {
         text: "<i class='fas fa-file-pdf'></i> PDF",
         titleAttr: "Exportar a PDF",
         className: "btn btn-danger mr-1 mb-2",
-        filename: "PEDIDOS",
+        filename: "PAGINAS",
         download: "open",
         orientation: "landscape",
         pageSize: "letter",
-        title: "Reporte de Pedidos",
+        title: "Reporte de Páginas",
         customize: function (doc) {
           doc.content[1].margin = [0, 40, 120, 20];
           doc.content[0].margin = [0, 20, 0, 0];
