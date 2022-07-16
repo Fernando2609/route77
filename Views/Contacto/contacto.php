@@ -29,13 +29,13 @@
 						</h4>
 
 						<div class="bor8 m-b-20 how-pos4-parent">
-							<input class="form-control valid validText stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="nombreContacto" id="nombreContacto" placeholder="Nombre Completo">
+							<input class="form-control valid validText stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" maxlength="50" name="nombreContacto" id="nombreContacto" placeholder="Nombre Completo">
 							<img class="how-pos4 pointer-none" src="<?= media(); ?>/tienda/images/icon-name.png" alt="ICON" style="width: 28px;">
 						</div>
 
                         
 						<div class="bor8 m-b-20 how-pos4-parent">
-							<input class=" form-control stext-111 cl2 plh3 size-116 p-l-62 p-r-30 valid validEmail" type="text" name="emailContacto" id="emailContacto"  placeholder="Correo Electrónico">
+							<input class=" form-control stext-111 cl2 plh3 size-116 p-l-62 p-r-30 valid validEmail" maxlength="60" type="text" name="emailContacto" id="emailContacto"  placeholder="Correo Electrónico">
 							<img class="how-pos4 pointer-none" src="<?= media(); ?>/tienda/images/icons/icon-email.png" alt="ICON">
 						</div>
 

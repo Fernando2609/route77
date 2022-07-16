@@ -44,7 +44,7 @@
                             <!-- Div Text -->
                             <div class="form-group">
                                 <label for="exampleInputNombre">Título  (<span class="required">*</span>)</label>
-                                <input type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Título de la Página" value="" required onkeypress="return controlTagLetraNumero(event);">
+                                <input maxlength="60" type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Título de la Página" value="" required onkeypress="return controlTagLetraNumero(event);">
                             </div>
                             <!-- Cierra Text -->
 

@@ -5,8 +5,6 @@ headerAdmin($data);
 /* getModal('modalCategorias', $data); */
 
 ?>
-
-<script>alert("hola")</script>
   <!-- Content Wrapper. Contains page content -- Div Principal -->
   <div class="content-wrapper">
       <!-- Content Header (Sección de Encabezado) -->

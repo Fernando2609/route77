@@ -29,7 +29,7 @@
             </div>
             <div class="form-group col-md-6">
               <label for="txtApellido">Apellidos<span class="required"> *</span></label>
-              <input type="text" class="form-control valid validText" maxlength="10" id="txtApellido" name="txtApellido" required="" maxlength="25">
+              <input type="text" class="form-control valid validText" id="txtApellido" name="txtApellido" required="" maxlength="25">
             </div>
           </div>
           <div class="form-row">

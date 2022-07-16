@@ -61,15 +61,32 @@ function testText(txtString){
         return false;
     }
 }
+/* function testContraseña(txtString) {
+  var stringText = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])([A-Za-z]|[^ ]){8,15}$/);
+  if (stringText.test(txtString)) {
+    return true;
+  } else {
+    return false;
+  }
+} */
 function testContraseña(txtString) {
-  var stringText = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@#$!%*,.?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/);
+  var stringText = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d]|[^ ]){8,15}$/);
   if (stringText.test(txtString)) {
     return true;
   } else {
     return false;
   }
 }
-
+/* function testContraseña(txtString) {
+  var stringText = new RegExp(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@#$!%*,.?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/
+  );
+  if (stringText.test(txtString)) {
+    return true;
+  } else {
+    return false;
+  }
+} */
 function testImg(txtString) {
   var stringText = new RegExp(
     /^(?=.*\d)(?=.*[$@#$!%*.?&])$/

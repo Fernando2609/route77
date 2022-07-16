@@ -53,7 +53,7 @@
                             <!-- Div Text -->
                             <div class="form-group">
                                 <label for="exampleInputNombre">Título  (<span class="required">*</span>)</label>
-                                <input type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Nombre del Producto" value=" <?=  $data['infoPage']['TITULO']  ?>" required onkeypress="return controlTagLetraNumero(event);">
+                                <input type="text" maxlength="60" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Nombre del Producto" value=" <?=  $data['infoPage']['TITULO']  ?>" required onkeypress="return controlTagLetraNumero(event);">
                             </div>
                             <!-- Cierra Text -->
 

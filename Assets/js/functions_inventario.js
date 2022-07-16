@@ -330,7 +330,9 @@ function fntEditInfo(element,COD_PRODUCTO){
           if(objData.status)
           {
             document.querySelector('#stockupdate').max =objData.data.STOCK;
+            document.querySelector("#titleModalEdit").innerHTML = "Inventario de "+ objData.data.NOMBRE;
             document.querySelector("#idInventario").value = objData.data.COD_PRODUCTO; 
+
               $('#modalEditInventario').modal('show');
           }else{
               swal.fire("Error", objData.msg , "error");
