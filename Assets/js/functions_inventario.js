@@ -222,32 +222,51 @@ document.addEventListener('DOMContentLoaded', function () {
             return false;
            }
            
-           divLoading.style.display = "flex";
+           swal.fire({
+               title: "Inventario",
+               text: "¿Realmente desea eliminar " +intstock+" productos?",
+               icon: "warning",
+               showClass: {
+                 popup: "animate__animated animate__fadeInDown",
+               },
+               hideClass: {
+                 popup: "animate__animated animate__fadeOutUp",
+               },
+               showCancelButton: true,
+               confirmButtonText: "!Si, Eliminar!",
+               cancelButtonText: "!No, Cancelar!",
+               closeOnConfirm: false,
+               closeOnCancel: true,
+             })
+             .then((result) => {
+               if (result.isConfirmed) {
+                 divLoading.style.display = "flex";
+
+                 let request = window.XMLHttpRequest
+                   ? new XMLHttpRequest()
+                   : new ActiveXObject("Microsoft.XMLHTTP");
+                 let ajaxUrl = base_url + "/Inventario/setInventario";
+                 let formData = new FormData(formInventario);
+                 request.open("POST", ajaxUrl, true);
+                 request.send(formData);
+                 request.onreadystatechange = function () {
+                   if (request.readyState == 4 && request.status == 200) {
+                     let objData = JSON.parse(request.responseText);
+                     if (objData.status) {
+                       tableInventario.api().ajax.reload();
+                       $("#modalEditInventario").modal("hide");
+                       formInventario.reset();
+                       swal.fire("Inventario", objData.msg, "success");
+                     } else {
+                       swal.fire("Error", objData.msg, "error");
+                     }
+                   }
+                   divLoading.style.display = "none";
+                   return false;
+                 };
+               }
+             });
            
-          let request = window.XMLHttpRequest
-            ? new XMLHttpRequest()
-            : new ActiveXObject("Microsoft.XMLHTTP");
-          let ajaxUrl = base_url + "/Inventario/setInventario";
-          let formData = new FormData(formInventario);
-          request.open("POST", ajaxUrl, true);
-          request.send(formData);
-          request.onreadystatechange = function () {
-            if (request.readyState == 4 && request.status == 200) {
-              
-              let objData = JSON.parse(request.responseText);
-              if (objData.status) {              
-                tableInventario.api().ajax.reload()
-                $('#modalEditInventario').modal("hide");
-                            formInventario.reset();
-                            swal.fire("Inventario", objData.msg ,"success");
-              } else {
-                swal.fire("Error", objData.msg, "error");
-              } 
-              
-            }
-            divLoading.style.display = "none";
-            return false;
-          };
         };
       }
       

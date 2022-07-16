@@ -73,7 +73,9 @@
                                 <div class="form-group col-md-12">
                                     <button id="btnActionForm" class="btn btn-success btn-lg btn-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>
                                 </div>
-                              
+                                <div class="form-group col-md-12">
+                                    <a href="<?=  base_url()  ?>/paginas" class="btn btn-danger btn-lg btn-block" ><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Regresar</span></a>
+                                </div>
                             </div>
                             </div>
                         </div>
