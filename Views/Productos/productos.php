@@ -37,7 +37,7 @@ getModal('modalProductos', $data);
               <div class="card"><!-- div card -->
                 <!-- Encabezado -->
                 <div class="card-header">
-                  <h2 class="card-title">Tabla de Categorías</h2>
+                  <h2 class="card-title">Tabla de Productos</h2>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-body">
