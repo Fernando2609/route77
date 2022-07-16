@@ -26,6 +26,7 @@ getModal('modalRoles', $data);
                 <!--Icono Casa-->
               <li class="breadcrumb-item"><a href="<?=base_url();?>/dashboard"><i class="fas fa-home casa"></i></a></li>
               <li> / <?= $data['page_title'] ?></li>
+                
               </ol>
             </div><!-- Termina Div 6 columnas Izquierda-->
           </div><!-- termina Div row y margen abajo de 2-->

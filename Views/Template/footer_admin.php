@@ -1,5 +1,6 @@
  <script>
    const base_url = "<?= base_url(); ?>";
+   const enviroment = "<?= ENVIRONMENT?>";
  </script>
 
 

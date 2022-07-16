@@ -286,9 +286,9 @@ require_once("Libraries/Core/Mysql.php");
 		$sql = 	"SELECT * FROM TBL_SUSCRIPCIONES WHERE EMAIL = '{$email}'";
 		$request = $this->con->select_all($sql);
 		if(empty($request)){
-			$query_insert  = "INSERT INTO TBL_SUSCRIPCIONES(NOMBRE,EMAIL) 
-							  VALUES(?,?)";
-			$arrData = array($nombre,$email);
+			$query_insert  = "INSERT INTO TBL_SUSCRIPCIONES(NOMBRE,EMAIL,FECHA_CREACION) 
+							  VALUES(?,?,?)";
+			$arrData = array($nombre,$email,NOW());
 			$request_insert = $this->con->insert($query_insert,$arrData);
 			$return = $request_insert;
 		}else{

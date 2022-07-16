@@ -23,7 +23,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="txtNombreEmpresa">Nombre Empresa<span class="required"> *</span></label>
-                            <input type="text" class="form-control valid" id="txtNombreEmpresa" name="txtNombreEmpresa" required="" onkeypress="return controlTagLetraNumero(event);">
+                            <input type="text" maxlength="20" class="form-control valid" id="txtNombreEmpresa" name="txtNombreEmpresa" required="" onkeypress="return controlTagLetraNumero(event);">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="txtDireccion">Dirección<span class="required"> *</span></label>

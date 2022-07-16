@@ -29,13 +29,13 @@
             </div>
             <div class="form-group col-md-6">
               <label for="txtApellido">Apellidos<span class="required"> *</span></label>
-              <input type="text" class="form-control valid validText" maxlength="10" id="txtApellido" name="txtApellido" required="" maxlength="25">
+              <input type="text" class="form-control valid validText" id="txtApellido" name="txtApellido" required="" maxlength="25">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="txtTelefono">Teléfono<span class="required"> *</span></label>
-              <input type="text" class="form-control valid validNumberTel" id="txtTelefono" name="txtTelefono" required="" maxlength="8" onkeypress="return controlTag(event);">
+              <input type="number" class="form-control valid validNumberTel" id="txtTelefono" name="txtTelefono" required="" maxlength="8" onkeypress="return controlTag(event);">
             </div>
             <div class="form-group col-md-6">
               <label for="txtEmail">Email<span class="required"> *</span></label>

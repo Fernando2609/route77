@@ -80,7 +80,7 @@ getModal('modalInventario', $data);
                                 <table  class="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
-                                            <th style="width: 100px">codigo</th>
+                                            <th style="width: 100px">Código</th>
                                             <th style="width: 400px">Nombre</th>
                                             <th>Categoría</th>
                                             <th style="width: 100px">Cantidad</th>
@@ -98,7 +98,7 @@ getModal('modalInventario', $data);
                                             <td ><a class="notBlock" id="add_product_Compra" class="link_add"><i class="fa fa-plus"></i>Agregar</a></td>
                                         </tr>
                                         <tr>
-                                            <th style="width: 100px">codigo</th>
+                                            <th style="width: 100px">Código</th>
                                             <th style="width: 400px">Nombre</th>
                                             <th>Categoría</th>
                                             <th style="width: 100px">Cantidad</th>

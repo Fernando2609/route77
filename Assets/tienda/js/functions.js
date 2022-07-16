@@ -1,4 +1,12 @@
 
+var longitude;
+var latitude;
+var ubicacion;
+var checkDireccion;
+if (document.querySelector("#direccion")) {
+  checkDireccion = document.querySelector("#direccion").checked=true;
+  ubicacion = document.querySelector("#ubicacionMap").checked;
+}
 $(".js-select2").each(function(){
     $(this).select2({
         minimumResultsForSearch: 20,
@@ -500,6 +508,7 @@ if(document.querySelector("#condiciones")){
 		let opcion = this.checked;
 		if(opcion){
 			document.querySelector('#optMetodoPago').classList.remove("notBlock");
+      console.log(checkDireccion);
 		}else{
 			document.querySelector('#optMetodoPago').classList.add("notBlock");
 		}
@@ -518,42 +527,301 @@ function fntViewPago(){
 if(document.querySelector("#btnComprar")){
 	let btnPago = document.querySelector("#btnComprar");
 	btnPago.addEventListener('click',function() { 
-		let dir = document.querySelector("#txtDireccion").value;
-	    let ciudad = document.querySelector("#txtCiudad").value;
+        if (checkDireccion) {
+          var dir = document.querySelector("#txtDireccion").value;
+          var ciudad = document.querySelector("#txtCiudad").value;
+        }else if (ubicacion) {
+          var ref = document.querySelector("#txtReferencia").value;
+          var mapUbicacion = latitude+","+longitude;
+          console.log(mapUbicacion);
+        }
+      
+     
 	    let inttipopago = document.querySelector("#listtipopago").value; 
-	    if( txtDireccion == "" || txtCiudad == "" || inttipopago =="" ){
-			swal("", "Complete datos de envío" , "error");
-			return;
-		}else{
-			divLoading.style.display = "flex";
-			let request = (window.XMLHttpRequest) ? 
-	                    new XMLHttpRequest() : 
-	                    new ActiveXObject('Microsoft.XMLHTTP');
-			let ajaxUrl = base_url+'/Tienda/procesarVenta';
-			let formData = new FormData();
-		    formData.append('direccion',dir);    
-		   	formData.append('ciudad',ciudad);
-			formData.append('inttipopago',inttipopago);
-		   	request.open("POST",ajaxUrl,true);
-		    request.send(formData);
-		    request.onreadystatechange = function(){
-		    	if(request.readyState != 4) return;
-		    	if(request.status == 200){
-		    		let objData = JSON.parse(request.responseText);
-		    		if(objData.status){
-		    			window.location = base_url+"/tienda/confirmarpedido/";
-		    		}else{
-		    			swal.fire("", objData.msg , "error");
-		    		}
-		    	}
-		    	divLoading.style.display = "none";
-            	return false;
-		    }
-		}
+	    if (dir == "" || ciudad == "" || inttipopago == "") {
+        swal.fire("", "Complete datos de envío", "error");
+        return;
+      }else if (mapUbicacion=="" ) {
+         swal.fire("", "Complete datos de envío", "error");
+         return;
+      } else {
+        divLoading.style.display = "flex";
+        let request = window.XMLHttpRequest
+          ? new XMLHttpRequest()
+          : new ActiveXObject("Microsoft.XMLHTTP");
+        let ajaxUrl = base_url + "/Tienda/procesarVenta";
+        let formData = new FormData();
+        if (checkDireccion) {
+          formData.append("direccion", dir);
+          formData.append("ciudad", ciudad);
+        }else if (ubicacion) {
+          formData.append("referencia", ref);
+          formData.append("mapUbicacion", mapUbicacion);
+        }
+        formData.append("inttipopago", inttipopago);
+        request.open("POST", ajaxUrl, true);
+        request.send(formData);
+        request.onreadystatechange = function () {
+          if (request.readyState != 4) return;
+          if (request.status == 200) {
+            let objData = JSON.parse(request.responseText);
+            if (objData.status) {
+              window.location = base_url + "/tienda/confirmarpedido/";
+            } else {
+              swal.fire("", objData.msg, "error");
+            }
+          }
+          divLoading.style.display = "none";
+          return false;
+        };
+      }
 
 	},false);
    
 }
+
+
+//document.querySelector("#map").classList.add("notBlock");
+/* if(document.querySelector(".methodpago")){
+
+	let optmetodo = document.querySelectorAll(".methodpago");
+    optmetodo.forEach(function(optmetodo) {
+        optmetodo.addEventListener('click', function(){
+        	if(this.value == "Paypal"){
+        		document.querySelector("#divpaypal").classList.remove("notBlock");
+        		document.querySelector("#divtipopago").classList.add("notBlock");
+        	}else{
+        		document.querySelector("#divpaypal").classList.add("notBlock");
+        		document.querySelector("#divtipopago").classList.remove("notBlock");
+        	}
+        });
+    });
+} */
+
+
+function initializingMap() {
+  // llame a este método antes de inicializar el mapa.
+  var container = L.DomUtil.get("map");
+  //console.log(container)
+  if (container != null) {
+    container._leaflet_id = null;
+  }
+}
+$("#direccion").change(function () {
+ checkDireccion= document.querySelector("#direccion").checked;
+  if (checkDireccion) {
+     document.querySelector("#blockDireccion").classList.remove("notBlock");
+     document.querySelector("#blockUbicacion").classList.add("notBlock");
+     document.querySelector("#divMetodoPago").classList.add("notBlock");
+  }else{
+    document.querySelector("#direccion").checked=false;
+  }
+});
+
+//MAPA
+//Pedor localizacion
+ $(document).ready(function () {
+   //Click al boton para pedir permisos
+   $("#ubicacionMap").change(function () {
+    ubicacion = document.querySelector("#ubicacionMap").checked;
+    if (ubicacion) {
+    
+      //Si el navegador soporta geolocalizacion
+      if (!!navigator.geolocation) {
+        //Pedimos los datos de geolocalizacion al navegador
+        navigator.geolocation.getCurrentPosition(
+          //si todo sale bien
+          function (position) {
+            Swal.fire({
+              title: "Obteniendo Ubicación",
+              html: "Permitir que el navegador Obtenga su Ubicación",
+              timer: 2000,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading();
+              },
+              allowOutsideClick: () => {
+              const popup = Swal.getPopup()
+              popup.classList.remove('swal2-show')
+              setTimeout(() => {
+                popup.classList.add('animate__animated', 'animate__headShake')
+              })
+              setTimeout(() => {
+                popup.classList.remove('animate__animated', 'animate__headShake')
+              }, 500)
+              return false
+            },
+            }).then((result) => {
+              /* Read more about handling dismissals below */
+              if (result.dismiss === Swal.DismissReason.timer) {
+                  checkDireccion = document.querySelector("#direccion").checked=false;
+                //Si el navegador entrega los datos de geolocalizacion los imprimimos
+                document.querySelector('#divMetodoPago').classList.remove("notBlock");
+                document.querySelector("#blockDireccion").classList.add("notBlock");
+                document.querySelector("#blockUbicacion").classList.remove("notBlock");
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
+                //window.alert("nav permitido");
+                /*  $("#nlat").text(position.coords.latitude);
+              $("#nlon").text(position.coords.longitude); */
+                var myIcon = L.icon({
+                  iconUrl:
+                    base_url + "/Assets/tienda/images/icons/markerRoute.png",
+                  iconSize: [30, 60],
+                  iconAnchor: [15, 60],
+                  //popupAnchor: [-3, -76],
+                  //shadowUrl: "my-icon-shadow.png",
+                  //shadowSize: [68, 95],
+                  //shadowAnchor: [15, 30],
+                });
+                initializingMap();
+                var mapOptions = {
+                  center: [latitude, longitude],
+                  zoom: 15,
+                  wheelPxPerZoomLevel: 100,
+                  dragging:true
+                };
+                var map = L.map("map", mapOptions);
+                console.log(map)
+                /* L.tileLayer(
+                  "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                  {
+                    attribution:
+                      'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+                    maxZoom: 18,
+
+                  }
+                ).addTo(map); */
+                //Agregar tilelAyer mapa base desde openstreetmap
+                marker2 = L.marker([14.069407629431197, -87.24257738652278], {
+                  icon: myIcon,
+                })
+                  .bindPopup(
+                    `Sucursal Los Laureles <br> Doble click para ver Dirección`,
+                    { offset: [0, -45] }
+                  )
+                  .addTo(map);
+                marker3 = L.marker([14.04141880334384, -87.23265394232925], {
+                  icon: myIcon,
+                })
+                  .bindPopup(
+                    `Sucursal Las Hadas <br> Doble click para ver Dirección`,
+                    { offset: [0, -45] }
+                  )
+                  .addTo(map);
+                marker4 = L.marker([14.118381221498888, -87.11241201349391], {
+                  icon: myIcon,
+                })
+                  .bindPopup(
+                    `Sucursal Ojojona <br> Doble click para ver Dirección`,
+                    { offset: [0, -45] }
+                  )
+                  .addTo(map);
+
+                marker2.on("dblclick", function (e) {
+                  actual = marker2.getLatLng();
+                  //window.location.href = "https://maps.google.com/?q="+actual["lat"]+","+actual["lng"];
+                  //window.location.href="https://goo.gl/maps/V54AQzY8MJyMGxjc6"
+                  window.open(
+                    "https://goo.gl/maps/V54AQzY8MJyMGxjc6",
+                    "_blank"
+                  );
+                  console.log(actual);
+                  //document.querySelectorAll(".norwayLink").innerHTML = `Tú Ubicación ${latitude}`;
+                  //document.querySelector("#latitude").innerHTML = actual['lat'];
+                  //document.querySelector("#longitude").innerHTML = actual["lng"];
+                });
+                marker3.on("dblclick", function (e) {
+                  actual = marker3.getLatLng();
+                  //window.location.href = "https://maps.google.com/?q="+actual["lat"]+","+actual["lng"];
+                  //window.location.href="https://goo.gl/maps/V54AQzY8MJyMGxjc6"
+                  window.open(
+                    "https://goo.gl/maps/aEjAQCiGMghF3cVv7",
+                    "_blank"
+                  );
+                  console.log(actual);
+                  //document.querySelectorAll(".norwayLink").innerHTML = `Tú Ubicación ${latitude}`;
+                  //document.querySelector("#latitude").innerHTML = actual['lat'];
+                  //document.querySelector("#longitude").innerHTML = actual["lng"];
+                });
+                marker4.on("dblclick", function (e) {
+                  actual = marker4.getLatLng();
+                  //window.location.href = "https://maps.google.com/?q="+actual["lat"]+","+actual["lng"];
+                  //window.location.href="https://goo.gl/maps/V54AQzY8MJyMGxjc6"
+                  window.open(
+                    "https://goo.gl/maps/Vg28MhefEMjEQN2k8",
+                    "_blank"
+                  );
+                  console.log(actual);
+                  //document.querySelectorAll(".norwayLink").innerHTML = `Tú Ubicación ${latitude}`;
+                  //document.querySelector("#latitude").innerHTML = actual['lat'];
+                  //document.querySelector("#longitude").innerHTML = actual["lng"];
+                });
+                L.tileLayer(
+                  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                  {
+                    attribution:
+                      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                  }
+                ).addTo(map);
+
+                L.control.scale().addTo(map);
+                //L.circleMarker([latitude, longitude]).addTo(map);
+                circle = L.circle([latitude, longitude], { radius: 30 }).addTo(
+                  map
+                );
+                marker = L.marker([latitude, longitude], {
+                  draggable: true,
+                }).bindPopup(
+                  `<H5 onClick={flyToNorway()} class="norwayLink">Tú Ubicación</h5>`
+                );
+                /* const somePopup = L.marker([latitude, longitude], {
+                  draggable: true
+                }); */
+
+                marker.addTo(map);
+
+                function flyToNorway() {
+                  map.flyTo([latitude, longitude], 10, {
+                    animate: true,
+                    duration: 10,
+                  });
+                  marker.closePopup();
+                }
+                //https://maps.google.com/?q=23.135249,-82.359685
+                marker.on("dragend", function (e) {
+                  actual = marker.getLatLng();
+
+                  latitude = actual["lat"];
+                  longitude = actual["lng"];  
+                  //document.querySelector("#txtDireccion").value=actual['lat'];
+                  //document.querySelector("#txtCiudad").value = actual["lng"];
+                  //document.querySelectorAll(".norwayLink").innerHTML = `Tú Ubicación ${latitude}`;
+                  //document.querySelector("#latitude").innerHTML = actual['lat'];
+                  //document.querySelector("#longitude").innerHTML = actual["lng"];
+                });
+                marker.addTo(map);
+
+                actual = marker.getLatLng();
+                console.log(actual);
+              }
+            });
+          },
+
+          //Si no los entrega manda un alerta de error
+          function () {
+            window.alert("nav no permitido");
+           document.querySelector("#ubicacion").checked=false;
+          }
+        );
+      }
+    }else{
+        document.querySelector("#blockUbicacion").classList.add("notBlock");
+         document.querySelector("#ubicacion").checked = false;
+    }
+   });
+ });
+ 
 
     if(document.querySelector("#frmSuscripcion")){
         let frmSuscripcion = document.querySelector("#frmSuscripcion");

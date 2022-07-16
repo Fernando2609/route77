@@ -57,7 +57,7 @@
           <div class="form-row">
       
             <div class="form-group col-md-6">
-              <label for="listGenero">Genero</label>
+              <label for="listGenero">Género</label>
               <select class="form-control " id="listGenero" name="listGenero" required>
               </select>
             </div>
@@ -144,7 +144,7 @@
             </tr>
            
             <tr>
-              <td>Genero:</td>
+              <td>Género:</td>
               <td id="celGenero">Larry</td>
             </tr>
            

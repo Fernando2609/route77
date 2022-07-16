@@ -155,7 +155,7 @@
 
 	<div id="divLoading">
       <div>
-        <img src="<?=media();?>/images//loadingRoute.webp" alt="Loading">
+        <img src="<?=media();?>/images//loadingRoute.webp" alt="LoadingRoute77">
        </div>
     </div>
 	<!-- Header -->
@@ -204,8 +204,8 @@
 				<nav class="limiter-menu-desktop container">
 					
 					<!-- Logo desktop -->		
-					<a href="<?= base_url(); ?>#" class="logo" >
-						<img src="<?= media() ?>/tienda/images/icons/logoTienda.png" alt="Tienda Virtual">
+					<a href="<?= base_url(); ?>" class="logo" >
+						<img src="<?= media() ?>/tienda/images/icons/logoTienda.png" alt="Estación Route 77">
 					</a>
 					
 					<!-- Menu desktop -->
@@ -261,7 +261,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="<?= base_url(); ?>"><img src="<?= media() ?>/tienda/images/icons/logoTienda.png" alt="Tienda Virtual"></a>
+				<a href="<?= base_url(); ?>"><img src="<?= media() ?>/tienda/images/icons/logoTienda.png" alt="Estación Route 77"></a>
 			</div>
 
 			<!-- Icon header -->

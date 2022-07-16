@@ -4,6 +4,7 @@
         {
           
             session_start();
+  
             if (isset($_SESSION['login'])) {
                 header('Location: '.base_url().'/dashboard');
                 die();
@@ -15,7 +16,7 @@
         
         public function login()
         {
-           
+  
             $data['page_tag']="Login - Route 77";
             $data['page_title']="LOGIN ESTACIÓN ROUTE 77";
             $data['page_name']="login";
@@ -28,12 +29,13 @@
                if(empty($_POST['txtEmail']) || empty($_POST['txtPassword'])){
                    $arrResponse = array('status' => false, 'msg' => 'Error de datos');
                 }else{
-                   
+                   $intentos=0;
                    $strUsuario = strtolower(strClean($_POST['txtEmail']));
                    $strPassword = hash("SHA256", $_POST['txtPassword']);
                    
                    $requestUser = $this->model->loginUser($strUsuario, $strPassword);
                    if(empty($requestUser)){
+                  
                     $arrResponse = array('status' => false, 'msg' => 'Datos incorrectos.' ); 
                 }else{
                     $arrData = $requestUser;
@@ -76,30 +78,39 @@
         {
             
             if ($_POST) {
+                //si el email es vacio. error
                 if(empty($_POST['txtEmailReset'])){
 					$arrResponse = array('status' => false, 'msg' => 'Error de datos' );
 				}else {
+                    //Creacion de token (token() es una función)
                     $token=token();
+                    //convertir email a minuscula
                     $strEmail  =  strtolower(strClean($_POST['txtEmailReset']));
+                    //enviar email al model para verificar si el usuario exite
 					$arrData = $this->model->getUserEmail($strEmail);
-                   
+                   // si esta vacio la respuesta no existe el usuario
 					if(empty($arrData)){
 						$arrResponse = array('status' => false, 'msg' => 'Usuario no existente.' ); 
+                    //sino
 					}else{
+                        //selecciona el codigo de la persona, el nombre, y apellido
                         $idUsuario = $arrData['COD_PERSONA'];
 						$nombreUsuario = $arrData['NOMBRES'].' '.$arrData['APELLIDOS'];
+                        //crear la url con concatenando el email y el token
                         $url_recovery = base_url().'/login/confirmUser/'.$strEmail.'/'.$token;
+                        //Guardar el token en la base de datos con el mismo id
 						$requestUpdate = $this->model->setTokenUser($idUsuario,$token);
-                       
+                        
                         //$datosEmpresa=$this->model->datosEmpresa()['Empresa'];
+                        //Creacion de array que se enviara a la funcion del email
                         $dataUsuario = array('nombreUsuario' => $nombreUsuario,
                         'email' => $strEmail,
                         'asunto' => 'Recuperar cuenta - '.NOMBRE_REMITENTE,
                         'url_recovery' => $url_recovery);
-                        
+                        //si el token se guardo correctamente enviar la funcion send email
                         if($requestUpdate){
-                            $sendEmail = sendEmail($dataUsuario,'email_cambioPassword');
-                            
+                            $sendEmail = sendEmail($dataUsuario,'email_cambioPassword2');
+                            // si el email se envio correctamente
                             if($sendEmail){
                                 $arrResponse = array('status' => true, 
                                                  'msg' => 'Se ha enviado un email a tu cuenta de correo para cambiar tu contraseña.');

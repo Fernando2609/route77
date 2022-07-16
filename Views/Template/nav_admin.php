@@ -205,7 +205,7 @@
               <!-- Sucursales -->
               <?php if(!empty($_SESSION['permisos'][MSUCURSALES]['r'])){ ?>
           <li class="nav-item">
-            <a href="<?= base_url();?>/adminsucursales" class="nav-link">
+            <a href="<?= base_url();?>/adminSucursales" class="nav-link">
            
             <i class="far fa-circle nav-icon"></i>
               <p>

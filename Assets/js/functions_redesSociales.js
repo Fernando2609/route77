@@ -256,7 +256,7 @@ tableredesSociales = $("#tableredesSociales").dataTable({
  
                         $('#modalFormredesSociales').modal("hide");
                         formredesSociales.reset();
-                            swal.fire("redesSociales", objData.msg ,"success");
+                            swal.fire("Redes Sociales", objData.msg ,"success");
                             tableredesSociales.api().ajax.reload();
                         }else{
                             swal.fire("Error", objData.msg , "error");
@@ -336,7 +336,7 @@ function fntDelInfo(idUsuario){
             popup: 'animate__animated animate__fadeOutUp'
         },
         showCancelButton: true,
-        confirmButtonText: "Si, eliminar!",
+        confirmButtonText: "Si, ¡eliminar!",
         cancelButtonText: "No, cancelar!",
         closeOnConfirm: false,
         closeOnCancel: true
@@ -354,7 +354,7 @@ function fntDelInfo(idUsuario){
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
                         swal.fire({
-                            title: "Eliminar!",
+                            title: "¡Eliminar!",
                             text: objData.msg,
                             icon: "success",
                             showClass: {

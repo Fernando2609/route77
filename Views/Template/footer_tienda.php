@@ -4,13 +4,21 @@
 		$telefonos=datosEmpresa()['TelEmpresa'];
 		$sucursales=datosEmpresa()['Sucursales'];
 		$empresa=datosEmpresa()['Empresa'];
-		
+		$numero=str_replace("+504 ","504",$empresa['CEL_EMPRESA']);
+		$numero=str_replace("-","",$numero);
 	 ?>
 <!-- Footer -->
-<!-- 
+
+<?php  
+	if (ENVIRONMENT==1) {
+?>
+<a id="app-whatsapp" target="_blanck" href="https://api.whatsapp.com/send?phone=<?=  $numero  ?>&amp;text=Hola!&nbsp;me&nbsp;pueden&nbsp;apoyar?">
+<i class="fa-brands fa-whatsapp-square" aria-hidden="true"></i>
+</a>
 <a id="app-whatsapp" target="_blanck" href="https://api.whatsapp.com/send?phone=50494877564&amp;text=Hola!&nbsp;me&nbsp;pueden&nbsp;apoyar?">
 <i class="fa-brands fa-whatsapp-square" aria-hidden="true"></i>
-</a> -->
+</a>
+<?php } ?>
 <footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
 			<div class="row">
@@ -88,12 +96,12 @@
 
 				<form id="frmSuscripcion" name="frmSuscripcion">
 						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text" id="nombreSuscripcion" name="nombreSuscripcion" placeholder="Nombre completo" required>
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" id="nombreSuscripcion" name="nombreSuscripcion" maxlength="50" placeholder="Nombre completo" required>
 							<div class="focus-input1 trans-04"></div>
 						</div>
 						<br>
 						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="email" id="emailSuscripcion" name="emailSuscripcion" placeholder="email@example.com" required >
+							<input class="input1 bg-none plh1 stext-107 cl7" type="email" id="emailSuscripcion" maxlength="60"  name="emailSuscripcion" placeholder="email@example.com" required >
 							<div class="focus-input1 trans-04"></div>
 						</div>
 
@@ -194,26 +202,29 @@
 	
 </script>
 </body>
+<?php  
+	if (ENVIRONMENT==1) {
+?>
+
 <!-- Messenger Plugin de chat Code -->
-<!-- <div id="fb-root"></div> -->
+<div id="fb-root"></div>
 
 <!-- Your Plugin de chat code -->
-<!-- <div id="fb-customer-chat" class="fb-customerchat">
+<div id="fb-customer-chat" class="fb-customerchat">
+</div>
 
-</div> -->
-
-<!-- <script>
+<script>
   var chatbox = document.getElementById('fb-customer-chat');
-  chatbox.setAttribute("page_id", "125542366351081");
+  chatbox.setAttribute("page_id", "656978747780306");
   chatbox.setAttribute("attribution", "biz_inbox");
-</script> -->
+</script>
 
 <!-- Your SDK code -->
-<!-- <script>
+<script>
   window.fbAsyncInit = function() {
 	FB.init({
 	  xfbml            : true,
-	  version          : 'v13.0'
+	  version          : 'v14.0'
 	});
   };
 
@@ -224,5 +235,6 @@
 	js.src = 'https://connect.facebook.net/es_LA/sdk/xfbml.customerchat.js';
 	fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
-</script> -->
+</script>
+<?php } ?>
 </html>

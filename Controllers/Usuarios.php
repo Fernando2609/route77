@@ -209,7 +209,7 @@
                     }else if($request_user == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => '¡Atención! el email o la identificación ya existe, ingrese otro.');		
 					}else{
-						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos Verifique el email y el DNI.');
+						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos. Verifique el email y el DNI.');
 					}
                  }
                  echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

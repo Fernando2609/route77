@@ -3,7 +3,7 @@ $('.login-content [data-toggle="flip"]').click(function() {
     $('.login-box').toggleClass('flipped');
     return false;
 });
-
+  intentos = 0;
 //Capturar los datos del formulario
 //document.addEventListener: Índica que se van a agregar todos los eventos que irán dentro de la función al moemnto de cargar todo el documento
 var divLoading = document.querySelector("#divLoading");
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function(){
           return false;
         }
       }
-
+    
       if (strEmail == "" || strPassword == "") {
         swal.fire("Por favor", "Escribe usuario y contraseña.", "error");
         return false;
@@ -45,13 +45,30 @@ document.addEventListener('DOMContentLoaded', function(){
           if (request.readyState != 4) return;
           if (request.status == 200) {
             var objData = JSON.parse(request.responseText);
+             
             if (objData.status) {
               if (objData.estado == 1) {
+                document.cookie = "intentos=; max-age=0;path=/";
                 window.location = base_url + "/usuarios/perfil";
               } else {
+                document.cookie = "intentos=; max-age=0;path=/";
                 window.location.reload(false);
+               
               }
             } else {
+              /* var lasCookies = document.cookie;
+              cookie = document.cookie.split(";");
+               //console.log(cookie);
+             if (cookie[1]) {
+               i=cookie[1].split("=");
+               intentos = parseInt(i[1]) + 1;
+               //console.log("si hay");
+             }else{
+                intentos=intentos+1;
+             }
+             
+              
+              document.cookie = "intentos=" + intentos + ";max-age=3600;path=/"; */
               swal.fire("Atención", objData.msg, "error");
               document.querySelector("#txtPassword").value = "";
             }
@@ -68,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function(){
     let formRecetPass = document.querySelector("#formRecetPass");
     formRecetPass.onsubmit = function (e) {
       e.preventDefault();
-
+      
       let strEmail = document.querySelector("#txtEmailReset").value;
       let elementsValid = document.getElementsByClassName("valid");
 
