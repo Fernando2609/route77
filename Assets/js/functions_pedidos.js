@@ -457,7 +457,7 @@ function fntUpdateInfo(){
     }
 }
 
-function fntFecha() {
+function fntUtilidadG() {
     let Finicio = document.querySelector(".Finicio").value;
     let Ffinal = document.querySelector(".fFinal").value;
    

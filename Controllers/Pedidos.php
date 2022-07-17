@@ -243,9 +243,8 @@ require 'Libraries/Excel/vendor/autoload.php';
             }
             public function Utilidad($params)
             {
-          
-                
-                if (($_SESSION['permisos']['5']['r'] || $_SESSION['permisos']['17']['r']) AND $_SESSION['userData']['COD_ROL']!=2 ) {
+               
+                if (($_SESSION['permisos'][MPEDIDOS]['r'] || $_SESSION['permisos'][MCOMPRAS]['r']) AND $_SESSION['userData']['COD_ROL']!=RCLIENTES ) {
                       
                     $arrFecha = explode(',',$params);
                    
@@ -545,5 +544,336 @@ require 'Libraries/Excel/vendor/autoload.php';
                 }
             }
            
+
+            public function UtilidadB($params)
+            {
+               
+                if (($_SESSION['permisos'][MPEDIDOS]['r'] || $_SESSION['permisos'][MCOMPRAS]['r']) AND $_SESSION['userData']['COD_ROL']!=RCLIENTES ) {
+                      
+                    $arrFecha = explode(',',$params);
+                   
+                    $fechaInicio= date("Y-m-d",strtotime($arrFecha[0]));
+                    
+                    $fechaFin=date("Y-m-d",strtotime($arrFecha[1]));
+                   //$fechaInicio = str_replace(" ","",$_POST['fechaInicio']);
+                   //$fechaFin = str_replace(" ","",$_POST['fechaFinal']);
+                    //traer pedidos y compras
+                   $data = $this->model->selectUtilidad($fechaInicio,$fechaFin);
+                   $arrProductos=[];
+                   $dataProducto=[];
+                   foreach($data['pedido'] as $codigo)
+                   {
+                    $productos=$this->model->selectProductosVendido($codigo['COD_PEDIDO']);
+                    array_push($arrProductos,$productos);
+                    
+                   }
+                   foreach($arrProductos as $producto)
+                   {
+                        foreach($producto as $codigoProducto)
+                        {
+                            $datosProducto=$this->model->selectDatosProductos($codigoProducto['COD_PRODUCTO']);
+                            array_push($dataProducto,$datosProducto);
+                            //array_push($arrProductos,$dataProducto);
+                        }
+                   }
+                  
+                   for ($i=0; $i < count($arrProductos); $i++) { 
+                        //dep($arrProductos[$i]);
+                       for ($j=0; $j < count($arrProductos[$i]) ; $j++) { 
+                        $arrProductos[$i][$j]['NombreProducto']=$dataProducto[$i][0]['NombreProducto'];
+                        $arrProductos[$i][$j]['PrecioCompra']=$dataProducto[$i][0]['PrecioCompra'];
+                    } 
+                   }
+                   dep($arrProductos);
+                  
+                   //dep($arrProductos);
+                   exit;
+                   //nueva hoja de excel
+                   $excel = new Spreadsheet();
+                   //estilos por default
+                   $excel->getDefaultStyle()
+                   ->getFont()
+                   ->setName('Times New Roman')
+                   ->setSize(11);
+                   $styleArrayFecha=[
+                               'borders' => [
+                                   'bottom' => ['borderStyle' => Border::BORDER_THIN],
+                                   'top' => ['borderStyle' => Border::BORDER_THIN],
+                                   'left' => ['borderStyle' => Border::BORDER_THIN],
+                                   'right' => ['borderStyle' => Border::BORDER_THIN],
+                               ],
+                               'alignment' => [
+                                   'horizontal' => Alignment::HORIZONTAL_CENTER,
+                               ],
+                       
+                           ];
+                   $styleArrayMonto=[
+                       'borders' => [
+                           'bottom' => ['borderStyle' => Border::BORDER_THIN],
+                           'top' => ['borderStyle' => Border::BORDER_THIN],
+                           'left' => ['borderStyle' => Border::BORDER_THIN],
+                           'right' => ['borderStyle' => Border::BORDER_THIN],
+                       ],
+                       
+               
+                   ];
+                   $styleSumatoria=[
+                       'fill' => [
+                       'fillType' => Fill::FILL_SOLID,
+                       'color' => ['argb' => '81B031'],
+                       
+                       ],
+                       'font' => [
+                           'color' => ['argb' => 'FFFFFF'],
+                       ],
+                           'borders' => [
+                               'bottom' => ['borderStyle' => Border::BORDER_THIN],
+                               'top' => ['borderStyle' => Border::BORDER_THIN],
+                               'left' => ['borderStyle' => Border::BORDER_THIN],
+                               'right' => ['borderStyle' => Border::BORDER_THIN],
+                           ],
+                           'alignment' => [
+                               'horizontal' => Alignment::HORIZONTAL_CENTER,
+                           ],
+                       
+                   ];
+                   $styleEncabezado=[
+                       'fill' => [
+                           'fillType' => Fill::FILL_SOLID,
+                           'color' => ['argb' => '055488'],
+                           
+                       ],
+                       'font' => [
+                           'bold' => true,
+                           'color' => ['argb' => 'FFFFFF'],
+                           'size'=>12
+                       ],
+                           'borders' => [
+                               'bottom' => ['borderStyle' => Border::BORDER_THIN],
+                               'right' => ['borderStyle' => Border::BORDER_MEDIUM],
+                           ],
+                           'alignment' => [
+                               'horizontal' => Alignment::HORIZONTAL_CENTER,
+                           ],    
+                   ];
+                   $styleUtilidad=[
+                       'fill' => [
+                           'fillType' => Fill::FILL_SOLID,
+                           'color' => ['argb' => 'D9D9D9'],
+                           
+                       ],
+                           'alignment' => [
+                               'horizontal' => Alignment::HORIZONTAL_CENTER,
+                           ],
+           
+                   ];
+                   //$hoja activa
+                   $hojaActiva=$excel->getActiveSheet();
+                   //titulo
+                   $hojaActiva->setTitle("Utilidad");
+                   //Dimension y valor de la Columna A
+                   $hojaActiva->getColumnDimension('A')->setWidth(30);
+                   $hojaActiva->setCellValue('A1',"FECHA PEDIDO");
+                   //Dimension y valor de la Columna B
+                   $hojaActiva->getColumnDimension('B')->setWidth(20);
+                   $hojaActiva->setCellValue('B1',"MONTO PEDIDO");
+                   //Dimension y valor de la Columna C
+                   $hojaActiva->getColumnDimension('C')->setWidth(30);
+                   $hojaActiva->setCellValue('C1',"FECHA COMPRA");
+                   //Dimension y valor de la Columna D
+                   $hojaActiva->getColumnDimension('D')->setWidth(20);
+                   $hojaActiva->setCellValue('D1',"MONTO COMPRA");
+                   //Se inicia en la segunda fila
+                   $filaPedido=2;
+               //recorrer los pedidos
+                   for ($i=0; $i < count($data['pedido']); $i++) { 
+                       //FECHA
+                   $hojaActiva->setCellValue('A'.$filaPedido,$data['pedido'][$i]["FECHA"])->getStyle('A'.$filaPedido)->applyFromArray($styleArrayFecha);
+                       //MONTO
+                   $hojaActiva->setCellValue('B'.$filaPedido,$data['pedido'][$i]["MONTO"])->getStyle('B'.$filaPedido)->applyFromArray($styleArrayMonto);
+                   $filaPedido++;
+                   }
+       
+               //Se inicia en la segunda fila
+                   $filaCompra=2;
+                   //recorrer compras
+                   for ($i=0; $i < count($data['compra']); $i++) { 
+                       //FECHA 
+                       $hojaActiva->setCellValue('C'.$filaCompra,$data['compra'][$i]["FECHA_COMPRA"])->getStyle('C'.$filaCompra)->applyFromArray($styleArrayFecha);
+                       //MONTO
+                       $hojaActiva->setCellValue('D'.$filaCompra,$data['compra'][$i]["MONTO"])->getStyle('D'.$filaCompra)->applyFromArray($styleArrayMonto);
+                       $filaCompra++;  
+                   }
+                   //Fila mayor de pedido o compra
+                   $filaMayor=0;
+                   if ($filaPedido>=$filaCompra) {
+                       $filaMayor=$filaPedido;
+                   }else{
+                       $filaMayor=$filaCompra; 
+                   }
+                   //Columna A fila mayor para la sumatoria
+                   $hojaActiva->setCellValue('A'.($filaMayor+1),'SUMA PEDIDOS')->getStyle('A'.($filaMayor+1))->applyFromArray($styleSumatoria);
+                   //Columna C fila mayor para la sumatoria
+                   $hojaActiva->setCellValue('C'.($filaMayor+1),'SUMA COMPRAS')->getStyle('C'.($filaMayor+1))->applyFromArray($styleSumatoria);
+       
+                   //Sumatora de pedido
+                   $hojaActiva->setCellValue('B'.($filaMayor+1),'=SUM(B2:B'.($filaPedido-1).')')->getStyle('B'.($filaMayor+1))->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_ACCOUNTING_LPS);
+                   //Sumatoria de compra
+                   $hojaActiva->setCellValue('D'.($filaMayor+1),'=SUM(D2:D'.($filaCompra-1).')')->getStyle('D'.($filaMayor+1))->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_ACCOUNTING_LPS);
+                   //estilo numerico para la columnas de monto
+                   $hojaActiva->getStyle('D2:D'.$filaMayor)->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_ACCOUNTING_LPS);
+                   $hojaActiva->getStyle('B2:B'.$filaMayor)->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_ACCOUNTING_LPS);
+                   //Estilos de encabezado
+                   $hojaActiva->getStyle('A1:D1')->applyFromArray($styleEncabezado);
+                   //Combinar columnas
+                   $hojaActiva->mergeCells('F3:k3');
+                   $hojaActiva->setCellValue('F3',"UTILIDAD BRUTA ".$fechaInicio.' / '.$fechaFin)->getStyle('F3')->applyFromArray(
+                       [
+                           'fill' => [
+                               'fillType' => Fill::FILL_SOLID,
+                               'color' => ['argb' => '81B031'],
+                               
+                               ],
+                               'font' => [
+                                   'bold'=>true,
+                                   //'color' => ['argb' => 'FFFFFF'],
+                                   'size'=>12
+                               ],
+                                   'borders' => [
+                                       'bottom' => ['borderStyle' => Border::BORDER_THIN],
+                                       'top' => ['borderStyle' => Border::BORDER_THIN],
+                                       'left' => ['borderStyle' => Border::BORDER_THIN],
+                                       'right' => ['borderStyle' => Border::BORDER_THIN],
+                                   ],
+                                   'alignment' => [
+                                       'horizontal' => Alignment::HORIZONTAL_CENTER,
+                                   ],
+                       ]
+                   ); 
+                   //Columna de abajo
+                   $hojaActiva->mergeCells('F4:H4');
+                   $hojaActiva->setCellValue('F4',"Totala Ingresos (Pedidos)")->getStyle('F4:H4')->applyFromArray(
+                       [
+                                   'borders' => [
+                                       'bottom' => ['borderStyle' => Border::BORDER_THIN],
+                                   
+                                       'right' => ['borderStyle' => Border::BORDER_THICK],
+                                       
+                                   ],
+                                   'alignment' => [
+                                       'horizontal' => Alignment::HORIZONTAL_CENTER,
+                                   ],
+                       ]
+                   ); 
+                   //Columna de abajo
+                   $hojaActiva->mergeCells('I4:K4');
+                   $hojaActiva->setCellValue('I4',"Total Costos (Compras)")->getStyle('I4:K4')->applyFromArray(
+                       [
+                                   'borders' => [
+                                       'bottom' => ['borderStyle' => Border::BORDER_THIN],
+                                       
+                                   ],
+                                   'alignment' => [
+                                       'horizontal' => Alignment::HORIZONTAL_CENTER,
+                                   ],
+                       ]
+                   ); 
+       
+                   //Totales 
+                   $hojaActiva->mergeCells('F6:H6');
+                   $hojaActiva->setCellValue('F6','=SUM(B2:B'.($filaPedido-1).')')->getStyle('F6:H6')->applyFromArray(
+                       [
+                                   'borders' => [
+                                       'bottom' => ['borderStyle' => Border::BORDER_THICK],
+                                       
+                                       //'right' => ['borderStyle' => Border::BORDER_THICK],
+                                       
+                                   ],
+                                   'alignment' => [
+                                       'horizontal' => Alignment::HORIZONTAL_CENTER,
+                                   ],
+                       ]
+                   ); 
+                   $hojaActiva->getStyle("F6")->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_ACCOUNTING_LPS); 
+                   //Columna de abajo
+                   $hojaActiva->mergeCells('I6:K6');
+                   $hojaActiva->setCellValue('I6','=SUM(D2:D'.($filaCompra-1).')')->getStyle('I6:K6')->applyFromArray(
+                       [
+                                   'borders' => [
+                                       'bottom' => ['borderStyle' => Border::BORDER_THICK],
+                                       
+                                   ],
+                                   'alignment' => [
+                                       'horizontal' => Alignment::HORIZONTAL_CENTER,
+                                   ],
+                       ]
+                   );
+                   $hojaActiva->getStyle("I6")->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_ACCOUNTING_LPS); 
+                   //Utilidad Bruta
+                   $hojaActiva->mergeCells('F8:G8');
+                   $hojaActiva->setCellValue('F8','Utilidad Bruta');
+                   $hojaActiva->mergeCells('I8:K8');
+                   $hojaActiva->setCellValue('I8','=(F6-I6)');
+                   $hojaActiva->getStyle("I8")->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_CURRENCY_LPS_SIMPLE); 
+                   $hojaActiva->getStyle("F8:H8")->applyFromArray($styleUtilidad);
+                       //Utilidad Bruta porcentual
+                   $hojaActiva->mergeCells('F10:G10');
+                   $hojaActiva->setCellValue('F10','Margen Bruto %');
+                   $hojaActiva->mergeCells('I10:K10');
+                   $hojaActiva->setCellValue('I10','=I8/F6');
+                   $hojaActiva->getStyle("I10")->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_PERCENTAGE_00); 
+                   $hojaActiva->getStyle("F10:H10")->applyFromArray($styleUtilidad);
+       
+       
+       
+                   /*Crear nueva Hoja
+                   $excel->createSheet();
+                   $excel->setActiveSheetIndex(1);
+                   $excel->getActiveSheet()->setCellValue('A1', 'Firstname:'); */
+       
+       
+                   $conditional2 = new Conditional();
+                   $conditional2->setConditionType(Conditional::CONDITION_CELLIS);
+                   $conditional2->setOperatorType(Conditional::OPERATOR_LESSTHAN);
+                   $conditional2->addCondition(0);
+                   $conditional2->getStyle()->getFont()->getColor()->setRGB(COLOR::COLOR_DARKRED);
+                   $conditional2->getStyle()->getFont()->setBold(true);
+                   //$conditional2->getStyle()->getFill()->setFillType(Fill::FILL_SOLID);
+                   //$conditional2->getStyle()->getFill()->getStartColor()->setRGB(COLOR::COLOR_ROJO);
+       
+       
+                   $conditional3 = new Conditional();
+                   $conditional3->setConditionType(Conditional::CONDITION_CELLIS);
+                   $conditional3->setOperatorType(Conditional::OPERATOR_GREATERTHANOREQUAL);
+                   $conditional3->addCondition(0);
+                   $conditional3->getStyle()->getFont()->getColor()->setRGB(COLOR::COLOR_RED);
+                   $conditional3->getStyle()->getFont()->setBold(true);
+       
+       
+                   $conditionalStyles = $hojaActiva->getStyle('I8')->getConditionalStyles();
+                   $conditionalStyles[] = $conditional2;
+                   $conditionalStyles[] = $conditional3;
+       
+                   $hojaActiva->getStyle('I8')->setConditionalStyles($conditionalStyles);
+                    //BIRACORA
+                    Bitacora($_SESSION['idUser'],MPEDIDOS,"Consulta","Consultó y descargó las utilidades de la fecha del ".$fechaInicio." al ".$fechaFin,'');
+                   //dep($excel);
+                   //exit;
+                   ob_end_clean();
+                   /* Here there will be some code where you create $spreadsheet */
+                   $nombre="Utilidades_".$fechaInicio.'_'.$fechaFin;
+                   
+                   // redirect output to client browser
+                   header('Content-Type: application/vnd.ms-excel');
+                   header('Content-Disposition: attachment;filename="'.$nombre.'.xls"');
+                   header('Cache-Control: max-age=0');
+       
+                   $writer = IOFactory::createWriter($excel, 'Xls');
+                   $writer->save('php://output');
+
+                   
+
+                }
+            }
     }
 ?>

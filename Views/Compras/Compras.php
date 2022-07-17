@@ -43,8 +43,15 @@
                         <input class="fecha inputFecha Finicio" id="min" name="min" >
                       </div>
                       <div>
+                          <?php
+                              if($_SESSION['permisosMod']['r'] and $_SESSION['userData']['COD_ROL'] != RCLIENTES){ 
+                            ?>
+                            <div class="text-center mb-3">
+                                <button class="btn btn-block btn-success btn-lg" onclick="fntUtilidadG()" id="idUtilidad"><span><i class="fas fa-file-excel" aria-hidden="true"></i></span> Utilidades</button>
+                            </div>
+                            <?php } ?>
                             <div class="text-center">
-                                <button class="btn btn-block btn-success btn-lg" onclick="fntFecha()" id="idUtilidad"><span><i class="fas fa-file-excel" aria-hidden="true"></i></span> Utilidades</button>
+                                <button class="btn btn-block btn-success btn-lg" onclick="fntUtilidadB()" id="idUtilidad"><span><i class="fas fa-file-excel" aria-hidden="true"></i></span> Utilidad Bruta</button>
                             </div>
                         </div>
                       <div class="form-group">
