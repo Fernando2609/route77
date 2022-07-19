@@ -80,13 +80,14 @@
   <!-- Cierra Modal -->
     <section class="material-half-bg">
       <div class="cover">
-      <div class="d-flex justify-content-end  ">
-
-      <a href="<?= base_url();?>" class="btn btn-success mr-2 mt-3">IR A TIENDA</a> 
-      </div>
+    
       </div>
       <div class="cover2"></div>
     </section>
+    <div class="d-flex justify-content-end">
+
+<a href="<?= base_url();?>" class="btn btn-success mr-2 mt-3">IR A TIENDA</a>
+</div>
     <section class="login-content">
 
      <div class="logo d-flex justify-content-center">
