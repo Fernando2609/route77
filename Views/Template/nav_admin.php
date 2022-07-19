@@ -115,6 +115,15 @@
 
             <ul class="nav nav-treeview">
 
+            <?php if(!empty($_SESSION['permisos'][MCATEGORIAS]['r'])){ ?>
+              <li class="nav-item">
+                <a href="<?= base_url();?>/categorias" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Categorías</p>
+                </a>
+              </li>
+              <?php } ?>
+
               <?php if(!empty($_SESSION['permisos'][MPRODUCTOS]['r'])){ ?>
               <li class="nav-item">
                 <a href="<?= base_url();?>/productos" class="nav-link">
@@ -123,14 +132,7 @@
                 </a>
               </li>
               <?php } ?>
-              <?php if(!empty($_SESSION['permisos'][MCATEGORIAS]['r'])){ ?>
-              <li class="nav-item">
-                <a href="<?= base_url();?>/categorias" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Categorías</p>
-                </a>
-              </li>
-              <?php } ?>
+          
             </ul>
           </li>
           <?php } ?>
