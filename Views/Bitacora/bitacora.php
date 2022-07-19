@@ -16,7 +16,7 @@
             <div class="col-sm-6"> <!-- Div 6 columnas Izquierda-->
               <ol class="breadcrumb float-sm-right">
                 <!--Icono Casa-->
-              <li class="breadcrumb-item"><a href="<?=base_url();?>/clientes"><i class="fas fa-home casa"></i></a></li>
+              <li class="breadcrumb-item"><a href="<?=base_url();?>/bitacora"><i class="fas fa-home casa"></i></a></li>
               <li> / <?= $data['page_title'] ?></li>
               </ol>
             </div><!-- Termina Div 6 columnas Izquierda-->

@@ -288,6 +288,33 @@
             </a>
           </li>
          <?php } ?>
+   
+         
+
+
+
+         <?php if(!empty($_SESSION['permisos'][MPRODUCTOS]['r']) || !empty($_SESSION['permisos'][MCATEGORIAS]['r'])){ ?>
+            <li class="nav-item">
+            <a href="../widgets.html" class="nav-link">
+             <i class=" nav-icon fas fa-shield-alt"></i>
+              <p>
+                Seguridad
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview">
+
+            <?php if(!empty($_SESSION['permisos'][MBITACORA]['r'])){ ?>
+            <li class="nav-item">
+            <a href="<?= base_url();?>/bitacora" class="nav-link">
+            <i class="nav-icon fa-solid fa-book"></i>
+              <p>
+                Bitácora
+              </p>
+            </a>
+          </li>
+         <?php } ?>
          <?php if(!empty($_SESSION['permisos'][MBACKUP]['r'])){ ?>
             <li class="nav-item">
             <a href="<?= base_url();?>/backup" class="nav-link">
@@ -298,16 +325,10 @@
             </a>
           </li>
          <?php } ?>
-         <?php if(!empty($_SESSION['permisos'][MBITACORA]['r'])){ ?>
-            <li class="nav-item">
-            <a href="<?= base_url();?>/bitacora" class="nav-link">
-            <i class="nav-icon fa-solid fa-book"></i>
-              <p>
-                Bitacora
-              </p>
-            </a>
+            </ul>
           </li>
-         <?php } ?>
+          <?php } ?>
+
 
 
           <!-- Logout-->
