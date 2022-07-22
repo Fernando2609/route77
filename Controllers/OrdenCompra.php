@@ -203,7 +203,7 @@ class OrdenCompra extends Controllers{
 
 
    public function procesarCompra(){
-  
+    
     if ($_POST){
      
         $personaid=$_SESSION['idUser'];
@@ -245,15 +245,15 @@ class OrdenCompra extends Controllers{
                     foreach ($_SESSION['compraDetalle'] as $producto) {
                         
                         $productoid = $producto['idproducto'];
-                      
+                        $id=$this->model->selectID($productoid); 
                         $precio = $producto['precio'];
                         $cantidad = $producto['cantidad'];
                         $stock = $producto['stock'];
                         $cantCompra=$producto['cantCompra']+$cantidad;
                         $nuevoStock=$stock+$cantidad;
-                        $this->model->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
+                        $this->model->insertDetalle($request_pedido,$id['COD_PRODUCTO'],$precio,$cantidad);
                          //Aumentar stock
-                         $id=$this->model->selectID($productoid); 
+                         //$id=$this->model->selectID($productoid); 
                       
                         //Aumentar stock
                         $this->model->updateStock($id['COD_PRODUCTO'],$nuevoStock); 

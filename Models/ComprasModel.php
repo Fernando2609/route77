@@ -76,6 +76,7 @@
 		}
 		
 		public function selectCompra(int $idCompra){
+			
 			$this->intidCompra = $idCompra;
 		
 			/* $sql="CALL CRUD_ORDEN_COMPRA(null,null,null,null,'R',null,{$this->intidCompra})";
@@ -106,7 +107,7 @@
                              p.COD_BARRA
                             FROM TBL_DETALLE_COMPRA d
                             INNER JOIN TBL_PRODUCTOS p
-                            ON d.COD_PRODUCTO = p.COD_BARRA
+                            ON d.COD_PRODUCTO = p.COD_PRODUCTO
                             INNER JOIN TBL_CATEGORIA c
                             ON c.COD_CATEGORIA = p.COD_CATEGORIA
                             WHERE d.COD_ORDEN = $idCompra";

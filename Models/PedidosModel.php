@@ -184,13 +184,30 @@
 
 
         public function selectUtilidad(string $inicio,string $final ){
-            $sqlPEDIDO="SELECT date_format(FECHA,'%d-%m-%Y') as FECHA, MONTO from TBL_PEDIDO where FECHA between '{$inicio} 00:00:00' and '{$final} 23:59:59'";
+            $sqlPEDIDO="SELECT COD_PEDIDO, date_format(FECHA,'%d-%m-%Y') as FECHA, MONTO from TBL_PEDIDO where FECHA between '{$inicio} 00:00:00' and '{$final} 23:59:59'";
+            
             $requestPedido = $this->select_all($sqlPEDIDO);
 
-            $sqlCompra="SELECT  date_format(FECHA_COMPRA,'%d-%m-%Y') as FECHA_COMPRA, MONTO from TBL_ORDEN_COMPRA where FECHA_COMPRA between  '{$inicio} 00:00:00' and '{$final} 23:59:59'";
+            $sqlCompra="SELECT  date_format(FECHA_COMPRA,'%d-%m-%Y') as FECHA_COMPRA, MONTO from TBL_ORDEN_COMPRA where FECHA_COMPRA between '{$inicio} 00:00:00' and '{$final} 23:59:59'";
            
             $requestCompraa = $this->select_all($sqlCompra);
             $request = array('pedido'=> $requestPedido, 'compra'=> $requestCompraa);
+         
+            return $request;
+        }
+        public function selectProductosVendido(int $codigo){
+            $sqlPEDIDO="SELECT * FROM `tbl_detalle_pedido` WHERE COD_PEDIDO={$codigo}";
+            
+            $requestPedido = $this->select_all($sqlPEDIDO);
+            $request = $requestPedido;
+         
+            return $request;
+        }
+        public function selectDatosProductos(int $codigo){
+            $sqlPEDIDO="SELECT P.COD_PRODUCTO, P.NOMBRE as NombreProducto, C.PRECIO as PrecioCompra FROM `TBL_PRODUCTOS` P INNER JOIN TBL_DETALLE_COMPRA C on P.COD_PRODUCTO=C.COD_PRODUCTO WHERE P.COD_PRODUCTO={$codigo} ORDER by C.COD_PRODUCTO DESC LIMIT 1";
+            
+            $requestPedido = $this->select_all($sqlPEDIDO);
+            $request = $requestPedido;
          
             return $request;
         }
