@@ -1,8 +1,9 @@
 //FULLCALENDAR V5
-document.addEventListener('DOMContentLoaded', function() {
+url = base_url;
+document.addEventListener("DOMContentLoaded", function () {
   //Div con el id Calendaar
-  let formulario=document.querySelector("form");  
-  var calendarEl = document.getElementById('calendar');
+  let formulario = document.querySelector("form");
+  var calendarEl = document.getElementById("calendar");
   var calendar = new FullCalendar.Calendar(calendarEl, {
     //Maximo de eventos por dia
     dayMaxEventRows: true,
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Extraer eventos desde el controlador
     //events: "https://estacionroute77.com/Calendario/mostrarCalendario",
-        events: 'http://localhost:8080/route77/Calendario/mostrarCalendario',
+    events: url + "/Calendario/mostrarCalendario",
     //Click en un evento
     eventClick: function (calEvent, jsEvent, view) {
       //Titulo del evento seleccionado
@@ -188,197 +189,196 @@ document.addEventListener('DOMContentLoaded', function() {
   calendar.render();
 });
 //Boton nuevo Abrir modal
-function openModal()
-{
-    //Resetear Modal
-    $('#tituloEvento').html("Nuevo Evento");
-    document.querySelector("#formCaledario").reset();
-    //Botones, Habilitar Guardar,Desabilitar modificar y eliminar
-    $('#btnGuardar').prop("disabled",false);
-    $('#btnModificar').prop("disabled",true);
-    $('#btnEliminar').prop("disabled",true);
-    //Abrir modal
-    $('#modalFormCalendar').modal('show');
+function openModal() {
+  //Resetear Modal
+  $("#tituloEvento").html("Nuevo Evento");
+  document.querySelector("#formCaledario").reset();
+  //Botones, Habilitar Guardar,Desabilitar modificar y eliminar
+  $("#btnGuardar").prop("disabled", false);
+  $("#btnModificar").prop("disabled", true);
+  $("#btnEliminar").prop("disabled", true);
+  //Abrir modal
+  $("#modalFormCalendar").modal("show");
 }
 //Nuevo Evento Función
-function agregarEvento(){
-    var formUsuario=document.querySelector("#formCaledario");
-        let strtitle = document.querySelector('#title').value;
-        let strDescripcion = document.querySelector('#descripcion').value;
-        let strStart= document.querySelector('#inicio').value;
-        let strEnd = document.querySelector('#end').value;
+function agregarEvento() {
+  var formUsuario = document.querySelector("#formCaledario");
+  let strtitle = document.querySelector("#title").value;
+  let strDescripcion = document.querySelector("#descripcion").value;
+  let strStart = document.querySelector("#inicio").value;
+  let strEnd = document.querySelector("#end").value;
 
-        if(strtitle == '' || strDescripcion == '' || strStart == '' )
-        {
-            swal.fire("Atención", "Todos los campos son obligatorios." , "error");
-            return false;
-        }
+  if (strtitle == "" || strDescripcion == "" || strStart == "") {
+    swal.fire("Atención", "Todos los campos son obligatorios.", "error");
+    return false;
+  }
 
-        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Calendario/setCalendario'; 
-        let formData = new FormData(formUsuario);
-        request.open("POST",ajaxUrl,true);
-        request.send(formData);
-        request.onreadystatechange = function(){ 
-            console.log(request);
-            if(request.readyState == 4 && request.status == 200){
-                console.log(request.responseText);
-                let objData = JSON.parse(request.responseText); 
-                
-                if(objData.status)
-                { 
-                    $('#modalFormCalendar').modal("hide");
-                        formUsuario.reset();
-                        swal.fire({
-                            title: "Evento",
-                            text: objData.msg,
-                            icon: "success",
-                           /*  showClass: {
+  let request = window.XMLHttpRequest
+    ? new XMLHttpRequest()
+    : new ActiveXObject("Microsoft.XMLHTTP");
+  let ajaxUrl = base_url + "/Calendario/setCalendario";
+  let formData = new FormData(formUsuario);
+  request.open("POST", ajaxUrl, true);
+  request.send(formData);
+  request.onreadystatechange = function () {
+    console.log(request);
+    if (request.readyState == 4 && request.status == 200) {
+      console.log(request.responseText);
+      let objData = JSON.parse(request.responseText);
+
+      if (objData.status) {
+        $("#modalFormCalendar").modal("hide");
+        formUsuario.reset();
+        swal
+          .fire({
+            title: "Evento",
+            text: objData.msg,
+            icon: "success",
+            /*  showClass: {
                               popup: 'animate__animated animate__fadeInDown'
                             },
                             hideClass: {
                               popup: 'animate__animated animate__fadeOutUp'
                             }, */
-                            showCancelButton: false,
-                            confirmButtonText: "Aceptar",
-                            //cancelButtonText: "No, cancelar!",
-                            closeOnConfirm: false,
-                            closeOnCancel: true,
-                            allowOutsideClick: false
-                        }).then((result) => {
-                          if (result.isConfirmed) {  
-                            location.reload();
-                          }});
-                      
-                    }else{
-                        swal.fire("Error", objData.msg , "error");
-                }
-            
-            }else{
-                console.log('Error');
+            showCancelButton: false,
+            confirmButtonText: "Aceptar",
+            //cancelButtonText: "No, cancelar!",
+            closeOnConfirm: false,
+            closeOnCancel: true,
+            allowOutsideClick: false,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
             }
-        }  
-    
+          });
+      } else {
+        swal.fire("Error", objData.msg, "error");
+      }
+    } else {
+      console.log("Error");
+    }
+  };
 }
 //Actualizar Evento
-function updateEvento(idEvento,nameEvent) {
-    var formUsuario=document.querySelector("#formCaledario");
-        let strtitle = document.querySelector('#title').value;
-        let strDescripcion = document.querySelector('#descripcion').value;
-        let strStart= document.querySelector('#inicio').value;
-        let strEnd = document.querySelector('#end').value;
+function updateEvento(idEvento, nameEvent) {
+  var formUsuario = document.querySelector("#formCaledario");
+  let strtitle = document.querySelector("#title").value;
+  let strDescripcion = document.querySelector("#descripcion").value;
+  let strStart = document.querySelector("#inicio").value;
+  let strEnd = document.querySelector("#end").value;
 
-        if(strtitle == '' || strDescripcion == '' || strStart == '' )
-        {
-            swal.fire("Atención", "Todos los campos son obligatorios." , "error");
-            return false;
-        }
-         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Calendario/updateCalendario/'+idEvento; 
-        let formData = new FormData(formUsuario);
-        request.open("POST",ajaxUrl,true);
-        request.send(formData);
-        request.onreadystatechange = function(){ 
-           /*  console.log(request); */
-            if(request.readyState == 4 && request.status == 200){
-                /* console.log(request.responseText); */
-                let objData = JSON.parse(request.responseText); 
-                
-                if(objData.status)
-                { 
-                    $('#modalFormCalendar').modal("hide");
-                        formUsuario.reset();
-                        
-                        
-                        swal.fire({
-                            title: nameEvent,
-                            text: objData.msg,
-                            icon: "success",
-                           /*  showClass: {
+  if (strtitle == "" || strDescripcion == "" || strStart == "") {
+    swal.fire("Atención", "Todos los campos son obligatorios.", "error");
+    return false;
+  }
+  let request = window.XMLHttpRequest
+    ? new XMLHttpRequest()
+    : new ActiveXObject("Microsoft.XMLHTTP");
+  let ajaxUrl = base_url + "/Calendario/updateCalendario/" + idEvento;
+  let formData = new FormData(formUsuario);
+  request.open("POST", ajaxUrl, true);
+  request.send(formData);
+  request.onreadystatechange = function () {
+    /*  console.log(request); */
+    if (request.readyState == 4 && request.status == 200) {
+      /* console.log(request.responseText); */
+      let objData = JSON.parse(request.responseText);
+
+      if (objData.status) {
+        $("#modalFormCalendar").modal("hide");
+        formUsuario.reset();
+
+        swal
+          .fire({
+            title: nameEvent,
+            text: objData.msg,
+            icon: "success",
+            /*  showClass: {
                               popup: 'animate__animated animate__fadeInDown'
                             },
                             hideClass: {
                               popup: 'animate__animated animate__fadeOutUp'
                             }, */
-                            showCancelButton: false,
-                            confirmButtonText: "Aceptar",
-                            //cancelButtonText: "No, cancelar!",
-                            closeOnConfirm: false,
-                            closeOnCancel: true,
-                            allowOutsideClick: false
-                        }).then((result) => {
-                          if (result.isConfirmed) {  
-                            location.reload();
-                          }});
-                      
-                    }else{
-                        swal.fire("Error", objData.msg , "error");
-                }
-            
-            }/* else{
+            showCancelButton: false,
+            confirmButtonText: "Aceptar",
+            //cancelButtonText: "No, cancelar!",
+            closeOnConfirm: false,
+            closeOnCancel: true,
+            allowOutsideClick: false,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          });
+      } else {
+        swal.fire("Error", objData.msg, "error");
+      }
+    } /* else{
                 console.log('Error');
             } */
-        }  
+  };
 }
 //Función Eliminar Evento
-function deleteEvento(idEvento,nameEvent) {
-    var formUsuario=document.querySelector("#formCaledario");
-        let strtitle = document.querySelector('#title').value;
-        let strDescripcion = document.querySelector('#descripcion').value;
-        let strStart= document.querySelector('#inicio').value;
-        let strEnd = document.querySelector('#end').value;
+function deleteEvento(idEvento, nameEvent) {
+  var formUsuario = document.querySelector("#formCaledario");
+  let strtitle = document.querySelector("#title").value;
+  let strDescripcion = document.querySelector("#descripcion").value;
+  let strStart = document.querySelector("#inicio").value;
+  let strEnd = document.querySelector("#end").value;
 
-        if(strtitle == '' || strDescripcion == '' || strStart == '' )
-        {
-            swal.fire("Atención", "Todos los campos son obligatorios." , "error");
-            return false;
-        }
+  if (strtitle == "" || strDescripcion == "" || strStart == "") {
+    swal.fire("Atención", "Todos los campos son obligatorios.", "error");
+    return false;
+  }
 
-        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Calendario/delCalendario/'+idEvento; 
-        let formData = new FormData(formUsuario);
-        request.open("POST",ajaxUrl,true);
-        request.send(formData);
-        request.onreadystatechange = function(){ 
-            console.log(request);
-            if(request.readyState == 4 && request.status == 200){
-                console.log(request.responseText);
-                let objData = JSON.parse(request.responseText); 
-                
-                if(objData.status)
-                { 
-                    $('#modalFormCalendar').modal("hide");
-                        formUsuario.reset();
+  let request = window.XMLHttpRequest
+    ? new XMLHttpRequest()
+    : new ActiveXObject("Microsoft.XMLHTTP");
+  let ajaxUrl = base_url + "/Calendario/delCalendario/" + idEvento;
+  let formData = new FormData(formUsuario);
+  request.open("POST", ajaxUrl, true);
+  request.send(formData);
+  request.onreadystatechange = function () {
+    console.log(request);
+    if (request.readyState == 4 && request.status == 200) {
+      console.log(request.responseText);
+      let objData = JSON.parse(request.responseText);
 
-                        swal.fire({
-                            title: nameEvent,
-                            text: objData.msg,
-                            icon: "success",
-                            showClass: {
-                              popup: 'animate__animated animate__fadeInDown'
-                            },
-                            hideClass: {
-                              popup: 'animate__animated animate__fadeOutUp'
-                            },
-                            showCancelButton: false,
-                            confirmButtonText: "Aceptar",
-                            //cancelButtonText: "No, cancelar!",
-                            closeOnConfirm: false,
-                            closeOnCancel: true,
-                            allowOutsideClick: false
-                        }).then((result) => {
-                          if (result.isConfirmed) {  
-                            location.reload();
-                          }});
-                      
-                    }else{
-                        swal.fire("Error", objData.msg , "error");
-                }
-            
-            }else{
-                console.log('Error');
+      if (objData.status) {
+        $("#modalFormCalendar").modal("hide");
+        formUsuario.reset();
+
+        swal
+          .fire({
+            title: nameEvent,
+            text: objData.msg,
+            icon: "success",
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+            showCancelButton: false,
+            confirmButtonText: "Aceptar",
+            //cancelButtonText: "No, cancelar!",
+            closeOnConfirm: false,
+            closeOnCancel: true,
+            allowOutsideClick: false,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
             }
-        }  
+          });
+      } else {
+        swal.fire("Error", objData.msg, "error");
+      }
+    } else {
+      console.log("Error");
+    }
+  };
 }
 //Cargar las clases desde el load
-

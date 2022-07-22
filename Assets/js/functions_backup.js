@@ -72,7 +72,12 @@ $("#fileBD").on("change", function () {
    fileValue = document.querySelector("#fileBD").value;
    namefile = fileValue.split("\\");
    
-   fechaArray=namefile[5].split("_");
+   if (enviroment == 1) {
+     namefile = fileValue.split("/");
+     fechaArray = namefile[8].split("_");
+   } else {
+     fechaArray = namefile[5].split("_");
+   }
   
    var horaArray = fechaArray[3].match(/.{1,2}/g); 
    dia = new Date(

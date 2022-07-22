@@ -64,7 +64,7 @@
       <!-- Div Contenido Modal -->
       <div class="modal-header header-primary">
         <!-- Encabezado Modal -->
-        <h5 class="modal-title" id="titleModal">Datos del Inventario</h5>
+        <h5 class="modal-title" id="titleModalEdit">Stock del Producto</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -74,7 +74,7 @@
         <!-- Card -->
         <form id="formInventario" name="formInventario" class="form-Horizontal">
         <div class="form-group">
-              <label for="">STOCK<span class="required"></span></label>
+              <label for="">Cantidad a disminuir<span class="required"></span></label>
               <input type="number" min="0" class="form-control"  id="stockupdate"  maxlength="8" name="stockupdate" >
         </div>
 

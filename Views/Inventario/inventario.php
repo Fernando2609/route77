@@ -50,7 +50,7 @@
                         <th>Ventas</th>
                         <th>Compras</th>
                       <!--   <th>Rol</th> -->
-                        <th>Cant.Minima</th>
+                        <th>Cant.Mínima</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>

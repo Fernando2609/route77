@@ -198,7 +198,7 @@
                             //Selecciona los datos del usuario Actualizado                                                       
                             $arrData= $this->model->selectCliente($idUsuario);
                             //BIRACORA
-                            Bitacora($_SESSION['idUser'],MCLIENTES,"Update","Actualizó al Cliente ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."",$changeTable);
+                            Bitacora($_SESSION['idUser'],MCLIENTES,"Actualizar","Actualizó al Cliente ".$arrData['NOMBRES']." ".$arrData['APELLIDOS']."",$changeTable);
                             $arrResponse = array("status" => true, "msg" => 'Cliente Actualizado Correctamente.');
                         }
                     }else if($request_user == 'exist'){

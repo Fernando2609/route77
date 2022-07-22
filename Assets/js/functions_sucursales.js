@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded',function () {
 function fntViewSucursales(idSucursal){
   
   let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-  let ajaxUrl = base_url+'/Sucursales/getSucursal/'+idSucursal;
+  let ajaxUrl = base_url + "/adminSucursales/getSucursal/" + idSucursal;
   request.open("GET",ajaxUrl,true);
   request.send();
   

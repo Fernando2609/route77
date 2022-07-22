@@ -33,7 +33,7 @@
                     <div class="col-md-4">
                     <div class="form-group">
                         <label class="control-label">Código </label>
-                        <input class="form-control" id="txtCodigo" name="txtCodigo" type="text" placeholder="Código de barra" onkeypress="return controlTag(event);">
+                        <input class="form-control"  maxlength="30" id="txtCodigo" name="txtCodigo" type="text" placeholder="Código de barra" onkeypress="return controlTag(event);">
                          <br>
                         <div id="divBarCode" class="notBlock textcenter">
                             <div id="printCode">
@@ -128,7 +128,7 @@
         <table class="table table-bordered">
           <tbody>
             <tr>
-              <td>Codigo:</td>
+              <td>Código:</td>
               <td id="celCodigo"></td>
             </tr>
             <tr>

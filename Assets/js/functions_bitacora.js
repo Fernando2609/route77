@@ -245,7 +245,7 @@ function fntViewInfo(ID_BITACORA) {
            table.deleteRow(tableHeaderRowCount);
          }
 
-          if (objData.data.ACCION == "Update") {
+          if (objData.data.ACCION == "Update" || objData.data.ACCION == "Actualizar") {
               $("#prueba>tbody").append(
                 `<tr class="text-center bg-blue">
              <td colspan="3" >Cambios</td>

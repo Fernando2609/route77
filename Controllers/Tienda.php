@@ -545,7 +545,7 @@
                                    
                                     $dataEmailOrden=array('asunto'=>"Se ha creado la orden No.".$request_pedido,
                                                          'email'=>$_SESSION['userData']['EMAIL'],
-                                                         //'emailCopia'=>datosEmpresa()['Empresa']['EMAIL_PEDIDOS'],
+                                                         'emailCopia'=>datosEmpresa()['Empresa']['EMAIL_PEDIDOS'],
                                                             'pedido'=>$infoOrden);
                                     
                                     sendEmail($dataEmailOrden,"email_orden");
@@ -600,7 +600,7 @@
 													'email' => $_SESSION['userData']['EMAIL'], 
 													'emailCopia' => datosEmpresa()['Empresa']['EMAIL_PEDIDOS'],
 													'pedido' => $infoOrden );
-									sendEmail($dataEmailOrden,"email_notificacion_orden");
+									sendEmail($dataEmailOrden,"email_orden");
 
                                     $orden=openssl_encrypt($request_pedido, METHODENCRIPT, KEY);
                                     $transaccion = openssl_encrypt($idtransaccionpaypal, METHODENCRIPT,KEY);  

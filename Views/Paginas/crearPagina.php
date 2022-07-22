@@ -44,7 +44,7 @@
                             <!-- Div Text -->
                             <div class="form-group">
                                 <label for="exampleInputNombre">Título  (<span class="required">*</span>)</label>
-                                <input type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Título de la Página" value="" required onkeypress="return controlTagLetraNumero(event);">
+                                <input maxlength="60" type="text" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Título de la Página" value="" required onkeypress="return controlTagLetraNumero(event);">
                             </div>
                             <!-- Cierra Text -->
 
@@ -73,7 +73,9 @@
                                 <div class="form-group col-md-12">
                                     <button id="btnActionForm" class="btn btn-success btn-lg btn-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>
                                 </div>
-                              
+                                <div class="form-group col-md-12">
+                                    <a href="<?=  base_url()  ?>/paginas" class="btn btn-danger btn-lg btn-block" ><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Regresar</span></a>
+                                </div>
                             </div>
                             </div>
                         </div>

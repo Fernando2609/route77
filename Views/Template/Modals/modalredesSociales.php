@@ -72,7 +72,7 @@
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
-                            <td>Descripcion:</td>
+                            <td>Descripción:</td>
                             <td id="celDescripcion">InShot</td>
                         </tr>
                         

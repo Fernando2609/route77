@@ -127,8 +127,7 @@
              die();
         }
         public function getSucursal($idSucursal){
-            //echo $idUsuario;
-            //die();
+           
             if($_SESSION['permisosMod']['r']){
 				$idSucursal = intval($idSucursal);
 				if($idSucursal > 0)

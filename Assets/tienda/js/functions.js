@@ -541,7 +541,7 @@ if(document.querySelector("#btnComprar")){
 	    if (dir == "" || ciudad == "" || inttipopago == "") {
         swal.fire("", "Complete datos de envío", "error");
         return;
-      }else if (ref==""||mapUbicacion=="" ) {
+      }else if (mapUbicacion=="" ) {
          swal.fire("", "Complete datos de envío", "error");
          return;
       } else {
