@@ -491,3 +491,43 @@ function fntUtilidadG() {
        };
      }
 }
+
+function fntUtilidadB() {
+  let Finicio = document.querySelector(".Finicio").value;
+  let Ffinal = document.querySelector(".fFinal").value;
+
+  if (Finicio == "" || Ffinal == "") {
+    swal.fire(
+      "",
+      "Seleccione Fecha inicial y Fecha final para las utilidades",
+      "error"
+    );
+    return false;
+  } else {
+    let request = window.XMLHttpRequest
+      ? new XMLHttpRequest()
+      : new ActiveXObject("Microsoft.XMLHTTP");
+    let ajaxUrl = base_url + "/Pedidos/UtilidadB/" + Finicio + "/" + Ffinal;
+    divLoading.style.display = "flex";
+    let formData = new FormData();
+    formData.append("fechaInicio", Finicio);
+    formData.append("fechaFinal", Ffinal);
+    request.open("POST", ajaxUrl, true);
+    request.send(formData);
+
+    request.onreadystatechange = function () {
+      if (request.readyState != 4) return;
+      if (request.status == 200) {
+        window.open(
+          base_url + "/Pedidos/UtilidadB/" + Finicio + "/" + Ffinal,
+          "_blank"
+        );
+
+        divLoading.style.display = "none";
+        return false;
+
+        //$("#pagosMesAnio").html(request.responseText);
+      }
+    };
+  }
+}

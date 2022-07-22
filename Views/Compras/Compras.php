@@ -36,13 +36,33 @@
                 <div class="card-body">
                   <!-- Tabla -->
                   <div class="form-group ">
-                    <div class="input-group d-flex justify-content-between">
+                    <div class="">
+                      <div class="row justify-content-between">
                       <div class="form-group">
-
                         <label for="" >Fecha Inicio</label>
                         <input class="fecha inputFecha Finicio" id="min" name="min" >
                       </div>
-                      <div>
+                      <?php
+                              if($_SESSION['permisosMod']['r'] and $_SESSION['userData']['COD_ROL'] != RCLIENTES){ 
+                            ?>
+                            <div class="text-center mb-3">
+                                <button class="btn btn-block btn-success btn-lg" onclick="fntUtilidadG()" id="idUtilidad"><span><i class="fas fa-file-excel" aria-hidden="true"></i></span> Utilidades</button>
+                            </div>
+                            <?php } ?>
+                      </div>
+                      <div class="row justify-content-between">
+
+                        <div class="form-group">
+                          <label for="">Fecha Final</label>
+                          <input class="fecha inputFecha fFinal" id="max" name="max" >
+                          </div>
+                          <div class="text-center">
+                                <button class="btn btn-block btn-success btn-lg" onclick="fntUtilidadB()" id="idUtilidad"><span><i class="fas fa-file-excel" aria-hidden="true"></i></span> Utilidad Bruta</button>
+                          </div>
+                        </div>
+
+                      </div>
+                      <!-- <div>
                           <?php
                               if($_SESSION['permisosMod']['r'] and $_SESSION['userData']['COD_ROL'] != RCLIENTES){ 
                             ?>
@@ -53,15 +73,9 @@
                             <div class="text-center">
                                 <button class="btn btn-block btn-success btn-lg" onclick="fntUtilidadB()" id="idUtilidad"><span><i class="fas fa-file-excel" aria-hidden="true"></i></span> Utilidad Bruta</button>
                             </div>
-                        </div>
-                      <div class="form-group">
-
-                        <label for="">Fecha Final</label>
-                        <input class="fecha inputFecha fFinal" id="max" name="max" >
-                      </div>
+                      </div> -->
+                     
                     </div>
-                  </div>
-                  
                   <table id="tableCompras" class="table table-hover table-bordered  dataTable dtr-inline collapsed" role="grid">
                     <!-- Encabezado de la tabla-->
                     <thead>
