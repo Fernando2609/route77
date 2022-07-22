@@ -79,15 +79,21 @@
   </div>
   <!-- Cierra Modal -->
     <section class="material-half-bg">
-      <div class="cover"></div>
+      <div class="cover">
+    
+      </div>
       <div class="cover2"></div>
     </section>
+    <div class="d-flex justify-content-end">
+
+<a href="<?= base_url();?>" class="btn btn-success mr-2 mt-3">IR A TIENDA</a>
+</div>
     <section class="login-content">
-   
-    <div class="logo d-flex justify-content-center">
+
+     <div class="logo d-flex justify-content-center">
     <a href="<?= base_url();?>" class="nav-link">
         <img src="<?= media(); ?>/images/Logo.png" class="imagenLogin" alt="" >
-    </div>
+        </div>
     </a>
 
       <div class="login-box">
