@@ -8,7 +8,8 @@
 
  <footer class="main-footer">
 
-   <strong>Copyright &copy; 2021 <a href="#">Route 77</a>.</strong> All rights reserved.
+   <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="#">Universidad Nacional Autónoma De Honduras</a>. </strong> All rights reserved.
+  
  </footer>
 
  <!-- Control Sidebar -->
