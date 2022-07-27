@@ -270,7 +270,7 @@
                      //BIRACORA
                      Bitacora($_SESSION['idUser'],MCATEGORIAS,"Eliminar","Eliminó la Categoría con el código: ".$arrData['COD_CATEGORIA']."",''); 
                 }else if($requestDelete == false){
-                    $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una categoría asociada a los usuarios');
+                    $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una categoría que tiene productos en existencia');
                 }else{
                     $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la cateogoría.');
                 }

@@ -348,6 +348,8 @@ function fntEditInfo(element,idUsuario){
                    objData.data.CATEGORIAS_SLIDER;
                  document.querySelector("#txtCatBanner").value =
                    objData.data.CATEGORIAS_BANNER;
+                    document.querySelector("#txtISV").value =
+                      objData.data.ISV;
               
                
               
@@ -394,6 +396,8 @@ function fntViewInfo(idpersona) {
                  objData.data.CATEGORIAS_SLIDER;
                  document.querySelector("#celCatBanner").innerHTML =
                    objData.data.CATEGORIAS_BANNER;
+                    document.querySelector("#celISV").innerHTML =
+                      objData.data.ISV;
         $("#modalViewEmpresa").modal("show");
       } else {
         swal.fire("Error", objData.msg, "error");

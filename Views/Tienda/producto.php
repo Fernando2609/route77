@@ -2,6 +2,7 @@
 headerTienda($data);
 //getModal('modalCarrito', $data);
 $arrProducto = $data['producto'];
+
 $arrProductos = $data['productos'];
 $arrImages = $arrProducto['images'];
 $rutaCategoria=$arrProducto['COD_CATEGORIA'].'/'.$arrProducto['ruta_categoria'];
@@ -78,6 +79,10 @@ $urlShared = base_url()."/tienda/producto/".$arrProducto['COD_PRODUCTO']."/".$ar
                      <p class="stext-102 cl3 p-t-23">
                         <?= $arrProducto['DESCRIPCION']; ?>
                     </p> 
+                    <p class="stext-102 cl3 p-t-23">
+                    Unidades Disponibles: <?= $arrProducto['STOCK']; ?>
+                    </p> 
+
 
                     
                     <div class="p-t-33">
