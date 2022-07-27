@@ -1,6 +1,7 @@
 <?php
 headerAdmin($data);
 getModal('modalEmpresa', $data);
+
 ?>
 <!-- Content Header (Sección de Encabezado) -->
 <div class="content-wrapper">

@@ -62,7 +62,7 @@ class OrdenCompra extends Controllers{
                 $arrTabla=array();
                 $subtotal=0;
                 $total=0;
-                $iva=15;
+                $iva=datosEmpresa()['Empresa']['ISV'];
                 
                 //$user=intval($_SESSION['idUser']);
                 $arrData = $this->model->selectProducto($idproducto);
@@ -211,7 +211,7 @@ class OrdenCompra extends Controllers{
         $factura=intval($_POST['txtFactura']);
         $idProveedor=intval($_POST['idProveedor']);
         $checkISV=$_POST['checkISV'];
-        $isv=15;
+        $isv=datosEmpresa()['Empresa']['ISV'];
         $total=0;
         $cantCompra=0;
         
