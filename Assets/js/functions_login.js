@@ -1,3 +1,33 @@
+/*
+-----------------------------------------------------------------------
+Universidad Nacional Autónoma de Honduras (UNAH)
+    Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+                Segundo Periodo 2022
+
+
+Equipo:
+Jose Fernando Ortiz Santos .......... (jfortizs@unah.hn)
+Hugo Alejandro Paz Izaguirre..........(hugo.paz@unah.hn)
+Kevin Alfredo Rodríguez Zúniga........(karodriguezz@unah.hn)
+Leonela Yasmin Pineda Barahona........(lypineda@unah)
+Reynaldo Jafet Giron Tercero..........(reynaldo.giron@unah.hn)
+Gabriela Giselh Maradiaga Amador......(ggmaradiaga@unah.hn)
+Alejandrino Victor García Bustillo....(alejandrino.garcia@unah.hn)
+
+Catedrático:
+Lic. Karla Melisa Garcia Pineda 
+
+---------------------------------------------------------------------
+
+Programa:          Módulo de Login
+Fecha:             22-Febrero-2022
+Programador:       Jose Fernando Ortiz Santos
+descripción:       Modulo que permite ingresar al sistema con las 
+                   credenciales del usuario
+
+-----------------------------------------------------------------------*/
 $('.login-content [data-toggle="flip"]').click(function() {
 	document.querySelector("#txtEmail").classList.remove("is-invalid");
     $('.login-box').toggleClass('flipped');

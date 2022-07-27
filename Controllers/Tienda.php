@@ -1,4 +1,38 @@
-<?php  
+<?php 
+/*
+-----------------------------------------------------------------------
+Universidad Nacional Autónoma de Honduras (UNAH)
+    Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+                Segundo Periodo 2022
+
+
+Equipo:
+Jose Fernando Ortiz Santos .......... (jfortizs@unah.hn)
+Hugo Alejandro Paz Izaguirre..........(hugo.paz@unah.hn)
+Kevin Alfredo Rodríguez Zúniga........(karodriguezz@unah.hn)
+Leonela Yasmin Pineda Barahona........(lypineda@unah)
+Reynaldo Jafet Giron Tercero..........(reynaldo.giron@unah.hn)
+Gabriela Giselh Maradiaga Amador......(ggmaradiaga@unah.hn)
+Alejandrino Victor García Bustillo....(alejandrino.garcia@unah.hn)
+
+Catedrático:
+Lic. Karla Melisa Garcia Pineda 
+
+---------------------------------------------------------------------
+
+Programa:          Módulo Tienda
+Fecha:             03-Abril-2022
+Programadores:     Kevin Alfredo Rodríguez Zúniga, 
+                   Jose Fernando Ortiz Santos 
+                   Alejandrino Victor García Bustillo
+descripción:       Tienda virtual presentada a los clientes , que muestra toda su estructura
+
+-----------------------------------------------------------------------*/
+
+
+ 
     require_once("Models/Tcategoria.php");
     require_once("Models/Tproducto.php");
     require_once("Models/TCliente.php");
