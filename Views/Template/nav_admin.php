@@ -332,6 +332,17 @@
           <?php } ?>
 
 
+          <?php if(!empty($_SESSION['permisos'][MPREGUNTAS]['r'])){ ?>
+            <li class="nav-item">
+            <a href="<?= base_url();?>/preguntas" class="nav-link">
+            <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Preguntas
+              </p>
+            </a>
+          </li>
+         <?php } ?>
+
 
           <!-- Logout-->
           <li class="nav-item">
@@ -342,8 +353,6 @@
               </p>
             </a>
           </li>
-          
-
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
