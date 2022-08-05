@@ -21,7 +21,7 @@
                   <!-- Div Text -->
                   <div class="form-group">
                     <label for="exampleInputNombre">Pregunta</label>
-                    <input type="text" class="form-control valid validText" id="txtPreguntas" name="txtPreguntas" placeholder="Pregunta" required="" maxlength="100">
+                    <input type="text" class="form-control valid " id="txtPreguntas" name="txtPreguntas" placeholder="Pregunta" required="" maxlength="100">
                   </div>
                   <!-- Cierra Text -->
 
