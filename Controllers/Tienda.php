@@ -533,14 +533,14 @@
                                         $nuevoStock=$stock-$cantidad;
                                         $cantVenta=$producto['cantVenta']+$cantidad;
                                         $this->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
-                                        
+                                       
                                         //Disminuir stock
                                          $this->updateStock($productoid,$nuevoStock);
                                         //aumentar cantiad vendida
                                         $this->updateCantVenta($productoid,$cantVenta); 
 
                                     }
-                           
+                               
                                     $infoOrden=$this->getPedido($request_pedido);
                                    
                                     $dataEmailOrden=array('asunto'=>"Se ha creado la orden No.".$request_pedido,
@@ -590,10 +590,14 @@
                                         $precio = $producto['precio'];
                                         $cantidad = $producto['cantidad'];
                                         $stock = $producto['stock'];
+                                        $cantVenta=$producto['cantVenta']+$cantidad;
                                         $nuevoStock=$stock-$cantidad;
                                         $this->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
                                         //Disminuir stock
                                         $this->updateStock($productoid,$nuevoStock); 
+
+                                        //aumentar cantiad vendida
+                                        $this->updateCantVenta($productoid,$cantVenta); 
                                     }
                                     $infoOrden=$this->getPedido($request_pedido);
                                     $dataEmailOrden = array('asunto' => "Se ha creado la orden No.".$request_pedido,

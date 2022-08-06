@@ -154,11 +154,35 @@ require 'Libraries/Excel/vendor/autoload.php';
                 die();
             }
             public function setReembolso(){
+               
                 if($_POST){
                     if($_SESSION['permisosMod']['u'] and $_SESSION['userData']['COD_ROL'] != RCLIENTES){
                         //dep($_POST);
                         $transaccion = strClean($_POST['idtransaccion']);
                         $observacion = strClean($_POST['observacion']); 
+                        $checkReembolso=strClean($_POST['reembolso']);
+                        if ($checkReembolso) {
+                            $requestReembolso=$this->model->selectPedidoPaypal($transaccion);
+
+                            foreach ($requestReembolso['detalle'] as $producto) {
+                                
+                             
+                                $idProducto=$producto['COD_PRODUCTO'];
+                                $cantidad=$producto['CANTIDAD'];
+                                $inventario=$this->model->selectProductoInventario($idProducto);
+                                
+                                $stock=$inventario['STOCK'];
+                                $cantVenta=$inventario['CANT_VENTA']-$cantidad;
+                                $nuevoStock=$stock+$cantidad;
+                                $this->model->updateStock($idProducto,$nuevoStock); 
+                                //aumentar cantiad vendida
+                                $this->model->updateCantVenta($idProducto,$cantVenta); 
+                                
+        
+                            }
+
+                        }
+                       
                         $requestTransaccion = $this->model->reembolsoPaypal($transaccion,$observacion);
                         if($requestTransaccion){
                              //BIRACORA

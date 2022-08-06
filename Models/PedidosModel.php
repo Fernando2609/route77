@@ -91,6 +91,76 @@
                     }
                     return $request;
         }
+
+        public function selectPedidoPaypal($transaccion)
+        {
+            $sqlPEDIDO="SELECT * FROM `TBL_PEDIDO` WHERE COD_TRANSACCION_PAYPAL= '$transaccion'";
+            
+            $requestPedido = $this->select($sqlPEDIDO);
+           
+
+            $sqlDetalle="SELECT * FROM `tbl_detalle_pedido` WHERE COD_PEDIDO={$requestPedido['COD_PEDIDO']}";
+            
+            $requestDetalle = $this->select_all($sqlDetalle);
+            
+            $request = array('pedido'=> $requestPedido, 'detalle'=> $requestDetalle);
+          
+         
+            
+            return $request;
+        }
+        public function selectProductoInventario($codProducto)
+        {
+            $sqlInventario="SELECT * FROM `TBL_INVENTARIO` WHERE COD_PRODUCTO= '$codProducto'";
+            
+            $requestInventario = $this->select($sqlInventario);
+    
+            
+            $request = $requestInventario;
+          
+          
+            return $request;
+        }
+        public function updateStock(int $productoid, int $stock){
+
+			$this->con = new Mysql();
+			$this->productoid=$productoid;
+			$this->stock=$stock;
+			/* $sql = "SELECT * FROM categoria WHERE nombre = '{$this->strCategoria}' AND idcategoria != $this->intIdcategoria";
+			$request = $this->select_all($sql); */
+			
+			if(empty($request))
+			{
+				//$sql = "UPDATE producto SET stock = ? WHERE idproducto = $this->productoid "; 	
+				$sql="CALL INVENTARIO(?,'U',?)";
+				$arrData = array($this->stock,$this->productoid);
+				$request = $this->con->update($sql,$arrData);
+				
+			}else{
+				$request = false;
+			}
+			return $request;
+		}
+        public function updateCantVenta(int $productoid, int $stock){
+
+            $this->con = new Mysql();
+            $this->productoid=$productoid;
+            $this->stock=$stock;
+            /* $sql = "SELECT * FROM categoria WHERE nombre = '{$this->strCategoria}' AND idcategoria != $this->intIdcategoria";
+            $request = $this->select_all($sql); */
+            
+            if(empty($request))
+            {
+                //$sql = "UPDATE producto SET stock = ? WHERE idproducto = $this->productoid "; 	
+                $sql="CALL INVENTARIO(?,'A',?)";
+                $arrData = array($this->stock,$this->productoid);
+                $request = $this->con->update($sql,$arrData);
+                
+            }else{
+                $request = false;
+            }
+            return $request;
+        }
         public function selectTransPaypal(string $idtransaccion, $idpersona = NULL){
 			$busqueda = "";
             $requestData="";
