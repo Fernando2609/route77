@@ -78,7 +78,7 @@ $("#fileBD").on("change", function () {
    } else {
      fechaArray = namefile[5].split("_");
    }
-  
+  console.log(fechaArray);
    var horaArray = fechaArray[3].match(/.{1,2}/g); 
    dia = new Date(
      fechaArray[2] + " " + horaArray[0] + ":" + horaArray[1] + ":" + horaArray[2] + ":"
