@@ -257,7 +257,7 @@ descripción:       Tienda virtual presentada a los clientes , que muestra toda 
                     {
                          $cantCarrito+=$pro['cantidad'];
                          $subtotal+=$pro['cantidad']*$pro['precio'];
-                         if ($subtotal>=datosEmpresa()['Empresa']['Empresa']['Empresa']['PEDIDO_MINIMO']) {
+                         if ($subtotal>=datosEmpresa()['Empresa']['PEDIDO_MINIMO']) {
                             $envio=0;
                         }else if ($subtotal<datosEmpresa()['Empresa']['PEDIDO_MINIMO']) {
                          $envio=datosEmpresa()['Empresa']['COSTO_ENVIO'];   

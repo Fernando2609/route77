@@ -125,6 +125,7 @@ const BASE_URL="https://estacionroute77.com";
 	const MPÁGINAS= 15;
 	const MBACKUP= 16;
 	const MBITACORA= 17;
+	const MPREGUNTAS= 18;
 
 	//Roles
 	const RADMINISTRADOR = 1;
