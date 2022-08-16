@@ -133,7 +133,7 @@ class LoginModel extends Mysql{
             public function datosEmpresa(){
                 
              
-                $sqlEmpresa = "call CRUD_EMPRESA(null,null,null,null,null,null,null,null,null,null,null,null,null,'V',null)";
+                $sqlEmpresa = "call CRUD_EMPRESA(null,null,null,null,null,null,null,null,null,null,null,null,null,null,'V',null)";
                 $requestEmpresa = $this->select($sqlEmpresa);
 
                 $sqlRedSocial = "CALL CRUD_REDES_SOCIALES(1,null,null,'V',null)";
@@ -158,8 +158,8 @@ class LoginModel extends Mysql{
             }
             public function confirmRequest(string $email, int $pregunta, string $respuesta){
 			
-                $sql= "SELECT * from tbl_personas p 
-                INNER JOIN tbl_preguntas_x_usuario pu on pu.COD_USUARIO= p.COD_PERSONA
+                $sql= "SELECT * from TBL_PERSONAS p 
+                INNER JOIN TBL_PREGUNTAS_X_USUARIO pu on pu.COD_USUARIO= p.COD_PERSONA
                 WHERE p.EMAIL='$email' and pu.COD_PREGUNTA=$pregunta and pu.RESPUESTA='$respuesta'";
                 $request = $this->select($sql); 
               

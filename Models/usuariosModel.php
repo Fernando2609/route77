@@ -321,6 +321,54 @@ descripción:       Gestiona todos los usuarios del sistema
 			$request = $this->update($sql,$arrData);
 		    return $request;
 		}
+		public function selectPreguntas()
+    {
+        $sql = "SELECT COD_PREGUNTA, PREGUNTA
+					FROM TBL_PREGUNTAS";
+        /*$sql = "CALL CRUD_REDES_SOCIALES(1,null,null,'V',null)";*/
+        $request = $this->select_all($sql);
+        return $request;
+    }
+
+	public function updatePregunta(int $idUsuario, string $Pregunta, string $respuesta)
+		{
+			
+			
+				$sql="CALL CRUD_USUARIO(?,?,null,?,null,null,?,null,null,null,null,null,?,'C',$this->intIdUsuario)";
+				$arrData = array(
+								$this->strNombre,
+								$this->strApellido,
+								//$this->strEmail,
+								$this->strPassword,
+								
+								$this->intTelefono,
+								$this->intUser
+								);
+			
+			$request = $this->update($sql,$arrData);
+		    return $request;
+		}
+		public function insertPregunta(int $user,int $pregunta,string $respuesta)
+			{
+				
+				$query_insert="INSERT INTO `TBL_PREGUNTAS_X_USUARIO` (`COD_PREGUNTA`, `COD_USUARIO`, `RESPUESTA`) VALUES (?, ?, ?)";
+				$arrData = array($pregunta,$user,$respuesta);
+				$request_insert = $this->insert($query_insert,$arrData);
+				$sql = "SELECT last_insert_id()";
+				$request_ID = $this->select($sql);
+				$return = $request_ID['last_insert_id()'];
+
+				
+				return $return;
+			}
+			public function deletePregunta(int $usuario)
+			{
+			
+				$sql = "DELETE FROM TBL_PREGUNTAS_X_USUARIO WHERE COD_USUARIO = $usuario"; 
+			
+				$request = $this->select_all($sql);
+				return $request;
+			}
     }
 
 ?>

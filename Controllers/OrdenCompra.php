@@ -95,7 +95,7 @@ class OrdenCompra extends Controllers{
                 $arrTabla=array();
                 $subtotal=0;
                 $total=0;
-                $iva=15;
+                $iva=datosEmpresa()['Empresa']['ISV'];
                 
                 //$user=intval($_SESSION['idUser']);
                 $arrData = $this->model->selectProducto($idproducto);
@@ -236,7 +236,7 @@ class OrdenCompra extends Controllers{
 
 
    public function procesarCompra(){
-  
+    
     if ($_POST){
      
         $personaid=$_SESSION['idUser'];
@@ -244,7 +244,7 @@ class OrdenCompra extends Controllers{
         $factura=intval($_POST['txtFactura']);
         $idProveedor=intval($_POST['idProveedor']);
         $checkISV=$_POST['checkISV'];
-        $isv=15;
+        $isv=datosEmpresa()['Empresa']['ISV'];
         $total=0;
         $cantCompra=0;
         
@@ -278,15 +278,15 @@ class OrdenCompra extends Controllers{
                     foreach ($_SESSION['compraDetalle'] as $producto) {
                         
                         $productoid = $producto['idproducto'];
-                      
+                        $id=$this->model->selectID($productoid); 
                         $precio = $producto['precio'];
                         $cantidad = $producto['cantidad'];
                         $stock = $producto['stock'];
                         $cantCompra=$producto['cantCompra']+$cantidad;
                         $nuevoStock=$stock+$cantidad;
-                        $this->model->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
+                        $this->model->insertDetalle($request_pedido,$id['COD_PRODUCTO'],$precio,$cantidad);
                          //Aumentar stock
-                         $id=$this->model->selectID($productoid); 
+                         //$id=$this->model->selectID($productoid); 
                       
                         //Aumentar stock
                         $this->model->updateStock($id['COD_PRODUCTO'],$nuevoStock); 

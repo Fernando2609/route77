@@ -110,6 +110,7 @@ descripción:       Muestra las compras realizadas por el usuario administrador
             $data['arrCompras'] = $this->model->selectCompra($idCompra);
             
             $data['page_title'] = "COMPRA# ".$data['arrCompras']['orden']['COD_ORDEN'];
+           
             //BIRACORA
             //Bitacora($_SESSION['idUser'],MCOMPRAS,"Consulta","Consultó la Orden Compra #".$idCompra);
             $this->views->getView($this, "orden", $data);

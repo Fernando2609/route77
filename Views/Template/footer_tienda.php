@@ -24,7 +24,7 @@
 			<div class="row">
 				<div class="col-sm-6 col-lg-4 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
-						Categorias
+						Categorías
 					</h4>
 					<?php if(count($catFotter) > 0){ ?>
 					<ul>
@@ -140,6 +140,7 @@
 				<p class="stext-107 cl6 txt-center">
 
 					Copyright ©<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+					
 
 					</p>
 			</div>

@@ -57,7 +57,7 @@
 
 						<div class="size-212 p-t-2">
 							<span class="mtext-110 cl2">
-								Direccion
+								Dirección
 							</span>
 
 							<p class="stext-115 cl6 size-213 p-t-18">

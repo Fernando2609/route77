@@ -257,7 +257,7 @@ descripción:       Tienda virtual presentada a los clientes , que muestra toda 
                     {
                          $cantCarrito+=$pro['cantidad'];
                          $subtotal+=$pro['cantidad']*$pro['precio'];
-                         if ($subtotal>=datosEmpresa()['Empresa']['Empresa']['Empresa']['PEDIDO_MINIMO']) {
+                         if ($subtotal>=datosEmpresa()['Empresa']['PEDIDO_MINIMO']) {
                             $envio=0;
                         }else if ($subtotal<datosEmpresa()['Empresa']['PEDIDO_MINIMO']) {
                          $envio=datosEmpresa()['Empresa']['COSTO_ENVIO'];   
@@ -567,14 +567,14 @@ descripción:       Tienda virtual presentada a los clientes , que muestra toda 
                                         $nuevoStock=$stock-$cantidad;
                                         $cantVenta=$producto['cantVenta']+$cantidad;
                                         $this->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
-                                        
+                                       
                                         //Disminuir stock
                                          $this->updateStock($productoid,$nuevoStock);
                                         //aumentar cantiad vendida
                                         $this->updateCantVenta($productoid,$cantVenta); 
 
                                     }
-                           
+                               
                                     $infoOrden=$this->getPedido($request_pedido);
                                    
                                     $dataEmailOrden=array('asunto'=>"Se ha creado la orden No.".$request_pedido,
@@ -624,10 +624,14 @@ descripción:       Tienda virtual presentada a los clientes , que muestra toda 
                                         $precio = $producto['precio'];
                                         $cantidad = $producto['cantidad'];
                                         $stock = $producto['stock'];
+                                        $cantVenta=$producto['cantVenta']+$cantidad;
                                         $nuevoStock=$stock-$cantidad;
                                         $this->insertDetalle($request_pedido,$productoid,$precio,$cantidad);
                                         //Disminuir stock
                                         $this->updateStock($productoid,$nuevoStock); 
+
+                                        //aumentar cantiad vendida
+                                        $this->updateCantVenta($productoid,$cantVenta); 
                                     }
                                     $infoOrden=$this->getPedido($request_pedido);
                                     $dataEmailOrden = array('asunto' => "Se ha creado la orden No.".$request_pedido,

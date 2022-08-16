@@ -84,7 +84,12 @@ descripción:       Gestiona todos los usuarios del sistema
                         if ($intStatus==ACTIVO) {
                             $intStatus=NUEVO;
                         }
-                        $strPassword =  empty($_POST['txtPassword']) ? hash("SHA256",passGenerator()) : hash("SHA256",$_POST['txtPassword']);
+
+                        $strPasswordDesencript =  empty($_POST['txtPassword']) ? passGenerator() : $_POST['txtPassword'];
+                        
+                        $strPassword =  hash("SHA256",$strPasswordDesencript);
+
+                        
                         if($_SESSION['permisosMod']['w']){
                         $request_user = $this->model->insertUsuario($strIdentificacion,
                                                                                     $strNombre, 
@@ -108,7 +113,9 @@ descripción:       Gestiona todos los usuarios del sistema
                         if($_SESSION['permisosMod']['u']){
                         // ! Seleccionar Datos antes de la actualización
                         $arrDataOld= $this->model->selectUsuario($idUsuario);
-                        
+                        if ($arrDataOld['COD_STATUS']==NUEVO) {
+                            $intStatus=NUEVO;
+                        }
                        
                         $request_user = $this->model->updateUsuario($idUsuario,$strIdentificacion,
                                                                                     $strNombre, 
@@ -226,6 +233,13 @@ descripción:       Gestiona todos los usuarios del sistema
                     if($request_user > 0 ){
                         if ($option==1) {
                             $arrResponse = array("status" => true, "msg" => 'Usuario Guardado Correctamente.');
+                            $nombreUsuario = $strNombre.' '.$strApellido;
+                        $dataUsuario = array(
+                            'nombreUsuario' => $nombreUsuario,
+                            'email' => $strEmail,
+                            'password' => $strPasswordDesencript,
+                            'asunto' => 'Bienvenido a tu Tienda en Línea');
+                        sendEmail($dataUsuario, 'email_bienvenida2');
                              //Selecciona los datos del usuario Insertado  
                              $arrData= $this->model->selectUsuario2($request_user);
                              //BIRACORA
@@ -361,6 +375,7 @@ descripción:       Gestiona todos los usuarios del sistema
         public function putPerfil()
         {
           
+          
             if ($_POST) {
                 $idUsuario = $_SESSION['idUser'];
                 $codRol=$_SESSION['userData']['COD_ROL'];
@@ -372,6 +387,7 @@ descripción:       Gestiona todos los usuarios del sistema
 				}else{
                     $idUsuario = $_SESSION['idUser'];
                     $strIdentificacion =  empty($_POST['txtIdentificacion']) ? "":  strClean($_POST['txtIdentificacion']);
+
                     if ($codRol==RCLIENTES) {
                         	/* $strIdentificacion = strClean($_POST['txtIdentificacion']); */
                         $strNombre = ucwords(strClean($_POST['txtNombre']));
@@ -379,7 +395,11 @@ descripción:       Gestiona todos los usuarios del sistema
                         $intTelefono = intval(strClean($_POST['txtTelefono']));
                     }
 				
-             
+                    $strPregunta =  empty($_POST['listPreguntas']) ? "":  strClean($_POST['listPreguntas']);
+
+                    $strRespuesta =  empty($_POST['txtRespuesta']) ? "":  strClean($_POST['txtRespuesta']);
+
+
                     $intGenero =  empty($_POST['listGenero']) ? "":   intval(strClean($_POST['listGenero']));
                    /*  $intGenero = intval(strClean($_POST['listGenero'])); */
                    $intSucursal =  empty($_POST['listSucursal']) ? "": intval(strClean($_POST['listSucursal']));
@@ -408,12 +428,18 @@ descripción:       Gestiona todos los usuarios del sistema
                         //$intSucursal,
                         $strPassword,$user);
                    }
+                   $request_user2=0;
+                   if (!empty($strRespuesta)) {
+                    $this->model->deletePregunta($user);
+                    $request_user2=$this->model->insertPregunta($user,$strPregunta,$strRespuesta);
+                   }
                    
                    
                    
                     if($request_user)
 					{
 						sessionUser($_SESSION['idUser']);
+                        
 						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
 					}else{
 						$arrResponse = array("status" => false, "msg" => 'No es posible actualizar los datos.');
@@ -425,6 +451,22 @@ descripción:       Gestiona todos los usuarios del sistema
 
            
             die();
+        }
+
+        //Funcion para traer La Sucursal
+        public function getSelectPreguntas()
+        {
+            $htmlOptions = "";
+            $arrData = $this->model->selectPreguntas();
+            if(count($arrData) > 0 ){
+                for ($i=0; $i < count($arrData); $i++) { 
+                
+                    $htmlOptions .= '<option value="'.$arrData[$i]['COD_PREGUNTA'].'">'.$arrData[$i]['PREGUNTA'].'</option>';
+                    
+                }
+            }
+            echo $htmlOptions;
+            die();		
         }
     
     }

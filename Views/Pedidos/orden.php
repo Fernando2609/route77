@@ -55,7 +55,7 @@
                                 <div class="col-sm-4 invoice-col">
 
                                     <address>
-                                        <strong>NOMBRE_EMPRESA</strong><br>
+                                        <strong>NOMBRE EMPRESA</strong><br>
                                         <?= DIRECCION ?><br>
                                         <?= TELEMPRESA ?><br>
                                         <?= EMAIL_EMPRESA ?><br>

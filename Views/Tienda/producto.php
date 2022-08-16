@@ -80,7 +80,7 @@ $urlShared = base_url()."/tienda/producto/".$arrProducto['COD_PRODUCTO']."/".$ar
                         <?= $arrProducto['DESCRIPCION']; ?>
                     </p> 
                     <p class="stext-102 cl3 p-t-23">
-                    Unidades Disponibles <?= $arrProducto['STOCK']; ?>
+                    Unidades Disponibles: <?= $arrProducto['STOCK']; ?>
                     </p> 
 
 
