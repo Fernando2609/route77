@@ -291,7 +291,7 @@
           </li>
          <?php } ?>
    
-         <?php if(!empty($_SESSION['permisos'][MPRODUCTOS]['r']) || !empty($_SESSION['permisos'][MCATEGORIAS]['r'])){ ?>
+         <?php if(!empty($_SESSION['permisos'][MBITACORA]['r']) || !empty($_SESSION['permisos'][MBACKUP]['r']) || !empty($_SESSION['permisos'][MPREGUNTAS]['r'])){ ?>
             <li class="nav-item">
             <a href="" class="nav-link">
              <i class=" nav-icon fas fa-shield-alt"></i>

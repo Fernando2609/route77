@@ -126,7 +126,7 @@
               <td id="celCreadoPor">Larry</td>
             </tr>
             <tr>
-              <td>Ult. Vez Modificado: </td>
+              <td>Últ. Vez Modificado: </td>
               <td id="celDateModificado">Larry</td>
             </tr>
             <tr>
@@ -134,7 +134,7 @@
               <td id="celModPor">Larry</td>
             </tr>
             <tr>
-              <td>Ult. Vez Login:</td>
+              <td>Últ. Vez Login:</td>
               <td id="celDateLogin">Larry</td>
             </tr>
            

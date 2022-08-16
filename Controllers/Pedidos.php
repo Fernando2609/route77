@@ -1,4 +1,37 @@
 <?php
+/*
+-----------------------------------------------------------------------
+Universidad Nacional Autónoma de Honduras (UNAH)
+    Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+                Segundo Periodo 2022
+
+
+Equipo:
+Jose Fernando Ortiz Santos .......... (jfortizs@unah.hn)
+Hugo Alejandro Paz Izaguirre..........(hugo.paz@unah.hn)
+Kevin Alfredo Rodríguez Zúniga........(karodriguezz@unah.hn)
+Leonela Yasmin Pineda Barahona........(lypineda@unah)
+Reynaldo Jafet Giron Tercero..........(reynaldo.giron@unah.hn)
+Gabriela Giselh Maradiaga Amador......(ggmaradiaga@unah.hn)
+Alejandrino Victor García Bustillo....(alejandrino.garcia@unah.hn)
+
+Catedrático:
+Lic. Karla Melisa Garcia Pineda 
+
+---------------------------------------------------------------------
+
+Programa:          Módulo de Pedidos
+Fecha:             10-Abril-2022
+Programador:       Alejandrino Victor García Bustillo
+descripción:       Módulo que administra los pedidos realizados por los
+                   clientes desde la tienda 
+
+-----------------------------------------------------------------------*/
+
+
+
 require_once("Models/TTipoPago.php");
 require 'Libraries/Excel/vendor/autoload.php';
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -154,11 +187,35 @@ require 'Libraries/Excel/vendor/autoload.php';
                 die();
             }
             public function setReembolso(){
+               
                 if($_POST){
                     if($_SESSION['permisosMod']['u'] and $_SESSION['userData']['COD_ROL'] != RCLIENTES){
                         //dep($_POST);
                         $transaccion = strClean($_POST['idtransaccion']);
                         $observacion = strClean($_POST['observacion']); 
+                        $checkReembolso=strClean($_POST['reembolso']);
+                        if ($checkReembolso) {
+                            $requestReembolso=$this->model->selectPedidoPaypal($transaccion);
+
+                            foreach ($requestReembolso['detalle'] as $producto) {
+                                
+                             
+                                $idProducto=$producto['COD_PRODUCTO'];
+                                $cantidad=$producto['CANTIDAD'];
+                                $inventario=$this->model->selectProductoInventario($idProducto);
+                                
+                                $stock=$inventario['STOCK'];
+                                $cantVenta=$inventario['CANT_VENTA']-$cantidad;
+                                $nuevoStock=$stock+$cantidad;
+                                $this->model->updateStock($idProducto,$nuevoStock); 
+                                //aumentar cantiad vendida
+                                $this->model->updateCantVenta($idProducto,$cantVenta); 
+                                
+        
+                            }
+
+                        }
+                       
                         $requestTransaccion = $this->model->reembolsoPaypal($transaccion,$observacion);
                         if($requestTransaccion){
                              //BIRACORA

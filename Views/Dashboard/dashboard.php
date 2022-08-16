@@ -98,7 +98,7 @@
                     <div class="icon">
                       <i class=" nav-icon fas fa-store"></i>
                     </div>
-                    <a href="#" class="small-box-footer">Más Información <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?= base_url() ?>/productos" class="small-box-footer">Más Información <i class="fas fa-arrow-circle-right"></i></a>
                   </div>
               
               </div>

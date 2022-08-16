@@ -1,3 +1,33 @@
+/*
+-----------------------------------------------------------------------
+Universidad Nacional Autónoma de Honduras (UNAH)
+    Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+                Segundo Periodo 2022
+
+
+Equipo:
+Jose Fernando Ortiz Santos .......... (jfortizs@unah.hn)
+Hugo Alejandro Paz Izaguirre..........(hugo.paz@unah.hn)
+Kevin Alfredo Rodríguez Zúniga........(karodriguezz@unah.hn)
+Leonela Yasmin Pineda Barahona........(lypineda@unah)
+Reynaldo Jafet Giron Tercero..........(reynaldo.giron@unah.hn)
+Gabriela Giselh Maradiaga Amador......(ggmaradiaga@unah.hn)
+Alejandrino Victor García Bustillo....(alejandrino.garcia@unah.hn)
+
+Catedrático:
+Lic. Karla Melisa Garcia Pineda 
+
+---------------------------------------------------------------------
+
+Programa:          Módulo Empresa
+Fecha:             11-Abril-2022
+Programador:       Reynaldo Jafet Giron Tercero
+descripción:       Módulo que gestiona los parametros del sistema 
+
+-----------------------------------------------------------------------*/
+
 let tableEmpresa;
 let rowTable="";
 let divLoading = document.querySelector("#divLoading");
@@ -36,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             exportOptions: {
               margin: [0, 20, 20, 20],
-              columns: [0, 1, 2, 3, 4, 5, 6],
+              columns: [0, 1, 2, 3, 4, 5],
               modifier: {},
             },
           },
@@ -63,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ],
             exportOptions: {
               margin: [0, 20, 20, 20],
-              columns: [0, 1, 2, 3, 4, 5, 6],
+              columns: [0, 1, 2, 3, 4, 5],
               modifier: {},
             },
           },
@@ -172,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             exportOptions: {
               margin: [0, 20, 20, 20],
-              columns: [0, 1, 2, 3, 4, 5, 6],
+              columns: [0, 1, 2, 3, 4, 5],
               modifier: {},
             },
           },
@@ -183,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
             className: "btn btn-info mr-1 mb-2",
             exportOptions: {
               margin: [0, 20, 20, 20],
-              columns: [0, 1, 2, 3, 4, 5, 6],
+              columns: [0, 1, 2, 3, 4, 5],
               modifier: {},
             },
           },
@@ -194,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
             className: "btn btn-warning mr-1 mb-2",
             exportOptions: {
               margin: [0, 20, 20, 20],
-              columns: [0, 1, 2, 3, 4, 5, 6],
+              columns: [0, 1, 2, 3, 4, 5],
               modifier: {},
             },
           },

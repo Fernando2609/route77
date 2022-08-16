@@ -1040,7 +1040,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 /*---------------------------------------------*/
 .header-cart-item-txt {
-  width: calc(100% - 80px);
+  width: calc(100% - 125px);
 }
 
 .header-cart-item-name {
@@ -3446,4 +3446,18 @@ input.num-product::-webkit-inner-spin-button {
  } */
  .pro{
   width: 50%;
+ }
+ .seguirComprando{
+  background-color: #075289;
+ }
+ .seguirComprando:hover{
+  border-color: #81B031;
+  background-color: #81B031;
+  color: #fff;
+ }
+ .borrar{
+  cursor: pointer;
+ }
+ .borrar:hover{
+  color: red;
  }

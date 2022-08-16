@@ -107,10 +107,19 @@ class PreguntasModel extends Mysql{
     public function deletePreguntas(int $Cod)
     {
         $this->idPreguntas = $Cod;
-        $sql = "DELETE  FROM TBL_PREGUNTAS WHERE COD_PREGUNTA = $this->idPreguntas";
+ 
+        $sql="SELECT * FROM `TBL_PREGUNTAS_X_USUARIO` WHERE COD_PREGUNTA=$Cod";
+        $request = $this->select_all($sql);
+        if(empty($request))
+		{
+            $sql = "DELETE  FROM TBL_PREGUNTAS WHERE COD_PREGUNTA = $this->idPreguntas";
         
-        $arrData = array($this->idPreguntas);
-        $request = $this->Delete($sql, $arrData);
+            $arrData = array($this->idPreguntas);
+            $request = $this->Delete($sql, $arrData);
+            
+        }else{
+            $request=false;
+        }
         return $request;
     }
 

@@ -1,4 +1,34 @@
 <?php  
+/*
+-----------------------------------------------------------------------
+Universidad Nacional Autónoma de Honduras (UNAH)
+    Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+                Segundo Periodo 2022
+
+
+Equipo:
+Jose Fernando Ortiz Santos .......... (jfortizs@unah.hn)
+Hugo Alejandro Paz Izaguirre..........(hugo.paz@unah.hn)
+Kevin Alfredo Rodríguez Zúniga........(karodriguezz@unah.hn)
+Leonela Yasmin Pineda Barahona........(lypineda@unah)
+Reynaldo Jafet Giron Tercero..........(reynaldo.giron@unah.hn)
+Gabriela Giselh Maradiaga Amador......(ggmaradiaga@unah.hn)
+Alejandrino Victor García Bustillo....(alejandrino.garcia@unah.hn)
+
+Catedrático:
+Lic. Karla Melisa Garcia Pineda 
+
+---------------------------------------------------------------------
+
+Programa:          Módulo de Pedidos
+Fecha:             10-Abril-2022
+Programador:       Alejandrino Victor García Bustillo
+descripción:       Módulo que administra los pedidos realizados por los
+                   clientes desde la tienda 
+
+-----------------------------------------------------------------------*/
     class PedidosModel extends Mysql{
 
         private $objCategoria;
@@ -90,6 +120,76 @@
                                         'detalle'=> $requestProductos);
                     }
                     return $request;
+        }
+
+        public function selectPedidoPaypal($transaccion)
+        {
+            $sqlPEDIDO="SELECT * FROM `TBL_PEDIDO` WHERE COD_TRANSACCION_PAYPAL= '$transaccion'";
+            
+            $requestPedido = $this->select($sqlPEDIDO);
+           
+
+            $sqlDetalle="SELECT * FROM `TBL_DETALLE_PEDIDO` WHERE COD_PEDIDO={$requestPedido['COD_PEDIDO']}";
+            
+            $requestDetalle = $this->select_all($sqlDetalle);
+            
+            $request = array('pedido'=> $requestPedido, 'detalle'=> $requestDetalle);
+          
+         
+            
+            return $request;
+        }
+        public function selectProductoInventario($codProducto)
+        {
+            $sqlInventario="SELECT * FROM `TBL_INVENTARIO` WHERE COD_PRODUCTO= '$codProducto'";
+            
+            $requestInventario = $this->select($sqlInventario);
+    
+            
+            $request = $requestInventario;
+          
+          
+            return $request;
+        }
+        public function updateStock(int $productoid, int $stock){
+
+			$this->con = new Mysql();
+			$this->productoid=$productoid;
+			$this->stock=$stock;
+			/* $sql = "SELECT * FROM categoria WHERE nombre = '{$this->strCategoria}' AND idcategoria != $this->intIdcategoria";
+			$request = $this->select_all($sql); */
+			
+			if(empty($request))
+			{
+				//$sql = "UPDATE producto SET stock = ? WHERE idproducto = $this->productoid "; 	
+				$sql="CALL INVENTARIO(?,'U',?)";
+				$arrData = array($this->stock,$this->productoid);
+				$request = $this->con->update($sql,$arrData);
+				
+			}else{
+				$request = false;
+			}
+			return $request;
+		}
+        public function updateCantVenta(int $productoid, int $stock){
+
+            $this->con = new Mysql();
+            $this->productoid=$productoid;
+            $this->stock=$stock;
+            /* $sql = "SELECT * FROM categoria WHERE nombre = '{$this->strCategoria}' AND idcategoria != $this->intIdcategoria";
+            $request = $this->select_all($sql); */
+            
+            if(empty($request))
+            {
+                //$sql = "UPDATE producto SET stock = ? WHERE idproducto = $this->productoid "; 	
+                $sql="CALL INVENTARIO(?,'A',?)";
+                $arrData = array($this->stock,$this->productoid);
+                $request = $this->con->update($sql,$arrData);
+                
+            }else{
+                $request = false;
+            }
+            return $request;
         }
         public function selectTransPaypal(string $idtransaccion, $idpersona = NULL){
 			$busqueda = "";
@@ -196,7 +296,7 @@
             return $request;
         }
         public function selectProductosVendido(int $codigo){
-            $sqlPEDIDO="SELECT * FROM `tbl_detalle_pedido` WHERE COD_PEDIDO={$codigo}";
+            $sqlPEDIDO="SELECT * FROM `TBL_DETALLE_PEDIDO` WHERE COD_PEDIDO={$codigo}";
             
             $requestPedido = $this->select_all($sqlPEDIDO);
             $request = $requestPedido;

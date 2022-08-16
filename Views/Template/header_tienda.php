@@ -217,7 +217,7 @@
 
 							
 							<li >
-								<a class="js-show-categoria" href="javascript:void(0);">Categorias <ion-icon style="font-size: 12px;" name="pricetags"></ion-icon></a>
+								<a class="js-show-categoria" href="javascript:void(0);">Categorías <ion-icon style="font-size: 12px;" name="pricetags"></ion-icon></a>
                				 </li>
 
 							<li>
@@ -338,7 +338,7 @@
 					<a href="<?= base_url(); ?>">Inicio</a>
 				</li>
 				<li>
-					<a class="js-show-categoria" href="#">Categorias</a>
+					<a class="js-show-categoria" href="#">Categorías</a>
 				</li>
 				<li>
 					<a href="<?= base_url(); ?>/tienda">Tienda</a>
