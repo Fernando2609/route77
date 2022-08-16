@@ -87,6 +87,10 @@
                             <label for="txtGerenteGeneral">Gerente General<span class="required"> *</span></label>
                             <input type="text" class="form-control valid validText" id="txtGerenteGeneral" name="txtGerenteGeneral" required="">
                         </div>
+                        <div class="form-group col-md-6">
+                            <label for="txtISV">ISV %<span class="required"> *</span></label>
+                            <input type="text" class="form-control valid validNumber" id="txtISV" name="txtISV" required="" onkeypress="return controlTag(event)";>
+                        </div>
                     </div>
 
             </div>
@@ -155,6 +159,10 @@
                         <tr>
                             <td>RTN</td>
                             <td id="celRTN">Nery</td>
+                        </tr>
+                        <tr>
+                            <td>ISV %</td>
+                            <td id="celISV">Nery</td>
                         </tr>
                         <tr>
                             <td>Email Pedidos</td>

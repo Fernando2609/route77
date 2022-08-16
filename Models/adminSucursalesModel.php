@@ -1,5 +1,36 @@
 <?php  
-    //Fernadno 23/10/2021
+/*
+-----------------------------------------------------------------------
+Universidad Nacional Autónoma de Honduras (UNAH)
+    Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+                Segundo Periodo 2022
+
+
+Equipo:
+Jose Fernando Ortiz Santos .......... (jfortizs@unah.hn)
+Hugo Alejandro Paz Izaguirre..........(hugo.paz@unah.hn)
+Kevin Alfredo Rodríguez Zúniga........(karodriguezz@unah.hn)
+Leonela Yasmin Pineda Barahona........(lypineda@unah)
+Reynaldo Jafet Giron Tercero..........(reynaldo.giron@unah.hn)
+Gabriela Giselh Maradiaga Amador......(ggmaradiaga@unah.hn)
+Alejandrino Victor García Bustillo....(alejandrino.garcia@unah.hn)
+
+Catedrático:
+Lic. Karla Melisa Garcia Pineda 
+
+---------------------------------------------------------------------
+
+Programa:          Módulo de sucursales
+Fecha:             03-Abril-2022
+Programador:       Leonela Yasmin Pineda Barahona
+descripción:       Mantenimiento de la información de las sucursales 
+                   pertenecientes a la empresa
+
+-----------------------------------------------------------------------*/
+
+   
     class adminSucursalesModel extends Mysql{
 		private $intIdSucursal;
         private $strNombre;

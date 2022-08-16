@@ -39,7 +39,7 @@
               <td id="celTipoUsuario">Larry</td>
             </tr> -->
             
-              <td>Cantidad Minima</td>
+              <td>Cantidad Mínima</td>
               <td id="celCant_Min">Larry</td>
             </tr>
          

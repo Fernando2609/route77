@@ -28,7 +28,7 @@ $codCiudad =  $cl->address->country_code;
           <input type="hidden" id="idtransaccion" value="<?= $idTransaccion ?>">
           <tbody>
             <tr>
-              <td>Transaccion:</td>
+              <td>Transacción:</td>
               <td> <?= $idTransaccion ?></td>
             </tr>
             <tr>
@@ -44,12 +44,26 @@ $codCiudad =  $cl->address->country_code;
               <td><?= $importeNeto.' '.$moneda ?></td>
             </tr>
             <tr>
-              <td>Comision Reembolso por Paypal:</td>
+              <td>Comisión Reembolso por Paypal:</td>
               <td><?= $comision.' '.$moneda ?></td>
             </tr>
             <tr>
-              <td>Observacion:</td>
+              <td>Observación:</td>
               <td > <textarea id="txtObservacion" class="form-control"></textarea> </td>
+            </tr>
+            <tr >
+              
+              <td colspan="2">
+              <div class="d-flex">
+              Reembolsar Producto:
+              <div class="toggle-flip ml-3">
+                <label>
+                  <input type="checkbox" name="checkReembolso" id="checkReembolso" class="selectAll"><span class="flip-indecator" data-toggle-on="Si"  data-toggle-off="No"></span>
+                </label>
+              </div>
+              </div>
+              </td>
+              
             </tr>
           </tbody>
         </table>

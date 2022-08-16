@@ -1,4 +1,36 @@
 <?php
+/*
+-----------------------------------------------------------------------
+Universidad Nacional Autónoma de Honduras (UNAH)
+    Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+                Segundo Periodo 2022
+
+
+Equipo:
+Jose Fernando Ortiz Santos .......... (jfortizs@unah.hn)
+Hugo Alejandro Paz Izaguirre..........(hugo.paz@unah.hn)
+Kevin Alfredo Rodríguez Zúniga........(karodriguezz@unah.hn)
+Leonela Yasmin Pineda Barahona........(lypineda@unah)
+Reynaldo Jafet Giron Tercero..........(reynaldo.giron@unah.hn)
+Gabriela Giselh Maradiaga Amador......(ggmaradiaga@unah.hn)
+Alejandrino Victor García Bustillo....(alejandrino.garcia@unah.hn)
+
+Catedrático:
+Lic. Karla Melisa Garcia Pineda 
+
+---------------------------------------------------------------------
+
+Programa:          Módulo Proveedores
+Fecha:             20-Abril-2022
+Programador:       Hugo Alejandro Paz Izaguirre
+descripción:       Administra los proveedores de la tienda
+
+-----------------------------------------------------------------------*/
+
+
+
 class Proveedores extends Controllers{
     public function __construct()
     {

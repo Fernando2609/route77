@@ -67,7 +67,7 @@ getModal('modalInventario', $data);
                             <div class="form-group mr-4">
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="checkISV">
-                                    <label class="custom-control-label" for="checkISV">15%</label>
+                                    <label class="custom-control-label" for="checkISV"><?=  datosEmpresa()['Empresa']['ISV']  ?>%</label>
                                 </div>
                             </div>
                                 <button id="btn_facturar_compra" class="btn btn-success notBlock" type="submit"><i class="fa fa-fw fa-lg fa-check-circle "></i><span id="btnText">Generar Compra</span></button>&nbsp;&nbsp;&nbsp;
@@ -81,7 +81,7 @@ getModal('modalInventario', $data);
                                     <thead>
                                         <tr>
                                             <th style="width: 100px">Código</th>
-                                            <th style="width: 400px">Nombre</th>
+                                            <th style="width: 400px; padding-left: 30px;">Nombre</th>
                                             <th>Categoría</th>
                                             <th style="width: 100px">Cantidad</th>
                                             <th style="width: 100px">Precio</th>
@@ -89,12 +89,12 @@ getModal('modalInventario', $data);
                                             <th>Acción</th>
                                         </tr>
                                         <tr>
-                                            <td><input class="w-100 form-control valid validNumber" type="text" name="idProducto" id="idProducto" onkeypress="return controlTag(event);"></td>
-                                            <td id="nombre">-</td>
+                                            <td style="width: 17rem;"><input class="w-100 form-control valid validNumber" type="text" name="idProducto" id="idProducto" onkeypress="return controlTag(event);"></td>
+                                            <td style="padding-left: 35px;" id="nombre">-</td>
                                             <td id="txtCategoria">-</td>
                                             <td><input type="text" class="w-100  form-control validNumber " name="txtCantidad" id="txtCantidad" value="0" min="1" disabled  onkeypress="return controlTagPrecio(event);"></td>
-                                            <td><input type="text" class="w-100  form-control valid validNumberPrecio" name="txtPrecio" id="txtPrecio" value="0" min="1" disabled  onkeypress="return controlTagPrecio(event);"></td>
-                                            <td id="txtPrecioTotal">0.00</td>
+                                            <td ><input type="text" class="w-100  form-control valid validNumberPrecio" name="txtPrecio" id="txtPrecio" value="0" min="1" disabled  onkeypress="return controlTagPrecio(event);"></td>
+                                            <td class="text-right" id="txtPrecioTotal">0.00</td>
                                             <td ><a class="notBlock" id="add_product_Compra" class="link_add"><i class="fa fa-plus"></i>Agregar</a></td>
                                         </tr>
                                         <tr>

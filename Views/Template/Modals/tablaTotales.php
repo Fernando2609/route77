@@ -1,7 +1,7 @@
 <?php
 $subtotal=0;
 $total=0;
-$iva=15;
+$iva=datosEmpresa()['Empresa']['ISV'];
 
 if (isset($_SESSION['compraDetalle']) and count($_SESSION['compraDetalle'])>0) {
 ?>
@@ -30,7 +30,7 @@ if (isset($_SESSION['compraDetalle']) and count($_SESSION['compraDetalle'])>0) {
         <td class="text-right"><?= SMONEY.' '. formatMoney($subtotal)  ?></td>
     </tr>
     <tr>
-        <td colspan="6" class="text-right">IVA (<?=  $iva  ?>%)</td>
+        <td colspan="6" class="text-right">ISV (<?=  $iva  ?>%)</td>
         <td class="text-right"><?= SMONEY.' '. formatMoney($impuesto)  ?></td>
     </tr>
     <tr>

@@ -1,4 +1,36 @@
 <?php
+/*
+-----------------------------------------------------------------------
+Universidad Nacional Autónoma de Honduras (UNAH)
+    Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+                Segundo Periodo 2022
+
+
+Equipo:
+Jose Fernando Ortiz Santos .......... (jfortizs@unah.hn)
+Hugo Alejandro Paz Izaguirre..........(hugo.paz@unah.hn)
+Kevin Alfredo Rodríguez Zúniga........(karodriguezz@unah.hn)
+Leonela Yasmin Pineda Barahona........(lypineda@unah)
+Reynaldo Jafet Giron Tercero..........(reynaldo.giron@unah.hn)
+Gabriela Giselh Maradiaga Amador......(ggmaradiaga@unah.hn)
+Alejandrino Victor García Bustillo....(alejandrino.garcia@unah.hn)
+
+Catedrático:
+Lic. Karla Melisa Garcia Pineda 
+
+---------------------------------------------------------------------
+
+Programa:          Módulo Empresa
+Fecha:             11-Abril-2022
+Programador:       Reynaldo Jafet Giron Tercero
+descripción:       Módulo que gestiona los parametros del sistema 
+
+-----------------------------------------------------------------------*/
+
+
+
 class Empresa extends Controllers{
         public function __construct()
         {
@@ -28,9 +60,9 @@ class Empresa extends Controllers{
         }
 
     public function setEmpresa(){ {
-        
+           
             if ($_POST) {
-                if (empty($_POST['txtNombreEmpresa']) || empty($_POST['txtDireccion']) || empty($_POST['txtRazonSocial']) || empty($_POST['txtEmail']) || empty($_POST['txtGerenteGeneral'])|| empty($_POST['txtCostoEnvio'])|| empty($_POST['txtRTN']) || empty($_POST['txtEmailPedidos'])|| empty($_POST['txtTelEmpresa'])|| empty($_POST['txtCelEmpresa'])|| empty($_POST['txtCatSlider'])|| empty($_POST['txtCatBanner']) || empty($_POST['txtPedidoMinimo'])) {
+                if (empty($_POST['txtNombreEmpresa']) || empty($_POST['txtDireccion']) || empty($_POST['txtRazonSocial']) || empty($_POST['txtEmail']) || empty($_POST['txtGerenteGeneral'])|| empty($_POST['txtCostoEnvio'])|| empty($_POST['txtRTN']) || empty($_POST['txtEmailPedidos'])|| empty($_POST['txtTelEmpresa'])|| empty($_POST['txtCelEmpresa'])|| empty($_POST['txtCatSlider'])|| empty($_POST['txtCatBanner']) || empty($_POST['txtPedidoMinimo'])|| empty($_POST['txtISV'])) {
                     $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
                 } else {
                     $idUsuario = intval($_POST['idUsuario']);
@@ -39,7 +71,7 @@ class Empresa extends Controllers{
                     $strRazonSocial = ucwords(strClean($_POST['txtRazonSocial']));
                     $strEmail = strtolower(strClean($_POST['txtEmail']));
                     $strGerenteGeneral = ucwords(strClean($_POST['txtGerenteGeneral']));
-
+                    $dblISV = strClean($_POST['txtISV']);
                     $intCostoEnvio = ucwords(strClean($_POST['txtCostoEnvio']));
                     $intPedidoMinimo = ucwords(strClean($_POST['txtPedidoMinimo']));
                     $strRTN = ucwords(strClean($_POST['txtRTN']));
@@ -82,7 +114,8 @@ class Empresa extends Controllers{
                                 $strTelEmpresa,
                                 $strCelEmpresa,
                                 $strCatSlider,
-                                $strCatBanner
+                                $strCatBanner,
+                                $dblISV
                             );
                              // ! datos despues de la actualización
                         $arrDataNew= $this->model->selectEmpresa($idUsuario);

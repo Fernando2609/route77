@@ -1,7 +1,7 @@
 
 <?php 
     headerAdmin($data); 
-    getModal('modalUsuarios', $data);
+    getModal('modalPreguntas', $data);
 ?>
     <!-- Content Header (Sección de Encabezado) -->
     <div class="content-wrapper">
@@ -35,22 +35,17 @@
               <div class="card"><!-- div card -->
                 <!-- Encabezado -->
                 <div class="card-header">
-                  <h2 class="card-title">Tabla de Usuarios</h2>
+                  <h2 class="card-title">Tabla de Preguntas</h2>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-body">
                   <!-- Tabla -->
-                  <table id="tableUsuarios" class="table table-hover table-bordered  dataTable dtr-inline collapsed" role="grid">
+                  <table id="tablePreguntas" class="table table-hover table-bordered  dataTable dtr-inline collapsed" role="grid">
                     <!-- Encabezado de la tabla-->
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
-                        <th>Rol</th>
-                        <th>Status</th>
+                        <th>Pregunta</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>

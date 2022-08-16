@@ -409,7 +409,7 @@ function fntdelItem(element) {
                             timerProgressBar: true
                           })
                     }else{
-                        element.parentNode.parentNode.remove();
+                        element.parentNode.parentNode.parentNode.remove();
                         document.querySelector("#subTotalCompra").innerHTML = objData.subTotal;
 	        			document.querySelector("#totalCompra").innerHTML = objData.total;
                         document.querySelector("#envio").innerHTML = objData.envio;
@@ -439,6 +439,88 @@ function fntdelItem(element) {
             }
     }
 }
+
+function fntdelItem2(element) {
+  element = element.nextSibling.nextSibling;
+  //console.log(element.nextSibling.nextSibling);
+  //console.log(element);
+  //Opcion 1 eliminar desde el modal
+  //Opcion 2 eliminar desde el carrito
+  let option = element.getAttribute("op");
+  let idpr = element.getAttribute("idpr");
+  if (option == 1 || option == 2) {
+    let request = window.XMLHttpRequest
+      ? new XMLHttpRequest()
+      : new ActiveXObject("Microsoft.XMLHTTP");
+    let ajaxUrl = base_url + "/Tienda/delCarrito";
+    let formData = new FormData();
+    formData.append("id", idpr);
+    formData.append("option", option);
+    request.open("POST", ajaxUrl, true);
+    request.send(formData);
+    request.onreadystatechange = function () {
+      if (request.readyState != 4) return;
+      if (request.status == 200) {
+        let objData = JSON.parse(request.responseText);
+        if (objData.status) {
+          if (option == 1) {
+            document.querySelector("#productoCarrito").innerHTML =
+              objData.htmlCarrito;
+            //document.querySelector(".cantCarrito").setAttribute("data-notify",objData.cantCarrito);
+            const cants = document.querySelectorAll(".cantCarrito");
+            cants.forEach((element) => {
+              element.setAttribute("data-notify", objData.cantCarrito);
+            });
+            Swal.fire({
+              toast: true,
+              iconColor: "white",
+              customClass: {
+                popup: "colored-toast",
+              },
+              position: "top-right",
+              icon: "info",
+              title: objData.msg,
+              showConfirmButton: false,
+              timer: 1500,
+              timerProgressBar: true,
+            });
+          } else {
+            element.parentNode.parentNode.parentNode.remove();
+            document.querySelector("#subTotalCompra").innerHTML =
+              objData.subTotal;
+            document.querySelector("#totalCompra").innerHTML = objData.total;
+            document.querySelector("#envio").innerHTML = objData.envio;
+            if (document.querySelectorAll("#tblCarrito tr").length == 1) {
+              window.location.href = base_url;
+            }
+            Swal.fire({
+              toast: true,
+              iconColor: "white",
+              customClass: {
+                popup: "colored-toast",
+              },
+              position: "top-right",
+              icon: "info",
+              title: objData.msg,
+              showConfirmButton: false,
+              timer: 1500,
+              timerProgressBar: true,
+            });
+          }
+          //swal.fire(nameProduct, "Se agrego al carrito", "success");
+        } else {
+          swal("", objData.msg, "error");
+        }
+      }
+      return false;
+    };
+  }
+}
+
+
+
+
+
 function fntUpdateCant(pro,cant) {
   
     if(cant <= 0){

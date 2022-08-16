@@ -1,4 +1,32 @@
 <?php  
+/*
+-----------------------------------------------------------------------
+Universidad Nacional Autónoma de Honduras (UNAH)
+    Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+                Segundo Periodo 2022
+
+
+Equipo:
+Jose Fernando Ortiz Santos .......... (jfortizs@unah.hn)
+Hugo Alejandro Paz Izaguirre..........(hugo.paz@unah.hn)
+Kevin Alfredo Rodríguez Zúniga........(karodriguezz@unah.hn)
+Leonela Yasmin Pineda Barahona........(lypineda@unah)
+Reynaldo Jafet Giron Tercero..........(reynaldo.giron@unah.hn)
+Gabriela Giselh Maradiaga Amador......(ggmaradiaga@unah.hn)
+Alejandrino Victor García Bustillo....(alejandrino.garcia@unah.hn)
+
+Catedrático:
+Lic. Karla Melisa Garcia Pineda 
+---------------------------------------------------------------------
+
+Programa:          Pantalla de carrito de compras
+Fecha:             21-Marzo-2022
+Programador:       Alejandrino Victor García Bustillo
+descripción:       Almacena los productos seleccionados por el cliente 
+                   para su posterior compra
+-----------------------------------------------------------------------*/
     require_once("Models/Tcategoria.php");
     require_once("Models/Tproducto.php");
     require_once("Models/TTipoPago.php");

@@ -1,4 +1,37 @@
 <?php
+/*
+-----------------------------------------------------------------------
+Universidad Nacional Autónoma de Honduras (UNAH)
+    Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+                Segundo Periodo 2022
+
+
+Equipo:
+Jose Fernando Ortiz Santos .......... (jfortizs@unah.hn)
+Hugo Alejandro Paz Izaguirre..........(hugo.paz@unah.hn)
+Kevin Alfredo Rodríguez Zúniga........(karodriguezz@unah.hn)
+Leonela Yasmin Pineda Barahona........(lypineda@unah)
+Reynaldo Jafet Giron Tercero..........(reynaldo.giron@unah.hn)
+Gabriela Giselh Maradiaga Amador......(ggmaradiaga@unah.hn)
+Alejandrino Victor García Bustillo....(alejandrino.garcia@unah.hn)
+
+Catedrático:
+Lic. Karla Melisa Garcia Pineda 
+
+---------------------------------------------------------------------
+
+Programa:          Módulo Clientes
+Fecha:             04-Marzo-2022
+Programador:       Leonela Yasmin Pineda Barahona
+descripción:       Módulo que Administra los datos personales de los 
+                   clientes registrados en la tienda
+
+-----------------------------------------------------------------------*/
+
+
+
  class Clientes extends Controllers{
         public function __construct()
         {
@@ -80,6 +113,9 @@
                          $option=2;
                          // ! Datos del cliente antes de actualizar                               
                         $arrDataOld= $this->model->selectCliente($idUsuario);
+                        if ($arrDataOld['COD_STATUS']==NUEVO) {
+                            $intStatus=NUEVO;
+                        }
                          $strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
                          if($_SESSION['permisosMod']['u']){
                         $request_user = $this->model->updateCliente($idUsuario,     

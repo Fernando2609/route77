@@ -291,13 +291,9 @@
           </li>
          <?php } ?>
    
-         
-
-
-
-         <?php if(!empty($_SESSION['permisos'][MPRODUCTOS]['r']) || !empty($_SESSION['permisos'][MCATEGORIAS]['r'])){ ?>
+         <?php if(!empty($_SESSION['permisos'][MBITACORA]['r']) || !empty($_SESSION['permisos'][MBACKUP]['r']) || !empty($_SESSION['permisos'][MPREGUNTAS]['r'])){ ?>
             <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
+            <a href="" class="nav-link">
              <i class=" nav-icon fas fa-shield-alt"></i>
               <p>
                 Seguridad
@@ -327,10 +323,22 @@
             </a>
           </li>
          <?php } ?>
+         <?php if(!empty($_SESSION['permisos'][MPREGUNTAS]['r'])){ ?>
+            <li class="nav-item">
+            <a href="<?= base_url();?>/preguntas" class="nav-link">
+            <i class="nav-icon fa-solid fa-question"></i>
+              <p>
+                Preguntas
+              </p>
+            </a>
+          </li>
+         <?php } ?>
             </ul>
           </li>
           <?php } ?>
 
+
+          
 
 
           <!-- Logout-->
@@ -342,8 +350,6 @@
               </p>
             </a>
           </li>
-          
-
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

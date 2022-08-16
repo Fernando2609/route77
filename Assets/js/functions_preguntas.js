@@ -1,37 +1,9 @@
-/*
------------------------------------------------------------------------
-Universidad Nacional Autónoma de Honduras (UNAH)
-    Facultad de Ciencias Economicas
-Departamento de Informatica administrativa
-     Analisis, Programacion y Evaluacion de Sistemas
-                Segundo Periodo 2022
-
-
-Equipo:
-Jose Fernando Ortiz Santos .......... (jfortizs@unah.hn)
-Hugo Alejandro Paz Izaguirre..........(hugo.paz@unah.hn)
-Kevin Alfredo Rodríguez Zúniga........(karodriguezz@unah.hn)
-Leonela Yasmin Pineda Barahona........(lypineda@unah)
-Reynaldo Jafet Giron Tercero..........(reynaldo.giron@unah.hn)
-Gabriela Giselh Maradiaga Amador......(ggmaradiaga@unah.hn)
-Alejandrino Victor García Bustillo....(alejandrino.garcia@unah.hn)
-
-Catedrático:
-Lic. Karla Melisa Garcia Pineda 
-
----------------------------------------------------------------------
-
-Programa:          Módulo de sucursales
-Fecha:             15-Abril-2022
-Programador:       Gabriela Giselh Maradiaga Amador
-descripción:       Administra los números telefonicos de contacto de la empresa
-
------------------------------------------------------------------------*/
-let tabletelEmpresa;
+let tablePreguntas;
 let rowTable="";
 let divLoading = document.querySelector("#divLoading");
 document.addEventListener('DOMContentLoaded', function () {
- tabletelEmpresa = $("#tabletelEmpresa").dataTable({
+
+tablePreguntas = $("#tablePreguntas").dataTable({
       aProcessing: true,
       aServerSide: true,
       language: {
@@ -39,13 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       
       ajax: {
-        url: " " + base_url + "/TelEmpresa/gettelEmpresas",
+        url: " " + base_url + "/Preguntas/getPreguntas",
         dataSrc: "",
       },
 
       columns: [
-        {data:"COD_TELEFONO_EMPRESA"},
-        { data: "TELEFONO" },
+        {data:"COD_PREGUNTA"},
+        {data:"PREGUNTA"},
         {data:"options"},
       ],
       dom:
@@ -61,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1],
+            columns: [0, 1, 2],
             modifier: {},
           },
         },
@@ -88,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
           ],
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1],
+            columns: [0, 1, 2],
             modifier: {},
           },
         },
@@ -97,11 +69,11 @@ document.addEventListener('DOMContentLoaded', function () {
           text: "<i class='fas fa-file-pdf'></i> PDF",
           titleAttr: "Exportar a PDF",
           className: "btn btn-danger mr-1 mb-2",
-          filename: "telEmpresa",
+          filename: "PREGUNTAS",
           download: "open",
           //orientation: "landscape",
           pageSize: "letter",
-          title: "Reporte de Teléfono Empresa",
+          title: "Reporte de Preguntas",
           customize: function (doc) {
             doc.content[1].margin = [0, 40, 120, 20];
             doc.content[0].margin = [0, 20, 0, 0];
@@ -197,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
           },
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1],
+            columns: [0, 1, 2],
             modifier: {},
           },
         },
@@ -208,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
           className: "btn btn-info mr-1 mb-2",
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1],
+            columns: [0, 1, 2],
             modifier: {},
           },
         },
@@ -219,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
           className: "btn btn-warning mr-1 mb-2",
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1],
+            columns: [0, 1, 2],
             modifier: {},
           },
         },
@@ -232,33 +204,37 @@ document.addEventListener('DOMContentLoaded', function () {
       lengthMenu: [
         [10, 25, 50, -1],
         ["10 ", "25 ", "50 ", "Todo"],
-      ],
+    ],
+   
     });
 
-    if (document.querySelector("#formtelEmpresa")) {
-        let formtelEmpresa=document.querySelector("#formtelEmpresa");
-        formtelEmpresa.onsubmit=function(e){
+
+ if (document.querySelector("#formPreguntas")) {
+        let formPreguntas=document.querySelector("#formPreguntas");
+        formPreguntas.onsubmit=function(e){
             e.preventDefault();
-            let intTelefono = document.querySelector('#txttelEmpresa').value;
+            //let strIdentificacion = document.querySelector('#txtIdentificacion').value;
+            let strPreguntas = document.querySelector('#txtPreguntas').value;
     
-            if(intTelefono == '')
+            
+            if(strPreguntas == '' )
                 {
-                    swal.fire("Atención", "El campo es obligatorio." , "error");
+                    swal.fire("Atención", "Todos los campos son obligatorios." , "error");
                     return false;
             }
     
             let elementsValid = document.getElementsByClassName("valid");
             for (let i = 0; i < elementsValid.length; i++) {
                 if (elementsValid[i].classList.contains('is-invalid')) {
-                    swal.fire("Atención", "Por favor verifique el campo en rojo.", "error");
+                    swal.fire("Atención", "Por favor verifique los campos en rojo.", "error");
                     return false;
                 }
             }
             
             divLoading.style.display="flex";
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url+'/TelEmpresa/settelEmpresa'; 
-            let formData = new FormData(formtelEmpresa);
+            let ajaxUrl = base_url+'/Preguntas/setPreguntas'; 
+            let formData = new FormData(formPreguntas);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
             request.onreadystatechange = function(){ 
@@ -269,16 +245,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     if(objData.status)
                     { 
                          if (rowTable == "") {
-                            tabletelEmpresa.api().ajax.reload();
-                        } else {
-                            rowTable.cells[1].textContent = intTelefono;
-                            rowTable = "";
-                        } 
+                             tablePreguntas.api().ajax.reload();
+                         } else {  
+                             rowTable.cells[1].textContent = strPreguntas;
+                             rowTable = "";
+                         }
  
-                        $('#modalFormtelEmpresa').modal("hide");
-                        formtelEmpresa.reset();
-                            swal.fire("telEmpresa", objData.msg ,"success");
-                            tabletelEmpresa.api().ajax.reload();
+                        $('#ModalFormPreguntas').modal("hide");
+                        formPreguntas.reset();
+                            swal.fire("Preguntas", objData.msg ,"success");
+                            tablePreguntas.api().ajax.reload();
                         }else{
                             swal.fire("Error", objData.msg , "error");
                     }
@@ -291,39 +267,42 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-}, false);
 
-function fntViewInfo(idpersona){
+
+}, false)
+
+function fntViewInfo(cod){
+    
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'/TelEmpresa/gettelEmpresa/'+idpersona;
+    let ajaxUrl = base_url+'/Preguntas/getPreguntasSeguridad/'+cod;
     request.open("GET",ajaxUrl,true);
     request.send();
-    $('#modalViewtelEmpresa').modal('show');
      request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
             let objData = JSON.parse(request.responseText);
-            console.log(objData);
+            //console.log(objData);
             if(objData.status)
             {
-              document.querySelector("#celtelEmpresa").innerHTML = objData.data.TELEFONO;
-                
-                $('#modalViewtelEmpresa').modal('show');
-            }else{
+              console.log(objData);
+
+                document.querySelector("#celPreguntas").innerHTML = objData.data.PREGUNTA; 
+                $('#modalViewPreguntas').modal('show');
+              }else{
                 swal.fire("Error", objData.msg , "error");
             }
         }
-    } 
+    }  
 }
 
-function fntEditInfo(element,idUsuario){
+function fntEditInfo(element,idPreguntas){
     rowTable=element.parentNode.parentNode.parentNode;
     //console.log(rowTable);
-    document.querySelector('#titleModal').innerHTML ="Actualizar Télefono Empresa";
+    document.querySelector('#titleModal').innerHTML ="Actualizar Pregunta";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-success", "btn-warning");
     document.querySelector('#btnText').innerHTML ="Actualizar";
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'/TelEmpresa/gettelEmpresa/'+idUsuario;
+    let ajaxUrl = base_url+'/Preguntas/getPreguntasSeguridad/'+idPreguntas;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
@@ -332,21 +311,20 @@ function fntEditInfo(element,idUsuario){
 
             if(objData.status)
             {
-                
-                document.querySelector("#idUsuario").value = objData.data.COD_TELEFONO_EMPRESA;
-                document.querySelector("#txttelEmpresa").value = objData.data.TELEFONO;
-              
+
+                document.querySelector("#idPreguntas").value = objData.data.COD_PREGUNTA;
+                document.querySelector("#txtPreguntas").value = objData.data.PREGUNTA;
             }
         }
-        $('#modalFormtelEmpresa').modal('show');
+        $('#ModalFormPreguntas').modal('show');
     } 
 }
 
-function fntDelInfo(idUsuario){
+function fntDelInfo(idPreguntas){
 
     swal.fire({
-        title: "Eliminar Teléfono Empresa",
-        text: "¿Realmente quiere eliminar el Teléfono Empresa?",
+        title: "Eliminar Pregunta",
+        text: "¿Realmente quiere eliminar la Pregunta?",
         icon: "warning",
         showClass: {
             popup: 'animate__animated animate__fadeInDown'
@@ -355,7 +333,7 @@ function fntDelInfo(idUsuario){
             popup: 'animate__animated animate__fadeOutUp'
         },
         showCancelButton: true,
-        confirmButtonText: "Si, eliminar!",
+        confirmButtonText: "Si, ¡eliminar!",
         cancelButtonText: "No, cancelar!",
         closeOnConfirm: false,
         closeOnCancel: true
@@ -363,8 +341,8 @@ function fntDelInfo(idUsuario){
     }).then((result) => {
         if (result.isConfirmed) {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url + '/TelEmpresa/deltelEmpresa/';
-            let strData = "idUsuario=" + idUsuario;
+            let ajaxUrl = base_url + '/Preguntas/delPreguntas/';
+            let strData = "idPreguntas=" + idPreguntas;
             request.open("POST", ajaxUrl, true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
@@ -373,7 +351,7 @@ function fntDelInfo(idUsuario){
                     let objData = JSON.parse(request.responseText);
                     if (objData.status) {
                         swal.fire({
-                            title: "Eliminar!",
+                            title: "¡Eliminar!",
                             text: objData.msg,
                             icon: "success",
                             showClass: {
@@ -383,7 +361,7 @@ function fntDelInfo(idUsuario){
                                 popup: 'animate__animated animate__flipOutY'
                             }
                         });
-                        tabletelEmpresa.api().ajax.reload();
+                        tablePreguntas.api().ajax.reload();
                     } else {
                         swal.fire("Atención!", objData.msg, "error");
                     }
@@ -394,16 +372,14 @@ function fntDelInfo(idUsuario){
     });
  }
 
-
-
 function openModal()
 {
     rowTable = "";
-    document.querySelector('#idUsuario').value ="";
+    document.querySelector('#idPreguntas').value ="";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-warning", "btn-success");
     document.querySelector('#btnText').innerHTML ="Guardar";
-    document.querySelector('#titleModal').innerHTML = "Nuevo telEmpresa";
-    document.querySelector("#formtelEmpresa").reset();
-    $('#modalFormtelEmpresa').modal('show');
+    document.querySelector('#titleModal').innerHTML = "Nueva Pregunta";
+    document.querySelector("#formPreguntas").reset();
+    $('#ModalFormPreguntas').modal('show');
 }

@@ -1,3 +1,33 @@
+/*
+-----------------------------------------------------------------------
+Universidad Nacional Autónoma de Honduras (UNAH)
+    Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+                Segundo Periodo 2022
+
+
+Equipo:
+Jose Fernando Ortiz Santos .......... (jfortizs@unah.hn)
+Hugo Alejandro Paz Izaguirre..........(hugo.paz@unah.hn)
+Kevin Alfredo Rodríguez Zúniga........(karodriguezz@unah.hn)
+Leonela Yasmin Pineda Barahona........(lypineda@unah)
+Reynaldo Jafet Giron Tercero..........(reynaldo.giron@unah.hn)
+Gabriela Giselh Maradiaga Amador......(ggmaradiaga@unah.hn)
+Alejandrino Victor García Bustillo....(alejandrino.garcia@unah.hn)
+
+Catedrático:
+Lic. Karla Melisa Garcia Pineda 
+
+---------------------------------------------------------------------
+
+Programa:          Módulo de Pedidos
+Fecha:             10-Abril-2022
+Programador:       Alejandrino Victor García Bustillo
+descripción:       Módulo que administra los pedidos realizados por los
+                   clientes desde la tienda 
+
+-----------------------------------------------------------------------*/
 let tablePedidos;
 let rowTable;
 document.addEventListener(
@@ -294,6 +324,8 @@ function fntTransaccion(idtransaccion){
     function fntReembolsar(){
        let idtransaccion = document.querySelector("#idtransaccion").value;
        let observacion = document.querySelector("#txtObservacion").value;
+       let reembolso = document.querySelector("#checkReembolso").checked;
+      
        if(idtransaccion=='' || observacion==''){
            swal.fire("", "Complete los datos para continuar.", "error");
            return false;
@@ -325,6 +357,7 @@ function fntTransaccion(idtransaccion){
                
                 formData.append('idtransaccion',idtransaccion);
                 formData.append('observacion',observacion);
+                formData.append("reembolso", reembolso);
                 request.open("POST",ajaxUrl,true);
                 request.send(formData);
                 request.onreadystatechange = function(){
@@ -457,7 +490,7 @@ function fntUpdateInfo(){
     }
 }
 
-function fntFecha() {
+function fntUtilidadG() {
     let Finicio = document.querySelector(".Finicio").value;
     let Ffinal = document.querySelector(".fFinal").value;
    
@@ -490,4 +523,44 @@ function fntFecha() {
          }
        };
      }
+}
+
+function fntUtilidadB() {
+  let Finicio = document.querySelector(".Finicio").value;
+  let Ffinal = document.querySelector(".fFinal").value;
+
+  if (Finicio == "" || Ffinal == "") {
+    swal.fire(
+      "",
+      "Seleccione Fecha inicial y Fecha final para las utilidades",
+      "error"
+    );
+    return false;
+  } else {
+    let request = window.XMLHttpRequest
+      ? new XMLHttpRequest()
+      : new ActiveXObject("Microsoft.XMLHTTP");
+    let ajaxUrl = base_url + "/Pedidos/UtilidadB/" + Finicio + "/" + Ffinal;
+    divLoading.style.display = "flex";
+    let formData = new FormData();
+    formData.append("fechaInicio", Finicio);
+    formData.append("fechaFinal", Ffinal);
+    request.open("POST", ajaxUrl, true);
+    request.send(formData);
+
+    request.onreadystatechange = function () {
+      if (request.readyState != 4) return;
+      if (request.status == 200) {
+        window.open(
+          base_url + "/Pedidos/UtilidadB/" + Finicio + "/" + Ffinal,
+          "_blank"
+        );
+
+        divLoading.style.display = "none";
+        return false;
+
+        //$("#pagosMesAnio").html(request.responseText);
+      }
+    };
+  }
 }
