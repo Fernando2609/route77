@@ -100,6 +100,19 @@
           </div>
          <?php } ?>
          
+         <div class="form-row">
+          <div class="form-group col-md-6">
+              <label for="listPreguntas">Pregunta de Seguridad</label>
+              <select class="form-control"  value="<?=  $_SESSION['userData']['COD_PREGUNTA'];  ?>" id="listPreguntas" name="listPreguntas">
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="txtRespuesta">Respuesta</label>
+                <input type="text" class="form-control"n onkeyup="javascript:this.value=this.value.toUpperCase();" id="txtRespuesta" name="txtRespuesta" >
+            </div>
+          </div>
+
+
         <div class="form-row">
             <div class="form-group col-md-6">
               <label for="txtPassword">Password</label>
@@ -110,6 +123,8 @@
                 <input type="password" class="form-control valid ValidContra" id="txtPasswordConfirm" name="txtPasswordConfirm" >
             </div>
           </div>
+
+          
 
           <!-- /.Cierra card-body -->
 

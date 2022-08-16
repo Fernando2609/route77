@@ -28,7 +28,7 @@ $codCiudad =  $cl->address->country_code;
           <input type="hidden" id="idtransaccion" value="<?= $idTransaccion ?>">
           <tbody>
             <tr>
-              <td>Transaccion:</td>
+              <td>Transacción:</td>
               <td> <?= $idTransaccion ?></td>
             </tr>
             <tr>
@@ -44,11 +44,11 @@ $codCiudad =  $cl->address->country_code;
               <td><?= $importeNeto.' '.$moneda ?></td>
             </tr>
             <tr>
-              <td>Comision Reembolso por Paypal:</td>
+              <td>Comisión Reembolso por Paypal:</td>
               <td><?= $comision.' '.$moneda ?></td>
             </tr>
             <tr>
-              <td>Observacion:</td>
+              <td>Observación:</td>
               <td > <textarea id="txtObservacion" class="form-control"></textarea> </td>
             </tr>
             <tr >

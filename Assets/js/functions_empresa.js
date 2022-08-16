@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             exportOptions: {
               margin: [0, 20, 20, 20],
-              columns: [0, 1, 2, 3, 4, 5, 6],
+              columns: [0, 1, 2, 3, 4, 5],
               modifier: {},
             },
           },
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ],
             exportOptions: {
               margin: [0, 20, 20, 20],
-              columns: [0, 1, 2, 3, 4, 5, 6],
+              columns: [0, 1, 2, 3, 4, 5],
               modifier: {},
             },
           },
@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             exportOptions: {
               margin: [0, 20, 20, 20],
-              columns: [0, 1, 2, 3, 4, 5, 6],
+              columns: [0, 1, 2, 3, 4, 5],
               modifier: {},
             },
           },
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
             className: "btn btn-info mr-1 mb-2",
             exportOptions: {
               margin: [0, 20, 20, 20],
-              columns: [0, 1, 2, 3, 4, 5, 6],
+              columns: [0, 1, 2, 3, 4, 5],
               modifier: {},
             },
           },
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
             className: "btn btn-warning mr-1 mb-2",
             exportOptions: {
               margin: [0, 20, 20, 20],
-              columns: [0, 1, 2, 3, 4, 5, 6],
+              columns: [0, 1, 2, 3, 4, 5],
               modifier: {},
             },
           },

@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
             download: "open",
             orientation: "landscape",
             pageSize: "letter",
-            title: "Reporte de Empresa",
+            title: "Reporte de Inventario",
             customize: function (doc) {
               doc.content[1].margin = [0, 40, 120, 20];
               doc.content[0].margin = [0, 20, 0, 0];

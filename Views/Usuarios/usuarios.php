@@ -48,7 +48,7 @@
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>Email</th>
-                        <th>Telefono</th>
+                        <th>Teléfono</th>
                         <th>Rol</th>
                         <th>Status</th>
                         <th>Acciones</th>

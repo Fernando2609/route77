@@ -52,8 +52,14 @@
                                 ?>
 								<tr class="table_row <?=  $idProducto;  ?>">
 									<td class="column-1">
+										<div class="d-flex align-items-center">
+											<div class="mr-3 borrar" onclick="fntdelItem2(this)">
+												<i class="fa-solid fa-x"></i>
+											</div>
+										
 										<div class="how-itemcart1" idpr="<?=  $idProducto  ?>" op="2" onclick="fntdelItem(this)">
 											<img src="<?=  $producto['imagen'];  ?>" alt="<?=  $producto['producto'];  ?>">
+										</div>
 										</div>
 									</td>
 									<td class="column-2"><a class="header-cart-item-name m-b-18 hov-cl1 trans-04" href="<?= base_url().'/tienda/producto/'.$producto['idproducto'].'/'.$ruta;?>"><?=  $producto['producto'];  ?></a></td>
@@ -149,10 +155,14 @@
 								</span>
 							</div>
 						</div>
+						<a href="<?=  base_url();  ?>/Tienda" id='btnComprar'  class=" flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer seguirComprando" >
+							Seguir Comprando
+						</a href="<?=  base_url();  ?>/Tienda">
 
-						<a href="<?=  base_url();  ?>/carrito/procesarpago" id='btnComprar' class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+						<a href="<?=  base_url();  ?>/carrito/procesarpago" id='btnComprar' class=" mt-3 flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
 							Procesar Pago
 						</a href="<?=  base_url();  ?>/carrito/procesarpago">
+						
 					</div>
 				</div>
 			</div>

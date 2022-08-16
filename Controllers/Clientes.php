@@ -113,6 +113,9 @@ descripción:       Módulo que Administra los datos personales de los
                          $option=2;
                          // ! Datos del cliente antes de actualizar                               
                         $arrDataOld= $this->model->selectCliente($idUsuario);
+                        if ($arrDataOld['COD_STATUS']==NUEVO) {
+                            $intStatus=NUEVO;
+                        }
                          $strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
                          if($_SESSION['permisosMod']['u']){
                         $request_user = $this->model->updateCliente($idUsuario,     

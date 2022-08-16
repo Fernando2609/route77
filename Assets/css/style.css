@@ -497,9 +497,9 @@
     opacity: 0;
     
   } 
-  #header-cate .ps--active-x > .ps__rail-x, .ps--active-y > .ps__rail-y {
+  /* #header-cate .ps--active-x > .ps__rail-x, .ps--active-y > .ps__rail-y {
     left: 0px;
-  }
+  } */
   .header-categoria .header-cart-item-name {
     font-size: 18px;
   }

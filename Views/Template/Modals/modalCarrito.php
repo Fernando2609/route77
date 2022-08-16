@@ -14,6 +14,9 @@
 			$idProducto = openssl_encrypt($producto['idproducto'],METHODENCRIPT,KEY);	
 	?>
 		<li class="header-cart-item flex-w flex-t m-b-12">
+			<div class="mr-3 borrar" onclick="fntdelItem2(this)">
+				<i class="fa-solid fa-x"></i>
+			</div>
 			<div class="header-cart-item-img" idpr="<?=  $idProducto  ?>" op="1" onclick="fntdelItem(this)">
 				<img src="<?= $producto['imagen'] ?>" alt="<?= $producto['producto'] ?>">
 			</div>
@@ -27,6 +30,7 @@
 				<?= $producto['cantidad'].' x '.SMONEY.formatMoney($producto['precio']) ?>
 				</span>
 			</div>
+			
 		</li>
 		<?php } ?>
 	</ul>

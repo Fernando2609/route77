@@ -24,7 +24,7 @@
 			<div class="row">
 				<div class="col-sm-6 col-lg-4 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
-						Categorias
+						Categorías
 					</h4>
 					<?php if(count($catFotter) > 0){ ?>
 					<ul>

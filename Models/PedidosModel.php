@@ -129,7 +129,7 @@ descripción:       Módulo que administra los pedidos realizados por los
             $requestPedido = $this->select($sqlPEDIDO);
            
 
-            $sqlDetalle="SELECT * FROM `tbl_detalle_pedido` WHERE COD_PEDIDO={$requestPedido['COD_PEDIDO']}";
+            $sqlDetalle="SELECT * FROM `TBL_DETALLE_PEDIDO` WHERE COD_PEDIDO={$requestPedido['COD_PEDIDO']}";
             
             $requestDetalle = $this->select_all($sqlDetalle);
             
@@ -296,7 +296,7 @@ descripción:       Módulo que administra los pedidos realizados por los
             return $request;
         }
         public function selectProductosVendido(int $codigo){
-            $sqlPEDIDO="SELECT * FROM `tbl_detalle_pedido` WHERE COD_PEDIDO={$codigo}";
+            $sqlPEDIDO="SELECT * FROM `TBL_DETALLE_PEDIDO` WHERE COD_PEDIDO={$codigo}";
             
             $requestPedido = $this->select_all($sqlPEDIDO);
             $request = $requestPedido;

@@ -64,9 +64,13 @@ headerAdmin($data);
                           <label for="">Fecha Final</label>
                           <input class="fecha inputFecha fFinal" id="max" name="max" >
                           </div>
+                          <?php
+                              if($_SESSION['permisosMod']['r'] and $_SESSION['userData']['COD_ROL'] != RCLIENTES){ 
+                            ?>
                           <div class="text-center">
                                 <button class="btn btn-block btn-success btn-lg" onclick="fntUtilidadB()" id="idUtilidad"><span><i class="fas fa-file-excel" aria-hidden="true"></i></span> Utilidad Bruta</button>
                           </div>
+                          <?php } ?>
                         </div>
 
                       </div>

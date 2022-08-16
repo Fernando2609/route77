@@ -1,5 +1,6 @@
     <?php headerAdmin($data);
-      getModal("modalPerfil",$data)
+      getModal("modalPerfil",$data);
+      dep($_SESSION);
     ?>
     <div class="content-wrapper" style="min-height: 2645.88px;">
     <!-- Content Header (Page header) -->
@@ -139,6 +140,17 @@
     </section>
     <!-- /.content -->
   </div>
+  <script>
+    let pregunta=<?=  $_SESSION['userData']['COD_PREGUNTA'];  ?>;
+    
+    let sucursal=<?php
+     empty($_SESSION['userData']['COD_SUCURSAL']) ? "":   intval(strClean($_SESSION['userData']['COD_SUCURSAL']));
+    ?>
+    let genero=<?php
+     empty($_SESSION['userData']['COD_GENERO']) ? "":   intval(strClean($_SESSION['userData']['COD_GENERO']));
+    ?>
+   
+  </script>
     <?php footerAdmin($data); ?>
     <!-- /.content -->
 
