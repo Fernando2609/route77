@@ -96,7 +96,7 @@ descripción:       Modulo que permite ingresar al sistema con las
 
                          $htmlNotifi = getFile('Template/Modals/notificaciones',$_SESSION['notificaciones']);
                               //BIRACORA
-                            Bitacora($_SESSION['idUser'],1,"Login","Inició Sesión",'');
+                          //  Bitacora($_SESSION['idUser'],1,"Login","Inició Sesión",'');
 							$arrResponse = array('status' => true, 'msg' => 'ok'); 
 						}else{
 							$arrResponse = array('status' => false, 'msg' => 'Usuario inactivo.');
