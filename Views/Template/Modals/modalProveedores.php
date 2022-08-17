@@ -28,8 +28,8 @@
               <input type="text" class="form-control valid validNumberRtn" id="txtRTN" name="txtRTN" required="" onkeypress="return controlTag(event);">
             </div>
             <div class="form-group col-md-6">
-              <label for="txtEmail">Email</label>
-              <input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail" required="">
+              <label for="txtTelefono">Empresa</label>
+              <input type="text" class="form-control valid" id="txtEmpresa" name="txtEmpresa" required="">
             </div>
           </div>
           <div class="form-row">
@@ -48,8 +48,8 @@
               <input type="text" class="form-control valid validNumberTel" id="txtTelefono" name="txtTelefono" required="" onkeypress="return controlTag(event);">
             </div>
             <div class="form-group col-md-6">
-              <label for="txtTelefono">Empresa</label>
-              <input type="text" class="form-control valid" id="txtEmpresa" name="txtEmpresa" required="">
+              <label for="txtEmail">Email</label>
+              <input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail" required="">
             </div>
           </div>
 

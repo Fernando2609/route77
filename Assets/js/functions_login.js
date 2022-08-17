@@ -345,3 +345,19 @@ function mostrarContrasenasConfirm() {
     document.getElementById("icon2").classList.add("fa-eye");
   }
 }
+
+function botonesCorreo(){
+ 
+    let botonCorreo = document.querySelector('#txtEmailReset');
+
+    if (botonCorreo.value) {
+      document.querySelector('#correoLogin').disabled = false;
+      document.querySelector('#preguntaLogin').classList.remove("disabled");
+      
+
+    } else {
+      document.querySelector('#correoLogin').disabled = true;
+      document.querySelector('#preguntaLogin').classList.add("disabled");
+    
+    }
+}

@@ -133,19 +133,19 @@
           <h3 class="login-head "><i class="fa fa-lg fa-fw fa-lock"></i>¿Olvidaste tu contraseña?</h3>
           <div class="form-group">
             <label class="control-label">EMAIL</label>
-            <input id="txtEmailReset" name="txtEmailReset" class="form-control valid validEmail" type="text" placeholder="Email">
+            <input id="txtEmailReset" name="txtEmailReset" class="form-control valid validEmail" type="text" placeholder="Email" onkeyup="botonesCorreo()">
           </div>
          
           <div class="form-group btn-container mb-3">
-            <button type="submit" class="btn btn-primary btn-block botonLogin"><i class="fa fa-unlock fa-lg fa-fw"></i>ENVIAR EMAIL</button>
+            <button type="submit" id="correoLogin" class="btn btn-primary btn-block botonLogin" disabled><i class="fa fa-unlock fa-lg fa-fw"></i>ENVIAR EMAIL</button>
           </div>
           <div class="form-group btn-container">
-            <a style="color:white" onclick="fntOpenModal()" class="btn btn-primary btn-block botonLogin"><i class="fa fa-unlock fa-lg fa-fw"></i>PREGUNTA DE SEGURIDAD</a>
+            <a style="color:white" id="preguntaLogin" onclick="fntOpenModal()" class="btn btn-primary btn-block botonLogin disabled"><i class="fa fa-unlock fa-lg fa-fw"></i>PREGUNTA DE SEGURIDAD</a>
           </div>
           <div class="form-group mt-3 mb-3">
             <p class="semibold-text mb-0"><a href="#" class="linkLogin" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Volver al login</a></p>
           </div>
-        </form>
+       </form>
        
       </div>
       </section>
