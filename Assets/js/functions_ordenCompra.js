@@ -83,7 +83,7 @@ $(document).ready(function(){
   $("#txtCantidad").keyup(function(e){
     e.preventDefault();
      cantidad = $(this).val();
-    precioTotal = precio * cantidad;
+    precioTotal = (precio*cantidad);
     if (isNaN(precioTotal)) {
         document.querySelector("#txtPrecioTotal").innerHTML = "0.00";
     }else{
@@ -101,9 +101,10 @@ $(document).ready(function(){
     
     //$("#txtPrecioTotal").html(precioTotal);
   })
+
    $("#txtPrecio").keyup(function (e) {
       precio = $(this).val();
-      precioTotal=precio*cantidad
+      precioTotal=parseFloat(precio*cantidad).toFixed(2);
      if (isNaN(precioTotal)) {
        document.querySelector("#txtPrecioTotal").innerHTML = "0.00";
      } else {
@@ -117,6 +118,7 @@ $(document).ready(function(){
 
     }
    });
+   
   $("#add_product_Compra").click(function (e) {
     e.preventDefault;
     if ($("#txtCantidad").val()>0) {
