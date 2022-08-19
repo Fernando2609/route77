@@ -1,6 +1,8 @@
  <script>
    const base_url = "<?= base_url(); ?>";
-   const enviroment = "<?= ENVIRONMENT?>";
+   const enviroment = "<?= ENVIRONMENT ?>";
+   const nombreEmpresa = "<?= datosEmpresa()['Empresa']['NOMBRE_EMPRESA'] ?>";
+   const nombreUsuario = "<?= $_SESSION['userData']['NOMBRES'] . ' ' . $_SESSION['userData']['APELLIDOS'] ?>";
  </script>
 
 
@@ -8,8 +10,10 @@
 
  <footer class="main-footer">
 
-   <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="#">Universidad Nacional Autónoma De Honduras</a>. </strong> All rights reserved.
-  
+   <strong>Copyright &copy; <script>
+       document.write(new Date().getFullYear());
+     </script> <a href="#">Universidad Nacional Autónoma De Honduras</a>. </strong> All rights reserved.
+
  </footer>
 
  <!-- Control Sidebar -->
@@ -48,7 +52,7 @@
  <script src="https://code.highcharts.com/highcharts.js"></script>
  <script src="https://code.highcharts.com/modules/exporting.js"></script>
  <script src="https://code.highcharts.com/modules/export-data.js"></script>
- 
+
  <script src="<?= media(); ?>/js/datepicker/jquery-ui.min.js"></script>
  <!-- Termina Datatables  & Plugins -->
 
