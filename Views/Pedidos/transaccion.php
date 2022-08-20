@@ -1,4 +1,4 @@
-<?php headerAdmin($data); ?>
+<?php headerAdmin($data);?>
 <div id="divModal"></div>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -29,7 +29,7 @@
         ?>
         <p>Datos no encontrados</p>
         <?php }else{
-
+            $codpedido=$data['cod_pedido'];
             $trs = $data['objTransaccion']->purchase_units[0];
             $cl = $data['objTransaccion']->payer;
             $idTransaccion = $trs->payments->captures[0]->id;
@@ -170,7 +170,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><?= $descripcion ?></td>
+                    <td><?= $descripcion ." en la orden ".$codpedido ?></td>
                     <td class="text-right">1</td>
                     <td class="text-right"><?= $monto.' '.$moneda ?></td>
                     <td class="text-right"><?= $monto.' '.$moneda ?></td>

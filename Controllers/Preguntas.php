@@ -147,7 +147,9 @@
                     $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar la pregunta Relacionada a un Usuario.');
                 }
                 echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+          
             }
+
         }
         die();
     }
