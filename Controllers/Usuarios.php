@@ -303,10 +303,13 @@ descripción:       Gestiona todos los usuarios del sistema
                 //    ($_SESSION['userData']['COD_ROL'] == 1 and $arrData[$i]['COD_ROL'] != 1) and
                   //            ($_SESSION['userData']['COD_PERSONA'] != $arrData[$i]['COD_PERSONA'])
                     //          ){
+                    if ($_SESSION['userData']['COD_PERSONA'] != $arrData[$i]['COD_PERSONA']) {
+         
                         $btnDelete = '<button class="btn btn-danger btn-sm btnDelUsuario" onClick="fntDelUsuario('.$arrData[$i]['COD_PERSONA'].')" title="Eliminar usuario"><i class="far fa-trash-alt"></i></button>';
-                    //}else{
-                     // $btnDelete = '<button class="btn btn-danger btn-sm" disabled><i class="far fa-trash-alt"></i></button>';
-                    //}
+                    
+                    }else{
+                     $btnDelete = '<button class="btn btn-danger btn-sm" disabled><i class="far fa-trash-alt"></i></button>';
+                    }
                    
                 }
                 
