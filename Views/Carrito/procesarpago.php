@@ -3,8 +3,10 @@
 	//getModal('modalCarrito', $data);
     $subtotal=0;
     $cantCarrito = 0;
+    
     foreach($_SESSION['arrCarrito'] as $producto)
     {
+      
         $subtotal+=$producto['precio']*$producto['cantidad'];
        
         if ($subtotal>=datosEmpresa()['Empresa']['PEDIDO_MINIMO']) {

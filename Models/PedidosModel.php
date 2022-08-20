@@ -191,7 +191,8 @@ descripción:       Módulo que administra los pedidos realizados por los
             }
             return $request;
         }
-        public function selectTransPaypal(string $idtransaccion, $idpersona = NULL){
+       
+         public function selectTransPaypal(string $idtransaccion, $idpersona = NULL){
 			$busqueda = "";
             $requestData="";
             
@@ -202,7 +203,7 @@ descripción:       Módulo que administra los pedidos realizados por los
 			//$objTransaccion = array(); */
             //FALTA
 			//$sql = "CALL CRUD_PEDIDO(NULL,NULL,NULL,NULL,NULL,NULL, $idtransaccion,NULL,NULL,'F',$idpersona)";
-            $sql = "SELECT DATOS_PAYPAL FROM TBL_PEDIDO WHERE COD_TRANSACCION_PAYPAL = '{$idtransaccion}' ".$busqueda;
+            $sql = "SELECT DATOS_PAYPAL, COD_PEDIDO FROM TBL_PEDIDO WHERE COD_TRANSACCION_PAYPAL = '{$idtransaccion}' ".$busqueda;
 			/* dep($sql);
             exit; */
             $requestData = $this->select($sql);
@@ -213,6 +214,19 @@ descripción:       Módulo que administra los pedidos realizados por los
 				$objTransaccion = CurlConnectionGet($urlOrden,"application/json",getTokenPaypal());
 			}
 			return $objTransaccion;
+		}
+        public function selectCodPedido(string $idtransaccion){
+			$requestData="";
+            
+			//$objTransaccion = array(); */
+            //FALTA
+			//$sql = "CALL CRUD_PEDIDO(NULL,NULL,NULL,NULL,NULL,NULL, $idtransaccion,NULL,NULL,'F',$idpersona)";
+            $sql = "SELECT DATOS_PAYPAL, COD_PEDIDO FROM TBL_PEDIDO WHERE COD_TRANSACCION_PAYPAL = '{$idtransaccion}' ";
+			/* dep($sql);
+            exit; */
+            $requestData = $this->select($sql);
+			
+			return $requestData;
 		}
     public function reembolsoPaypal(string $idtransaccion, string $observacion){
             $response = false;
