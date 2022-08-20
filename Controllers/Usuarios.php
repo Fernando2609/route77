@@ -288,23 +288,27 @@ descripción:       Gestiona todos los usuarios del sistema
                 }
 
                 if($_SESSION['permisosMod']['u']){
-                    if(($_SESSION['idUser'] == 1 and $_SESSION['userData']['COD_ROL'] == 1) ||
-                       ($_SESSION['userData']['COD_ROL'] == 1 and $arrData[$i]['COD_ROL'] != 1)){
+                 //   if(($_SESSION['idUser'] == 1 and $_SESSION['userData']['COD_ROL'] == 1) ||
+                   //    ($_SESSION['userData']['COD_ROL'] == 1 and $arrData[$i]['COD_ROL'] != 1))
+                     //  {
                         $btnEdit = '<button class="btn btn-warning btn-sm btnEditUsuario" onClick="fntEditUsuario(this,'.$arrData[$i]['COD_PERSONA'].')" title="Editar usuario"><i class="fas fa-pencil-alt"></i></button>';
-                       }else{
-                        $btnEdit = '<button class="btn btn-warning btn-sm" disabled><i class="fas fa-pencil-alt"></i></button>';  
-                       }
+                    //   }else{
+                     //   $btnEdit = '<button class="btn btn-warning btn-sm" disabled><i class="fas fa-pencil-alt"></i></button>';  
+                  //     }
                    
                 }
 
                 if($_SESSION['permisosMod']['d']){
-                    if(($_SESSION['idUser'] == 1 and $_SESSION['userData']['COD_ROL'] == 1) ||
-                    ($_SESSION['userData']['COD_ROL'] == 1 and $arrData[$i]['COD_ROL'] != 1) and
-                              ($_SESSION['userData']['COD_PERSONA'] != $arrData[$i]['COD_PERSONA'])
-                              ){
+              //      if(($_SESSION['idUser'] == 1 and $_SESSION['userData']['COD_ROL'] == 1) ||
+                //    ($_SESSION['userData']['COD_ROL'] == 1 and $arrData[$i]['COD_ROL'] != 1) and
+                  //            ($_SESSION['userData']['COD_PERSONA'] != $arrData[$i]['COD_PERSONA'])
+                    //          ){
+                    if ($_SESSION['userData']['COD_PERSONA'] != $arrData[$i]['COD_PERSONA']) {
+         
                         $btnDelete = '<button class="btn btn-danger btn-sm btnDelUsuario" onClick="fntDelUsuario('.$arrData[$i]['COD_PERSONA'].')" title="Eliminar usuario"><i class="far fa-trash-alt"></i></button>';
+                    
                     }else{
-                        $btnDelete = '<button class="btn btn-danger btn-sm" disabled><i class="far fa-trash-alt"></i></button>';
+                     $btnDelete = '<button class="btn btn-danger btn-sm" disabled><i class="far fa-trash-alt"></i></button>';
                     }
                    
                 }
