@@ -1,10 +1,9 @@
  <script>
    const base_url = "<?= base_url(); ?>";
-   const enviroment = "<?= ENVIRONMENT ?>";
+   const enviroment = "<?= ENVIRONMENT?>";
    const nombreEmpresa = "<?= datosEmpresa()['Empresa']['NOMBRE_EMPRESA'] ?>";
-   const nombreUsuario = "<?= $_SESSION['userData']['NOMBRES'] . ' ' . $_SESSION['userData']['APELLIDOS'] ?>";
+   const nombreUsuario = "<?= $_SESSION['userData']['NOMBRES'].' '.$_SESSION['userData']['APELLIDOS']?>";
  </script>
-
 
 
 

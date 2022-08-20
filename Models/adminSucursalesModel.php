@@ -129,12 +129,29 @@ descripción:       Mantenimiento de la información de las sucursales
 	}
 	public function deleteSucursal($intIdSucursal)
 	{
+		
 		$this->intIdSucursal = $intIdSucursal;
-		//$sql = "UPDATE usuarios SET status = ? WHERE idUsuario = $intIdUser";
-        $sql="CALL CRUD_SUCURSAL(null,null,'D',?)";
-		$arrData = array($this->intIdSucursal);
-		$request = $this->update($sql, $arrData);
-		return $request;
+
+		 //$sql = "UPDATE usuarios SET status = ? WHERE idUsuario = $intIdUser";
+        //$sql="CALL CRUD_SUCURSAL(null,null,'D',?)";
+		//$arrData = array($this->intIdSucursal);
+		/* $request = $this->update($sql, $arrData);
+		return $request;  */
+
+		 $sql="SELECT * FROM `TBL_USUARIOS` WHERE COD_SUCURSAL=$intIdSucursal";
+        $request = $this->select_all($sql);
+        if(empty($request))
+		{
+            $sql = "CALL CRUD_SUCURSAL(null,null,'D',$this->intIdSucursal)";
+        
+            $arrData = array($this->intIdSucursal);
+            $request = $this->Delete($sql, $arrData);
+            
+        }else{
+            $request=false;
+        }
+        return $request; 
+		
 	}
 
 }

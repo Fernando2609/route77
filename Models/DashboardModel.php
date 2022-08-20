@@ -211,6 +211,37 @@ descripción:       Módulo que muestra las estadisticas de compras, pedidos
         $request = $this->select_all($sql);
         return $request;
     }
+
+
+    public function changePassword(int $user,string $password)
+    {
+       
+        
+
+        $sql="UPDATE `TBL_PERSONAS` SET `CHANGE_PASSWORD` = ?, `CONTRASEÑA`=?  WHERE `TBL_PERSONAS`.`COD_PERSONA` = $user;";
+        $arrData = array(0,$password);
+        $request = $this->update($sql,$arrData);
+        
+        return $request;
+    }
+
+    public function getPassword(int $user)
+    {
+       
+        
+
+        $sql="SELECT `CONTRASEÑA` FROM `TBL_PERSONAS` WHERE `TBL_PERSONAS`.`COD_PERSONA` = $user;";
+        
+        $request = $this->select($sql);
+        
+        return $request;
+    }
+
+
+
+
+
+
  }
 
  ?>

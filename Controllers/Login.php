@@ -65,7 +65,6 @@ descripción:       Modulo que permite ingresar al sistema con las
                    $intentos=0;
                    $strUsuario = strtolower(strClean($_POST['txtEmail']));
                    $strPassword = hash("SHA256", $_POST['txtPassword']);
-                   
                    $requestUser = $this->model->loginUser($strUsuario, $strPassword);
                    if(empty($requestUser)){
                   
@@ -96,7 +95,7 @@ descripción:       Modulo que permite ingresar al sistema con las
 
                          $htmlNotifi = getFile('Template/Modals/notificaciones',$_SESSION['notificaciones']);
                               //BIRACORA
-                            Bitacora($_SESSION['idUser'],1,"Login","Inició Sesión",'');
+                          //  Bitacora($_SESSION['idUser'],1,"Login","Inició Sesión",'');
 							$arrResponse = array('status' => true, 'msg' => 'ok'); 
 						}else{
 							$arrResponse = array('status' => false, 'msg' => 'Usuario inactivo.');

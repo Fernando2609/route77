@@ -158,12 +158,16 @@ require 'Libraries/Excel/vendor/autoload.php';
                 $idpersona = $_SESSION['userData']['COD_PERSONA'];
             }
             $requestTransaccion=$this->model->selectTransPaypal($transaccion,$idpersona);
+
+            $requestCodPedido=$this->model->selectCodPedido($transaccion);
+            
            
             $data['page_tag'] = "Detalle de la Transaccion - Route 77";
             $data['page_title'] = "Detalles de la Transaccion";
             $data['page_name'] = "Detalles de la Transaccion";
             $data['page_functions_js']="functions_pedidos.js";
             $data['objTransaccion']=$requestTransaccion;
+            $data['cod_pedido'] = $requestCodPedido['COD_PEDIDO'];
              //BIRACORA
              Bitacora($_SESSION['idUser'],MPEDIDOS,"Consulta","Consultó el Pedido con la transacción paypal #".$transaccion,'');
             $this->views->getView($this, "transaccion", $data);   

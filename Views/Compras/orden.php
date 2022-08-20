@@ -49,13 +49,17 @@
                             <!-- info row -->
                             <div class="row invoice-info">
                                 <div class="col-sm-4 invoice-col">
+                                
 
                                     <address>
-                                        <strong>NOMBRE_EMPRESA</strong><br>
-                                      
-                                        <?= TELEMPRESA ?><br>
-                                        <?= EMAIL_EMPRESA ?><br>
-                                        <?= WEB_EMPRESA ?>
+                                        <?= datosEmpresa()['Empresa']['NOMBRE_EMPRESA'] ?>
+                                        <br>
+                                        <?= datosEmpresa()['Empresa']['EMAIL_EMPRESA'] ?>
+                                        <br>
+                                        <?= datosEmpresa()['Empresa']['TEL_EMPRESA'] ?>
+                                        <br>
+                                        <?= WEB_EMPRESA?>
+                                        
                                     </address>
                                 </div>
                                 <!-- /.col -->

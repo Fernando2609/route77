@@ -147,6 +147,7 @@ document.addEventListener(
               margin: [0, 20, 20, 100],
             };
             cols[2] = {
+
                fontSize: 11,
                text: [
                  {

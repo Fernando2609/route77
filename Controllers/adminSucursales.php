@@ -183,27 +183,25 @@ descripción:       Mantenimiento de la información de las sucursales
              } 
 			die();
 		} 
-        public function delSucursal()
-        {
+        public function delSucursal(){
             if($_POST){
                 if($_SESSION['permisosMod']['d']){
                     $intIdSucursal = intval($_POST['idSucursal']);
                     //Selecciona los datos del usuario Eliminado  
                     $arrData= $this->model->selectSucursal($intIdSucursal);
                     $requestDelete = $this-> model->deleteSucursal($intIdSucursal);
-                    if ($requestDelete) 
-                    {
+                    
+                    if ($requestDelete) {
                         $arrResponse = array ('status' => true, 'msg' => 'Se ha eliminado la sucursal');
-                           
-                           //BIRACORA
-                           //Bitacora($_SESSION['idUser'],MSUCURSALES,"Delete","Eliminó la Sucursal ".$arrData['NOMBRE'].""); 
                     }else{
-                        $arrResponse = array('status' => false, 'msg' => 'Error al eliminar la sucursal.');
+                        $arrResponse = array('status' => false, 'msg' => 'No es posible eliminar la sucursal Relacionada a un Usuario.');
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-                    } 
-                }  
-            die();  
+                }
+            }
+                die();
+            }
         }
-    }
-?>
+    ?>
+    
+    

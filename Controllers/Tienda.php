@@ -543,6 +543,8 @@ descripción:       Tienda virtual presentada a los clientes , que muestra toda 
                         $costo_envio=datosEmpresa()['Empresa']['COSTO_ENVIO'];
                     }
                     $monto = formatMoney($subtotal + $costo_envio);
+                    $monto=str_replace(",","",$monto);
+                 
                     /* dep($monto);
                     dep($costo_envio);
                     die(); */
@@ -576,7 +578,8 @@ descripción:       Tienda virtual presentada a los clientes , que muestra toda 
                                     }
                                
                                     $infoOrden=$this->getPedido($request_pedido);
-                                   
+                                  /*  dep($infoOrden);
+                                   exit; */
                                     $dataEmailOrden=array('asunto'=>"Se ha creado la orden No.".$request_pedido,
                                                          'email'=>$_SESSION['userData']['EMAIL'],
                                                          'emailCopia'=>datosEmpresa()['Empresa']['EMAIL_PEDIDOS'],
