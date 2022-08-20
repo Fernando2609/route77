@@ -62,16 +62,93 @@ descripción:       Módulo que gestiona la existencia de productos en el sistem
 			exit;*/
 			return $request;
 		}
+		public function selectProductoPedido(int $idUsuario){
+			$this->intCod_Producto = $idUsuario;
 
-		public function updateInventario(int $idInventario, int $stock)
-    {
+			
+			$sql= "SELECT * from TBL_DETALLE_PEDIDO WHERE COD_PRODUCTO=$this->intCod_Producto";
+			$request = $this->select_all($sql);
+			/*dep(($request));
+			exit;*/
+			return $request;
+		}
+		public function selectProductoCompra(int $idUsuario){
+			$this->intCod_Producto = $idUsuario;
+
+			
+			$sql= "SELECT * from TBL_DETALLE_COMPRA WHERE COD_PRODUCTO=$this->intCod_Producto";
+			$request = $this->select_all($sql);
+			/*dep(($request));
+			exit;*/
+			return $request;
+		}
+
+		public function selectMovimientos(int $idUsuario){
+			$this->intCod_Producto = $idUsuario;
+
+			
+			$sql= "SELECT * from TBL_MOVIMIENTOS WHERE COD_PRODUCTO=$this->intCod_Producto";
+			$request = $this->select_all($sql);
+			/*dep(($request));
+			exit;*/
+			return $request;
+		}
+
+
+		public function selectPedido(int $idPedido){
+			$this->intPedido = $idPedido;
+
+			
+			$sql= "SELECT * from TBL_PEDIDO WHERE COD_PEDIDO=$this->intPedido";
+			$request = $this->select($sql);
+			/*dep(($request));
+			exit;*/
+			return $request;
+		}
+		public function selectCompra(int $idCompra){
+			$this->intCompra = $idCompra;
+
+			
+			$sql= "SELECT * from TBL_ORDEN_COMPRA WHERE COD_ORDEN=$this->intCompra";
+			$request = $this->select($sql);
+			/*dep(($request));
+			exit;*/
+			return $request;
+		}
+
+		public function updateInventario(int $idInventario, int $stock){
         $this->intIdInventario = $idInventario;
 		$this->intStock = $stock;
 		$sql = "UPDATE TBL_INVENTARIO SET STOCK = ? WHERE COD_PRODUCTO = $this->intIdInventario";
 		$arrData = array($this->intStock);
 		$request = $this->update($sql,$arrData);
 	    return $request;
-    }
+    	}
+		public function InsertMovimiento(int $idProducto, int $stock,string $movimiento, string $descripcion,int $user){
+
+
+			/*$query_insert= " CALL CRUD_REDES_SOCIALES(1,?,?,'I',null)";*/
+			$query_insert="INSERT INTO TBL_MOVIMIENTOS(MOVIMIENTO, COD_PRODUCTO,	DESCRIPCION_MOVIMIENTO,CANTIDAD,FECHA,COD_USUARIO) VALUES (?,?,?,?,?,?)";
+			$arrData = array($movimiento,$idProducto,$descripcion,$stock,NOW(),$user);
+			$request_insert = $this->insert($query_insert,$arrData);
+			$sql = "SELECT last_insert_id()";
+			$request_ID = $this->select($sql);
+			$return = $request_ID['last_insert_id()'];
+	        return $return;
+		}
+
+		public function selectPersona(int $idUsuario){
+			$this->intCod_usuario = $idUsuario;
+
+			
+			$sql= "SELECT NOMBRES, APELLIDOS from TBL_PERSONAS WHERE COD_PERSONA=$this->intCod_usuario";
+			$request = $this->select($sql);
+			/*dep(($request));
+			exit;*/
+			return $request;
+		}
+
+	
 
 
 	

@@ -166,25 +166,68 @@ public function preguntasSeguridad(){
                 $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
             }else{
                 
+                $user=intval($_SESSION['idUser']);
+                $contraseñaUsuario=$this->model->getPassword($user);
                 $passwordConfirm= strClean($_POST['txtPasswordConfirm']);
                 $pregunta1= intval($_POST['txtPregunta1']);
                 $respuesta1=strClean($_POST['txtRespuesta1']);
-                $user=intval($_SESSION['idUser']);
 
                 $strPassword = hash("SHA256",$_POST['txtPassword']);
-                $this->model->deletePregunta($user);
-                $request_user = $this->model->insertPregunta($pregunta1,$user,$respuesta1,$strPassword);
-                
-                if($request_user > 0 ){
-                    $arrResponse = array("status" => true, "msg" => 'Datos Guardados Correctamente.');
-                    $_SESSION['userData']['COD_STATUS']=1;
+
+                if ($contraseñaUsuario['CONTRASEÑA']!=$strPassword) {
+                    $this->model->deletePregunta($user);
+                    $request_user = $this->model->insertPregunta($pregunta1,$user,$respuesta1,$strPassword);
+                    
+                    if($request_user > 0 ){
+                        $arrResponse = array("status" => true, "msg" => 'Datos Guardados Correctamente.');
+                        $_SESSION['userData']['COD_STATUS']=1;
+                    }else{
+                        $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos Comuniquesé con el administrador');
+                    }
                 }else{
-                    $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos Comuniquesé con el administrador');
+                    $arrResponse = array("status" => false, "msg" => 'Ingrese una contraseña diferente a la proporcionada');
                 }
+                
             }
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
         }
         die();
     }   
+
+    public function changePassword(){
+   
+        if ($_POST) {
+            if(empty($_POST['txtPassword'])  || empty($_POST['txtPasswordConfirm']))
+            {
+                $arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+            }else{
+
+                $user=intval($_SESSION['idUser']);
+                $contraseñaUsuario=$this->model->getPassword($user);
+                
+                
+                $passwordConfirm= strClean($_POST['txtPasswordConfirm']);
+
+                $strPassword = hash("SHA256",strClean($_POST['txtPassword']));
+                
+                if ($contraseñaUsuario['CONTRASEÑA']!=$strPassword) {
+                    
+                    $request_user = $this->model->changePassword($user,$strPassword);
+                
+                
+                if($request_user > 0 ){
+                    $arrResponse = array("status" => true, "msg" => 'Datos Guardados Correctamente.');
+                    sessionUser($_SESSION['idUser']);
+                }else{
+                    $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos Comuniquesé con el administrador');
+                }
+                }else{
+                    $arrResponse = array("status" => false, "msg" => 'Ingrese una contraseña diferente a la proporcionada');
+                }
+            }
+            echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    } 
   } 
 ?>
