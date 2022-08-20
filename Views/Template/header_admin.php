@@ -125,7 +125,7 @@
     </ul>
   </nav>
   <?php
-    if ($_SESSION['userData']['COD_STATUS']==3 ) {
+    if ($_SESSION['userData']['COD_STATUS']==3) {
       $preguntas=[];
       $preguntas=preguntasSeguridad();
      
@@ -204,12 +204,58 @@
 </div><!-- /. Cierre Div Centrar Modal -->
 </div>
 <!-- Cierra Modal -->
+<?php } ?>
 
+<?php
+    if ($_SESSION['userData']['CHANGE_PASSWORD']==1) {
+    
+  ?>
+  <!-- Modal -->
+<div class="modal fade" id="modalChangePassword" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Div Centrar Modal -->
+<div class="modal-dialog modal-lg bounceInDown animated" role="document">
+  <div class="modal-content">
+    <!-- Div Contenido Modal -->
+    <div class="modal-header2">
+          <!-- Encabezado Modal -->
+        <h5 class="modal-title" >Cambiar Contraseña</h5>
+      </div><!-- Termina Encabezado Modal -->
+    
+    <!-- abre Modal Body -->
+    <div class="modal-body">
+        <!-- Card -->
+      <!-- formulario Modal -->
+      <form id="formChangePassword" name="formChangePassword" class="form-horizontal">
+        <!-- <input type="hidden" id="idUsuario" name="idUsuario" value=""> -->
+        <!-- <p class="text-success">Todos los campos son obligatorios</p> -->
+        <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="txtPassword">Contraseña</label>
+                <input type="password" class="form-control valid ValidContra" id="txtPassword" name="txtPassword" required="">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="txtPasswordConfirm">Confirmar Contraseña</label>
+                <input type="password" class="form-control valid ValidContra" id="txtPasswordConfirm" name="txtPasswordConfirm" required="">
+              </div>
+            </div>
+        
 
+        <div class="card-footer">
+          <button id="btnAction" class="btn btn-success" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
 
+        
+        </div>
+      </form>
+
+    </div><!-- /. Cierra  Div body Modal -->
+  </div><!-- /. Cierra  Div Centrar Modal -->
+</div><!-- /. Cierre Div Centrar Modal -->
+</div>
+<!-- Cierra Modal -->
 
   <?php 
     }
+     
   require_once("nav_admin.php"); 
   ?>
   <!-- /.navbar -->

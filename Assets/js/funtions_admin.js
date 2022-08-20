@@ -296,9 +296,13 @@ window.addEventListener(
     if (document.querySelector("#modalUserNew")) {
       $("#modalUserNew").modal({ backdrop: "static", keyboard: false });
     }
+    //modaal Preguntas
+    if (document.querySelector("#modalChangePassword")) {
+      $("#modalChangePassword").modal({ backdrop: "static", keyboard: false });
+    }
 
-    //preguntas
-    //Actulizar desde perfil
+    //preguntas y contraseña nuevo usuario
+    
     if (document.querySelector("#formPreguntasSeguridad")) {
       let formPreguntas = document.querySelector("#formPreguntasSeguridad");
       formPreguntas.onsubmit = function (e) {
@@ -367,6 +371,96 @@ window.addEventListener(
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
               //$("#modalformPreguntas").modal("hide");
+              swal.fire({
+                title: "Datos Guardados",
+                text: objData.msg,
+                icon: "success",
+                confirmButtonText: "Aceptar",
+                closeOnConfirm: false,
+                timer: 3000,
+                willClose: () => {
+                  location.reload();
+                },
+              });
+            } else {
+              swal.fire("Error", objData.msg, "error");
+            }
+          }
+          divLoading.style.display = "none";
+          return false;
+        };
+      };
+    }
+
+    //Cambiar contraseñaa
+    if (document.querySelector("#formChangePassword")) {
+      let formPassword = document.querySelector("#formChangePassword");
+      formPassword.onsubmit = function (e) {
+        e.preventDefault();
+
+        // let strIdentificacion = document.querySelector('#txtIdentificacion').value;
+    
+        let strPassword = document.querySelector("#txtPassword").value;
+        let strPasswordConfirm = document.querySelector(
+          "#txtPasswordConfirm"
+        ).value;
+        //let respuesta2 = document.querySelector("#txtPregunta2").value;
+
+        if (strPassword == "" || strPasswordConfirm == "") {
+          swal.fire("Atención", "Todos los campos son obligatorios.", "error");
+          return false;
+        }
+
+        if (strPassword != strPasswordConfirm) {
+          swal.fire("Atención", "Las contraseñas no son iguales.", "info");
+          return false;
+        }
+        //longitud de la contraseña
+        if (strPassword.length < 8) {
+          swal.fire(
+            "Atención",
+            "La contraseña debe tener un mínimo de 8 caracteres.",
+            "info"
+          );
+          return false;
+        }
+
+        let contraseñaValid = document.querySelector("#txtPassword");
+
+        if (contraseñaValid.classList.contains("is-invalid")) {
+          swal.fire(
+            "Atención",
+            "La contraseña debe de contener al menos 8 carácteres, una letra mayúscula, una letra minúscula, un número y sin espacios",
+            "error"
+          );
+          return false;
+        }
+        let elementsValid = document.getElementsByClassName("valid");
+        for (let i = 0; i < elementsValid.length; i++) {
+          if (elementsValid[i].classList.contains("is-invalid")) {
+            swal.fire(
+              "Atención",
+              "Por favor verifique los campos en rojo.",
+              "error"
+            );
+            return false;
+          }
+        }
+        divLoading.style.display = "flex";
+        let request = window.XMLHttpRequest
+          ? new XMLHttpRequest()
+          : new ActiveXObject("Microsoft.XMLHTTP");
+        let ajaxUrl = base_url + "/Dashboard/changePassword";
+        let formData = new FormData(formPassword);
+        request.open("POST", ajaxUrl, true);
+        request.send(formData);
+        request.onreadystatechange = function () {
+          if (request.readyState != 4) return;
+          if (request.status == 200) {
+            console.log(request.responseText);
+            let objData = JSON.parse(request.responseText);
+            if (objData.status) {
+              //$("#modalformPassword").modal("hide");
               swal.fire({
                 title: "Datos Guardados",
                 text: objData.msg,

@@ -266,16 +266,20 @@ $detalle = $data['pedido']['detalle'];
                 if(count($detalle)>0){
                     $subtotal=0;
                     foreach($detalle as $producto){
+						$importe=0;
                         $precio=formatMoney($producto['PRECIO']);
-                        $importe=formatMoney($producto['PRECIO'] * $producto['CANTIDAD']);
-                        $subtotal+=$importe;
+                        //$importe=formatMoney(floatval($producto['PRECIO']) * floatval($producto['CANTIDAD']));
+						$importe=$producto['PRECIO'] * $producto['CANTIDAD'];
+                        $subtotal=$subtotal+$importe;
+						
+
                 
               ?>
 		    <tr>
 		      <td class="hola" style="border: 1px solid #ccc;"><?= $producto['NOMBRE'] ?></td>
 		      <td class="text-right hola" style="text-align: right;border: 1px solid #ccc;"><?= SMONEY.' '.$precio ?></td>
 		      <td class="text-center hola" style="text-align: center;border: 1px solid #ccc;"><?= $producto['CANTIDAD'] ?></td>
-		      <td class="text-right hola" style="text-align: right;border: 1px solid #ccc;"><?= SMONEY.' '.$importe ?></td>
+		      <td class="text-right hola" style="text-align: right;border: 1px solid #ccc;"><?= SMONEY.' '.formatMoney($importe) ?></td>
 		    </tr>
             <?php } 
             }?>

@@ -158,6 +158,9 @@ descripción:       Módulo que Administra los datos personales de los
 					$this->intUser,NOW()
 				);
 				
+				$sql2="UPDATE TBL_PERSONAS SET CHANGE_PASSWORD=? WHERE COD_PERSONA=$this->intIdUsuario";
+					$arrData2 = array(1);
+					$request2 = $this->update($sql2,$arrData2);
 			} else {
 				$sql="CALL CRUD_CLIENTE(?,?,?,null,?,?,?,null,?,?,'S',$this->intIdUsuario)";
 				

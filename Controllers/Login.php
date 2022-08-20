@@ -65,7 +65,6 @@ descripción:       Modulo que permite ingresar al sistema con las
                    $intentos=0;
                    $strUsuario = strtolower(strClean($_POST['txtEmail']));
                    $strPassword = hash("SHA256", $_POST['txtPassword']);
-                   
                    $requestUser = $this->model->loginUser($strUsuario, $strPassword);
                    if(empty($requestUser)){
                   
