@@ -104,7 +104,7 @@ window.addEventListener(
           download: "open",
           orientation: "landscape",
           pageSize: "letter",
-          title: "Reporte de Suscriptores",
+          title: "Reporte de Contactos",
           customize: function (doc) {
             doc.content[1].margin = [0, 40, 120, 20];
             doc.content[0].margin = [0, 20, 0, 0];
@@ -137,21 +137,38 @@ window.addEventListener(
             const fecha = new Date();
             cols[1] = {
               fontSize: 11,
-              text: "ROUTE 77",
+              text: nombreEmpresa,
               alignment: "right",
               margin: [0, 20, 20, 100],
             };
+
             cols[2] = {
-              fontSize: 11,
-              text: fecha.toLocaleDateString("es-hn", {
-                weekday: "short",
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              }),
-              alignment: "right",
-              margin: [0, 20, 20, 0],
-            };
+               fontSize: 11,
+               text: [
+                 {
+                   text:
+                     fecha.toLocaleDateString("es-hn", {
+                       weekday: "short",
+                       year: "numeric",
+                       month: "short",
+                       day: "numeric",
+                     }) +
+                     "  " +
+                     fecha.toLocaleTimeString("es-hn", {
+                       hour: "2-digit",
+                       minute: "2-digit",
+                       //second: "2-digit",
+                     }) +
+                     "\n",
+                 },
+                 {
+                   text: "Generado por: " + nombreUsuario,
+                 },
+               ],
+               alignment: "right",
+               margin: [0, 10, 20, 0],
+             };
+
             let objheader = {};
             objheader["columns"] = cols;
             doc["header"] = function (page) {

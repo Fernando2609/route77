@@ -9,8 +9,10 @@
 
  <footer class="main-footer">
 
-   <strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> <a href="#">Universidad Nacional Autónoma De Honduras</a>. </strong> All rights reserved.
-  
+   <strong>Copyright &copy; <script>
+       document.write(new Date().getFullYear());
+     </script> <a href="#">Universidad Nacional Autónoma De Honduras</a>. </strong> All rights reserved.
+
  </footer>
 
  <!-- Control Sidebar -->
@@ -49,7 +51,7 @@
  <script src="https://code.highcharts.com/highcharts.js"></script>
  <script src="https://code.highcharts.com/modules/exporting.js"></script>
  <script src="https://code.highcharts.com/modules/export-data.js"></script>
- 
+
  <script src="<?= media(); ?>/js/datepicker/jquery-ui.min.js"></script>
  <!-- Termina Datatables  & Plugins -->
 

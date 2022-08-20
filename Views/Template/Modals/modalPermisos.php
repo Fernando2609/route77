@@ -45,7 +45,7 @@
                             ?>
                           <tr>
                           <?php
-                            if ($modulos[$i]['COD_MODULO'] == (MUSUARIOS+1) ) {
+                            if ($modulos[$i]['COD_MODULO'] == (MUSUARIOS) ) {
                               $modulos[$i]['NOMBRE']='USUARIOS / ROLES';
                             }
                             if ($modulos[$i]['COD_MODULO'] == (MPRODUCTOS)) {
