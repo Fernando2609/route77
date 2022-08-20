@@ -44,7 +44,7 @@
                                 <div class="col-12">
                                     <h4>
                                         <!-- Acá empieza la orden -->
-                                   <img width="42" src="<?= media(); ?>/images//logo3.ico" alt="" srcset="">Estación Route 77
+                                   <img width="42" src="<?= media(); ?>/images//logo3.ico" alt="" srcset=""><?= datosEmpresa()['Empresa']['NOMBRE_EMPRESA'] ?>
                                     <small class="float-right">Fecha: <?= $orden['fecha'] ?></small>
                                     </h4>
                                 </div>
@@ -55,11 +55,16 @@
                                 <div class="col-sm-4 invoice-col">
 
                                     <address>
-                                        <strong>NOMBRE EMPRESA</strong><br>
-                                        <?= DIRECCION ?><br>
-                                        <?= TELEMPRESA ?><br>
-                                        <?= EMAIL_EMPRESA ?><br>
-                                        <?= WEB_EMPRESA ?>
+                                       
+                                        
+                                       RTN: <?= datosEmpresa()['Empresa']['RTN'] ?><br>
+                                        <?= datosEmpresa()['Empresa']['EMAIL_EMPRESA'] ?>
+                                        <br>
+                                        <?= datosEmpresa()['Empresa']['TEL_EMPRESA'] ?>
+                                        <br>
+                                        <?= datosEmpresa()['Empresa']['CEL_EMPRESA'] ?>
+                                        <br>
+                                        <?= WEB_EMPRESA?>
                                     </address>
                                 </div>
                                 <!-- /.col -->
