@@ -225,6 +225,8 @@ tableredesSociales = $("#tableredesSociales").dataTable({
           text: "<i class='fas fa-file-csv'></i> CSV",
           titleAttr: "Exportar a CSV",
           className: "btn btn-info mr-1 mb-2",
+          charset: "utf-8",
+          bom: true,
           exportOptions: {
             margin: [0, 20, 20, 20],
             columns: [0, 1, 2],

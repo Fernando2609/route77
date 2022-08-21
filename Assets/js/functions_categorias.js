@@ -200,6 +200,8 @@ document.addEventListener('DOMContentLoaded',function(){
                             "text": "<i class='fas fa-file-csv'></i> CSV",
                             "titleAttr": "Exportar a CSV",
                             "className": "btn btn-info mr-1 mb-2",
+                            charset: "utf-8",
+                            bom: true,
                             exportOptions: {
 
                                 margin: [0, 20,20,20],
@@ -367,7 +369,7 @@ function fntViewInfo(idcategoria){
 function fntEditInfo(element,idcategoria){
     rowTable = element.parentNode.parentNode.parentNode;
     
-    document.querySelector('#titleModal').innerHTML ="Actualizar Categoria";
+    document.querySelector('#titleModal').innerHTML ="Actualizar Categoría";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-success", "btn-warning");
     document.querySelector('#btnText').innerHTML ="Actualizar";

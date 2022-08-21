@@ -55,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
     columnDefs: [
       { className: "textcenter", targets: [2] },
       { className: "textcenter", targets: [3] },
-
     ],
     dom:
       "<'row d-flex'<'col-sm-12 mb-2 col-md-5'l B><'col-md-7 mb-2 align-self-end'f>>" +
@@ -149,31 +148,31 @@ document.addEventListener("DOMContentLoaded", function () {
           };
 
           cols[2] = {
-               fontSize: 11,
-               text: [
-                 {
-                   text:
-                     fecha.toLocaleDateString("es-hn", {
-                       weekday: "short",
-                       year: "numeric",
-                       month: "short",
-                       day: "numeric",
-                     }) +
-                     "  " +
-                     fecha.toLocaleTimeString("es-hn", {
-                       hour: "2-digit",
-                       minute: "2-digit",
-                       //second: "2-digit",
-                     }) +
-                     "\n",
-                 },
-                 {
-                   text: "Generado por: " + nombreUsuario,
-                 },
-               ],
-               alignment: "right",
-               margin: [0, 10, 20, 0],
-             };
+            fontSize: 11,
+            text: [
+              {
+                text:
+                  fecha.toLocaleDateString("es-hn", {
+                    weekday: "short",
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  }) +
+                  "  " +
+                  fecha.toLocaleTimeString("es-hn", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    //second: "2-digit",
+                  }) +
+                  "\n",
+              },
+              {
+                text: "Generado por: " + nombreUsuario,
+              },
+            ],
+            alignment: "right",
+            margin: [0, 10, 20, 0],
+          };
 
           let objheader = {};
           objheader["columns"] = cols;
@@ -229,6 +228,8 @@ document.addEventListener("DOMContentLoaded", function () {
         text: "<i class='fas fa-file-csv'></i> CSV",
         titleAttr: "Exportar a CSV",
         className: "btn btn-info mr-1 mb-2",
+        charset: "utf-8",
+        bom: true,
         exportOptions: {
           margin: [0, 20, 20, 20],
           columns: [0, 1, 2],

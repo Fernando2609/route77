@@ -229,6 +229,8 @@ document.addEventListener(
           text: "<i class='fas fa-file-csv'></i> CSV",
           titleAttr: "Exportar a CSV",
           className: "btn btn-info mr-1 mb-2",
+          charset: "utf-8",
+          bom: true,
           exportOptions: {
             margin: [0, 20, 20, 20],
             columns: [0, 1, 2, 3, 4],
@@ -240,6 +242,7 @@ document.addEventListener(
           text: "<i class='fa fa-print'></i> Imprimir",
           titleAttr: "Imprimir",
           className: "btn btn-warning mr-1 mb-2",
+
           exportOptions: {
             margin: [0, 20, 20, 20],
             columns: [0, 1, 2, 3, 4],

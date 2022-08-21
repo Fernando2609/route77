@@ -171,8 +171,17 @@ public function getMovimientos($idProducto){
         
         for ($i=0; $i < count($arrMovimietos); $i++) {
             
-            $arrMovimietos[$i]['DESCRIPCION']="Salida por ".$arrMovimietos[$i]['DESCRIPCION_MOVIMIENTO'];
-            unset($arrMovimietos[$i]['DESCRIPCION_MOVIMIENTO']);
+
+            
+            if ($arrMovimietos[$i]['MOVIMIENTO']=='Entrada') {
+               
+                $arrMovimietos[$i]['DESCRIPCION']="Entrada por ".$arrMovimietos[$i]['DESCRIPCION_MOVIMIENTO'];
+                unset($arrMovimietos[$i]['DESCRIPCION_MOVIMIENTO']);
+
+            }else  if ($arrMovimietos[$i]['MOVIMIENTO']=='Salidaa'){
+                $arrMovimietos[$i]['DESCRIPCION']="Salida por ".$arrMovimietos[$i]['DESCRIPCION_MOVIMIENTO'];
+                unset($arrMovimietos[$i]['DESCRIPCION_MOVIMIENTO']);
+            }
 
             $arrMovimietos[$i]['PRECIONUEVO']="-";
             $arrPersona=$this->model->selectPersona($arrMovimietos[$i]['COD_USUARIO']);
@@ -263,7 +272,7 @@ public function setInventario()
                     $request_user=$this->model->updateInventario($idInventario, $newstock);
 
                     $request_user=$this->model->InsertMovimiento($idProducto, $stockupdate,$movimiento,$txtDescripcion,$user);
-                
+                    
             if($request_user > 0 ){
                     $arrResponse = array("status" => true, "msg" => 'Inventario  Actualizado Correctamente.');
                     //Selecciona los datos del usuario Actualizado                                                       

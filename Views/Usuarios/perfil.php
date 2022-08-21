@@ -1,6 +1,5 @@
     <?php headerAdmin($data);
       getModal("modalPerfil",$data);
-      dep($_SESSION);
     ?>
     <div class="content-wrapper" style="min-height: 2645.88px;">
     <!-- Content Header (Page header) -->
@@ -52,7 +51,7 @@
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Datos Personales</a></li>
                   
-                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Datos de Sesion</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Datos de Sesión</a></li>
                   <li class="nav-item"><button class="ml-2 btn btn-sm btn-info" type="button" onclick="openModalPerfil();"><i class="fas fa-pencil-alt" aria-hidden="true"></i></button></li>
                 </ul>
               </div><!-- /.card-header -->

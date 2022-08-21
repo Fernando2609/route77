@@ -133,7 +133,7 @@
                             <td id="celNombreEmpresa">Despensa</td>
                         </tr>
                         <tr>
-                            <td>Direccion Factura (Factura)</td>
+                            <td>Dirección Factura (Factura)</td>
                             <td id="celDireccion">Torocagua</td>
                         </tr>
                         <tr>

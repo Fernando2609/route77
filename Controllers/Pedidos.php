@@ -590,7 +590,7 @@ require 'Libraries/Excel/vendor/autoload.php';
                    //exit;
                    ob_end_clean();
                    /* Here there will be some code where you create $spreadsheet */
-                   $nombre="Utilidades_".$fechaInicio.'_'.$fechaFin;
+                   $nombre="Utilidad_General_".$fechaInicio.'_'.$fechaFin;
                    
                    // redirect output to client browser
                    header('Content-Type: application/vnd.ms-excel');
@@ -1037,7 +1037,7 @@ require 'Libraries/Excel/vendor/autoload.php';
                    //exit;
                    ob_end_clean();
                    /* Here there will be some code where you create $spreadsheet */
-                   $nombre="Utilidades_".$fechaInicio.'_'.$fechaFin;
+                   $nombre="Utilidad_Bruta_".$fechaInicio.'_'.$fechaFin;
                    
                    // redirect output to client browser
                    header('Content-Type: application/vnd.ms-excel');

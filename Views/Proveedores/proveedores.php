@@ -44,11 +44,11 @@
                     <thead>
                       <tr> <!--nombres,apellidos,email,status,rol,telefono,empresa,rtn,ubicacion-->
                         <th>ID</th>
+                        <th>Empresa</th>
                         <th>RTN</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
                         <th>Email</th>
-                        <th>Empresa</th>
                         <th>Teléfono</th>
                        
                         <th>Status</th>

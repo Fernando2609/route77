@@ -264,10 +264,16 @@ document.addEventListener('DOMContentLoaded', function () {
          e.preventDefault();
          console.log(formInventario);
           let intstock = document.querySelector("#stockupdate").value;
-          if (intstock == "") {
-            swal.fire("Atención", "Todos los campos son obligatorios.", "error");
+          let descripcion = document.querySelector("#txtDescripcion").value;
+
+          if (intstock == "" || descripcion=="") {
+            swal.fire(
+              "Atención",
+              "Todos los campos son obligatorios.",
+              "error"
+            );
             return false;
-           }
+          }
            
            if (movimiento==1) {
               txtMovimiento="Agregar";
@@ -400,7 +406,7 @@ $("#compromiso_ejecutivo").dataTable({
 
       exportOptions: {
         margin: [0, 20, 20, 20],
-        columns: [0, 1, 2, 3, 4],
+        columns: [0, 1, 2, 3, 4, 5, 6],
         modifier: {},
       },
     },
@@ -427,7 +433,7 @@ $("#compromiso_ejecutivo").dataTable({
       ],
       exportOptions: {
         margin: [0, 20, 20, 20],
-        columns: [0, 1, 2, 3, 4],
+        columns: [0, 1, 2, 3, 4, 5, 6],
         modifier: {},
       },
     },
@@ -451,14 +457,14 @@ $("#compromiso_ejecutivo").dataTable({
         doc.content[1].table.widths = [
           "5%",
           "20%",
+          "10%",
+          "15%",
+          "25%",
           "30%",
-          "15%",
-          "15%",
-          "15%",
           "20%",
         ];
         doc.content[1].table.body[0].forEach(function (h) {
-          //h.alignment='left';
+          h.alignment = "left";
           h.fillColor = "#81ae39";
           h.color = "white";
           h.fontSize = 12;
@@ -473,20 +479,35 @@ $("#compromiso_ejecutivo").dataTable({
         const fecha = new Date();
         cols[1] = {
           fontSize: 11,
-          text: "ROUTE 77",
+          text: nombreEmpresa,
           alignment: "right",
           margin: [0, 20, 20, 100],
         };
         cols[2] = {
           fontSize: 11,
-          text: fecha.toLocaleDateString("es-hn", {
-            weekday: "short",
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          }),
+          text: [
+            {
+              text:
+                fecha.toLocaleDateString("es-hn", {
+                  weekday: "short",
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                }) +
+                "  " +
+                fecha.toLocaleTimeString("es-hn", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  //second: "2-digit",
+                }) +
+                "\n",
+            },
+            {
+              text: "Generado por: " + nombreUsuario,
+            },
+          ],
           alignment: "right",
-          margin: [0, 20, 20, 0],
+          margin: [0, 10, 20, 0],
         };
         let objheader = {};
         objheader["columns"] = cols;
@@ -533,7 +554,7 @@ $("#compromiso_ejecutivo").dataTable({
       },
       exportOptions: {
         margin: [0, 20, 20, 20],
-        columns: [0, 1, 2, 3, 4],
+        columns: [0, 1, 2, 3, 4, 5, 6],
         modifier: {},
       },
     },
@@ -542,9 +563,11 @@ $("#compromiso_ejecutivo").dataTable({
       text: "<i class='fas fa-file-csv'></i> CSV",
       titleAttr: "Exportar a CSV",
       className: "btn btn-info mr-1 mb-2",
+      charset: "utf-8",
+      bom: true,
       exportOptions: {
         margin: [0, 20, 20, 20],
-        columns: [0, 1, 2, 3, 4],
+        columns: [0, 1, 2, 3, 4, 5, 6],
         modifier: {},
       },
     },
@@ -555,7 +578,7 @@ $("#compromiso_ejecutivo").dataTable({
       className: "btn btn-warning mr-1 mb-2",
       exportOptions: {
         margin: [0, 20, 20, 20],
-        columns: [0, 1, 2, 3, 4],
+        columns: [0, 1, 2, 3, 4, 5, 6],
         modifier: {},
       },
     },
@@ -634,7 +657,7 @@ $("#modalViewMovimientos").modal("show");
 function fntEditInfo(element,COD_PRODUCTO){
   rowTable=element.parentNode.parentNode.parentNode;
   console.log(rowTable);
-
+document.querySelector("#formInventario").reset();
   document.querySelector('#titleModal').innerHTML ="Actualizar Stock";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-success", "btn-warning");
@@ -654,7 +677,8 @@ function fntEditInfo(element,COD_PRODUCTO){
           {
             //document.querySelector('#stockupdate').max =objData.data.STOCK;
             document.querySelector("#titleModalEdit").innerHTML = "Inventario de "+ objData.data.NOMBRE;
-            document.querySelector("#idInventario").value = objData.data.COD_PRODUCTO; 
+            document.querySelector("#idInventario").value = objData.data.COD_PRODUCTO;
+            $("#listMovimiento").selectpicker("render");
 
               $('#modalEditInventario').modal('show');
           }else{

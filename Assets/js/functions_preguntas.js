@@ -33,7 +33,7 @@ tablePreguntas = $("#tablePreguntas").dataTable({
 
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2],
+            columns: [0, 1],
             modifier: {},
           },
         },
@@ -60,7 +60,7 @@ tablePreguntas = $("#tablePreguntas").dataTable({
           ],
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2],
+            columns: [0, 1],
             modifier: {},
           },
         },
@@ -186,7 +186,7 @@ tablePreguntas = $("#tablePreguntas").dataTable({
           },
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2],
+            columns: [0, 1],
             modifier: {},
           },
         },
@@ -197,7 +197,7 @@ tablePreguntas = $("#tablePreguntas").dataTable({
           className: "btn btn-info mr-1 mb-2",
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2],
+            columns: [0, 1],
             modifier: {},
           },
         },
@@ -208,7 +208,7 @@ tablePreguntas = $("#tablePreguntas").dataTable({
           className: "btn btn-warning mr-1 mb-2",
           exportOptions: {
             margin: [0, 20, 20, 20],
-            columns: [0, 1, 2],
+            columns: [0, 1],
             modifier: {},
           },
         },

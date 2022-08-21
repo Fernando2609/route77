@@ -46,7 +46,8 @@ document.addEventListener(
      /* success: function(data, textStatus, jqXHR)
             {
                 console.log(data); //*** returns correct json data
-    } */},
+    } */
+   },
 
    columns: [
      { data: "COD_PEDIDO" },
@@ -154,31 +155,31 @@ document.addEventListener(
          };
 
          cols[2] = {
-               fontSize: 11,
-               text: [
-                 {
-                   text:
-                     fecha.toLocaleDateString("es-hn", {
-                       weekday: "short",
-                       year: "numeric",
-                       month: "short",
-                       day: "numeric",
-                     }) +
-                     "  " +
-                     fecha.toLocaleTimeString("es-hn", {
-                       hour: "2-digit",
-                       minute: "2-digit",
-                       //second: "2-digit",
-                     }) +
-                     "\n",
-                 },
-                 {
-                   text: "Generado por: " + nombreUsuario,
-                 },
-               ],
-               alignment: "right",
-               margin: [0, 10, 20, 0],
-             };
+           fontSize: 11,
+           text: [
+             {
+               text:
+                 fecha.toLocaleDateString("es-hn", {
+                   weekday: "short",
+                   year: "numeric",
+                   month: "short",
+                   day: "numeric",
+                 }) +
+                 "  " +
+                 fecha.toLocaleTimeString("es-hn", {
+                   hour: "2-digit",
+                   minute: "2-digit",
+                   //second: "2-digit",
+                 }) +
+                 "\n",
+             },
+             {
+               text: "Generado por: " + nombreUsuario,
+             },
+           ],
+           alignment: "right",
+           margin: [0, 10, 20, 0],
+         };
 
          let objheader = {};
          objheader["columns"] = cols;
@@ -234,6 +235,8 @@ document.addEventListener(
        text: "<i class='fas fa-file-csv'></i> CSV",
        titleAttr: "Exportar a CSV",
        className: "btn btn-info mr-1 mb-2",
+       charset: "utf-8",
+       bom: true,
        exportOptions: {
          margin: [0, 20, 20, 20],
          columns: [0, 1, 2, 3, 4, 5],

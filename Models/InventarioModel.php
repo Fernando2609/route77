@@ -122,6 +122,7 @@ descripción:       Módulo que gestiona la existencia de productos en el sistem
 		$sql = "UPDATE TBL_INVENTARIO SET STOCK = ? WHERE COD_PRODUCTO = $this->intIdInventario";
 		$arrData = array($this->intStock);
 		$request = $this->update($sql,$arrData);
+	
 	    return $request;
     	}
 		public function InsertMovimiento(int $idProducto, int $stock,string $movimiento, string $descripcion,int $user){
