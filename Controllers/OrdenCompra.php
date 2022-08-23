@@ -236,7 +236,7 @@ class OrdenCompra extends Controllers{
 
 
    public function procesarCompra(){
-    
+   
     if ($_POST){
      
         $personaid=$_SESSION['idUser'];
@@ -350,5 +350,33 @@ class OrdenCompra extends Controllers{
         }
 
         
+        public function getProveedores()
+    {
+        if($_SESSION['permisosMod']['r']){ 
+        $arrData= $this->model->selectProveedores();
+       /* dep($arrData);
+        exit;*/
+        for ($i=0; $i < count($arrData) ; $i++) { 
+            $btnView ='';
+            $btnEdit = '';
+            $btnDelete = '';
+
+            if ($arrData[$i]['COD_STATUS']==1) {
+             $arrData[$i]['status'] = '<span class="badge badge-success">Activo</span>';   
+            }else{
+             $arrData[$i]['status'] = '<span class="badge badge-danger">Inactivo</span>';
+            }
+            $btnView = '<button class="btn btn-success btn-sm" onClick="fntProveedorSelect('.$arrData[$i]['COD_PROVEEDOR'].',`'.$arrData[$i]['NOMBRE_EMPRESA'].'`)" title="Seleccionar"><i class="fa-solid fa-check"></i></button>';
+
+            $arrData[$i]['options'] = '<div class="text-center">'.$btnView.'</div>';
+            
+         } 
+        /*  dep($arrData[0]['status']);exit; */
+        echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+     }
+         die();
+    }  
  }
+
+ 
 ?>

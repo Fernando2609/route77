@@ -2,6 +2,45 @@
 headerAdmin($data);
 getModal('modalInventario', $data);
 ?>
+<div class="modal fade" id="modalProveedores" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+<!-- Div Centrar Modal -->
+<div class="modal-dialog bounceInDown animated modal-lg" role="document">
+  <div class="modal-content">
+    <!-- Div Contenido Modal -->
+    <div class="modal-header  header-primary">
+      <!-- Encabezado Modal -->
+      <h5 class="modal-title" id="titleMvimientosEdit">Selección de Proveedor</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div><!-- Termina Encabezado Modal -->
+    <!-- abre Modal Body -->
+    <div class="modal-body">
+      <!-- Card -->
+      <table id="tableProveedores" class="display nowrap table-responsive table table-hover table-bordered  dataTable dtr-inline collapsed" style="width:100%"  role="grid">
+                      <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Empresa</th>
+                            <th>RTN</th>
+                            <th>Email</th>
+                            <!-- <th>Teléfono</th> -->
+                            <th>Seleccionar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      
+                      </tbody>
+                  </table>
+
+    </div><!-- /. Cierra  Div body Modal -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+    </div>
+  </div><!-- /. Cierra  Div Centrar Modal -->
+</div><!-- /. Cierre Div Centrar Modal -->
+</div>
 <!-- Content Header (Sección de Encabezado) -->
 <div class="content-wrapper">
     <section class="content-header">
@@ -51,11 +90,16 @@ getModal('modalInventario', $data);
                                     </div>
                                     
                                     
-                                        <div class="form-group col-md-6">
-                                        <label for="listProveedor">Proveedor</label>
-                                        <select class="form-control" id="listProveedor" name="listProveedor"  data-live-search="true" required>
+                                    <div class="form-group col-md-6">
+                                        <div class="d-flex justify-content-between">
+                                            <label for="listProveedor">Proveedor</label>
+                                        <!-- <select class="form-control" id="listProveedor" name="listProveedor"  data-live-search="true" required>
                                            
-                                        </select>
+                                            </select> -->
+                                            <button onclick="modalProveedores()" class="btn btn-primary mb-2 ">Seleccionar Proveedor</button>
+                                        </div>
+                                        <input disabled placeholder="Seleccione un Proveedor" id="txtProveedor" name="txtProveedor" type="text" class="form-control"></input>
+                                        <input type="hidden" id="codProveedor" name="codProveedor" value="">
                                     </div>
                                     <!-- Div Form-Group -->
                                 </div>
@@ -67,7 +111,7 @@ getModal('modalInventario', $data);
                             <div class="form-group mr-4">
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="checkISV">
-                                    <label class="custom-control-label" for="checkISV"><?=  datosEmpresa()['Empresa']['ISV']  ?>%</label>
+                                    <label class="custom-control-label" for="checkISV">ISV <?=  datosEmpresa()['Empresa']['ISV']  ?>%</label>
                                 </div>
                             </div>
                                 <button id="btn_facturar_compra" class="btn btn-success notBlock" type="submit"><i class="fa fa-fw fa-lg fa-check-circle "></i><span id="btnText">Generar Compra</span></button>&nbsp;&nbsp;&nbsp;
